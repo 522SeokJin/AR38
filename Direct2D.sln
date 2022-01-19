@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameApp", "GameApp\GameApp.vcxproj", "{2D3228DF-0426-47B6-A86D-8CEBE485B08E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{96FE3A35-2CB0-4348-BEC3-BEAB3679C702} = {96FE3A35-2CB0-4348-BEC3-BEAB3679C702}
+		{B89D23D7-D496-43AD-B1AE-9A7005815215} = {B89D23D7-D496-43AD-B1AE-9A7005815215}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngineBase", "GameEngineBase\GameEngineBase.vcxproj", "{96FE3A35-2CB0-4348-BEC3-BEAB3679C702}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03App", "03App", "{1571DD62-53A0-4BA8-AC4C-931847502D2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02Lib", "02Lib", "{0DA65D44-5FE1-44D1-9C3D-2E429A366BA9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00Doc", "00Doc", "{3607B2C2-EF36-4A72-BC27-74098DFB8050}"
+	ProjectSection(SolutionItems) = preProject
+		꼭 알아야하는 사항들.txt = 꼭 알아야하는 사항들.txt
+		용어정리.txt = 용어정리.txt
+		행렬.txt = 행렬.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01BaseFile", "01BaseFile", "{BA7AC44A-F935-4D10-B7C0-2592FDC1F338}"
+	ProjectSection(SolutionItems) = preProject
+		AClassDefault.zip = AClassDefault.zip
+		AClassDefaultManager.zip = AClassDefaultManager.zip
+		LibProjectBase.zip = LibProjectBase.zip
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngine", "GameEngine\GameEngine.vcxproj", "{B89D23D7-D496-43AD-B1AE-9A7005815215}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level 0", "Level 0", "{21C307B8-E743-4E92-9CC7-A254A05449CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level 1", "Level 1", "{8C5FE973-FD79-4A72-9F00-2C66E45E7FD5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D3228DF-0426-47B6-A86D-8CEBE485B08E}.Debug|x64.ActiveCfg = Debug|x64
+		{2D3228DF-0426-47B6-A86D-8CEBE485B08E}.Debug|x64.Build.0 = Debug|x64
+		{2D3228DF-0426-47B6-A86D-8CEBE485B08E}.Debug|x86.ActiveCfg = Debug|Win32
+		{2D3228DF-0426-47B6-A86D-8CEBE485B08E}.Debug|x86.Build.0 = Debug|Win32
+		{2D3228DF-0426-47B6-A86D-8CEBE485B08E}.Release|x64.ActiveCfg = Release|x64
+		{2D3228DF-0426-47B6-A86D-8CEBE485B08E}.Release|x64.Build.0 = Release|x64
+		{2D3228DF-0426-47B6-A86D-8CEBE485B08E}.Release|x86.ActiveCfg = Release|Win32
+		{2D3228DF-0426-47B6-A86D-8CEBE485B08E}.Release|x86.Build.0 = Release|Win32
+		{96FE3A35-2CB0-4348-BEC3-BEAB3679C702}.Debug|x64.ActiveCfg = Debug|x64
+		{96FE3A35-2CB0-4348-BEC3-BEAB3679C702}.Debug|x64.Build.0 = Debug|x64
+		{96FE3A35-2CB0-4348-BEC3-BEAB3679C702}.Debug|x86.ActiveCfg = Debug|Win32
+		{96FE3A35-2CB0-4348-BEC3-BEAB3679C702}.Debug|x86.Build.0 = Debug|Win32
+		{96FE3A35-2CB0-4348-BEC3-BEAB3679C702}.Release|x64.ActiveCfg = Release|x64
+		{96FE3A35-2CB0-4348-BEC3-BEAB3679C702}.Release|x64.Build.0 = Release|x64
+		{96FE3A35-2CB0-4348-BEC3-BEAB3679C702}.Release|x86.ActiveCfg = Release|Win32
+		{96FE3A35-2CB0-4348-BEC3-BEAB3679C702}.Release|x86.Build.0 = Release|Win32
+		{B89D23D7-D496-43AD-B1AE-9A7005815215}.Debug|x64.ActiveCfg = Debug|x64
+		{B89D23D7-D496-43AD-B1AE-9A7005815215}.Debug|x64.Build.0 = Debug|x64
+		{B89D23D7-D496-43AD-B1AE-9A7005815215}.Debug|x86.ActiveCfg = Debug|Win32
+		{B89D23D7-D496-43AD-B1AE-9A7005815215}.Debug|x86.Build.0 = Debug|Win32
+		{B89D23D7-D496-43AD-B1AE-9A7005815215}.Release|x64.ActiveCfg = Release|x64
+		{B89D23D7-D496-43AD-B1AE-9A7005815215}.Release|x64.Build.0 = Release|x64
+		{B89D23D7-D496-43AD-B1AE-9A7005815215}.Release|x86.ActiveCfg = Release|Win32
+		{B89D23D7-D496-43AD-B1AE-9A7005815215}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2D3228DF-0426-47B6-A86D-8CEBE485B08E} = {1571DD62-53A0-4BA8-AC4C-931847502D2B}
+		{96FE3A35-2CB0-4348-BEC3-BEAB3679C702} = {21C307B8-E743-4E92-9CC7-A254A05449CA}
+		{B89D23D7-D496-43AD-B1AE-9A7005815215} = {8C5FE973-FD79-4A72-9F00-2C66E45E7FD5}
+		{21C307B8-E743-4E92-9CC7-A254A05449CA} = {0DA65D44-5FE1-44D1-9C3D-2E429A366BA9}
+		{8C5FE973-FD79-4A72-9F00-2C66E45E7FD5} = {0DA65D44-5FE1-44D1-9C3D-2E429A366BA9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {93F3A4E3-AB22-407C-9A45-98196FCC3916}
+	EndGlobalSection
+EndGlobal
