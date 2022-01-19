@@ -32,5 +32,7 @@ public:
 	std::string PathToPlusFileName(const std::string& _DirName);
 	GameEngineFile PathToCreateFile(const std::string& _FileName);
 	GameEngineFile PathToGetFile(const std::string& _FileName);
+
+	std::vector<GameEngineFile> GetAllFile();
 };
 

@@ -166,3 +166,10 @@ GameEngineFile GameEngineDirectroy::PathToGetFile(const std::string& _FileName)
 {
 	return GameEngineFile(PathToPlusFileName(_FileName));
 }
+
+std::vector<GameEngineFile> GameEngineDirectroy::GetAllFile()
+{
+	std::vector<GameEngineFile> Return;
+
+	return Return;
+}
