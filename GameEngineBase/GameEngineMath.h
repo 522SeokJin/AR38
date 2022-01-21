@@ -19,12 +19,12 @@ public:
 	static const float4 DOWN;
 
 public:
-	static float4 DegreeToRotatefloat2(float4 _OriginVector, float _Degree)
+	static float4 Rotatefloat2Degree(float4 _OriginVector, float _Degree)
 	{
-		return RadianToRotatefloat2(_OriginVector, _Degree * GameEngineMath::DegreeToRadian);
+		return Rotatefloat2Radian(_OriginVector, _Degree * GameEngineMath::DegreeToRadian);
 	}
 
-	static float4 RadianToRotatefloat2(float4 _OriginVector, float _Radian)
+	static float4 Rotatefloat2Radian(float4 _OriginVector, float _Radian)
 	{
 		float4 NextVector;
 
@@ -34,13 +34,13 @@ public:
 		return NextVector;
 	}
 
-	static float4 DegreeTofloat2(float _Degree)
+	static float4 Dirfloat2Degree(float _Degree)
 	{
-		return RadianTofloat2(_Degree * GameEngineMath::DegreeToRadian);
+		return Dirfloat2Radian(_Degree * GameEngineMath::DegreeToRadian);
 	}
 
 	// 0도일때의 벡터를 회전시키는 공식인겁니다.
-	static float4 RadianTofloat2(float _Radian)
+	static float4 Dirfloat2Radian(float _Radian)
 	{
 		return float4(cosf(_Radian), sinf(_Radian));
 	}
@@ -232,6 +232,16 @@ public:
 		return static_cast<int>(hz());
 	}
 
+	POINT GetWindowPoint()
+	{
+		return { ix(), iy() };
+	}
+
+	void Rotatefloat2Degree(float _Deg)
+	{
+		*this = Rotatefloat2Degree(*this, _Deg);
+		return;
+	}
 
 public:
 	float4() 
@@ -360,3 +370,5 @@ public:
 
 	}
 };
+
+// using FVector = float4;

@@ -6,6 +6,7 @@ GameEngineTime* GameEngineTime::Inst = new GameEngineTime();
 // Static Func
 // constructer destructer
 GameEngineTime::GameEngineTime()
+	: deltaTime_(0.0f)
 {
 	TimeCheckReset();
 }
@@ -14,10 +15,11 @@ GameEngineTime::~GameEngineTime()
 {
 }
 
-GameEngineTime::GameEngineTime(const GameEngineTime&& _Other)
+GameEngineTime::GameEngineTime(const GameEngineTime&& _Other)	noexcept
 	: timeCount_(_Other.timeCount_),
 	startCheck_(_Other.startCheck_),
-	endCheck_(_Other.endCheck_)
+	endCheck_(_Other.endCheck_),
+	deltaTime_(_Other.deltaTime_)
 {
 }
 

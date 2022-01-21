@@ -5,7 +5,12 @@
 
 #include <GameEngineBase/GameEngineDebug.h>
 
-int main()
+int WinMain(
+	HINSTANCE hInstance,
+	HINSTANCE hPrevInstance,
+	LPSTR     lpCmdLine,
+	int       nShowCmd
+)
 {
 	GameEngineDebug::LeakCheckOn();
 	//_CrtSetBreakAlloc(169);

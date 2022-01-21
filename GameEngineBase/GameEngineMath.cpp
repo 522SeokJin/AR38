@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "GameEngineMath.h"
 
-
 const float GameEngineMath::PI = 3.14159265359f;
 const float GameEngineMath::PI2 = 3.14159265359f * 2;
 const float GameEngineMath::DegreeToRadian = GameEngineMath::PI / 180.0f;

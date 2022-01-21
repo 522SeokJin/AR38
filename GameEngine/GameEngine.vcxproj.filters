@@ -10,6 +10,18 @@
     <ClInclude Include="GameEngineCore.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineRenderingPipeLine.h">
+      <Filter>RenderingPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineVertexBuffer.h">
+      <Filter>RenderingPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineIndexBuffer.h">
+      <Filter>RenderingPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineVertexShader.h">
+      <Filter>RenderingPipeLine\Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -21,6 +33,18 @@
     <ClCompile Include="GameEngineCore.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineRenderingPipeLine.cpp">
+      <Filter>RenderingPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineVertexBuffer.cpp">
+      <Filter>RenderingPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineIndexBuffer.cpp">
+      <Filter>RenderingPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineVertexShader.cpp">
+      <Filter>RenderingPipeLine\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -31,6 +55,12 @@
     </Filter>
     <Filter Include="Window">
       <UniqueIdentifier>{6cfa9545-cdec-4b88-9571-198eea9500ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderingPipeLine">
+      <UniqueIdentifier>{bdcd9a60-4a22-4b3d-b415-f47ed7373670}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderingPipeLine\Shader">
+      <UniqueIdentifier>{da0a6309-a209-4c4a-8253-bb71b6ddb7e2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
