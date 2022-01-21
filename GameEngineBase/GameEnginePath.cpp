@@ -1,6 +1,8 @@
 #include "PreCompile.h"
 #include "GameEnginePath.h"
 
+#include <filesystem>
+
 
 // Static Var
 // Static Func
@@ -9,6 +11,13 @@
 GameEnginePath::GameEnginePath()
 	: path_("")
 {
+
+}
+
+GameEnginePath::GameEnginePath(std::filesystem::path _path)
+	: path_(_path)
+{
+
 }
 
 GameEnginePath::~GameEnginePath()
@@ -30,10 +39,16 @@ GameEnginePath::GameEnginePath(GameEnginePath&& _other) noexcept
 
 bool GameEnginePath::IsExist()
 {
-	if (0 == _access(path_.c_str(), 0))
-	{
-		return true;
-	}
+	return std::filesystem::exists(path_);
+}
+std::string GameEnginePath::GetFileName(std::string _path)
+{
+	std::filesystem::path NewPath = _path;
 
-	return false;
+	return NewPath.filename().string();
+}
+
+std::string GameEnginePath::GetFullPath()
+{
+	return path_.string();
 }

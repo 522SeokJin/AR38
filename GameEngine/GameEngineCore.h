@@ -22,19 +22,28 @@ private:		//delete operator
 	GameEngineCore& operator=(const GameEngineCore& _other) = delete; // default Copy operator 디폴트 대입 연산자
 	GameEngineCore& operator=(const GameEngineCore&& _other) = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
 
+private:
+	static GameEngineCore* MainCore;
+
+private:
+	static void WindowCreate();
+	static void Loop();
+	static void MainLoop();
+
 public:
 	template<typename UserGameType>
 	static void Start()
 	{
+		WindowCreate();
+
 		UserGameType NewUserGame;
 
 		NewUserGame.Initialize();
 		NewUserGame.ResourceLoad();
 
-		while (NewUserGame.IsOn())
-		{
-			NewUserGame.GameLoop();
-		}
+		MainCore = &NewUserGame;
+
+		Loop();
 
 		NewUserGame.Release();
 	}

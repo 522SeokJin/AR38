@@ -4,6 +4,7 @@
 #include "GameEngineDebug.h"
 #include "GameEngineSoundFile.h"
 #include "GameEngineSoundPlayer.h"
+#include "GameEnginePath.h"
 
 
 GameEngineSound* GameEngineSound::Inst = new GameEngineSound();
@@ -13,6 +14,7 @@ GameEngineSound* GameEngineSound::Inst = new GameEngineSound();
 
 // constructer destructer
 GameEngineSound::GameEngineSound()
+	: soundSystem_(nullptr)
 {
 }
 
@@ -56,6 +58,7 @@ GameEngineSound::~GameEngineSound()
 }
 
 GameEngineSound::GameEngineSound(GameEngineSound&& _other) noexcept
+	:soundSystem_(_other.soundSystem_)
 {
 
 }
@@ -90,6 +93,11 @@ GameEngineSoundPlayer* GameEngineSound::CreateSoundPlayer()
 	allSoundPlayer_.push_back(NewSoundplayer);
 
 	return  NewSoundplayer;
+}
+
+void GameEngineSound::LoadSound(const std::string& _path)
+{
+	LoadSound(GameEnginePath::GetFileName(_path), _path);
 }
 
 void GameEngineSound::LoadSound(const std::string& _name, const std::string& _path) 

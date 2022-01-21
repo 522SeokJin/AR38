@@ -1,20 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="GameEngineCore.h" />
     <ClInclude Include="PreCompile.h">
       <Filter>Precom</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineWindow.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameEngineCore.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <Filter>Precom</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineWindow.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineCore.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
       <UniqueIdentifier>{990cba2f-39bb-4889-a79b-de71f43adde5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{08bba0b0-1508-4be5-b1d2-3b4675d6e2cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{6cfa9545-cdec-4b88-9571-198eea9500ad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -15,6 +15,8 @@ public:
 	GameEngineFile(); // default constructer 디폴트 생성자
 	GameEngineFile(const std::string& _Path); // default constructer 디폴트 생성자
 
+	GameEngineFile(const std::filesystem::path& _Path);
+
 	GameEngineFile(const std::string& _Path, const std::string& _Mode); // default constructer 디폴트 생성자
 
 	~GameEngineFile(); // default destructer 디폴트 소멸자

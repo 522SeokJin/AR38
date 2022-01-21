@@ -98,6 +98,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,6 +119,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,6 +140,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,6 +161,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PreCompile.h</PrecompiledHeaderFile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -173,15 +181,21 @@
     </ClInclude>
     <ClInclude Include="GameEngineDirectroy.h" />
     <ClInclude Include="GameEngineFile.h" />
+    <ClInclude Include="GameEngineMath.h" />
     <ClInclude Include="GameEngineObjectBase.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="GameEngineObjectNameBase.h" />
     <ClInclude Include="GameEnginePath.h" />
+    <ClInclude Include="GameEngineRandom.h" />
     <ClInclude Include="GameEngineSound.h" />
     <ClInclude Include="GameEngineSoundFile.h" />
     <ClInclude Include="GameEngineSoundPlayer.h" />
+    <ClInclude Include="GameEngineString.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineTime.h" />
     <ClInclude Include="PreCompile.h">
       <SubType>
@@ -195,15 +209,21 @@
     </ClCompile>
     <ClCompile Include="GameEngineDirectroy.cpp" />
     <ClCompile Include="GameEngineFile.cpp" />
+    <ClCompile Include="GameEngineMath.cpp" />
     <ClCompile Include="GameEngineObjectBase.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineObjectNameBase.cpp" />
     <ClCompile Include="GameEnginePath.cpp" />
+    <ClCompile Include="GameEngineRandom.cpp" />
     <ClCompile Include="GameEngineSound.cpp" />
     <ClCompile Include="GameEngineSoundFile.cpp" />
     <ClCompile Include="GameEngineSoundPlayer.cpp" />
+    <ClCompile Include="GameEngineString.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameEngineTime.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <SubType>
