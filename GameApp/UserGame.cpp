@@ -2,6 +2,8 @@
 #include "UserGame.h"
 #include <conio.h>
 
+#include "GameEngine/GameEngineWindow.h"
+
 UserGame::UserGame() // default constructer 디폴트 생성자
 {
 
@@ -50,6 +52,8 @@ void UserGame::GameLoop()
 void UserGame::Release()
 {
 	GameEngineSound::Destroy();
+
+	GameEngineWindow::Destroy();
 
 	GameEngineCore::EngineDestroy();
 }
