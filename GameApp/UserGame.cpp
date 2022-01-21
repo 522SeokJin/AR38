@@ -20,6 +20,7 @@ UserGame::UserGame(UserGame&& _other) noexcept  // default RValue Copy construct
 void UserGame::Initialize()
 {
 	GameEngineSound::GetInst().Initialize();
+
 	return;
 }
 
@@ -31,21 +32,25 @@ void UserGame::ResourceLoad()
 		SoundDir.MoveChild("Resources");
 		SoundDir.MoveChild("Sound");
 
-		GameEngineSound::GetInst().LoadSound("Bgm.mp3", SoundDir.PathToPlusFileName("Bgm.mp3"));
-	}
+		std::vector<GameEngineFile> AllFile = SoundDir.GetAllFile("mp3");
+		
+		for (size_t i = 0; i < AllFile.size(); i++)
+		{
+			GameEngineSound::GetInst().LoadSound(AllFile[i].GetFullPath());
+		}
 
-	GameEngineSound::GetInst().PlaySoundOneShot("Bgm.mp3");
+	}
 }
 
 void UserGame::GameLoop()
 {
-
-	int value = _getch();
 
 }
 
 void UserGame::Release()
 {
 	GameEngineSound::Destroy();
+
+	GameEngineCore::EngineDestroy();
 }
 

@@ -1,25 +1,17 @@
 #include "PreCompile.h"
 #include "GameEngineDirectroy.h"
 #include "GameEngineFile.h"
+
+#include "GameEngineDebug.h"
+#include "GameEngineString.h"
+
 // Static Var
 // Static Func
 
 // constructer destructer
 GameEngineDirectroy::GameEngineDirectroy()
 {
-	// std::string
-	// 내부에 char* = new char[256]
-	path_.resize(256);
-
-	for (size_t i = 0; i < path_.size(); i++)
-	{
-		path_[i] = '\0';
-	}
-
-	GetCurrentDirectoryA(static_cast<DWORD>(path_.size()), &path_[0]);
-	size_t ZeroCount = path_.find('\0');
-	path_ = path_.substr(0, ZeroCount);
-	path_ += "\\";
+	path_ = std::filesystem::current_path();
 }
 
 GameEngineDirectroy::GameEngineDirectroy(const GameEngineDirectroy& _other)
@@ -40,136 +32,97 @@ GameEngineDirectroy::GameEngineDirectroy(GameEngineDirectroy&& _other) noexcept
 
 std::string GameEngineDirectroy::DirectroyName() 
 {
-	// reverseFind
-	size_t Count = path_.rfind("\\");
-	if (std::string::npos == Count)
-	{
-		return path_;
-	}
-
-	//       5     10                
-	// "aaaaa//bbbbb//ccccc"
-	size_t StartCount = path_.rfind("\\", Count - 1);
-
-	std::string Name = path_.substr(StartCount, Count);
-	Name = Name.substr(1, Name.size() - 2);
-	return Name;
-
+	return path_.filename().string();
 }
 
 void GameEngineDirectroy::MoveParent() 
 {
-	size_t Count = path_.rfind("\\");
-	if (std::string::npos == Count)
-	{
-		return;
-	}
-
-	// "aaaaa//bbbbb//ccccc//"
-	// aaaaa//bbbbb//
-	size_t StartCount = path_.rfind("\\", Count - 1);
-	path_ = path_.substr(0, StartCount + 1);
-
+	path_ = path_.parent_path();
 }
 
 bool GameEngineDirectroy::IsRoot() 
 {
-	int Count = 0;
+	return path_.root_directory() == path_;
+}
 
-	for (size_t i = 0; i < path_.size(); i++)
+bool GameEngineDirectroy::MoveParent(const std::string& _DirName)
+{
+	while (false == IsRoot())
 	{
-		if (path_[i] == '\\')
+		if (path_.filename().string() == _DirName)
 		{
-			++Count;
+			return true;
 		}
-	}
 
-	if (1 >= Count)
-	{
-		return true;
+		MoveParent();
 	}
 
 	return false;
 }
 
-bool GameEngineDirectroy::MoveParent(const std::string& _DirName)
-{
-	// 
-	GameEngineDirectroy CheckDir = GameEngineDirectroy(*this);
-
-	while (true)
-	{
-		if (_DirName == CheckDir.DirectroyName())
-		{
-			break;
-		}
-
-		CheckDir.MoveParent();
-
-		if (true == CheckDir.IsRoot())
-		{
-			return false;
-		}
-	}
-
-	this->path_ = CheckDir.path_;
-
-	return true;
-}
-
 
 bool GameEngineDirectroy::MoveChild(const std::string& _DirName)
 {
-	if (0 == _DirName.size())
+	path_.append(_DirName);
+
+	if (false == IsExist())
 	{
+		GameEngineDebug::MsgBoxError("존재하지 않는 경로로 이동했습니다.");
 		return false;
 	}
 
-	std::string CheckPath = _DirName;
-
-	if (CheckPath[0] == '\\')
-	{
-		CheckPath = CheckPath.substr(1, _DirName.size());
-	}
-
-	if (CheckPath[CheckPath.size() - 1] == '\\')
-	{
-		CheckPath = CheckPath.substr(0, _DirName.size() - 1);
-	}
-
-	GameEngineDirectroy NewDir;
-	NewDir.path_ = this->path_ + _DirName + "\\";
-
-	if (false == NewDir.IsExist())
-	{
-		return false;
-	}
-
-	this->path_ += CheckPath + "\\";
 	return true;
 }
 
 std::string GameEngineDirectroy::PathToPlusFileName(const std::string& _FileName)
 {
-	return path_ + _FileName;
+	std::filesystem::path NewPath = path_;
+	NewPath.append(_FileName);
+
+	GameEngineFile NewFile(NewPath.string());
+
+	if (false == NewFile.IsExist())
+	{
+		GameEngineDebug::MsgBoxError("존재하지 않는 파일입니다.");
+	}
+
+	return NewPath.string();
+
 }
 
-GameEngineFile GameEngineDirectroy::PathToCreateFile(const std::string& _FileName) 
-{
-	GameEngineFile NewFile = GameEngineFile(PathToPlusFileName(_FileName), "wb");
-	NewFile.Close();
-	// NewFile.Open();
-	return NewFile;
-}
+//std::filesystem::directory_iterator를 사용하여 디렉토리의 파일 목록 가져 오기
+//opendir / readdir 함수를 사용하여 디렉토리의 파일 목록 가져 오기
+//std::filesystem::recursive_directory_iterator를 사용하여 모든 하위 디렉토리의 파일 목록을 가져옵니다
 
-GameEngineFile GameEngineDirectroy::PathToGetFile(const std::string& _FileName)
+std::vector<GameEngineFile> GameEngineDirectroy::GetAllFile(const std::string& _filter)
 {
-	return GameEngineFile(PathToPlusFileName(_FileName));
-}
+	std::string Filter = "";
 
-std::vector<GameEngineFile> GameEngineDirectroy::GetAllFile()
-{
+	if (std::string::npos == _filter.find('.'))
+	{
+		Filter = ".";
+	}
+
+	Filter += _filter;
+
+	GameEngineString::toupper(Filter);
+
 	std::vector<GameEngineFile> Return;
+
+	std::filesystem::directory_iterator DirIter = std::filesystem::directory_iterator(path_);
+
+	for (const std::filesystem::directory_entry& File : DirIter)
+	{
+		std::string Ext = File.path().extension().string();
+		GameEngineString::toupper(Ext);
+
+		if (_filter != "*" && Filter != Ext)
+		{
+			continue;
+		}
+
+		Return.push_back(GameEngineFile(File.path()));
+	}
 
 	return Return;
 }

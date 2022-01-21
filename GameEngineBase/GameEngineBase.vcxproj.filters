@@ -34,6 +34,9 @@
     <ClInclude Include="GameEngineSoundPlayer.h">
       <Filter>Media</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineString.h">
+      <Filter>String</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineObjectBase.cpp">
@@ -69,6 +72,9 @@
     <ClCompile Include="GameEngineSoundPlayer.cpp">
       <Filter>Media</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineString.cpp">
+      <Filter>String</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Object">
@@ -100,6 +106,9 @@
     </Filter>
     <Filter Include="Lib\Release">
       <UniqueIdentifier>{16b45b7a-83c8-4ca6-b9e7-6fe6c8dd022a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="String">
+      <UniqueIdentifier>{2f8515f1-6251-4dc1-87b9-8e7cdd364888}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
