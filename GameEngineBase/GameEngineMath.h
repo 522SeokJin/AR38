@@ -262,8 +262,8 @@ public:
 	{
 	}
 
-	~float4() {
-
+	~float4()
+	{
 	}
 
 public:		// delete constructer

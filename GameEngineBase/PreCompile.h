@@ -4,13 +4,18 @@
 
 #include <Windows.h>
 
+// Debug
+#include <assert.h>
+#include <crtdbg.h>
+
+// data struct
 #include <vector>
 #include <list>
 #include <map>
-#include <string>
 
-#include <assert.h>
-#include <crtdbg.h>
+// std::
+#include <string>
+#include <functional>
 
 // Math
 #include <math.h>

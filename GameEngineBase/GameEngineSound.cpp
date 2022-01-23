@@ -1,157 +1,40 @@
 #include "PreCompile.h"
-
 #include "GameEngineSound.h"
 #include "GameEngineDebug.h"
-#include "GameEngineSoundFile.h"
-#include "GameEngineSoundPlayer.h"
-#include "GameEnginePath.h"
 
-
-GameEngineSound* GameEngineSound::Inst = new GameEngineSound();
-
-// Static Var
-// Static Func
-
-// constructer destructer
-GameEngineSound::GameEngineSound()
-	: soundSystem_(nullptr)
-{
-}
-
-GameEngineSound::~GameEngineSound()
-{
-	{
-		std::list<GameEngineSoundPlayer*>::iterator StartIter = allSoundPlayer_.begin();
-		std::list<GameEngineSoundPlayer*>::iterator EndIter = allSoundPlayer_.end();
-
-		for (; StartIter != EndIter; ++StartIter)
-		{
-			if (nullptr != *StartIter)
-			{
-				delete *StartIter;
-			}
-		}
-		allSoundPlayer_.clear();
-	}
-
-	{
-		std::map<std::string, GameEngineSoundFile*>::iterator StartIter = allLoadSound_.begin();
-		std::map<std::string, GameEngineSoundFile*>::iterator EndIter = allLoadSound_.end();
-
-		for (; StartIter != EndIter; ++StartIter)
-		{
-			if (nullptr != StartIter->second)
-			{
-				delete StartIter->second;
-				StartIter->second = nullptr;
-			}
-		}
-		allLoadSound_.clear();
-	}
-
-
-	if (nullptr != soundSystem_)
-	{
-		soundSystem_->release();
-		soundSystem_ = nullptr;
-	}
-}
-
-GameEngineSound::GameEngineSound(GameEngineSound&& _other) noexcept
-	:soundSystem_(_other.soundSystem_)
+GameEngineSound::GameEngineSound() // default constructer 디폴트 생성자
+	: sound_(nullptr)
 {
 
 }
 
-GameEngineSoundFile* GameEngineSound::FindSound(const std::string& _name)
+GameEngineSound::~GameEngineSound() // default destructer 디폴트 소멸자
 {
-	std::map<std::string, GameEngineSoundFile*>::iterator FindIter = allLoadSound_.find(_name);
 
-	if (FindIter == allLoadSound_.end())
-	{
-		return nullptr;
-	}
-
-	return FindIter->second;
 }
 
-void GameEngineSound::SoundUpdate() 
+GameEngineSound::GameEngineSound(GameEngineSound&& _other) noexcept  // default RValue Copy constructer 디폴트 RValue 복사생성자
+	: sound_(_other.sound_)
 {
-	if (nullptr == soundSystem_)
-	{
-		GameEngineDebug::MsgBoxError("SoundSystem Is null");
-		return;
-	}
 
-	soundSystem_->update();
 }
 
-GameEngineSoundPlayer* GameEngineSound::CreateSoundPlayer()
+bool GameEngineSound::Load(const std::string& _Path)
 {
-	GameEngineSoundPlayer* NewSoundplayer = new GameEngineSoundPlayer();
-
-	allSoundPlayer_.push_back(NewSoundplayer);
-
-	return  NewSoundplayer;
-}
-
-void GameEngineSound::LoadSound(const std::string& _path)
-{
-	LoadSound(GameEnginePath::GetFileName(_path), _path);
-}
-
-void GameEngineSound::LoadSound(const std::string& _name, const std::string& _path) 
-{
-	if (nullptr != FindSound(_name))
-	{
-		GameEngineDebug::MsgBoxError("Sound Load overlap error");
-		return;
-	}
-
-	GameEngineSoundFile* newLoadSound = new GameEngineSoundFile();
-
-	if (false == newLoadSound->Load(_path))
+	if (FMOD_RESULT::FMOD_OK !=
+		GameEngineSoundManager::GetInst().soundSystem_->createSound(
+			_Path.c_str(), FMOD_LOOP_NORMAL, nullptr, &sound_))
 	{
 		GameEngineDebug::MsgBoxError("Sound Load Error");
-		delete newLoadSound;
-		return;
+		return false;
 	}
 
-	allLoadSound_.insert(
-		std::map<std::string, GameEngineSoundFile*>::value_type(_name, newLoadSound));
+	if (nullptr == sound_)
+	{
+		GameEngineDebug::MsgBoxError("Sound Pointer nullptr Error");
+		return false;
+	}
+
+	return true;
 }
 
-void GameEngineSound::PlaySoundOneShot(const std::string& _name) 
-{
-	GameEngineSoundFile* SoundPtr = FindSound(_name);
-
-	if (nullptr == SoundPtr)
-	{
-		GameEngineDebug::MsgBoxError("PlaySound Error");
-		return;
-	}
-
-	soundSystem_->playSound(SoundPtr->sound_, nullptr, false, nullptr);
-}
-
-//member Func
-
-void GameEngineSound::Initialize()
-{
-	// 내부코드에서 NEW를 할 가능성이 매우 다분해.
-	FMOD::System_Create(&soundSystem_);
-
-	if (nullptr == soundSystem_)
-	{
-		GameEngineDebug::MsgBoxError("sound system create Error");
-		return;
-	}
-
-	// 동시에 32개 개수인지 사운드 채널의 의미인지를 잘 모르고 있습니다.
-	// 32채널을 재생할수 있다는 의미인데 선생님도 잘 모릅니다.
-	if (FMOD_OK != soundSystem_->init(32, FMOD_DEFAULT, nullptr))
-	{
-		GameEngineDebug::MsgBoxError("sound system init Error");
-		return;
-	}
-}

@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "GameEngineSoundPlayer.h"
-#include "GameEngineSoundFile.h"
+#include "GameEngineSound.h"
 #include "GameEngineDebug.h"
 
 
@@ -43,7 +43,7 @@ void GameEngineSoundPlayer::PlayCountReset(int _Count /*= -1*/)
 
 void GameEngineSoundPlayer::PlayOverLap(const std::string& _name, int _LoopCount/* = 1*/)
 {
-	GameEngineSoundFile* SoundPtr = GameEngineSound::GetInst().FindSound(_name);
+	GameEngineSound* SoundPtr = GameEngineSoundManager::GetInst().FindSound(_name);
 
 	if (nullptr == SoundPtr)
 	{
@@ -56,7 +56,7 @@ void GameEngineSoundPlayer::PlayOverLap(const std::string& _name, int _LoopCount
 		return;
 	}
 
-	GameEngineSound::GetInst().soundSystem_->playSound(
+	GameEngineSoundManager::GetInst().soundSystem_->playSound(
 		SoundPtr->sound_
 		, nullptr
 		, false
@@ -71,7 +71,7 @@ void GameEngineSoundPlayer::PlayOverLap(const std::string& _name, int _LoopCount
 void GameEngineSoundPlayer::PlayAlone(const std::string& _name, int _LoopCount /*= 1*/) 
 {
 	// 함수를 만들어서 그함수를 다시 실행
-	GameEngineSoundFile* SoundPtr = GameEngineSound::GetInst().FindSound(_name);
+	GameEngineSound* SoundPtr = GameEngineSoundManager::GetInst().FindSound(_name);
 
 	if (nullptr == SoundPtr)
 	{
@@ -89,7 +89,7 @@ void GameEngineSoundPlayer::PlayAlone(const std::string& _name, int _LoopCount /
 		return;
 	}
 
-	GameEngineSound::GetInst().soundSystem_->playSound(
+	GameEngineSoundManager::GetInst().soundSystem_->playSound(
 		SoundPtr->sound_
 		, nullptr
 		, false

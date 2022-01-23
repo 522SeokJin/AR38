@@ -4,6 +4,7 @@
 
 #include "GameEngineBase/GameEngineTime.h"
 #include "GameEngine/GameEngineWindow.h"
+#include "GameEngine/GameEngineVertexBufferManager.h"
 
 UserGame::UserGame() // default constructer 디폴트 생성자
 {
@@ -22,7 +23,7 @@ UserGame::UserGame(UserGame&& _other) noexcept  // default RValue Copy construct
 
 void UserGame::Initialize()
 {
-	GameEngineSound::GetInst().Initialize();
+	GameEngineSoundManager::GetInst().Initialize();
 
 	return;
 }
@@ -39,7 +40,7 @@ void UserGame::ResourceLoad()
 		
 		for (size_t i = 0; i < AllFile.size(); i++)
 		{
-			GameEngineSound::GetInst().LoadSound(AllFile[i].GetFullPath());
+			GameEngineSoundManager::GetInst().LoadSound(AllFile[i].GetFullPath());
 		}
 
 	}
@@ -47,7 +48,9 @@ void UserGame::ResourceLoad()
 
 void UserGame::Release()
 {
-	GameEngineSound::Destroy();
+	GameEngineSoundManager::Destroy();
+
+	GameEngineVertexBufferManager::Destroy();
 
 	GameEngineWindow::Destroy();
 

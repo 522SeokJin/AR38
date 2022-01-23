@@ -189,8 +189,11 @@
     <ClInclude Include="GameEngineObjectNameBase.h" />
     <ClInclude Include="GameEnginePath.h" />
     <ClInclude Include="GameEngineRandom.h" />
-    <ClInclude Include="GameEngineSound.h" />
-    <ClInclude Include="GameEngineSoundFile.h" />
+    <ClInclude Include="GameEngineSound.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEngineSoundManager.h" />
     <ClInclude Include="GameEngineSoundPlayer.h" />
     <ClInclude Include="GameEngineString.h">
       <SubType>
@@ -217,8 +220,11 @@
     <ClCompile Include="GameEngineObjectNameBase.cpp" />
     <ClCompile Include="GameEnginePath.cpp" />
     <ClCompile Include="GameEngineRandom.cpp" />
-    <ClCompile Include="GameEngineSound.cpp" />
-    <ClCompile Include="GameEngineSoundFile.cpp" />
+    <ClCompile Include="GameEngineSound.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEngineSoundManager.cpp" />
     <ClCompile Include="GameEngineSoundPlayer.cpp" />
     <ClCompile Include="GameEngineString.cpp">
       <SubType>

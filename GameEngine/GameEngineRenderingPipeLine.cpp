@@ -1,8 +1,11 @@
 #include "PreCompile.h"
 #include "GameEngineRenderingPipeLine.h"
 #include "GameEngineVertexBuffer.h"
+#include "GameEngineVertexShader.h"
 
 GameEngineRenderingPipeLine::GameEngineRenderingPipeLine() // default constructer 디폴트 생성자
+	: VertexBuffer_(nullptr),
+	VertexShader_(nullptr)
 {
 
 }
@@ -13,16 +16,34 @@ GameEngineRenderingPipeLine::~GameEngineRenderingPipeLine() // default destructe
 }
 
 GameEngineRenderingPipeLine::GameEngineRenderingPipeLine(GameEngineRenderingPipeLine&& _other) noexcept  // default RValue Copy constructer 디폴트 RValue 복사생성자
+	: VertexBuffer_(_other.VertexBuffer_),
+	VertexShader_(_other.VertexShader_)
 {
 
 }
 
 void GameEngineRenderingPipeLine::SetInputAssembler1(GameEngineVertexBuffer* _Ptr)
 {
-	CopyVertex = _Ptr->GetVertexs();
+	VertexBuffer_ = _Ptr;
 }
 
-void GameEngineRenderingPipeLine::OutputMerger()
+void GameEngineRenderingPipeLine::SetVertexShader(GameEngineVertexShader* _Ptr)
 {
+	VertexShader_ = _Ptr;
+}
 
+void GameEngineRenderingPipeLine::Rendering()
+{
+	// input어셈블러 단계
+	std::vector<float4> CopyVertex;
+	{
+		CopyVertex = VertexBuffer_->GetVertexs();
+	}
+
+	{
+		for (size_t i = 0; i < CopyVertex.size(); i++)
+		{
+			CopyVertex[i] = VertexShader_->VertexShaderFunction(CopyVertex[i]);
+		}
+	}
 }

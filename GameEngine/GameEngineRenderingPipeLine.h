@@ -11,13 +11,15 @@ class GameEngineRenderingPipeLine
 {
 private:	// member Var
 	// VertexBuffer 에서 복사해서 받아온다.
-	std::vector<float4> CopyVertex;
+	GameEngineVertexBuffer* VertexBuffer_;
+	GameEngineVertexShader* VertexShader_;
 
 public:
 	void SetInputAssembler1(GameEngineVertexBuffer* _Ptr);
-	//void SetVertexShader(GameEngineVertexShader* _Vertex);
+	void SetVertexShader(GameEngineVertexShader* _Ptr);
 
-	void OutputMerger();
+public:
+	void Rendering();
 	
 public:
 	GameEngineRenderingPipeLine(); // default constructer 디폴트 생성자

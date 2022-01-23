@@ -1,10 +1,11 @@
 #pragma once
 #include <GameEngineBase/GameEngineMath.h>
+#include <GameEngineBase/GameEngineObjectNameBase.h>
 
 // 분류 : 렌더링 파이프라인
 // 용도 : 버텍스버퍼
 // 설명 : 정점위치정보를 모음
-class GameEngineVertexBuffer
+class GameEngineVertexBuffer : public GameEngineObjectNameBase
 {
 private:	// member Var
 	std::vector<float4> Vertexs_;

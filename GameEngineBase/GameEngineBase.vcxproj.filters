@@ -25,10 +25,7 @@
     <ClInclude Include="GameEngineTime.h">
       <Filter>Time</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineSound.h">
-      <Filter>Media</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngineSoundFile.h">
+    <ClInclude Include="GameEngineSoundManager.h">
       <Filter>Media</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineSoundPlayer.h">
@@ -42,6 +39,9 @@
     </ClInclude>
     <ClInclude Include="GameEngineRandom.h">
       <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineSound.h">
+      <Filter>Media</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -69,10 +69,7 @@
     <ClCompile Include="GameEngineTime.cpp">
       <Filter>Time</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineSound.cpp">
-      <Filter>Media</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngineSoundFile.cpp">
+    <ClCompile Include="GameEngineSoundManager.cpp">
       <Filter>Media</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineSoundPlayer.cpp">
@@ -86,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineRandom.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineSound.cpp">
+      <Filter>Media</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
