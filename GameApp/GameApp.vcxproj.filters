@@ -5,17 +5,24 @@
     <ClCompile Include="PreCompile.cpp">
       <Filter>Precom</Filter>
     </ClCompile>
-    <ClCompile Include="UserGame.cpp" />
+    <ClCompile Include="UserGame.cpp">
+      <Filter>UserCore</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
       <UniqueIdentifier>{02522052-7326-46b3-8c44-efbe0e540691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserCore">
+      <UniqueIdentifier>{6594ca4b-42c5-47f7-a71c-b445e496b9e7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
       <Filter>Precom</Filter>
     </ClInclude>
-    <ClInclude Include="UserGame.h" />
+    <ClInclude Include="UserGame.h">
+      <Filter>UserCore</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

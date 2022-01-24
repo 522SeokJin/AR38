@@ -7,16 +7,19 @@
 
 class GameEngineVertexBuffer;
 class GameEngineVertexShader;
+class GameEngineIndexBuffer;
 class GameEngineRenderingPipeLine
 {
 private:	// member Var
 	// VertexBuffer 에서 복사해서 받아온다.
 	GameEngineVertexBuffer* VertexBuffer_;
 	GameEngineVertexShader* VertexShader_;
+	GameEngineIndexBuffer* IndexBuffer_;
 
 public:
-	void SetInputAssembler1(GameEngineVertexBuffer* _Ptr);
-	void SetVertexShader(GameEngineVertexShader* _Ptr);
+	void SetInputAssembler1(const std::string& _Name);
+	void SetVertexShader(const std::string& _Name);
+	void SetInputAssembler2(const std::string& _Name);
 
 public:
 	void Rendering();

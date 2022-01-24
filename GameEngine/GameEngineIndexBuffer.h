@@ -1,12 +1,14 @@
 #pragma once
 
+#include <GameEngineBase/GameEngineObjectNameBase.h>
+
 // 분류 : 렌더링파이프라인 
 // 용도 : 인덱스버퍼
 // 설명 : 정점들로 어떻게 그릴지 정의를 함, 3개로 삼각형을 만듬
 //		면을 구성하기위한 최소한의 면은 삼각형이기 때문
-class GameEngineIndexBuffer
+class GameEngineIndexBuffer : public GameEngineObjectNameBase
 {
-private:	// member Var
+public:	// member Var
 	std::vector<int> Indexs;
 	// 0 1 3
 	// 0 3 2

@@ -15,4 +15,3 @@ GameEngineIndexBuffer::GameEngineIndexBuffer(GameEngineIndexBuffer&& _other) noe
 {
 
 }
-

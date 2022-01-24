@@ -19,12 +19,12 @@ public:
 	static const float4 DOWN;
 
 public:
-	static float4 Rotatefloat2Degree(float4 _OriginVector, float _Degree)
+	static float4 RotateZfloat2Degree(float4 _OriginVector, float _Degree)
 	{
-		return Rotatefloat2Radian(_OriginVector, _Degree * GameEngineMath::DegreeToRadian);
+		return RotateZfloat2Radian(_OriginVector, _Degree * GameEngineMath::DegreeToRadian);
 	}
 
-	static float4 Rotatefloat2Radian(float4 _OriginVector, float _Radian)
+	static float4 RotateZfloat2Radian(float4 _OriginVector, float _Radian)
 	{
 		float4 NextVector;
 
@@ -151,6 +151,15 @@ public:
 		return *this;
 	}
 
+	float4& operator*=(const float _other)
+	{
+		this->x *= _other;
+		this->y *= _other;
+		this->z *= _other;
+		this->w *= _other;
+		return *this;
+	}
+
 	float4& operator*=(const float4 _other)
 	{
 		this->x *= _other.x;
@@ -237,9 +246,9 @@ public:
 		return { ix(), iy() };
 	}
 
-	void Rotatefloat2Degree(float _Deg)
+	void RotateZfloat2Degree(float _Deg)
 	{
-		*this = Rotatefloat2Degree(*this, _Deg);
+		*this = RotateZfloat2Degree(*this, _Deg);
 		return;
 	}
 

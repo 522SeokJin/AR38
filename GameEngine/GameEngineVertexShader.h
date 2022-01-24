@@ -1,10 +1,11 @@
 #pragma once
 #include <GameEngineBase/GameEngineMath.h>
+#include <GameEngineBase/GameEngineObjectNameBase.h>
 
 // 분류 : 렌더링파이프라인 
 // 용도 : 버텍스쉐이더
 // 설명 : 버텍스버퍼를 움직이거나 회전하는걸 할때 사용한다.
-class GameEngineVertexShader
+class GameEngineVertexShader : public GameEngineObjectNameBase
 {
 public:	// member Var
 	std::function<float4(const float4& _Vertex)> VertexShaderFunction;

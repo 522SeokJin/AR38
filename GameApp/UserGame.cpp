@@ -1,10 +1,9 @@
 #include "PreCompile.h"
 #include "UserGame.h"
-//#include <conio.h> //_getch();
+#include <conio.h> //_getch();
 
-#include "GameEngineBase/GameEngineTime.h"
 #include "GameEngine/GameEngineWindow.h"
-#include "GameEngine/GameEngineVertexBufferManager.h"
+#include "GameEngine/GameEngineRenderingPipeLine.h"
 
 UserGame::UserGame() // default constructer 디폴트 생성자
 {
@@ -28,6 +27,8 @@ void UserGame::Initialize()
 	return;
 }
 
+float RotAngle = 0.0f;
+
 void UserGame::ResourceLoad()
 {
 	{
@@ -42,44 +43,73 @@ void UserGame::ResourceLoad()
 		{
 			GameEngineSoundManager::GetInst().LoadSound(AllFile[i].GetFullPath());
 		}
+	}
 
+	{
+		std::vector<float4> RectVertex = std::vector<float4>(4);
+
+		// 0 1
+		// 3 2
+
+		RectVertex[0] = float4({ -0.5f, 0.5f, 0.5f });
+		RectVertex[1] = float4({ 0.5f, 0.5f, 0.5f });
+		RectVertex[2] = float4({ 0.5f, -0.5f, 0.5f });
+		RectVertex[3] = float4({ -0.5f, -0.5f, 0.5f });
+
+		GameEngineVertexBufferManager::GetInst().Create("Rect", RectVertex);
+	}
+
+	{
+		std::vector<int> RectIndex = { 0,1,2, 0,2,3 };
+
+		GameEngineIndexBufferManager::GetInst().Create("Rect", RectIndex);
+	}
+
+	{
+		// 이 스택에서 곧바로 넣어주고 싶은건
+		// [] -> 람다함수
+		// 이름없는 함수를 즉석에서 만들어낼수있다.
+
+		GameEngineVertexShaderManager::GetInst().Create("TestShader", [](const float4& _Value)
+			{
+				float4 MovePos = { 200.0f, 200.0f };
+				float4 Pos = _Value;
+				Pos *= 100.f;
+				Pos.RotateZfloat2Degree(RotAngle);
+				Pos += MovePos;
+
+				return Pos;
+			}
+		);
 	}
 }
 
 void UserGame::Release()
 {
+	// Resources
+	GameEngineVertexBufferManager::Destroy();
+	GameEngineVertexShaderManager::Destroy();
+	GameEngineIndexBufferManager::Destroy();
 	GameEngineSoundManager::Destroy();
 
-	GameEngineVertexBufferManager::Destroy();
-
+	// Base
+	GameEngineTime::Destroy();
 	GameEngineWindow::Destroy();
 
 	GameEngineCore::EngineDestroy();
 }
 
-static float4 RectPoint[4]
-= {
-	{0, 0},
-	{100, 0},
-	{100, 100},
-	{0, 100},
-};
-
 void UserGame::GameLoop()
 {
-	POINT PolyGon[4];
+	GameEngineRenderingPipeLine Pipe;
 
-	for (size_t i = 0; i < 4; i++)
-	{
-		RectPoint[i].Rotatefloat2Degree(45 * GameEngineTime::GetInst().GetDeltaTime());
-	}
+	Pipe.SetInputAssembler1("Rect");
+	Pipe.SetVertexShader("TestShader");
+	Pipe.SetInputAssembler2("Rect");
 
-	for (size_t i = 0; i < 4; i++)
-	{
-		PolyGon[i] = RectPoint[i].GetWindowPoint();
-	}
+	RotAngle += 360.0f * GameEngineTime::GetInst().GetDeltaTime();
 
-	Polygon(GameEngineWindow::GetInst().GetWindowDC(), PolyGon, 4);
+	Pipe.Rendering();
 }
 
 
