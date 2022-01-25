@@ -3,8 +3,6 @@
 #include <GameEngine/GameEngineCore.h>
 #include "UserGame.h"
 
-#include <GameEngineBase/GameEngineDebug.h>
-
 int WinMain(
 	HINSTANCE hInstance,
 	HINSTANCE hPrevInstance,
@@ -12,8 +10,5 @@ int WinMain(
 	int       nShowCmd
 )
 {
-	GameEngineDebug::LeakCheckOn();
-	//_CrtSetBreakAlloc(163);
-
 	GameEngineCore::Start<UserGame>();
 }

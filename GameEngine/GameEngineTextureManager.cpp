@@ -2,6 +2,8 @@
 #include "GameEngineTextureManager.h"
 #include "GameEngineTexture.h"
 
+GameEngineTextureManager* GameEngineTextureManager::Inst = new GameEngineTextureManager();
+
 GameEngineTextureManager::GameEngineTextureManager() // default constructer 디폴트 생성자
 {
 

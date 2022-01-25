@@ -19,12 +19,12 @@ public:
 	static const float4 DOWN;
 
 public:
-	static float4 RotateXDegree(float4 _OriginVector, float _Degree)
+	static float4 RotateXDegree(const float4& _OriginVector, float _Degree)
 	{
 		return RotateXRadian(_OriginVector, _Degree * GameEngineMath::DegreeToRadian);
 	}
 
-	static float4 RotateXRadian(float4 _OriginVector, float _Radian)
+	static float4 RotateXRadian(const float4& _OriginVector, float _Radian)
 	{
 		float4 NextVector;
 
@@ -35,12 +35,12 @@ public:
 		return NextVector;
 	}
 
-	static float4 RotateYDegree(float4 _OriginVector, float _Degree)
+	static float4 RotateYDegree(const float4& _OriginVector, float _Degree)
 	{
 		return RotateYRadian(_OriginVector, _Degree * GameEngineMath::DegreeToRadian);
 	}
 
-	static float4 RotateYRadian(float4 _OriginVector, float _Radian)
+	static float4 RotateYRadian(const float4& _OriginVector, float _Radian)
 	{
 		float4 NextVector;
 
@@ -51,12 +51,12 @@ public:
 		return NextVector;
 	}
 
-	static float4 RotateZDegree(float4 _OriginVector, float _Degree)
+	static float4 RotateZDegree(const float4& _OriginVector, float _Degree)
 	{
 		return RotateZRadian(_OriginVector, _Degree * GameEngineMath::DegreeToRadian);
 	}
 
-	static float4 RotateZRadian(float4 _OriginVector, float _Radian)
+	static float4 RotateZRadian(const float4& _OriginVector, float _Radian)
 	{
 		float4 NextVector;
 
@@ -102,7 +102,7 @@ public:
 		// 실수는 기본적으로 00000000 00000000 00000000 00000000
 	};
 
-	float4 operator+(const float4 _other) const
+	float4 operator+(const float4& _other) const
 	{
 		float4 ReturnValue;
 
@@ -113,7 +113,7 @@ public:
 		return ReturnValue;
 	}
 
-	float4 operator-(const float4 _other) const
+	float4 operator-(const float4& _other) const
 	{
 		float4 ReturnValue;
 
@@ -137,7 +137,7 @@ public:
 
 
 
-	float4 operator*(const float4 _other) const
+	float4 operator*(const float4& _other) const
 	{
 		float4 ReturnValue;
 
@@ -148,7 +148,7 @@ public:
 		return ReturnValue;
 	}
 
-	float4 operator/(const float4 _other) const
+	float4 operator/(const float4& _other) const
 	{
 		float4 ReturnValue;
 
@@ -160,7 +160,7 @@ public:
 	}
 
 
-	float4& operator+=(const float4 _other)
+	float4& operator+=(const float4& _other)
 	{
 		this->x += _other.x;
 		this->y += _other.y;
@@ -169,12 +169,12 @@ public:
 		return *this;
 	}
 
-	float4& operator-=(const float4 _other) 
+	float4& operator-=(const float4& _other) 
 	{
 		this->x -= _other.x;
 		this->y -= _other.y;
 		this->z -= _other.z;
-		this->w -= _other.w;
+		//this->w -= _other.w;
 		return *this;
 	}
 
@@ -183,25 +183,25 @@ public:
 		this->x *= _other;
 		this->y *= _other;
 		this->z *= _other;
-		this->w *= _other;
+		//this->w *= _other;
 		return *this;
 	}
 
-	float4& operator*=(const float4 _other)
+	float4& operator*=(const float4& _other)
 	{
 		this->x *= _other.x;
 		this->y *= _other.y;
 		this->z *= _other.z;
-		this->w *= _other.w;
+		//this->w *= _other.w;
 		return *this;
 	}
 
-	float4& operator/=(const float4 _other) 
+	float4& operator/=(const float4& _other) 
 	{
 		this->x /= _other.x;
 		this->y /= _other.y;
 		this->z /= _other.z;
-		this->w /= _other.w;
+		//this->w /= _other.w;
 		return *this;
 	}
 
@@ -417,6 +417,29 @@ public:
 	{
 
 	}
+};
+
+// 0.0f 0.0f 0.0f 0.0f
+// 0.0f 0.0f 0.0f 0.0f
+// 0.0f 0.0f 0.0f 0.0f
+// 0.0f 0.0f 0.0f 0.0f
+
+class float4x4
+{
+	union
+	{
+		struct
+		{
+			float4 vx;
+			float4 vy;
+			float4 vz;
+			float4 vw;
+		};
+
+		float Arr1D[4 * 4];
+		float Arr2D[4][4];
+		// 실수는 기본적으로 00000000 00000000 00000000 00000000
+	};
 };
 
 // using FVector = float4;
