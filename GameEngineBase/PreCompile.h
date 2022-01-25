@@ -21,6 +21,9 @@
 #include <math.h>
 #include <random>
 
+// DirectX 마소에서 제공하는 simd 연산용 함수들을 사용할수있다.
+#include <DirectXPackedVector.h>
+
 // io
 #include <io.h>
 #include <filesystem>

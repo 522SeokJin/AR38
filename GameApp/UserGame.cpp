@@ -122,6 +122,8 @@ void UserGame::ResourceLoad()
 
 		GameEngineVertexShaderManager::GetInst().Create("TestShader", [](const float4& _Value)
 			{
+				float4x4 Mat;
+
 				float4 Pos = _Value;
 				float4 WorldScale = { 100.0f, 100.0f, 100.0f };
 				float4 WorldMove = { 100.0f, 0.0f };
