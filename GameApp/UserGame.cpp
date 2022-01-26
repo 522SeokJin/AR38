@@ -39,7 +39,7 @@ void UserGame::ResourceLoad()
 		SoundDir.MoveChild("Sound");
 
 		std::vector<GameEngineFile> AllFile = SoundDir.GetAllFile("mp3");
-		
+
 		for (size_t i = 0; i < AllFile.size(); i++)
 		{
 			GameEngineSoundManager::GetInst().LoadSound(AllFile[i].GetFullPath());
@@ -72,8 +72,8 @@ void UserGame::ResourceLoad()
 		}
 
 		{
-			RectVertex[8]  = float4::RotateYDegree(RectVertex[0], 90.0f);
-			RectVertex[9]  = float4::RotateYDegree(RectVertex[1], 90.0f);
+			RectVertex[8] = float4::RotateYDegree(RectVertex[0], 90.0f);
+			RectVertex[9] = float4::RotateYDegree(RectVertex[1], 90.0f);
 			RectVertex[10] = float4::RotateYDegree(RectVertex[2], 90.0f);
 			RectVertex[11] = float4::RotateYDegree(RectVertex[3], 90.0f);
 
@@ -88,7 +88,7 @@ void UserGame::ResourceLoad()
 			RectVertex[17] = float4::RotateXDegree(RectVertex[1], 90.0f);
 			RectVertex[18] = float4::RotateXDegree(RectVertex[2], 90.0f);
 			RectVertex[19] = float4::RotateXDegree(RectVertex[3], 90.0f);
-										   
+
 			RectVertex[20] = float4::RotateXDegree(RectVertex[0], -90.0f);
 			RectVertex[21] = float4::RotateXDegree(RectVertex[1], -90.0f);
 			RectVertex[22] = float4::RotateXDegree(RectVertex[2], -90.0f);
@@ -122,33 +122,38 @@ void UserGame::ResourceLoad()
 
 		GameEngineVertexShaderManager::GetInst().Create("TestShader", [](const float4& _Value)
 			{
-				float4x4 Mat;
+				// 1 0 0 0
+				// 0 1 0 0
+				// 0 0 1 0
+				// 0 0 0 1
+
+				float4x4 ScaleMat;
+				ScaleMat.Scaling({ 100.0f, 100.0f, 100.0f });
+
+				float4x4 RotMat;
+				RotMat.RotationDeg({ 0.0f, RotAngle, RotAngle });
+
+				float4x4 PosMat;
+				PosMat.Translation({ 100.0f, 100.0f, 0.0f });
+
+
+				// 보는 사람이 없으면 안됨
+				float4x4 ViewMat;
+
+				// 벡터란?
+				// 원점에서부터 시작하는 x y
+
+				// 행렬은 교환법칙이 성립하지 않는다.
+				
+				// 순서를 지켜서 곱해야한다.
+				// 크자이공부
+				// 크기 자전 이동 공전 부모
+				// 뷰행렬 -> 공전행렬
+
+				float4x4 WorldMat = ScaleMat * RotMat * PosMat;
 
 				float4 Pos = _Value;
-				float4 WorldScale = { 100.0f, 100.0f, 100.0f };
-				float4 WorldMove = { 100.0f, 0.0f };
-				float4 WorldRot = { 0.0f, 0.0f, RotAngle };
-				Pos *= WorldScale;
-				Pos.RotateXDegree(WorldRot.x);
-				Pos.RotateYDegree(WorldRot.y);
-				Pos.RotateZDegree(WorldRot.z);
-				Pos += BoxPos;
-
-				// 거의 대부분을 버텍스 쉐이더에서 합니다.
-
-
-				// 한번더 뭘로 변환시키고
-				// 월드 세상에 위치시키기 위한 변형
-				
-				float4 SpaceScale = { 1.0f, -1.0f, 1.0f };
-				float4 SpaceRot = { 0.0f, 0.0f, 0.0f };
-				float4 SpaceMove = { 1280.0f * 0.5f, 720*0.5f, 0.0f};
-
-				Pos *= SpaceScale;
-				Pos.RotateXDegree(SpaceRot.x);
-				Pos.RotateYDegree(SpaceRot.y);
-				Pos.RotateZDegree(SpaceRot.z);
-				Pos += SpaceMove;
+				Pos *= WorldMat;
 
 				return Pos;
 			}

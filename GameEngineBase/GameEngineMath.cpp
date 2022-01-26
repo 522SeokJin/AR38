@@ -15,3 +15,42 @@ const float4 float4::LEFT = {-1.0f, 0.0f};
 const float4 float4::RIGHT = { 1.0f, 0.0f };
 const float4 float4::UP = { 0.0f, 1.0f };
 const float4 float4::DOWN = { 0.0f, -1.0f };
+
+float4 float4::operator*(const float4x4& _Value) const
+{
+	return DirectX::XMVector4Transform(DirectVector, _Value.DirectMatrix);
+}
+
+float4& float4::operator*=(const float4x4& _Value)
+{
+	DirectVector = DirectX::XMVector4Transform(DirectVector, _Value.DirectMatrix);
+	return *this;
+}
+
+float4 float4::RotateXRadian(const float4& _OriginVector, float _Radian)
+{
+	float4x4 Rot;
+	Rot.RotationXRad(_Radian);
+	return _OriginVector * Rot;
+}
+
+float4 float4::RotateYRadian(const float4& _OriginVector, float _Radian)
+{
+	float4x4 Rot;
+	Rot.RotationYRad(_Radian);
+	return _OriginVector * Rot;
+}
+
+float4 float4::RotateZRadian(const float4& _OriginVector, float _Radian)
+{
+	float4x4 Rot;
+	Rot.RotationZRad(_Radian);
+	return _OriginVector * Rot;
+}
+
+float4 float4::DirZRadian(float _Radian)
+{
+	float4x4 Rot;
+	Rot.RotationZRad(_Radian);
+	return float4::RIGHT * Rot;
+}
