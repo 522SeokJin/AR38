@@ -30,6 +30,37 @@ public:
 		return DirectX::XMVector3Cross(_Left.DirectVector, _Right.DirectVector);
 	}
 
+	static float Dot3D(float4 _Left, float4 _Right)
+	{
+		return DirectX::XMVector3Dot(_Left.DirectVector, _Right.DirectVector).m128_f32[0];
+	}
+
+	// 정사영
+	static float Dot3DToLen(float4 _Left, float4 _Right)
+	{
+		_Right.Normalize3D();
+		return DirectX::XMVector3Dot(_Left.DirectVector, _Right.DirectVector).m128_f32[0];
+	}
+
+	// 코사인
+	static float Dot3DToCos(float4 _Left, float4 _Right)
+	{
+		_Left.Normalize3D();
+		_Right.Normalize3D();
+		return DirectX::XMVector3Dot(_Left.DirectVector, _Right.DirectVector).m128_f32[0];
+	}
+
+	static float Dot3DToCosAngle(float4 _Left, float4 _Right)
+	{
+		// (1 * 2) = 2
+		//  / 2
+		// 역함수
+		// cost(1) = ???
+		// ??? => 1
+
+		return acos(Dot3DToLen(_Left, _Right));
+	}
+
 	static float4 RotateXDegree(const float4& _OriginVector, float _Degree)
 	{
 		return RotateXRadian(_OriginVector, _Degree * GameEngineMath::DegreeToRadian);
@@ -93,6 +124,11 @@ public:
 		return DirectX::XMVectorAdd(DirectVector, _Value.DirectVector);
 	}
 
+	float4 operator-() const
+	{
+		return DirectX::XMVectorNegate(DirectVector);
+	}
+	
 	float4 operator-(const float4& _Value) const
 	{
 		return DirectX::XMVectorSubtract(DirectVector, _Value.DirectVector);
@@ -448,6 +484,11 @@ public:
 		DirectMatrix = DirectX::XMMatrixTranslationFromVector(_Value.DirectVector);
 	}
 
+	void Transpose()
+	{
+		DirectMatrix = DirectX::XMMatrixTranspose(DirectMatrix);
+	}
+
 	void RotationDeg(const float4& _Value)
 	{
 		RotationRad(_Value * GameEngineMath::DegreeToRadian);
@@ -487,43 +528,61 @@ public:
 	}
 
 
-	// _EyePos		: 어디서 보고있는가
-	// _EyeFocus	: 어디를 보고있는가
-	// _EyeUp		: 그 상태에서 내 머리위 방향은 어디인가?
+	// 뷰행렬
 
-	void View(const float4& _EyePos, const float4& _EyeFocus, const float4& _EyeUp)
+	// LootAt은 내가 어떠한 물체를 바라보고있다
+	void ViewAt(const float4& _EyePos, const float4& _EyeFocus, const float4& _EyeUp)
 	{
-		float4 EyeDir = _EyeFocus - _EyePos;
-		EyeDir.Normalize3D();
+		// _EyePos		: 어디서 보고있는가
+		// _EyeFocus	: 어디를 보고있는가
+		// _EyeUp		: 그 상태에서 내 머리위 방향은 어디인가?
+	
+		// 내부구조
+		// float4 ZPivot = _EyeFocus - _EyePos;
+		// ZPivot.Normalize3D();
+		   
+		// float4 EyeUp = _EyeUp.NormalizeReturn3D();
+		   
+		// float4 XPivot = float4::Cross3D(EyeUp, ZPivot);
+		// XPivot.Normalize3D();
+		   
+		// float4 YPivot = float4::Cross3D(ZPivot, XPivot);
+		// YPivot.Normalize3D();
+		   
+		   
+		// 내가 원점으로 이동한만큼 물체는 반대로 이동해야한다.
+		// float4 NegEyePosition = -_EyePos;
+		   
+		// float D0 = float4::Dot3D(XPivot, NegEyePosition);
+		// float D1 = float4::Dot3D(YPivot, NegEyePosition);
+		// float D2 = float4::Dot3D(ZPivot, NegEyePosition);
+		   
+		// float4x4 ViewMat;
+		   
+		// 이 행렬은 현재 정방향 회전, 내가 회전한만큼 물체가 더 회전하게됨
+		// ViewMat.vx = float4(XPivot.x, XPivot.y, XPivot.z, D0);
+		// ViewMat.vy = float4(YPivot.x, YPivot.y, YPivot.z, D1);
+		// ViewMat.vz = float4(ZPivot.x, ZPivot.y, ZPivot.z, D2);
+		// ViewMat.vw = { 0.0f, 0.0f, 0.0f, 1.0f };
+		   
+		// 전치를 하면 반대방향으로 회전하게 된다.
+		// ViewMat.Transpose();
+		   
+		// ViewMat : 우리가 구하고자했던 뷰행렬이 된다.
+		
+		// return ViewMat;
 
-		float4 EyeUp = _EyeUp.NormalizeReturn3D();
+		// cos -sin
+		// sin	cos
 
-		float4 EyeRight = float4::Cross3D(EyeUp, EyeDir);
-		EyeRight.Normalize3D();
-
-		/*XMVECTOR EyeDirection = XMVectorSubtract(FocusPosition, EyePosition);
-
-		XMVECTOR R2 = XMVector3Normalize(EyeDirection);
-
-		XMVECTOR R0 = XMVector3Cross(UpDirection, R2);
-		R0 = XMVector3Normalize(R0);
-
-		XMVECTOR R1 = XMVector3Cross(R2, R0);
-
-		XMVECTOR NegEyePosition = XMVectorNegate(EyePosition);
-
-		XMVECTOR D0 = XMVector3Dot(R0, NegEyePosition);
-		XMVECTOR D1 = XMVector3Dot(R1, NegEyePosition);
-		XMVECTOR D2 = XMVector3Dot(R2, NegEyePosition);
-
-		XMMATRIX M;
-		M.r[0] = XMVectorSelect(D0, R0, g_XMSelect1110.v);
-		M.r[1] = XMVectorSelect(D1, R1, g_XMSelect1110.v);
-		M.r[2] = XMVectorSelect(D2, R2, g_XMSelect1110.v);
-		M.r[3] = g_XMIdentityR3.v;
-
-		M = XMMatrixTranspose(M);*/
+		// 뷰행렬의 목적 : 바라보는 사람이 원점이 되게 모든 물체에 영향을 주는 행렬
 
 		DirectMatrix = DirectX::XMMatrixLookAtLH(_EyePos.DirectVector, _EyeFocus.DirectVector, _EyeUp.DirectVector);
+	}
+
+	// LootTo는 내가 이 방향으로 바라보고있다
+	void ViewTo(const float4& _EyePos, const float4& _EyeFocus, const float4& _EyeUp)
+	{
+		DirectMatrix = DirectX::XMMatrixLookToLH(_EyePos.DirectVector, _EyeFocus.DirectVector, _EyeUp.DirectVector);
 	}
 };

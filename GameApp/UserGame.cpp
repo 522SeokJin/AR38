@@ -131,14 +131,22 @@ void UserGame::ResourceLoad()
 				ScaleMat.Scaling({ 100.0f, 100.0f, 100.0f });
 
 				float4x4 RotMat;
-				RotMat.RotationDeg({ 0.0f, RotAngle, RotAngle });
+				RotMat.RotationDeg({ 0.0f, 0.0f, RotAngle });
 
 				float4x4 PosMat;
-				PosMat.Translation({ 100.0f, 100.0f, 0.0f });
+				PosMat.Translation({ 0.0f, 0.0f, 0.0f });
 
+				float4 ZeroPos = float4::ZERO;
+
+				float4 FDir = { 1.0f, 0.0f, 1.0f };
+				FDir.Normalize3D();
 
 				// 보는 사람이 없으면 안됨
 				float4x4 ViewMat;
+
+				ViewMat.ViewTo({ 0.0f, 0.0f, -2000.0f }, FDir, {0.0f, 1.0f, 0.0f});
+
+				ZeroPos *= ViewMat;
 
 				// 벡터란?
 				// 원점에서부터 시작하는 x y
@@ -149,7 +157,7 @@ void UserGame::ResourceLoad()
 				// 크자이공부
 				// 크기 자전 이동 공전 부모
 				// 뷰행렬 -> 공전행렬
-
+				
 				float4x4 WorldMat = ScaleMat * RotMat * PosMat;
 
 				float4 Pos = _Value;
