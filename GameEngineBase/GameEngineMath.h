@@ -531,7 +531,7 @@ public:
 	// 뷰행렬
 
 	// LootAt은 내가 어떠한 물체를 바라보고있다
-	void ViewAt(const float4& _EyePos, const float4& _EyeFocus, const float4& _EyeUp)
+	void ViewAtLH(const float4& _EyePos, const float4& _EyeFocus, const float4& _EyeUp)
 	{
 		// _EyePos		: 어디서 보고있는가
 		// _EyeFocus	: 어디를 보고있는가
@@ -581,8 +581,80 @@ public:
 	}
 
 	// LootTo는 내가 이 방향으로 바라보고있다
-	void ViewTo(const float4& _EyePos, const float4& _EyeFocus, const float4& _EyeUp)
+	void ViewToLH(const float4& _EyePos, const float4& _EyeFocus, const float4& _EyeUp)
 	{
 		DirectMatrix = DirectX::XMMatrixLookToLH(_EyePos.DirectVector, _EyeFocus.DirectVector, _EyeUp.DirectVector);
+	}
+
+	// 투영행렬
+	// 1. 원근감을 주는 투영행렬 원근투영
+	// 2. 주지 않는 투영행렬 직교투영
+
+	// -1~1로 들어가기 직전으로 바꾼다.
+
+	void PerspectiveFovLH(
+		float _FovAngleY,
+		float _Width,
+		float _Height,
+		float _NearZ,
+		float _FarZ
+	)
+	{
+		PerspectiveFovLH(_FovAngleY * GameEngineMath::DegreeToRadian, _Width / _Height, _NearZ, _FarZ);
+	}
+
+	void PerspectiveFovLH(
+		float _FovAngleY,
+		float _AspectRatio,
+		float _NearZ,
+		float _FarZ
+	)
+	{
+
+		float Height = cos(0.5f * _FovAngleY) / sin(0.5f * _FovAngleY);
+		float Width = Height / _AspectRatio;
+		float fRange = _FarZ / (_FarZ - _NearZ);
+
+		/*float    SinFov;
+		float    CosFov;
+		XMScalarSinCos(&SinFov, &CosFov, 0.5f * FovAngleY);
+
+		float Height = CosFov / SinFov;
+		float Width = Height / AspectRatio;
+		float fRange = FarZ / (FarZ - NearZ);
+
+		XMMATRIX M;
+		M.m[0][0] = Width;
+		M.m[0][1] = 0.0f;
+		M.m[0][2] = 0.0f;
+		M.m[0][3] = 0.0f;
+
+		M.m[1][0] = 0.0f;
+		M.m[1][1] = Height;
+		M.m[1][2] = 0.0f;
+		M.m[1][3] = 0.0f;
+
+		M.m[2][0] = 0.0f;
+		M.m[2][1] = 0.0f;
+		M.m[2][2] = fRange;
+		M.m[2][3] = 1.0f;
+
+		M.m[3][0] = 0.0f;
+		M.m[3][1] = 0.0f;
+		M.m[3][2] = -fRange * NearZ;
+		M.m[3][3] = 0.0f;
+		return M;*/
+
+		DirectMatrix = DirectX::XMMatrixPerspectiveFovLH(_FovAngleY, _AspectRatio, _NearZ, _FarZ);
+	}
+
+	void OrthographicLH(
+		float _Width,
+		float _Height,
+		float _NearZ,
+		float _FarZ
+	)
+	{
+		DirectMatrix = DirectX::XMMatrixOrthographicLH(_Width, _Height, _NearZ, _FarZ);
 	}
 };

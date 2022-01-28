@@ -62,6 +62,11 @@ void GameEngineRenderingPipeLine::SetInputAssembler2(const std::string& _Name)
 	}
 }
 
+void GameEngineRenderingPipeLine::SetRasterizer(const std::string& _Name)
+{
+	// Rasterizer_ = 
+}
+
 void GameEngineRenderingPipeLine::Rendering()
 {
 	// input어셈블러 단계

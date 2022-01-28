@@ -128,25 +128,39 @@ void UserGame::ResourceLoad()
 				// 0 0 0 1
 
 				float4x4 ScaleMat;
-				ScaleMat.Scaling({ 100.0f, 100.0f, 100.0f });
+				ScaleMat.Scaling({ 1280.0f, 720.0f, 10.0f });
 
 				float4x4 RotMat;
-				RotMat.RotationDeg({ 0.0f, 0.0f, RotAngle });
+				RotMat.RotationDeg({ 0.0f, 0.0f, 0.0f });
 
 				float4x4 PosMat;
 				PosMat.Translation({ 0.0f, 0.0f, 0.0f });
 
-				float4 ZeroPos = float4::ZERO;
-
-				float4 FDir = { 1.0f, 0.0f, 1.0f };
-				FDir.Normalize3D();
-
 				// 보는 사람이 없으면 안됨
 				float4x4 ViewMat;
 
-				ViewMat.ViewTo({ 0.0f, 0.0f, -2000.0f }, FDir, {0.0f, 1.0f, 0.0f});
+				ViewMat.ViewToLH({ 0.0f, 0.0f, -200.0f }, {0.0f, 0.0f, 1.0f}, {0.0f, 1.0f, 0.0f});
 
-				ZeroPos *= ViewMat;
+				// 세계의 크기를 -1 1사이의 값으로 줄인다.
+				// X = -1~1;
+				// Y = -1~1;
+				// Z = 0~1;
+
+				// 보통 2가지 투영행렬이 있는데.
+				// 1. 원근감을 주는 투영행렬 원근투영
+				// 2. 주지 않는 투영행렬 직교투영
+
+				// -1~1로 들어가기 직전으로 바꾼다.
+
+				float4x4 PerspectiveMat;
+				PerspectiveMat.PerspectiveFovLH(60.0f, 1280.0f, 720.0f, 0.1f, 1000.0f);
+
+				float4x4 OrthographicMat;
+				OrthographicMat.OrthographicLH(1280.0f, 720.0f, 0.1f, 1000.0f);
+
+				// float4x4 ProjectionMat;
+
+
 
 				// 벡터란?
 				// 원점에서부터 시작하는 x y
@@ -160,10 +174,16 @@ void UserGame::ResourceLoad()
 				
 				float4x4 WorldMat = ScaleMat * RotMat * PosMat;
 
-				float4 Pos = _Value;
-				Pos *= WorldMat;
+				float4x4 WorldViewProjectionMat = WorldMat * ViewMat * PerspectiveMat;
 
-				return Pos;
+				float4x4 WorldViewOrthographicMat = WorldMat * ViewMat * OrthographicMat;
+
+				float4 PersPos = _Value;
+				PersPos *= WorldViewProjectionMat;
+				float4 OrthPos = _Value;
+				OrthPos *= WorldViewOrthographicMat;
+
+				return PersPos;
 			}
 		);
 	}
