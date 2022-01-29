@@ -22,8 +22,6 @@ UserGame::UserGame(UserGame&& _other) noexcept  // default RValue Copy construct
 
 void UserGame::Initialize()
 {
-	GameEngineSoundManager::GetInst().Initialize();
-
 	return;
 }
 
@@ -197,14 +195,7 @@ void UserGame::ResourceLoad()
 
 void UserGame::Release()
 {
-	// Resources
-	GameEngineManagerHelper::ManagerRelease();
-
-	// Base
-	GameEngineTime::Destroy();
-	GameEngineWindow::Destroy();
-
-	GameEngineCore::EngineDestroy();
+	
 }
 
 void UserGame::GameLoop()

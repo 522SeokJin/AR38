@@ -7,7 +7,8 @@
 // 설명 : 
 class GameEngineCore : public GameEngineObjectBase
 {
-public:
+private:
+	void EngineInitialize();
 	void EngineDestroy();
 
 protected:
@@ -37,10 +38,15 @@ public:
 		GameEngineDebug::LeakCheckOn();
 		//_CrtSetBreakAlloc(163);
 
+#ifdef _DEBUG
+		new int();	// 신뢰의 릭
+#endif
+
 		WindowCreate();
 
 		UserGameType NewUserGame;
 
+		NewUserGame.EngineInitialize();
 		NewUserGame.Initialize();
 		NewUserGame.ResourceLoad();
 
@@ -49,6 +55,7 @@ public:
 		Loop();
 
 		NewUserGame.Release();
+		NewUserGame.EngineDestroy();
 	}
 
 

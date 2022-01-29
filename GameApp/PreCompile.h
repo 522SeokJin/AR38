@@ -5,4 +5,4 @@
 #include <GameEngineBase/GameEngineDirectroy.h>
 #include <GameEngineBase/GameEngineFile.h>
 
-#include <GameEngine/GameEngineResourceManager.h>
+#include <GameEngine/GameEngineResourcesManager.h>

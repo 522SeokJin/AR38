@@ -1,6 +1,8 @@
 #include "PreCompile.h"
 #include "GameEngineCore.h"
 #include "GameEngineWindow.h"
+#include "GameEngineResourcesManager.h"
+#include "GameEngineDirectXDevice.h"
 
 GameEngineCore* GameEngineCore::MainCore_ = nullptr;
 
@@ -19,6 +21,28 @@ GameEngineCore::GameEngineCore(GameEngineCore&& _other) noexcept  // default RVa
 
 }
 
+/// <summary>
+/// ///////////////////////////// member
+/// </summary>
+
+
+void GameEngineCore::EngineInitialize()
+{
+	GameEngineSoundManager::GetInst().Initialize();
+}
+
+void GameEngineCore::EngineDestroy()
+{
+	GameEngineManagerHelper::ManagerRelease();
+	GameEngineTime::Destroy();
+	GameEngineDirectXDevice::Destroy();
+	GameEngineWindow::Destroy();
+}
+
+/// <summary>
+/// ///////////////////////////// static
+/// </summary>
+
 void GameEngineCore::MainLoop()
 {
 	GameEngineTime::GetInst().TimeCheck();
@@ -29,6 +53,10 @@ void GameEngineCore::MainLoop()
 void GameEngineCore::WindowCreate()
 {
 	GameEngineWindow::GetInst().CreateMainWindow("MainWindow", { 1280, 720 }, { 0, 0 });
+
+	// 디바이스가 만들어져야 한다.
+	// HWND 윈도우에서 제공하는 3D 라이브러리니까 Window API 기반으로 처리되어있다.
+	GameEngineDirectXDevice::GetInst().Initialize();
 }
 
 void GameEngineCore::Loop()
@@ -36,7 +64,3 @@ void GameEngineCore::Loop()
 	GameEngineWindow::GetInst().Loop(&GameEngineCore::MainLoop);
 }
 
-void GameEngineCore::EngineDestroy()
-{
-	Death();
-}
