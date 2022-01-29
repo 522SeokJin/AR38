@@ -128,13 +128,14 @@ void UserGame::ResourceLoad()
 				// 0 0 0 1
 
 				float4x4 ScaleMat;
-				ScaleMat.Scaling({ 1280.0f, 720.0f, 10.0f });
+				ScaleMat.Scaling({ 20.0f, 20.0f, 20.0f });
 
 				float4x4 RotMat;
 				RotMat.RotationDeg({ 0.0f, 0.0f, 0.0f });
 
 				float4x4 PosMat;
-				PosMat.Translation({ 0.0f, 0.0f, 0.0f });
+				//PosMat.Translation({ 0.0f, 0.0f, 0.0f });
+				PosMat.Translation(BoxPos);
 
 				// 보는 사람이 없으면 안됨
 				float4x4 ViewMat;
@@ -160,8 +161,6 @@ void UserGame::ResourceLoad()
 
 				// float4x4 ProjectionMat;
 
-
-
 				// 벡터란?
 				// 원점에서부터 시작하는 x y
 
@@ -171,12 +170,13 @@ void UserGame::ResourceLoad()
 				// 크자이공부
 				// 크기 자전 이동 공전 부모
 				// 뷰행렬 -> 공전행렬
-				
+	
 				float4x4 WorldMat = ScaleMat * RotMat * PosMat;
+				float4x4 WolrdView = WorldMat * ViewMat;
 
-				float4x4 WorldViewProjectionMat = WorldMat * ViewMat * PerspectiveMat;
+				float4x4 WorldViewProjectionMat = WolrdView * PerspectiveMat;
 
-				float4x4 WorldViewOrthographicMat = WorldMat * ViewMat * OrthographicMat;
+				float4x4 WorldViewOrthographicMat = WolrdView * OrthographicMat;
 
 				float4 PersPos = _Value;
 				PersPos *= WorldViewProjectionMat;
@@ -187,16 +187,18 @@ void UserGame::ResourceLoad()
 			}
 		);
 	}
+
+	{
+		GameEngineRasterizer* Ptr = GameEngineRasterizerManager::GetInst().Create("TestRasterizer");
+
+		Ptr->SetViewPort(1280.0f, 720.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+	}
 }
 
 void UserGame::Release()
 {
 	// Resources
-	GameEngineVertexBufferManager::Destroy();
-	GameEngineVertexShaderManager::Destroy();
-	GameEngineIndexBufferManager::Destroy();
-	GameEngineTextureManager::Destroy();
-	GameEngineSoundManager::Destroy();
+	GameEngineManagerHelper::ManagerRelease();
 
 	// Base
 	GameEngineTime::Destroy();
@@ -212,9 +214,10 @@ void UserGame::GameLoop()
 	Pipe.SetInputAssembler1("Rect");
 	Pipe.SetVertexShader("TestShader");
 	Pipe.SetInputAssembler2("Rect");
+	Pipe.SetRasterizer("TestRasterizer");
 
 	RotAngle += 180.0f * GameEngineTime::GetInst().GetDeltaTime();
-	BoxPos.y += 10.0f * GameEngineTime::GetInst().GetDeltaTime();
+	BoxPos.x += 10.0f * GameEngineTime::GetInst().GetDeltaTime();
 
 	Pipe.Rendering();
 }

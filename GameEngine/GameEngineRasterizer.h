@@ -1,15 +1,23 @@
 #pragma once
+#include <GameEngineBase/GameEngineObjectNameBase.h>
 
 // 분류 : 
 // 용도 : 
 // 설명 : 
-class GameEngineRasterizer
+class GameEngineRasterizer : public GameEngineObjectNameBase
 {
 private:	// member Var
 	float4x4 ViewPort;
 
 public:
-	void RasterizerUpdate(const float4& _Pos);
+	void SetViewPort(float _ScreenX, float _ScreenY, float _StartX,
+		float _StartY, float _MinZ, float _MaxZ)
+	{
+		ViewPort.ViewPortCenter(_ScreenX, _ScreenY, _StartX, _StartY, _MinZ, _MaxZ);
+	}
+
+public:
+	void RasterizerUpdate(float4& _Pos);
 
 public:
 	GameEngineRasterizer(); // default constructer 디폴트 생성자

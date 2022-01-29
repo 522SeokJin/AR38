@@ -469,7 +469,7 @@ public:
 		return DirectX::XMMatrixMultiply(DirectMatrix, _Value.DirectMatrix);
 	}
 
-	void Identitiy()
+	void Identity()
 	{
 		DirectMatrix = DirectX::XMMatrixIdentity();
 	}
@@ -529,6 +529,19 @@ public:
 
 
 	// 뷰행렬
+
+	void ViewPortCenter(float _ScreenX, float _ScreenY, float _StartX,
+		float _StartY, float _MinZ, float _MaxZ)
+	{
+		Identity();
+
+		Arr2D[0][0] = _ScreenX * 0.5f;
+		Arr2D[1][1] = _ScreenY * 0.5f;
+		Arr2D[2][2] = _MaxZ - _MinZ;
+		Arr2D[3][0] = _StartX + Arr2D[0][0];
+		Arr2D[3][1] = Arr2D[1][1] + _StartY;
+		Arr2D[3][2] = _MinZ;
+	}
 
 	// LootAt은 내가 어떠한 물체를 바라보고있다
 	void ViewAtLH(const float4& _EyePos, const float4& _EyeFocus, const float4& _EyeUp)

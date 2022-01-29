@@ -40,6 +40,12 @@
     <ClInclude Include="GameEngineRasterizer.h">
       <Filter>Resources\03. Rasterizer</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineResourceManager.h">
+      <Filter>Resources\99. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineRasterizerManager.h">
+      <Filter>Resources\99. Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -80,6 +86,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineRasterizer.cpp">
       <Filter>Resources\03. Rasterizer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRasterizerManager.cpp">
+      <Filter>Resources\99. Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
