@@ -25,9 +25,6 @@
     <ClInclude Include="GameEngineVertexBufferManager.h">
       <Filter>Resources\99. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineTexture.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngineTextureManager.h">
       <Filter>Resources\99. Manager</Filter>
     </ClInclude>
@@ -48,6 +45,15 @@
     </ClInclude>
     <ClInclude Include="GameEngineDirectXDevice.h">
       <Filter>RenderingPipeLine\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineTexture.h">
+      <Filter>Resources\02. Image</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineRenderTarget.h">
+      <Filter>Resources\02. Image</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineRenderTargetManager.h">
+      <Filter>Resources\99. Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -75,9 +81,6 @@
     <ClCompile Include="GameEngineVertexBufferManager.cpp">
       <Filter>Resources\99. Manager</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineTexture.cpp">
-      <Filter>Resources</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngineTextureManager.cpp">
       <Filter>Resources\99. Manager</Filter>
     </ClCompile>
@@ -95,6 +98,15 @@
     </ClCompile>
     <ClCompile Include="GameEngineDirectXDevice.cpp">
       <Filter>RenderingPipeLine\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineTexture.cpp">
+      <Filter>Resources\02. Image</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRenderTarget.cpp">
+      <Filter>Resources\02. Image</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRenderTargetManager.cpp">
+      <Filter>Resources\99. Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +139,9 @@
     </Filter>
     <Filter Include="RenderingPipeLine\Device">
       <UniqueIdentifier>{504f4b11-7763-4f4b-a872-e29e091ba8ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\02. Image">
+      <UniqueIdentifier>{6c958abe-ece6-48a2-a85b-d86a897facf1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

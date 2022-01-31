@@ -35,7 +35,7 @@ GameEngineRasterizer* GameEngineRasterizerManager::Create(const std::string& _Na
 
 	if (nullptr != FindRes)
 	{
-		GameEngineDebug::MsgBoxError(_Name + " Is Overlap Load");
+		GameEngineDebug::MsgBoxError(_Name + " Is Overlap Create");
 	}
 
 

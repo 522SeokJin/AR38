@@ -17,6 +17,7 @@ GameEngineRenderingPipeLine::GameEngineRenderingPipeLine() // default constructe
 	: VertexBuffer_(nullptr)
 	, VertexShader_(nullptr)
 	, IndexBuffer_(nullptr)
+	, Rasterizer_(nullptr)
 {
 
 }
@@ -31,6 +32,7 @@ GameEngineRenderingPipeLine::GameEngineRenderingPipeLine(GameEngineRenderingPipe
 	: VertexBuffer_(_other.VertexBuffer_)
 	, VertexShader_(_other.VertexShader_)
 	, IndexBuffer_(_other.IndexBuffer_)
+	, Rasterizer_(_other.Rasterizer_)
 {
 
 }

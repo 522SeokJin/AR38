@@ -39,7 +39,7 @@ public:
 		//_CrtSetBreakAlloc(163);
 
 #ifdef _DEBUG
-		new int();	// ½Å·ÚÀÇ ¸¯
+		//new int();	// ½Å·ÚÀÇ ¸¯
 #endif
 
 		WindowCreate();

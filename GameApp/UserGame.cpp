@@ -200,7 +200,9 @@ void UserGame::Release()
 
 void UserGame::GameLoop()
 {
-	GameEngineRenderingPipeLine Pipe;
+	GameEngineDirectXDevice::RenderStart();
+
+	/*GameEngineRenderingPipeLine Pipe;
 
 	Pipe.SetInputAssembler1("Rect");
 	Pipe.SetVertexShader("TestShader");
@@ -210,7 +212,9 @@ void UserGame::GameLoop()
 	RotAngle += 180.0f * GameEngineTime::GetInst().GetDeltaTime();
 	BoxPos.x += 10.0f * GameEngineTime::GetInst().GetDeltaTime();
 
-	Pipe.Rendering();
+	Pipe.Rendering();*/
+
+	GameEngineDirectXDevice::RenderEnd();
 }
 
 

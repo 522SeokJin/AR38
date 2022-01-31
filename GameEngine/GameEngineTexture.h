@@ -1,12 +1,18 @@
 #pragma once
 #include <GameEngineBase/GameEngineObjectNameBase.h>
+#include "GameEngineDirectXDevice.h"
 
 // 분류 : 
 // 용도 : 
-// 설명 : 
+// 설명 : 이미지를 로드한다는 것은 텍스처까지만이다. 렌더타겟은 직접 만들어야한다.
 class GameEngineTexture : public GameEngineObjectNameBase
 {
 private:	// member Var
+	ID3D11Texture2D* Texture2D_;
+	ID3D11RenderTargetView* RenderTargetView_;
+
+public:
+	void Create(ID3D11Texture2D* _Texture2D);
 
 public:
 	GameEngineTexture(); // default constructer 디폴트 생성자
@@ -14,12 +20,13 @@ public:
 
 protected:		// delete constructer
 	GameEngineTexture(const GameEngineTexture& _other) = delete; // default Copy constructer 디폴트 복사생성자
-	GameEngineTexture(GameEngineTexture&& _other) noexcept; // default RValue Copy constructer 디폴트 RValue 복사생성자
+	GameEngineTexture(GameEngineTexture&& _other) noexcept = delete; // default RValue Copy constructer 디폴트 RValue 복사생성자
 
 private:		//delete operator
 	GameEngineTexture& operator=(const GameEngineTexture& _other) = delete; // default Copy operator 디폴트 대입 연산자
 	GameEngineTexture& operator=(const GameEngineTexture&& _other) = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
 
 public:
+	ID3D11RenderTargetView* CreateRenderTargetView();
 };
 

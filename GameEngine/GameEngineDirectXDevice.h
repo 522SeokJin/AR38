@@ -13,6 +13,7 @@
 // 분류 : 
 // 용도 : 
 // 설명 : 그래픽카드에 접근할 수 있는 포인터
+class GameEngineRenderTarget;
 class GameEngineDirectXDevice
 {
 private:	// member Var
@@ -34,13 +35,25 @@ public:
 	}
 
 private:
-	ID3D11Device* Device_;
+	static ID3D11Device* Device_;
 	// 그래픽카드에 공간을 할당하려고하면 디바이스를 거쳐야한다.
-	ID3D11DeviceContext* Context_;
+	static ID3D11DeviceContext* Context_;
 	// 그래픽카드에게 뭔가를 그리라고 명령하거나 그리는데
 	// 필요한 옵션을 세팅하려면 컨텍스트를 거쳐야한다.
 
-	IDXGISwapChain* SwapChain_;
+	static IDXGISwapChain* SwapChain_;
+
+	static GameEngineRenderTarget* BackBufferTarget_;
+
+public:
+	static ID3D11Device* GetDevice();
+	static ID3D11DeviceContext* GetContext();
+	
+	// 메모리로서의 텍스처의 역할
+	// ID3D11Texutre2D* BackBufferTexture_;
+
+	// 렌더링파이프라인에 세팅하기 위한 역할
+	// ID3D11RenderTargetView* BackBufferViewTexture_;
 
 public:
 	void Initialize();
@@ -61,5 +74,7 @@ private:		//delete operator
 	GameEngineDirectXDevice& operator=(const GameEngineDirectXDevice&& _other) = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
 
 public:
+	static void RenderStart();
+	static void RenderEnd();
 };
 
