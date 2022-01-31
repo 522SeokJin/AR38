@@ -197,6 +197,14 @@ void GameEngineDirectXDevice::RenderStart()
 
 void GameEngineDirectXDevice::RenderEnd()
 {
+	// 화면에 그려라
+	HRESULT Result = SwapChain_->Present(0, 0);
+	if (Result == DXGI_ERROR_DEVICE_REMOVED ||
+		Result == DXGI_ERROR_DEVICE_RESET)
+	{
+		int a = 0;
+	}
+
 	// 화면에 뿌려라
 	// BackBufferTarget_;
 }

@@ -29,8 +29,8 @@ GameEngineRenderTargetManager::GameEngineRenderTargetManager(GameEngineRenderTar
 
 
 
-GameEngineRenderTarget* GameEngineRenderTargetManager::Create(const std::string& _Name
-	, const std::string& _TextureName, float4 _Color)
+GameEngineRenderTarget* GameEngineRenderTargetManager::Create(const std::string& _Name,
+	const std::string& _TextureName, float4 _Color)
 {
 	GameEngineRenderTarget* FindRes = Find(_Name);
 
