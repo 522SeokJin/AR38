@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02Lib", "02Lib", "{0DA65D44
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00Doc", "00Doc", "{3607B2C2-EF36-4A72-BC27-74098DFB8050}"
 	ProjectSection(SolutionItems) = preProject
+		DirectX API기반 렌더링구조.txt = DirectX API기반 렌더링구조.txt
 		DirectX 개념파악.txt = DirectX 개념파악.txt
 		꼭 알아야하는 사항들.txt = 꼭 알아야하는 사항들.txt
 		용어정리.txt = 용어정리.txt

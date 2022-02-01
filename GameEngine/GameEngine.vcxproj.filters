@@ -35,7 +35,7 @@
       <Filter>Resources\99. Manager</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineRasterizer.h">
-      <Filter>Resources\03. Rasterizer</Filter>
+      <Filter>Resources\03. Setting</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineResourcesManager.h">
       <Filter>Resources\99. Manager</Filter>
@@ -55,6 +55,12 @@
     <ClInclude Include="GameEngineRenderTargetManager.h">
       <Filter>Resources\99. Manager</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineRenderingPipeLineManager.h">
+      <Filter>Resources\99. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineMesh.h">
+      <Filter>Resources\00. Buffer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -65,9 +71,6 @@
     </ClCompile>
     <ClCompile Include="GameEngineCore.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngineRenderingPipeLine.cpp">
-      <Filter>RenderingPipeLine</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineVertexShader.cpp">
       <Filter>Resources\01. Shader</Filter>
@@ -91,7 +94,7 @@
       <Filter>Resources\99. Manager</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineRasterizer.cpp">
-      <Filter>Resources\03. Rasterizer</Filter>
+      <Filter>Resources\03. Setting</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineRasterizerManager.cpp">
       <Filter>Resources\99. Manager</Filter>
@@ -107,6 +110,15 @@
     </ClCompile>
     <ClCompile Include="GameEngineRenderTargetManager.cpp">
       <Filter>Resources\99. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRenderingPipeLineManager.cpp">
+      <Filter>Resources\99. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineMesh.cpp">
+      <Filter>Resources\00. Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRenderingPipeLine.cpp">
+      <Filter>RenderingPipeLine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,14 +146,14 @@
     <Filter Include="Resources\01. Shader">
       <UniqueIdentifier>{de17405b-d586-4df7-86e7-fd7ef8ce3c51}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\03. Rasterizer">
-      <UniqueIdentifier>{c51986b5-61f2-40b1-a271-b9e8058eb03e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="RenderingPipeLine\Device">
       <UniqueIdentifier>{504f4b11-7763-4f4b-a872-e29e091ba8ea}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources\02. Image">
       <UniqueIdentifier>{6c958abe-ece6-48a2-a85b-d86a897facf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\03. Setting">
+      <UniqueIdentifier>{c51986b5-61f2-40b1-a271-b9e8058eb03e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

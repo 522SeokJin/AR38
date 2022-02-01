@@ -9,7 +9,7 @@ class GameEngineVertexBuffer;
 class GameEngineVertexShader;
 class GameEngineIndexBuffer;
 class GameEngineRasterizer;
-class GameEngineRenderingPipeLine
+class GameEngineRenderingPipeLine : public GameEngineObjectNameBase
 {
 private:	// member Var
 	// VertexBuffer 에서 복사해서 받아온다.
@@ -21,13 +21,19 @@ private:	// member Var
 	GameEngineRasterizer* Rasterizer_;
 
 public:
+	// Mesh
+	// 부피, 골격과 관련
 	void SetInputAssembler1(const std::string& _Name);
-
-	void SetVertexShader(const std::string& _Name);
-
 	void SetInputAssembler2(const std::string& _Name);
 
+	// Material -> PipeLine IA 밑에 있는것들
+	// 색깔과 관련
+	void SetVertexShader(const std::string& _Name);
 	void SetRasterizer(const std::string& _Name);
+
+public:
+	void SetMesh();
+	void SetMaterial();
 
 public:
 	void Rendering();

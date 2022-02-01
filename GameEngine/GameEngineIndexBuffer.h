@@ -1,6 +1,6 @@
 #pragma once
-
 #include <GameEngineBase/GameEngineObjectNameBase.h>
+#include <GameEngine/GameEngineDirectXDevice.h>
 
 // 분류 : 렌더링파이프라인 
 // 용도 : 인덱스버퍼
@@ -9,10 +9,11 @@
 class GameEngineIndexBuffer : public GameEngineObjectNameBase
 {
 public:	// member Var
-	std::vector<int> Indexs;
-	// 0 1 3
-	// 0 3 2
-	// 0 4 1
+	ID3D11Buffer*					Buffer_;
+	D3D11_BUFFER_DESC				BufferData_;
+	D3D11_SUBRESOURCE_DATA			ResData_;
+	DXGI_FORMAT						Format_;
+	UINT							Offset_;
 
 public:
 	GameEngineIndexBuffer(); // default constructer 디폴트 생성자
@@ -27,5 +28,10 @@ private:		//delete operator
 	GameEngineIndexBuffer& operator=(const GameEngineIndexBuffer&& _other) = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
 
 public:
+	void Create(const std::vector<UINT>& _Datas, D3D11_USAGE _Usage);
+
+	void Create(const void* _Data, size_t _Size, size_t _Count, D3D11_USAGE _Usage);
+
+	void Setting();
 };
 
