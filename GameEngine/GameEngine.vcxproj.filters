@@ -155,5 +155,13 @@
     <Filter Include="Resources\03. Setting">
       <UniqueIdentifier>{c51986b5-61f2-40b1-a271-b9e8058eb03e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ShaderCode">
+      <UniqueIdentifier>{c65ead8a-c235-4121-9cb2-3c2b288f5aa0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="VertexShader.hlsl">
+      <Filter>ShaderCode</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

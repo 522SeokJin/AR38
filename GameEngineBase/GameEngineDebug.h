@@ -25,6 +25,7 @@ private:		//delete operator
 
 public:		//member Func
 	static void MsgBoxError(const std::string& _Ptr);
+	static void MsgBox(const std::string& _Ptr);
 	static void AssertFalse();
 	static void OutPutDebugString(const std::string& _Text);
 };

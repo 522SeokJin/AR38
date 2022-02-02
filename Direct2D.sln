@@ -17,8 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02Lib", "02Lib", "{0DA65D44
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00Doc", "00Doc", "{3607B2C2-EF36-4A72-BC27-74098DFB8050}"
 	ProjectSection(SolutionItems) = preProject
-		DirectX API기반 렌더링구조.txt = DirectX API기반 렌더링구조.txt
-		DirectX 개념파악.txt = DirectX 개념파악.txt
 		꼭 알아야하는 사항들.txt = 꼭 알아야하는 사항들.txt
 		용어정리.txt = 용어정리.txt
 		행렬.txt = 행렬.txt
@@ -36,6 +34,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level 0", "Level 0", "{21C307B8-E743-4E92-9CC7-A254A05449CA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level 1", "Level 1", "{8C5FE973-FD79-4A72-9F00-2C66E45E7FD5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DirectX", "DirectX", "{B1E48C41-4983-40E5-9B27-BA6DF42F9E1F}"
+	ProjectSection(SolutionItems) = preProject
+		DirectX API기반 VertexShader.txt = DirectX API기반 VertexShader.txt
+		DirectX API기반 렌더링구조.txt = DirectX API기반 렌더링구조.txt
+		DirectX 개념파악.txt = DirectX 개념파악.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +84,7 @@ Global
 		{B89D23D7-D496-43AD-B1AE-9A7005815215} = {8C5FE973-FD79-4A72-9F00-2C66E45E7FD5}
 		{21C307B8-E743-4E92-9CC7-A254A05449CA} = {0DA65D44-5FE1-44D1-9C3D-2E429A366BA9}
 		{8C5FE973-FD79-4A72-9F00-2C66E45E7FD5} = {0DA65D44-5FE1-44D1-9C3D-2E429A366BA9}
+		{B1E48C41-4983-40E5-9B27-BA6DF42F9E1F} = {3607B2C2-EF36-4A72-BC27-74098DFB8050}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93F3A4E3-AB22-407C-9A45-98196FCC3916}
