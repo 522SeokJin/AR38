@@ -43,7 +43,7 @@
     <ClInclude Include="GameEngineRasterizerManager.h">
       <Filter>Resources\99. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineDirectXDevice.h">
+    <ClInclude Include="GameEngineDevice.h">
       <Filter>RenderingPipeLine\Device</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineTexture.h">
@@ -99,7 +99,7 @@
     <ClCompile Include="GameEngineRasterizerManager.cpp">
       <Filter>Resources\99. Manager</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineDirectXDevice.cpp">
+    <ClCompile Include="GameEngineDevice.cpp">
       <Filter>RenderingPipeLine\Device</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineTexture.cpp">

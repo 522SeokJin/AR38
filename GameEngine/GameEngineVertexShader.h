@@ -1,7 +1,7 @@
 #pragma once
 #include <GameEngineBase/GameEngineMath.h>
 #include <GameEngineBase/GameEngineObjectNameBase.h>
-#include <GameEngine/GameEngineDirectXDevice.h>
+#include <GameEngine/GameEngineDevice.h>
 
 // 분류 : 렌더링파이프라인 
 // 용도 : 버텍스쉐이더
@@ -11,8 +11,10 @@ class GameEngineVertexShader : public GameEngineObjectNameBase
 private:	// member Var
 	UINT		VersionHigh_;
 	UINT		VersionLow_;
-	ID3DBlob*	CodeBlob_;
 	std::string Version_;
+
+	ID3DBlob*	CodeBlob_;
+	ID3D11VertexShader* VertexShader_;
 
 	std::string	EntryPoint_;
 	std::string Code_;
@@ -50,23 +52,13 @@ private:
 	/// <summary>
 	/// ////////////////////////////// InputLayout Settting
 	/// </summary>
+	// CustomVertex의 순서를 정해준다.
 private:
 	ID3D11InputLayout*						Layout_;
-	unsigned int							LayoutOffset_;
+	unsigned int							LayoutOffset_; // Current Offset Position
 	std::vector<std::string>				SemanticName_;
 	std::vector<D3D11_INPUT_ELEMENT_DESC>	InputLayoutDesc_;
 
-	/*
-	CreateInputLayout(...) parameter
-
-	ID3D11InputLayout** ppInputLayout;					-> Layout_
-	UINT NumElements;
-	SIZE_T BytecodeLength;
-	const void* pShaderBytecodeWithInputSignature;
-	const D3D11_INPUT_ELEMENT_DESC* pInputElementDescs;	-> InputLayoutDesc_
-	*/
-
-public:
 	void AddInputLayout(
 		const char* _SemanticName,
 		unsigned int _SemanticIndex,
@@ -78,6 +70,13 @@ public:
 	);
 
 	void CreateLayout();
+
+	void LayoutCheck();
+
 	void LayoutClear();
+
+public:
+	void InputLayoutSetting();
+	void Setting();
 };
 

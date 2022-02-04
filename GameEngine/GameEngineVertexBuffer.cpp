@@ -57,7 +57,7 @@ void GameEngineVertexBuffer::Create(const void* _Data, size_t _Size, size_t _Cou
 	BufferData_.StructureByteStride = 0;
 	BufferData_.MiscFlags = 0;
 
-	if (S_OK != GameEngineDirectXDevice::GetDevice()->CreateBuffer(&BufferData_, &ResData_, &Buffer_))
+	if (S_OK != GameEngineDevice::GetDevice()->CreateBuffer(&BufferData_, &ResData_, &Buffer_))
 	{
 		GameEngineDebug::MsgBoxError("VertexBuffer Create Error");
 		return;
@@ -69,5 +69,5 @@ void GameEngineVertexBuffer::Setting()
 	// IASetVertexBuffer 's' -> 한번에 여러개를 세팅할 수있다.
 	// VertexBuffer도 vector로 들고있어야하는데 지금은 1개로 하겠다.
 	// _Size도 나중에 vector로 만듬
-	GameEngineDirectXDevice::GetContext()->IASetVertexBuffers(0, 1, &Buffer_, &Size_, &Offset_);
+	GameEngineDevice::GetContext()->IASetVertexBuffers(0, 1, &Buffer_, &Size_, &Offset_);
 }

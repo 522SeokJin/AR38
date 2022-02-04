@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "GameEngineVertexShader.h"
-#include "GameEngineDirectXDevice.h"
+#include "GameEngineDevice.h"
 
 GameEngineVertexShader::GameEngineVertexShader() // default constructer 디폴트 생성자
 	: VersionHigh_(5)
@@ -16,6 +16,12 @@ GameEngineVertexShader::~GameEngineVertexShader() // default destructer 디폴트 �
 	{
 		Layout_->Release();
 		Layout_ = nullptr;
+	}
+
+	if (nullptr != VertexShader_)
+	{
+		VertexShader_->Release();
+		VertexShader_ = nullptr;
 	}
 
 	if (nullptr != CodeBlob_)
@@ -90,6 +96,15 @@ bool GameEngineVertexShader::Compile()
 
 	CodeBlob_ = ResultBlob;
 
+	if (S_OK != GameEngineDevice::GetDevice()->CreateVertexShader(CodeBlob_->GetBufferPointer(),
+		CodeBlob_->GetBufferSize(), nullptr, &VertexShader_))
+	{
+		GameEngineDebug::MsgBoxError("버텍스쉐이더 생성에 실패했습니다.");
+		return false;
+	}
+
+	LayoutCheck();
+
 	return true;
 }
 
@@ -129,7 +144,7 @@ void GameEngineVertexShader::AddInputLayout(
 	// 0번 (POSITION 0)
 	LayoutDesc.SemanticIndex = _SemanticIndex;
 	// 16 -> 16Byte 위치
-	LayoutDesc.AlignedByteOffset = _AlignedByteOffset;	// LayOutOffset_?
+	LayoutDesc.AlignedByteOffset = LayoutOffset_;	// _AlignedByteOffset
 	// DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT
 	LayoutDesc.Format = _Format;
 	// 0 -> 아직안씀
@@ -137,6 +152,8 @@ void GameEngineVertexShader::AddInputLayout(
 	// 0 -> 아직안씀
 	LayoutDesc.InstanceDataStepRate = _InstanceDataStepRate;
 	
+	LayoutOffset_ += _AlignedByteOffset;
+
 	InputLayoutDesc_.push_back(LayoutDesc);
 
 	//struct GameEngineVertex
@@ -153,7 +170,211 @@ void GameEngineVertexShader::AddInputLayout(
 
 void GameEngineVertexShader::CreateLayout()
 {
-	//GameEngineDirectXDevice::GetDevice()->CreateInputLayout();
+	if (S_OK != GameEngineDevice::GetDevice()->CreateInputLayout
+	(
+		&InputLayoutDesc_[0],
+		static_cast<unsigned int>(InputLayoutDesc_.size()),
+		CodeBlob_->GetBufferPointer(),
+		CodeBlob_->GetBufferSize(),
+		&Layout_
+	)
+	)
+	{
+		GameEngineDebug::MsgBoxError("인풋레이아웃 생성에 실패했습니다.");
+		return;
+	}
+}
+
+void GameEngineVertexShader::LayoutCheck()
+{
+	LayoutClear();
+
+	if (nullptr == CodeBlob_)
+	{
+		return;
+	}
+
+	// 내가 쉐이더에서 사용한 변수, 함수, 인자들 그 이외의 상수버퍼 등의
+	// 모든 정보를 알고있다.
+	// ex) 쉐이더에서 행렬을 1개 사용했다.
+	ID3D11ShaderReflection* CompileInfo;
+
+	if (S_OK != D3DReflect
+	(
+		CodeBlob_->GetBufferPointer(),
+		CodeBlob_->GetBufferSize(),
+		IID_ID3D11ShaderReflection,
+		reinterpret_cast<void**>(&CompileInfo)
+	)
+	)
+	{
+		GameEngineDebug::MsgBoxError("쉐이더 컴파일 정보를 얻어오지 못했습니다.");
+	}
+
+	D3D11_SHADER_DESC Info;
+
+	CompileInfo->GetDesc(&Info);
+
+	std::string Name = "";
+	int PrevIndex = 0;
+
+	// InputParameters : VertexShader에 들어오는 InputParameter의 갯수
+	// CustomVertex와 서로 순서가 같아야된다. POSITION 0, POSITION 1, COLOR 0 ...
+	for (unsigned int i = 0; i < Info.InputParameters; i++)
+	{
+		D3D11_SIGNATURE_PARAMETER_DESC Input = { 0, };
+		CompileInfo->GetInputParameterDesc(i, &Input);
+
+		DXGI_FORMAT Format = DXGI_FORMAT::DXGI_FORMAT_UNKNOWN;
+
+		// 타입이 정수인지 실수인지 부호가 있는지 없는지
+		D3D_REGISTER_COMPONENT_TYPE Reg = Input.ComponentType;
+
+		// D3D_REGISTER_COMPONENT_TYPE
+		// 그래픽카드에는 데이터가 항상 4바이트로 들어간다.
+		// 그래픽카드의 버퍼에 데이터를 넣어줄때
+		// 쉐이더는 여기에 있는 형식으로밖에 이해하지 못한다. 
+
+		// float4
+		// 1 1 1 1 -> 15
+		
+		// float3
+		// 0 1 1 1 -> 7
+
+		unsigned int ParameterSize = 0;
+
+		// Format을 지정
+		switch (Input.Mask)
+		{
+			// 1개짜리
+		case 1:
+			ParameterSize = 4;
+			switch (Reg)
+			{
+			case D3D_REGISTER_COMPONENT_UNKNOWN:
+				break;
+			case D3D_REGISTER_COMPONENT_UINT32:
+				// unsigned int형 정보라는 뜻
+				Format = DXGI_FORMAT::DXGI_FORMAT_R32_UINT;
+				break;
+			case D3D_REGISTER_COMPONENT_SINT32:
+				Format = DXGI_FORMAT::DXGI_FORMAT_R32_SINT;
+				// int형 정보라는 뜻
+				break;
+			case D3D_REGISTER_COMPONENT_FLOAT32:
+				Format = DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT;
+				// float형 정보라는 뜻
+				break;
+			default:
+				break;
+			}
+			break;
+		case 3:
+			ParameterSize = 8;
+			switch (Reg)
+			{
+			case D3D_REGISTER_COMPONENT_UNKNOWN:
+				break;
+			case D3D_REGISTER_COMPONENT_UINT32:
+				// unsigned int형 정보라는 뜻
+				Format = DXGI_FORMAT::DXGI_FORMAT_R32G32_UINT;
+				break;
+			case D3D_REGISTER_COMPONENT_SINT32:
+				Format = DXGI_FORMAT::DXGI_FORMAT_R32G32_SINT;
+				// int형 정보라는 뜻
+				break;
+			case D3D_REGISTER_COMPONENT_FLOAT32:
+				Format = DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT;
+				// float형 정보라는 뜻
+				break;
+			default:
+				break;
+			}
+			break;
+		case 7:
+			ParameterSize = 12;
+			switch (Reg)
+			{
+			case D3D_REGISTER_COMPONENT_UNKNOWN:
+				break;
+			case D3D_REGISTER_COMPONENT_UINT32:
+				// unsigned int형 정보라는 뜻
+				Format = DXGI_FORMAT::DXGI_FORMAT_R32G32B32_UINT;
+				break;
+			case D3D_REGISTER_COMPONENT_SINT32:
+				Format = DXGI_FORMAT::DXGI_FORMAT_R32G32B32_SINT;
+				// int형 정보라는 뜻
+				break;
+			case D3D_REGISTER_COMPONENT_FLOAT32:
+				Format = DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT;
+				// float형 정보라는 뜻
+				break;
+			default:
+				break;
+			}
+			break;
+		case 15:
+			ParameterSize = 16;
+			switch (Reg)
+			{
+			case D3D_REGISTER_COMPONENT_UNKNOWN:
+				break;
+			case D3D_REGISTER_COMPONENT_UINT32:
+				// unsigned int형 정보라는 뜻
+				Format = DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_UINT;
+				break;
+			case D3D_REGISTER_COMPONENT_SINT32:
+				Format = DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_SINT;
+				// int형 정보라는 뜻
+				break;
+			case D3D_REGISTER_COMPONENT_FLOAT32:
+				Format = DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT;
+				// float형 정보라는 뜻
+				break;
+			default:
+				break;
+			}
+			break;
+		default:
+			break;
+		}
+
+		std::string NextName = Input.SemanticName;
+
+		if (Name == "")
+		{
+			Name = NextName;
+			++PrevIndex;
+		}
+		else
+		{
+			if (Name == NextName)
+			{
+				if (PrevIndex != Input.SemanticIndex)
+				{
+					GameEngineDebug::MsgBoxError("시멘틱의 인덱스 순서가 잘못되었습니다. 오름차순이 아닙니다.");
+					return;
+				}
+
+				++PrevIndex;
+			}
+			else
+			{
+				Name = NextName;
+				PrevIndex = 0;
+			}
+		}
+
+		if (DXGI_FORMAT::DXGI_FORMAT_UNKNOWN == Format)
+		{
+			GameEngineDebug::MsgBoxError("쉐이더 인풋 파라미터 타입이 정상적이지 않습니다.");
+		}
+
+		AddInputLayout(Input.SemanticName, Input.SemanticIndex, ParameterSize ,Format, 0, 0,
+			D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA);
+	}
+
+	CreateLayout();
 }
 
 void GameEngineVertexShader::LayoutClear()
@@ -168,4 +389,19 @@ void GameEngineVertexShader::LayoutClear()
 	LayoutOffset_ = 0;
 	SemanticName_.clear();
 	InputLayoutDesc_.clear();
+}
+
+void GameEngineVertexShader::InputLayoutSetting()
+{
+	if (nullptr == Layout_)
+	{
+		GameEngineDebug::MsgBoxError("쉐이더 인풋 파라미터가 존재하지않습니다.");
+	}
+
+	GameEngineDevice::GetContext()->IASetInputLayout(Layout_);
+}
+
+void GameEngineVertexShader::Setting()
+{
+	GameEngineDevice::GetContext()->VSSetShader(VertexShader_, nullptr, 0);
 }

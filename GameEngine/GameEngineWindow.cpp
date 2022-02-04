@@ -110,6 +110,9 @@ void GameEngineWindow::CreateMainWindow(const std::string& _titlename, const flo
         return;
     }
 
+    // 국가코드설정
+    // setlocale(LC_ALL, "");
+
     windowTitle_ = _titlename;
     windowhandle_ = nullptr;
     windowhandle_ = CreateWindowA(className_.c_str(), "TEST", WS_OVERLAPPEDWINDOW,

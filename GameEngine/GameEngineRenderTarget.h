@@ -1,5 +1,5 @@
 #pragma once
-#include "GameEngineDirectXDevice.h"
+#include "GameEngineDevice.h"
 
 // 분류 : 
 // 용도 : 

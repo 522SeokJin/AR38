@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineBase/GameEngineObjectNameBase.h>
-#include <GameEngine/GameEngineDirectXDevice.h>
+#include <GameEngine/GameEngineDevice.h>
 
 // 분류 : 렌더링파이프라인 
 // 용도 : 인덱스버퍼

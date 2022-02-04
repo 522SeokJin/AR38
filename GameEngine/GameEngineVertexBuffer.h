@@ -1,7 +1,7 @@
 #pragma once
 #include <GameEngineBase/GameEngineMath.h>
 #include <GameEngineBase/GameEngineObjectNameBase.h>
-#include <GameEngine/GameEngineDirectXDevice.h>
+#include <GameEngine/GameEngineDevice.h>
 
 // 분류 : 렌더링 파이프라인
 // 용도 : 버텍스버퍼

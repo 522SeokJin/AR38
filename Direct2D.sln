@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02Lib", "02Lib", "{0DA65D44
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00Doc", "00Doc", "{3607B2C2-EF36-4A72-BC27-74098DFB8050}"
 	ProjectSection(SolutionItems) = preProject
+		DX11 렌더링파이프라인.jpg = DX11 렌더링파이프라인.jpg
 		꼭 알아야하는 사항들.txt = 꼭 알아야하는 사항들.txt
 		용어정리.txt = 용어정리.txt
 		행렬.txt = 행렬.txt
