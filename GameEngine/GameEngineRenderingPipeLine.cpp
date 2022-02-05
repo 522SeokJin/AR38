@@ -113,15 +113,32 @@ void GameEngineRenderingPipeLine::InputAssembler1()
 	InputLayoutVertexShader_->InputLayoutSetting();
 }
 
+void GameEngineRenderingPipeLine::InputAssembler2()
+{
+	IndexBuffer_->Setting();
+	GameEngineDevice::GetContext()->IASetPrimitiveTopology(Topology_);
+}
+
 void GameEngineRenderingPipeLine::VertexShader()
 {
 	VertexShader_->Setting();
 }
 
+void GameEngineRenderingPipeLine::Rasterizer()
+{
+	Rasterizer_->Setting();
+}
+
+
 void GameEngineRenderingPipeLine::Rendering()
 {
 	// input어셈블러 단계
-	// 버텍스버퍼 세팅
+	// VertexBuffer Setting
 	InputAssembler1();
-	//
+	// IndexBuffer, Topology Setting
+	InputAssembler2();
+
+	VertexShader();
+	
+	Rasterizer();
 }

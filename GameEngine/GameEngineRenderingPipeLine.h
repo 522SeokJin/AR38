@@ -1,6 +1,6 @@
 #pragma once
-#include <GameEngineBase/GameEngineMath.h>
 #include <GameEngine/GameEngineDevice.h>
+#include <GameEngineBase/GameEngineMath.h>
 
 // 분류 : 렌더링파이프라인
 // 용도 : 렌더링파이프라인을 그림
@@ -65,6 +65,8 @@ private:		//delete operator
 
 public:
 	void InputAssembler1();
+	void InputAssembler2();
 	void VertexShader();
+	void Rasterizer();
 };
 

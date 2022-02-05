@@ -27,7 +27,7 @@ private:
 	static GameEngineCore* MainCore_;
 
 private:
-	static void WindowCreate();
+	static void WindowCreate(GameEngineCore& _RuntimeCore);
 	static void Loop();
 	static void MainLoop();
 
@@ -41,10 +41,8 @@ public:
 #ifdef _DEBUG
 		//new int();	// ½Å·ÚÀÇ ¸¯
 #endif
-
-		WindowCreate();
-
 		UserGameType NewUserGame;
+		WindowCreate(NewUserGame);
 
 		NewUserGame.EngineInitialize();
 		NewUserGame.Initialize();
@@ -64,5 +62,9 @@ protected:
 	virtual void ResourceLoad() = 0;
 	virtual void GameLoop() = 0;
 	virtual void Release() = 0;
+
+public:
+	virtual float4 StartWindowPos() = 0;
+	virtual float4 StartWindowSize() = 0;
 };
 

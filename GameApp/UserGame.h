@@ -25,5 +25,14 @@ public:
 	virtual void ResourceLoad() override;
 	virtual void GameLoop() override;
 	virtual void Release() override;
+
+	virtual float4 StartWindowPos() override
+	{
+		return { 0, 0 };
+	}
+	virtual float4 StartWindowSize() override
+	{
+		return { 1280, 720 };
+	}
 };
 

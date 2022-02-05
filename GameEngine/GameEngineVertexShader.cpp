@@ -6,6 +6,10 @@ GameEngineVertexShader::GameEngineVertexShader() // default constructer µðÆúÆ® »
 	: VersionHigh_(5)
 	, VersionLow_(0)
 	, CodeBlob_(nullptr)
+	, VertexShader_(nullptr)
+	, Layout_(nullptr)
+	, LayoutOffset_(0)
+
 {
 
 }
