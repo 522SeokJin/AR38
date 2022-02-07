@@ -296,7 +296,7 @@ typedef long long FMOD_THREAD_AFFINITY;
 #define FMOD_REVERB_MAXINSTANCES                    4
 #define FMOD_PORT_INDEX_NONE                        0xFFFFFFFFFFFFFFFF
 
-typedef enum FMOD_THREAD_TYPE
+typedef enum class FMOD_THREAD_TYPE
 {
     FMOD_THREAD_TYPE_MIXER,
     FMOD_THREAD_TYPE_FEEDER,
@@ -316,7 +316,7 @@ typedef enum FMOD_THREAD_TYPE
     FMOD_THREAD_TYPE_FORCEINT = 65536
 } FMOD_THREAD_TYPE;
 
-typedef enum FMOD_RESULT
+typedef enum class FMOD_RESULT 
 {
     FMOD_OK,
     FMOD_ERR_BADCOMMAND,
@@ -439,7 +439,7 @@ typedef enum FMOD_OUTPUTTYPE
     FMOD_OUTPUTTYPE_FORCEINT = 65536
 } FMOD_OUTPUTTYPE;
 
-typedef enum FMOD_DEBUG_MODE
+typedef enum class FMOD_DEBUG_MODE
 {
     FMOD_DEBUG_MODE_TTY,
     FMOD_DEBUG_MODE_FILE,

@@ -151,7 +151,7 @@ void GameEngineSoundManager::Initialize()
 
 	// 동시에 32개 개수인지 사운드 채널의 의미인지를 잘 모르고 있습니다.
 	// 32채널을 재생할수 있다는 의미인데 선생님도 잘 모릅니다.
-	if (FMOD_OK != soundSystem_->init(32, FMOD_DEFAULT, nullptr))
+	if (FMOD_RESULT::FMOD_OK != soundSystem_->init(32, FMOD_DEFAULT, nullptr))
 	{
 		GameEngineDebug::MsgBoxError("sound system init Error");
 		return;

@@ -5,13 +5,12 @@
 #include "GameEngineRenderTargetManager.h"
 #include "GameEngineRenderTarget.h"
 
-
 GameEngineDevice* GameEngineDevice::Inst = new GameEngineDevice();
 
 GameEngineRenderTarget* GameEngineDevice::BackBufferTarget_	= nullptr;
 ID3D11Device*			GameEngineDevice::Device_			= nullptr;
 ID3D11DeviceContext*	GameEngineDevice::Context_			= nullptr;
-IDXGISwapChain*			GameEngineDevice::SwapChain_			= nullptr;
+IDXGISwapChain*			GameEngineDevice::SwapChain_		= nullptr;
 
 ID3D11Device* GameEngineDevice::GetDevice()
 {
