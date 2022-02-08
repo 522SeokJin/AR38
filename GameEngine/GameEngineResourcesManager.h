@@ -6,6 +6,7 @@
 #include "GameEngineVertexShaderManager.h"
 #include "GameEngineIndexBufferManager.h"
 #include "GameEngineRasterizerManager.h"
+#include "GameEnginePixelShaderManager.h"
 #include "GameEngineRenderTargetManager.h"
 #include "GameEngineTextureManager.h"
 
@@ -15,6 +16,7 @@
 #include "GameEngineVertexShader.h"
 #include "GameEngineIndexBuffer.h"
 #include "GameEngineRasterizer.h"
+#include "GameEnginePixelShader.h"
 #include "GameEngineRenderTarget.h"
 #include "GameEngineTexture.h"
 
@@ -35,6 +37,7 @@ public:
 		GameEngineIndexBufferManager::Destroy();
 		GameEngineRasterizerManager::Destroy();
 		GameEngineRenderTargetManager::Destroy();
+		GameEnginePixelShaderManager::Destroy();
 		GameEngineTextureManager::Destroy();
 	}
 };

@@ -3,13 +3,9 @@
 #include "GameEngineDevice.h"
 
 GameEngineVertexShader::GameEngineVertexShader() // default constructer 디폴트 생성자
-	: VersionHigh_(5)
-	, VersionLow_(0)
-	, CodeBlob_(nullptr)
-	, VertexShader_(nullptr)
+	: Shader_(nullptr)
 	, Layout_(nullptr)
 	, LayoutOffset_(0)
-
 {
 
 }
@@ -22,10 +18,10 @@ GameEngineVertexShader::~GameEngineVertexShader() // default destructer 디폴트 �
 		Layout_ = nullptr;
 	}
 
-	if (nullptr != VertexShader_)
+	if (nullptr != Shader_)
 	{
-		VertexShader_->Release();
-		VertexShader_ = nullptr;
+		Shader_->Release();
+		Shader_ = nullptr;
 	}
 
 	if (nullptr != CodeBlob_)
@@ -38,26 +34,16 @@ GameEngineVertexShader::~GameEngineVertexShader() // default destructer 디폴트 �
 bool GameEngineVertexShader::Create(
 	const std::string& _ShaderCode,
 	const std::string& _EntryPoint,
-	UINT _VersionHigh,
-	UINT _VersionLow
+	UINT _VersionHigh /*= 5*/,
+	UINT _VersionLow /*= 0*/
 )
 {
 	SetVersion(_VersionHigh, _VersionLow);
 	SetEntryPoint(_EntryPoint);
 	SetCode(_ShaderCode);
-	CreateVersion();
+	CreateVersion("vs");
 
 	return Compile();
-}
-
-void GameEngineVertexShader::SetCode(const std::string& _Code)
-{
-	Code_ = _Code;
-}
-
-void GameEngineVertexShader::SetEntryPoint(const std::string& _EntryPoint)
-{
-	EntryPoint_ = _EntryPoint;
 }
 
 bool GameEngineVertexShader::Compile()
@@ -101,7 +87,7 @@ bool GameEngineVertexShader::Compile()
 	CodeBlob_ = ResultBlob;
 
 	if (S_OK != GameEngineDevice::GetDevice()->CreateVertexShader(CodeBlob_->GetBufferPointer(),
-		CodeBlob_->GetBufferSize(), nullptr, &VertexShader_))
+		CodeBlob_->GetBufferSize(), nullptr, &Shader_))
 	{
 		GameEngineDebug::MsgBoxError("버텍스쉐이더 생성에 실패했습니다.");
 		return false;
@@ -110,21 +96,6 @@ bool GameEngineVertexShader::Compile()
 	LayoutCheck();
 
 	return true;
-}
-
-void GameEngineVertexShader::SetVersion(UINT _VersionHigh, UINT _VersionLow)
-{
-	VersionHigh_ = _VersionHigh;
-	VersionLow_ = _VersionLow;
-}
-
-void GameEngineVertexShader::CreateVersion()
-{
-	Version_ = "";
-	Version_ += "vs_";
-	Version_ += std::to_string(VersionHigh_);
-	Version_ += "_";
-	Version_ += std::to_string(VersionLow_);
 }
 
 void GameEngineVertexShader::AddInputLayout(
@@ -407,5 +378,5 @@ void GameEngineVertexShader::InputLayoutSetting()
 
 void GameEngineVertexShader::Setting()
 {
-	GameEngineDevice::GetContext()->VSSetShader(VertexShader_, nullptr, 0);
+	GameEngineDevice::GetContext()->VSSetShader(Shader_, nullptr, 0);
 }

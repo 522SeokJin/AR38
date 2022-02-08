@@ -10,6 +10,7 @@ class GameEngineVertexBuffer;
 class GameEngineVertexShader;
 class GameEngineIndexBuffer;
 class GameEngineRasterizer;
+class GameEnginePixelShader;
 class GameEngineRenderingPipeLine : public GameEngineObjectNameBase
 {
 private:	// member Var
@@ -25,7 +26,14 @@ private:	// member Var
 	GameEngineIndexBuffer* IndexBuffer_;
 	D3D11_PRIMITIVE_TOPOLOGY Topology_;
 
+	// RS
 	GameEngineRasterizer* Rasterizer_;
+
+	// PS
+	GameEnginePixelShader* PixelShader_;
+
+	// OM
+	GameEngineRenderTarget* RenderTarget_;
 
 public:
 	
@@ -37,18 +45,15 @@ public:
 	void SetInputAssembler2IndexBufferSetting(const std::string& _Name);
 	void SetInputAssembler2TopologySetting(D3D11_PRIMITIVE_TOPOLOGY _Topology);
 
-	
 	void SetRasterizer(const std::string& _Name);
 
-public:
-	// Mesh
-	// 부피, 골격과 관련
-	// Material -> PipeLine IA 밑에 있는것들
-	// 색깔과 관련
-	void SetMesh();
-	void SetMaterial();
+	void SetPixelShader(const std::string& _Name);
+
+	void SetOutputMerger(const std::string& _Name);
 
 public:
+	void RenderingPipeLineSetting();
+
 	void Rendering();
 	
 public:
@@ -57,7 +62,7 @@ public:
 
 protected:		// delete constructer
 	GameEngineRenderingPipeLine(const GameEngineRenderingPipeLine& _other) = delete; // default Copy constructer 디폴트 복사생성자
-	GameEngineRenderingPipeLine(GameEngineRenderingPipeLine&& _other) noexcept; // default RValue Copy constructer 디폴트 RValue 복사생성자
+	GameEngineRenderingPipeLine(GameEngineRenderingPipeLine&& _other) = delete; // default RValue Copy constructer 디폴트 RValue 복사생성자
 
 private:		//delete operator
 	GameEngineRenderingPipeLine& operator=(const GameEngineRenderingPipeLine& _other) = delete; // default Copy operator 디폴트 대입 연산자
@@ -68,5 +73,6 @@ public:
 	void InputAssembler2();
 	void VertexShader();
 	void Rasterizer();
+	void PixelShader();
 };
 

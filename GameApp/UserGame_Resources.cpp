@@ -110,24 +110,37 @@ void UserGame::ResourceLoad()
 		//	0, 0, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA);
 	}
 
+	{
+		std::string ShaderCode =
+			"\
+			float4 StartPixelShader( float4 pos : SV_POSITION ) : SV_Target0\n \
+			{\n \
+				return float4(1.0f, 0.0f, 0.0f, 1.0f);\n\
+			}\n\
+			";
+
+		GameEnginePixelShader* Ptr = GameEnginePixelShaderManager::GetInst().
+			Create("StartPixelShader", ShaderCode);
+	}
+
 	// Rasterizer
 	{
 		D3D11_RASTERIZER_DESC Info;
 
-		Info.FillMode = D3D11_FILL_MODE::D3D11_FILL_WIREFRAME;
+		Info.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 
 		// CullMode : 뒷면제거를 위해서 필요한 모드이다.
 		// D3D11_CULL_NONE	: 어느방향으로 돌던 그려라.
 		// D3D11_CULL_FRONT : 시계방향으로 그려진 것들을 그려라.
 		// D3D11_CULL_BACK	: 시계 반대방향으로 그려진 것들을 그려라.
-		Info.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
+		Info.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
 
 		// 이 매개변수가 TRUE 이면 삼각형의 정점이 렌더 대상에서 시계 반대 방향이면 전면으로 간주되고
 		// 시계 방향이면 후면으로 간주된다. 이 매개변수가 FALSE 이면 그 반대.
 		Info.FrontCounterClockwise = TRUE;
 
 		// 화면 바깥에 나간 면들을 잘라낸다.
-		Info.ScissorEnable = TRUE;
+		Info.ScissorEnable = FALSE;
 
 		Info.MultisampleEnable = TRUE;
 
@@ -136,7 +149,7 @@ void UserGame::ResourceLoad()
 		Info.SlopeScaledDepthBias = 0;
 		Info.DepthBias = 0;
 		Info.DepthBiasClamp = 0;
-		Info.DepthClipEnable = TRUE;
+		Info.DepthClipEnable = FALSE;
 
 
 		GameEngineRasterizer* Ptr = GameEngineRasterizerManager::GetInst().Create("EngineBaseRasterizer", Info);
@@ -173,5 +186,7 @@ void UserGame::ResourceLoad()
 		// 그리기로한 면, 선등에 겹치는 모니터의 픽셀들을 추출하겠다.
 		// Rasterizer
 		Pipe->SetRasterizer("EngineBaseRasterizer");
+
+		Pipe->SetPixelShader("StartPixelShader");
 	}
 }

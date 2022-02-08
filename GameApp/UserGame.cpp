@@ -48,9 +48,7 @@ void UserGame::GameLoop()
 	Pipe.SetRasterizer("TestRasterizer");
 
 	RotAngle += 180.0f * GameEngineTime::GetInst().GetDeltaTime();
-	BoxPos.x += 10.0f * GameEngineTime::GetInst().GetDeltaTime();
-
-	Pipe.Rendering();*/
+	BoxPos.x += 10.0f * GameEngineTime::GetInst().GetDeltaTime();*/
 
 	GameEngineDevice::RenderEnd();
 }

@@ -127,7 +127,7 @@ void GameEngineDevice::CreateSwapChain()
 	// 2장으로 SwapChain
 	ScInfo.BufferCount = 2;
 
-	ScInfo.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+	ScInfo.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 
 	// 전체화면, 창모드 전환이 알아서되는 옵션
 	ScInfo.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;

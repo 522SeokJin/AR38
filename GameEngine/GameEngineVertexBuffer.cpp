@@ -4,6 +4,7 @@
 GameEngineVertexBuffer::GameEngineVertexBuffer() // default constructer 디폴트 생성자
 	: Buffer_(nullptr)
 	, Size_(0)
+	, Count_(0)
 	, Offset_(0)
 	, BufferData_()
 	, ResData_()
@@ -38,6 +39,9 @@ void GameEngineVertexBuffer::Create(const void* _Data, size_t _Size, size_t _Cou
 	// 그 버퍼의
 	ResData_.pSysMem = _Data;
 	
+	Size_ = static_cast<UINT>(_Size);
+	Count_ = static_cast<UINT>(_Count);
+
 	BufferData_.ByteWidth = static_cast<UINT>(_Size) * static_cast<UINT>(_Count);
 	BufferData_.Usage = _Usage;
 

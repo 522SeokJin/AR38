@@ -14,6 +14,13 @@ public:	// member Var
 	D3D11_SUBRESOURCE_DATA			ResData_;
 	DXGI_FORMAT						Format_;
 	UINT							Offset_;
+	UINT							IndexCount_;
+
+public:
+	UINT GetIndexCount()
+	{
+		return IndexCount_;
+	}
 
 public:
 	GameEngineIndexBuffer(); // default constructer 디폴트 생성자
@@ -21,7 +28,7 @@ public:
 
 protected:		// delete constructer
 	GameEngineIndexBuffer(const GameEngineIndexBuffer& _other) = delete; // default Copy constructer 디폴트 복사생성자
-	GameEngineIndexBuffer(GameEngineIndexBuffer&& _other) noexcept; // default RValue Copy constructer 디폴트 RValue 복사생성자
+	GameEngineIndexBuffer(GameEngineIndexBuffer&& _other) = delete; // default RValue Copy constructer 디폴트 RValue 복사생성자
 
 private:		//delete operator
 	GameEngineIndexBuffer& operator=(const GameEngineIndexBuffer& _other) = delete; // default Copy operator 디폴트 대입 연산자

@@ -19,17 +19,6 @@ GameEngineRasterizer::~GameEngineRasterizer() // default destructer 디폴트 소멸�
 
 void GameEngineRasterizer::Create(const D3D11_RASTERIZER_DESC& _RasterizerDesc)
 {
-    // D3D11_FILL_MODE FillMode;
-    // D3D11_CULL_MODE CullMode;
-    // BOOL FrontCounterClockwise;
-    // INT DepthBias;
-    // FLOAT DepthBiasClamp;
-    // FLOAT SlopeScaledDepthBias;
-    // BOOL DepthClipEnable;
-    // BOOL ScissorEnable;
-    // BOOL MultisampleEnable;
-    // BOOL AntialiasedLineEnable;
-
 	if (S_OK != GameEngineDevice::GetDevice()->CreateRasterizerState(&_RasterizerDesc, &State_))
 	{
 		GameEngineDebug::MsgBoxError("래스터라이저 생성에 실패했습니다.");
@@ -39,10 +28,10 @@ void GameEngineRasterizer::Create(const D3D11_RASTERIZER_DESC& _RasterizerDesc)
 
 void GameEngineRasterizer::SettingViewPort()
 {
-    GameEngineDevice::GetContext()->RSSetViewports(0, &ViewPort_);
+    GameEngineDevice::GetContext()->RSSetViewports(1, &ViewPort_);
 }
 
 void GameEngineRasterizer::Setting()
 {
-
+    GameEngineDevice::GetContext()->RSSetState(State_);
 }

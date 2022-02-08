@@ -1,23 +1,16 @@
 #pragma once
 #include <GameEngineBase/GameEngineMath.h>
 #include <GameEngineBase/GameEngineObjectNameBase.h>
-#include <GameEngine/GameEngineDevice.h>
+#include "GameEngineDevice.h"
+#include "GameEngineShader.h"
 
 // 분류 : 렌더링파이프라인 
 // 용도 : 버텍스쉐이더
 // 설명 : 정점의 정보값을 변화시켜서, 물체를 특별한 위치로 옮기거나, 텍스처를 바꾸거나, 색상을 바꾸는 등의 일을 한다.
-class GameEngineVertexShader : public GameEngineObjectNameBase
+class GameEngineVertexShader : public GameEngineShader
 {
 private:	// member Var
-	UINT		VersionHigh_;
-	UINT		VersionLow_;
-	std::string Version_;
-
-	ID3DBlob*	CodeBlob_;
-	ID3D11VertexShader* VertexShader_;
-
-	std::string	EntryPoint_;
-	std::string Code_;
+	ID3D11VertexShader* Shader_;
 
 public:
 	GameEngineVertexShader(); // default constructer 디폴트 생성자
@@ -39,15 +32,10 @@ public:
 		UINT _VersionLow = 0
 	);
 
-	void SetCode(const std::string& _Code);
-	void SetEntryPoint(const std::string& _EntryPoint);
-
 	// 수정한 사항에 에러가 없다면 중간에 고쳐도 바로 적용이 된다.
 	bool Compile();
-	void SetVersion(UINT _VersionHigh, UINT _VersionLow);
 
 private:
-	void CreateVersion();
 
 	/// <summary>
 	/// ////////////////////////////// InputLayout Settting
