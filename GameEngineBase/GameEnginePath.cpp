@@ -7,6 +7,13 @@
 // Static Var
 // Static Func
 
+std::string GameEnginePath::GetFileName(std::string _path)
+{
+	std::filesystem::path NewPath = _path;
+
+	return NewPath.filename().string();
+}
+
 // constructer destructer
 GameEnginePath::GameEnginePath()
 	: path_("")
@@ -41,14 +48,21 @@ bool GameEnginePath::IsExist()
 {
 	return std::filesystem::exists(path_);
 }
-std::string GameEnginePath::GetFileName(std::string _path)
-{
-	std::filesystem::path NewPath = _path;
-
-	return NewPath.filename().string();
-}
 
 std::string GameEnginePath::GetFullPath()
 {
 	return path_.string();
+}
+
+std::string GameEnginePath::GetFileName()
+{
+	return path_.filename().string();
+}
+
+std::string GameEnginePath::GetFileNameWithoutExtension()
+{
+	std::string Ext = path_.extension().string();
+	std::string FileName = GetFileName();
+
+	return FileName.erase(FileName.size() - Ext.size(), Ext.size());
 }

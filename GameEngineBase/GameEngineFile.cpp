@@ -98,7 +98,7 @@ void GameEngineFile::Write(const void* _Data, size_t _Size)
 void GameEngineFile::Read(void* _Buffer, size_t _BufferSize, size_t _DataSize)
 {
 	// 쓰기용으로 파일을 열지 않고
-// 왜 쓰려고 하는냐에 대한 예외처리입니다.
+	// 왜 쓰려고 하는냐에 대한 예외처리입니다.
 	if (OpenMode[0] != 'r')
 	{
 		GameEngineDebug::AssertFalse();
@@ -141,4 +141,22 @@ void GameEngineFile::Read(std::string& _Data)
 void GameEngineFile::Read(int& _Data)
 {
 	Read(&_Data, sizeof(int), sizeof(int));
+}
+
+uintmax_t GameEngineFile::GetFileSize()
+{
+	return std::filesystem::file_size(path_);
+}
+
+std::string GameEngineFile::FileName()
+{
+	return path_.filename().string();
+}
+
+std::string GameEngineFile::GetString()
+{
+	std::string AllString = std::string();
+	AllString.resize(GetFileSize());
+	Read(&AllString[0], AllString.size(), AllString.size());
+	return AllString;
 }

@@ -24,6 +24,10 @@ public:		//delete operator
 public:
 	static std::string GetFileName(std::string _path);
 
+	std::string GetFileName();
+
+	std::string GetFileNameWithoutExtension();
+
 public:		//member Func
 	// 유요한 경로인가 아닌가를 판단하는 함수.
 	bool IsExist();

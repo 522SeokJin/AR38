@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DirectX", "DirectX", "{B1E4
 		DirectX 개념파악.txt = DirectX 개념파악.txt
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderProject", "Resources\Shader\ShaderProject.vcxproj", "{8C185799-CFAD-4B89-9D82-B44253316982}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -75,6 +77,14 @@ Global
 		{B89D23D7-D496-43AD-B1AE-9A7005815215}.Release|x64.Build.0 = Release|x64
 		{B89D23D7-D496-43AD-B1AE-9A7005815215}.Release|x86.ActiveCfg = Release|Win32
 		{B89D23D7-D496-43AD-B1AE-9A7005815215}.Release|x86.Build.0 = Release|Win32
+		{8C185799-CFAD-4B89-9D82-B44253316982}.Debug|x64.ActiveCfg = Debug|x64
+		{8C185799-CFAD-4B89-9D82-B44253316982}.Debug|x64.Build.0 = Debug|x64
+		{8C185799-CFAD-4B89-9D82-B44253316982}.Debug|x86.ActiveCfg = Debug|Win32
+		{8C185799-CFAD-4B89-9D82-B44253316982}.Debug|x86.Build.0 = Debug|Win32
+		{8C185799-CFAD-4B89-9D82-B44253316982}.Release|x64.ActiveCfg = Release|x64
+		{8C185799-CFAD-4B89-9D82-B44253316982}.Release|x64.Build.0 = Release|x64
+		{8C185799-CFAD-4B89-9D82-B44253316982}.Release|x86.ActiveCfg = Release|Win32
+		{8C185799-CFAD-4B89-9D82-B44253316982}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

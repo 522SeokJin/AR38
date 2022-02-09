@@ -15,11 +15,6 @@ UserGame::~UserGame() // default destructer 디폴트 소멸자
 
 }
 
-UserGame::UserGame(UserGame&& _other) noexcept  // default RValue Copy constructer 디폴트 RValue 복사생성자
-{
-
-}
-
 void UserGame::Initialize()
 {
 	return;
@@ -35,9 +30,15 @@ void UserGame::Release()
 
 void UserGame::GameLoop()
 {
+	float4x4 MyWorld;
+
 	GameEngineDevice::RenderStart();
 
 	GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Find("BoxRendering");
+
+	// Pipe->SetMatrix("World", MyWorld);
+	// Pipe->SetMatrix("World", Test);
+
 	Pipe->Rendering();
 
 	/*GameEngineRenderingPipeLine Pipe;

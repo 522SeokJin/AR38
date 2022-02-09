@@ -33,6 +33,10 @@ public:		//member Func
 	void Open(const std::string& _Mode);
 	void Close();
 
+	uintmax_t GetFileSize();
+
+	std::string FileName();
+
 public:
 	void Write(const void* _Data, size_t _Size);
 
@@ -146,6 +150,6 @@ public:
 		}
 	}
 
-
+	std::string GetString();
 };
 
