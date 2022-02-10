@@ -57,12 +57,21 @@ GameEnginePixelShader* GameEnginePixelShaderManager::Create(const std::string& _
 	return NewRes;
 }
 
-GameEnginePixelShader* GameEnginePixelShaderManager::Load(const std::string& _Path)
+GameEnginePixelShader* GameEnginePixelShaderManager::Load(const std::string& _Path,
+	const std::string& _EntryPoint,
+	UINT _VersionHigh/* = 5*/,
+	UINT _VersionLow /*= 0*/
+)
 {
-	return Load(GameEnginePath::GetFileName(_Path), _Path);
+	return Load(GameEnginePath::GetFileName(_Path), _Path, _EntryPoint);
 }
 
-GameEnginePixelShader* GameEnginePixelShaderManager::Load(const std::string& _Name, const std::string& _Path)
+GameEnginePixelShader* GameEnginePixelShaderManager::Load(const std::string& _Name,
+	const std::string& _Path,
+	const std::string& _EntryPoint,
+	UINT _VersionHigh /*= 5*/,
+	UINT _VersionLow /*= 0*/
+)
 {
 	GameEnginePixelShader* FindRes = Find(_Name);
 
@@ -74,6 +83,7 @@ GameEnginePixelShader* GameEnginePixelShaderManager::Load(const std::string& _Na
 	GameEnginePixelShader* NewRes = new GameEnginePixelShader();
 	NewRes->SetName(_Name);
 
+	NewRes->Load(_Path, _EntryPoint, _VersionHigh, _VersionLow);
 
 	ResourcesMap.insert(std::map<std::string, GameEnginePixelShader*>::value_type(_Name, NewRes));
 	return NewRes;

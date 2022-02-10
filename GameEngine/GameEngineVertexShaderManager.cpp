@@ -57,12 +57,21 @@ GameEngineVertexShader* GameEngineVertexShaderManager::Create(const std::string&
 	return NewRes;
 }
 
-GameEngineVertexShader* GameEngineVertexShaderManager::Load(const std::string& _Path)
+GameEngineVertexShader* GameEngineVertexShaderManager::Load(const std::string& _Path,
+	const std::string& _EntryPoint,
+	UINT _VersionHigh/* = 5*/,
+	UINT _VersionLow /*= 0*/
+	)
 {
-	return Load(GameEnginePath::GetFileName(_Path), _Path);
+	return Load(GameEnginePath::GetFileName(_Path), _Path, _EntryPoint);
 }
 
-GameEngineVertexShader* GameEngineVertexShaderManager::Load(const std::string& _Name, const std::string& _Path)
+GameEngineVertexShader* GameEngineVertexShaderManager::Load(const std::string& _Name, 
+	const std::string& _Path,
+	const std::string& _EntryPoint,
+	UINT _VersionHigh /*= 5*/,
+	UINT _VersionLow /*= 0*/
+)
 {
 	GameEngineVertexShader* FindRes = Find(_Name);
 
@@ -74,6 +83,7 @@ GameEngineVertexShader* GameEngineVertexShaderManager::Load(const std::string& _
 	GameEngineVertexShader* NewRes = new GameEngineVertexShader();
 	NewRes->SetName(_Name);
 
+	NewRes->Load(_Path, _EntryPoint, _VersionHigh, _VersionLow);
 
 	ResourcesMap.insert(std::map<std::string, GameEngineVertexShader*>::value_type(_Name, NewRes));
 	return NewRes;

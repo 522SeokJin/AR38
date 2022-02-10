@@ -4,6 +4,12 @@
 // 분류 : 
 // 용도 : 
 // 설명 : 
+
+class ConstantBuffer
+{
+
+};
+
 class GameEngineShader : public GameEngineObjectNameBase
 {
 protected:	// member Var
@@ -16,6 +22,8 @@ protected:	// member Var
 	std::string	EntryPoint_;
 	std::string Code_;
 
+private:
+	std::map<std::string, ConstantBuffer> ConstantBuffer_;
 
 public:
 	GameEngineShader(); // default constructer 디폴트 생성자
@@ -35,5 +43,6 @@ protected:
 	void SetCode(const std::string& _Code);
 	void SetEntryPoint(const std::string& _EntryPoint);
 
+	void ResCheck();	// Resource Check
 };
 

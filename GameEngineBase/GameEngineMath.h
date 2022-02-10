@@ -492,6 +492,13 @@ public:
 		return DirectX::XMMatrixMultiply(DirectMatrix, _Value.DirectMatrix);
 	}
 
+	float4x4 operator=(const float4x4& _Value)
+	{
+		DirectMatrix = _Value.DirectMatrix;
+
+		return *this;
+	}
+
 	void Identity()
 	{
 		DirectMatrix = DirectX::XMMatrixIdentity();

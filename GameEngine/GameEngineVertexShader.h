@@ -32,8 +32,16 @@ public:
 		UINT _VersionLow = 0
 	);
 
+	bool Load(const std::string& _Path,
+		const std::string& _EntryPoint,
+		UINT _VersionHigh = 5,
+		UINT _VersionLow = 0
+	);
+
 	// 수정한 사항에 에러가 없다면 중간에 고쳐도 바로 적용이 된다.
-	bool Compile();
+	bool StringCompile();
+
+	bool FileCompile(const std::string& _Path);
 
 private:
 
