@@ -1,5 +1,6 @@
 #pragma once
 #include "GameEngineDevice.h"
+#include "GameEngineConstantBuffer.h"
 
 // 분류 : 
 // 용도 : 
@@ -22,9 +23,6 @@ protected:	// member Var
 	std::string	EntryPoint_;
 	std::string Code_;
 
-private:
-	std::map<std::string, ConstantBuffer> ConstantBuffer_;
-
 public:
 	GameEngineShader(); // default constructer 디폴트 생성자
 	virtual ~GameEngineShader() = 0; // default destructer 디폴트 소멸자
@@ -43,6 +41,16 @@ protected:
 	void SetCode(const std::string& _Code);
 	void SetEntryPoint(const std::string& _EntryPoint);
 
-	void ResCheck();	// Resource Check
+	void ResCheck();	// Resource Check, GameEngineConstantBuffer Create
+
+	///////////////////////////////////			ConstantBuffer
+private:
+	std::map<UINT, GameEngineConstantBuffer*> ConstantBuffer_;
+
+public:
+	std::map<UINT, GameEngineConstantBuffer*>& GetConstantBuffer()
+	{
+		return ConstantBuffer_;
+	}
 };
 

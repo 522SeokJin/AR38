@@ -2,6 +2,7 @@
 
 #include <GameEngineBase/GameEngineSoundManager.h>
 
+#include "GameEngineConstantBufferManager.h"
 #include "GameEngineVertexBufferManager.h"
 #include "GameEngineVertexShaderManager.h"
 #include "GameEngineIndexBufferManager.h"
@@ -12,6 +13,7 @@
 
 #include "GameEngineRenderingPipeLineManager.h"
 
+#include "GameEngineConstantBuffer.h"
 #include "GameEngineVertexBuffer.h"
 #include "GameEngineVertexShader.h"
 #include "GameEngineIndexBuffer.h"
@@ -32,6 +34,7 @@ public:
 
 		GameEngineRenderingPipeLineManager::Destroy();
 
+		GameEngineConstantBufferManager::Destroy();
 		GameEngineVertexBufferManager::Destroy();
 		GameEngineVertexShaderManager::Destroy();
 		GameEngineIndexBufferManager::Destroy();

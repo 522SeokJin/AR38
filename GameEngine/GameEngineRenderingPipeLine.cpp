@@ -12,6 +12,7 @@
 #include "GameEngineIndexBuffer.h"
 #include "GameEngineRasterizer.h"
 #include "GameEnginePixelShader.h"
+#include "GameEngineConstantBuffer.h"
 
 #include "GameEngineWindow.h"
 
@@ -161,4 +162,19 @@ void GameEngineRenderingPipeLine::Rendering()
 	RenderingPipeLineSetting();
 
 	GameEngineDevice::GetContext()->DrawIndexed(IndexBuffer_->GetIndexCount(), 0, 0);
+}
+
+
+void GameEngineRenderingPipeLine::ResourcesCheck()
+{
+	ShaderResourcesCheck(VertexShader_);
+	ShaderResourcesCheck(PixelShader_);
+}
+
+void GameEngineRenderingPipeLine::ShaderResourcesCheck(GameEngineShader* _Shader)
+{
+	for (auto& ConstBuffer : _Shader->GetConstantBuffer())
+	{
+		GameEngineConstantBufferSetting* NewSettingData = new GameEngineConstantBufferSetting();
+	}
 }

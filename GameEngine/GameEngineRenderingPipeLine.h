@@ -1,11 +1,14 @@
 #pragma once
 #include <GameEngine/GameEngineDevice.h>
 #include <GameEngineBase/GameEngineMath.h>
+#include "GameEngineRenderingSettingData.h"
 
 // 분류 : 렌더링파이프라인
 // 용도 : 렌더링파이프라인을 그림
 // 설명 : 렌더링파이프라인을 직접 설정하기위해 만든 클래스
 
+class GameEngineShader;
+class GameEngineConstantBuffer;
 class GameEngineVertexBuffer;
 class GameEngineVertexShader;
 class GameEngineIndexBuffer;
@@ -74,5 +77,15 @@ public:
 	void VertexShader();
 	void Rasterizer();
 	void PixelShader();
+
+
+	///////////////////////////////////////////// Shader Setting Data
+public:
+	std::map<std::string, GameEngineConstantBufferSetting*> ConstantBufferSetting_;
+
+	void ResourcesCheck();
+	void ShaderResourcesCheck(GameEngineShader* _Shader);
+
+	// void ConstantBufferSetting();
 };
 

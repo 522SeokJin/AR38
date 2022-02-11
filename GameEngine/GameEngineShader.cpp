@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "GameEngineShader.h"
+#include "GameEngineConstantBufferManager.h"
 
 GameEngineShader::GameEngineShader() // default constructer 디폴트 생성자
 	: VersionHigh_(5)
@@ -84,16 +85,31 @@ void GameEngineShader::ResCheck()
 
 		std::string Name = ResInfo.Name;
 		UINT BindPoint = ResInfo.BindPoint;
-		D3D_SHADER_INPUT_TYPE ResPoint = ResInfo.Type;
+		D3D_SHADER_INPUT_TYPE Type = ResInfo.Type;
 
-		switch (ResPoint)
+		switch (Type)
 		{
 		case D3D_SIT_CBUFFER:
 		{
+			ID3D11ShaderReflectionConstantBuffer* Buffer = CompileInfo->GetConstantBufferByName(Name.c_str());
 
-		}
+			D3D11_SHADER_BUFFER_DESC BufferDesc;
+			Buffer->GetDesc(&BufferDesc);
+			
+			GameEngineConstantBuffer* NewBuffer = GameEngineConstantBufferManager::GetInst().
+				CreateAndFind(Name, BufferDesc, Buffer);
+
+			if (BufferDesc.Size != NewBuffer->GetBufferSize())
+			{
+				GameEngineDebug::MsgBoxError("이름은 같고 구조가 다른 상수버퍼가 이미 존재합니다.");
+				return;
+			}
+
+			ConstantBuffer_.insert(std::make_pair(ResInfo.BindPoint, NewBuffer));
 			break;
+		}
 		default:
+			GameEngineDebug::MsgBoxError("처리하지 못하는 타입의 쉐이더리소스가 발견되었습니다.");
 			break;
 		}
 	}
