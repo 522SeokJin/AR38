@@ -22,9 +22,18 @@ struct TransformData
 	float4x4 Proj;
 };
 
+float4 Pos;
+TransformData TransData;
+
 void UserGame::Initialize()
 {
 	GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Find("ColorRendering");
+	// cpu와 데이터와 상수버퍼를 연결한다.
+
+
+	// cpu와 데이터를 상수버퍼에 한번 복사한다.
+	Pipe->ShaderHelper.SettingConstantBufferLink("TransformData", TransData);
+
 	return;
 }
 
@@ -33,32 +42,19 @@ void UserGame::Release()
 	
 }
 
-TransformData TransData;
-
 void UserGame::GameLoop()
 {
 	GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Find("ColorRendering");
-
-	//float4x4 mScale;
-	//float4x4 mRot;
-	//float4x4 mPos;
-	//float4x4 mWorld;
-
-	//// 업데이트
-	//{
-	//	mScale.Scaling(vScale);
-	//	mRot.RotationDeg(vRot);
-	//	mPos.Translation(vPos);
-
-	//	mWorld = mScale * mRot * mPos;
-
-	//	// Pipe->Setting("World", mWorld);
-	//}
+	//GameEngineRenderingPipeLine* Pipe2 = GameEngineRenderingPipeLineManager::GetInst().Find("TextureRendering");
 
 	// 렌더링
 	{
+		Pos.x += 0.001f;
+		TransData.World.Translation(Pos);
+
 		GameEngineDevice::RenderStart();
 		Pipe->Rendering();
+		//Pipe2->Rendering();
 		GameEngineDevice::RenderEnd();
 	}
 	

@@ -208,4 +208,20 @@ void UserGame::ResourceLoad()
 
 		Pipe->SetPixelShader("Color_PS");
 	}
+
+	{
+		GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Create("TextureRendering");
+
+		Pipe->SetInputAssembler1VertexBufferSetting("Rect");
+		Pipe->SetInputAssembler1InputLayoutSetting("Texture_VS");
+
+		Pipe->SetVertexShader("Texture_VS");
+
+		Pipe->SetInputAssembler2IndexBufferSetting("Rect");
+		Pipe->SetInputAssembler2TopologySetting(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+		Pipe->SetRasterizer("EngineBaseRasterizer");
+
+		Pipe->SetPixelShader("Texture_PS");
+	}
 }

@@ -1,9 +1,11 @@
 #include "PreCompile.h"
 #include "GameEnginePixelShader.h"
 #include <GameEngineBase\GameEngineString.h>
+#include "GameEngineShaderResHelper.h"
 
 GameEnginePixelShader::GameEnginePixelShader() // default constructer 디폴트 생성자
 	: Shader_(nullptr)
+	, GameEngineShader(ShaderType::PS)
 {
 
 }
@@ -149,6 +151,11 @@ bool GameEnginePixelShader::FileCompile(const std::string& _Path)
 	ResCheck();
 
 	return true;
+}
+
+void GameEnginePixelShader::SetConstantBuffers(const GameEngineConstantBufferSetting* _Setting)
+{
+	GameEngineDevice::GetContext()->PSSetConstantBuffers(_Setting->SettingIndex_, 1, &_Setting->Res_->GetBuffer());
 }
 
 void GameEnginePixelShader::Setting()

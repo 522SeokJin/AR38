@@ -47,3 +47,24 @@ void GameEngineConstantBuffer::Create(const D3D11_SHADER_BUFFER_DESC& _BufferDes
 		VarInfos_.push_back(VarDesc);
 	}
 }
+
+void GameEngineConstantBuffer::ChangeData(void* _Data, size_t _Size)
+{
+	if (BufferData_.ByteWidth != _Size)
+	{
+		GameEngineDebug::MsgBoxError("상수버퍼 세팅의 크기가 다릅니다. " + GetName());
+	}
+
+	memset(&ResData_, 0, sizeof(ResData_));
+
+	// Map : CPU 데이터의 전송을 알림, Buffer_의 데이터를 변경하기위해 렌더링을 정지함
+	//		Map을 자주 호출하게되면 느려진다.
+	GameEngineDevice::GetContext()->Map(Buffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &ResData_);
+
+	// CPU에 존재하는 _Data 데이터를 BufferData.ByteWidth 만큼
+	// 그래픽카드의 ResData_.pData 로 전송
+	memcpy_s(ResData_.pData, BufferData_.ByteWidth, _Data, BufferData_.ByteWidth);
+
+	// UnMap : 전송을 끝내고 다시 이 버퍼가 사용이 가능해진다.
+	GameEngineDevice::GetContext()->Unmap(Buffer_, 0);
+}

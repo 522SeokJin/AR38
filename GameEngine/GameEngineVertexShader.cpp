@@ -2,11 +2,13 @@
 #include "GameEngineVertexShader.h"
 #include "GameEngineDevice.h"
 #include <GameEngineBase/GameEngineString.h>
+#include "GameEngineShaderResHelper.h"
 
 GameEngineVertexShader::GameEngineVertexShader() // default constructer 디폴트 생성자
 	: Shader_(nullptr)
 	, Layout_(nullptr)
 	, LayoutOffset_(0)
+	, GameEngineShader(ShaderType::VS)
 {
 
 }
@@ -166,6 +168,11 @@ bool GameEngineVertexShader::FileCompile(const std::string& _Path)
 	ResCheck();
 
 	return true;
+}
+
+void GameEngineVertexShader::SetConstantBuffers(const GameEngineConstantBufferSetting* _Setting)
+{
+	GameEngineDevice::GetContext()->VSSetConstantBuffers(_Setting->SettingIndex_, 1, &_Setting->Res_->GetBuffer());
 }
 
 void GameEngineVertexShader::AddInputLayout(

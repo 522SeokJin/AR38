@@ -2,15 +2,16 @@
 #include "GameEngineShader.h"
 #include "GameEngineConstantBufferManager.h"
 
-GameEngineShader::GameEngineShader() // default constructer 디폴트 생성자
-	: VersionHigh_(5)
+GameEngineShader::GameEngineShader(ShaderType _Type)
+	: Type_(_Type)
+	, VersionHigh_(5)
 	, VersionLow_(0)
 	, CodeBlob_(nullptr)
 {
 
 }
 
-GameEngineShader::~GameEngineShader() // default destructer 디폴트 소멸자
+GameEngineShader::~GameEngineShader()
 {
 	
 }
@@ -105,7 +106,7 @@ void GameEngineShader::ResCheck()
 				return;
 			}
 
-			ConstantBuffer_.insert(std::make_pair(ResInfo.BindPoint, NewBuffer));
+			ConstantBuffers_.insert(std::make_pair(ResInfo.BindPoint, NewBuffer));
 			break;
 		}
 		default:

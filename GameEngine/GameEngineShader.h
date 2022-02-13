@@ -2,18 +2,22 @@
 #include "GameEngineDevice.h"
 #include "GameEngineConstantBuffer.h"
 
-// 분류 : 
-// 용도 : 
-// 설명 : 
 
-class ConstantBuffer
+enum class ShaderType
 {
-
+	VS,
+	PS,
+	MAX
 };
 
+
+// 설명 : 
+class GameEngineConstantBufferSetting;
 class GameEngineShader : public GameEngineObjectNameBase
 {
 protected:	// member Var
+	ShaderType Type_;
+
 	UINT		VersionHigh_;
 	UINT		VersionLow_;
 	std::string Version_;
@@ -24,16 +28,16 @@ protected:	// member Var
 	std::string Code_;
 
 public:
-	GameEngineShader(); // default constructer 디폴트 생성자
-	virtual ~GameEngineShader() = 0; // default destructer 디폴트 소멸자
+	// constrcuter destructer
+	GameEngineShader(ShaderType _Type);
+	virtual ~GameEngineShader() = 0;
 
-protected:		// delete constructer
-	GameEngineShader(const GameEngineShader& _other) = delete; // default Copy constructer 디폴트 복사생성자
-	GameEngineShader(GameEngineShader&& _other) = delete; // default RValue Copy constructer 디폴트 RValue 복사생성자
-
-private:		//delete operator
-	GameEngineShader& operator=(const GameEngineShader& _other) = delete; // default Copy operator 디폴트 대입 연산자
-	GameEngineShader& operator=(const GameEngineShader&& _other) = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
+public:
+	// delete Function
+	GameEngineShader(const GameEngineShader& _other) = delete;
+	GameEngineShader(GameEngineShader&& _other) noexcept = delete; 
+	GameEngineShader& operator=(const GameEngineShader& _other) = delete; 
+	GameEngineShader& operator=(const GameEngineShader&& _other) = delete;
 
 protected:
 	void SetVersion(UINT _VersionHigh, UINT _VersionLow);
@@ -45,12 +49,14 @@ protected:
 
 	///////////////////////////////////			ConstantBuffer
 private:
-	std::map<UINT, GameEngineConstantBuffer*> ConstantBuffer_;
+	std::map<UINT, GameEngineConstantBuffer*> ConstantBuffers_;
 
 public:
-	std::map<UINT, GameEngineConstantBuffer*>& GetConstantBuffer()
+	std::map<UINT, GameEngineConstantBuffer*>& GetConstantBuffers()
 	{
-		return ConstantBuffer_;
+		return ConstantBuffers_;
 	}
+
+	virtual void SetConstantBuffers(const GameEngineConstantBufferSetting* _Setting) = 0;
 };
 

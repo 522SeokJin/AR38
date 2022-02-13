@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineDevice.h>
 #include <GameEngineBase/GameEngineMath.h>
 #include "GameEngineRenderingSettingData.h"
+#include "GameEngineShaderResHelper.h"
 
 // 분류 : 렌더링파이프라인
 // 용도 : 렌더링파이프라인을 그림
@@ -37,6 +38,9 @@ private:	// member Var
 
 	// OM
 	GameEngineRenderTarget* RenderTarget_;
+
+public:
+	GameEngineShaderResHelper ShaderHelper;
 
 public:
 	
@@ -78,14 +82,7 @@ public:
 	void Rasterizer();
 	void PixelShader();
 
-
-	///////////////////////////////////////////// Shader Setting Data
 public:
-	std::map<std::string, GameEngineConstantBufferSetting*> ConstantBufferSetting_;
 
-	void ResourcesCheck();
-	void ShaderResourcesCheck(GameEngineShader* _Shader);
-
-	// void ConstantBufferSetting();
 };
 
