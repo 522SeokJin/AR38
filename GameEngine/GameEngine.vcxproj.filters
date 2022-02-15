@@ -82,6 +82,12 @@
     <ClInclude Include="GameEngineShaderResHelper.h">
       <Filter>RenderingPipeLine</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineLevel.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineActor.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -162,6 +168,12 @@
     <ClCompile Include="GameEngineShaderResHelper.cpp">
       <Filter>RenderingPipeLine</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineLevel.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineActor.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -202,6 +214,9 @@
     </Filter>
     <Filter Include="Resources\01. Shader\ShaderResources">
       <UniqueIdentifier>{545100c7-73ac-45cb-945e-6471addb2ed1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{cdf65227-5add-4e35-9454-d75d488f8091}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

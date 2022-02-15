@@ -329,7 +329,7 @@ public:
 	{
 	}
 
-public:		// delete constructer
+public:
 	float4(const float4& _Value)
 		: x(_Value.x), y(_Value.y), z(_Value.z), w(_Value.w)
 	{
@@ -503,7 +503,15 @@ public:
 	{
 		DirectMatrix = DirectX::XMMatrixIdentity();
 	}
-
+	// X,Y Scaling
+	void Scaling2D(const float _Value)
+	{
+		DirectMatrix = DirectX::XMMatrixScalingFromVector(float4(_Value, _Value, 1.0f).DirectVector);
+	}
+	void Scaling(const float _Value)
+	{
+		DirectMatrix = DirectX::XMMatrixScalingFromVector(float4(_Value, _Value, _Value).DirectVector);
+	}
 	void Scaling(const float4& _Value)
 	{
 		DirectMatrix = DirectX::XMMatrixScalingFromVector(_Value.DirectVector);
