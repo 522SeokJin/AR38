@@ -24,7 +24,7 @@ void GameEngineString::toupper(std::string& _Text)
 
 void GameEngineString::StringToWString(const std::string& _Text, std::wstring& _Out)
 {
-	int Size = MultiByteToWideChar(CP_ACP, 0, _Text.c_str(), _Text.size(), nullptr, 0);
+	int Size = MultiByteToWideChar(CP_ACP, 0, _Text.c_str(), static_cast<int>(_Text.size()), nullptr, 0);
 	
 	if (0 == Size)
 	{
@@ -34,7 +34,7 @@ void GameEngineString::StringToWString(const std::string& _Text, std::wstring& _
 
 	_Out.resize(Size);
 
-	Size = MultiByteToWideChar(CP_ACP, 0, _Text.c_str(), _Text.size(), &_Out[0], Size);
+	Size = MultiByteToWideChar(CP_ACP, 0, _Text.c_str(), static_cast<int>(_Text.size()), &_Out[0], Size);
 
 	if (0 == Size)
 	{

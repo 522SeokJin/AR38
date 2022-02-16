@@ -24,20 +24,25 @@ public:
 	GameEngineLevel& operator=(const GameEngineLevel&& _other) = delete;
 
 public:
-	// template ¹Ù²Ü¿¹Á¤
-	void CreateActor(int _UpdateOrder = 0)
+	template<typename ActorType>
+	ActorType* CreateActor(int _UpdateOrder = 0)
 	{
-		GameEngineActor* NewActor = new GameEngineActor();
+		GameEngineActor* NewActor = new ActorType();
 		NewActor->SetLevel(this);
+		NewActor->Start();
 
 		// Insert + Find
 		std::list<GameEngineActor*>& List = ActorList_[_UpdateOrder];
 		List.push_back(NewActor);
+
+		return dynamic_cast<ActorType*>(NewActor);
 	}
 
-	void Update(float _DeltaTime);
+	void ActorUpdate(float _DeltaTime);
 
-	virtual void LevelChangeStartEvent();
-	virtual void LevelChangeEndEvent();
+	virtual void LevelStart() = 0;
+	virtual void LevelUpdate(float _DeltaTime) = 0;
+	virtual void LevelChangeEndEvent() = 0;
+	virtual void LevelChangeStartEvent() = 0;
 };
 

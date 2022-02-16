@@ -1,10 +1,12 @@
 #include "PreCompile.h"
 #include "GameEngineActor.h"
+#include "GameEngineTransform.h"
 
 GameEngineActor::GameEngineActor()
 	: Level_(nullptr)
+	, Transform_(nullptr)
 {
-
+	Transform_ = new GameEngineTransform();
 }
 
 GameEngineActor::~GameEngineActor()

@@ -5,6 +5,9 @@
 #include "GameEngine/GameEngineWindow.h"
 #include "GameEngine/GameEngineRenderingPipeLine.h"
 
+#include "TitleLevel.h"
+#include "PlayLevel.h"
+
 UserGame::UserGame() // default constructer 디폴트 생성자
 {
 
@@ -31,25 +34,26 @@ public:
 	}
 };
 
-float4 Pos;
-TransformData TransData;
+//float4 Pos;
+//TransformData TransData;
 
 void UserGame::Initialize()
 {
-	TransData.View.ViewToLH({ 0.0f, 0.0f, -10.0f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f });
-	TransData.Projection.OrthographicLH(1280.0f, 720.0f, 0.1f, 1000.0f);	// 직교투영
-
-	TransData.Scale.Scaling2D(200.0f);
-	TransData.Rotation.RotationDeg({ 0.0f, 0.0f, 45.0f });
-	TransData.Position.Translation({ 0.0f, 0.0f, 0.0f });
-	TransData.CalWorld();
-
-	GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Find("ColorRendering");
-	// cpu와 데이터와 상수버퍼를 연결한다.
-	Pipe->ShaderHelper.SettingConstantBufferLink("TransformData", TransData);
-
-	// cpu와 데이터를 상수버퍼에 한번 복사한다.
-	// Pipe->ShaderHelper.SettingConstantBufferSet("TransformData", TransData);
+	// TransData, SettingConstantBufferLink
+	
+	//TransData.View.ViewToLH({ 0.0f, 0.0f, -10.0f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f });
+	//TransData.Projection.OrthographicLH(1280.0f, 720.0f, 0.1f, 1000.0f);	// 직교투영
+	//TransData.Scale.Scaling2D(200.0f);
+	//TransData.Rotation.RotationDeg({ 0.0f, 0.0f, 45.0f });
+	//TransData.Position.Translation({ 0.0f, 0.0f, 0.0f });
+	//TransData.CalWorld();
+	//GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Find("ColorRendering");
+	//// cpu와 데이터와 상수버퍼를 연결한다.
+	//Pipe->ShaderHelper.SettingConstantBufferLink("TransformData", TransData);
+	
+	LevelCreate<TitleLevel>("Title");
+	LevelCreate<PlayLevel>("Play");
+	LevelChange("Play");
 
 	return;
 }

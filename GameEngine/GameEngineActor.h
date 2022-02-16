@@ -2,14 +2,18 @@
 #include <GameEngineBase/GameEngineObjectNameBase.h>
 
 // 설명 : 
+class GameEngineComponent;
 class GameEngineLevel;
+class GameEngineTransform;
 class GameEngineActor : public GameEngineObjectNameBase
 {
 	friend GameEngineLevel;
 
 private:	// member Var
-	GameEngineLevel* Level_;
+	GameEngineLevel*				Level_;
+	GameEngineTransform*			Transform_;
 
+	std::list<GameEngineComponent*> ComponentList_;
 
 private:
 	void SetLevel(GameEngineLevel* _Level);
@@ -22,8 +26,8 @@ public:
 
 public:
 	// constrcuter destructer
-	GameEngineActor(); // default constructer 디폴트 생성자
-	~GameEngineActor(); // default destructer 디폴트 소멸자
+	GameEngineActor();
+	~GameEngineActor();
 
 public:
 	// delete Function
@@ -32,7 +36,18 @@ public:
 	GameEngineActor& operator=(const GameEngineActor& _other) = delete;
 	GameEngineActor& operator=(const GameEngineActor&& _other) = delete;
 
+public:
+	template <typename ComponentType>
+	ComponentType* CreateComponent()
+	{
+		ComponentType* NewComponent = new ComponentType();
+		NewComponent->InitComponent(this);
+
+		ComponentList_.push_back(NewComponent);
+	}
+
 protected:
-	virtual void Update(float _DeltaTime);
+	virtual void Start() = 0;
+	virtual void Update(float _DeltaTime) = 0;
 };
 
