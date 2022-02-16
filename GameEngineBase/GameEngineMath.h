@@ -68,6 +68,13 @@ public:
 		return acos(Dot3DToLen(_Left, _Right));
 	}
 
+	static float4 Rotate3DDegree(const float4& _Vector, const float4& _Angle)
+	{
+		float4 ResultVector = _Vector;
+		ResultVector.Rotate3DDegree(_Angle);
+		return ResultVector;
+	}
+
 	static float4 RotateXDegree(const float4& _OriginVector, float _Degree)
 	{
 		return RotateXRadian(_OriginVector, _Degree * GameEngineMath::DegreeToRadian);
@@ -306,6 +313,13 @@ public:
 		return;
 	}
 
+	float4& Rotate3DDegree(const float4& _Angle)
+	{
+		DirectVector = DirectX::XMVector3Rotate(DirectVector, 
+			DirectX::XMQuaternionRotationRollPitchYawFromVector(_Angle.DirectVector));
+		return *this;
+	}
+
 public:
 	float4() 
 		: x(0.0f), y(0.0f), z(0.0f), w(1.0f)
@@ -486,15 +500,22 @@ public:
 	{
 
 	}
+	
+	float4x4 operator=(const float4x4& _Value)
+	{
+		DirectMatrix = _Value.DirectMatrix;
+
+		return *this;
+	}
 
 	float4x4 operator*(const float4x4& _Value)
 	{
 		return DirectX::XMMatrixMultiply(DirectMatrix, _Value.DirectMatrix);
 	}
 
-	float4x4 operator=(const float4x4& _Value)
+	float4x4& operator*=(const float4x4& _Value)
 	{
-		DirectMatrix = _Value.DirectMatrix;
+		DirectMatrix = DirectX::XMMatrixMultiply(DirectMatrix, _Value.DirectMatrix);
 
 		return *this;
 	}

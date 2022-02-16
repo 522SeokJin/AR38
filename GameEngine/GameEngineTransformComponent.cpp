@@ -10,7 +10,11 @@ GameEngineTransformComponent::GameEngineTransformComponent()
 
 GameEngineTransformComponent::~GameEngineTransformComponent()
 {
-
+	if (nullptr != Transform_)
+	{
+		delete Transform_;
+		Transform_ = nullptr;
+	}
 }
 
 void GameEngineTransformComponent::InitComponent(GameEngineActor* _Actor)
@@ -19,6 +23,6 @@ void GameEngineTransformComponent::InitComponent(GameEngineActor* _Actor)
 
 	Transform_ = new GameEngineTransform();
 
-	// Transform_->
+
 }
 

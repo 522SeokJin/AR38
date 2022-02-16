@@ -3,8 +3,6 @@
 #include "GameEngineLevel.h"
 
 
-// 분류 : 
-// 용도 : 
 // 설명 : 
 class GameEngineCore : public GameEngineObjectBase
 {
@@ -16,8 +14,8 @@ private:
 	void EngineDestroy();
 
 protected:
-	GameEngineCore(); // default constructer 디폴트 생성자
-	~GameEngineCore(); // default destructer 디폴트 소멸자
+	GameEngineCore();
+	~GameEngineCore();
 
 protected:		// delete Function
 	GameEngineCore(const GameEngineCore& _other) = delete;
@@ -38,7 +36,7 @@ public:
 		//_CrtSetBreakAlloc(163);
 
 #ifdef _DEBUG
-		//new int();	// 신뢰의 릭
+		new int();	// 신뢰의 릭
 #endif
 		UserGameType NewUserGame;
 		WindowCreate(NewUserGame);
