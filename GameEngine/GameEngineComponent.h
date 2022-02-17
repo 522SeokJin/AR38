@@ -1,14 +1,23 @@
 #pragma once
 #include <GameEngineBase/GameEngineObjectNameBase.h>
 
-// 설명 : 
+// 설명 : Actor에게 필요한 기능 하나하나를 담당
+class GameEngineLevel;
 class GameEngineActor;
 class GameEngineComponent : public GameEngineObjectNameBase
 {
+	friend GameEngineActor;
+
 private:	// member Var
+	GameEngineLevel* Level_;
 	GameEngineActor* Actor_;
 
 public:
+	GameEngineLevel* GetLevel()
+	{
+		return Level_;
+	}
+
 	GameEngineActor* GetActor()
 	{
 		return Actor_;
@@ -17,7 +26,7 @@ public:
 public:
 	// constrcuter destructer
 	GameEngineComponent();
-	~GameEngineComponent();
+	virtual ~GameEngineComponent() = 0;
 
 public:
 	// delete Function
@@ -28,5 +37,7 @@ public:
 
 protected:
 	virtual void InitComponent(GameEngineActor* Actor_);
+
+	virtual void Start() = 0;
 };
 

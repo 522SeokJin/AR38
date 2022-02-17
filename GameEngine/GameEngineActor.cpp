@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "GameEngineActor.h"
 #include "GameEngineTransform.h"
+#include "GameEngineTransformComponent.h"
 
 GameEngineActor::GameEngineActor()
 	: Level_(nullptr)
@@ -16,16 +17,29 @@ GameEngineActor::~GameEngineActor()
 		delete Transform_;
 		Transform_ = nullptr;
 	}
+
+	for (auto& Component : ComponentList_)
+	{
+		if (nullptr != Component)
+		{
+			delete Component;
+			Component = nullptr;
+		}
+	}
+
+	for (auto& TransformComponent : TransformComponentList_)
+	{
+		if (nullptr != TransformComponent)
+		{
+			delete TransformComponent;
+			TransformComponent = nullptr;
+		}
+	}
 }
 
 void GameEngineActor::SetLevel(GameEngineLevel* _Level)
 {
 	Level_ = _Level;
-}
-
-void GameEngineActor::Update(float _DeltaTime)
-{
-
 }
 
 

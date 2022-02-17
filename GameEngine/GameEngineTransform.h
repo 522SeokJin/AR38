@@ -1,6 +1,7 @@
 #pragma once
 
 // 설명 : 위치를 나타내는 기능이라 도저히 컴포넌트라고 부를수 없을정도로 중요하다.
+//		충돌도 담당하게 된다.
 
 class TransformData
 {
@@ -55,9 +56,14 @@ protected:	// member Var
 	GameEngineTransform*			Parent_;
 	std::list<GameEngineTransform*> Childs_;
 
-private:
-	void SetParent(GameEngineTransform* _Parent);
-	void DetachChild(GameEngineTransform* _Child);
+public:
+	TransformData& GetTransformData()
+	{
+		return TransData_;
+	}
+
+	void AttachTransform(GameEngineTransform* _Parent);
+	void DetachTransform(GameEngineTransform* _Child);
 
 public:
 	// constrcuter destructer

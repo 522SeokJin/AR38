@@ -82,6 +82,7 @@ void GameEngineCore::MainLoop()
 
 	CurrentLevel_->LevelUpdate(GameEngineTime::GetInst().GetDeltaTime());
 	CurrentLevel_->ActorUpdate(GameEngineTime::GetInst().GetDeltaTime());
+	CurrentLevel_->Render();
 
 
 	// 오브젝트 루프

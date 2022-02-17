@@ -18,7 +18,6 @@ public:
 	char*					  SettingData_;
 	size_t					  SettingDataSize_;
 	int						  SettingIndex_;
-	bool					  IsSet_;				// 이번 프레임의 세팅여부
 
 public:
 	GameEngineConstantBufferSetting()
@@ -28,7 +27,6 @@ public:
 		, SettingData_(nullptr)
 		, SettingDataSize_(0)
 		, SettingIndex_(0)
-		, IsSet_(false)
 	{
 
 	}

@@ -97,6 +97,9 @@
     <ClInclude Include="GameEngineTransformComponent.h">
       <Filter>Object\Component</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineRenderer.h">
+      <Filter>Object\Component\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -192,6 +195,9 @@
     <ClCompile Include="GameEngineTransformComponent.cpp">
       <Filter>Object\Component</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineRenderer.cpp">
+      <Filter>Object\Component\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -241,6 +247,9 @@
     </Filter>
     <Filter Include="Object\Transform">
       <UniqueIdentifier>{9aa90d38-0ccc-480b-9d31-b7b01bfa8816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\Renderer">
+      <UniqueIdentifier>{55fd52d8-309c-47f7-b08d-84ec3ddefac0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

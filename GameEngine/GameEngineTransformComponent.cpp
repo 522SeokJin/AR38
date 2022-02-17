@@ -5,7 +5,7 @@
 GameEngineTransformComponent::GameEngineTransformComponent()
 	: Transform_(nullptr)
 {
-
+	Transform_ = new GameEngineTransform();
 }
 
 GameEngineTransformComponent::~GameEngineTransformComponent()
@@ -17,12 +17,7 @@ GameEngineTransformComponent::~GameEngineTransformComponent()
 	}
 }
 
-void GameEngineTransformComponent::InitComponent(GameEngineActor* _Actor)
+void GameEngineTransformComponent::AttachTransform(GameEngineTransform* _Parent)
 {
-	GameEngineComponent::InitComponent(_Actor);
-
-	Transform_ = new GameEngineTransform();
-
-
+	Transform_->AttachTransform(_Parent);
 }
-

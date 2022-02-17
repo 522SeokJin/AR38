@@ -1,7 +1,7 @@
 #pragma once
 #include "GameEngineComponent.h"
 
-// 설명 : 
+// 설명 : 위치가 필요한 Component
 class GameEngineTransform;
 class GameEngineTransformComponent : public GameEngineComponent
 {
@@ -9,9 +9,15 @@ private:	// member Var
 	GameEngineTransform* Transform_;
 
 public:
+	GameEngineTransform* GetTransform()
+	{
+		return Transform_;
+	}
+
+public:
 	// constrcuter destructer
 	GameEngineTransformComponent();
-	~GameEngineTransformComponent();
+	virtual ~GameEngineTransformComponent() = 0;
 
 public:
 	// delete Function
@@ -20,7 +26,7 @@ public:
 	GameEngineTransformComponent& operator=(const GameEngineTransformComponent& _other) = delete;
 	GameEngineTransformComponent& operator=(const GameEngineTransformComponent&& _other) = delete;
 
-private:
-	virtual void InitComponent(GameEngineActor* _Actor);
+public:
+	void AttachTransform(GameEngineTransform* _Parent);
 };
 

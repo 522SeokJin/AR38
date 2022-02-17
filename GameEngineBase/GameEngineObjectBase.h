@@ -10,6 +10,7 @@ private:	// member Var
 	bool isDeath_;
 	bool isUpdate_;
 	bool isDebug_; // 디버깅 기능 이거 true로 해놓고 f9 걸어 놓으면 
+	int Order_;
 	GameEngineObjectBase* parent_;
 
 public:
@@ -21,6 +22,16 @@ public:
 	void SetParent(GameEngineObjectBase* _parent)
 	{
 		parent_ = _parent;
+	}
+
+	void SetOrder(int _Order)
+	{
+		Order_ = _Order;
+	}
+	
+	int GetOrder()
+	{
+		return Order_;
 	}
 
 public:

@@ -1,10 +1,12 @@
 #pragma once
-#include "GameEngineActor.h"
 
 // 설명 : 
+class GameEngineActor;
+class GameEngineRenderer;
 class GameEngineLevel : public GameEngineObjectNameBase
 {
 	friend class GameEngineCore;
+	friend class GameEngineRenderer;
 
 private:	// member Var
 	// int 는 업데이트 그룹의 순서를 정하기위함이다. Ordering
@@ -30,6 +32,7 @@ public:
 		GameEngineActor* NewActor = new ActorType();
 		NewActor->SetLevel(this);
 		NewActor->Start();
+		NewActor->SetOrder(_UpdateOrder);
 
 		// Insert + Find
 		std::list<GameEngineActor*>& List = ActorList_[_UpdateOrder];
@@ -40,9 +43,18 @@ public:
 
 	void ActorUpdate(float _DeltaTime);
 
+	void Render();
+
 	virtual void LevelStart() = 0;
 	virtual void LevelUpdate(float _DeltaTime) = 0;
 	virtual void LevelChangeEndEvent() = 0;
 	virtual void LevelChangeStartEvent() = 0;
+
+	//////////////////////////////////////////////////		Renderer
+	
+private:
+	std::map<int, std::list<GameEngineRenderer*>> RendererList_;
+
+	void PushRenderer(int _Order, GameEngineRenderer* _Renderer);
 };
 
