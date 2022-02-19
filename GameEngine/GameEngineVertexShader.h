@@ -4,8 +4,6 @@
 #include "GameEngineDevice.h"
 #include "GameEngineShader.h"
 
-// 분류 : 렌더링파이프라인 
-// 용도 : 버텍스쉐이더
 // 설명 : 정점의 정보값을 변화시켜서, 물체를 특별한 위치로 옮기거나, 텍스처를 바꾸거나, 색상을 바꾸는 등의 일을 한다.
 class GameEngineVertexShader : public GameEngineShader
 {

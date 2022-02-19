@@ -1,8 +1,11 @@
 #pragma once
 
-// 설명 : 
+
+class CameraActor;
+class CameraComponent;
 class GameEngineActor;
 class GameEngineRenderer;
+// 설명 : 
 class GameEngineLevel : public GameEngineObjectNameBase
 {
 	friend class GameEngineCore;
@@ -12,6 +15,12 @@ private:	// member Var
 	// int 는 업데이트 그룹의 순서를 정하기위함이다. Ordering
 	// 순서가 없다면, 먼저 생성된 것이 먼저 행동한다.
 	std::map<int, std::list<GameEngineActor*>> ActorList_;
+	CameraActor* MainCameraActor_;
+
+public:
+	CameraActor* GetMainCameraActor();
+
+	CameraComponent* GetMainCamera();
 
 public:
 	// constrcuter destructer
@@ -45,6 +54,10 @@ public:
 
 	void Render();
 
+private:
+	void Init();
+
+public:
 	virtual void LevelStart() = 0;
 	virtual void LevelUpdate(float _DeltaTime) = 0;
 	virtual void LevelChangeEndEvent() = 0;

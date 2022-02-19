@@ -31,25 +31,30 @@ void GameEngineTransform::DetachTransform(GameEngineTransform* _Child)
 
 void GameEngineTransform::TransformUpdate()
 {
-	TransData_.LocalCalculation();
+	TransformData_.LocalCalculation();
 
 	if (nullptr != Parent_)
 	{
-		TransData_.ParentSetting(Parent_->TransData_.WorldWorld_);
+		TransformData_.ParentSetting(Parent_->TransformData_.WorldWorld_);
 	}
 	else
 	{
-		TransData_.RootCalculation();
+		TransformData_.RootCalculation();
+	}
+
+	for (GameEngineTransform* ChildTransform : Childs_)
+	{
+		ChildTransform->TransformUpdate();
 	}
 }
 
 void GameEngineTransform::SetLocalScaling(const float4& _Value)
 {
-	TransData_.vLocalScaling_ = _Value;
+	TransformData_.vLocalScaling_ = _Value;
 
 	if (nullptr == Parent_)
 	{
-		TransData_.vWorldScaling_ = _Value;
+		TransformData_.vWorldScaling_ = _Value;
 	}
 	else
 	{
@@ -61,11 +66,11 @@ void GameEngineTransform::SetLocalScaling(const float4& _Value)
 
 void GameEngineTransform::SetWorldScaling(const float4& _Value)
 {
-	TransData_.vWorldScaling_ = _Value;
+	TransformData_.vWorldScaling_ = _Value;
 
 	if (nullptr == Parent_)
 	{
-		TransData_.vLocalScaling_ = _Value;
+		TransformData_.vLocalScaling_ = _Value;
 	}
 	else
 	{
@@ -77,11 +82,11 @@ void GameEngineTransform::SetWorldScaling(const float4& _Value)
 
 void GameEngineTransform::SetLocalRotation(const float4& _Value)
 {
-	TransData_.vLocalRotation_ = _Value;
+	TransformData_.vLocalRotation_ = _Value;
 
 	if (nullptr == Parent_)
 	{
-		TransData_.vWorldRotation_ = _Value;
+		TransformData_.vWorldRotation_ = _Value;
 	}
 	else
 	{
@@ -93,11 +98,11 @@ void GameEngineTransform::SetLocalRotation(const float4& _Value)
 
 void GameEngineTransform::SetWorldRotation(const float4& _Value)
 {
-	TransData_.vWorldRotation_ = _Value;
+	TransformData_.vWorldRotation_ = _Value;
 
 	if (nullptr == Parent_)
 	{
-		TransData_.vLocalRotation_ = _Value;
+		TransformData_.vLocalRotation_ = _Value;
 	}
 	else
 	{
@@ -109,11 +114,11 @@ void GameEngineTransform::SetWorldRotation(const float4& _Value)
 
 void GameEngineTransform::SetLocalPosition(const float4& _Value)
 {
-	TransData_.vLocalPosition_ = _Value;
+	TransformData_.vLocalPosition_ = _Value;
 
 	if (nullptr == Parent_)
 	{
-		TransData_.vWorldPosition_ = _Value;
+		TransformData_.vWorldPosition_ = _Value;
 	}
 	else
 	{
@@ -125,11 +130,11 @@ void GameEngineTransform::SetLocalPosition(const float4& _Value)
 
 void GameEngineTransform::SetWorldPosition(const float4& _Value)
 {
-	TransData_.vWorldPosition_ = _Value;
+	TransformData_.vWorldPosition_ = _Value;
 
 	if (nullptr == Parent_)
 	{
-		TransData_.vLocalPosition_ = _Value;
+		TransformData_.vLocalPosition_ = _Value;
 	}
 	else
 	{
@@ -141,44 +146,44 @@ void GameEngineTransform::SetWorldPosition(const float4& _Value)
 
 void GameEngineTransform::CalculationLocalScaling()
 {
-	TransData_.vLocalScaling_ = TransData_.vWorldScaling_ / Parent_->TransData_.vLocalScaling_;
+	TransformData_.vLocalScaling_ = TransformData_.vWorldScaling_ / Parent_->TransformData_.vLocalScaling_;
 }
 
 void GameEngineTransform::CalculationWorldScaling()
 {
-	TransData_.vWorldScaling_ = TransData_.vLocalScaling_ * Parent_->TransData_.vWorldScaling_;
+	TransformData_.vWorldScaling_ = TransformData_.vLocalScaling_ * Parent_->TransformData_.vWorldScaling_;
 }
 
 void GameEngineTransform::CalculationLocalRotation()
 {
-	TransData_.vLocalRotation_ = TransData_.vWorldRotation_ - Parent_->TransData_.vWorldRotation_;
+	TransformData_.vLocalRotation_ = TransformData_.vWorldRotation_ - Parent_->TransformData_.vWorldRotation_;
 }
 
 void GameEngineTransform::CalculationWorldRotation()
 {
-	TransData_.vWorldRotation_ = TransData_.vWorldRotation_ + Parent_->TransData_.vWorldRotation_;
+	TransformData_.vWorldRotation_ = TransformData_.vWorldRotation_ + Parent_->TransformData_.vWorldRotation_;
 }
 
 void GameEngineTransform::CalculationLocalPosition()
 {
 	// CalculationWorldPosition() 의 역으로 계산
-	float4 CalLocalPos = TransData_.vWorldPosition_ - Parent_->TransData_.vWorldPosition_;
-	CalLocalPos.Rotate3DDegree(-Parent_->TransData_.vWorldRotation_);	// 역회전
-	CalLocalPos /= Parent_->TransData_.vWorldScaling_;
-	TransData_.vLocalPosition_ = CalLocalPos;
+	float4 CalLocalPos = TransformData_.vWorldPosition_ - Parent_->TransformData_.vWorldPosition_;
+	CalLocalPos.Rotate3DDegree(-Parent_->TransformData_.vWorldRotation_);	// 역회전
+	CalLocalPos /= Parent_->TransformData_.vWorldScaling_;
+	TransformData_.vLocalPosition_ = CalLocalPos;
 }
 
 void GameEngineTransform::CalculationWorldPosition()
 {
-	float4 CalWorldPos = TransData_.vLocalPosition_;
+	float4 CalWorldPos = TransformData_.vLocalPosition_;
 	// 크기
-	CalWorldPos *= Parent_->TransData_.vWorldScaling_;
+	CalWorldPos *= Parent_->TransformData_.vWorldScaling_;
 	// 회전
-	CalWorldPos.Rotate3DDegree(Parent_->TransData_.vWorldRotation_);
+	CalWorldPos.Rotate3DDegree(Parent_->TransformData_.vWorldRotation_);
 	// 이동
-	CalWorldPos += Parent_->TransData_.vWorldPosition_;
+	CalWorldPos += Parent_->TransformData_.vWorldPosition_;
 
-	TransData_.vWorldPosition_ = CalWorldPos;
+	TransformData_.vWorldPosition_ = CalWorldPos;
 }
 
 void GameEngineTransform::AllChildCalculationScaling()

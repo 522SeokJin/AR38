@@ -249,7 +249,7 @@ void GameEngineVertexShader::LayoutCheck()
 	// 내가 쉐이더에서 사용한 변수, 함수, 인자들 그 이외의 상수버퍼 등의
 	// 모든 정보를 알고있다.
 	// ex) 쉐이더에서 행렬을 1개 사용했다.
-	ID3D11ShaderReflection* CompileInfo;
+	ID3D11ShaderReflection* CompileInfo = {};
 
 	if (S_OK != D3DReflect
 	(

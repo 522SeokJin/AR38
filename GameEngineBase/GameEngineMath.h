@@ -14,6 +14,7 @@ class float4
 {
 public:
 	static const float4 ZERO;
+	static const float4 ONE;
 	static const float4 LEFT;
 	static const float4 RIGHT;
 	static const float4 UP;
@@ -653,9 +654,9 @@ public:
 	}
 
 	// LootTo는 내가 이 방향으로 바라보고있다
-	void ViewToLH(const float4& _EyePos, const float4& _EyeFocus, const float4& _EyeUp)
+	void ViewToLH(const float4& _EyePos, const float4& _EyeDir, const float4& _EyeUp)
 	{
-		DirectMatrix = DirectX::XMMatrixLookToLH(_EyePos.DirectVector, _EyeFocus.DirectVector, _EyeUp.DirectVector);
+		DirectMatrix = DirectX::XMMatrixLookToLH(_EyePos.DirectVector, _EyeDir.DirectVector, _EyeUp.DirectVector);
 	}
 
 	// 투영행렬

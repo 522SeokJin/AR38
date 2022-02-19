@@ -21,6 +21,11 @@ void GameEngineRenderer::Start()
 	GetLevel()->PushRenderer(GetOrder(), this);
 }
 
+void GameEngineRenderer::Update()
+{
+
+}
+
 void GameEngineRenderer::Render()
 {
 	PipeLine_->Rendering();
@@ -34,9 +39,12 @@ void GameEngineRenderer::SetRenderingPipeLine(const std::string& _Value)
 	{
 		GameEngineDebug::MsgBoxError("존재하지 않는 파이프라인 입니다!");
 	}
-
-	if (true == PipeLine_->ShaderHelper.IsConstantBuffer("TransformData"))
+	else
 	{
-		PipeLine_->ShaderHelper.SettingConstantBufferLink("TransformData", GetTransform()->GetTransformData());
+		// 기본적으로 TransformData는 다 가지고있을것이므로 자동으로되게 해준다.
+		if (true == PipeLine_->ShaderHelper.IsConstantBuffer("TransformData"))
+		{
+			PipeLine_->ShaderHelper.SettingConstantBufferLink("TransformData", GetTransform()->GetTransformData());
+		}
 	}
 }

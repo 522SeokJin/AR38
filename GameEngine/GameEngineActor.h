@@ -65,7 +65,7 @@ public:
 		NewComponent->InitComponent(this);
 		if (nullptr == _Parent)
 		{
-			GameEngineDebug::MsgBoxError("트랜스폼을 세팅하지 않았습니다. CreateTransformComponent(_Parent, _Order)");
+			GameEngineDebug::MsgBoxError("GameEngineTransform* _Parent 을 세팅하지 않았습니다. CreateTransformComponent(_Parent, _Order)");
 		}
 		NewComponent->AttachTransform(_Parent);
 		TransformComponentList_.push_back(NewComponent);
@@ -74,8 +74,12 @@ public:
 		return dynamic_cast<ComponentType*>(NewComponent);
 	}
 
+private:
+	void ComponentUpdate();
+
 protected:
-	virtual void Start() = 0;
-	virtual void Update(float _DeltaTime) = 0;
+	virtual void Start() {};
+	virtual void TransformUpdate();
+	virtual void Update(float _DeltaTime) {};
 };
 

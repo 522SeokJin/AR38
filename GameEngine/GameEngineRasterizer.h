@@ -2,8 +2,6 @@
 #include <GameEngineBase/GameEngineObjectNameBase.h>
 #include "GameEngineDevice.h"
 
-// 분류 : 
-// 용도 : 
 // 설명 : 
 class GameEngineRasterizer : public GameEngineObjectNameBase
 {

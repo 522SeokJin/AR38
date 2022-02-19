@@ -23,7 +23,8 @@ public:
 	GameEngineRenderer& operator=(const GameEngineRenderer& _other) = delete;
 	GameEngineRenderer& operator=(const GameEngineRenderer&& _other) = delete;
 private:
-	void Start();
+	void Start() override;
+	void Update() override;
 
 	virtual void Render();
 

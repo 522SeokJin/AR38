@@ -12,8 +12,6 @@
 // 다이렉트 X는 프로세스마다 GUIID를 부여해서 X프로세스가 디바이스를 이용하려고 하는지 알아서 처리해준다.
 #pragma comment(lib, "dxguid")
 
-// 분류 : 
-// 용도 : 
 // 설명 : 그래픽카드에 접근할 수 있는 포인터
 class GameEngineRenderTarget;
 class GameEngineDevice
