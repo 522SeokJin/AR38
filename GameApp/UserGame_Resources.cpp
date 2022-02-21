@@ -2,6 +2,7 @@
 #include "UserGame.h"
 #include "CustomVertex.h"
 #include "UserGame_Resources_Shader.h"
+#include "GameEngine/GameEngineWindow.h"
 
 
 void UserGame::ResourceLoad()
@@ -172,7 +173,8 @@ void UserGame::ResourceLoad()
 
 
 		GameEngineRasterizer* Ptr = GameEngineRasterizerManager::GetInst().Create("EngineBaseRasterizer", Info);
-		Ptr->SetViewPort(1280.0f, 720.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+		Ptr->SetViewPort(GameEngineWindow::GetInst().GetSize().x, 
+			GameEngineWindow::GetInst().GetSize().y, 0.0f, 0.0f, 0.0f, 1.0f);
 	}
 
 	// RenderingPipeLine

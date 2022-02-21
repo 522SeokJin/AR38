@@ -1,7 +1,8 @@
 #pragma once
 #include "GameEngineTransformComponent.h"
+#include "GameEngineShaderResHelper.h"
 
-// 설명 : 
+// 설명 : 하나의 렌더단위를 표현한다.
 class GameEngineLevel;
 class GameEngineRenderingPipeLine;
 class GameEngineRenderer : public GameEngineTransformComponent
@@ -10,6 +11,9 @@ class GameEngineRenderer : public GameEngineTransformComponent
 
 protected:	// member Var
 	GameEngineRenderingPipeLine* PipeLine_;
+
+public:
+	GameEngineShaderResHelper ShaderHelper;
 
 public:
 	// constrcuter destructer

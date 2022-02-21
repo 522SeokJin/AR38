@@ -15,8 +15,10 @@ private:	// member Var
 	GameEngineTransform*			Transform_;
 
 	std::list<GameEngineComponent*> ComponentList_;
-
 	std::list<GameEngineTransformComponent*> TransformComponentList_;
+
+	bool	IsDestroyed_;
+	float	DeathTime_;
 
 public:
 	GameEngineLevel* GetLevel()
@@ -45,10 +47,25 @@ public:
 	GameEngineActor& operator=(const GameEngineActor&& _other) = delete;
 
 public:
+	void Release(float _Time = 0.0f)
+	{
+		if (0.0f >= _Time)
+		{
+			Death();
+		}
+		else
+		{
+			IsDestroyed_ = true;
+			DeathTime_ = _Time;
+		}
+	}
+
+public:
 	template <typename ComponentType>
 	ComponentType* CreateComponent(int _Order = 0)
 	{
 		GameEngineComponent* NewComponent = new ComponentType();
+		NewComponent->SetParent(this);
 		NewComponent->SetOrder(_Order);
 		NewComponent->InitComponent(this);
 		ComponentList_.push_back(NewComponent);
@@ -61,6 +78,7 @@ public:
 	ComponentType* CreateTransformComponent(GameEngineTransform* _Parent, int _Order = 0)
 	{
 		GameEngineTransformComponent* NewComponent = new ComponentType();
+		NewComponent->SetParent(this);
 		NewComponent->SetOrder(_Order);
 		NewComponent->InitComponent(this);
 		if (nullptr == _Parent)
@@ -76,10 +94,13 @@ public:
 
 private:
 	void ComponentUpdate();
+	void ComponentRelease();
+	void ReleaseUpdate(float _DeltaTime);
 
 protected:
 	virtual void Start() {};
 	virtual void TransformUpdate();
 	virtual void Update(float _DeltaTime) {};
+	virtual void ReleaseEvent() {};
 };
 

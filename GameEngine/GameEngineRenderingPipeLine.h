@@ -4,8 +4,6 @@
 #include "GameEngineRenderingSettingData.h"
 #include "GameEngineShaderResHelper.h"
 
-// 분류 : 렌더링파이프라인
-// 용도 : 렌더링파이프라인을 그림
 // 설명 : 렌더링파이프라인을 직접 설정하기위해 만든 클래스
 
 class GameEngineShader;
@@ -40,10 +38,16 @@ private:	// member Var
 	GameEngineRenderTarget* RenderTarget_;
 
 public:
-	GameEngineShaderResHelper ShaderHelper;
+	inline GameEngineVertexShader* GetVertexShader() const
+	{
+		return VertexShader_;
+	}
 
-public:
-	
+	inline GameEnginePixelShader* GetPixelShader() const
+	{
+		return PixelShader_;
+	}
+
 	void SetInputAssembler1VertexBufferSetting(const std::string& _Name);
 	void SetInputAssembler1InputLayoutSetting(const std::string& _Name);
 	

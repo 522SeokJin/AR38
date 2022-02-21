@@ -54,6 +54,8 @@ public:
 
 	void Render();
 
+	void Release(float _DeltaTime);
+
 private:
 	void Init();
 

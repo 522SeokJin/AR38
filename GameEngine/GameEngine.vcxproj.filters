@@ -89,7 +89,7 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineTransform.h">
-      <Filter>Object\Component\Transform</Filter>
+      <Filter>Object\Transform</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineComponent.h">
       <Filter>Object\Component</Filter>
@@ -104,7 +104,10 @@
       <Filter>Object\Component\Camera</Filter>
     </ClInclude>
     <ClInclude Include="CameraActor.h">
-      <Filter>Object\SubActor</Filter>
+      <Filter>Object\EngineActor</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineInput.h">
+      <Filter>Control</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -193,7 +196,7 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineTransform.cpp">
-      <Filter>Object\Component\Transform</Filter>
+      <Filter>Object\Transform</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineComponent.cpp">
       <Filter>Object\Component</Filter>
@@ -208,7 +211,10 @@
       <Filter>Object\Component\Camera</Filter>
     </ClCompile>
     <ClCompile Include="CameraActor.cpp">
-      <Filter>Object\SubActor</Filter>
+      <Filter>Object\EngineActor</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineInput.cpp">
+      <Filter>Control</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -257,14 +263,17 @@
     <Filter Include="Object\Component\Renderer">
       <UniqueIdentifier>{55fd52d8-309c-47f7-b08d-84ec3ddefac0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Component\Transform">
-      <UniqueIdentifier>{9aa90d38-0ccc-480b-9d31-b7b01bfa8816}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Component\Camera">
       <UniqueIdentifier>{5e37e014-dd97-4d5d-9b1a-1e678e52a979}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\SubActor">
+    <Filter Include="Object\EngineActor">
       <UniqueIdentifier>{d8180a59-2ce2-4730-a5bb-2ebe7e45270b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Control">
+      <UniqueIdentifier>{1a59472a-0a26-4ab3-af85-607a6925bf68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Transform">
+      <UniqueIdentifier>{9aa90d38-0ccc-480b-9d31-b7b01bfa8816}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

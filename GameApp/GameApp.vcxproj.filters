@@ -23,6 +23,12 @@
     <ClCompile Include="Player.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -42,6 +48,18 @@
     </Filter>
     <Filter Include="Actor">
       <UniqueIdentifier>{18fb2cf2-c780-4bcc-b2ae-8053a571d086}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Monster">
+      <UniqueIdentifier>{8fd35a2b-f6ff-4097-bd6d-fe5b84d77e4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\NPC">
+      <UniqueIdentifier>{d5ce0523-29a4-495c-a840-b26a26f94b98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Monster\BOSS">
+      <UniqueIdentifier>{c21ac8a3-9e06-4c1d-af4c-ca687fbe5aa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Monster\BOSS\Demian">
+      <UniqueIdentifier>{14f50ceb-51f6-4604-a096-863134a254c0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +82,12 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
       <Filter>Actor</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,6 +6,8 @@
 class GameEngineConstantBuffer;
 class GameEngineShaderResHelper
 {
+	friend class GameEngineRenderer;
+
 private:	// member Var
 	std::map<std::string, GameEngineConstantBufferSetting*> AllConstantBufferData_;
 	
@@ -27,8 +29,10 @@ public:
 public:
 	void ShaderResourcesCheck(GameEngineShader* _Shader);
 
+private:
 	void Setting();
 	
+public:
 	// 해당 주소값에 지속적으로 세팅을 해줄수있다.
 	template<typename T>
 	void SettingConstantBufferLink(const std::string& _SettingName, T& _Data)

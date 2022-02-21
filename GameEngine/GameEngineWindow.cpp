@@ -71,7 +71,7 @@ int GameEngineWindow::CreateMainWindowClass()
 
     className_ = "DEF";
 
-    WNDCLASSEXA wcex;
+    WNDCLASSEXA wcex = {};
     wcex.cbSize = sizeof(WNDCLASSEX);
     wcex.style = CS_HREDRAW | CS_VREDRAW; // 화면 재갱신 옵션
     wcex.lpfnWndProc = WndProc; // <= 내일 설명

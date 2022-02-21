@@ -29,7 +29,7 @@ public:
 	}
 	virtual float4 StartWindowSize() override
 	{
-		return { 1280, 720 };
+		return { 1024, 768 };
 	}
 };
 

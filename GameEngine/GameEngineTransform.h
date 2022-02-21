@@ -108,8 +108,35 @@ public:
 	void SetLocalRotation(const float4& _Value);
 	void SetWorldRotation(const float4& _Value);
 
+	void SetLocalDeltaTimeRotation(const float4& _Value)
+	{
+		SetLocalRotation(TransformData_.vLocalRotation_ + _Value * GameEngineTime::GetInst().GetDeltaTime());
+	}
+	void SetWorldDeltaTimeRotation(const float4& _Value)
+	{
+		SetWorldRotation(TransformData_.vWorldRotation_ + _Value * GameEngineTime::GetInst().GetDeltaTime());
+	}
+
 	void SetLocalPosition(const float4& _Value);
 	void SetWorldPosition(const float4& _Value);
+
+	void SetLocalMove(const float4& _Value)
+	{
+		SetLocalPosition(TransformData_.vLocalPosition_ + _Value);
+	}
+	void SetWorldMove(const float4& _Value)
+	{
+		SetWorldPosition(TransformData_.vWorldPosition_ + _Value);
+	}
+
+	void SetLocalDeltaTimeMove(const float4& _Value)
+	{
+		SetLocalPosition(TransformData_.vLocalPosition_ + _Value * GameEngineTime::GetInst().GetDeltaTime());
+	}
+	void SetWorldDeltaTimeMove(const float4& _Value)
+	{
+		SetWorldPosition(TransformData_.vWorldPosition_ + _Value * GameEngineTime::GetInst().GetDeltaTime());
+	}
 
 private:
 	// 부모가 있을때 계산하는 함수

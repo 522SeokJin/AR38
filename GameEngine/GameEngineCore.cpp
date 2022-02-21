@@ -4,6 +4,7 @@
 #include "GameEngineResourcesManager.h"
 #include "GameEngineDevice.h"
 #include "GameEngineLevel.h"
+#include "GameEngineInput.h"
 
 // static member
 GameEngineCore* GameEngineCore::MainCore_ = nullptr;
@@ -46,6 +47,7 @@ void GameEngineCore::EngineDestroy()
 	}
 
 	GameEngineManagerHelper::ManagerRelease();
+	GameEngineInput::Destroy();
 	GameEngineTime::Destroy();
 	GameEngineDevice::Destroy();
 	GameEngineWindow::Destroy();
@@ -59,6 +61,7 @@ void GameEngineCore::MainLoop()
 {
 	GameEngineTime::GetInst().TimeCheck();
 	GameEngineSoundManager::GetInst().SoundUpdate();
+	GameEngineInput::GetInst().Update();
 
 	if (nullptr != NextLevel_)
 	{
@@ -75,6 +78,8 @@ void GameEngineCore::MainLoop()
 		GameEngineTime::GetInst().TimeCheckReset();
 	}
 
+	NextLevel_ = nullptr;
+
 	if (nullptr == CurrentLevel_)
 	{
 		GameEngineDebug::MsgBoxError("현재 레벨이 존재하지 않습니다.");
@@ -83,7 +88,7 @@ void GameEngineCore::MainLoop()
 	CurrentLevel_->LevelUpdate(GameEngineTime::GetInst().GetDeltaTime());
 	CurrentLevel_->ActorUpdate(GameEngineTime::GetInst().GetDeltaTime());
 	CurrentLevel_->Render();
-
+	CurrentLevel_->Release(GameEngineTime::GetInst().GetDeltaTime());
 
 	// 오브젝트 루프
 	// MainCore_->GameLoop();

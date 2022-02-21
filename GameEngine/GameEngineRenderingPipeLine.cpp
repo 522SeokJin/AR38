@@ -62,8 +62,6 @@ void GameEngineRenderingPipeLine::SetVertexShader(const std::string& _Name)
 	{
 		GameEngineDebug::MsgBoxError("존재하지 않는 버텍스쉐이더를 세팅하려고 했습니다.");
 	}
-
-	ShaderHelper.ShaderResourcesCheck(VertexShader_);
 }
 
 void GameEngineRenderingPipeLine::SetInputAssembler2IndexBufferSetting(const std::string& _Name)
@@ -99,8 +97,6 @@ void GameEngineRenderingPipeLine::SetPixelShader(const std::string& _Name)
 	{
 		GameEngineDebug::MsgBoxError("존재하지 않는 픽셀쉐이더 세팅을 하려고 했습니다.");
 	}
-
-	ShaderHelper.ShaderResourcesCheck(PixelShader_);
 }
 
 void GameEngineRenderingPipeLine::SetOutputMerger(const std::string& _Name)
@@ -164,8 +160,6 @@ void GameEngineRenderingPipeLine::RenderingPipeLineSetting()
 void GameEngineRenderingPipeLine::Rendering()
 {
 	RenderingPipeLineSetting();
-
-	ShaderHelper.Setting();
 
 	GameEngineDevice::GetContext()->DrawIndexed(IndexBuffer_->GetIndexCount(), 0, 0);
 }
