@@ -1,7 +1,7 @@
 #pragma once
 #include "GameEngine/GameEngineActor.h"
 
-class MonsterDB
+struct DBMonster
 {
 public:
 	INT32	Level_;
@@ -21,14 +21,15 @@ public:
 class Monster : public GameEngineActor
 {
 private:	// member Var
-	MonsterDB	Data_;
+	DBMonster	Data_;
 
 public:
-	MonsterDB GetData() { return Data_; }
+	DBMonster GetData() { return Data_; }
 
 public:
 	// constrcuter destructer
-	Monster(const MonsterDB& _Data);
+	Monster();
+	Monster(const DBMonster& _Data);
 	~Monster();
 
 public:

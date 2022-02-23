@@ -205,25 +205,20 @@ void UserGame::ResourceLoad()
 		// Geometry Shader : 게임에서 쓸모가 많이 있다.
 
 		// 그리기로한 면, 선등에 겹치는 모니터의 픽셀들을 추출하겠다.
-		// Rasterizer
 		Pipe->SetRasterizer("EngineBaseRasterizer");
 
 		Pipe->SetPixelShader("Color_PS");
 	}
 
 	{
-		GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Create("TextureRendering");
+		GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Create("Texture");
 
 		Pipe->SetInputAssembler1VertexBufferSetting("Rect");
 		Pipe->SetInputAssembler1InputLayoutSetting("Texture_VS");
-
 		Pipe->SetVertexShader("Texture_VS");
-
 		Pipe->SetInputAssembler2IndexBufferSetting("Rect");
 		Pipe->SetInputAssembler2TopologySetting(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
 		Pipe->SetRasterizer("EngineBaseRasterizer");
-
 		Pipe->SetPixelShader("Texture_PS");
 	}
 }

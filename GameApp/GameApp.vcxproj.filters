@@ -20,14 +20,20 @@
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Actor</Filter>
-    </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Actor\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="WzRenderer.cpp">
+      <Filter>Wz\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="TopUI.cpp">
+      <Filter>Actor\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +67,15 @@
     <Filter Include="Actor\Monster\BOSS\Demian">
       <UniqueIdentifier>{14f50ceb-51f6-4604-a096-863134a254c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Wz">
+      <UniqueIdentifier>{4dd958d5-a0fc-4333-b007-3da3ecbbe842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI">
+      <UniqueIdentifier>{c9f9e47b-c1c8-44fc-b891-f4d3d8b44932}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Wz\Component">
+      <UniqueIdentifier>{8d6864ba-c02f-4f5b-b34d-22a8343a0cb0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -81,14 +96,23 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Actor\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="WzRenderer.h">
+      <Filter>Wz\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="TopUI.h">
+      <Filter>Actor\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="WzPhysics.h">
+      <Filter>Wz</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

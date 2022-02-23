@@ -15,12 +15,16 @@ private:	// member Var
 	// int 는 업데이트 그룹의 순서를 정하기위함이다. Ordering
 	// 순서가 없다면, 먼저 생성된 것이 먼저 행동한다.
 	std::map<int, std::list<GameEngineActor*>> ActorList_;
+
 	CameraActor* MainCameraActor_;
+	CameraActor* UICameraActor_;
 
 public:
 	CameraActor* GetMainCameraActor();
-
 	CameraComponent* GetMainCamera();
+
+	CameraActor* GetUICameraActor();
+	CameraComponent* GetUICamera();
 
 public:
 	// constrcuter destructer
@@ -64,12 +68,5 @@ public:
 	virtual void LevelUpdate(float _DeltaTime) = 0;
 	virtual void LevelChangeEndEvent() = 0;
 	virtual void LevelChangeStartEvent() = 0;
-
-	//////////////////////////////////////////////////		Renderer
-	
-private:
-	std::map<int, std::list<GameEngineRenderer*>> RendererList_;
-
-	void PushRenderer(int _Order, GameEngineRenderer* _Renderer);
 };
 

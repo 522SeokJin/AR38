@@ -6,6 +6,8 @@
 #include "GameEngineTransform.h"
 #include "GameEngineVertexShader.h"
 #include "GameEnginePixelShader.h"
+#include "GameEngineActor.h"
+#include "CameraComponent.h"
 
 GameEngineRenderer::GameEngineRenderer()
 	: PipeLine_(nullptr)
@@ -20,7 +22,7 @@ GameEngineRenderer::~GameEngineRenderer()
 
 void GameEngineRenderer::Start()
 {
-	GetLevel()->PushRenderer(GetOrder(), this);
+	GetLevel()->GetMainCamera()->PushRenderer(GetOrder(), this);
 }
 
 void GameEngineRenderer::Update()
@@ -39,15 +41,15 @@ void GameEngineRenderer::SetRenderingPipeLine(const std::string& _Value)
 {
 	PipeLine_ = GameEngineRenderingPipeLineManager::GetInst().Find(_Value);
 
-	ShaderHelper.ShaderResourcesCheck(PipeLine_->GetVertexShader());
-	ShaderHelper.ShaderResourcesCheck(PipeLine_->GetPixelShader());
-
 	if (nullptr == PipeLine_)
 	{
-		GameEngineDebug::MsgBoxError("존재하지 않는 파이프라인 입니다!");
+		GameEngineDebug::MsgBoxError("존재하지 않는 파이프라인 입니다!" + _Value);
 	}
 	else
 	{
+		ShaderHelper.ShaderResourcesCheck(PipeLine_->GetVertexShader());
+		ShaderHelper.ShaderResourcesCheck(PipeLine_->GetPixelShader());
+
 		// 기본적으로 TransformData는 다 가지고있을것이므로 자동으로되게 해준다.
 		if (true == ShaderHelper.IsConstantBuffer("TransformData"))
 		{

@@ -109,6 +109,12 @@
     <ClInclude Include="GameEngineInput.h">
       <Filter>Control</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineUIRenderer.h">
+      <Filter>Object\Component\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineImageRenderer.h">
+      <Filter>Object\Component\Renderer\Sub</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -216,6 +222,12 @@
     <ClCompile Include="GameEngineInput.cpp">
       <Filter>Control</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineUIRenderer.cpp">
+      <Filter>Object\Component\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineImageRenderer.cpp">
+      <Filter>Object\Component\Renderer\Sub</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -274,6 +286,9 @@
     </Filter>
     <Filter Include="Object\Transform">
       <UniqueIdentifier>{9aa90d38-0ccc-480b-9d31-b7b01bfa8816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\Renderer\Sub">
+      <UniqueIdentifier>{0f26e041-0e52-4fae-9503-8766ca677fe8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

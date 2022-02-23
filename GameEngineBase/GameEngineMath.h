@@ -314,12 +314,32 @@ public:
 		return;
 	}
 
+	float4& InvertX()
+	{
+		x = -x;
+		return *this;
+	}
+
+	float4& InvertY()
+	{
+		y = -y;
+		return *this;
+	}
+
+	float4& InvertZ()
+	{
+		z = -z;
+		return *this;
+	}
+
 	float4& Rotate3DDegree(const float4& _Angle)
 	{
 		DirectVector = DirectX::XMVector3Rotate(DirectVector, 
 			DirectX::XMQuaternionRotationRollPitchYawFromVector(_Angle.DirectVector));
 		return *this;
 	}
+
+	
 
 public:
 	float4() 
@@ -525,6 +545,7 @@ public:
 	{
 		DirectMatrix = DirectX::XMMatrixIdentity();
 	}
+
 	// X,Y Scaling
 	void Scaling2D(const float _Value)
 	{

@@ -195,12 +195,20 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="TopUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="UserGame.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="UserGame_Resources.cpp" />
     <ClCompile Include="UserGame_Resources_Shader.cpp" />
+    <ClCompile Include="WzRenderer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -208,6 +216,11 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="TopUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="WzPhysics.h" />
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -227,6 +240,10 @@
     </ClInclude>
     <ClInclude Include="CustomVertex.h" />
     <ClInclude Include="UserGame_Resources_Shader.h" />
+    <ClInclude Include="WzRenderer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

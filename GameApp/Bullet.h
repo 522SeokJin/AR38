@@ -4,6 +4,8 @@
 // Ό³Έν :
 class Bullet : public GameEngineActor
 {
+private:
+
 public:
 	// constrcuter destructer
 	Bullet();

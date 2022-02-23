@@ -2,6 +2,7 @@
 #include "CameraComponent.h"
 #include "GameEngineWindow.h"
 #include "GameEngineTransform.h"
+#include "GameEngineRenderer.h"
 
 CameraComponent::CameraComponent()
 	: ProjectionMode_(ProjectionMode::PERSPECTIVE)
@@ -24,7 +25,6 @@ void CameraComponent::Start()
 
 void CameraComponent::Update()
 {
-
 }
 
 void CameraComponent::CameraTransformUpdate()
@@ -50,3 +50,64 @@ void CameraComponent::CameraTransformUpdate()
 	}
 }
 
+void CameraComponent::Render()
+{
+	float4x4 View = GetTransform()->GetTransformData().View_;
+	float4x4 Projection = GetTransform()->GetTransformData().Projection_;
+
+	for (std::pair<int, std::list<GameEngineRenderer*>> Pair : RendererList_)
+	{
+		std::list<GameEngineRenderer*>& Renderers = Pair.second;
+
+		for (GameEngineRenderer* Renderer : Renderers)
+		{
+			if (false == Renderer->IsUpdate())
+			{
+				continue;
+			}
+
+			Renderer->GetTransform()->GetTransformData().View_ = View;
+			Renderer->GetTransform()->GetTransformData().Projection_ = Projection;
+
+			Renderer->Render();
+		}
+	}
+}
+
+void CameraComponent::ReleaseRenderer()
+{
+	std::map<int, std::list<GameEngineRenderer*>>::iterator RenderMapBeginIter = RendererList_.begin();
+	std::map<int, std::list<GameEngineRenderer*>>::iterator RenderMapEndIter = RendererList_.end();
+
+	for (; RenderMapBeginIter != RenderMapEndIter; ++RenderMapBeginIter)
+	{
+		std::list<GameEngineRenderer*>& Renderers = RenderMapBeginIter->second;
+
+		std::list<GameEngineRenderer*>::iterator BeginIter = Renderers.begin();
+		std::list<GameEngineRenderer*>::iterator EndIter = Renderers.end();
+
+		for (; BeginIter != EndIter; )
+		{
+			GameEngineRenderer* ReleaseRenderer = *BeginIter;
+
+			if (nullptr == ReleaseRenderer)
+			{
+				GameEngineDebug::MsgBoxError("Release Actor Is Nullptr!!!!");
+			}
+
+			if (true == ReleaseRenderer->IsDeath())
+			{
+				BeginIter = Renderers.erase(BeginIter);
+
+				continue;
+			}
+
+			++BeginIter;
+		}
+	}
+}
+
+void CameraComponent::PushRenderer(int _Order, GameEngineRenderer* _Renderer)
+{
+	RendererList_[_Order].push_back(_Renderer);
+}
