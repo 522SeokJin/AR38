@@ -45,5 +45,8 @@ public:
 	// .
 	// * 모든확장자
 	std::vector<GameEngineFile> GetAllFile(const std::string& _filter = "*");
+
+	// 모든 하위 디렉토리의 파일 목록을 가져온다
+	std::vector<GameEngineFile> GetAllDirFile(const std::string& _filter = "*");
 };
 

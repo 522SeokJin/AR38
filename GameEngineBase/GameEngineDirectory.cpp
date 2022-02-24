@@ -5,6 +5,8 @@
 #include "GameEngineDebug.h"
 #include "GameEngineString.h"
 
+#include <system_error>
+
 // Static Var
 // Static Func
 
@@ -91,7 +93,6 @@ std::string GameEngineDirectory::PathToPlusFileName(const std::string& _FileName
 
 //std::filesystem::directory_iterator를 사용하여 디렉토리의 파일 목록 가져 오기
 //opendir / readdir 함수를 사용하여 디렉토리의 파일 목록 가져 오기
-//std::filesystem::recursive_directory_iterator를 사용하여 모든 하위 디렉토리의 파일 목록을 가져옵니다
 
 std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _filter)
 {
@@ -121,6 +122,29 @@ std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _
 		}
 
 		Return.push_back(GameEngineFile(File.path()));
+	}
+
+	return Return;
+}
+
+std::vector<GameEngineFile> GameEngineDirectory::GetAllDirFile(const std::string& _filter)
+{
+	std::vector<GameEngineFile> Return;
+
+	for (std::filesystem::recursive_directory_iterator next(path_), end; next != end; ++next)
+	{
+		if (_filter != "*" && _filter != next->path().extension())
+		{
+			continue;
+		}
+		
+		if (false == next->path().has_extension())
+		{
+			continue;
+		}
+
+		
+		Return.push_back(GameEngineFile(next->path()));
 	}
 
 	return Return;

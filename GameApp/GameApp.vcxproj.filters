@@ -17,7 +17,7 @@
     <ClCompile Include="PlayLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="TitleLevel.cpp">
+    <ClCompile Include="LoginLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
@@ -76,6 +76,9 @@
     <Filter Include="Wz\Component">
       <UniqueIdentifier>{8d6864ba-c02f-4f5b-b34d-22a8343a0cb0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\UI\Login">
+      <UniqueIdentifier>{512fe019-c86d-49b5-833e-8624cf6f780f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -93,7 +96,7 @@
     <ClInclude Include="PlayLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="TitleLevel.h">
+    <ClInclude Include="LoginLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
