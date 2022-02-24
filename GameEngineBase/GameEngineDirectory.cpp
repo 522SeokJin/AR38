@@ -129,21 +129,35 @@ std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _
 
 std::vector<GameEngineFile> GameEngineDirectory::GetAllDirFile(const std::string& _filter)
 {
+	std::string Filter = "";
+
+	if (std::string::npos == _filter.find('.'))
+	{
+		Filter = ".";
+	}
+
+	Filter += _filter;
+
+	GameEngineString::toupper(Filter);
+
 	std::vector<GameEngineFile> Return;
 
 	for (std::filesystem::recursive_directory_iterator next(path_), end; next != end; ++next)
 	{
-		if (_filter != "*" && _filter != next->path().extension())
-		{
-			continue;
-		}
-		
 		if (false == next->path().has_extension())
 		{
 			continue;
 		}
 
-		
+		std::string CurrentExtension = next->path().extension().string();
+
+		GameEngineString::toupper(CurrentExtension);
+
+		if (_filter != "*" && Filter != CurrentExtension)
+		{
+			continue;
+		}
+
 		Return.push_back(GameEngineFile(next->path()));
 	}
 
