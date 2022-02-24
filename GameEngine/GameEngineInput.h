@@ -37,10 +37,6 @@ private:
             CheckKey_.push_back(_CurKey);
         }
 
-        //void PushKey()
-        //{
-        //}
-
     private:
         bool KeyCheck();
         void Update();

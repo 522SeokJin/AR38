@@ -8,16 +8,30 @@
 void UserGame::ResourceLoad()
 {
 	{
-		GameEngineDirectroy SoundDir;
-		SoundDir.MoveParent("Direct2D");
-		SoundDir.MoveChild("Resources");
-		SoundDir.MoveChild("Sound");
+		GameEngineDirectroy Dir;
+		Dir.MoveParent();
+		Dir.MoveChild("Resources");
+		Dir.MoveChild("Sound");
 
-		std::vector<GameEngineFile> AllFile = SoundDir.GetAllFile("mp3");
+		std::vector<GameEngineFile> AllFile = Dir.GetAllFile("mp3");
 
 		for (size_t i = 0; i < AllFile.size(); i++)
 		{
-			GameEngineSoundManager::GetInst().LoadSound(AllFile[i].GetFullPath());
+			GameEngineSoundManager::GetInst().Load(AllFile[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectroy Dir;
+		Dir.MoveParent();
+		Dir.MoveChild("Resources");
+		Dir.MoveChild("Image");
+
+		std::vector<GameEngineFile> AllFile = Dir.GetAllFile();
+
+		for (size_t i = 0; i < AllFile.size(); i++)
+		{
+			GameEngineTextureManager::GetInst().Load(AllFile[i].GetFullPath());
 		}
 	}
 
@@ -32,9 +46,6 @@ void UserGame::ResourceLoad()
 		// 월드스페이스
 
 		std::vector<GameEngineVertex> RectVertex = std::vector<GameEngineVertex>(4 * 6);
-
-		// 0 1
-		// 3 2
 
 		{
 			RectVertex[0] = { float4({ -0.5f, 0.5f, 0.5f }) };
@@ -72,6 +83,19 @@ void UserGame::ResourceLoad()
 			RectVertex[23] = { float4::RotateXDegree(RectVertex[3].Position, -90.0f) };
 		}
 
+
+		// UV
+		// 0 1	->	0,0		1,0
+		// 3 2	->	0,1		1,1
+
+		for (size_t i = 0; i < RectVertex.size(); i += 4)
+		{
+			RectVertex[i + 0].Texcoord = { 0.0f, 0.0f };
+			RectVertex[i + 1].Texcoord = { 1.0f, 0.0f };
+			RectVertex[i + 2].Texcoord = { 1.0f, 1.0f };
+			RectVertex[i + 3].Texcoord = { 0.0f, 1.0f };
+		}
+
 		// D3D11_USAGE : CPU, GPU 읽기/쓰기, 액세스권한을 설정
 		GameEngineVertexBufferManager::GetInst().Create("Box", RectVertex, D3D11_USAGE::D3D11_USAGE_DEFAULT);
 	}
@@ -97,10 +121,10 @@ void UserGame::ResourceLoad()
 	{
 		std::vector<GameEngineVertex> RectVertex = std::vector<GameEngineVertex>(4);
 
-		RectVertex[0] = { float4({ -0.5f, 0.5f, 0.0f }) };
-		RectVertex[1] = { float4({ 0.5f, 0.5f, 0.0f }) };
-		RectVertex[2] = { float4({ 0.5f, -0.5f, 0.0f }) };
-		RectVertex[3] = { float4({ -0.5f, -0.5f, 0.0f }) };
+		RectVertex[0] = { float4({ -0.5f, 0.5f, 0.0f }),  { 0.0f, 0.0f } };
+		RectVertex[1] = { float4({ 0.5f, 0.5f, 0.0f }),  { 1.0f, 0.0f } };
+		RectVertex[2] = { float4({ 0.5f, -0.5f, 0.0f }),  { 1.0f, 1.0f } };
+		RectVertex[3] = { float4({ -0.5f, -0.5f, 0.0f }),  { 0.0f, 1.0f } };
 
 		GameEngineVertexBufferManager::GetInst().Create("Rect", RectVertex, D3D11_USAGE::D3D11_USAGE_DEFAULT);
 	}

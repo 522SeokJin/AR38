@@ -153,12 +153,19 @@ bool GameEnginePixelShader::FileCompile(const std::string& _Path)
 	return true;
 }
 
+void GameEnginePixelShader::Setting()
+{
+	GameEngineDevice::GetContext()->PSSetShader(Shader_, nullptr, 0);
+}
+
 void GameEnginePixelShader::SetConstantBuffers(const GameEngineConstantBufferSetting* _Setting)
 {
 	GameEngineDevice::GetContext()->PSSetConstantBuffers(_Setting->SettingIndex_, 1, &_Setting->Res_->GetBuffer());
 }
 
-void GameEnginePixelShader::Setting()
+void GameEnginePixelShader::SetTexture(const GameEngineTextureSetting* _Setting)
 {
-	GameEngineDevice::GetContext()->PSSetShader(Shader_, nullptr, 0);
+	GameEngineDevice::GetContext()->PSSetShaderResources(_Setting->SettingIndex_, 1,
+		_Setting->Res_->GetShaderResourceView());
 }
+

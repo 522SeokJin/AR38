@@ -113,28 +113,31 @@
     <Filter Include="Lib">
       <UniqueIdentifier>{576e93cd-9525-4e10-b7c2-370f7ed1d328}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Lib\Debug">
-      <UniqueIdentifier>{1620bafd-8735-454e-82a6-54fae64b7bef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Lib\Release">
-      <UniqueIdentifier>{16b45b7a-83c8-4ca6-b9e7-6fe6c8dd022a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="String">
       <UniqueIdentifier>{2f8515f1-6251-4dc1-87b9-8e7cdd364888}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lib\FMOD">
+      <UniqueIdentifier>{eb2111a7-3a58-4f0d-b2a1-14da29792292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\FMOD\Debug">
+      <UniqueIdentifier>{1620bafd-8735-454e-82a6-54fae64b7bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\FMOD\Release">
+      <UniqueIdentifier>{16b45b7a-83c8-4ca6-b9e7-6fe6c8dd022a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="..\ThirdParty\x64\Release\FMOD\fmodL.dll">
-      <Filter>Lib\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="..\ThirdParty\x64\Release\FMOD\fmodL_vc.lib">
-      <Filter>Lib\Debug</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="..\ThirdParty\x64\Release\FMOD\fmod.dll">
-      <Filter>Lib\Release</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="..\ThirdParty\x64\Release\FMOD\fmod_vc.lib">
-      <Filter>Lib\Release</Filter>
-    </CopyFileToFolders>
+    <None Include="..\ThirdParty\x64\Debug\FMOD\fmodL.dll">
+      <Filter>Lib\FMOD\Debug</Filter>
+    </None>
+    <None Include="..\ThirdParty\x64\Release\FMOD\fmod.dll">
+      <Filter>Lib\FMOD\Release</Filter>
+    </None>
+    <None Include="..\ThirdParty\x64\Debug\FMOD\fmodL_vc.lib">
+      <Filter>Lib\FMOD\Debug</Filter>
+    </None>
+    <None Include="..\ThirdParty\x64\Release\FMOD\fmod_vc.lib">
+      <Filter>Lib\FMOD\Release</Filter>
+    </None>
   </ItemGroup>
 </Project>

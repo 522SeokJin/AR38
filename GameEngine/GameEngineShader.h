@@ -1,7 +1,5 @@
 #pragma once
 #include "GameEngineDevice.h"
-#include "GameEngineConstantBuffer.h"
-
 
 enum class ShaderType
 {
@@ -12,7 +10,9 @@ enum class ShaderType
 
 
 // Ό³Έν : 
+class GameEngineConstantBuffer;
 class GameEngineConstantBufferSetting;
+class GameEngineTextureSetting;
 class GameEngineShader : public GameEngineObjectNameBase
 {
 protected:	// member Var
@@ -22,7 +22,7 @@ protected:	// member Var
 	UINT		VersionLow_;
 	std::string Version_;
 
-	ID3DBlob* CodeBlob_;
+	ID3DBlob*	CodeBlob_;
 
 	std::string	EntryPoint_;
 	std::string Code_;
@@ -58,5 +58,7 @@ public:
 	}
 
 	virtual void SetConstantBuffers(const GameEngineConstantBufferSetting* _Setting) = 0;
+
+	virtual void SetTexture(const GameEngineTextureSetting* _Setting) = 0;
 };
 

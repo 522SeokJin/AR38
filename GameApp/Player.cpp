@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include "WzRenderer.h"
+#include "GameEngine\GameEngineImageRenderer.h"
 #include "Bullet.h"
 #include "WzPhysics.h"
 
@@ -20,6 +21,12 @@ Player::~Player()
 
 void Player::Start()
 {
+	{
+		GameEngineImageRenderer* Renderer = CreateTransformComponent<GameEngineImageRenderer>(GetTransform());
+		Renderer->SetImage();
+		Renderer->GetTransform()->SetLocalScaling({ 100.0f, 100.0f, 1.0f });
+	}
+
 	Body_ = CreateTransformComponent<WzRenderer>(GetTransform());
 	Body_->SetRenderingPipeLine("Color");
 	Body_->GetTransform()->SetLocalScaling({ 21.0f, 31.0f, 1.0f });
@@ -41,17 +48,16 @@ void Player::Start()
 	Head_->GetTransform()->SetLocalPosition(Body_->NeckPosition_ - Head_->NeckPosition_);
 	Head_->ShaderHelper.SettingConstantBufferSet("ResultColor", float4(0.0f, 1.0f, 0.0f));
 
-	if (false == GameEngineInput::GetInst().IsKey("PlayerMove"))
-	{
-		GameEngineInput::GetInst().CreateKey("MoveLeft", VK_LEFT);
-		GameEngineInput::GetInst().CreateKey("MoveRight", VK_RIGHT);
-		GameEngineInput::GetInst().CreateKey("MoveUp", VK_UP);
-		GameEngineInput::GetInst().CreateKey("MoveDown", VK_DOWN);
-		GameEngineInput::GetInst().CreateKey("Attack", VK_CONTROL);
-		GameEngineInput::GetInst().CreateKey("Jump", VK_MENU);	// ALT KEY
-		GameEngineInput::GetInst().CreateKey("RotZ+", 'Q');
-		GameEngineInput::GetInst().CreateKey("RotZ-", 'E');
-	}
+
+	GameEngineInput::GetInst().CreateKey("MoveLeft", VK_LEFT);
+	GameEngineInput::GetInst().CreateKey("MoveRight", VK_RIGHT);
+	GameEngineInput::GetInst().CreateKey("MoveUp", VK_UP);
+	GameEngineInput::GetInst().CreateKey("MoveDown", VK_DOWN);
+	GameEngineInput::GetInst().CreateKey("Attack", VK_CONTROL);
+	GameEngineInput::GetInst().CreateKey("Jump", VK_MENU);	// ALT KEY
+	GameEngineInput::GetInst().CreateKey("RotZ+", 'Q');
+	GameEngineInput::GetInst().CreateKey("RotZ-", 'E');
+
 }
 
 void Player::Update(float _DeltaTime)

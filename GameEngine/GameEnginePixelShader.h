@@ -2,8 +2,6 @@
 #include "GameEngineShader.h"
 #include "GameEngineDevice.h"
 
-// 분류 : 
-// 용도 : 
 // 설명 : 
 class GameEnginePixelShader : public GameEngineShader
 {
@@ -41,8 +39,10 @@ public:
 
 	bool FileCompile(const std::string& _Path);
 
-	virtual void SetConstantBuffers(const GameEngineConstantBufferSetting* _Setting);
-public:
 	void Setting();
+
+	virtual void SetConstantBuffers(const GameEngineConstantBufferSetting* _Setting) override;
+
+	virtual void SetTexture(const GameEngineTextureSetting* _Setting) override;
 };
 

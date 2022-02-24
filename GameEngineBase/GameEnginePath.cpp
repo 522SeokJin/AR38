@@ -66,3 +66,8 @@ std::string GameEnginePath::GetFileNameWithoutExtension()
 
 	return FileName.erase(FileName.size() - Ext.size(), Ext.size());
 }
+
+std::string GameEnginePath::GetExtension()
+{
+	return path_.extension().string();
+}

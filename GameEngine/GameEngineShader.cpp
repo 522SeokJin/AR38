@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "GameEngineShader.h"
-#include "GameEngineConstantBufferManager.h"
+#include "GameEngineResourcesManager.h"
 
 GameEngineShader::GameEngineShader(ShaderType _Type)
 	: Type_(_Type)
@@ -51,7 +51,7 @@ void GameEngineShader::ResCheck()
 	// 내가 쉐이더에서 사용한 변수, 함수, 인자들 그 이외의 상수버퍼 등의
 	// 모든 정보를 알고있다.
 	// ex) 쉐이더에서 행렬을 1개 사용했다.
-	ID3D11ShaderReflection* CompileInfo;
+	ID3D11ShaderReflection* CompileInfo = nullptr;
 
 	if (S_OK != D3DReflect
 	(
@@ -107,6 +107,21 @@ void GameEngineShader::ResCheck()
 			}
 
 			ConstantBuffers_.insert(std::make_pair(ResInfo.BindPoint, NewBuffer));
+			break;
+		}
+		case D3D10_SIT_SAMPLER:
+		{
+			D3D11_SAMPLER_DESC SmpDesc = {};
+
+			// D3D11_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR : 뭉개라
+			// D3D11_FILTER_COMPARISON_MIN_MAG_MIP_POINT : 도트게임처럼 뭉개지않는다.
+			SmpDesc.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
+
+			// Smp_Decs.AddressU
+
+			// GameEngineSamplerManager::GetInst().Create();
+
+			// ConstanceBuffer_.insert(std::make_pair(ResInfo.BindPoint, NewBuffer));
 			break;
 		}
 		default:

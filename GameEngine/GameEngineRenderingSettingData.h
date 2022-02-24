@@ -1,6 +1,7 @@
 #pragma once
 #include "GameEngineConstantBuffer.h"
 #include "GameEngineShader.h"
+#include "GameEngineTexture.h"
 
 enum class SettingMode
 {
@@ -25,8 +26,8 @@ public:
 		, Res_(nullptr)
 		, Mode_(SettingMode::MAX)
 		, SettingData_(nullptr)
-		, SettingDataSize_(0)
-		, SettingIndex_(0)
+		, SettingDataSize_(-1)
+		, SettingIndex_(-1)
 	{
 
 	}
@@ -57,5 +58,32 @@ public:
 	void ShaderSetting()
 	{
 		Shader_->SetConstantBuffers(this);
+	}
+};
+
+class GameEngineTextureSetting
+{
+public:
+	GameEngineShader*		Shader;
+	GameEngineTexture*		Res_;
+	int						SettingIndex_;
+
+public:
+	void ShaderSetting()
+	{
+		Shader->SetTexture(this);
+	}
+
+public:
+	GameEngineTextureSetting()
+		: Shader(nullptr)
+		, Res_(nullptr)
+		, SettingIndex_(-1)
+	{
+
+	}
+
+	~GameEngineTextureSetting()
+	{
 	}
 };

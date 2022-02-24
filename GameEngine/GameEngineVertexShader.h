@@ -42,6 +42,7 @@ public:
 	bool FileCompile(const std::string& _Path);
 
 	virtual void SetConstantBuffers(const GameEngineConstantBufferSetting* _Setting) override; 
+	virtual void SetTexture(const GameEngineTextureSetting* _Setting) override;
 
 private:
 

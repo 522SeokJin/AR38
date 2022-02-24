@@ -28,6 +28,8 @@ public:
 
 	std::string GetFileNameWithoutExtension();
 
+	std::string GetExtension();
+
 public:		//member Func
 	// 유요한 경로인가 아닌가를 판단하는 함수.
 	bool IsExist();

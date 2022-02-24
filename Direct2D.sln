@@ -17,19 +17,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02Lib", "02Lib", "{0DA65D44
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00Doc", "00Doc", "{3607B2C2-EF36-4A72-BC27-74098DFB8050}"
 	ProjectSection(SolutionItems) = preProject
-		Demain.json = Demain.json
-		Demian.atlas = Demian.atlas
-		DX11 렌더링파이프라인.jpg = DX11 렌더링파이프라인.jpg
-		꼭 알아야하는 사항들.txt = 꼭 알아야하는 사항들.txt
-		용어정리.txt = 용어정리.txt
-		행렬.txt = 행렬.txt
+		Doc\DX11 렌더링파이프라인.jpg = Doc\DX11 렌더링파이프라인.jpg
+		Doc\꼭 알아야하는 사항들.txt = Doc\꼭 알아야하는 사항들.txt
+		Doc\용어정리.txt = Doc\용어정리.txt
+		Doc\행렬.txt = Doc\행렬.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01BaseFile", "01BaseFile", "{BA7AC44A-F935-4D10-B7C0-2592FDC1F338}"
 	ProjectSection(SolutionItems) = preProject
-		AClassDefault.zip = AClassDefault.zip
-		AClassDefaultManager.zip = AClassDefaultManager.zip
-		LibProjectBase.zip = LibProjectBase.zip
+		BaseFile\AClassDefault.zip = BaseFile\AClassDefault.zip
+		BaseFile\AClassDefaultManager.zip = BaseFile\AClassDefaultManager.zip
+		BaseFile\LibProjectBase.zip = BaseFile\LibProjectBase.zip
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngine", "GameEngine\GameEngine.vcxproj", "{B89D23D7-D496-43AD-B1AE-9A7005815215}"
@@ -43,9 +41,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level 1", "Level 1", "{8C5F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DirectX", "DirectX", "{B1E48C41-4983-40E5-9B27-BA6DF42F9E1F}"
 	ProjectSection(SolutionItems) = preProject
-		DirectX API기반 VertexShader.txt = DirectX API기반 VertexShader.txt
-		DirectX API기반 렌더링구조.txt = DirectX API기반 렌더링구조.txt
-		DirectX 개념파악.txt = DirectX 개념파악.txt
+		Doc\DirectX API기반 VertexShader.txt = Doc\DirectX API기반 VertexShader.txt
+		Doc\DirectX API기반 렌더링구조.txt = Doc\DirectX API기반 렌더링구조.txt
+		Doc\DirectX 개념파악.txt = Doc\DirectX 개념파악.txt
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderProject", "Resources\Shader\ShaderProject.vcxproj", "{8C185799-CFAD-4B89-9D82-B44253316982}"
@@ -54,8 +52,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04Shader", "04Shader", "{EA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demian Skeleton", "Demian Skeleton", "{5EBADCB6-AA30-4665-A3B6-A9DF70577C79}"
 	ProjectSection(SolutionItems) = preProject
-		Demain.json = Demain.json
-		Demian.atlas = Demian.atlas
+		Doc\Demain.json = Doc\Demain.json
+		Doc\Demian.atlas = Doc\Demian.atlas
 	EndProjectSection
 EndProject
 Global

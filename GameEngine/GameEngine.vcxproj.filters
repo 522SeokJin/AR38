@@ -35,7 +35,7 @@
       <Filter>Resources\99. Manager</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineRasterizer.h">
-      <Filter>Resources\03. Setting</Filter>
+      <Filter>Resources\03. Rasterizer</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineResourcesManager.h">
       <Filter>Resources\99. Manager</Filter>
@@ -115,6 +115,12 @@
     <ClInclude Include="GameEngineImageRenderer.h">
       <Filter>Object\Component\Renderer\Sub</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineSampler.h">
+      <Filter>Resources\02. Image</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineSamplerManager.h">
+      <Filter>Resources\99. Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -148,7 +154,7 @@
       <Filter>Resources\99. Manager</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineRasterizer.cpp">
-      <Filter>Resources\03. Setting</Filter>
+      <Filter>Resources\03. Rasterizer</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineRasterizerManager.cpp">
       <Filter>Resources\99. Manager</Filter>
@@ -228,6 +234,12 @@
     <ClCompile Include="GameEngineImageRenderer.cpp">
       <Filter>Object\Component\Renderer\Sub</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineSampler.cpp">
+      <Filter>Resources\02. Image</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineSamplerManager.cpp">
+      <Filter>Resources\99. Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -260,9 +272,6 @@
     <Filter Include="Resources\02. Image">
       <UniqueIdentifier>{6c958abe-ece6-48a2-a85b-d86a897facf1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\03. Setting">
-      <UniqueIdentifier>{c51986b5-61f2-40b1-a271-b9e8058eb03e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\01. Shader\ShaderResources">
       <UniqueIdentifier>{545100c7-73ac-45cb-945e-6471addb2ed1}</UniqueIdentifier>
     </Filter>
@@ -290,5 +299,25 @@
     <Filter Include="Object\Component\Renderer\Sub">
       <UniqueIdentifier>{0f26e041-0e52-4fae-9503-8766ca677fe8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lib">
+      <UniqueIdentifier>{1ad8f818-d77b-41d6-ab50-a31cc6dc5ee1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\Debug">
+      <UniqueIdentifier>{26c63524-9a1c-4947-98e3-3f1a05ee0d00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\Release">
+      <UniqueIdentifier>{27a9b5f8-04d4-407c-a2c8-3a1626904972}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\03. Rasterizer">
+      <UniqueIdentifier>{c51986b5-61f2-40b1-a271-b9e8058eb03e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\ThirdParty\x64\Debug\DirectXTex\DirectXTex.lib">
+      <Filter>Lib\Debug</Filter>
+    </None>
+    <None Include="..\ThirdParty\x64\Release\DirectXTex\DirectXTex.lib">
+      <Filter>Lib\Release</Filter>
+    </None>
   </ItemGroup>
 </Project>
