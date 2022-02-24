@@ -4,12 +4,16 @@
 
 // 설명 : 
 class GameEngineConstantBuffer;
+class GameEngineSampler;
+class GameEngineTexture;
 class GameEngineShaderResHelper
 {
 	friend class GameEngineRenderer;
 
 private:	// member Var
 	std::map<std::string, GameEngineConstantBufferSetting*> AllConstantBufferData_;
+	std::map<std::string, GameEngineSamplerSetting*> AllSamplerData_;
+	std::map<std::string, GameEngineTextureSetting*> AllTextureData_;
 	
 public:
 	bool IsConstantBuffer(const std::string& _SettingName);
@@ -31,6 +35,7 @@ public:
 
 private:
 	void Setting();
+	void Reset();
 	
 public:
 	// 해당 주소값에 지속적으로 세팅을 해줄수있다.
@@ -83,5 +88,8 @@ public:
 
 		memcpy_s(SettingData->SettingData_, sizeof(_Data), &_Data, sizeof(_Data));
 	}
+
+	void SettingTexture(const std::string& _SettingName, const std::string& _ImageName);
+
 };
 

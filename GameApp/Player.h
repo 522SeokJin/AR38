@@ -18,6 +18,17 @@ private:	// member Var
 	WzRenderer* Body_;
 	WzRenderer* Arm_;
 	WzRenderer* Head_;
+	WzRenderer* Ear_;
+	WzRenderer* Face_;
+	WzRenderer* HairBelowBody_;
+	WzRenderer* HairOverHead_;
+	WzRenderer* Hair_;
+
+	WzRenderer* Mail_;
+	WzRenderer* MailArm_;
+	WzRenderer* Pants_;
+	WzRenderer* Shoes_;
+	WzRenderer* Weapon_;
 
 public:
 	PlayerDir GetDir()

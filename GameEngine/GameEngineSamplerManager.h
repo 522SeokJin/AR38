@@ -1,4 +1,5 @@
 #pragma once
+#include "GameEngineDevice.h"
 
 // Ό³Έν : 
 class GameEngineSampler;

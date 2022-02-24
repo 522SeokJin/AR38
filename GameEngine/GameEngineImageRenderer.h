@@ -20,7 +20,7 @@ public:
 	GameEngineImageRenderer& operator=(const GameEngineImageRenderer&& _other) = delete;
 
 public:
-	void SetImage();
+	void SetImage(const std::string& _ImageName);
 private:
 	void Start() override;
 };

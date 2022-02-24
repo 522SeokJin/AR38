@@ -11,12 +11,15 @@ enum class ShaderType
 
 // Ό³Έν : 
 class GameEngineConstantBuffer;
+class GameEngineTexture;
+class GameEngineSampler;
 class GameEngineConstantBufferSetting;
 class GameEngineTextureSetting;
+class GameEngineSamplerSetting;
 class GameEngineShader : public GameEngineObjectNameBase
 {
 protected:	// member Var
-	ShaderType Type_;
+	ShaderType	Type_;
 
 	UINT		VersionHigh_;
 	UINT		VersionLow_;
@@ -45,20 +48,31 @@ protected:
 	void SetCode(const std::string& _Code);
 	void SetEntryPoint(const std::string& _EntryPoint);
 
-	void ResCheck();	// Resource Check, GameEngineConstantBuffer Create
+	/// <summary>
+	/////////////////////////	Resource 
+	/// </summary>
 
-	///////////////////////////////////			ConstantBuffer
+	void ResCheck();	// Resource Check
+
 private:
 	std::map<UINT, GameEngineConstantBuffer*> ConstantBuffers_;
+	
+	std::map<UINT, GameEngineSampler*> Samplers_;
+
+	std::map<UINT, std::string> Textures_;
 
 public:
-	std::map<UINT, GameEngineConstantBuffer*>& GetConstantBuffers()
-	{
-		return ConstantBuffers_;
-	}
+	std::map<UINT, GameEngineConstantBuffer*>&	GetConstantBuffers() { return ConstantBuffers_; }
+	std::map<UINT, GameEngineSampler*>&			GetSamplers() { return Samplers_; }
+	std::map<UINT, std::string>&				GetTextures() { return Textures_; }
 
 	virtual void SetConstantBuffers(const GameEngineConstantBufferSetting* _Setting) = 0;
+	virtual void SetSamplers(const GameEngineSamplerSetting* _Setting) = 0;
+	virtual void SetTextures(const GameEngineTextureSetting* _Setting) = 0;
 
-	virtual void SetTexture(const GameEngineTextureSetting* _Setting) = 0;
+	virtual void ResetConstantBuffers(const GameEngineConstantBufferSetting* _Setting) = 0;
+	virtual void ResetSamplers(const GameEngineSamplerSetting* _Setting) = 0;
+	virtual void ResetTextures(const GameEngineTextureSetting* _Setting) = 0;
+
 };
 

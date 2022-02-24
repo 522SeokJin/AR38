@@ -7,32 +7,27 @@
 
 void UserGame::ResourceLoad()
 {
+	GameEngineDirectory Dir;
+
+	Dir.MoveParent();
+	Dir.MoveChild("Resources");
+	Dir.MoveChild("Sound");
+
+	std::vector<GameEngineFile> AllSound = Dir.GetAllFile("mp3");
+
+	for (size_t i = 0; i < AllSound.size(); i++)
 	{
-		GameEngineDirectroy Dir;
-		Dir.MoveParent();
-		Dir.MoveChild("Resources");
-		Dir.MoveChild("Sound");
-
-		std::vector<GameEngineFile> AllFile = Dir.GetAllFile("mp3");
-
-		for (size_t i = 0; i < AllFile.size(); i++)
-		{
-			GameEngineSoundManager::GetInst().Load(AllFile[i].GetFullPath());
-		}
+		GameEngineSoundManager::GetInst().Load(AllSound[i].GetFullPath());
 	}
 
+	Dir.MoveParent();
+	Dir.MoveChild("Image");
+
+	std::vector<GameEngineFile> AllImage = Dir.GetAllFile();
+
+	for (size_t i = 0; i < AllImage.size(); i++)
 	{
-		GameEngineDirectroy Dir;
-		Dir.MoveParent();
-		Dir.MoveChild("Resources");
-		Dir.MoveChild("Image");
-
-		std::vector<GameEngineFile> AllFile = Dir.GetAllFile();
-
-		for (size_t i = 0; i < AllFile.size(); i++)
-		{
-			GameEngineTextureManager::GetInst().Load(AllFile[i].GetFullPath());
-		}
+		GameEngineTextureManager::GetInst().Load(AllImage[i].GetFullPath());
 	}
 
 	AppShaderLoad();

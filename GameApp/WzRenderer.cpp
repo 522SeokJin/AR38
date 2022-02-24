@@ -22,7 +22,7 @@ void WzRenderer::CalculationBodyPos(const float4& _WzOrigin,
 	const float4& _WzNeck, const float4& _WzNavel)
 {
 	// 위컴알 기준 센터의 좌표는 크기의 절반값
-	float4 WzCenter = {};
+	float4 WzCenter = float4();
 	WzCenter.x = GetTransform()->GetLocalScaling().x / 2.0f;
 	WzCenter.y = GetTransform()->GetLocalScaling().y / 2.0f;
 
@@ -39,7 +39,8 @@ void WzRenderer::CalculationBodyPos(const float4& _WzOrigin,
 	NavelPosition_ = OriginPosition_ + _WzNavel * float4(1.0f, -1.0f, 1.0f);
 }
 
-void WzRenderer::CalculationArmPos(const float4& _WzOrigin, const float4& _WzNavel, const float4& _WzHand)
+void WzRenderer::CalculationArmPos(const float4& _WzOrigin, const float4& _WzNavel, 
+	const float4& _WzHand)
 {
 	float4 WzCenter = {};
 	WzCenter.x = GetTransform()->GetLocalScaling().x / 2.0f;
@@ -70,4 +71,57 @@ void WzRenderer::CalculationHeadPos(const float4& _WzOrigin, const float4& _WzNe
 	EarOverHeadPosition_ = OriginPosition_ + _WzEarOverHead * float4(1.0f, -1.0f, 1.0f);
 	EarBelowHeadPosition_ = OriginPosition_ + _WzEarBelowHead * float4(1.0f, -1.0f, 1.0f);
 	BrowPosition_ = OriginPosition_ + _WzBrow * float4(1.0f, -1.0f, 1.0f);
+}
+
+void WzRenderer::CalculationEarPos(const float4& _WzOrigin, const float4& _WzNeck,
+	const float4& _WzEarOverHead, const float4& _WzEarBelowHead, const float4& _WzBrow)
+{
+	CalculationHeadPos(_WzOrigin, _WzNeck, _WzEarOverHead, _WzEarBelowHead, _WzBrow);
+}
+
+void WzRenderer::CalculationHairPos(const float4& _WzOrigin, const float4& _WzBrow)
+{
+	float4 WzCenter = {};
+	WzCenter.x = GetTransform()->GetLocalScaling().x / 2.0f;
+	WzCenter.y = GetTransform()->GetLocalScaling().y / 2.0f;
+
+	float4 Center = GetActor()->GetTransform()->GetLocalPosition();
+
+	float4 CenterDiff = Center - WzCenter;
+	OriginPosition_ = (_WzOrigin + CenterDiff) * float4(1.0f, -1.0f, 1.0f);
+
+	BrowPosition_ = OriginPosition_ + _WzBrow * float4(1.0f, -1.0f, 1.0f);
+}
+
+void WzRenderer::CalculationFacePos(const float4& _WzOrigin, const float4& _WzBrow)
+{
+	CalculationHairPos(_WzOrigin, _WzBrow);
+}
+
+void WzRenderer::CalculationClothesPos(const float4& _WzOrigin, const float4& _WzNavel)
+{
+	float4 WzCenter = {};
+	WzCenter.x = GetTransform()->GetLocalScaling().x / 2.0f;
+	WzCenter.y = GetTransform()->GetLocalScaling().y / 2.0f;
+
+	float4 Center = GetActor()->GetTransform()->GetLocalPosition();
+
+	float4 CenterDiff = Center - WzCenter;
+	OriginPosition_ = (_WzOrigin + CenterDiff) * float4(1.0f, -1.0f, 1.0f);
+
+	NavelPosition_ = OriginPosition_ + _WzNavel * float4(1.0f, -1.0f, 1.0f);
+}
+
+void WzRenderer::CalculationWeaponPos(const float4& _WzOrigin, const float4& _WzHand)
+{
+	float4 WzCenter = {};
+	WzCenter.x = GetTransform()->GetLocalScaling().x / 2.0f;
+	WzCenter.y = GetTransform()->GetLocalScaling().y / 2.0f;
+
+	float4 Center = GetActor()->GetTransform()->GetLocalPosition();
+
+	float4 CenterDiff = Center - WzCenter;
+	OriginPosition_ = (_WzOrigin + CenterDiff) * float4(1.0f, -1.0f, 1.0f);
+
+	HandPosition_ = OriginPosition_ + _WzHand * float4(1.0f, -1.0f, 1.0f);
 }

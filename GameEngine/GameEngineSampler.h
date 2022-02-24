@@ -12,6 +12,9 @@ private:	// member Var
 	ID3D11SamplerState* State_;
 	D3D11_SAMPLER_DESC	Info_;
 
+public:
+	inline ID3D11SamplerState** GetSamplerState() { return &State_; }
+
 public: // constrcuter destructer
 	GameEngineSampler();
 	~GameEngineSampler();
@@ -22,8 +25,9 @@ public: // delete Function
 	GameEngineSampler& operator=(const GameEngineSampler& _other) = delete;
 	GameEngineSampler& operator=(const GameEngineSampler&& _other) = delete;
 
-public:
-	void ReSetting(const D3D11_SAMPLER_DESC& _Info);
+public: // 실시간으로 수정가능
+	void Setting(const D3D11_SAMPLER_DESC& _Info);
+
 private:
 	void Create(const D3D11_SAMPLER_DESC& _Info);
 };

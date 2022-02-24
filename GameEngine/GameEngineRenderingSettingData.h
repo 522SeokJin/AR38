@@ -1,6 +1,7 @@
 #pragma once
-#include "GameEngineConstantBuffer.h"
 #include "GameEngineShader.h"
+#include "GameEngineConstantBuffer.h"
+#include "GameEngineSampler.h"
 #include "GameEngineTexture.h"
 
 enum class SettingMode
@@ -29,7 +30,6 @@ public:
 		, SettingDataSize_(-1)
 		, SettingIndex_(-1)
 	{
-
 	}
 	~GameEngineConstantBufferSetting()
 	{
@@ -59,28 +59,67 @@ public:
 	{
 		Shader_->SetConstantBuffers(this);
 	}
+
+	void ShaderReset()
+	{
+		Shader_->ResetConstantBuffers(this);
+	}
+};
+
+class GameEngineSamplerSetting
+{
+public:
+	GameEngineShader* Shader_;
+	GameEngineSampler* Res_;
+	int SettingIndex_;
+
+public:
+	void ShaderSetting()
+	{
+		Shader_->SetSamplers(this);
+	}
+
+	void ShaderReset()
+	{
+		Shader_->ResetSamplers(this);
+	}
+
+public:
+	GameEngineSamplerSetting()
+		: Shader_(nullptr)
+		, Res_(nullptr)
+		, SettingIndex_(-1)
+	{
+	}
+
+	~GameEngineSamplerSetting()
+	{
+	}
 };
 
 class GameEngineTextureSetting
 {
 public:
-	GameEngineShader*		Shader;
+	GameEngineShader*		Shader_;
 	GameEngineTexture*		Res_;
 	int						SettingIndex_;
 
 public:
 	void ShaderSetting()
 	{
-		Shader->SetTexture(this);
+		Shader_->SetTextures(this);
+	}
+	void ShaderReset()
+	{
+		Shader_->ResetTextures(this);
 	}
 
 public:
 	GameEngineTextureSetting()
-		: Shader(nullptr)
+		: Shader_(nullptr)
 		, Res_(nullptr)
 		, SettingIndex_(-1)
 	{
-
 	}
 
 	~GameEngineTextureSetting()

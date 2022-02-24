@@ -1,8 +1,8 @@
 #pragma once
-#include <GameEngine/GameEngineRenderer.h>
+#include <GameEngine/GameEngineImageRenderer.h>
 
 // Ό³Έν : 
-class WzRenderer : public GameEngineRenderer
+class WzRenderer : public GameEngineImageRenderer
 {
 public:	// member Var
 	float4 OriginPosition_;
@@ -37,7 +37,14 @@ public:
 	void CalculationHeadPos(const float4& _WzOrigin, const float4& _WzNeck,
 		const float4& _WzEarOverHead, const float4& _WzEarBelowHead, const float4& _WzBrow);
 
-	/*void CalculationEarPos(const float4& _WzOrigin, const float4& _WzNeck,
-		const float4& _WzEarOverHead, const float4& _WzEarBelowHead, const float4& _WzBrow);*/
-};
+	void CalculationEarPos(const float4& _WzOrigin, const float4& _WzNeck,
+		const float4& _WzEarOverHead, const float4& _WzEarBelowHead, const float4& _WzBrow);
 
+	void CalculationHairPos(const float4& _WzOrigin, const float4& _WzBrow);
+
+	void CalculationFacePos(const float4& _WzOrigin, const float4& _WzBrow);
+
+	void CalculationClothesPos(const float4& _WzOrigin, const float4& _WzNavel);
+
+	void CalculationWeaponPos(const float4& _WzOrigin, const float4& _WzHand);
+};

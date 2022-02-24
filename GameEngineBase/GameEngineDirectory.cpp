@@ -1,5 +1,5 @@
 #include "PreCompile.h"
-#include "GameEngineDirectroy.h"
+#include "GameEngineDirectory.h"
 #include "GameEngineFile.h"
 
 #include "GameEngineDebug.h"
@@ -9,43 +9,43 @@
 // Static Func
 
 // constructer destructer
-GameEngineDirectroy::GameEngineDirectroy()
+GameEngineDirectory::GameEngineDirectory()
 {
 	path_ = std::filesystem::current_path();
 }
 
-GameEngineDirectroy::GameEngineDirectroy(const GameEngineDirectroy& _other)
+GameEngineDirectory::GameEngineDirectory(const GameEngineDirectory& _other)
 	: GameEnginePath(_other)
 {
 
 }
 
-GameEngineDirectroy::~GameEngineDirectroy()
+GameEngineDirectory::~GameEngineDirectory()
 {
 }
 
-GameEngineDirectroy::GameEngineDirectroy(GameEngineDirectroy&& _other) noexcept
+GameEngineDirectory::GameEngineDirectory(GameEngineDirectory&& _other) noexcept
 {
 }
 
 //member Func
 
-std::string GameEngineDirectroy::DirectroyName() 
+std::string GameEngineDirectory::DirectroyName() 
 {
 	return path_.filename().string();
 }
 
-void GameEngineDirectroy::MoveParent() 
+void GameEngineDirectory::MoveParent() 
 {
 	path_ = path_.parent_path();
 }
 
-bool GameEngineDirectroy::IsRoot() 
+bool GameEngineDirectory::IsRoot() 
 {
 	return path_.root_directory() == path_;
 }
 
-bool GameEngineDirectroy::MoveParent(const std::string& _DirName)
+bool GameEngineDirectory::MoveParent(const std::string& _DirName)
 {
 	while (false == IsRoot())
 	{
@@ -61,7 +61,7 @@ bool GameEngineDirectroy::MoveParent(const std::string& _DirName)
 }
 
 
-bool GameEngineDirectroy::MoveChild(const std::string& _DirName)
+bool GameEngineDirectory::MoveChild(const std::string& _DirName)
 {
 	path_.append(_DirName);
 
@@ -74,7 +74,7 @@ bool GameEngineDirectroy::MoveChild(const std::string& _DirName)
 	return true;
 }
 
-std::string GameEngineDirectroy::PathToPlusFileName(const std::string& _FileName)
+std::string GameEngineDirectory::PathToPlusFileName(const std::string& _FileName)
 {
 	std::filesystem::path NewPath = path_;
 	NewPath.append(_FileName);
@@ -93,7 +93,7 @@ std::string GameEngineDirectroy::PathToPlusFileName(const std::string& _FileName
 //opendir / readdir 함수를 사용하여 디렉토리의 파일 목록 가져 오기
 //std::filesystem::recursive_directory_iterator를 사용하여 모든 하위 디렉토리의 파일 목록을 가져옵니다
 
-std::vector<GameEngineFile> GameEngineDirectroy::GetAllFile(const std::string& _filter)
+std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _filter)
 {
 	std::string Filter = "";
 

@@ -12,6 +12,7 @@ struct VertexOut
     float4 Texcoord : TEXTURECOORD;
 };
 
+
 VertexOut Texture_VS(VertexIn _in)
 {
     VertexOut Out;
@@ -19,10 +20,11 @@ VertexOut Texture_VS(VertexIn _in)
     Out.Position = _in.Position;
 
     Out.Position.w = 1.0f;
-
     Out.Position = mul(Out.Position, World);
     Out.Position = mul(Out.Position, View);
     Out.Position = mul(Out.Position, Projection);
+
+    Out.Texcoord = _in.Texcoord;
 
     return Out;
 }

@@ -172,13 +172,41 @@ bool GameEngineVertexShader::FileCompile(const std::string& _Path)
 
 void GameEngineVertexShader::SetConstantBuffers(const GameEngineConstantBufferSetting* _Setting)
 {
-	GameEngineDevice::GetContext()->VSSetConstantBuffers(_Setting->SettingIndex_, 1, &_Setting->Res_->GetBuffer());
+	GameEngineDevice::GetContext()->VSSetConstantBuffers(_Setting->SettingIndex_, 1,
+		&_Setting->Res_->GetBuffer());
 }
 
-void GameEngineVertexShader::SetTexture(const GameEngineTextureSetting* _Setting)
+void GameEngineVertexShader::SetSamplers(const GameEngineSamplerSetting* _Setting)
+{
+	GameEngineDevice::GetContext()->VSSetSamplers(_Setting->SettingIndex_, 1,
+		_Setting->Res_->GetSamplerState());
+}
+
+void GameEngineVertexShader::SetTextures(const GameEngineTextureSetting* _Setting)
 {
 	GameEngineDevice::GetContext()->VSSetShaderResources(_Setting->SettingIndex_, 1,
 		_Setting->Res_->GetShaderResourceView());
+}
+
+void GameEngineVertexShader::ResetConstantBuffers(const GameEngineConstantBufferSetting* _Setting)
+{
+	static ID3D11Buffer* const Reset[16] = { nullptr };
+
+	GameEngineDevice::GetContext()->VSSetConstantBuffers(_Setting->SettingIndex_, 1, Reset);
+}
+
+void GameEngineVertexShader::ResetSamplers(const GameEngineSamplerSetting* _Setting)
+{
+	static ID3D11SamplerState* const Reset[16] = { nullptr };
+
+	GameEngineDevice::GetContext()->VSSetSamplers(_Setting->SettingIndex_, 1, Reset);
+}
+
+void GameEngineVertexShader::ResetTextures(const GameEngineTextureSetting* _Setting)
+{
+	static ID3D11ShaderResourceView* Reset[16] = { nullptr };
+
+	GameEngineDevice::GetContext()->VSSetShaderResources(_Setting->SettingIndex_, 1, Reset);
 }
 
 void GameEngineVertexShader::AddInputLayout(

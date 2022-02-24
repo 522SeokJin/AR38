@@ -2,7 +2,7 @@
 
 #include <GameEngine/PreCompile.h>
 
-#include <GameEngineBase/GameEngineDirectroy.h>
+#include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineBase/GameEngineFile.h>
 
 #include <GameEngine/GameEngineResourcesManager.h>

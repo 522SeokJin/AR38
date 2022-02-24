@@ -113,15 +113,29 @@ void GameEngineShader::ResCheck()
 		{
 			D3D11_SAMPLER_DESC SmpDesc = {};
 
-			// D3D11_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR : 뭉개라
-			// D3D11_FILTER_COMPARISON_MIN_MAG_MIP_POINT : 도트게임처럼 뭉개지않는다.
-			SmpDesc.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
+			// D3D11_FILTER_MIN_MAG_MIP_LINEAR : 뭉개라
+			// D3D11_FILTER_MIN_MAG_MIP_POINT : 도트게임처럼 뭉개지않는다.
+			SmpDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 
-			// Smp_Decs.AddressU
+			SmpDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+			SmpDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+			SmpDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
 
-			// GameEngineSamplerManager::GetInst().Create();
-
-			// ConstanceBuffer_.insert(std::make_pair(ResInfo.BindPoint, NewBuffer));
+			SmpDesc.MipLODBias = 0.0f;
+			SmpDesc.MaxAnisotropy = 1;
+			SmpDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+			SmpDesc.MinLOD = -FLT_MAX;
+			SmpDesc.MaxLOD = FLT_MAX;
+			// SmpDesc.BorderColor;
+			// SmpDesc.MaxAnisotropy;
+			 
+			GameEngineSampler* NewRes = GameEngineSamplerManager::GetInst().Create(Name, SmpDesc);
+			Samplers_.insert(std::make_pair(ResInfo.BindPoint, NewRes));
+			break;
+		}
+		case D3D_SIT_TEXTURE:
+		{
+			Textures_.insert(std::make_pair(ResInfo.BindPoint, Name));
 			break;
 		}
 		default:

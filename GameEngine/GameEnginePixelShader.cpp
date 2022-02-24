@@ -160,12 +160,40 @@ void GameEnginePixelShader::Setting()
 
 void GameEnginePixelShader::SetConstantBuffers(const GameEngineConstantBufferSetting* _Setting)
 {
-	GameEngineDevice::GetContext()->PSSetConstantBuffers(_Setting->SettingIndex_, 1, &_Setting->Res_->GetBuffer());
+	GameEngineDevice::GetContext()->PSSetConstantBuffers(_Setting->SettingIndex_, 1,
+		&_Setting->Res_->GetBuffer());
 }
 
-void GameEnginePixelShader::SetTexture(const GameEngineTextureSetting* _Setting)
+void GameEnginePixelShader::SetSamplers(const GameEngineSamplerSetting* _Setting)
+{
+	GameEngineDevice::GetContext()->PSSetSamplers(_Setting->SettingIndex_, 1,
+		_Setting->Res_->GetSamplerState());
+}
+
+void GameEnginePixelShader::SetTextures(const GameEngineTextureSetting* _Setting)
 {
 	GameEngineDevice::GetContext()->PSSetShaderResources(_Setting->SettingIndex_, 1,
 		_Setting->Res_->GetShaderResourceView());
+}
+
+void GameEnginePixelShader::ResetConstantBuffers(const GameEngineConstantBufferSetting* _Setting)
+{
+	static ID3D11Buffer* const Reset[1] = { nullptr };
+
+	GameEngineDevice::GetContext()->PSSetConstantBuffers(_Setting->SettingIndex_, 1, Reset);
+}
+
+void GameEnginePixelShader::ResetSamplers(const GameEngineSamplerSetting* _Setting)
+{
+	static ID3D11SamplerState* const Reset[1] = { nullptr };
+
+	GameEngineDevice::GetContext()->PSSetSamplers(_Setting->SettingIndex_, 1, Reset);
+}
+
+void GameEnginePixelShader::ResetTextures(const GameEngineTextureSetting* _Setting)
+{
+	static ID3D11ShaderResourceView* Reset[1] = { nullptr };
+
+	GameEngineDevice::GetContext()->PSSetShaderResources(_Setting->SettingIndex_, 1, Reset);
 }
 

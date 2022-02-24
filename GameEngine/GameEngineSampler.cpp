@@ -17,9 +17,8 @@ GameEngineSampler::~GameEngineSampler()
 	}
 }
 
-void GameEngineSampler::ReSetting(const D3D11_SAMPLER_DESC& _Info)
+void GameEngineSampler::Setting(const D3D11_SAMPLER_DESC& _Info)
 {
-	// 실시간으로 수정가능
 	Create(_Info);
 }
 
