@@ -27,6 +27,10 @@ public:
 	static const float4 BLACK;
 	static const float4 NONE;
 
+	static const float4 INVERTX;
+	static const float4 INVERTY;
+	static const float4 INVERTZ;
+
 public:
 	// 1 0 0 0
 	// 0 1 0 0

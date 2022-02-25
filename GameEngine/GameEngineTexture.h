@@ -18,6 +18,7 @@ private:	// member Var
 public:
 	ID3D11RenderTargetView* GetRenderTargetView();
 	ID3D11ShaderResourceView** GetShaderResourceView();
+	float4 GetImageSize();
 
 public:
 	GameEngineTexture(); // default constructer 디폴트 생성자

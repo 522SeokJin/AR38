@@ -23,7 +23,7 @@ void UserGame::Initialize()
 	LevelCreate<LoginLevel>("Login");
 	LevelCreate<PlayLevel>("Play");
 
-	LevelChange("Play");
+	LevelChange("Login");
 }
 
 void UserGame::Release()

@@ -35,6 +35,15 @@
     <ClCompile Include="TopUI.cpp">
       <Filter>Actor\UI</Filter>
     </ClCompile>
+    <ClCompile Include="LoginUI.cpp">
+      <Filter>Actor\UI\Login</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginUI_CreateRenderer.cpp">
+      <Filter>Actor\UI\Login</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_CreateRenderer.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -116,6 +125,9 @@
     </ClInclude>
     <ClInclude Include="WzPhysics.h">
       <Filter>Wz</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginUI.h">
+      <Filter>Actor\UI\Login</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

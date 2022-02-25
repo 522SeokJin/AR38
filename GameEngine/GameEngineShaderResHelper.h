@@ -12,8 +12,8 @@ class GameEngineShaderResHelper
 
 private:	// member Var
 	std::map<std::string, GameEngineConstantBufferSetting*> AllConstantBufferData_;
-	std::map<std::string, GameEngineSamplerSetting*> AllSamplerData_;
-	std::map<std::string, GameEngineTextureSetting*> AllTextureData_;
+	std::map<std::string, GameEngineSamplerSetting*>		AllSamplerData_;
+	std::map<std::string, GameEngineTextureSetting*>		AllTextureData_;
 	
 public:
 	bool IsConstantBuffer(const std::string& _SettingName);

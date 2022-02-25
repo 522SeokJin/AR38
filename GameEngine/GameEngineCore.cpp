@@ -109,9 +109,9 @@ void GameEngineCore::MainLoop()
 
 }
 
-void GameEngineCore::WindowCreate(GameEngineCore& _RuntimeCore)
+void GameEngineCore::WindowCreate(GameEngineCore& _RuntimeCore, const std::string& _TitleName)
 {
-	GameEngineWindow::GetInst().CreateMainWindow("MainWindow", _RuntimeCore.StartWindowSize(), _RuntimeCore.StartWindowPos());
+	GameEngineWindow::GetInst().CreateMainWindow(_TitleName, _RuntimeCore.StartWindowSize(), _RuntimeCore.StartWindowPos());
 
 	// 디바이스가 만들어져야 한다.
 	// HWND 윈도우에서 제공하는 3D 라이브러리니까 Window API 기반으로 처리되어있다.

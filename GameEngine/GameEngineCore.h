@@ -24,13 +24,13 @@ protected:		// delete Function
 	GameEngineCore& operator=(const GameEngineCore&& _other) = delete;
 
 private:
-	static void WindowCreate(GameEngineCore& _RuntimeCore);
+	static void WindowCreate(GameEngineCore& _RuntimeCore, const std::string& _TitleName);
 	static void Loop();
 	static void MainLoop();
 
 public:
 	template<typename UserGameType>
-	static void Start()
+	static void Start(const std::string& _TitleName)
 	{
 		GameEngineDebug::LeakCheckOn();
 		//_CrtSetBreakAlloc(163);
@@ -39,7 +39,7 @@ public:
 		new int();	// ½Å·ÚÀÇ ¸¯
 #endif
 		UserGameType NewUserGame;
-		WindowCreate(NewUserGame);
+		WindowCreate(NewUserGame, _TitleName);
 
 		NewUserGame.EngineInitialize();
 		NewUserGame.ResourceLoad();

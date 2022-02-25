@@ -46,6 +46,14 @@ ID3D11ShaderResourceView** GameEngineTexture::GetShaderResourceView()
 	return &ShaderResourceView_;
 }
 
+float4 GameEngineTexture::GetImageSize()
+{
+	float Width = static_cast<float>(TextureDesc_.Width);
+	float Height = static_cast<float>(TextureDesc_.Height);
+
+	return { Width , Height };
+}
+
 void GameEngineTexture::Create(ID3D11Texture2D* _Texture2D)
 {
 	if (nullptr == _Texture2D)

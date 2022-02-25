@@ -33,13 +33,6 @@ void UserGame::ResourceLoad()
 	AppShaderLoad();
 
 	{
-		// 각자 물체가 각자의 크기와 회전값을 가진 세상
-		// 로컬스페이스
-
-		// 로컬세상에 있는 물체를 우리가 원하는 대로 변형하고
-		// 위치시키고 인식합니다.
-		// 월드스페이스
-
 		std::vector<GameEngineVertex> RectVertex = std::vector<GameEngineVertex>(4 * 6);
 
 		{
@@ -183,8 +176,7 @@ void UserGame::ResourceLoad()
 		// 화면 바깥에 나간 면들을 잘라낸다.
 		//Info.ScissorEnable = true;
 
-		// 깊이관련은 추후 설명
-		// 깊이버퍼 설명을 듣고 다뤄야한다.
+		// 깊이버퍼 관련
 		//Info.SlopeScaledDepthBias = 0;
 		//Info.DepthBias = 0;
 		//Info.DepthBiasClamp = 0;

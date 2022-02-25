@@ -48,6 +48,9 @@ public:
 	Player& operator=(const Player& _other) = delete;
 	Player& operator=(const Player&& _other) = delete;
 
+private:
+	void CreateWzRenderer();
+
 public:
 	virtual void Start() override;
 	virtual void Update(float _DeltaTime) override;

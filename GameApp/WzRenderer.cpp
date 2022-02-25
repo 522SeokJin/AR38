@@ -18,59 +18,59 @@ WzRenderer::~WzRenderer()
 
 }
 
-void WzRenderer::CalculationBodyPos(const float4& _WzOrigin,
-	const float4& _WzNeck, const float4& _WzNavel)
+void WzRenderer::SetUILocalPosition(const float4& _WzOrigin, const float4& _WzFarFromOrigin)
+{
+	// _WzOrigin 기준으로 얼마나 떨어져있는가
+	float4 FarFromOrigin = _WzFarFromOrigin;
+	
+	GetTransform()->SetLocalPosition(_WzOrigin + FarFromOrigin.InvertX()
+		+ GetImageSize().InvertY().halffloat4());
+}
+
+void WzRenderer::CalculationOriginPos(const float4& _WzOrigin)
 {
 	// 위컴알 기준 센터의 좌표는 크기의 절반값
 	float4 WzCenter = float4();
-	WzCenter.x = GetTransform()->GetLocalScaling().x / 2.0f;
-	WzCenter.y = GetTransform()->GetLocalScaling().y / 2.0f;
+	WzCenter.x = GetTransform()->GetLocalScaling().hx();
+	WzCenter.y = GetTransform()->GetLocalScaling().hy();
 
-	// 센터는 부모의 좌표, 아직 이동을 하지 않았기 때문에
-	float4 Center = GetActor()->GetTransform()->GetLocalPosition();
+	// 지금 센터는 내 월드포지션
+	float4 Center = GetTransform()->GetWorldPosition();
 
 	// Center값에서 Origin 좌표를 구하기위해서는 기존의 Origin좌표에
 	// Y축반전을 하고, Center의 차이값만큼 이동을 해야함
 	float4 CenterDiff = Center - WzCenter;
-	OriginPosition_ = (_WzOrigin + CenterDiff) * float4(1.0f, -1.0f, 1.0f);
+	OriginPosition_ = (_WzOrigin + CenterDiff).InvertY();
+}
+
+void WzRenderer::CalculationBodyPos(const float4& _WzOrigin,
+	const float4& _WzNeck, const float4& _WzNavel)
+{
+	CalculationOriginPos(_WzOrigin);
 
 	// Neck, Navel 위치는 Origin을 기준으로 _WzNeck, _WzNavel 만큼 이동한곳이 된다.
-	NeckPosition_ = OriginPosition_ + _WzNeck * float4(1.0f, -1.0f, 1.0f);
-	NavelPosition_ = OriginPosition_ + _WzNavel * float4(1.0f, -1.0f, 1.0f);
+	NeckPosition_ = OriginPosition_ + _WzNeck * float4::INVERTY;
+	NavelPosition_ = OriginPosition_ + _WzNavel * float4::INVERTY;
 }
 
 void WzRenderer::CalculationArmPos(const float4& _WzOrigin, const float4& _WzNavel, 
 	const float4& _WzHand)
 {
-	float4 WzCenter = {};
-	WzCenter.x = GetTransform()->GetLocalScaling().x / 2.0f;
-	WzCenter.y = GetTransform()->GetLocalScaling().y / 2.0f;
+	CalculationOriginPos(_WzOrigin);
 
-	float4 Center = GetActor()->GetTransform()->GetLocalPosition();
-
-	float4 CenterDiff = Center - WzCenter;
-	OriginPosition_ = (_WzOrigin + CenterDiff) * float4(1.0f, -1.0f, 1.0f);
-
-	NavelPosition_ = OriginPosition_ + _WzNavel * float4(1.0f, -1.0f, 1.0f);
-	HandPosition_ = OriginPosition_ + _WzHand * float4(1.0f, -1.0f, 1.0f);
+	NavelPosition_ = OriginPosition_ + _WzNavel * float4::INVERTY;
+	HandPosition_ = OriginPosition_ + _WzHand * float4::INVERTY;
 }
 
 void WzRenderer::CalculationHeadPos(const float4& _WzOrigin, const float4& _WzNeck,
 	const float4& _WzEarOverHead, const float4& _WzEarBelowHead, const float4& _WzBrow)
 {
-	float4 WzCenter = {};
-	WzCenter.x = GetTransform()->GetLocalScaling().x / 2.0f;
-	WzCenter.y = GetTransform()->GetLocalScaling().y / 2.0f;
+	CalculationOriginPos(_WzOrigin);
 
-	float4 Center = GetActor()->GetTransform()->GetLocalPosition();
-
-	float4 CenterDiff = Center - WzCenter;
-	OriginPosition_ = (_WzOrigin + CenterDiff) * float4(1.0f, -1.0f, 1.0f);
-
-	NeckPosition_ = OriginPosition_ + _WzNeck * float4(1.0f, -1.0f, 1.0f);
-	EarOverHeadPosition_ = OriginPosition_ + _WzEarOverHead * float4(1.0f, -1.0f, 1.0f);
-	EarBelowHeadPosition_ = OriginPosition_ + _WzEarBelowHead * float4(1.0f, -1.0f, 1.0f);
-	BrowPosition_ = OriginPosition_ + _WzBrow * float4(1.0f, -1.0f, 1.0f);
+	NeckPosition_ = OriginPosition_ + _WzNeck * float4::INVERTY;
+	EarOverHeadPosition_ = OriginPosition_ + _WzEarOverHead * float4::INVERTY;
+	EarBelowHeadPosition_ = OriginPosition_ + _WzEarBelowHead * float4::INVERTY;
+	BrowPosition_ = OriginPosition_ + _WzBrow * float4::INVERTY;
 }
 
 void WzRenderer::CalculationEarPos(const float4& _WzOrigin, const float4& _WzNeck,
@@ -81,16 +81,8 @@ void WzRenderer::CalculationEarPos(const float4& _WzOrigin, const float4& _WzNec
 
 void WzRenderer::CalculationHairPos(const float4& _WzOrigin, const float4& _WzBrow)
 {
-	float4 WzCenter = {};
-	WzCenter.x = GetTransform()->GetLocalScaling().x / 2.0f;
-	WzCenter.y = GetTransform()->GetLocalScaling().y / 2.0f;
-
-	float4 Center = GetActor()->GetTransform()->GetLocalPosition();
-
-	float4 CenterDiff = Center - WzCenter;
-	OriginPosition_ = (_WzOrigin + CenterDiff) * float4(1.0f, -1.0f, 1.0f);
-
-	BrowPosition_ = OriginPosition_ + _WzBrow * float4(1.0f, -1.0f, 1.0f);
+	CalculationOriginPos(_WzOrigin);
+	BrowPosition_ = OriginPosition_ + _WzBrow * float4::INVERTY;
 }
 
 void WzRenderer::CalculationFacePos(const float4& _WzOrigin, const float4& _WzBrow)
@@ -100,28 +92,12 @@ void WzRenderer::CalculationFacePos(const float4& _WzOrigin, const float4& _WzBr
 
 void WzRenderer::CalculationClothesPos(const float4& _WzOrigin, const float4& _WzNavel)
 {
-	float4 WzCenter = {};
-	WzCenter.x = GetTransform()->GetLocalScaling().x / 2.0f;
-	WzCenter.y = GetTransform()->GetLocalScaling().y / 2.0f;
-
-	float4 Center = GetActor()->GetTransform()->GetLocalPosition();
-
-	float4 CenterDiff = Center - WzCenter;
-	OriginPosition_ = (_WzOrigin + CenterDiff) * float4(1.0f, -1.0f, 1.0f);
-
-	NavelPosition_ = OriginPosition_ + _WzNavel * float4(1.0f, -1.0f, 1.0f);
+	CalculationOriginPos(_WzOrigin);
+	NavelPosition_ = OriginPosition_ + _WzNavel * float4::INVERTY;
 }
 
 void WzRenderer::CalculationWeaponPos(const float4& _WzOrigin, const float4& _WzHand)
 {
-	float4 WzCenter = {};
-	WzCenter.x = GetTransform()->GetLocalScaling().x / 2.0f;
-	WzCenter.y = GetTransform()->GetLocalScaling().y / 2.0f;
-
-	float4 Center = GetActor()->GetTransform()->GetLocalPosition();
-
-	float4 CenterDiff = Center - WzCenter;
-	OriginPosition_ = (_WzOrigin + CenterDiff) * float4(1.0f, -1.0f, 1.0f);
-
-	HandPosition_ = OriginPosition_ + _WzHand * float4(1.0f, -1.0f, 1.0f);
+	CalculationOriginPos(_WzOrigin);
+	HandPosition_ = OriginPosition_ + _WzHand * float4::INVERTY;
 }

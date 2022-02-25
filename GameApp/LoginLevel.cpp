@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "LoginLevel.h"
+#include "LoginUI.h"
 
 LoginLevel::LoginLevel()
 {
@@ -16,11 +17,11 @@ void LoginLevel::LevelStart()
 	GetMainCamera()->SetProjectionMode(ProjectionMode::ORTHOGRAPHIC);
 	GetMainCamera()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
 
-	//{
-	//	Player* Actor = CreateActor<Player>();
-	//	GetMainCameraActor()->GetTransform()->SetWorldPosition(
-	//		Actor->GetTransform()->GetLocalPosition());
-	//}
+	{
+		LoginUI* Actor = CreateActor<LoginUI>();
+		GetMainCameraActor()->GetTransform()->SetWorldPosition(
+			Actor->GetTransform()->GetLocalPosition());
+	}
 
 }
 

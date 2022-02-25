@@ -10,5 +10,5 @@ int WinMain(
 	int       nShowCmd
 )
 {
-	GameEngineCore::Start<UserGame>();
+	GameEngineCore::Start<UserGame>("MapleStory");
 }

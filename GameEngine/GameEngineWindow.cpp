@@ -78,19 +78,18 @@ int GameEngineWindow::CreateMainWindowClass()
     WNDCLASSEXA wcex = {};
     wcex.cbSize = sizeof(WNDCLASSEX);
     wcex.style = CS_HREDRAW | CS_VREDRAW; // 화면 재갱신 옵션
-    wcex.lpfnWndProc = WndProc; // <= 내일 설명
-    wcex.cbClsExtra = 0; // 신경안써도 됨
-    wcex.cbWndExtra = 0; // 신경안써도 됨.
+    wcex.lpfnWndProc = WndProc;
+    wcex.cbClsExtra = 0; 
+    wcex.cbWndExtra = 0; 
     wcex.hInstance = hInstance_;
-    wcex.hIcon = nullptr;//LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WINDOWSPROJECT3));
-    wcex.hCursor = nullptr;//LoadCursor(nullptr, IDC_ARROW);
+    wcex.hIcon = nullptr;   //LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WINDOWSPROJECT3));
+    wcex.hCursor = nullptr; //LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 2);
 
     wcex.lpszMenuName = nullptr;//MAKEINTRESOURCEW(IDC_WINDOWSPROJECT3);
     wcex.lpszClassName = className_.c_str();
     wcex.hIconSm = nullptr;//LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
-    // 아래의 함수의 내용이 
     return RegisterClassExA(&wcex);
 }
 

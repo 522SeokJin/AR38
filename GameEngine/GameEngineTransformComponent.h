@@ -28,5 +28,25 @@ public:
 
 public:
 	void AttachTransform(GameEngineTransform* _Parent);
+
+public:
+	void SetLocalScaling(const float4& _Value);
+	void SetWorldScaling(const float4& _Value);
+
+	// Degree Only
+	void SetLocalRotation(const float4& _Value);
+	void SetWorldRotation(const float4& _Value);
+
+	void SetLocalDeltaTimeRotation(const float4& _Value);
+	void SetWorldDeltaTimeRotation(const float4& _Value);
+
+	void SetLocalPosition(const float4& _Value);
+	void SetWorldPosition(const float4& _Value);
+
+	void SetLocalMove(const float4& _Value);
+	void SetWorldMove(const float4& _Value);
+
+	void SetLocalDeltaTimeMove(const float4& _Value);
+	void SetWorldDeltaTimeMove(const float4& _Value);
 };
 
