@@ -2,11 +2,11 @@
 #include "GameEngine/GameEngineActor.h"
 
 // Ό³Έν : 
-class WzRenderer;
+class WzUIRenderer;
 class LoginUI : public GameEngineActor
 {
 private:	// member Var
-	WzRenderer* LoginUI_;
+	WzUIRenderer* LoginUI_;
 
 public: // constrcuter destructer
 	LoginUI();

@@ -2,6 +2,7 @@
 #include "MainBarUI.h"
 
 MainBarUI::MainBarUI()
+	: ExpBarUI_(nullptr)
 {
 
 }

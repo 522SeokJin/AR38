@@ -24,7 +24,7 @@ public:
 	GameEngineUIRenderer& operator=(const GameEngineUIRenderer& _other) = delete;
 	GameEngineUIRenderer& operator=(const GameEngineUIRenderer&& _other) = delete;
 
-private:
+protected:
 	void Start() override;
 };
 

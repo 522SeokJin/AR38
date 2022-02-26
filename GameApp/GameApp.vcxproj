@@ -220,6 +220,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="WzUIRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -263,6 +264,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="WzUIRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,11 +2,13 @@
 #include "GameEngine/GameEngineActor.h"
 
 // Ό³Έν : 
-class WzRenderer;
+class WzUIRenderer;
 class MainBarUI : public GameEngineActor
 {
 private:	// member Var
-	WzRenderer* ExpBarUI_;
+	WzUIRenderer* ExpBarUI_;
+	WzUIRenderer* StatusUI_;
+	WzUIRenderer* CashShopUI_;
 
 public: // constrcuter destructer
 	MainBarUI();

@@ -50,6 +50,9 @@
     <ClCompile Include="MainBarUI_CreateRenderer.cpp">
       <Filter>Actor\UI\StatusBar\MainBar</Filter>
     </ClCompile>
+    <ClCompile Include="WzUIRenderer.cpp">
+      <Filter>Wz\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -143,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="MainBarUI.h">
       <Filter>Actor\UI\StatusBar\MainBar</Filter>
+    </ClInclude>
+    <ClInclude Include="WzUIRenderer.h">
+      <Filter>Wz\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

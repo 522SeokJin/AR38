@@ -32,8 +32,8 @@ void PlayLevel::LevelStart()
 	}
 
 	{
-		float4 EXPBarOrigin = float4(0.0f, 23.0f, 0.0f) - GameEngineWindow::GetInst().GetSize().halffloat4();
-		MainBarUI* Actor = CreateActor<MainBarUI>(EXPBarOrigin);
+		float4 WindowLeftBottom = -GameEngineWindow::GetInst().GetSize().halffloat4();
+		MainBarUI* Actor = CreateActor<MainBarUI>(WindowLeftBottom);
 	}
 }
 
