@@ -1,19 +1,6 @@
 #include "PreCompile.h"
 #include "GameEngineRenderingPipeLine.h"
-
-#include "GameEngineVertexBufferManager.h"
-#include "GameEngineVertexShaderManager.h"
-#include "GameEngineIndexBufferManager.h"
-#include "GameEngineRasterizerManager.h"
-#include "GameEnginePixelShaderManager.h"
-
-#include "GameEngineVertexBuffer.h"
-#include "GameEngineVertexShader.h"
-#include "GameEngineIndexBuffer.h"
-#include "GameEngineRasterizer.h"
-#include "GameEnginePixelShader.h"
-#include "GameEngineConstantBuffer.h"
-
+#include "GameEngineResourcesManager.h"
 #include "GameEngineWindow.h"
 
 GameEngineRenderingPipeLine::GameEngineRenderingPipeLine() // default constructer 디폴트 생성자
@@ -25,6 +12,7 @@ GameEngineRenderingPipeLine::GameEngineRenderingPipeLine() // default constructe
 	, Rasterizer_(nullptr)
 	, PixelShader_(nullptr)
 	, RenderTarget_(nullptr)
+	, Blend_(nullptr)
 {
 
 }
@@ -99,13 +87,13 @@ void GameEngineRenderingPipeLine::SetPixelShader(const std::string& _Name)
 	}
 }
 
-void GameEngineRenderingPipeLine::SetOutputMerger(const std::string& _Name)
+void GameEngineRenderingPipeLine::SetOutputMergerBlend(const std::string& _Name)
 {
-	Rasterizer_ = GameEngineRasterizerManager::GetInst().Find(_Name);
+	Blend_ = GameEngineBlendManager::GetInst().Find(_Name);
 
-	if (nullptr == Rasterizer_)
+	if (nullptr == Blend_)
 	{
-		GameEngineDebug::MsgBoxError("존재하지 않는 래스터라이저 세팅을 하려고 했습니다.");
+		GameEngineDebug::MsgBoxError("존재하지 않는 블렌드를 세팅하려고 했습니다.");
 		return;
 	}
 
@@ -142,6 +130,11 @@ void GameEngineRenderingPipeLine::PixelShader()
 	PixelShader_->Setting();
 }
 
+void GameEngineRenderingPipeLine::OutputMerger()
+{
+	Blend_->Setting();
+}
+
 void GameEngineRenderingPipeLine::RenderingPipeLineSetting()
 {
 	// VertexBuffer Setting
@@ -155,6 +148,8 @@ void GameEngineRenderingPipeLine::RenderingPipeLineSetting()
 	Rasterizer();
 
 	PixelShader();
+
+	OutputMerger();
 }
 
 void GameEngineRenderingPipeLine::Rendering()

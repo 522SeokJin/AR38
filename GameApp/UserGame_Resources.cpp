@@ -188,6 +188,33 @@ void UserGame::ResourceLoad()
 			GameEngineWindow::GetInst().GetSize().y, 0.0f, 0.0f, 0.0f, 1.0f);
 	}
 
+	// Blend
+	{
+		D3D11_BLEND_DESC BlendInfo = {};
+
+		BlendInfo.AlphaToCoverageEnable = FALSE;
+		BlendInfo.IndependentBlendEnable = FALSE;
+
+		BlendInfo.RenderTarget[0].BlendEnable = true;
+		BlendInfo.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+		// 블렌드 공식 : (SrcColor * SrcFactor) BlendOp (DestColor * DestFactor)
+		BlendInfo.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;	// Set Operator
+		// ADD -> (SrcColor * SrcFactor) + (DestColor * DestFactor)
+		BlendInfo.RenderTarget[0].SrcBlend = D3D11_BLEND::D3D11_BLEND_SRC_ALPHA; // SrcFactor를 소스의 알파값으로
+		BlendInfo.RenderTarget[0].DestBlend = D3D11_BLEND::D3D11_BLEND_INV_SRC_ALPHA;
+
+		// DirectX11 부터 알파는 따로 설정가능
+		BlendInfo.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+		BlendInfo.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND::D3D11_BLEND_ONE;
+		BlendInfo.RenderTarget[0].DestBlendAlpha = D3D11_BLEND::D3D11_BLEND_ONE;
+
+		// 직접값을 지정할수있음
+		// BlendInfo.RenderTarget[0].DestBlendAlpha = D3D11_BLEND::D3D11_BLEND_BLEND_FACTOR;
+
+		GameEngineBlendManager::GetInst().Create("AlphaBlend", BlendInfo);
+	}
+	
 	// RenderingPipeLine
 	{
 		GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Create("Color");
@@ -219,6 +246,7 @@ void UserGame::ResourceLoad()
 		Pipe->SetRasterizer("EngineBaseRasterizer");
 
 		Pipe->SetPixelShader("Color_PS");
+		Pipe->SetOutputMergerBlend("AlphaBlend");
 	}
 
 	{
@@ -231,5 +259,6 @@ void UserGame::ResourceLoad()
 		Pipe->SetInputAssembler2TopologySetting(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		Pipe->SetRasterizer("EngineBaseRasterizer");
 		Pipe->SetPixelShader("Texture_PS");
+		Pipe->SetOutputMergerBlend("AlphaBlend");
 	}
 }

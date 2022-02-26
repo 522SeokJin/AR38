@@ -37,9 +37,6 @@
     <ClInclude Include="GameEngineRasterizer.h">
       <Filter>Resources\03. Rasterizer</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineResourcesManager.h">
-      <Filter>Resources\99. Manager</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngineRasterizerManager.h">
       <Filter>Resources\99. Manager</Filter>
     </ClInclude>
@@ -120,6 +117,15 @@
     </ClInclude>
     <ClInclude Include="GameEngineSamplerManager.h">
       <Filter>Resources\99. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineBlend.h">
+      <Filter>Resources\02. Image</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineBlendManager.h">
+      <Filter>Resources\99. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineResourcesManager.h">
+      <Filter>Resources\99. Manager\ResourceManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -240,6 +246,12 @@
     <ClCompile Include="GameEngineSamplerManager.cpp">
       <Filter>Resources\99. Manager</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineBlend.cpp">
+      <Filter>Resources\02. Image</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineBlendManager.cpp">
+      <Filter>Resources\99. Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -310,6 +322,9 @@
     </Filter>
     <Filter Include="Resources\03. Rasterizer">
       <UniqueIdentifier>{c51986b5-61f2-40b1-a271-b9e8058eb03e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\99. Manager\ResourceManager">
+      <UniqueIdentifier>{da9f6a34-95aa-4b16-b5a7-b585066393fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -17,7 +17,7 @@ GameEngineSampler::~GameEngineSampler()
 	}
 }
 
-void GameEngineSampler::Setting(const D3D11_SAMPLER_DESC& _Info)
+void GameEngineSampler::ReCreate(const D3D11_SAMPLER_DESC& _Info)
 {
 	Create(_Info);
 }

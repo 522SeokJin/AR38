@@ -5,7 +5,7 @@
 #include "GameEngineShaderResHelper.h"
 
 // 설명 : 렌더링파이프라인을 직접 설정하기위해 만든 클래스
-
+class GameEngineBlend;
 class GameEngineShader;
 class GameEngineConstantBuffer;
 class GameEngineVertexBuffer;
@@ -37,6 +37,8 @@ private:	// member Var
 	// OM
 	GameEngineRenderTarget* RenderTarget_;
 
+	GameEngineBlend* Blend_;
+
 public:
 	inline GameEngineVertexShader* GetVertexShader() const
 	{
@@ -60,7 +62,7 @@ public:
 
 	void SetPixelShader(const std::string& _Name);
 
-	void SetOutputMerger(const std::string& _Name);
+	void SetOutputMergerBlend(const std::string& _Name);
 
 public:
 	void RenderingPipeLineSetting();
@@ -85,6 +87,7 @@ public:
 	void VertexShader();
 	void Rasterizer();
 	void PixelShader();
+	void OutputMerger();
 
 public:
 

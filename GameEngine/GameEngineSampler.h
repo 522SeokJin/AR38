@@ -26,7 +26,7 @@ public: // delete Function
 	GameEngineSampler& operator=(const GameEngineSampler&& _other) = delete;
 
 public: // 실시간으로 수정가능
-	void Setting(const D3D11_SAMPLER_DESC& _Info);
+	void ReCreate(const D3D11_SAMPLER_DESC& _Info);
 
 private:
 	void Create(const D3D11_SAMPLER_DESC& _Info);

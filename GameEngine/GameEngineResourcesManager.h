@@ -11,6 +11,7 @@
 #include "GameEngineRenderTargetManager.h"
 #include "GameEngineTextureManager.h"
 #include "GameEngineSamplerManager.h"
+#include "GameEngineBlendManager.h"
 
 #include "GameEngineRenderingPipeLineManager.h"
 
@@ -23,6 +24,7 @@
 #include "GameEngineRenderTarget.h"
 #include "GameEngineTexture.h"
 #include "GameEngineSampler.h"
+#include "GameEngineBlend.h"
 
 #include "GameEngineRenderingPipeLine.h"
 
@@ -45,5 +47,6 @@ public:
 		GameEnginePixelShaderManager::Destroy();
 		GameEngineSamplerManager::Destroy();
 		GameEngineTextureManager::Destroy();
+		GameEngineBlendManager::Destroy();
 	}
 };
