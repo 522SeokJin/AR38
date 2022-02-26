@@ -89,8 +89,8 @@ void Player::Update(float _DeltaTime)
 
 	if (CurrentDir != Dir_)
 	{
-		Arm_->GetTransform()->SetLocalPosition((Arm_->GetTransform()->GetLocalPosition()).InvertX());
-		Head_->GetTransform()->SetLocalPosition((Head_->GetTransform()->GetLocalPosition()).InvertX());
+		Arm_->SetLocalPosition((Arm_->GetLocalPosition()).InvertX());
+		Head_->SetLocalPosition((Head_->GetLocalPosition()).InvertX());
 	}
 
 	GetLevel()->GetMainCameraActor()->GetTransform()->

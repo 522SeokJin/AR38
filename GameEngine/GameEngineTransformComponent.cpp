@@ -23,6 +23,31 @@ void GameEngineTransformComponent::AttachTransform(GameEngineTransform* _Parent)
 	Transform_->AttachTransform(_Parent);
 }
 
+float4 GameEngineTransformComponent::GetLocalScaling()
+{
+	return Transform_->GetTransformData().vLocalScaling_;
+}
+float4 GameEngineTransformComponent::GetWorldScaling()
+{
+	return Transform_->GetTransformData().vWorldScaling_;
+}
+float4 GameEngineTransformComponent::GetLocalRotation()
+{
+	return Transform_->GetTransformData().vLocalRotation_;
+}
+float4 GameEngineTransformComponent::GetWorldRotation()
+{
+	return Transform_->GetTransformData().vWorldRotation_;
+}
+float4 GameEngineTransformComponent::GetLocalPosition()
+{
+	return Transform_->GetTransformData().vLocalPosition_;
+}
+float4 GameEngineTransformComponent::GetWorldPosition()
+{
+	return Transform_->GetTransformData().vWorldPosition_;
+}
+
 void GameEngineTransformComponent::SetLocalScaling(const float4& _Value)
 {
 	Transform_->SetLocalScaling(_Value);

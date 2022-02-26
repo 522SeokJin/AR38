@@ -14,6 +14,13 @@ public:
 		return Transform_;
 	}
 
+	float4 GetLocalScaling();
+	float4 GetWorldScaling();
+	float4 GetLocalRotation();
+	float4 GetWorldRotation();
+	float4 GetLocalPosition();
+	float4 GetWorldPosition();
+
 public:
 	// constrcuter destructer
 	GameEngineTransformComponent();

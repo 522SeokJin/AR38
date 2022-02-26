@@ -49,8 +49,8 @@ void WzRenderer::CalculationBodyPos(const float4& _WzOrigin,
 	CalculationOriginPos(_WzOrigin);
 
 	// Neck, Navel 위치는 Origin을 기준으로 _WzNeck, _WzNavel 만큼 이동한곳이 된다.
-	NeckPosition_ = OriginPosition_ + _WzNeck * float4::INVERTY;
-	NavelPosition_ = OriginPosition_ + _WzNavel * float4::INVERTY;
+	NeckPosition_ = OriginPosition_ + _WzNeck * float4::INVERT_Y;
+	NavelPosition_ = OriginPosition_ + _WzNavel * float4::INVERT_Y;
 }
 
 void WzRenderer::CalculationArmPos(const float4& _WzOrigin, const float4& _WzNavel, 
@@ -58,8 +58,8 @@ void WzRenderer::CalculationArmPos(const float4& _WzOrigin, const float4& _WzNav
 {
 	CalculationOriginPos(_WzOrigin);
 
-	NavelPosition_ = OriginPosition_ + _WzNavel * float4::INVERTY;
-	HandPosition_ = OriginPosition_ + _WzHand * float4::INVERTY;
+	NavelPosition_ = OriginPosition_ + _WzNavel * float4::INVERT_Y;
+	HandPosition_ = OriginPosition_ + _WzHand * float4::INVERT_Y;
 }
 
 void WzRenderer::CalculationHeadPos(const float4& _WzOrigin, const float4& _WzNeck,
@@ -67,10 +67,10 @@ void WzRenderer::CalculationHeadPos(const float4& _WzOrigin, const float4& _WzNe
 {
 	CalculationOriginPos(_WzOrigin);
 
-	NeckPosition_ = OriginPosition_ + _WzNeck * float4::INVERTY;
-	EarOverHeadPosition_ = OriginPosition_ + _WzEarOverHead * float4::INVERTY;
-	EarBelowHeadPosition_ = OriginPosition_ + _WzEarBelowHead * float4::INVERTY;
-	BrowPosition_ = OriginPosition_ + _WzBrow * float4::INVERTY;
+	NeckPosition_ = OriginPosition_ + _WzNeck * float4::INVERT_Y;
+	EarOverHeadPosition_ = OriginPosition_ + _WzEarOverHead * float4::INVERT_Y;
+	EarBelowHeadPosition_ = OriginPosition_ + _WzEarBelowHead * float4::INVERT_Y;
+	BrowPosition_ = OriginPosition_ + _WzBrow * float4::INVERT_Y;
 }
 
 void WzRenderer::CalculationEarPos(const float4& _WzOrigin, const float4& _WzNeck,
@@ -82,7 +82,7 @@ void WzRenderer::CalculationEarPos(const float4& _WzOrigin, const float4& _WzNec
 void WzRenderer::CalculationHairPos(const float4& _WzOrigin, const float4& _WzBrow)
 {
 	CalculationOriginPos(_WzOrigin);
-	BrowPosition_ = OriginPosition_ + _WzBrow * float4::INVERTY;
+	BrowPosition_ = OriginPosition_ + _WzBrow * float4::INVERT_Y;
 }
 
 void WzRenderer::CalculationFacePos(const float4& _WzOrigin, const float4& _WzBrow)
@@ -93,11 +93,11 @@ void WzRenderer::CalculationFacePos(const float4& _WzOrigin, const float4& _WzBr
 void WzRenderer::CalculationClothesPos(const float4& _WzOrigin, const float4& _WzNavel)
 {
 	CalculationOriginPos(_WzOrigin);
-	NavelPosition_ = OriginPosition_ + _WzNavel * float4::INVERTY;
+	NavelPosition_ = OriginPosition_ + _WzNavel * float4::INVERT_Y;
 }
 
 void WzRenderer::CalculationWeaponPos(const float4& _WzOrigin, const float4& _WzHand)
 {
 	CalculationOriginPos(_WzOrigin);
-	HandPosition_ = OriginPosition_ + _WzHand * float4::INVERTY;
+	HandPosition_ = OriginPosition_ + _WzHand * float4::INVERT_Y;
 }

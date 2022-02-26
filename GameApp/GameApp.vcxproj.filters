@@ -88,6 +88,9 @@
     <Filter Include="Actor\UI\Login">
       <UniqueIdentifier>{512fe019-c86d-49b5-833e-8624cf6f780f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\UI\StatusBar">
+      <UniqueIdentifier>{bf319917-55eb-463d-842e-84f14f4f408e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">

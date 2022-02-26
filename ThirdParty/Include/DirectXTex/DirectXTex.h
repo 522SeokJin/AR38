@@ -11,6 +11,8 @@
 
 #pragma once
 
+#pragma warning(disable : 26812)    // enum warning
+
 #include <cstddef>
 #include <cstdint>
 #include <functional>

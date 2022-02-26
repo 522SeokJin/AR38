@@ -29,8 +29,8 @@ VertexOut Texture_VS(VertexIn _in)
     return Out;
 }
 
-Texture2D Tex : register(t0);
-SamplerState Smp : register(s0);
+Texture2D       Tex : register(t0);
+SamplerState    Smp : register(s0);
 
 float4 Texture_PS(VertexOut _in) : SV_Target0
 {

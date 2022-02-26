@@ -1,7 +1,9 @@
 #pragma once
+
+#pragma warning(disable : 6387)
+
 #include <GameEngineBase/GameEngineMath.h>
 #include <GameEngineBase/GameEngineObjectNameBase.h>
-
 
 // 설명 : winapi의 윈도우 창을 제어하는 기능들에 대한 
 //       랩핑(다른 api의 기능을 내 입맛에 맞는 클래스로 한번 감쌌다.)을하고

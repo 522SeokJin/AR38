@@ -24,9 +24,9 @@ const float4 float4::WHITE = { 1.0f, 1.0f, 1.0f, 1.0f };
 const float4 float4::BLACK = { 0.0f, 0.0f, 0.0f, 1.0f };
 const float4 float4::NONE = { 0.0f, 0.0f, 0.0f, 0.0f };
 
-const float4 float4::INVERTX = { -1.0f,  1.0f,  1.0f };
-const float4 float4::INVERTY = {  1.0f, -1.0f,  1.0f };
-const float4 float4::INVERTZ = {  1.0f,  1.0f, -1.0f };
+const float4 float4::INVERT_X = { -1.0f,  1.0f,  1.0f };
+const float4 float4::INVERT_Y = {  1.0f, -1.0f,  1.0f };
+const float4 float4::INVERT_Z = {  1.0f,  1.0f, -1.0f };
 
 float4 float4::operator*(const float4x4& _Value) const
 {
