@@ -17,6 +17,7 @@ protected:	// member Var
 public:
 	GameEngineShaderResHelper ShaderHelper;
 
+	bool UIMode_;
 public:
 	// constrcuter destructer
 	GameEngineRenderer();

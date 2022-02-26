@@ -20,4 +20,3 @@ void TopUI::Start()
 	Renderer->GetTransform()->SetLocalPosition({ 0.0f, 384.0f - 50.0f, 0.0f });
 	Renderer->ShaderHelper.SettingConstantBufferSet("ResultColor", float4(1.0f, 0.0f, 1.0f));
 }
-

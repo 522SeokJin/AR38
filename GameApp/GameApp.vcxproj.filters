@@ -44,6 +44,12 @@
     <ClCompile Include="Player_CreateRenderer.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
+    <ClCompile Include="MainBarUI.cpp">
+      <Filter>Actor\UI\StatusBar\MainBar</Filter>
+    </ClCompile>
+    <ClCompile Include="MainBarUI_CreateRenderer.cpp">
+      <Filter>Actor\UI\StatusBar\MainBar</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -91,6 +97,9 @@
     <Filter Include="Actor\UI\StatusBar">
       <UniqueIdentifier>{bf319917-55eb-463d-842e-84f14f4f408e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\UI\StatusBar\MainBar">
+      <UniqueIdentifier>{b78ac7f3-926a-4325-add4-812e28a98687}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -131,6 +140,9 @@
     </ClInclude>
     <ClInclude Include="LoginUI.h">
       <Filter>Actor\UI\Login</Filter>
+    </ClInclude>
+    <ClInclude Include="MainBarUI.h">
+      <Filter>Actor\UI\StatusBar\MainBar</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

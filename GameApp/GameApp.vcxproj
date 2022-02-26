@@ -178,6 +178,11 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="LoginUI_CreateRenderer.cpp" />
+    <ClCompile Include="MainBarUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MainBarUI_CreateRenderer.cpp" />
     <ClCompile Include="Monster.cpp">
       <SubType>
       </SubType>
@@ -219,6 +224,10 @@
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="LoginUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MainBarUI.h">
       <SubType>
       </SubType>
     </ClInclude>

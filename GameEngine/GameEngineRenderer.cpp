@@ -11,6 +11,7 @@
 
 GameEngineRenderer::GameEngineRenderer()
 	: PipeLine_(nullptr)
+	, UIMode_(false)
 {
 
 }
@@ -22,6 +23,12 @@ GameEngineRenderer::~GameEngineRenderer()
 
 void GameEngineRenderer::Start()
 {
+	if (UIMode_ == true)
+	{
+		GetLevel()->GetUICamera()->PushRenderer(GetOrder(), this);
+		return;
+	}
+
 	GetLevel()->GetMainCamera()->PushRenderer(GetOrder(), this);
 }
 

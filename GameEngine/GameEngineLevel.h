@@ -40,10 +40,11 @@ public:
 
 public:
 	template<typename ActorType>
-	ActorType* CreateActor(int _UpdateOrder = 0)
+	ActorType* CreateActor(float4 _WorldPosition = { 0.0f, 0.0f }, int _UpdateOrder = 0)
 	{
 		GameEngineActor* NewActor = new ActorType();
 		NewActor->SetLevel(this);
+		NewActor->GetTransform()->SetWorldPosition(_WorldPosition);
 		NewActor->Start();
 		NewActor->SetOrder(_UpdateOrder);
 

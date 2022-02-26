@@ -2,7 +2,8 @@
 #include "PlayLevel.h"
 #include "Player.h"
 #include "Monster.h"
-#include "TopUI.h"
+#include "MainBarUI.h"
+#include "GameEngine/GameEngineWindow.h"
 
 PlayLevel::PlayLevel()
 {
@@ -31,8 +32,8 @@ void PlayLevel::LevelStart()
 	}
 
 	{
-		TopUI* Actor = CreateActor<TopUI>();
-		Actor->GetTransform()->SetWorldPosition(float4(0.0f, 0.0f, 0.0f));
+		float4 EXPBarOrigin = float4(0.0f, 23.0f, 0.0f) - GameEngineWindow::GetInst().GetSize().halffloat4();
+		MainBarUI* Actor = CreateActor<MainBarUI>(EXPBarOrigin);
 	}
 }
 

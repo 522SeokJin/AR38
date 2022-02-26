@@ -28,7 +28,7 @@ public:
 	WzRenderer& operator=(const WzRenderer&& _other) = delete;
 
 public:
-	void SetUILocalPosition(const float4& _WzOrigin, const float4& _WzFarFromOrigin);
+	void SetUIWorldPosition(const float4& _WzOrigin, const float4& _WzFarFromOrigin);
 
 public:
 	void CalculationOriginPos(const float4& _WzOrigin);
