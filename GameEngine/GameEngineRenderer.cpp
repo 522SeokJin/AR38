@@ -59,3 +59,12 @@ void GameEngineRenderer::SetRenderingPipeLine(const std::string& _Value)
 		}
 	}
 }
+
+void GameEngineRenderer::FileCompile()
+{
+	std::string VertexPath = PipeLine_->GetVertexShader()->GetPath();
+	std::string PixelPath  = PipeLine_->GetPixelShader()->GetPath();
+
+	PipeLine_->GetVertexShader()->FileCompile(VertexPath);
+	PipeLine_->GetPixelShader()->FileCompile(PixelPath);
+}

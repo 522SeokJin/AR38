@@ -30,6 +30,19 @@ protected:	// member Var
 	std::string	EntryPoint_;
 	std::string Code_;
 
+	std::string	Path_;
+
+public:
+	std::string& GetPath()
+	{
+		return Path_;
+	}
+
+	void SetPath(const std::string& _Path)
+	{
+		Path_ = _Path;
+	}
+
 public:
 	// constrcuter destructer
 	GameEngineShader(ShaderType _Type);
@@ -55,11 +68,9 @@ protected:
 	void ResCheck();	// Resource Check
 
 private:
-	std::map<UINT, GameEngineConstantBuffer*> ConstantBuffers_;
-	
-	std::map<UINT, GameEngineSampler*> Samplers_;
-
-	std::map<UINT, std::string> Textures_;
+	std::map<UINT, GameEngineConstantBuffer*>	ConstantBuffers_;
+	std::map<UINT, GameEngineSampler*>			Samplers_;
+	std::map<UINT, std::string>					Textures_;
 
 public:
 	std::map<UINT, GameEngineConstantBuffer*>&	GetConstantBuffers() { return ConstantBuffers_; }

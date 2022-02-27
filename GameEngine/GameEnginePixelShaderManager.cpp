@@ -22,13 +22,6 @@ GameEnginePixelShaderManager::~GameEnginePixelShaderManager() // default destruc
 	ResourcesMap.clear();
 }
 
-GameEnginePixelShaderManager::GameEnginePixelShaderManager(GameEnginePixelShaderManager&& _other) noexcept  // default RValue Copy constructer 디폴트 RValue 복사생성자
-{
-
-}
-
-
-
 GameEnginePixelShader* GameEnginePixelShaderManager::Create(const std::string& _Name,
 	const std::string& _ShaderCode,
 	const std::string& _EntryPoint,
@@ -82,7 +75,7 @@ GameEnginePixelShader* GameEnginePixelShaderManager::Load(const std::string& _Na
 
 	GameEnginePixelShader* NewRes = new GameEnginePixelShader();
 	NewRes->SetName(_Name);
-
+	NewRes->SetPath(_Path);
 	NewRes->Load(_Path, _EntryPoint, _VersionHigh, _VersionLow);
 
 	ResourcesMap.insert(std::map<std::string, GameEnginePixelShader*>::value_type(_Name, NewRes));

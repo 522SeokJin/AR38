@@ -16,7 +16,7 @@ public:
 
 	float4x4 LocalScaling_;
 	float4x4 LocalRotation_;
-	float4x4 LocalPosition_;
+	float4x4 LocalTranslation_;
 	float4x4 LocalWorld_;
 
 	float4x4 Parent_;
@@ -36,9 +36,9 @@ public:
 	{
 		LocalScaling_.Scaling(vLocalScaling_);
 		LocalRotation_.RotationDeg(vLocalRotation_);
-		LocalPosition_.Translation(vLocalPosition_);
+		LocalTranslation_.Translation(vLocalPosition_);
 
-		LocalWorld_ = LocalScaling_ * LocalRotation_ * LocalPosition_;
+		LocalWorld_ = LocalScaling_ * LocalRotation_ * LocalTranslation_;
 	}
 
 	void ParentSetting(const float4x4& _Parent)

@@ -14,10 +14,10 @@ cbuffer TransformData : register(b0)
     float4 vLocalRotation;
     float4 vLocalScaling;
 
-    float4x4 Scaling;
-    float4x4 Rotation;
-    float4x4 Translation;
-    float4x4 Revolve;
+    float4x4 LocalScaling;
+    float4x4 LocalRotation;
+    float4x4 LocalTranslation;
+    float4x4 LocalWorld;
     float4x4 Parent;
     float4x4 World;
     float4x4 View;

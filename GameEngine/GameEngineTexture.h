@@ -3,7 +3,7 @@
 #include "GameEngineDevice.h"
 #include "ThirdParty/Include/DirectXTex/DirectXTex.h"
 
-// 설명 : 이미지를 로드한다는 것은 텍스처까지만이다. 렌더타겟은 직접 만들어야한다.
+// 설명 : 텍스처는 픽셀정보가 담긴 배열, 렌더타겟은 직접 만들어야한다.
 class GameEngineTexture : public GameEngineObjectNameBase
 {
 private:	// member Var

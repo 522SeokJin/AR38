@@ -49,12 +49,11 @@ public:
 	void ResetSamplers(const GameEngineSamplerSetting* _Setting) override;
 	void ResetTextures(const GameEngineTextureSetting* _Setting) override;
 
-private:
-
 	/// <summary>
 	/// ////////////////////////////// InputLayout Settting
 	/// </summary>
 	// CustomVertex의 순서를 정해준다.
+
 private:
 	ID3D11InputLayout*						Layout_;
 	unsigned int							LayoutOffset_; // Current Offset Position

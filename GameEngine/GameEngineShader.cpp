@@ -7,6 +7,7 @@ GameEngineShader::GameEngineShader(ShaderType _Type)
 	, VersionHigh_(5)
 	, VersionLow_(0)
 	, CodeBlob_(nullptr)
+	, Path_()
 {
 
 }
@@ -111,6 +112,11 @@ void GameEngineShader::ResCheck()
 		}
 		case D3D10_SIT_SAMPLER:
 		{
+			if (Samplers_.end() != Samplers_.find(ResInfo.BindPoint))
+			{
+				return;
+			}
+
 			D3D11_SAMPLER_DESC SmpDesc = {};
 
 			// D3D11_FILTER_MIN_MAG_MIP_LINEAR : ¹¶°³¶ó
@@ -123,7 +129,7 @@ void GameEngineShader::ResCheck()
 
 			SmpDesc.MipLODBias = 0.0f;
 			SmpDesc.MaxAnisotropy = 1;
-			SmpDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+			SmpDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS; // 
 			SmpDesc.MinLOD = -FLT_MAX;
 			SmpDesc.MaxLOD = FLT_MAX;
 			// SmpDesc.BorderColor;

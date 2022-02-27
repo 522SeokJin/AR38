@@ -22,13 +22,6 @@ GameEngineVertexShaderManager::~GameEngineVertexShaderManager() // default destr
 	ResourcesMap.clear();
 }
 
-GameEngineVertexShaderManager::GameEngineVertexShaderManager(GameEngineVertexShaderManager&& _other) noexcept  // default RValue Copy constructer 디폴트 RValue 복사생성자
-{
-
-}
-
-
-
 GameEngineVertexShader* GameEngineVertexShaderManager::Create(const std::string& _Name,
 	const std::string& _ShaderCode,
 	const std::string& _EntryPoint,
@@ -82,7 +75,7 @@ GameEngineVertexShader* GameEngineVertexShaderManager::Load(const std::string& _
 
 	GameEngineVertexShader* NewRes = new GameEngineVertexShader();
 	NewRes->SetName(_Name);
-
+	NewRes->SetPath(_Path);
 	NewRes->Load(_Path, _EntryPoint, _VersionHigh, _VersionLow);
 
 	ResourcesMap.insert(std::map<std::string, GameEngineVertexShader*>::value_type(_Name, NewRes));

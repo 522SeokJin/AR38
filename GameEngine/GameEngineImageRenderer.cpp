@@ -18,11 +18,11 @@ void GameEngineImageRenderer::SetImageSize(const float4& _ImageSize)
 {
 	ImageSize_ = _ImageSize;
 
-	LeftTopWorldPos_.x = GetTransform()->GetWorldPosition().x - (ImageSize_.x * 0.5f);
-	LeftTopWorldPos_.y = GetTransform()->GetWorldPosition().y + (ImageSize_.y * 0.5f);
+	LeftTopWorldPos_.x = GetTransform()->GetWorldPosition().x - ImageSize_.hx();
+	LeftTopWorldPos_.y = GetTransform()->GetWorldPosition().y + ImageSize_.hy();
 
-	RightBottomWorldPos_.x = GetTransform()->GetWorldPosition().x + (ImageSize_.x * 0.5f);
-	RightBottomWorldPos_.y = GetTransform()->GetWorldPosition().y - (ImageSize_.y * 0.5f);
+	RightBottomWorldPos_.x = GetTransform()->GetWorldPosition().x + ImageSize_.hx();
+	RightBottomWorldPos_.y = GetTransform()->GetWorldPosition().y - ImageSize_.hy();
 }
 
 void GameEngineImageRenderer::SetImage(const std::string& _ImageName,
@@ -46,11 +46,11 @@ void GameEngineImageRenderer::SetImage(const std::string& _ImageName,
 	ImageSize_ = FindTexture->GetImageSize();
 	GetTransform()->SetLocalScaling(ImageSize_);
 
-	LeftTopWorldPos_.x = GetTransform()->GetWorldPosition().x - (ImageSize_.x * 0.5f);
-	LeftTopWorldPos_.y = GetTransform()->GetWorldPosition().y + (ImageSize_.y * 0.5f);
+	LeftTopWorldPos_.x = GetTransform()->GetWorldPosition().x - ImageSize_.hx();
+	LeftTopWorldPos_.y = GetTransform()->GetWorldPosition().y + ImageSize_.hy();
 
-	RightBottomWorldPos_.x = GetTransform()->GetWorldPosition().x + (ImageSize_.x * 0.5f);
-	RightBottomWorldPos_.y = GetTransform()->GetWorldPosition().y - (ImageSize_.y * 0.5f);
+	RightBottomWorldPos_.x = GetTransform()->GetWorldPosition().x + ImageSize_.hx();
+	RightBottomWorldPos_.y = GetTransform()->GetWorldPosition().y - ImageSize_.hy();
 }
 
 void GameEngineImageRenderer::Start()
@@ -58,5 +58,6 @@ void GameEngineImageRenderer::Start()
 	GameEngineRenderer::Start();
 
 	SetRenderingPipeLine("Texture");
-}
 
+	ShaderHelper.SettingConstantBufferLink("TextureData", TextureData_);
+}

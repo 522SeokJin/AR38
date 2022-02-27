@@ -7,6 +7,10 @@ void LoginUI::CreateWzRenderer()
 	{
 		WzUIRenderer* Renderer = CreateTransformComponent<WzUIRenderer>(GetTransform());
 		Renderer->SetImage("UI_login.img.back.0.png");
+		Renderer->SetBrightness(1.5f);
+
+		Renderer->FileCompile();
+		
 	}
 
 	{

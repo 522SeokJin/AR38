@@ -69,5 +69,7 @@ void GameEngineImageUIRenderer::Start()
 	GameEngineUIRenderer::Start();
 
 	SetRenderingPipeLine("Texture");
+
+	ShaderHelper.SettingConstantBufferLink("TextureData", TextureData_);
 }
 

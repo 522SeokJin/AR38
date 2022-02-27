@@ -42,8 +42,6 @@ GameEngineRenderingPipeLine* GameEngineRenderingPipeLineManager::Create(const st
 	GameEngineRenderingPipeLine* NewRes = new GameEngineRenderingPipeLine();
 	NewRes->SetName(_Name);
 
-	// 그리고 뭘할거냐?
-
 	ResourcesMap.insert(std::map<std::string, GameEngineRenderingPipeLine*>::value_type(_Name, NewRes));
 	return NewRes;
 }

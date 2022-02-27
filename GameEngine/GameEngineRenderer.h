@@ -31,6 +31,7 @@ public:
 
 public:
 	void SetRenderingPipeLine(const std::string& _Value);
+	void FileCompile();
 
 protected:
 	void Start() override;
