@@ -44,6 +44,9 @@ public:
 	void SetLocalRotation(const float4& _Value);
 	void SetWorldRotation(const float4& _Value);
 
+	void AddLocalRotation(const float4& _Value);
+	void AddWorldRotation(const float4& _Value);
+
 	void SetLocalDeltaTimeRotation(const float4& _Value);
 	void SetWorldDeltaTimeRotation(const float4& _Value);
 

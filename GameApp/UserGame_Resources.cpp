@@ -166,7 +166,7 @@ void UserGame::ResourceLoad()
 		// D3D11_CULL_NONE	: 어느방향으로 돌던 그려라.
 		// D3D11_CULL_FRONT : 시계방향으로 그려진 것들을 그려라.
 		// D3D11_CULL_BACK	: 시계 반대방향으로 그려진 것들을 그려라.
-		Info.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
+		Info.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
 		Info.AntialiasedLineEnable = true;
 		Info.MultisampleEnable = true;
 		

@@ -38,12 +38,10 @@ public:
 	}
 
 public:
-	// constrcuter destructer
 	GameEngineImageUIRenderer();
 	~GameEngineImageUIRenderer();
 
-public:
-	// delete Function
+public: // delete Function
 	GameEngineImageUIRenderer(const GameEngineImageUIRenderer& _other) = delete; 
 	GameEngineImageUIRenderer(GameEngineImageUIRenderer&& _other) noexcept = delete;
 	GameEngineImageUIRenderer& operator=(const GameEngineImageUIRenderer& _other) = delete;
@@ -51,7 +49,6 @@ public:
 
 public:
 	void SetImageSize(const float4& _ImageSize);
-
 	void SetImage(const std::string& _ImageName, bool _ScaleToImageSize = true);
 
 	void SetWorldPosition(float4 _Value);

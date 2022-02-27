@@ -108,6 +108,15 @@ public:
 	void SetLocalRotation(const float4& _Value);
 	void SetWorldRotation(const float4& _Value);
 
+	void AddLocalRotation(const float4& _Value)
+	{
+		SetLocalRotation(TransformData_.vLocalRotation_ + _Value);
+	}
+	void AddWorldRotation(const float4& _Value)
+	{
+		SetWorldRotation(TransformData_.vWorldRotation_ + _Value);
+	}
+
 	void SetLocalDeltaTimeRotation(const float4& _Value)
 	{
 		SetLocalRotation(TransformData_.vLocalRotation_ + _Value * GameEngineTime::GetInst().GetDeltaTime());

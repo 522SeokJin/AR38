@@ -18,11 +18,13 @@ public: // delete Function
 	LoginUI& operator=(const LoginUI& _other) = delete;
 	LoginUI& operator=(const LoginUI&& _other) = delete;
 
-private:
-	void CreateWzRenderer();
-
 public:
 	virtual void Start() override;
 	virtual void Update(float _DeltaTime) override;
+
+
+	// CreateRenderer.cpp
+private:
+	void CreateWzRenderer();
 };
 

@@ -53,6 +53,12 @@ void GameEngineImageRenderer::SetImage(const std::string& _ImageName,
 	RightBottomWorldPos_.y = GetTransform()->GetWorldPosition().y - ImageSize_.hy();
 }
 
+void GameEngineImageRenderer::ImageFlipYAxis()
+{
+	SetLocalPosition(GetLocalPosition().InvertX());
+	AddLocalRotation(float4(0.0f, 180.0f, 0.0f));
+}
+
 void GameEngineImageRenderer::Start()
 {
 	GameEngineRenderer::Start();

@@ -21,17 +21,13 @@ public:
 	}
 
 public:
-	GameEngineObjectNameBase(); // default constructer 디폴트 생성자
-	~GameEngineObjectNameBase(); // default destructer 디폴트 소멸자
+	GameEngineObjectNameBase();
+	~GameEngineObjectNameBase();
 
-protected:		// delete constructer
-	GameEngineObjectNameBase(const GameEngineObjectNameBase& _other) = delete; // default Copy constructer 디폴트 복사생성자
-	GameEngineObjectNameBase(GameEngineObjectNameBase&& _other) noexcept; // default RValue Copy constructer 디폴트 RValue 복사생성자
-
-private:		//delete operator
-	GameEngineObjectNameBase& operator=(const GameEngineObjectNameBase& _other) = delete; // default Copy operator 디폴트 대입 연산자
-	GameEngineObjectNameBase& operator=(const GameEngineObjectNameBase&& _other) = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
-
-public:
+protected:		// delete function
+	GameEngineObjectNameBase(const GameEngineObjectNameBase& _other) = delete;
+	GameEngineObjectNameBase(GameEngineObjectNameBase&& _other) noexcept = delete; 
+	GameEngineObjectNameBase& operator=(const GameEngineObjectNameBase& _other) = delete; 
+	GameEngineObjectNameBase& operator=(const GameEngineObjectNameBase&& _other) = delete;
 };
 

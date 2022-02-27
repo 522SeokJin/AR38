@@ -26,9 +26,24 @@ Player::~Player()
 {
 }
 
+void Player::ChangeImageDirection()
+{
+	Body_->ImageFlipYAxis();
+	Arm_->ImageFlipYAxis();
+	Head_->ImageFlipYAxis();
+	Ear_->ImageFlipYAxis();
+	Face_->ImageFlipYAxis();
+	HairOverHead_->ImageFlipYAxis();
+	Hair_->ImageFlipYAxis();
+	Mail_->ImageFlipYAxis();
+	MailArm_->ImageFlipYAxis();
+	Pants_->ImageFlipYAxis();
+	Shoes_->ImageFlipYAxis();
+	Weapon_->ImageFlipYAxis();
+}
+
 void Player::Start()
 {
-	
 	CreateWzRenderer();
 
 	GameEngineInput::GetInst().CreateKey("MoveLeft", VK_LEFT);
@@ -37,9 +52,6 @@ void Player::Start()
 	GameEngineInput::GetInst().CreateKey("MoveDown", VK_DOWN);
 	GameEngineInput::GetInst().CreateKey("Attack", VK_CONTROL);
 	GameEngineInput::GetInst().CreateKey("Jump", VK_MENU);	// ALT KEY
-	GameEngineInput::GetInst().CreateKey("RotZ+", 'Q');
-	GameEngineInput::GetInst().CreateKey("RotZ-", 'E');
-
 }
 
 void Player::Update(float _DeltaTime)
@@ -77,20 +89,9 @@ void Player::Update(float _DeltaTime)
 		GetTransform()->SetLocalDeltaTimeMove(float4::UP * JUMPSPEED);
 	}
 
-	if (true == GameEngineInput::GetInst().Press("RotZ+"))
-	{
-		GetTransform()->SetLocalDeltaTimeRotation(float4{ 0.0f, 0.0f, 1.0f } *100.0f);
-	}
-
-	if (true == GameEngineInput::GetInst().Press("RotZ-"))
-	{
-		GetTransform()->SetLocalDeltaTimeRotation(float4{ 0.0f, 0.0f, -1.0f } *100.0f);
-	}
-
 	if (CurrentDir != Dir_)
 	{
-		Arm_->SetLocalPosition((Arm_->GetLocalPosition()).InvertX());
-		Head_->SetLocalPosition((Head_->GetLocalPosition()).InvertX());
+		ChangeImageDirection();
 	}
 
 	GetLevel()->GetMainCameraActor()->GetTransform()->

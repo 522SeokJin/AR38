@@ -177,7 +177,7 @@ void GameEngineTransform::CalculationWorldPosition()
 {
 	float4 CalWorldPos = TransformData_.vLocalPosition_;
 	// 크기
-	//CalWorldPos *= Parent_->TransformData_.vWorldScaling_;
+	CalWorldPos *= Parent_->TransformData_.vWorldScaling_;
 	// 회전
 	CalWorldPos.Rotate3DDegree(Parent_->TransformData_.vWorldRotation_);
 	// 이동

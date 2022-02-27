@@ -49,10 +49,15 @@ public:
 	Player& operator=(const Player&& _other) = delete;
 
 private:
-	void CreateWzRenderer();
+	void ChangeImageDirection();
 
 public:
 	virtual void Start() override;
 	virtual void Update(float _DeltaTime) override;
+
+
+	// CreateRenderer.cpp
+private:
+	void CreateWzRenderer();
 };
 

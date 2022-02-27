@@ -64,6 +64,14 @@ void GameEngineTransformComponent::SetWorldRotation(const float4& _Value)
 {
 	Transform_->SetWorldRotation(_Value);
 }
+void GameEngineTransformComponent::AddLocalRotation(const float4& _Value)
+{
+	SetLocalRotation(Transform_->GetTransformData().vLocalRotation_ + _Value);
+}
+void GameEngineTransformComponent::AddWorldRotation(const float4& _Value)
+{
+	SetWorldRotation(Transform_->GetTransformData().vWorldRotation_ + _Value);
+}
 void GameEngineTransformComponent::SetLocalDeltaTimeRotation(const float4& _Value)
 {
 	SetLocalRotation(Transform_->GetLocalRotation() + _Value * GameEngineTime::GetInst().GetDeltaTime());

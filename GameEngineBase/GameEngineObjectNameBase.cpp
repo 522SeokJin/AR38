@@ -10,9 +10,3 @@ GameEngineObjectNameBase::~GameEngineObjectNameBase() // default destructer 디폴
 {
 
 }
-
-GameEngineObjectNameBase::GameEngineObjectNameBase(GameEngineObjectNameBase&& _other) noexcept  // default RValue Copy constructer 디폴트 RValue 복사생성자
-{
-
-}
-

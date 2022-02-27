@@ -38,12 +38,10 @@ public:
 	}
 
 public:
-	// constrcuter destructer
 	GameEngineImageRenderer();
 	~GameEngineImageRenderer();
 
-public:
-	// delete Function
+public: // delete Function
 	GameEngineImageRenderer(const GameEngineImageRenderer& _other) = delete; 
 	GameEngineImageRenderer(GameEngineImageRenderer&& _other) noexcept = delete;
 	GameEngineImageRenderer& operator=(const GameEngineImageRenderer& _other) = delete;
@@ -53,6 +51,8 @@ public:
 	void SetImageSize(const float4& _ImageSize);
 
 	void SetImage(const std::string& _ImageName, bool _ScaleToImageSize = true);
+
+	void ImageFlipYAxis();
 
 private:
 	void Start() override;
