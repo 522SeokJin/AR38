@@ -167,23 +167,26 @@ void GameEngineTransform::CalculationWorldRotation()
 void GameEngineTransform::CalculationLocalPosition()
 {
 	// CalculationWorldPosition() 의 역으로 계산
-	float4 CalLocalPos = TransformData_.vWorldPosition_ - Parent_->TransformData_.vWorldPosition_;
-	CalLocalPos.Rotate3DDegree(-Parent_->TransformData_.vWorldRotation_);	// 역회전
-	CalLocalPos /= Parent_->TransformData_.vWorldScaling_;
-	TransformData_.vLocalPosition_ = CalLocalPos;
+	float4 WorldPostion = TransformData_.vWorldPosition_ - Parent_->TransformData_.vWorldPosition_;
+
+	WorldPostion.Rotate3DDegree(-Parent_->TransformData_.vWorldRotation_);
+
+	WorldPostion /= Parent_->TransformData_.vWorldScaling_;
+
+	TransformData_.vLocalPosition_ = WorldPostion;
 }
 
 void GameEngineTransform::CalculationWorldPosition()
 {
-	float4 CalWorldPos = TransformData_.vLocalPosition_;
-	// 크기
-	CalWorldPos *= Parent_->TransformData_.vWorldScaling_;
-	// 회전
-	CalWorldPos.Rotate3DDegree(Parent_->TransformData_.vWorldRotation_);
-	// 이동
-	CalWorldPos += Parent_->TransformData_.vWorldPosition_;
+	float4 CalLocalPos = TransformData_.vLocalPosition_;
+	// 크기를 키우고
+	CalLocalPos *= Parent_->TransformData_.vWorldScaling_;
+	// 회전시키고
+	CalLocalPos.Rotate3DDegree(Parent_->TransformData_.vWorldRotation_);
+	// 부모의 위치로 이동한게
+	CalLocalPos += Parent_->TransformData_.vWorldPosition_;
 
-	TransformData_.vWorldPosition_ = CalWorldPos;
+	TransformData_.vWorldPosition_ = CalLocalPos;
 }
 
 void GameEngineTransform::AllChildCalculationScaling()

@@ -8,6 +8,7 @@ public:
 	WzUIRenderer();
 	~WzUIRenderer();
 
+	void SetUILocalPosition(const float4& _WzOrigin, const float4& _WzFarFromOrigin);
 	void SetUIWorldPosition(const float4& _WzOrigin, const float4& _WzFarFromOrigin);
 
 	float4 OriginPosition_;

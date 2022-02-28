@@ -32,7 +32,8 @@ void LithHarborLevel::LevelStart()
 
 	{
 		float4 WindowLeftBottom = -GameEngineWindow::GetInst().GetSize().halffloat4();
-		MainBarUI* Actor = CreateActor<MainBarUI>(WindowLeftBottom);
+		MainBarUI* Actor = CreateActor<MainBarUI>();
+		Actor->GetTransform()->SetWorldPosition(WindowLeftBottom);
 	}
 }
 
