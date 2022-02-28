@@ -10,34 +10,14 @@ class GameEngineShaderResHelper
 {
 	friend class GameEngineRenderer;
 
-private:	// member Var
-	std::map<std::string, GameEngineConstantBufferSetting*> AllConstantBufferData_;
-	std::map<std::string, GameEngineSamplerSetting*>		AllSamplerData_;
-	std::map<std::string, GameEngineTextureSetting*>		AllTextureData_;
-	
 public:
-	bool IsConstantBuffer(const std::string& _SettingName);
-
-public:
-	// constrcuter destructer
 	GameEngineShaderResHelper();
 	~GameEngineShaderResHelper();
 
-public:
-	// delete Function
-	GameEngineShaderResHelper(const GameEngineShaderResHelper& _other) = delete; 
-	GameEngineShaderResHelper(GameEngineShaderResHelper&& _other) noexcept = delete;
-	GameEngineShaderResHelper& operator=(const GameEngineShaderResHelper& _other) = delete;
-	GameEngineShaderResHelper& operator=(const GameEngineShaderResHelper&& _other) = delete;
+	bool IsConstantBuffer(const std::string& _SettingName);
 
-public:
 	void ShaderResourcesCheck(GameEngineShader* _Shader);
 
-private:
-	void Setting();
-	void Reset();
-	
-public:
 	// 해당 주소값에 지속적으로 세팅을 해줄수있다.
 	template<typename T>
 	void SettingConstantBufferLink(const std::string& _SettingName, T& _Data)
@@ -91,5 +71,18 @@ public:
 
 	void SettingTexture(const std::string& _SettingName, const std::string& _ImageName);
 
+protected:
+	GameEngineShaderResHelper(const GameEngineShaderResHelper& _other) = delete; 
+	GameEngineShaderResHelper(GameEngineShaderResHelper&& _other) noexcept = delete;
+	GameEngineShaderResHelper& operator=(const GameEngineShaderResHelper& _other) = delete;
+	GameEngineShaderResHelper& operator=(const GameEngineShaderResHelper&& _other) = delete;
+
+private:
+	void Setting();
+	void Reset();
+
+	std::map<std::string, GameEngineConstantBufferSetting*> AllConstantBufferData_;
+	std::map<std::string, GameEngineSamplerSetting*>		AllSamplerData_;
+	std::map<std::string, GameEngineTextureSetting*>		AllTextureData_;
 };
 

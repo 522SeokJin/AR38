@@ -28,16 +28,6 @@ public:
 		}
 	}
 
-private:
-	std::string className_;
-	std::string windowTitle_;
-	HINSTANCE hInstance_;
-	HWND windowhandle_;
-	HDC devicecontext_;
-
-	float4 size_;
-	float4 pos_;
-
 public:
 	HWND  GetWindowHWND()
 	{
@@ -57,11 +47,6 @@ public:
 		return pos_;
 	}
 
-
-private:
-	int CreateMainWindowClass();
-
-public:
 	void CreateMainWindow(const std::string& _titlename, const float4& _size, const float4& _pos);
 	void SetSizeAndPos(const float4& _size, const float4& _pos);
 	void Loop(void(*_loopFunc)());
@@ -69,4 +54,15 @@ public:
 private:
 	GameEngineWindow();
 	~GameEngineWindow();
+
+	int CreateMainWindowClass();
+
+	std::string className_;
+	std::string windowTitle_;
+	HINSTANCE hInstance_;
+	HWND windowhandle_;
+	HDC devicecontext_;
+
+	float4 size_;
+	float4 pos_;
 };

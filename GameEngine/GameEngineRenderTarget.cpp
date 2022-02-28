@@ -3,19 +3,14 @@
 #include "GameEngineTextureManager.h"
 #include "GameEngineTexture.h"
 
-GameEngineRenderTarget::GameEngineRenderTarget() // default constructer 디폴트 생성자
+GameEngineRenderTarget::GameEngineRenderTarget() 
 {
 
 }
 
-GameEngineRenderTarget::~GameEngineRenderTarget() // default destructer 디폴트 소멸자
+GameEngineRenderTarget::~GameEngineRenderTarget()
 {
 	
-}
-
-GameEngineRenderTarget::GameEngineRenderTarget(GameEngineRenderTarget&& _other) noexcept  // default RValue Copy constructer 디폴트 RValue 복사생성자
-{
-
 }
 
 void GameEngineRenderTarget::Clear()

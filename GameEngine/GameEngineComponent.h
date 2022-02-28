@@ -8,11 +8,10 @@ class GameEngineComponent : public GameEngineObjectNameBase
 {
 	friend GameEngineActor;
 
-private:	// member Var
-	GameEngineLevel* Level_;
-	GameEngineActor* Actor_;
-
 public:
+	GameEngineComponent();
+	virtual ~GameEngineComponent() = 0;
+
 	GameEngineLevel* GetLevel()
 	{
 		return Level_;
@@ -23,22 +22,19 @@ public:
 		return Actor_;
 	}
 
-public:
-	// constrcuter destructer
-	GameEngineComponent();
-	virtual ~GameEngineComponent() = 0;
-
-public:
-	// delete Function
-	GameEngineComponent(const GameEngineComponent& _other) = delete; 
+protected:
+	GameEngineComponent(const GameEngineComponent& _other) = delete;
 	GameEngineComponent(GameEngineComponent&& _other) noexcept = delete;
 	GameEngineComponent& operator=(const GameEngineComponent& _other) = delete;
 	GameEngineComponent& operator=(const GameEngineComponent&& _other) = delete;
 
-protected:
 	virtual void InitComponent(GameEngineActor* Actor_);
 
 	virtual void Start() = 0;
 	virtual void Update() = 0;
+
+private:
+	GameEngineLevel* Level_;
+	GameEngineActor* Actor_;
 };
 

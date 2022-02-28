@@ -106,7 +106,7 @@ public:
 		return DirZRadian(_Degree * GameEngineMath::DegreeToRadian);
 	}
 
-	// 0도일때의 벡터를 회전시키는 공식인겁니다.
+	// 0도일때의 벡터를 회전시키는 공식
 	static float4 DirZRadian(float _Radian);
 
 public:
@@ -709,9 +709,9 @@ public:
 	)
 	{
 
-		float Height = cos(0.5f * _FovAngleY) / sin(0.5f * _FovAngleY);
+		/*float Height = cos(0.5f * _FovAngleY) / sin(0.5f * _FovAngleY);
 		float Width = Height / _AspectRatio;
-		float fRange = _FarZ / (_FarZ - _NearZ);
+		float fRange = _FarZ / (_FarZ - _NearZ);*/
 
 		/*float    SinFov;
 		float    CosFov;

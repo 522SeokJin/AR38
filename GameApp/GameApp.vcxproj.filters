@@ -23,17 +23,11 @@
     <ClCompile Include="Monster.cpp">
       <Filter>Actor\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Actor</Filter>
-    </ClCompile>
     <ClCompile Include="WzRenderer.cpp">
       <Filter>Wz\Component</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="TopUI.cpp">
-      <Filter>Actor\UI</Filter>
     </ClCompile>
     <ClCompile Include="LoginUI.cpp">
       <Filter>Actor\UI\Login</Filter>
@@ -126,17 +120,11 @@
     <ClInclude Include="Monster.h">
       <Filter>Actor\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
     <ClInclude Include="WzRenderer.h">
       <Filter>Wz\Component</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="TopUI.h">
-      <Filter>Actor\UI</Filter>
     </ClInclude>
     <ClInclude Include="WzPhysics.h">
       <Filter>Wz</Filter>

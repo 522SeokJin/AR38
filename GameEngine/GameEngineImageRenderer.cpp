@@ -43,14 +43,8 @@ void GameEngineImageRenderer::SetImage(const std::string& _ImageName,
 		return;
 	}
 
-	ImageSize_ = FindTexture->GetImageSize();
+	SetImageSize(FindTexture->GetImageSize());
 	GetTransform()->SetLocalScaling(ImageSize_);
-
-	LeftTopWorldPos_.x = GetTransform()->GetWorldPosition().x - ImageSize_.hx();
-	LeftTopWorldPos_.y = GetTransform()->GetWorldPosition().y + ImageSize_.hy();
-
-	RightBottomWorldPos_.x = GetTransform()->GetWorldPosition().x + ImageSize_.hx();
-	RightBottomWorldPos_.y = GetTransform()->GetWorldPosition().y - ImageSize_.hy();
 }
 
 void GameEngineImageRenderer::ImageLocalFlipYAxis()

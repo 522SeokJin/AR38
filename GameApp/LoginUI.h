@@ -5,26 +5,23 @@
 class WzUIRenderer;
 class LoginUI : public GameEngineActor
 {
-private:	// member Var
-	WzUIRenderer* LoginUI_;
-
-public: // constrcuter destructer
+public:
 	LoginUI();
 	~LoginUI();
 
-public: // delete Function
+	virtual void Start() override;
+	virtual void Update(float _DeltaTime) override;
+
+protected:
 	LoginUI(const LoginUI& _other) = delete; 
 	LoginUI(LoginUI&& _other) noexcept = delete;
 	LoginUI& operator=(const LoginUI& _other) = delete;
 	LoginUI& operator=(const LoginUI&& _other) = delete;
 
-public:
-	virtual void Start() override;
-	virtual void Update(float _DeltaTime) override;
-
-
-	// CreateRenderer.cpp
 private:
 	void CreateWzRenderer();
+
+	WzUIRenderer* LoginUI_;
+
 };
 

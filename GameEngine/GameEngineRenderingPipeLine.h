@@ -15,31 +15,10 @@ class GameEngineRasterizer;
 class GameEnginePixelShader;
 class GameEngineRenderingPipeLine : public GameEngineObjectNameBase
 {
-private:	// member Var
-	// VertexBuffer 에서 복사해서 받아온다.
-	// IA1
-	GameEngineVertexBuffer* VertexBuffer_;
-	GameEngineVertexShader* InputLayoutVertexShader_;
-
-	// VS
-	GameEngineVertexShader* VertexShader_;
-	
-	// IA2
-	GameEngineIndexBuffer* IndexBuffer_;
-	D3D11_PRIMITIVE_TOPOLOGY Topology_;
-
-	// RS
-	GameEngineRasterizer* Rasterizer_;
-
-	// PS
-	GameEnginePixelShader* PixelShader_;
-
-	// OM
-	GameEngineRenderTarget* RenderTarget_;
-
-	GameEngineBlend* Blend_;
-
 public:
+	GameEngineRenderingPipeLine();
+	~GameEngineRenderingPipeLine();
+
 	inline GameEngineVertexShader* GetVertexShader() const
 	{
 		return VertexShader_;
@@ -52,7 +31,7 @@ public:
 
 	void SetInputAssembler1VertexBufferSetting(const std::string& _Name);
 	void SetInputAssembler1InputLayoutSetting(const std::string& _Name);
-	
+
 	void SetVertexShader(const std::string& _Name);
 
 	void SetInputAssembler2IndexBufferSetting(const std::string& _Name);
@@ -64,24 +43,19 @@ public:
 
 	void SetOutputMergerBlend(const std::string& _Name);
 
-public:
 	void RenderingPipeLineSetting();
 
 	void Rendering();
-	
-public:
-	GameEngineRenderingPipeLine(); // default constructer 디폴트 생성자
-	~GameEngineRenderingPipeLine(); // default destructer 디폴트 소멸자
 
-protected:		// delete constructer
-	GameEngineRenderingPipeLine(const GameEngineRenderingPipeLine& _other) = delete; // default Copy constructer 디폴트 복사생성자
-	GameEngineRenderingPipeLine(GameEngineRenderingPipeLine&& _other) = delete; // default RValue Copy constructer 디폴트 RValue 복사생성자
+	void Reset();
 
-private:		//delete operator
-	GameEngineRenderingPipeLine& operator=(const GameEngineRenderingPipeLine& _other) = delete; // default Copy operator 디폴트 대입 연산자
-	GameEngineRenderingPipeLine& operator=(const GameEngineRenderingPipeLine&& _other) = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
+protected:
+	GameEngineRenderingPipeLine(const GameEngineRenderingPipeLine& _other) = delete;
+	GameEngineRenderingPipeLine(GameEngineRenderingPipeLine&& _other) = delete;
+	GameEngineRenderingPipeLine& operator=(const GameEngineRenderingPipeLine& _other) = delete;
+	GameEngineRenderingPipeLine& operator=(const GameEngineRenderingPipeLine&& _other) = delete;
 
-public:
+private:
 	void InputAssembler1();
 	void InputAssembler2();
 	void VertexShader();
@@ -89,7 +63,24 @@ public:
 	void PixelShader();
 	void OutputMerger();
 
-public:
+	// VertexBuffer 에서 복사해서 받아온다.
+	// IA1
+	GameEngineVertexBuffer*		VertexBuffer_;
+	GameEngineVertexShader*		InputLayoutVertexShader_;
+	// VS
+	GameEngineVertexShader*		VertexShader_;
+	// IA2
+	GameEngineIndexBuffer*		IndexBuffer_;
+	D3D11_PRIMITIVE_TOPOLOGY	Topology_;
+	// RS
+	GameEngineRasterizer*		Rasterizer_;
+	// PS
+	GameEnginePixelShader*		PixelShader_;
+	// Blend
+	GameEngineBlend*			Blend_;
+	// OM
+	GameEngineRenderTarget*		RenderTarget_;
+
 
 };
 

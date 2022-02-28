@@ -68,6 +68,7 @@ void CameraComponent::Render()
 
 			Renderer->GetTransform()->GetTransformData().View_ = View;
 			Renderer->GetTransform()->GetTransformData().Projection_ = Projection;
+			Renderer->GetTransform()->GetTransformData().CalWVP();
 
 			Renderer->Render();
 		}

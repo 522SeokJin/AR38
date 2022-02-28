@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "PlayLevel.h"
 #include "Player.h"
-#include "Monster.h"
 #include "MainBarUI.h"
 #include "GameEngine/GameEngineWindow.h"
 
@@ -24,11 +23,6 @@ void PlayLevel::LevelStart()
 		Player* Actor = CreateActor<Player>();
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(
 			Actor->GetTransform()->GetLocalPosition());
-	}
-
-	{
-		Monster* Actor = CreateActor<Monster>();
-		Actor->GetTransform()->SetWorldPosition(float4(200.0f, 0.0f, 0.0f));
 	}
 
 	{

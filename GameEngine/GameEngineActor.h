@@ -10,17 +10,10 @@ class GameEngineActor : public GameEngineObjectNameBase
 {
 	friend GameEngineLevel;
 
-private:	// member Var
-	GameEngineLevel*				Level_;
-	GameEngineTransform*			Transform_;
-
-	std::list<GameEngineComponent*> ComponentList_;
-	std::list<GameEngineTransformComponent*> TransformComponentList_;
-
-	bool	IsDestroyed_;
-	float	DeathTime_;
-
 public:
+	GameEngineActor();
+	~GameEngineActor();
+
 	GameEngineLevel* GetLevel()
 	{
 		return Level_;
@@ -31,22 +24,6 @@ public:
 		return Transform_;
 	}
 
-private:
-	void SetLevel(GameEngineLevel* _Level);
-
-public:
-	// constrcuter destructer
-	GameEngineActor();
-	~GameEngineActor();
-
-public:
-	// delete Function
-	GameEngineActor(const GameEngineActor& _other) = delete; 
-	GameEngineActor(GameEngineActor&& _other) noexcept = delete;
-	GameEngineActor& operator=(const GameEngineActor& _other) = delete;
-	GameEngineActor& operator=(const GameEngineActor&& _other) = delete;
-
-public:
 	void Release(float _Time = 0.0f)
 	{
 		if (0.0f >= _Time)
@@ -60,7 +37,6 @@ public:
 		}
 	}
 
-public:
 	template <typename ComponentType>
 	ComponentType* CreateComponent(int _Order = 0)
 	{
@@ -92,15 +68,34 @@ public:
 		return dynamic_cast<ComponentType*>(NewComponent);
 	}
 
-private:
-	void ComponentUpdate();
-	void ComponentRelease();
-	void ReleaseUpdate(float _DeltaTime);
-
 protected:
+	GameEngineActor(const GameEngineActor& _other) = delete;
+	GameEngineActor(GameEngineActor&& _other) noexcept = delete;
+	GameEngineActor& operator=(const GameEngineActor& _other) = delete;
+	GameEngineActor& operator=(const GameEngineActor&& _other) = delete;
+
 	virtual void Start() {};
 	virtual void TransformUpdate();
 	virtual void Update(float _DeltaTime) {};
 	virtual void ReleaseEvent() {};
+
+private:
+	void SetLevel(GameEngineLevel* _Level);
+
+	void UpdateComponent();
+
+	void ComponentRelease();
+
+	void ReleaseUpdate(float _DeltaTime);
+
+	GameEngineTransform* Transform_;
+
+	GameEngineLevel* Level_;
+
+	bool	IsDestroyed_;
+	float	DeathTime_;
+
+	std::list<GameEngineComponent*> ComponentList_;
+	std::list<GameEngineTransformComponent*> TransformComponentList_;
 };
 

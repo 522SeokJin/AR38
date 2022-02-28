@@ -167,8 +167,8 @@ void UserGame::ResourceLoad()
 		// D3D11_CULL_FRONT : 시계방향으로 그려진 것들을 그려라.
 		// D3D11_CULL_BACK	: 시계 반대방향으로 그려진 것들을 그려라.
 		Info.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
-		Info.AntialiasedLineEnable = true;
-		Info.MultisampleEnable = true;
+		Info.AntialiasedLineEnable = false;
+		Info.MultisampleEnable = false;
 		
 		// 이 매개변수가 TRUE 이면 삼각형의 정점이 렌더 대상에서 시계 반대 방향이면 전면으로 간주되고
 		// 시계 방향이면 후면으로 간주된다. 이 매개변수가 FALSE 이면 그 반대.

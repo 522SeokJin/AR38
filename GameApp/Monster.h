@@ -20,27 +20,20 @@ public:
 // Ό³Έν : 
 class Monster : public GameEngineActor
 {
-private:	// member Var
-	DBMonster	Data_;
-
 public:
-	DBMonster GetData() { return Data_; }
-
-public:
-	// constrcuter destructer
 	Monster();
-	Monster(const DBMonster& _Data);
-	~Monster();
+	virtual ~Monster() = 0;
 
-public:
-	// delete Function
+	DBMonster GetData() { return Data_; }
+	void SetData(DBMonster _Data) { Data_ = _Data; }
+
+protected:
 	Monster(const Monster& _other) = delete; 
 	Monster(Monster&& _other) noexcept = delete;
 	Monster& operator=(const Monster& _other) = delete;
 	Monster& operator=(const Monster&& _other) = delete;
 
-protected:
-	void Start() override;
-	void Update(float _DeltaTime) override;
+private:
+	DBMonster	Data_;
 };
 

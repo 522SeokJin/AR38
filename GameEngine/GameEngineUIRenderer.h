@@ -10,21 +10,16 @@ class GameEngineUIRenderer : public GameEngineRenderer
 	friend GameEngineLevel;
 	friend CameraComponent;
 
-private:	// member Var
-
 public:
-	// constrcuter destructer
 	GameEngineUIRenderer();
 	~GameEngineUIRenderer();
 
-public:
-	// delete Function
+protected:
 	GameEngineUIRenderer(const GameEngineUIRenderer& _other) = delete; 
 	GameEngineUIRenderer(GameEngineUIRenderer&& _other) noexcept = delete;
 	GameEngineUIRenderer& operator=(const GameEngineUIRenderer& _other) = delete;
 	GameEngineUIRenderer& operator=(const GameEngineUIRenderer&& _other) = delete;
 
-protected:
 	void Start() override;
 };
 

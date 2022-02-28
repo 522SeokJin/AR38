@@ -44,7 +44,7 @@ void GameEngineActor::SetLevel(GameEngineLevel* _Level)
 	Level_ = _Level;
 }
 
-void GameEngineActor::ComponentUpdate()
+void GameEngineActor::UpdateComponent()
 {
 	for (GameEngineComponent* Component : ComponentList_)
 	{

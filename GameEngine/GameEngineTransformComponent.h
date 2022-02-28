@@ -5,10 +5,10 @@
 class GameEngineTransform;
 class GameEngineTransformComponent : public GameEngineComponent
 {
-private:	// member Var
-	GameEngineTransform* Transform_;
-
 public:
+	GameEngineTransformComponent();
+	virtual ~GameEngineTransformComponent() = 0;
+
 	GameEngineTransform* GetTransform()
 	{
 		return Transform_;
@@ -21,22 +21,8 @@ public:
 	float4 GetLocalPosition();
 	float4 GetWorldPosition();
 
-public:
-	// constrcuter destructer
-	GameEngineTransformComponent();
-	virtual ~GameEngineTransformComponent() = 0;
-
-public:
-	// delete Function
-	GameEngineTransformComponent(const GameEngineTransformComponent& _other) = delete; 
-	GameEngineTransformComponent(GameEngineTransformComponent&& _other) noexcept = delete;
-	GameEngineTransformComponent& operator=(const GameEngineTransformComponent& _other) = delete;
-	GameEngineTransformComponent& operator=(const GameEngineTransformComponent&& _other) = delete;
-
-public:
 	void AttachTransform(GameEngineTransform* _Parent);
 
-public:
 	void SetLocalScaling(const float4& _Value);
 	void SetWorldScaling(const float4& _Value);
 
@@ -58,5 +44,15 @@ public:
 
 	void SetLocalDeltaTimeMove(const float4& _Value);
 	void SetWorldDeltaTimeMove(const float4& _Value);
+
+protected:
+	// delete Function
+	GameEngineTransformComponent(const GameEngineTransformComponent& _other) = delete; 
+	GameEngineTransformComponent(GameEngineTransformComponent&& _other) noexcept = delete;
+	GameEngineTransformComponent& operator=(const GameEngineTransformComponent& _other) = delete;
+	GameEngineTransformComponent& operator=(const GameEngineTransformComponent&& _other) = delete;
+
+private:
+	GameEngineTransform* Transform_;
 };
 

@@ -1,6 +1,5 @@
 #include "PreCompile.h"
 #include "Player.h"
-#include "Bullet.h"
 #include "WzRenderer.h"
 #include "WzPhysics.h"
 
@@ -79,9 +78,7 @@ void Player::Update(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst().Down("Attack"))
 	{
-		Bullet* NewBullet = GetLevel()->CreateActor<Bullet>();
-		NewBullet->GetTransform()->SetLocalPosition(GetTransform()->GetLocalPosition());
-		NewBullet->Release(1.0f);
+		// Attack
 	}
 
 	if (true == GameEngineInput::GetInst().Press("Jump"))

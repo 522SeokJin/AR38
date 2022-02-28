@@ -12,7 +12,29 @@ enum class PlayerDir
 class WzRenderer;
 class Player : public GameEngineActor
 {
-private:	// member Var
+public:
+	Player();
+	~Player();
+
+	virtual void Start() override;
+	virtual void Update(float _DeltaTime) override;
+
+	PlayerDir GetDir()
+	{
+		return Dir_;
+	}
+
+protected:
+	Player(const Player& _other) = delete; 
+	Player(Player&& _other) noexcept = delete;
+	Player& operator=(const Player& _other) = delete;
+	Player& operator=(const Player&& _other) = delete;
+
+private:
+	void CreateWzRenderer();
+
+	void ChangeImageDirection();
+
 	PlayerDir	Dir_;
 
 	WzRenderer* Body_;
@@ -29,35 +51,5 @@ private:	// member Var
 	WzRenderer* Pants_;
 	WzRenderer* Shoes_;
 	WzRenderer* Weapon_;
-
-public:
-	PlayerDir GetDir()
-	{
-		return Dir_;
-	}
-
-public:
-	// constrcuter destructer
-	Player();
-	~Player();
-
-public:
-	// delete Function
-	Player(const Player& _other) = delete; 
-	Player(Player&& _other) noexcept = delete;
-	Player& operator=(const Player& _other) = delete;
-	Player& operator=(const Player&& _other) = delete;
-
-private:
-	void ChangeImageDirection();
-
-public:
-	virtual void Start() override;
-	virtual void Update(float _DeltaTime) override;
-
-
-	// CreateRenderer.cpp
-private:
-	void CreateWzRenderer();
 };
 

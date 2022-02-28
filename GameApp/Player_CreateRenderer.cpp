@@ -7,6 +7,7 @@ void Player::CreateWzRenderer()
 	Body_ = CreateTransformComponent<WzRenderer>(GetTransform());
 	Body_->SetImage("stand1.0.body.png");
 	Body_->CalculationBodyPos(float4(16.0f, 31.0f), float4(-4.0f, -32.0f), float4(-8.0f, -21.0f));
+	Body_->SetLocalScaling({ 200.0f, 200.0f });
 
 	Arm_ = CreateTransformComponent<WzRenderer>(GetTransform(), 1);
 	Arm_->SetImage("stand1.0.arm.png");

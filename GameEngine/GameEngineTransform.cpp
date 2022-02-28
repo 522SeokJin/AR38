@@ -10,23 +10,23 @@ GameEngineTransform::~GameEngineTransform()
 {
 }
 
-void GameEngineTransform::AttachTransform(GameEngineTransform* _Parent)
+void GameEngineTransform::AttachTransform(GameEngineTransform* _Transform)
 {
 	// 이제부터 _Parent를 따라다닌다.
 
 	if (nullptr != Parent_)
 	{
-		Parent_->DetachTransform(this);
+		Parent_->DetachChildTransform(this);
 	}
 
-	Parent_ = _Parent;
+	Parent_ = _Transform;
 	Parent_->Childs_.push_back(this);
 }
 
-void GameEngineTransform::DetachTransform(GameEngineTransform* _Child)
+void GameEngineTransform::DetachChildTransform(GameEngineTransform* _Transform)
 {
 	// _Child가 안에 없다면, 무시됨
-	Childs_.remove(_Child);
+	Childs_.remove(_Transform);
 }
 
 void GameEngineTransform::TransformUpdate()

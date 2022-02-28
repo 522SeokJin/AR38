@@ -10,34 +10,28 @@ class GameEngineRenderer : public GameEngineTransformComponent
 {
 	friend GameEngineLevel;
 	friend CameraComponent;
-
-protected:	// member Var
-	GameEngineRenderingPipeLine* PipeLine_;
-
 public:
-	GameEngineShaderResHelper ShaderHelper;
-
-public:
-	// constrcuter destructer
 	GameEngineRenderer();
 	~GameEngineRenderer();
 
-public:
-	// delete Function
-	GameEngineRenderer(const GameEngineRenderer& _other) = delete; 
+	void SetRenderingPipeLine(const std::string& _Value);
+	void FileCompile();
+
+	GameEngineShaderResHelper ShaderHelper;
+
+protected:
+	virtual void Start() override;
+
+	GameEngineRenderer(const GameEngineRenderer& _other) = delete;
 	GameEngineRenderer(GameEngineRenderer&& _other) noexcept = delete;
 	GameEngineRenderer& operator=(const GameEngineRenderer& _other) = delete;
 	GameEngineRenderer& operator=(const GameEngineRenderer&& _other) = delete;
 
-public:
-	void SetRenderingPipeLine(const std::string& _Value);
-	void FileCompile();
-
-protected:
-	void Start() override;
-	void Update() override;
+	GameEngineRenderingPipeLine* PipeLine_;
 
 private:
+	virtual void Update() override;
+
 	virtual void Render();
 };
 

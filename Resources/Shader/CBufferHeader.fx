@@ -18,8 +18,10 @@ cbuffer TransformData : register(b0)
     float4x4 LocalRotation;
     float4x4 LocalTranslation;
     float4x4 LocalWorld;
+
     float4x4 Parent;
     float4x4 World;
     float4x4 View;
     float4x4 Projection;
+    float4x4 WVP;
 }

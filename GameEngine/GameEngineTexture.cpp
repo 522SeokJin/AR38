@@ -5,7 +5,7 @@
 
 #pragma comment(lib, "DirectXTex.lib")
 
-GameEngineTexture::GameEngineTexture() // default constructer 디폴트 생성자
+GameEngineTexture::GameEngineTexture()
 	: TextureDesc_()
 	, Texture2D_(nullptr)
 	, RenderTargetView_(nullptr)
@@ -14,7 +14,7 @@ GameEngineTexture::GameEngineTexture() // default constructer 디폴트 생성자
 
 }
 
-GameEngineTexture::~GameEngineTexture() // default destructer 디폴트 소멸자
+GameEngineTexture::~GameEngineTexture()
 {
 	
 	if (nullptr != ShaderResourceView_)

@@ -13,6 +13,10 @@ CameraActor::~CameraActor()
 {
 
 }
+void CameraActor::Start()
+{
+	Camera_ = CreateTransformComponent<CameraComponent>(GetTransform());
+}
 
 float4x4 CameraActor::GetViewMatrix()
 {
@@ -22,11 +26,6 @@ float4x4 CameraActor::GetViewMatrix()
 float4x4 CameraActor::GetProjectionMatrix()
 {
 	return Camera_->GetTransform()->GetTransformData().Projection_;
-}
-
-void CameraActor::Start()
-{
-	Camera_ = CreateTransformComponent<CameraComponent>(GetTransform());
 }
 
 void CameraActor::TransformUpdate()

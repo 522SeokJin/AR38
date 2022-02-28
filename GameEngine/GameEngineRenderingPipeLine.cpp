@@ -3,7 +3,7 @@
 #include "GameEngineResourcesManager.h"
 #include "GameEngineWindow.h"
 
-GameEngineRenderingPipeLine::GameEngineRenderingPipeLine() // default constructer 디폴트 생성자
+GameEngineRenderingPipeLine::GameEngineRenderingPipeLine()
 	: VertexBuffer_(nullptr)
 	, InputLayoutVertexShader_(nullptr)
 	, VertexShader_(nullptr)
@@ -17,7 +17,7 @@ GameEngineRenderingPipeLine::GameEngineRenderingPipeLine() // default constructe
 
 }
 
-GameEngineRenderingPipeLine::~GameEngineRenderingPipeLine() // default destructer 디폴트 소멸자
+GameEngineRenderingPipeLine::~GameEngineRenderingPipeLine()
 {
 
 }
@@ -157,4 +157,10 @@ void GameEngineRenderingPipeLine::Rendering()
 	RenderingPipeLineSetting();
 
 	GameEngineDevice::GetContext()->DrawIndexed(IndexBuffer_->GetIndexCount(), 0, 0);
+}
+
+void GameEngineRenderingPipeLine::Reset()
+{
+	// 나머지는 리셋이 필요할때 추가
+	Blend_->Reset();
 }

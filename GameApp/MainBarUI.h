@@ -5,16 +5,14 @@
 class WzUIRenderer;
 class MainBarUI : public GameEngineActor
 {
-private:	// member Var
-	WzUIRenderer* ExpBarUI_;
-	WzUIRenderer* StatusUI_;
-	WzUIRenderer* CashShopUI_;
-
-public: // constrcuter destructer
+public:
 	MainBarUI();
 	~MainBarUI();
 
-public: // delete Function
+	virtual void Start() override;
+	virtual void Update(float _DeltaTime) override;
+
+protected:
 	MainBarUI(const MainBarUI& _other) = delete; 
 	MainBarUI(MainBarUI&& _other) noexcept = delete;
 	MainBarUI& operator=(const MainBarUI& _other) = delete;
@@ -23,8 +21,8 @@ public: // delete Function
 private:
 	void CreateWzRenderer();
 
-public:
-	virtual void Start() override;
-	virtual void Update(float _DeltaTime) override;
+	WzUIRenderer* ExpBarUI_;
+	WzUIRenderer* StatusUI_;
+	WzUIRenderer* CashShopUI_;
 };
 

@@ -29,6 +29,11 @@ void GameEngineBlend::ReCreate(const D3D11_BLEND_DESC& _Info, float4 _Factor, UI
 	Create(_Info, _Factor, _Mask);
 }
 
+void GameEngineBlend::Reset()
+{
+	GameEngineDevice::GetContext()->OMSetBlendState(nullptr, Factor_.Arr1D, Mask_);
+}
+
 void GameEngineBlend::Create(const D3D11_BLEND_DESC& _Info, float4 _Factor, UINT _Mask)
 {
 	ID3D11BlendState* State = nullptr;

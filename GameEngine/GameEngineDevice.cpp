@@ -22,12 +22,12 @@ ID3D11DeviceContext* GameEngineDevice::GetContext()
 	return Context_;
 }
 
-GameEngineDevice::GameEngineDevice() // default constructer 디폴트 생성자
+GameEngineDevice::GameEngineDevice()
 {
 
 }
 
-GameEngineDevice::~GameEngineDevice() // default destructer 디폴트 소멸자
+GameEngineDevice::~GameEngineDevice()
 {
 	if (nullptr != SwapChain_)
 	{
@@ -201,7 +201,7 @@ void GameEngineDevice::RenderEnd()
 	if (Result == DXGI_ERROR_DEVICE_REMOVED ||
 		Result == DXGI_ERROR_DEVICE_RESET)
 	{
-		int a = 0;
+		GameEngineDebug::MsgBoxError("SwapChain_->Present(0, 0); Error");
 	}
 
 	// 화면에 뿌려라

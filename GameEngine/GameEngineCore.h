@@ -6,29 +6,10 @@
 // Ό³Έν : 
 class GameEngineCore : public GameEngineObjectBase
 {
-private:
-	static GameEngineCore* MainCore_;
-
-private:
-	void EngineInitialize();
-	void EngineDestroy();
-
-protected:
-	GameEngineCore();
-	~GameEngineCore();
-
-protected:		// delete Function
-	GameEngineCore(const GameEngineCore& _other) = delete;
-	GameEngineCore(GameEngineCore&& _other) noexcept = delete;
-	GameEngineCore& operator=(const GameEngineCore& _other) = delete;
-	GameEngineCore& operator=(const GameEngineCore&& _other) = delete;
-
-private:
-	static void WindowCreate(GameEngineCore& _RuntimeCore, const std::string& _TitleName);
-	static void Loop();
-	static void MainLoop();
-
 public:
+	virtual float4 StartWindowPos() = 0;
+	virtual float4 StartWindowSize() = 0;
+
 	template<typename UserGameType>
 	static void Start(const std::string& _TitleName)
 	{
@@ -53,23 +34,30 @@ public:
 		NewUserGame.EngineDestroy();
 	}
 
-
 protected:
+	GameEngineCore();
+	~GameEngineCore();
+
+	GameEngineCore(const GameEngineCore& _other) = delete;
+	GameEngineCore(GameEngineCore&& _other) noexcept = delete;
+	GameEngineCore& operator=(const GameEngineCore& _other) = delete;
+	GameEngineCore& operator=(const GameEngineCore&& _other) = delete;
+
 	virtual void Initialize() = 0;
 	virtual void ResourceLoad() = 0;
 	virtual void Release() = 0;
 
-public:
-	virtual float4 StartWindowPos() = 0;
-	virtual float4 StartWindowSize() = 0;
+private:
+	static void WindowCreate(GameEngineCore& _RuntimeCore, const std::string& _TitleName);
+	static void Loop();
+	static void MainLoop();
+
+	void EngineInitialize();
+	void EngineDestroy();
+
+	static GameEngineCore* MainCore_;
 
 /////////////////////////////////////////////////	Level Manager
-
-private:
-	static std::map<std::string, GameEngineLevel*> AllLevel_;
-	static GameEngineLevel* CurrentLevel_;
-	static GameEngineLevel* NextLevel_;
-
 public:
 	template <typename LevelType>
 	static void LevelCreate(const std::string& _Level)
@@ -86,5 +74,11 @@ public:
 	}
 	static void LevelChange(const std::string& _Level);
 	static GameEngineLevel* LevelFind(const std::string& _Level);
+
+private:
+	static std::map<std::string, GameEngineLevel*> AllLevel_;
+	static GameEngineLevel* CurrentLevel_;
+	static GameEngineLevel* NextLevel_;
+
 };
 
