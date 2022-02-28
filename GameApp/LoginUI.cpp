@@ -18,12 +18,12 @@ void LoginUI::Start()
 {
 	CreateWzRenderer();
 
-	GameEngineInput::GetInst().CreateKey("FileCompile", VK_RETURN);
+	GameEngineInput::GetInst().CreateKey("FileCompile", 'S');
 }
 
 void LoginUI::Update(float _DeltaTime)
 {
-	if (GameEngineInput::GetInst().Down("FileCompile"))
+	if (GameEngineInput::GetInst().Up("FileCompile"))
 	{
 		LoginUI_->FileCompile();
 	}

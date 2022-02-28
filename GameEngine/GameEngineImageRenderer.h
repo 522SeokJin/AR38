@@ -52,7 +52,7 @@ public:
 
 	void SetImage(const std::string& _ImageName, bool _ScaleToImageSize = true);
 
-	void ImageFlipYAxis();
+	void ImageLocalFlipYAxis();
 
 private:
 	void Start() override;

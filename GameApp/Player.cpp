@@ -28,18 +28,18 @@ Player::~Player()
 
 void Player::ChangeImageDirection()
 {
-	Body_->ImageFlipYAxis();
-	Arm_->ImageFlipYAxis();
-	Head_->ImageFlipYAxis();
-	Ear_->ImageFlipYAxis();
-	Face_->ImageFlipYAxis();
-	HairOverHead_->ImageFlipYAxis();
-	Hair_->ImageFlipYAxis();
-	Mail_->ImageFlipYAxis();
-	MailArm_->ImageFlipYAxis();
-	Pants_->ImageFlipYAxis();
-	Shoes_->ImageFlipYAxis();
-	Weapon_->ImageFlipYAxis();
+	Body_->ImageLocalFlipYAxis();
+	Arm_->ImageLocalFlipYAxis();
+	Head_->ImageLocalFlipYAxis();
+	Ear_->ImageLocalFlipYAxis();
+	Face_->ImageLocalFlipYAxis();
+	HairOverHead_->ImageLocalFlipYAxis();
+	Hair_->ImageLocalFlipYAxis();
+	Mail_->ImageLocalFlipYAxis();
+	MailArm_->ImageLocalFlipYAxis();
+	Pants_->ImageLocalFlipYAxis();
+	Shoes_->ImageLocalFlipYAxis();
+	Weapon_->ImageLocalFlipYAxis();
 }
 
 void Player::Start()
