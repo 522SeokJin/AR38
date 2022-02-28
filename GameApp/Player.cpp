@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include "WzRenderer.h"
-#include "WzPhysics.h"
+#include "WzPhysicsValue.h"
 
 Player::Player()
 	: Dir_(PlayerDir::LEFT)

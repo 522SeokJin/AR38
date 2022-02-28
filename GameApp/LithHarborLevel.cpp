@@ -1,23 +1,28 @@
 #include "PreCompile.h"
-#include "PlayLevel.h"
+#include "GameEngine/GameEngineWindow.h"
+#include "LithHarborLevel.h"
+#include "LithHarbor.h"
 #include "Player.h"
 #include "MainBarUI.h"
-#include "GameEngine/GameEngineWindow.h"
 
-PlayLevel::PlayLevel()
+LithHarborLevel::LithHarborLevel()
 {
 
 }
 
-PlayLevel::~PlayLevel()
+LithHarborLevel::~LithHarborLevel()
 {
 
 }
 
-void PlayLevel::LevelStart()
+void LithHarborLevel::LevelStart()
 {
 	GetMainCamera()->SetProjectionMode(ProjectionMode::ORTHOGRAPHIC);
 	GetMainCamera()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
+
+	{
+		LithHarbor* Actor = CreateActor<LithHarbor>();
+	}
 
 	{
 		Player* Actor = CreateActor<Player>();
@@ -31,17 +36,17 @@ void PlayLevel::LevelStart()
 	}
 }
 
-void PlayLevel::LevelUpdate(float _DeltaTime)
+void LithHarborLevel::LevelUpdate(float _DeltaTime)
 {
 
 }
 
-void PlayLevel::LevelChangeEndEvent()
+void LithHarborLevel::LevelChangeEndEvent()
 {
 
 }
 
-void PlayLevel::LevelChangeStartEvent()
+void LithHarborLevel::LevelChangeStartEvent()
 {
 
 }

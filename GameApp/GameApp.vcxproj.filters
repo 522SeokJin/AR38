@@ -14,7 +14,7 @@
     <ClCompile Include="UserGame_Resources.cpp">
       <Filter>UserCore\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
+    <ClCompile Include="LithHarborLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="LoginLevel.cpp">
@@ -47,6 +47,9 @@
     <ClCompile Include="WzUIRenderer.cpp">
       <Filter>Wz\Component</Filter>
     </ClCompile>
+    <ClCompile Include="LithHarbor.cpp">
+      <Filter>Actor\Map\LithHarbor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -69,9 +72,6 @@
     </Filter>
     <Filter Include="Actor\Monster">
       <UniqueIdentifier>{8fd35a2b-f6ff-4097-bd6d-fe5b84d77e4f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\NPC">
-      <UniqueIdentifier>{d5ce0523-29a4-495c-a840-b26a26f94b98}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Monster\BOSS">
       <UniqueIdentifier>{c21ac8a3-9e06-4c1d-af4c-ca687fbe5aa6}</UniqueIdentifier>
@@ -97,6 +97,15 @@
     <Filter Include="Actor\UI\StatusBar\MainBar">
       <UniqueIdentifier>{b78ac7f3-926a-4325-add4-812e28a98687}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Map">
+      <UniqueIdentifier>{7ab2ae4a-cf96-462a-bcbc-f7ff0c56e979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Map\LithHarbor">
+      <UniqueIdentifier>{e335b05d-15cd-475a-a91e-b0a6a40eee32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Map\LithHarbor\NPC">
+      <UniqueIdentifier>{d5ce0523-29a4-495c-a840-b26a26f94b98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -111,7 +120,7 @@
     <ClInclude Include="UserGame_Resources_Shader.h">
       <Filter>UserCore\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="PlayLevel.h">
+    <ClInclude Include="LithHarborLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="LoginLevel.h">
@@ -126,7 +135,7 @@
     <ClInclude Include="Player.h">
       <Filter>Actor</Filter>
     </ClInclude>
-    <ClInclude Include="WzPhysics.h">
+    <ClInclude Include="WzPhysicsValue.h">
       <Filter>Wz</Filter>
     </ClInclude>
     <ClInclude Include="LoginUI.h">
@@ -137,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="WzUIRenderer.h">
       <Filter>Wz\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="LithHarbor.h">
+      <Filter>Actor\Map\LithHarbor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

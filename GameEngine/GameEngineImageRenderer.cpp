@@ -23,6 +23,8 @@ void GameEngineImageRenderer::SetImageSize(const float4& _ImageSize)
 
 	RightBottomWorldPos_.x = GetTransform()->GetWorldPosition().x + ImageSize_.hx();
 	RightBottomWorldPos_.y = GetTransform()->GetWorldPosition().y - ImageSize_.hy();
+
+	GetTransform()->SetLocalScaling(ImageSize_);
 }
 
 void GameEngineImageRenderer::SetImage(const std::string& _ImageName,
@@ -39,12 +41,11 @@ void GameEngineImageRenderer::SetImage(const std::string& _ImageName,
 
 	if (nullptr == FindTexture)
 	{
-		GameEngineDebug::MsgBoxError("이미지를 찾지 못했습니다. SetImage(...) ->" + _ImageName);
+		GameEngineDebug::MsgBoxError("이미지를 찾지 못했습니다. SetImage " + _ImageName);
 		return;
 	}
 
 	SetImageSize(FindTexture->GetImageSize());
-	GetTransform()->SetLocalScaling(ImageSize_);
 }
 
 void GameEngineImageRenderer::ImageLocalFlipYAxis()

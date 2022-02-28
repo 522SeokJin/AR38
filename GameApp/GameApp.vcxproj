@@ -172,6 +172,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AppMain.cpp" />
+    <ClCompile Include="LithHarbor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="LoginUI.cpp">
       <SubType>
       </SubType>
@@ -191,7 +195,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Player_CreateRenderer.cpp" />
-    <ClCompile Include="PlayLevel.cpp">
+    <ClCompile Include="LithHarborLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -218,6 +222,10 @@
     <ClCompile Include="WzUIRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LithHarbor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="LoginUI.h">
       <SubType>
       </SubType>
@@ -230,12 +238,12 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="WzPhysics.h" />
+    <ClInclude Include="WzPhysicsValue.h" />
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="PlayLevel.h">
+    <ClInclude Include="LithHarborLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
