@@ -3,7 +3,11 @@
 #include "LithHarborLevel.h"
 #include "LithHarbor.h"
 #include "Player.h"
-#include "MainBarUI.h"
+
+#include "MenuUI.h"
+#include "ExpBarUI.h"
+#include "StatusUI.h"
+#include "QuickSlotUI.h"
 
 LithHarborLevel::LithHarborLevel()
 {
@@ -29,11 +33,25 @@ void LithHarborLevel::LevelStart()
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(
 			Actor->GetTransform()->GetLocalPosition());
 	}
+	
+	{
+		ExpBarUI* Actor = CreateActor<ExpBarUI>();
+		Actor->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
+	}
 
 	{
-		float4 WindowLeftBottom = -GameEngineWindow::GetInst().GetSize().halffloat4();
-		MainBarUI* Actor = CreateActor<MainBarUI>();
-		Actor->GetTransform()->SetWorldPosition(WindowLeftBottom);
+		StatusUI* Actor = CreateActor<StatusUI>();
+		Actor->GetTransform()->SetWorldPosition({ 5.0f, 45.0f - GameEngineWindow::GetInst().GetSize().hy() });
+	}
+
+	{
+		MenuUI* Actor = CreateActor<MenuUI>();
+		Actor->GetTransform()->SetWorldPosition({ 133.0f, -355.5f });
+	}
+
+	{
+		QuickSlotUI* Actor = CreateActor<QuickSlotUI>();
+		Actor->GetTransform()->SetWorldPosition({ 617.0f, -337.5f });
 	}
 }
 

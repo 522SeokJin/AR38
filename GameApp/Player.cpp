@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "Player.h"
-#include "WzRenderer.h"
+#include "PlayerRenderer.h"
 #include "WzPhysicsValue.h"
 
 Player::Player()
@@ -43,7 +43,7 @@ void Player::ChangeImageDirection()
 
 void Player::Start()
 {
-	CreateWzRenderer();
+	CreatePlayerRenderer();
 
 	GameEngineInput::GetInst().CreateKey("MoveLeft", VK_LEFT);
 	GameEngineInput::GetInst().CreateKey("MoveRight", VK_RIGHT);

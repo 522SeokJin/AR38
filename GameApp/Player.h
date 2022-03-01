@@ -9,7 +9,7 @@ enum class PlayerDir
 };
 
 // Ό³Έν : 
-class WzRenderer;
+class PlayerRenderer;
 class Player : public GameEngineActor
 {
 public:
@@ -31,25 +31,25 @@ protected:
 	Player& operator=(const Player&& _other) = delete;
 
 private:
-	void CreateWzRenderer();
+	void CreatePlayerRenderer();
 
 	void ChangeImageDirection();
 
 	PlayerDir	Dir_;
 
-	WzRenderer* Body_;
-	WzRenderer* Arm_;
-	WzRenderer* Head_;
-	WzRenderer* Ear_;
-	WzRenderer* Face_;
-	WzRenderer* HairBelowBody_;
-	WzRenderer* HairOverHead_;
-	WzRenderer* Hair_;
+	PlayerRenderer* Body_;
+	PlayerRenderer* Arm_;
+	PlayerRenderer* Head_;
+	PlayerRenderer* Ear_;
+	PlayerRenderer* Face_;
+	PlayerRenderer* HairBelowBody_;
+	PlayerRenderer* HairOverHead_;
+	PlayerRenderer* Hair_;
 
-	WzRenderer* Mail_;
-	WzRenderer* MailArm_;
-	WzRenderer* Pants_;
-	WzRenderer* Shoes_;
-	WzRenderer* Weapon_;
+	PlayerRenderer* Mail_;
+	PlayerRenderer* MailArm_;
+	PlayerRenderer* Pants_;
+	PlayerRenderer* Shoes_;
+	PlayerRenderer* Weapon_;
 };
 

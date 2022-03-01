@@ -2,13 +2,11 @@
 #include <GameEngine/GameEngineImageRenderer.h>
 
 // Ό³Έν : 
-class WzRenderer : public GameEngineImageRenderer
+class PlayerRenderer : public GameEngineImageRenderer
 {
 public:
-	WzRenderer();
-	~WzRenderer();
-
-	void SetUIWorldPosition(const float4& _WzOrigin, const float4& _WzFarFromOrigin);
+	PlayerRenderer();
+	~PlayerRenderer();
 
 	void CalculationOriginPos(const float4& _WzOrigin);
 	void CalculationBodyPos(const float4& _WzOrigin,
@@ -27,8 +25,6 @@ public:
 	void CalculationWeaponPos(const float4& _WzOrigin, const float4& _WzHand);
 
 	float4 OriginPosition_;
-
-	// Player
 	float4 NeckPosition_;
 	float4 NavelPosition_;
 	float4 HandPosition_;
@@ -37,10 +33,10 @@ public:
 	float4 BrowPosition_;
 
 protected:
-	WzRenderer(const WzRenderer& _other) = delete; 
-	WzRenderer(WzRenderer&& _other) = delete;
-	WzRenderer& operator=(const WzRenderer& _other) = delete;
-	WzRenderer& operator=(const WzRenderer&& _other) = delete;
+	PlayerRenderer(const PlayerRenderer& _other) = delete; 
+	PlayerRenderer(PlayerRenderer&& _other) = delete;
+	PlayerRenderer& operator=(const PlayerRenderer& _other) = delete;
+	PlayerRenderer& operator=(const PlayerRenderer&& _other) = delete;
 
 private:
 	

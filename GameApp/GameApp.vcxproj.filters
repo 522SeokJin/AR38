@@ -23,7 +23,7 @@
     <ClCompile Include="Monster.cpp">
       <Filter>Actor\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="WzRenderer.cpp">
+    <ClCompile Include="PlayerRenderer.cpp">
       <Filter>Wz\Component</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
@@ -32,23 +32,23 @@
     <ClCompile Include="LoginUI.cpp">
       <Filter>Actor\UI\Login</Filter>
     </ClCompile>
-    <ClCompile Include="LoginUI_CreateRenderer.cpp">
-      <Filter>Actor\UI\Login</Filter>
-    </ClCompile>
     <ClCompile Include="Player_CreateRenderer.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
-    <ClCompile Include="MainBarUI.cpp">
-      <Filter>Actor\UI\StatusBar\MainBar</Filter>
-    </ClCompile>
-    <ClCompile Include="MainBarUI_CreateRenderer.cpp">
-      <Filter>Actor\UI\StatusBar\MainBar</Filter>
-    </ClCompile>
-    <ClCompile Include="WzUIRenderer.cpp">
-      <Filter>Wz\Component</Filter>
-    </ClCompile>
     <ClCompile Include="LithHarbor.cpp">
       <Filter>Actor\Map\LithHarbor</Filter>
+    </ClCompile>
+    <ClCompile Include="ExpBarUI.cpp">
+      <Filter>Actor\UI\MainBar</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuUI.cpp">
+      <Filter>Actor\UI\MainBar</Filter>
+    </ClCompile>
+    <ClCompile Include="QuickSlotUI.cpp">
+      <Filter>Actor\UI\MainBar</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusUI.cpp">
+      <Filter>Actor\UI\MainBar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,12 +91,6 @@
     <Filter Include="Actor\UI\Login">
       <UniqueIdentifier>{512fe019-c86d-49b5-833e-8624cf6f780f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\UI\StatusBar">
-      <UniqueIdentifier>{bf319917-55eb-463d-842e-84f14f4f408e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\UI\StatusBar\MainBar">
-      <UniqueIdentifier>{b78ac7f3-926a-4325-add4-812e28a98687}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\Map">
       <UniqueIdentifier>{7ab2ae4a-cf96-462a-bcbc-f7ff0c56e979}</UniqueIdentifier>
     </Filter>
@@ -105,6 +99,9 @@
     </Filter>
     <Filter Include="Actor\Map\LithHarbor\NPC">
       <UniqueIdentifier>{d5ce0523-29a4-495c-a840-b26a26f94b98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI\MainBar">
+      <UniqueIdentifier>{bf319917-55eb-463d-842e-84f14f4f408e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,7 +126,7 @@
     <ClInclude Include="Monster.h">
       <Filter>Actor\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="WzRenderer.h">
+    <ClInclude Include="PlayerRenderer.h">
       <Filter>Wz\Component</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
@@ -141,14 +138,20 @@
     <ClInclude Include="LoginUI.h">
       <Filter>Actor\UI\Login</Filter>
     </ClInclude>
-    <ClInclude Include="MainBarUI.h">
-      <Filter>Actor\UI\StatusBar\MainBar</Filter>
-    </ClInclude>
-    <ClInclude Include="WzUIRenderer.h">
-      <Filter>Wz\Component</Filter>
-    </ClInclude>
     <ClInclude Include="LithHarbor.h">
       <Filter>Actor\Map\LithHarbor</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpBarUI.h">
+      <Filter>Actor\UI\MainBar</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuUI.h">
+      <Filter>Actor\UI\MainBar</Filter>
+    </ClInclude>
+    <ClInclude Include="QuickSlotUI.h">
+      <Filter>Actor\UI\MainBar</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusUI.h">
+      <Filter>Actor\UI\MainBar</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -25,6 +25,8 @@ public:
 
 	void PushRenderer(int _Order, GameEngineRenderer* _Renderer);
 
+	void FileCompile();
+
 protected:
 	CameraComponent(const CameraComponent& _other) = delete; 
 	CameraComponent(CameraComponent&& _other) noexcept = delete;

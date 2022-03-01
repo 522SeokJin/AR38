@@ -172,6 +172,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AppMain.cpp" />
+    <ClCompile Include="ExpBarUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="LithHarbor.cpp">
       <SubType>
       </SubType>
@@ -180,12 +184,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="LoginUI_CreateRenderer.cpp" />
-    <ClCompile Include="MainBarUI.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="MainBarUI_CreateRenderer.cpp" />
+    <ClCompile Include="MenuUI.cpp" />
     <ClCompile Include="Monster.cpp">
       <SubType>
       </SubType>
@@ -209,19 +208,24 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="QuickSlotUI.cpp" />
+    <ClCompile Include="StatusUI.cpp" />
     <ClCompile Include="UserGame.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="UserGame_Resources.cpp" />
     <ClCompile Include="UserGame_Resources_Shader.cpp" />
-    <ClCompile Include="WzRenderer.cpp">
+    <ClCompile Include="PlayerRenderer.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="WzUIRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ExpBarUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="LithHarbor.h">
       <SubType>
       </SubType>
@@ -230,14 +234,13 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="MainBarUI.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
+    <ClInclude Include="MenuUI.h" />
     <ClInclude Include="Monster.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="QuickSlotUI.h" />
+    <ClInclude Include="StatusUI.h" />
     <ClInclude Include="WzPhysicsValue.h" />
     <ClInclude Include="Player.h">
       <SubType>
@@ -258,11 +261,10 @@
     </ClInclude>
     <ClInclude Include="CustomVertex.h" />
     <ClInclude Include="UserGame_Resources_Shader.h" />
-    <ClInclude Include="WzRenderer.h">
+    <ClInclude Include="PlayerRenderer.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="WzUIRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,7 +2,6 @@
 #include "GameEngine/GameEngineActor.h"
 
 // Ό³Έν : 
-class WzUIRenderer;
 class LoginUI : public GameEngineActor
 {
 public:
@@ -19,9 +18,6 @@ protected:
 	LoginUI& operator=(const LoginUI&& _other) = delete;
 
 private:
-	void CreateWzRenderer();
-
-	WzUIRenderer* LoginUI_;
-
+	
 };
 

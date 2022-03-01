@@ -1,7 +1,7 @@
 #include "PreCompile.h"
-#include "WzRenderer.h"
+#include "PlayerRenderer.h"
 
-WzRenderer::WzRenderer()
+PlayerRenderer::PlayerRenderer()
 	: OriginPosition_()
 	, NeckPosition_()
 	, NavelPosition_()
@@ -13,23 +13,12 @@ WzRenderer::WzRenderer()
 
 }
 
-WzRenderer::~WzRenderer()
+PlayerRenderer::~PlayerRenderer()
 {
 
 }
 
-void WzRenderer::SetUIWorldPosition(const float4& _WzOrigin, const float4& _WzFarFromOrigin)
-{
-	// _WzOrigin 기준으로 얼마나 떨어져있는가
-	float4 FarFromOrigin = _WzFarFromOrigin;
-	
-	// 사이즈를 고려
-	float4 ImageHalfSize = GetImageSize().InvertY().halffloat4();
-
-	SetWorldPosition(_WzOrigin + FarFromOrigin.InvertX() + ImageHalfSize);
-}
-
-void WzRenderer::CalculationOriginPos(const float4& _WzOrigin)
+void PlayerRenderer::CalculationOriginPos(const float4& _WzOrigin)
 {
 	// 위컴알 기준 센터의 좌표는 크기의 절반값
 	float4 WzCenter = float4();
@@ -45,7 +34,7 @@ void WzRenderer::CalculationOriginPos(const float4& _WzOrigin)
 	OriginPosition_ = (_WzOrigin + CenterDiff).InvertY();
 }
 
-void WzRenderer::CalculationBodyPos(const float4& _WzOrigin,
+void PlayerRenderer::CalculationBodyPos(const float4& _WzOrigin,
 	const float4& _WzNeck, const float4& _WzNavel)
 {
 	CalculationOriginPos(_WzOrigin);
@@ -55,7 +44,7 @@ void WzRenderer::CalculationBodyPos(const float4& _WzOrigin,
 	NavelPosition_ = OriginPosition_ + _WzNavel * float4::INVERT_Y;
 }
 
-void WzRenderer::CalculationArmPos(const float4& _WzOrigin, const float4& _WzNavel, 
+void PlayerRenderer::CalculationArmPos(const float4& _WzOrigin, const float4& _WzNavel, 
 	const float4& _WzHand)
 {
 	CalculationOriginPos(_WzOrigin);
@@ -64,7 +53,7 @@ void WzRenderer::CalculationArmPos(const float4& _WzOrigin, const float4& _WzNav
 	HandPosition_ = OriginPosition_ + _WzHand * float4::INVERT_Y;
 }
 
-void WzRenderer::CalculationHeadPos(const float4& _WzOrigin, const float4& _WzNeck,
+void PlayerRenderer::CalculationHeadPos(const float4& _WzOrigin, const float4& _WzNeck,
 	const float4& _WzEarOverHead, const float4& _WzEarBelowHead, const float4& _WzBrow)
 {
 	CalculationOriginPos(_WzOrigin);
@@ -75,30 +64,30 @@ void WzRenderer::CalculationHeadPos(const float4& _WzOrigin, const float4& _WzNe
 	BrowPosition_ = OriginPosition_ + _WzBrow * float4::INVERT_Y;
 }
 
-void WzRenderer::CalculationEarPos(const float4& _WzOrigin, const float4& _WzNeck,
+void PlayerRenderer::CalculationEarPos(const float4& _WzOrigin, const float4& _WzNeck,
 	const float4& _WzEarOverHead, const float4& _WzEarBelowHead, const float4& _WzBrow)
 {
 	CalculationHeadPos(_WzOrigin, _WzNeck, _WzEarOverHead, _WzEarBelowHead, _WzBrow);
 }
 
-void WzRenderer::CalculationHairPos(const float4& _WzOrigin, const float4& _WzBrow)
+void PlayerRenderer::CalculationHairPos(const float4& _WzOrigin, const float4& _WzBrow)
 {
 	CalculationOriginPos(_WzOrigin);
 	BrowPosition_ = OriginPosition_ + _WzBrow * float4::INVERT_Y;
 }
 
-void WzRenderer::CalculationFacePos(const float4& _WzOrigin, const float4& _WzBrow)
+void PlayerRenderer::CalculationFacePos(const float4& _WzOrigin, const float4& _WzBrow)
 {
 	CalculationHairPos(_WzOrigin, _WzBrow);
 }
 
-void WzRenderer::CalculationClothesPos(const float4& _WzOrigin, const float4& _WzNavel)
+void PlayerRenderer::CalculationClothesPos(const float4& _WzOrigin, const float4& _WzNavel)
 {
 	CalculationOriginPos(_WzOrigin);
 	NavelPosition_ = OriginPosition_ + _WzNavel * float4::INVERT_Y;
 }
 
-void WzRenderer::CalculationWeaponPos(const float4& _WzOrigin, const float4& _WzHand)
+void PlayerRenderer::CalculationWeaponPos(const float4& _WzOrigin, const float4& _WzHand)
 {
 	CalculationOriginPos(_WzOrigin);
 	HandPosition_ = OriginPosition_ + _WzHand * float4::INVERT_Y;

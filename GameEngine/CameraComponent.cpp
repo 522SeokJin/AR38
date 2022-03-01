@@ -112,3 +112,16 @@ void CameraComponent::PushRenderer(int _Order, GameEngineRenderer* _Renderer)
 {
 	RendererList_[_Order].push_back(_Renderer);
 }
+
+void CameraComponent::FileCompile()
+{
+	for (std::pair<int, std::list<GameEngineRenderer*>> Pair : RendererList_)
+	{
+		std::list<GameEngineRenderer*>& Renderers = Pair.second;
+
+		for (GameEngineRenderer* Renderer : Renderers)
+		{
+			Renderer->FileCompile();
+		}
+	}
+}
