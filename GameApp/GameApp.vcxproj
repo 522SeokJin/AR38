@@ -172,6 +172,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AppMain.cpp" />
+    <ClCompile Include="DeepeningForestLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="DesertedCampLevel.cpp" />
+    <ClCompile Include="EntranceDemianLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ExpBarUI.cpp">
       <SubType>
       </SubType>
@@ -180,7 +189,24 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="LoginUI.cpp">
+    <ClCompile Include="PerionLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="PerionNorthernRidgeLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="PerionRoomLevel.cpp" />
+    <ClCompile Include="SahelLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SilentSwampLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TitleUI.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -204,7 +230,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="LoginLevel.cpp">
+    <ClCompile Include="TitleLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -222,6 +248,15 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DeepeningForestLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="DesertedCampLevel.h" />
+    <ClInclude Include="EntranceDemianLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ExpBarUI.h">
       <SubType>
       </SubType>
@@ -230,7 +265,24 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="LoginUI.h">
+    <ClInclude Include="PerionLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="PerionNorthernRidgeLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="PerionRoomLevel.h" />
+    <ClInclude Include="SahelLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SilentSwampLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TitleUI.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -251,7 +303,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="PreCompile.h" />
-    <ClInclude Include="LoginLevel.h">
+    <ClInclude Include="TitleLevel.h">
       <SubType>
       </SubType>
     </ClInclude>

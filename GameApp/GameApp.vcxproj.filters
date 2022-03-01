@@ -14,10 +14,7 @@
     <ClCompile Include="UserGame_Resources.cpp">
       <Filter>UserCore\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="LithHarborLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="LoginLevel.cpp">
+    <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
@@ -29,7 +26,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
-    <ClCompile Include="LoginUI.cpp">
+    <ClCompile Include="TitleUI.cpp">
       <Filter>Actor\UI\Login</Filter>
     </ClCompile>
     <ClCompile Include="Player_CreateRenderer.cpp">
@@ -49,6 +46,33 @@
     </ClCompile>
     <ClCompile Include="StatusUI.cpp">
       <Filter>Actor\UI\MainBar</Filter>
+    </ClCompile>
+    <ClCompile Include="DesertedCampLevel.cpp">
+      <Filter>Level\Town</Filter>
+    </ClCompile>
+    <ClCompile Include="LithHarborLevel.cpp">
+      <Filter>Level\Town</Filter>
+    </ClCompile>
+    <ClCompile Include="PerionLevel.cpp">
+      <Filter>Level\Town</Filter>
+    </ClCompile>
+    <ClCompile Include="PerionRoomLevel.cpp">
+      <Filter>Level\Town</Filter>
+    </ClCompile>
+    <ClCompile Include="PerionNorthernRidgeLevel.cpp">
+      <Filter>Level\HuntingGround</Filter>
+    </ClCompile>
+    <ClCompile Include="DeepeningForestLevel.cpp">
+      <Filter>Level\HuntingGround</Filter>
+    </ClCompile>
+    <ClCompile Include="SilentSwampLevel.cpp">
+      <Filter>Level\HuntingGround</Filter>
+    </ClCompile>
+    <ClCompile Include="SahelLevel.cpp">
+      <Filter>Level\HuntingGround</Filter>
+    </ClCompile>
+    <ClCompile Include="EntranceDemianLevel.cpp">
+      <Filter>Level\HuntingGround\Demian</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,9 +100,6 @@
     <Filter Include="Actor\Monster\BOSS">
       <UniqueIdentifier>{c21ac8a3-9e06-4c1d-af4c-ca687fbe5aa6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Monster\BOSS\Demian">
-      <UniqueIdentifier>{14f50ceb-51f6-4604-a096-863134a254c0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Wz">
       <UniqueIdentifier>{4dd958d5-a0fc-4333-b007-3da3ecbbe842}</UniqueIdentifier>
     </Filter>
@@ -97,11 +118,20 @@
     <Filter Include="Actor\Map\LithHarbor">
       <UniqueIdentifier>{e335b05d-15cd-475a-a91e-b0a6a40eee32}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Map\LithHarbor\NPC">
-      <UniqueIdentifier>{d5ce0523-29a4-495c-a840-b26a26f94b98}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\UI\MainBar">
       <UniqueIdentifier>{bf319917-55eb-463d-842e-84f14f4f408e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Town">
+      <UniqueIdentifier>{c241f2ed-7d11-4b06-b4ef-04cbdbe926c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\HuntingGround">
+      <UniqueIdentifier>{e2e45dc0-8628-47cf-9e2b-57b2dda33049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\NPC">
+      <UniqueIdentifier>{d5ce0523-29a4-495c-a840-b26a26f94b98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\HuntingGround\Demian">
+      <UniqueIdentifier>{5247f2c1-c26d-4932-b321-14d614563cfb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,10 +147,7 @@
     <ClInclude Include="UserGame_Resources_Shader.h">
       <Filter>UserCore\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="LithHarborLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="LoginLevel.h">
+    <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
@@ -135,7 +162,7 @@
     <ClInclude Include="WzPhysicsValue.h">
       <Filter>Wz</Filter>
     </ClInclude>
-    <ClInclude Include="LoginUI.h">
+    <ClInclude Include="TitleUI.h">
       <Filter>Actor\UI\Login</Filter>
     </ClInclude>
     <ClInclude Include="LithHarbor.h">
@@ -152,6 +179,33 @@
     </ClInclude>
     <ClInclude Include="StatusUI.h">
       <Filter>Actor\UI\MainBar</Filter>
+    </ClInclude>
+    <ClInclude Include="DesertedCampLevel.h">
+      <Filter>Level\Town</Filter>
+    </ClInclude>
+    <ClInclude Include="LithHarborLevel.h">
+      <Filter>Level\Town</Filter>
+    </ClInclude>
+    <ClInclude Include="PerionLevel.h">
+      <Filter>Level\Town</Filter>
+    </ClInclude>
+    <ClInclude Include="PerionRoomLevel.h">
+      <Filter>Level\Town</Filter>
+    </ClInclude>
+    <ClInclude Include="PerionNorthernRidgeLevel.h">
+      <Filter>Level\HuntingGround</Filter>
+    </ClInclude>
+    <ClInclude Include="DeepeningForestLevel.h">
+      <Filter>Level\HuntingGround</Filter>
+    </ClInclude>
+    <ClInclude Include="SilentSwampLevel.h">
+      <Filter>Level\HuntingGround</Filter>
+    </ClInclude>
+    <ClInclude Include="SahelLevel.h">
+      <Filter>Level\HuntingGround</Filter>
+    </ClInclude>
+    <ClInclude Include="EntranceDemianLevel.h">
+      <Filter>Level\HuntingGround\Demian</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

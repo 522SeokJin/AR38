@@ -1,19 +1,19 @@
 #include "PreCompile.h"
-#include "LoginUI.h"
+#include "TitleUI.h"
 #include "GameEngine/GameEngineInput.h"
 #include "GameEngine/GameEngineImageUIRenderer.h"
 
-LoginUI::LoginUI()
+TitleUI::TitleUI()
 {
 
 }
 
-LoginUI::~LoginUI()
+TitleUI::~TitleUI()
 {
 
 }
 
-void LoginUI::Start()
+void TitleUI::Start()
 {
 	{
 		GameEngineImageUIRenderer* Renderer = CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
@@ -30,7 +30,7 @@ void LoginUI::Start()
 	GameEngineInput::GetInst().CreateKey("FileCompile", 'S');
 }
 
-void LoginUI::Update(float _DeltaTime)
+void TitleUI::Update(float _DeltaTime)
 {
 	if (GameEngineInput::GetInst().Up("FileCompile"))
 	{

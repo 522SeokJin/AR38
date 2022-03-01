@@ -140,7 +140,6 @@ void GameEngineSoundManager::PlaySoundOneShot(const std::string& _name)
 
 void GameEngineSoundManager::Initialize()
 {
-	// 내부코드에서 NEW를 할 가능성이 매우 다분해.
 	FMOD::System_Create(&soundSystem_);
 
 	if (nullptr == soundSystem_)
@@ -149,8 +148,7 @@ void GameEngineSoundManager::Initialize()
 		return;
 	}
 
-	// 동시에 32개 개수인지 사운드 채널의 의미인지를 잘 모르고 있습니다.
-	// 32채널을 재생할수 있다는 의미인데 선생님도 잘 모릅니다.
+	// 32채널을 재생할수 있다
 	if (FMOD_RESULT::FMOD_OK != soundSystem_->init(32, FMOD_DEFAULT, nullptr))
 	{
 		GameEngineDebug::MsgBoxError("sound system init Error");
