@@ -23,7 +23,7 @@ void UserGame::ResourceLoad()
 	Dir.MoveParent();
 	Dir.MoveChild("Image");
 
-	std::vector<GameEngineFile> AllImage = Dir.GetAllDirFile();
+	std::vector<GameEngineFile> AllImage = Dir.GetAllDirFile("png");
 
 	for (size_t i = 0; i < AllImage.size(); i++)
 	{
