@@ -8,6 +8,7 @@
 #include "ExpBarUI.h"
 #include "StatusUI.h"
 #include "QuickSlotUI.h"
+#include "QuickSlotKeyUI.h"
 
 LithHarborLevel::LithHarborLevel()
 {
@@ -54,6 +55,10 @@ void LithHarborLevel::LevelStart()
 		Actor->GetTransform()->SetWorldPosition({ 617.0f, -337.5f });
 	}
 
+	{
+		QuickSlotKeyUI* Actor = CreateActor<QuickSlotKeyUI>();
+		Actor->GetTransform()->SetWorldPosition({ 338.5f, -310.0f });
+	}
 	
 }
 

@@ -74,6 +74,9 @@
     <ClCompile Include="EntranceDemianLevel.cpp">
       <Filter>Level\HuntingGround\Demian</Filter>
     </ClCompile>
+    <ClCompile Include="QuickSlotKeyUI.cpp">
+      <Filter>Actor\UI\MainBar</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -206,6 +209,9 @@
     </ClInclude>
     <ClInclude Include="EntranceDemianLevel.h">
       <Filter>Level\HuntingGround\Demian</Filter>
+    </ClInclude>
+    <ClInclude Include="QuickSlotKeyUI.h">
+      <Filter>Actor\UI\MainBar</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

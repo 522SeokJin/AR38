@@ -35,7 +35,7 @@ private:
 
 	void ChangeImageDirection();
 
-	PlayerDir	Dir_;
+	PlayerDir		Dir_;
 
 	PlayerRenderer* Body_;
 	PlayerRenderer* Arm_;

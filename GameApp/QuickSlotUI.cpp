@@ -30,7 +30,11 @@ void QuickSlotUI::Start()
 		Renderer->SetImage("quickSlot.backgrnd.png");
 	}
 
-	
+	{
+		GameEngineImageUIRenderer* Renderer = CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+		Renderer->SetImage("key.1.png");
+		Renderer->SetLocalPosition({ 344.5f, -310.0f });
+	}
 }
 
 void QuickSlotUI::Update(float _DeltaTime)
