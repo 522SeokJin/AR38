@@ -18,6 +18,8 @@ GameEngineImageUIRenderer::~GameEngineImageUIRenderer()
 void GameEngineImageUIRenderer::SetImageSize(const float4& _ImageSize)
 {
 	ImageSize_ = _ImageSize;
+
+	GetTransform()->SetLocalScaling(ImageSize_);
 }
 
 void GameEngineImageUIRenderer::SetImage(const std::string& _ImageName,

@@ -71,8 +71,8 @@ private:
 		void CallFrame();
 		void Update(float _DeltaTime);
 
-		GameEngineTexture* Texture_;
-		GameEngineImageRenderer* Renderer_;
+		GameEngineTexture*			Texture_;
+		GameEngineImageRenderer*	Renderer_;
 
 		bool IsEnd_;
 		bool Loop_;
