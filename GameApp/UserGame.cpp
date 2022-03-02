@@ -9,7 +9,6 @@
 #include "LithHarborLevel.h"
 #include "PerionLevel.h"
 #include "PerionRoomLevel.h"
-#include "DesertedCampLevel.h"
 #include "PerionNorthernRidgeLevel.h"
 #include "DeepeningForestLevel.h"
 #include "SilentSwampLevel.h"
@@ -35,7 +34,6 @@ void UserGame::Initialize()
 	LevelCreate<LithHarborLevel>("LithHarbor");
 	LevelCreate<PerionLevel>("Perion");
 	LevelCreate<PerionRoomLevel>("PerionRoom");
-	LevelCreate<DesertedCampLevel>("DesertedCamp");
 
 	// Hunting Ground
 	LevelCreate<PerionNorthernRidgeLevel>("PerionNorthernRidge");
@@ -46,7 +44,7 @@ void UserGame::Initialize()
 	// Demian
 	LevelCreate<EntranceDemianLevel>("EntranceDemian");
 
-	LevelChange("LithHarbor");
+	LevelChange("Title");
 }
 
 void UserGame::Release()

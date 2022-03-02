@@ -1,10 +1,5 @@
 #include "CbufferHeader.fx"
 
-//tbuffer TextureData : register(t1)
-//{
-//    float4 Brightness;
-//}
-
 struct VertexIn
 {
     float4 Position : POSITION;
@@ -35,16 +30,11 @@ VertexOut Texture_VS(VertexIn _in)
 Texture2D       Tex : register(t0);
 SamplerState    Smp : register(s0);
 
-cbuffer TextureData : register(b0)
-{
-    float4 Brightness;
-}
-
 float4 Texture_PS(VertexOut _in) : SV_Target0
 {
     float4 Color = Tex.Sample(Smp, _in.Texcoord.xy);
     
-    return Color * Brightness;
+    return Color;
 }
 
 

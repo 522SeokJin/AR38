@@ -1,18 +1,6 @@
 #pragma once
 #include "GameEngineRenderer.h"
 
-class TextureData
-{
-public:
-	float4 Brightness;
-
-	TextureData()
-		: Brightness(float4::ONE)
-	{
-
-	}
-};
-
 // Ό³Έν : 
 class GameEngineImageRenderer : public GameEngineRenderer
 {
@@ -23,11 +11,6 @@ public:
 	float4 GetImageSize()
 	{
 		return ImageSize_;
-	}
-
-	void SetBrightness(float _Value)
-	{
-		TextureData_.Brightness = float4(_Value, _Value, _Value);
 	}
 
 	void SetImage(const std::string& _ImageName, bool _ScaleToImageSize = true);
@@ -47,7 +30,6 @@ protected:
 private:
 	void Start() override;
 
-	TextureData TextureData_;
 	bool		ScaleToImageSize_;
 	float4		ImageSize_;
 };

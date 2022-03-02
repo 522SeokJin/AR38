@@ -41,14 +41,8 @@
     <ClCompile Include="MenuUI.cpp">
       <Filter>Actor\UI\MainBar</Filter>
     </ClCompile>
-    <ClCompile Include="QuickSlotUI.cpp">
-      <Filter>Actor\UI\MainBar</Filter>
-    </ClCompile>
     <ClCompile Include="StatusUI.cpp">
       <Filter>Actor\UI\MainBar</Filter>
-    </ClCompile>
-    <ClCompile Include="DesertedCampLevel.cpp">
-      <Filter>Level\Town</Filter>
     </ClCompile>
     <ClCompile Include="LithHarborLevel.cpp">
       <Filter>Level\Town</Filter>
@@ -75,7 +69,10 @@
       <Filter>Level\HuntingGround\Demian</Filter>
     </ClCompile>
     <ClCompile Include="QuickSlotKeyUI.cpp">
-      <Filter>Actor\UI\MainBar</Filter>
+      <Filter>Actor\UI\MainBar\QuickSlot</Filter>
+    </ClCompile>
+    <ClCompile Include="QuickSlotUI.cpp">
+      <Filter>Actor\UI\MainBar\QuickSlot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +133,9 @@
     <Filter Include="Level\HuntingGround\Demian">
       <UniqueIdentifier>{5247f2c1-c26d-4932-b321-14d614563cfb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\UI\MainBar\QuickSlot">
+      <UniqueIdentifier>{a77aef23-3af5-434e-a631-ebd758e245ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -177,14 +177,8 @@
     <ClInclude Include="MenuUI.h">
       <Filter>Actor\UI\MainBar</Filter>
     </ClInclude>
-    <ClInclude Include="QuickSlotUI.h">
-      <Filter>Actor\UI\MainBar</Filter>
-    </ClInclude>
     <ClInclude Include="StatusUI.h">
       <Filter>Actor\UI\MainBar</Filter>
-    </ClInclude>
-    <ClInclude Include="DesertedCampLevel.h">
-      <Filter>Level\Town</Filter>
     </ClInclude>
     <ClInclude Include="LithHarborLevel.h">
       <Filter>Level\Town</Filter>
@@ -211,7 +205,10 @@
       <Filter>Level\HuntingGround\Demian</Filter>
     </ClInclude>
     <ClInclude Include="QuickSlotKeyUI.h">
-      <Filter>Actor\UI\MainBar</Filter>
+      <Filter>Actor\UI\MainBar\QuickSlot</Filter>
+    </ClInclude>
+    <ClInclude Include="QuickSlotUI.h">
+      <Filter>Actor\UI\MainBar\QuickSlot</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

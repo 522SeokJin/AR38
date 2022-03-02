@@ -129,7 +129,7 @@ void GameEngineShader::ResCheck()
 
 			SmpDesc.MipLODBias = 0.0f;
 			SmpDesc.MaxAnisotropy = 1;
-			SmpDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS; // 
+			SmpDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
 			SmpDesc.MinLOD = -FLT_MAX;
 			SmpDesc.MaxLOD = FLT_MAX;
 			// SmpDesc.BorderColor;

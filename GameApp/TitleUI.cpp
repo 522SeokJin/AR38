@@ -18,7 +18,6 @@ void TitleUI::Start()
 	{
 		GameEngineImageUIRenderer* Renderer = CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
 		Renderer->SetImage("UI_login.img.back.0.png");
-		Renderer->SetBrightness(1.0f);
 	}
 
 	{
