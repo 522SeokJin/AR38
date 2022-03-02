@@ -51,9 +51,6 @@ void StatusUI::Start()
 		MPBar_->SetLocalPosition({ 10.0f, -16.0f });
 		MPPercent_ = MPBar_->GetImageSize().x / 100.0f;
 	}
-
-	SetHP(70.0f);
-	SetMP(25.0f);
 }
 
 void StatusUI::Update(float _DeltaTime)
@@ -67,13 +64,13 @@ void StatusUI::Update(float _DeltaTime)
 
 void StatusUI::SetHP(float _Percent)
 {
-	if (0 > _Percent)
+	if (0 >= _Percent)
 	{
 		// Death();
 		return;
 	}
 
-	if (100.0f < _Percent)
+	if (100.0f <= _Percent)
 	{
 		return;
 	}
@@ -91,13 +88,13 @@ void StatusUI::SetHP(float _Percent)
 
 void StatusUI::SetMP(float _Percent)
 {
-	if (0 > _Percent)
+	if (0 >= _Percent)
 	{
 		// Death();
 		return;
 	}
 
-	if (100.0f < _Percent)
+	if (100.0f <= _Percent)
 	{
 		return;
 	}
