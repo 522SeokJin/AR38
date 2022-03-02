@@ -14,6 +14,7 @@
 #include "SilentSwampLevel.h"
 #include "SahelLevel.h"
 #include "EntranceDemianLevel.h"
+#include "DemianLevel.h"
 
 UserGame::UserGame() // default constructer 디폴트 생성자
 {
@@ -43,6 +44,7 @@ void UserGame::Initialize()
 
 	// Demian
 	LevelCreate<EntranceDemianLevel>("EntranceDemian");
+	LevelCreate<DemianLevel>("Demian");
 
 	LevelChange("Title");
 }

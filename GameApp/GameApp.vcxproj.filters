@@ -74,6 +74,9 @@
     <ClCompile Include="QuickSlotUI.cpp">
       <Filter>Actor\UI\MainBar\QuickSlot</Filter>
     </ClCompile>
+    <ClCompile Include="DemianLevel.cpp">
+      <Filter>Level\HuntingGround\Demian</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -209,6 +212,9 @@
     </ClInclude>
     <ClInclude Include="QuickSlotUI.h">
       <Filter>Actor\UI\MainBar\QuickSlot</Filter>
+    </ClInclude>
+    <ClInclude Include="DemianLevel.h">
+      <Filter>Level\HuntingGround\Demian</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
