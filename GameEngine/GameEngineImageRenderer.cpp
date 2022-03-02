@@ -37,6 +37,14 @@ void GameEngineImageRenderer::SetImageSize(const float4& _ImageSize)
 void GameEngineImageRenderer::SetImage(const std::string& _ImageName,
 	bool _ScaleToImageSize/* = true*/)
 {
+	CurTexture_ = GameEngineTextureManager::GetInst().Find(_ImageName);
+
+	if (nullptr == CurTexture_)
+	{
+		GameEngineDebug::MsgBoxError("존재하지 않는 텍스처를 세팅하려고 했습니다" + _ImageName);
+		return;
+	}
+
 	ShaderHelper.SettingTexture("Tex", _ImageName);
 
 	if (false == _ScaleToImageSize)
@@ -44,15 +52,7 @@ void GameEngineImageRenderer::SetImage(const std::string& _ImageName,
 		return;
 	}
 
-	GameEngineTexture* FindTexture = GameEngineTextureManager::GetInst().Find(_ImageName);
-
-	if (nullptr == FindTexture)
-	{
-		GameEngineDebug::MsgBoxError("이미지를 찾지 못했습니다. SetImage " + _ImageName);
-		return;
-	}
-
-	SetImageSize(FindTexture->GetImageSize());
+	SetImageSize(CurTexture_->GetImageSize());
 }
 
 void GameEngineImageRenderer::ImageLocalFlipYAxis()
@@ -184,6 +184,13 @@ void GameEngineImageRenderer::SetFrameCallBack(const std::string& _Name,
 void GameEngineImageRenderer::Update(float _DeltaTime)
 {
 	GameEngineRenderer::Update(_DeltaTime);
+
+	if (nullptr == CurAnimation_)
+	{
+		return;
+	}
+
+	CurAnimation_->Update(_DeltaTime);
 }
 
 void GameEngineImageRenderer::Start()

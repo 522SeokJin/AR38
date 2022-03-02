@@ -29,5 +29,7 @@ private:
 
 	bool ScaleToImageSize_;
 	float4 ImageSize_;
+
+	float4 CutData_; // float2 TextureCutDataPos, float2 TextureCutDataSize
 };
 

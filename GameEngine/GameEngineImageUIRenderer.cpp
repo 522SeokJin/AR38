@@ -5,6 +5,7 @@
 
 GameEngineImageUIRenderer::GameEngineImageUIRenderer()
 	: ScaleToImageSize_(true)
+	, CutData_(0, 0, 1, 1)
 {
 
 }
@@ -51,5 +52,7 @@ void GameEngineImageUIRenderer::Start()
 	GameEngineUIRenderer::Start();
 
 	SetRenderingPipeLine("Texture");
+
+	ShaderHelper.SettingConstantBufferLink("TextureCutData", CutData_);
 }
 

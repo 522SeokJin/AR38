@@ -94,4 +94,3 @@ void Player::Update(float _DeltaTime)
 	GetLevel()->GetMainCameraActor()->GetTransform()->
 		SetLocalPosition(GetTransform()->GetLocalPosition());
 }
-
