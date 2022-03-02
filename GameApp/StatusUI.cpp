@@ -5,8 +5,8 @@
 StatusUI::StatusUI()
 	: HPBar_(nullptr)
 	, MPBar_(nullptr)
-	, HPPercent_(100.0f)
-	, MPPercent_(100.0f)
+	, HPRatio_(100.0f)
+	, MPRatio_(100.0f)
 	, HPTimeTest_(0.0f)
 	, MPTimeTest_(0.0f)
 {
@@ -42,14 +42,14 @@ void StatusUI::Start()
 		HPBar_ = CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
 		HPBar_->SetImage("mainBar.status.gauge.hp.layer_0.png");
 		HPBar_->SetLocalPosition({ 10.0f, 0.0f });
-		HPPercent_ = HPBar_->GetImageSize().x / 100.0f;
+		HPRatio_ = HPBar_->GetImageSize().x / 100.0f;
 	}
 
 	{
 		MPBar_ = CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
 		MPBar_->SetImage("mainBar.status.gauge.mp.layer_0.png");
 		MPBar_->SetLocalPosition({ 10.0f, -16.0f });
-		MPPercent_ = MPBar_->GetImageSize().x / 100.0f;
+		MPRatio_ = MPBar_->GetImageSize().x / 100.0f;
 	}
 }
 
@@ -64,49 +64,167 @@ void StatusUI::Update(float _DeltaTime)
 
 void StatusUI::SetHP(float _Percent)
 {
-	if (0 >= _Percent)
+	if (0 > _Percent)
 	{
 		// Death();
 		return;
 	}
 
-	if (100.0f <= _Percent)
+	if (100.0f < _Percent)
 	{
 		return;
 	}
 
-	float CurrentHPBar = HPBar_->GetImageSize().x;
+	float CurrentBar = HPBar_->GetImageSize().x;
 
-	if (CurrentHPBar == HPPercent_ * _Percent)
+	if (CurrentBar == HPRatio_ * _Percent)
 	{
 		return;
 	}
 
-	HPBar_->SetImageSize({ HPPercent_ * _Percent, HPBar_->GetImageSize().y });
-	HPBar_->SetLocalMove({ (HPBar_->GetImageSize().x - CurrentHPBar) / 2.0f, 0.0f });
+	HPBar_->SetImageSize({ HPRatio_ * _Percent, HPBar_->GetImageSize().y });
+	HPBar_->SetLocalMove({ (HPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
 }
 
 void StatusUI::SetMP(float _Percent)
 {
-	if (0 >= _Percent)
+	if (0 > _Percent)
 	{
 		// Death();
 		return;
 	}
 
-	if (100.0f <= _Percent)
+	if (100.0f < _Percent)
 	{
 		return;
 	}
 
-	float CurrentMPBar = MPBar_->GetImageSize().x;
+	float CurrentBar = MPBar_->GetImageSize().x;
 
-	if (CurrentMPBar == MPPercent_ * _Percent)
+	if (CurrentBar == MPRatio_ * _Percent)
 	{
 		return;
 	}
 
-	MPBar_->SetImageSize({ MPPercent_ * _Percent, MPBar_->GetImageSize().y });
-	MPBar_->SetLocalMove({ (MPBar_->GetImageSize().x - CurrentMPBar) / 2.0f, 0.0f });
+	MPBar_->SetImageSize({ MPRatio_ * _Percent, MPBar_->GetImageSize().y });
+	MPBar_->SetLocalMove({ (MPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
+}
+
+void StatusUI::AddHPPercent(float _Percent)
+{
+	if (0 > _Percent)
+	{
+		return;
+	}
+
+	if (100.0f < _Percent)
+	{
+		return;
+	}
+
+	float CurrentBar = HPBar_->GetImageSize().x;
+
+	float Result = CurrentBar + HPRatio_ * _Percent;
+
+	if (100.0f < Result)
+	{
+		Result = 100.0f;
+	}
+
+	HPBar_->SetImageSize({ Result, HPBar_->GetImageSize().y });
+	HPBar_->SetLocalMove({ (HPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
+}
+
+void StatusUI::AddMPPercent(float _Percent)
+{
+	if (0 > _Percent)
+	{
+		return;
+	}
+
+	if (100.0f < _Percent)
+	{
+		return;
+	}
+
+	float CurrentBar = MPBar_->GetImageSize().x;
+
+	float Result = CurrentBar + MPRatio_ * _Percent;
+
+	if (100.0f < Result)
+	{
+		Result = 100.0f;
+	}
+
+	MPBar_->SetImageSize({ Result, MPBar_->GetImageSize().y });
+	MPBar_->SetLocalMove({ (MPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
+}
+
+void StatusUI::SubHPPercent(float _Percent)
+{
+	if (0 > _Percent)
+	{
+		return;
+	}
+
+	if (100.0f < _Percent)
+	{
+		return;
+	}
+
+	float CurrentBar = HPBar_->GetImageSize().x;
+
+	float Result = CurrentBar - HPRatio_ * _Percent;
+
+	if (0.0f > Result)
+	{
+		Result = 0.0f;
+		//Death();
+	}
+
+	HPBar_->SetImageSize({ Result, HPBar_->GetImageSize().y });
+	HPBar_->SetLocalMove({ (HPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
+}
+
+void StatusUI::SubMPPercent(float _Percent)
+{
+	if (0 > _Percent)
+	{
+		return;
+	}
+
+	if (100.0f < _Percent)
+	{
+		return;
+	}
+
+	float CurrentBar = MPBar_->GetImageSize().x;
+
+	float Result = CurrentBar - MPRatio_ * _Percent;
+
+	if (0.0f > Result)
+	{
+		Result = 0.0f;
+		//Death();
+	}
+
+	MPBar_->SetImageSize({ Result, MPBar_->GetImageSize().y });
+	MPBar_->SetLocalMove({ (MPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
+}
+
+void StatusUI::AddHPValue(float _Value)
+{
+}
+
+void StatusUI::AddMPValue(float _Value)
+{
+}
+
+void StatusUI::SubHPValue(float _Value)
+{
+}
+
+void StatusUI::SubMPValue(float _Value)
+{
 }
 
