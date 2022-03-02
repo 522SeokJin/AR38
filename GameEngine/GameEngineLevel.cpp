@@ -67,8 +67,6 @@ void GameEngineLevel::ActorUpdate(float _DeltaTime)
 		}
 	}
 
-
-
 	for (std::pair<int, std::list<GameEngineActor*>> Pair : ActorList_)
 	{
 		std::list<GameEngineActor*>& Actors = Pair.second;
@@ -81,6 +79,7 @@ void GameEngineLevel::ActorUpdate(float _DeltaTime)
 			}
 
 			Actor->Update(_DeltaTime);
+			Actor->UpdateComponent(_DeltaTime);
 		}
 	}
 }

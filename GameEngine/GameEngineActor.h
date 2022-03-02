@@ -82,7 +82,7 @@ protected:
 private:
 	void SetLevel(GameEngineLevel* _Level);
 
-	void UpdateComponent();
+	void UpdateComponent(float _DeltaTime);
 
 	void ComponentRelease();
 

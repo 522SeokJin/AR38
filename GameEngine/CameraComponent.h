@@ -34,7 +34,7 @@ protected:
 	CameraComponent& operator=(const CameraComponent&& _other) = delete;
 
 	virtual void Start() override;
-	virtual void Update() override;
+	virtual void Update(float _DeltaTime) override;
 
 private:
 	void CameraTransformUpdate();

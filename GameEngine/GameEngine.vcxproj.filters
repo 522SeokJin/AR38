@@ -320,25 +320,28 @@
     <Filter Include="Lib">
       <UniqueIdentifier>{1ad8f818-d77b-41d6-ab50-a31cc6dc5ee1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Lib\Debug">
-      <UniqueIdentifier>{26c63524-9a1c-4947-98e3-3f1a05ee0d00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Lib\Release">
-      <UniqueIdentifier>{27a9b5f8-04d4-407c-a2c8-3a1626904972}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\03. Rasterizer">
       <UniqueIdentifier>{c51986b5-61f2-40b1-a271-b9e8058eb03e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources\99. Manager\ResourceManager">
       <UniqueIdentifier>{da9f6a34-95aa-4b16-b5a7-b585066393fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lib\DitectXTex">
+      <UniqueIdentifier>{64cbd94b-6012-4988-bc3a-d7c6f8796c90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\DitectXTex\Debug">
+      <UniqueIdentifier>{26c63524-9a1c-4947-98e3-3f1a05ee0d00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\DitectXTex\Release">
+      <UniqueIdentifier>{27a9b5f8-04d4-407c-a2c8-3a1626904972}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\ThirdParty\x64\Debug\DirectXTex\DirectXTex.lib">
-      <Filter>Lib\Debug</Filter>
-    </None>
-    <None Include="..\ThirdParty\x64\Release\DirectXTex\DirectXTex.lib">
-      <Filter>Lib\Release</Filter>
-    </None>
+    <CopyFileToFolders Include="..\ThirdParty\x64\Debug\DirectXTex\DirectXTex.lib">
+      <Filter>Lib\DitectXTex\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\ThirdParty\x64\Release\DirectXTex\DirectXTex.lib">
+      <Filter>Lib\DitectXTex\Release</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

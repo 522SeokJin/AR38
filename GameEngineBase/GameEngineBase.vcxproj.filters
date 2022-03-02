@@ -127,17 +127,17 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\ThirdParty\x64\Debug\FMOD\fmodL.dll">
+    <CopyFileToFolders Include="..\ThirdParty\x64\Debug\FMOD\fmodL.dll">
       <Filter>Lib\FMOD\Debug</Filter>
-    </None>
-    <None Include="..\ThirdParty\x64\Release\FMOD\fmod.dll">
-      <Filter>Lib\FMOD\Release</Filter>
-    </None>
-    <None Include="..\ThirdParty\x64\Debug\FMOD\fmodL_vc.lib">
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\ThirdParty\x64\Debug\FMOD\fmodL_vc.lib">
       <Filter>Lib\FMOD\Debug</Filter>
-    </None>
-    <None Include="..\ThirdParty\x64\Release\FMOD\fmod_vc.lib">
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\ThirdParty\x64\Release\FMOD\fmod.dll">
       <Filter>Lib\FMOD\Release</Filter>
-    </None>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\ThirdParty\x64\Release\FMOD\fmod_vc.lib">
+      <Filter>Lib\FMOD\Release</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

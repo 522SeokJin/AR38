@@ -19,6 +19,11 @@ public:
 
 	ID3D11RenderTargetView* CreateRenderTargetView();
 
+	bool IsCut();
+	void Cut(int _x, int _y);
+	void PushCutIndex(const float4& _Size, const float4& _Pos);
+	float4 GetCutData(int _Index);
+
 protected:
 	GameEngineTexture(const GameEngineTexture& _other) = delete;
 	GameEngineTexture(GameEngineTexture&& _other) noexcept = delete;
@@ -33,5 +38,7 @@ private:
 	ID3D11ShaderResourceView* ShaderResourceView_;
 
 	DirectX::ScratchImage Image_;
+
+	std::vector<float4> CutList_;
 };
 

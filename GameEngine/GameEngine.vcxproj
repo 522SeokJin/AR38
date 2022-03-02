@@ -328,12 +328,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\ThirdParty\x64\Debug\DirectXTex\DirectXTex.lib">
+    <CopyFileToFolders Include="..\ThirdParty\x64\Debug\DirectXTex\DirectXTex.lib">
       <FileType>Document</FileType>
-    </None>
-    <None Include="..\ThirdParty\x64\Release\DirectXTex\DirectXTex.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\ThirdParty\x64\Release\DirectXTex\DirectXTex.lib">
       <FileType>Document</FileType>
-    </None>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </CopyFileToFolders>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -431,7 +435,8 @@
       </Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)\ThirdParty\x64\$(ConfigurationName)\DirectXTex "$(TargetDir)\" /s /d /y</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -462,7 +467,8 @@
       </Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)\ThirdParty\x64\$(ConfigurationName)\DirectXTex "$(TargetDir)\" /s /d /y</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -489,7 +495,8 @@
       </Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)\ThirdParty\x64\$(ConfigurationName)\DirectXTex "$(TargetDir)\" /s /d /y</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -520,7 +527,8 @@
       </Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)\ThirdParty\x64\$(ConfigurationName)\DirectXTex "$(TargetDir)\" /s /d /y</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -20,18 +20,17 @@ public:
 	GameEngineShaderResHelper ShaderHelper;
 
 protected:
-	virtual void Start() override;
-
 	GameEngineRenderer(const GameEngineRenderer& _other) = delete;
 	GameEngineRenderer(GameEngineRenderer&& _other) noexcept = delete;
 	GameEngineRenderer& operator=(const GameEngineRenderer& _other) = delete;
 	GameEngineRenderer& operator=(const GameEngineRenderer&& _other) = delete;
 
+	virtual void Start() override;
+	virtual void Update(float _DeltaTime) override;
+
 	GameEngineRenderingPipeLine* PipeLine_;
 
 private:
-	virtual void Update() override;
-
 	virtual void Render();
 };
 

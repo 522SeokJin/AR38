@@ -44,16 +44,16 @@ void GameEngineActor::SetLevel(GameEngineLevel* _Level)
 	Level_ = _Level;
 }
 
-void GameEngineActor::UpdateComponent()
+void GameEngineActor::UpdateComponent(float _DeltaTime)
 {
 	for (GameEngineComponent* Component : ComponentList_)
 	{
-		Component->Update();
+		Component->Update(_DeltaTime);
 	}
 
 	for (GameEngineTransformComponent* Component : TransformComponentList_)
 	{
-		Component->Update();
+		Component->Update(_DeltaTime);
 	}
 }
 

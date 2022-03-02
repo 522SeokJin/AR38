@@ -109,7 +109,8 @@
       <AdditionalLibraryDirectories>$(SolutionDir)\Bin\$(Platform)\$(Configuration)\;</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)\ThirdParty\x64\$(ConfigurationName)\FMOD "$(TargetDir)\" /s /d /y</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>
@@ -139,7 +140,8 @@
       <AdditionalLibraryDirectories>$(SolutionDir)\Bin\$(Platform)\$(Configuration)\;</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)\ThirdParty\x64\$(ConfigurationName)\FMOD "$(TargetDir)\" /s /d /y</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>
@@ -165,7 +167,8 @@
       <AdditionalLibraryDirectories>$(SolutionDir)\Bin\$(Platform)\$(Configuration)\;</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)\ThirdParty\x64\$(ConfigurationName)\FMOD "$(TargetDir)\" /s /d /y</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>
@@ -195,7 +198,8 @@
       <AdditionalLibraryDirectories>$(SolutionDir)\Bin\$(Platform)\$(Configuration)\;</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)\ThirdParty\x64\$(ConfigurationName)\FMOD "$(TargetDir)\" /s /d /y</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>
@@ -269,22 +273,30 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\ThirdParty\x64\Debug\FMOD\fmodL.dll">
+    <CopyFileToFolders Include="..\ThirdParty\x64\Debug\FMOD\fmodL.dll">
       <FileType>Document</FileType>
-    </None>
-    <None Include="..\ThirdParty\x64\Release\FMOD\fmod.dll">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\ThirdParty\x64\Release\FMOD\fmod.dll">
       <FileType>Document</FileType>
-    </None>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\ThirdParty\x64\Release\FMOD\fmod_vc.lib">
+    <CopyFileToFolders Include="..\ThirdParty\x64\Release\FMOD\fmod_vc.lib">
       <FileType>Document</FileType>
-    </None>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\ThirdParty\x64\Debug\FMOD\fmodL_vc.lib">
+    <CopyFileToFolders Include="..\ThirdParty\x64\Debug\FMOD\fmodL_vc.lib">
       <FileType>Document</FileType>
-    </None>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

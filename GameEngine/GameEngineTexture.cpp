@@ -115,3 +115,56 @@ ID3D11RenderTargetView* GameEngineTexture::CreateRenderTargetView()
 
 	return RenderTargetView_;
 }
+
+bool GameEngineTexture::IsCut()
+{
+	return CutList_.size() != 0;
+}
+
+void GameEngineTexture::Cut(int _x, int _y)
+{
+	float4 CutStart;
+
+	// UV 기준 z,w에 사이즈를 넣음
+	CutStart.z = 1.0f / _x;
+	CutStart.w = 1.0f / _y;
+
+	for (int y = 0; y < _y; y++)
+	{
+		CutStart.y = CutStart.w * y;
+
+		for (int x = 0; x < _x; x++)
+		{
+			CutStart.x = CutStart.z * x;
+			CutList_.push_back(CutStart);
+		}
+	}
+}
+
+void GameEngineTexture::PushCutIndex(const float4& _Size, const float4& _Pos)
+{
+	float4 CutUV;
+
+	CutUV.x = _Pos.x;
+	CutUV.y = _Pos.y;
+
+	CutUV.z = _Size.x;
+	CutUV.w = _Size.y;
+
+	CutList_.push_back(CutUV);
+}
+
+float4 GameEngineTexture::GetCutData(int _Index)
+{
+	if (0 == CutList_.size())
+	{
+		GameEngineDebug::MsgBoxError("자르지 않은 텍스처에서 인덱스를 얻어오려고 했습니다.");
+	}
+	
+	if (_Index > CutList_.size())
+	{
+		GameEngineDebug::MsgBoxError("자른 개수에 비해서 인덱스가 너무 큽니다.");
+	}
+
+	return CutList_[_Index];
+}
