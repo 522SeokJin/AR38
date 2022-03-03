@@ -49,12 +49,17 @@ private:
 	float MaxHP_;
 	float MaxMP_;
 
+	bool HPChanged;
+	bool MPChanged;
+
 	float HPTimeTest_;
 	float MPTimeTest_;
 
 	// Number Image
 	std::map<int, std::vector<GameEngineImageUIRenderer*>> HPNumber_;
 	std::map<int, std::vector<GameEngineImageUIRenderer*>> MPNumber_;
+	std::map<int, std::vector<GameEngineImageUIRenderer*>> MaxHPNumber_;
+	std::map<int, std::vector<GameEngineImageUIRenderer*>> MaxMPNumber_;
 	std::map<int, std::vector<GameEngineImageUIRenderer*>> LvNumber_;
 };
 
