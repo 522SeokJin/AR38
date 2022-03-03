@@ -13,6 +13,11 @@ void Player::CreatePlayerRenderer()
 	Arm_->CalculationArmPos(float4(5.0f, 9.0f), float4(-13, -1.0f), float4(-1.0f, 5.0f));
 	Arm_->SetLocalPosition(Body_->NavelPosition_ - Arm_->NavelPosition_);
 
+	Pants_ = CreateTransformComponent<PlayerRenderer>(GetTransform());
+	Pants_->SetImage("stand1.0.pants.png");
+	Pants_->CalculationClothesPos(float4(9.0f, 6.0f), float4(-5.0f, -6.0f));
+	Pants_->SetLocalPosition(Body_->NavelPosition_ - Pants_->NavelPosition_);
+
 	Mail_ = CreateTransformComponent<PlayerRenderer>(GetTransform());
 	Mail_->SetImage("stand1.0.mail.png");
 	Mail_->CalculationClothesPos(float4(11.0f, 9.0f), float4(-8.0f, 1.0f));
@@ -22,11 +27,6 @@ void Player::CreatePlayerRenderer()
 	MailArm_->SetImage("stand1.0.mailArm.png");
 	MailArm_->CalculationClothesPos(float4(3.0f, 4.0f), float4(-12.0f, 4.0f));
 	MailArm_->SetLocalPosition(Body_->NavelPosition_ - MailArm_->NavelPosition_);
-
-	Pants_ = CreateTransformComponent<PlayerRenderer>(GetTransform());
-	Pants_->SetImage("stand1.0.pants.png");
-	Pants_->CalculationClothesPos(float4(9.0f, 6.0f), float4(-4.0f, -5.0f));
-	Pants_->SetLocalPosition(Body_->NavelPosition_ - Pants_->NavelPosition_);
 
 	Shoes_ = CreateTransformComponent<PlayerRenderer>(GetTransform());
 	Shoes_->SetImage("stand1.0.shoes.png");

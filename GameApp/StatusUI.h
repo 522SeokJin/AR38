@@ -53,8 +53,8 @@ private:
 	float MPTimeTest_;
 
 	// Number Image
-	GameEngineImageUIRenderer*				HPNumberSlash_;
-	std::vector<GameEngineImageUIRenderer*> HPNumber_;
-	std::vector<GameEngineImageUIRenderer*>	LvNumber_;
+	std::map<int, std::vector<GameEngineImageUIRenderer*>> HPNumber_;
+	std::map<int, std::vector<GameEngineImageUIRenderer*>> MPNumber_;
+	std::map<int, std::vector<GameEngineImageUIRenderer*>> LvNumber_;
 };
 
