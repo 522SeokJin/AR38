@@ -12,8 +12,10 @@ StatusUI::StatusUI()
 	, MaxMP_(2000.0f)
 	, HPTimeTest_(0.0f)
 	, MPTimeTest_(0.0f)
-	, HPChanged(false)
-	, MPChanged(false)
+	, HPChanged_(false)
+	, MPChanged_(false)
+	, Level_(10)
+	, LevelChanged_(false)
 {
 
 }
@@ -130,8 +132,8 @@ void StatusUI::Start()
 		for (int j = 0; j < 10; j++)
 		{
 			GameEngineImageUIRenderer* Renderer =
-				CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
-			Renderer->SetImage("mainBar.status.lvNumber." + std::to_string(i) + ".png");
+				CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform(), 3);
+			Renderer->SetImage("status.lvNumber." + std::to_string(j) + ".png");
 			Renderer->Off();
 			LvNumber_[i].push_back(Renderer);
 		}
@@ -139,10 +141,6 @@ void StatusUI::Start()
 
 	SetHP(3000.0f);
 	SetMP(1500.0f);
-
-	UpdateHPBar();
-	UpdateMPBar();
-
 }
 
 void StatusUI::Update(float _DeltaTime)
@@ -153,16 +151,22 @@ void StatusUI::Update(float _DeltaTime)
 	SetHPPer(HPTimeTest_);
 	SetMPPer(MPTimeTest_);
 
-	if (true == HPChanged)
+	if (true == HPChanged_)
 	{
 		UpdateHPBar();
-		HPChanged = false;
+		HPChanged_ = false;
 	}
 
-	if (true == MPChanged)
+	if (true == MPChanged_)
 	{
 		UpdateMPBar();
-		MPChanged = false;
+		MPChanged_ = false;
+	}
+
+	if (true == LevelChanged_)
+	{
+		UpdateStatusLv();
+		LevelChanged_ = false;
 	}
 }
 
@@ -220,7 +224,7 @@ void StatusUI::SetHPPer(float _Percent)
 	HPBar_->SetImageSize({ Ratio_ * Percent, HPBar_->GetImageSize().y });
 	HPBar_->SetLocalMove({ (HPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
 
-	HPChanged = true;
+	HPChanged_ = true;
 }
 
 void StatusUI::SetMPPer(float _Percent)
@@ -255,7 +259,7 @@ void StatusUI::SetMPPer(float _Percent)
 	MPBar_->SetImageSize({ Ratio_ * Percent, MPBar_->GetImageSize().y });
 	MPBar_->SetLocalMove({ (MPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
 
-	MPChanged = true;
+	MPChanged_ = true;
 }
 
 void StatusUI::AddHPPer(float _Percent)
@@ -284,7 +288,7 @@ void StatusUI::AddHPPer(float _Percent)
 	HPBar_->SetImageSize({ Result, HPBar_->GetImageSize().y });
 	HPBar_->SetLocalMove({ (HPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
 
-	HPChanged = true;
+	HPChanged_ = true;
 }
 
 void StatusUI::AddMPPer(float _Percent)
@@ -314,7 +318,7 @@ void StatusUI::AddMPPer(float _Percent)
 	MPBar_->SetImageSize({ Result, MPBar_->GetImageSize().y });
 	MPBar_->SetLocalMove({ (MPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
 
-	MPChanged = true;
+	MPChanged_ = true;
 }
 
 void StatusUI::SubHPPer(float _Percent)
@@ -339,7 +343,7 @@ void StatusUI::SubHPPer(float _Percent)
 	HPBar_->SetImageSize({ Result, HPBar_->GetImageSize().y });
 	HPBar_->SetLocalMove({ (HPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
 
-	HPChanged = true;
+	HPChanged_ = true;
 }
 
 void StatusUI::SubMPPer(float _Percent)
@@ -364,7 +368,7 @@ void StatusUI::SubMPPer(float _Percent)
 	MPBar_->SetImageSize({ Result, MPBar_->GetImageSize().y });
 	MPBar_->SetLocalMove({ (MPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
 
-	MPChanged = true;
+	MPChanged_ = true;
 }
 
 void StatusUI::SetHP(float _Value)
@@ -394,7 +398,7 @@ void StatusUI::SetHP(float _Value)
 	HPBar_->SetImageSize({ AfterBar, HPBar_->GetImageSize().y });
 	HPBar_->SetLocalMove({ (AfterBar - CurrentBar) / 2.0f, 0.0f });
 
-	HPChanged = true;
+	HPChanged_ = true;
 }
 
 void StatusUI::SetMP(float _Value)
@@ -424,7 +428,7 @@ void StatusUI::SetMP(float _Value)
 	MPBar_->SetImageSize({ AfterBar, MPBar_->GetImageSize().y });
 	MPBar_->SetLocalMove({ (AfterBar - CurrentBar) / 2.0f, 0.0f });
 
-	MPChanged = true;
+	MPChanged_ = true;
 }
 
 void StatusUI::AddHP(float _Value)
@@ -450,7 +454,7 @@ void StatusUI::AddHP(float _Value)
 	HPBar_->SetImageSize({ AfterBar, HPBar_->GetImageSize().y });
 	HPBar_->SetLocalMove({ (AfterBar - CurrentBar) / 2.0f, 0.0f });
 
-	HPChanged = true;
+	HPChanged_ = true;
 }
 
 void StatusUI::AddMP(float _Value)
@@ -476,7 +480,7 @@ void StatusUI::AddMP(float _Value)
 	MPBar_->SetImageSize({ AfterBar, MPBar_->GetImageSize().y });
 	MPBar_->SetLocalMove({ (AfterBar - CurrentBar) / 2.0f, 0.0f });
 
-	MPChanged = true;
+	MPChanged_ = true;
 }
 
 void StatusUI::SubHP(float _Value)
@@ -502,7 +506,7 @@ void StatusUI::SubHP(float _Value)
 	HPBar_->SetImageSize({ AfterBar, HPBar_->GetImageSize().y });
 	HPBar_->SetLocalMove({ (AfterBar - CurrentBar) / 2.0f, 0.0f });
 
-	HPChanged = true;
+	HPChanged_ = true;
 }
 
 void StatusUI::SubMP(float _Value)
@@ -528,7 +532,7 @@ void StatusUI::SubMP(float _Value)
 	MPBar_->SetImageSize({ AfterBar, MPBar_->GetImageSize().y });
 	MPBar_->SetLocalMove({ (AfterBar - CurrentBar) / 2.0f, 0.0f });
 
-	MPChanged = true;
+	MPChanged_ = true;
 }
 
 void StatusUI::UpdateHPBar()
@@ -591,3 +595,23 @@ void StatusUI::UpdateMPBar()
 	}
 }
 
+void StatusUI::UpdateStatusLv()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			LvNumber_[i][j]->Off();
+		}
+	}
+
+	float CurPos = -56.5f + 8.0f * (GameEngineMath::IntLength(Level_) - 1);
+
+	for (int i = 0; i < GameEngineMath::IntLength(Level_); i++)
+	{
+		int Value = GameEngineMath::PlaceValue(Level_, i + 1);
+
+		LvNumber_[i][Value]->On();
+		LvNumber_[i][Value]->SetLocalPosition({ CurPos - 8.0f * i, 22.0f});
+	}
+}

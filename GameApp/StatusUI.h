@@ -29,6 +29,17 @@ public:
 	void SubHP(float _Value);
 	void SubMP(float _Value);
 
+	void SetLevel(int _Level)
+	{
+		Level_ = _Level;
+		LevelChanged_ = true;
+	}
+	void LevelUp()
+	{
+		Level_ += 1;
+		LevelChanged_ = true;
+	}
+
 protected:
 	StatusUI(const StatusUI& _other) = delete; 
 	StatusUI(StatusUI&& _other) noexcept = delete;
@@ -38,6 +49,7 @@ protected:
 private:
 	void UpdateHPBar();
 	void UpdateMPBar();
+	void UpdateStatusLv();
 
 	GameEngineImageUIRenderer* HPBar_;
 	GameEngineImageUIRenderer* MPBar_;
@@ -48,9 +60,11 @@ private:
 	float CurMP_;
 	float MaxHP_;
 	float MaxMP_;
+	bool HPChanged_;
+	bool MPChanged_;
 
-	bool HPChanged;
-	bool MPChanged;
+	int	Level_;
+	bool LevelChanged_;
 
 	float HPTimeTest_;
 	float MPTimeTest_;

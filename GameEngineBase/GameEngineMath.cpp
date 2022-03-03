@@ -11,7 +11,7 @@ int GameEngineMath::IntLength(int _Num)
 
 int GameEngineMath::PlaceValue(int _Num, int _Place)
 {
-	return (_Num / static_cast<int>(pow(10, _Place - 1))) % 10;;
+	return (_Num / static_cast<int>(pow(10, _Place - 1))) % 10;
 }
 
 const float GameEngineMath::PI = 3.14159265359f;
