@@ -8,10 +8,11 @@ StatusUI::StatusUI()
 	, Ratio_(0.0f)
 	, CurHP_(5000.0f)
 	, CurMP_(2000.0f)
-	, MaxHP_(5000.0f)
+	, MaxHP_(5678.0f)
 	, MaxMP_(2000.0f)
 	, HPTimeTest_(0.0f)
 	, MPTimeTest_(0.0f)
+	, HPNumberSlash_(nullptr)
 {
 
 }
@@ -24,19 +25,21 @@ StatusUI::~StatusUI()
 void StatusUI::Start()
 {
 	{
-		
-		GameEngineImageUIRenderer* Renderer = CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform(), 1);
+		GameEngineImageUIRenderer* Renderer = 
+			CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform(), 1);
 		Renderer->SetImage("mainBar.status.layer_cover.png");
 	}
 
 	{
-		GameEngineImageUIRenderer* Renderer = CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+		GameEngineImageUIRenderer* Renderer = 
+			CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
 		Renderer->SetImage("mainBar.status.backgrnd.png");
 		Renderer->SetLocalPosition({ -2.0f, -12.0f });
 	}
 
 	{
-		GameEngineImageUIRenderer* Renderer = CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform(), 2);
+		GameEngineImageUIRenderer* Renderer = 
+			CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform(), 2);
 		Renderer->SetImage("mainBar.status.layer_Lv.png");
 		Renderer->SetLocalPosition({ -70.5f, 22.0f });
 	}
@@ -54,15 +57,66 @@ void StatusUI::Start()
 		MPBar_->SetLocalPosition({ 10.0f, -16.0f });
 		Ratio_ = MPBar_->GetImageSize().x / 100.0f;
 	}
+
+	{
+		HPNumberSlash_ = CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+		HPNumberSlash_->SetImage("status.gauge.number._.png");
+		HPNumberSlash_->SetLocalPosition({ 10.0f, 0.0f });
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		GameEngineImageUIRenderer* Renderer =
+			CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+		Renderer->SetImage("status.gauge.number." + std::to_string(i) + ".png");
+		Renderer->Off();
+		HPNumber_.push_back(Renderer);
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		GameEngineImageUIRenderer* Renderer =
+			CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+		Renderer->SetImage("mainBar.status.lvNumber." + std::to_string(i) + ".png");
+		Renderer->Off();
+		LvNumber_.push_back(Renderer);
+	}
+
+	SetHP(1234.0f);
 }
 
 void StatusUI::Update(float _DeltaTime)
 {
-	HPTimeTest_ += 20.0f * _DeltaTime;
-	MPTimeTest_ += 10.0f * _DeltaTime;
+	//HPTimeTest_ += 20.0f * _DeltaTime;
+	//MPTimeTest_ += 10.0f * _DeltaTime;
 
-	SetHPPer(HPTimeTest_);
-	SetMPPer(MPTimeTest_);
+	//SetHPPer(HPTimeTest_);
+	//SetMPPer(MPTimeTest_);
+
+	UpdateHPBar();
+	UpdateMPBar();
+}
+
+void StatusUI::SetMaxHP(float _Value)
+{
+	if (CurHP_ > _Value)
+	{
+		CurHP_ = _Value;
+	}
+
+	MaxHP_ = _Value;
+	SetHP(CurHP_);
+}
+
+void StatusUI::SetMaxMP(float _Value)
+{
+	if (CurMP_ > _Value)
+	{
+		CurMP_ = _Value;
+	}
+
+	MaxMP_ = _Value;
+	SetMP(CurMP_);
 }
 
 void StatusUI::SetHPPer(float _Percent)
@@ -139,6 +193,11 @@ void StatusUI::AddHPPer(float _Percent)
 
 	CurHP_ += MaxHP_ * _Percent * 0.01f;
 
+	if (CurHP_ > MaxHP_)
+	{
+		CurHP_ = MaxHP_;
+	}
+
 	HPBar_->SetImageSize({ Result, HPBar_->GetImageSize().y });
 	HPBar_->SetLocalMove({ (HPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
 }
@@ -160,6 +219,12 @@ void StatusUI::AddMPPer(float _Percent)
 	}
 
 	CurMP_ += MaxMP_ * _Percent * 0.01f;
+
+	if (CurMP_ > MaxMP_)
+	{
+		CurMP_ = MaxMP_;
+	}
+
 
 	MPBar_->SetImageSize({ Result, MPBar_->GetImageSize().y });
 	MPBar_->SetLocalMove({ (MPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
@@ -361,5 +426,37 @@ void StatusUI::SubMP(float _Value)
 
 	MPBar_->SetImageSize({ AfterBar, MPBar_->GetImageSize().y });
 	MPBar_->SetLocalMove({ (AfterBar - CurrentBar) / 2.0f, 0.0f });
+}
+
+void StatusUI::UpdateHPBar()
+{
+	for (int i = 0; i < HPNumber_.size(); i++)
+	{
+		HPNumber_[i]->Off();
+	}
+
+	float CurPos = HPNumberSlash_->GetLocalPosition().x;
+
+	for (int i = 1; i <= GameEngineMath::IntLength(static_cast<int>(CurHP_)); i++)
+	{
+		int Value = GameEngineMath::PlaceValue(static_cast<int>(CurHP_), i);
+
+		HPNumber_[Value]->On();
+		HPNumber_[Value]->SetLocalPosition({ CurPos - 7.0f * i, 0.0f });
+	}
+
+	CurPos = HPNumberSlash_->GetLocalPosition().x + 7.0f * (GameEngineMath::IntLength(static_cast<int>(MaxHP_)) + 1);
+
+	for (int i = 1; i <= GameEngineMath::IntLength(static_cast<int>(MaxHP_)); i++)
+	{
+		int Value = GameEngineMath::PlaceValue(static_cast<int>(MaxHP_), i);
+
+		HPNumber_[Value]->On();
+		HPNumber_[Value]->SetLocalPosition({ CurPos - 7.0f * i, 0.0f });
+	}
+}
+
+void StatusUI::UpdateMPBar()
+{
 }
 

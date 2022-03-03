@@ -7,6 +7,9 @@ public:
 	static const float PI2;
 	static const float DegreeToRadian;
 	static const float RadianToDegree;
+
+	static int IntLength(int _Num);
+	static int PlaceValue(int _Num, int _Place);
 };
 
 class float4x4;

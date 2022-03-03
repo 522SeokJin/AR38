@@ -12,6 +12,9 @@ public:
 	virtual void Start() override;
 	virtual void Update(float _DeltaTime) override;
 
+	void SetMaxHP(float _Value);
+	void SetMaxMP(float _Value);
+
 	void SetHPPer(float _Percent);
 	void SetMPPer(float _Percent);
 	void AddHPPer(float _Percent);
@@ -33,6 +36,9 @@ protected:
 	StatusUI& operator=(const StatusUI&& _other) = delete;
 
 private:
+	void UpdateHPBar();
+	void UpdateMPBar();
+
 	GameEngineImageUIRenderer* HPBar_;
 	GameEngineImageUIRenderer* MPBar_;
 
@@ -45,5 +51,10 @@ private:
 
 	float HPTimeTest_;
 	float MPTimeTest_;
+
+	// Number Image
+	GameEngineImageUIRenderer*				HPNumberSlash_;
+	std::vector<GameEngineImageUIRenderer*> HPNumber_;
+	std::vector<GameEngineImageUIRenderer*>	LvNumber_;
 };
 
