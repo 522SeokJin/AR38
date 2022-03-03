@@ -115,8 +115,3 @@ void GameEngineActor::ReleaseUpdate(float _DeltaTime)
 		Death();
 	}
 }
-
-void GameEngineActor::TransformUpdate()
-{
-	Transform_->TransformUpdate();
-}

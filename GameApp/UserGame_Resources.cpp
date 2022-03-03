@@ -30,6 +30,15 @@ void UserGame::ResourceLoad()
 		GameEngineTextureManager::GetInst().Load(AllImage[i].GetFullPath());
 	}
 
+	Dir.MoveChild("Demian");
+
+	std::vector<GameEngineFile> AllDir = Dir.GetAllDir();
+
+	for (size_t i = 0; i < AllDir.size(); i++)
+	{
+		GameEngineFolderTextureManager::GetInst().Load(AllDir[i].GetFullPath());
+	}
+
 	AppShaderLoad();
 
 	{

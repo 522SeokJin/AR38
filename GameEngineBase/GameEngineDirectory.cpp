@@ -16,6 +16,11 @@ GameEngineDirectory::GameEngineDirectory()
 	path_ = std::filesystem::current_path();
 }
 
+GameEngineDirectory::GameEngineDirectory(const std::string& _Path)
+{
+	path_ = _Path;
+}
+
 GameEngineDirectory::GameEngineDirectory(const GameEngineDirectory& _other)
 	: GameEnginePath(_other)
 {
@@ -159,6 +164,23 @@ std::vector<GameEngineFile> GameEngineDirectory::GetAllDirFile(const std::string
 		GameEngineString::toupper(CurrentExtension);
 
 		if (_filter != "*" && Filter != CurrentExtension)
+		{
+			continue;
+		}
+
+		Return.push_back(GameEngineFile(next->path()));
+	}
+
+	return Return;
+}
+
+std::vector<GameEngineFile> GameEngineDirectory::GetAllDir()
+{
+	std::vector<GameEngineFile> Return;
+
+	for (std::filesystem::recursive_directory_iterator next(path_), end; next != end; ++next)
+	{
+		if (true == next->path().has_extension())
 		{
 			continue;
 		}

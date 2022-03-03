@@ -24,7 +24,6 @@ protected:
 	CameraActor& operator=(const CameraActor&& _other) = delete;
 
 	void Start() override;
-	void TransformUpdate() override;
 	void Update(float _DeltaTime) override;
 
 private:

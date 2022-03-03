@@ -3,6 +3,7 @@
 
 // 설명 : 
 class GameEngineTexture;
+class GameEngineFolderTexture;
 class GameEngineImageRenderer : public GameEngineRenderer
 {
 private:
@@ -17,6 +18,8 @@ public:
 		return ImageSize_;
 	}
 
+	
+
 	void SetImage(const std::string& _ImageName, bool _ScaleToImageSize = true);
 	void SetImageSize(const float4& _ImageSize);
 
@@ -26,6 +29,9 @@ public:
 
 	void CreateAnimation(const std::string& _Name, int _StartFrame, int _EndFrame,
 		float _InterTime, bool _Loop = true);
+
+	void CreateAnimationFolder(const std::string& _Name, 
+		const std::string& _FolderTexName, float _InterTime, bool _Loop = true);
 
 	// _IsForce : 같은 애니매이션이여도 바꾼다.
 	void SetChangeAnimation(const std::string& _Name, bool _IsForce = false);
@@ -58,7 +64,7 @@ private:
 	{
 	public:
 		Animation2D() 
-			: Texture_(nullptr), Renderer_(nullptr)
+			: FolderTextures_(nullptr), Renderer_(nullptr)
 			, IsEnd_(false), Loop_(true)
 			, InterTime_(0.0f), CurTime_(0.0f)
 			, CurFrame_(0), StartFrame_(0), EndFrame_(0)
@@ -71,7 +77,7 @@ private:
 		void CallFrame();
 		void Update(float _DeltaTime);
 
-		GameEngineTexture*			Texture_;
+		GameEngineFolderTexture*	FolderTextures_;
 		GameEngineImageRenderer*	Renderer_;
 
 		bool IsEnd_;

@@ -4,7 +4,7 @@
 void AppShaderLoad()
 {
 	GameEngineDirectory Dir;
-	Dir.MoveParent("Direct2D");
+	Dir.MoveParent();
 	Dir.MoveChild("Resources");
 	Dir.MoveChild("Shader");
 

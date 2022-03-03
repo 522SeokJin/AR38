@@ -9,6 +9,7 @@ class GameEngineDirectory : public GameEnginePath
 {
 public:
 	GameEngineDirectory(); // default constructer 디폴트 생성자
+	GameEngineDirectory(const std::string& _Path);
 	~GameEngineDirectory(); // default destructer 디폴트 소멸자
 
 public:		// delete constructer
@@ -48,5 +49,7 @@ public:
 
 	// 모든 하위 디렉토리의 파일 목록을 가져온다
 	std::vector<GameEngineFile> GetAllDirFile(const std::string& _filter = "*");
+
+	std::vector<GameEngineFile> GetAllDir();
 };
 

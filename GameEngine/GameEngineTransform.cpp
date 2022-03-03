@@ -25,8 +25,19 @@ void GameEngineTransform::AttachTransform(GameEngineTransform* _Transform)
 
 void GameEngineTransform::DetachChildTransform(GameEngineTransform* _Transform)
 {
-	// _Child가 안에 없다면, 무시됨
-	Childs_.remove(_Transform);
+	static std::vector<GameEngineTransform*>::iterator StartIter = Childs_.begin();
+	static std::vector<GameEngineTransform*>::iterator EndIter = Childs_.end();
+	
+	for (; StartIter != EndIter; )
+	{
+		if (*StartIter != _Transform)
+		{
+			++StartIter;
+			continue;
+		}
+
+		StartIter = Childs_.erase(StartIter);
+	}
 }
 
 void GameEngineTransform::TransformUpdate()
@@ -62,6 +73,7 @@ void GameEngineTransform::SetLocalScaling(const float4& _Value)
 	}
 
 	AllChildCalculationScaling();
+	TransformUpdate();
 }
 
 void GameEngineTransform::SetWorldScaling(const float4& _Value)
@@ -78,6 +90,7 @@ void GameEngineTransform::SetWorldScaling(const float4& _Value)
 	}
 
 	AllChildCalculationScaling();
+	TransformUpdate();
 }
 
 void GameEngineTransform::SetLocalRotation(const float4& _Value)
@@ -94,6 +107,7 @@ void GameEngineTransform::SetLocalRotation(const float4& _Value)
 	}
 
 	AllChildCalculationRotation();
+	TransformUpdate();
 }
 
 void GameEngineTransform::SetWorldRotation(const float4& _Value)
@@ -110,6 +124,7 @@ void GameEngineTransform::SetWorldRotation(const float4& _Value)
 	}
 
 	AllChildCalculationRotation();
+	TransformUpdate();
 }
 
 void GameEngineTransform::SetLocalPosition(const float4& _Value)
@@ -126,6 +141,7 @@ void GameEngineTransform::SetLocalPosition(const float4& _Value)
 	}
 
 	AllChildCalculationPosition();
+	TransformUpdate();
 }
 
 void GameEngineTransform::SetWorldPosition(const float4& _Value)
@@ -142,6 +158,7 @@ void GameEngineTransform::SetWorldPosition(const float4& _Value)
 	}
 
 	AllChildCalculationPosition();
+	TransformUpdate();
 }
 
 void GameEngineTransform::CalculationLocalScaling()

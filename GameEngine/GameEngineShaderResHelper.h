@@ -71,6 +71,8 @@ public:
 
 	void SettingTexture(const std::string& _SettingName, const std::string& _ImageName);
 
+	void SettingTexture(const std::string& _SettingName, GameEngineTexture* _Texture);
+
 protected:
 	GameEngineShaderResHelper(const GameEngineShaderResHelper& _other) = delete; 
 	GameEngineShaderResHelper(GameEngineShaderResHelper&& _other) noexcept = delete;

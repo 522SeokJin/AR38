@@ -45,6 +45,13 @@ void Player::Start()
 {
 	CreatePlayerRenderer();
 
+	{
+		GameEngineImageRenderer* Renderer = CreateTransformComponent<GameEngineImageRenderer>(GetTransform());;
+		Renderer->CreateAnimationFolder("Test", "Act1_attack1", 0.1f);
+		Renderer->GetTransform()->SetLocalScaling({ 100.0f, 100.0f, 1.0f });
+		Renderer->SetChangeAnimation("Test");
+	}
+
 	GameEngineInput::GetInst().CreateKey("MoveLeft", VK_LEFT);
 	GameEngineInput::GetInst().CreateKey("MoveRight", VK_RIGHT);
 	GameEngineInput::GetInst().CreateKey("MoveUp", VK_UP);

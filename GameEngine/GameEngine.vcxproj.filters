@@ -130,6 +130,12 @@
     <ClInclude Include="GameEngineImageUIRenderer.h">
       <Filter>Object\Component\Renderer\Sub</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineFolderTexture.h">
+      <Filter>Resources\02. Image</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineFolderTextureManager.h">
+      <Filter>Resources\99. Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -257,6 +263,12 @@
     </ClCompile>
     <ClCompile Include="GameEngineImageUIRenderer.cpp">
       <Filter>Object\Component\Renderer\Sub</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineFolderTexture.cpp">
+      <Filter>Resources\02. Image</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineFolderTextureManager.cpp">
+      <Filter>Resources\99. Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
