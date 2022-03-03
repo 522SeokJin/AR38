@@ -12,18 +12,19 @@ public:
 	virtual void Start() override;
 	virtual void Update(float _DeltaTime) override;
 
-	void SetHP(float _Percent);
-	void SetMP(float _Percent);
+	void SetHPPer(float _Percent);
+	void SetMPPer(float _Percent);
+	void AddHPPer(float _Percent);
+	void AddMPPer(float _Percent);
+	void SubHPPer(float _Percent);
+	void SubMPPer(float _Percent);
 
-	void AddHPPercent(float _Percent);
-	void AddMPPercent(float _Percent);
-	void SubHPPercent(float _Percent);
-	void SubMPPercent(float _Percent);
-
-	void AddHPValue(float _Value);
-	void AddMPValue(float _Value);
-	void SubHPValue(float _Value);
-	void SubMPValue(float _Value);
+	void SetHP(float _Value);
+	void SetMP(float _Value);
+	void AddHP(float _Value);
+	void AddMP(float _Value);
+	void SubHP(float _Value);
+	void SubMP(float _Value);
 
 protected:
 	StatusUI(const StatusUI& _other) = delete; 
@@ -35,8 +36,12 @@ private:
 	GameEngineImageUIRenderer* HPBar_;
 	GameEngineImageUIRenderer* MPBar_;
 
-	float HPRatio_;
-	float MPRatio_;
+	float Ratio_;
+
+	float CurHP_;
+	float CurMP_;
+	float MaxHP_;
+	float MaxMP_;
 
 	float HPTimeTest_;
 	float MPTimeTest_;
