@@ -12,10 +12,10 @@ StatusUI::StatusUI()
 	, MaxMP_(2000.0f)
 	, HPTimeTest_(0.0f)
 	, MPTimeTest_(0.0f)
-	, HPChanged_(false)
-	, MPChanged_(false)
+	, HPChanged_(true)
+	, MPChanged_(true)
 	, Level_(10)
-	, LevelChanged_(false)
+	, LevelChanged_(true)
 {
 
 }
@@ -138,9 +138,6 @@ void StatusUI::Start()
 			LvNumber_[i].push_back(Renderer);
 		}
 	}
-
-	SetHP(3000.0f);
-	SetMP(1500.0f);
 }
 
 void StatusUI::Update(float _DeltaTime)
