@@ -62,6 +62,11 @@ void GameEngineImageRenderer::ImageLocalFlipYAxis()
 	SetLocalPosition(GetLocalPosition().InvertX());
 	AddLocalRotation(float4(0.0f, 180.0f, 0.0f));
 
+	if (nullptr == CurAnimation_)
+	{
+		return;
+	}
+
 	if (nullptr == CurAnimation_->FolderTextures_)
 	{
 		return;
