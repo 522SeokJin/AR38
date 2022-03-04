@@ -22,6 +22,7 @@ void UserGame::ResourceLoad()
 
 	Dir.MoveParent();
 	Dir.MoveChild("Image");
+	Dir.MoveChild("Image");
 
 	std::vector<GameEngineFile> AllImage = Dir.GetAllDirFile("png");
 
@@ -30,6 +31,7 @@ void UserGame::ResourceLoad()
 		GameEngineTextureManager::GetInst().Load(AllImage[i].GetFullPath());
 	}
 
+	Dir.MoveParent();
 	Dir.MoveChild("Demian");
 
 	std::vector<GameEngineFile> AllDir = Dir.GetAllDir();
