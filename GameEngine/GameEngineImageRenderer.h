@@ -18,8 +18,6 @@ public:
 		return ImageSize_;
 	}
 
-	
-
 	void SetImage(const std::string& _ImageName, bool _ScaleToImageSize = true);
 	void SetImageSize(const float4& _ImageSize);
 
@@ -27,6 +25,7 @@ public:
 
 	void SetIndex(const int _Index);
 
+	// CutData 기반
 	void CreateAnimation(const std::string& _Name, int _StartFrame, int _EndFrame,
 		float _InterTime, bool _Loop = true);
 
@@ -35,6 +34,7 @@ public:
 
 	// _IsForce : 같은 애니매이션이여도 바꾼다.
 	void SetChangeAnimation(const std::string& _Name, bool _IsForce = false);
+	void SetOffsetAnimation(const std::string& _Name, int _Frame, float4 _Offset);
 
 	void SetStartCallBack(const std::string& _Name, std::function<void()> _CallBack);
 	void SetEndCallBack(const std::string& _Name, std::function<void()> _CallBack);
@@ -77,7 +77,11 @@ private:
 		void CallFrame();
 		void Update(float _DeltaTime);
 
+		void SetOffset(int _Index, float4 _Offset);
+
 		GameEngineFolderTexture*	FolderTextures_;
+		std::vector<float4>			Offsets_;
+
 		GameEngineImageRenderer*	Renderer_;
 
 		bool IsEnd_;

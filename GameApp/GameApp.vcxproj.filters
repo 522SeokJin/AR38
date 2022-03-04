@@ -77,6 +77,12 @@
     <ClCompile Include="DemianLevel.cpp">
       <Filter>Level\HuntingGround\Demian</Filter>
     </ClCompile>
+    <ClCompile Include="Demian.cpp">
+      <Filter>Actor\Monster\BOSS</Filter>
+    </ClCompile>
+    <ClCompile Include="Demian_Animation.cpp">
+      <Filter>Actor\Monster\BOSS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -215,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="DemianLevel.h">
       <Filter>Level\HuntingGround\Demian</Filter>
+    </ClInclude>
+    <ClInclude Include="Demian.h">
+      <Filter>Actor\Monster\BOSS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

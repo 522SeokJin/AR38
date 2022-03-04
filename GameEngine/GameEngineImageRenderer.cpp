@@ -61,6 +61,16 @@ void GameEngineImageRenderer::ImageLocalFlipYAxis()
 {
 	SetLocalPosition(GetLocalPosition().InvertX());
 	AddLocalRotation(float4(0.0f, 180.0f, 0.0f));
+
+	if (nullptr == CurAnimation_->FolderTextures_)
+	{
+		return;
+	}
+
+	for (size_t i = 0; i < CurAnimation_->Offsets_.size(); i++)
+	{
+		CurAnimation_->Offsets_[i].InvertX();
+	}
 }
 
 void GameEngineImageRenderer::SetIndex(const int _Index)
@@ -134,6 +144,7 @@ void GameEngineImageRenderer::CreateAnimationFolder(const std::string& _Name,
 	NewAnimation->EndFrame_ = FolderTexture->GetTextureCount() - 1;
 	NewAnimation->StartFrame_ = 0;
 	NewAnimation->Renderer_ = this;
+	NewAnimation->Offsets_.resize(FolderTexture->GetTextureCount());
 	
 	AllAnimations_.insert(std::map<std::string, Animation2D*>::
 		value_type(_Name, NewAnimation));
@@ -162,6 +173,23 @@ void GameEngineImageRenderer::SetChangeAnimation(const std::string& _Name,
 	CurAnimation_ = FindIter->second;
 	CurAnimation_->Reset();
 	CurAnimation_->CallStart();
+}
+
+void GameEngineImageRenderer::SetOffsetAnimation(const std::string& _Name, int _Index, float4 _Offset)
+{
+	std::map<std::string, Animation2D*>::iterator FindIter = AllAnimations_.find(_Name);
+
+	if (AllAnimations_.end() == FindIter)
+	{
+		GameEngineDebug::MsgBoxError("존재하지 않는 애니메이션을 세팅하려고 했습니다");
+	}
+
+	if (nullptr == FindIter->second)
+	{
+		GameEngineDebug::MsgBoxError("Animation2D* 가 nullptr 입니다");
+	}
+
+	FindIter->second->SetOffset(_Index, _Offset);
 }
 
 void GameEngineImageRenderer::SetStartCallBack(const std::string& _Name,
@@ -324,5 +352,17 @@ void GameEngineImageRenderer::Animation2D::Update(float _DeltaTime)
 		Renderer_->CutData_ = float4(0, 0, 1, 1);
 		Renderer_->ShaderHelper.SettingTexture("Tex", 
 			FolderTextures_->GetTextureIndex(CurFrame_));
+		Renderer_->SetLocalScaling(FolderTextures_->GetTextureIndex(CurFrame_)->GetTextureSize());
+		Renderer_->SetLocalPosition({Offsets_[CurFrame_].x, Offsets_[CurFrame_].y });
 	}
+}
+
+void GameEngineImageRenderer::Animation2D::SetOffset(int _Index, float4 _Offset)
+{
+	if (EndFrame_ < _Index || 0 > _Index)
+	{
+		GameEngineDebug::MsgBoxError("잘못된 오프셋 프레임입니다.");
+	}
+
+	Offsets_[_Index] = _Offset;
 }

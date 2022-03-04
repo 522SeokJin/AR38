@@ -176,10 +176,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Demian.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="DemianLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Demian_Animation.cpp" />
     <ClCompile Include="EntranceDemianLevel.cpp">
       <SubType>
       </SubType>
@@ -253,6 +258,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DeepeningForestLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Demian.h">
       <SubType>
       </SubType>
     </ClInclude>
