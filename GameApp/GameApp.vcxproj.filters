@@ -32,9 +32,6 @@
     <ClCompile Include="LithHarbor.cpp">
       <Filter>Actor\Map\LithHarbor</Filter>
     </ClCompile>
-    <ClCompile Include="ExpBarUI.cpp">
-      <Filter>Actor\UI\MainBar</Filter>
-    </ClCompile>
     <ClCompile Include="MenuUI.cpp">
       <Filter>Actor\UI\MainBar</Filter>
     </ClCompile>
@@ -91,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="ItemUI_CreateRenderer.cpp">
       <Filter>Actor\UI\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ExpBarUI.cpp">
+      <Filter>Actor\UI\MainBar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -183,9 +183,6 @@
     <ClInclude Include="LithHarbor.h">
       <Filter>Actor\Map\LithHarbor</Filter>
     </ClInclude>
-    <ClInclude Include="ExpBarUI.h">
-      <Filter>Actor\UI\MainBar</Filter>
-    </ClInclude>
     <ClInclude Include="MenuUI.h">
       <Filter>Actor\UI\MainBar</Filter>
     </ClInclude>
@@ -239,6 +236,9 @@
     </ClInclude>
     <ClInclude Include="ItemUI.h">
       <Filter>Actor\UI\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpBarUI.h">
+      <Filter>Actor\UI\MainBar</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
