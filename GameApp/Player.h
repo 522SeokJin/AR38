@@ -32,10 +32,31 @@ protected:
 
 private:
 	void CreatePlayerRenderer();
-
 	void ChangeImageDirection();
 
-	PlayerDir		Dir_;
+	float4 CalculationOriginPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin);
+	void CalculationBodyPos(GameEngineImageRenderer* _Renderer,
+		const float4& _WzOrigin, const float4& _WzNeck, const float4& _WzNavel);
+	void CalculationArmPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin,
+		const float4& _WzNavel, const float4& _WzHand);
+	void CalculationHeadPos(GameEngineImageRenderer* _Renderer,
+		const float4& _WzOrigin, const float4& _WzNeck,
+		const float4& _WzEarOverHead, const float4& _WzEarBelowHead,
+		const float4& _WzBrow);
+	void CalculationEarPos(GameEngineImageRenderer* _Renderer,
+		const float4& _WzOrigin, const float4& _WzNeck,
+		const float4& _WzEarOverHead, const float4& _WzEarBelowHead,
+		const float4& _WzBrow);
+	void CalculationHairPos(GameEngineImageRenderer* _Renderer,
+		const float4& _WzOrigin, const float4& _WzBrow);
+	void CalculationFacePos(GameEngineImageRenderer* _Renderer,
+		const float4& _WzOrigin, const float4& _WzBrow);
+	void CalculationClothesPos(GameEngineImageRenderer* _Renderer,
+		const float4& _WzOrigin, const float4& _WzNavel);
+	void CalculationWeaponPos(GameEngineImageRenderer* _Renderer,
+		const float4& _WzOrigin, const float4& _WzHand);
+
+	PlayerDir Dir_;
 
 	GameEngineImageRenderer* Body_;
 	GameEngineImageRenderer* Arm_;
@@ -50,28 +71,6 @@ private:
 	GameEngineImageRenderer* Pants_;
 	GameEngineImageRenderer* Shoes_;
 	GameEngineImageRenderer* Weapon_;
-
-	float4 CalculationOriginPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin);
-	void CalculationBodyPos(GameEngineImageRenderer* _Renderer, 
-		const float4& _WzOrigin, const float4& _WzNeck, const float4& _WzNavel);
-	void CalculationArmPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin,
-		const float4& _WzNavel, const float4& _WzHand);
-	void CalculationHeadPos(GameEngineImageRenderer* _Renderer, 
-		const float4& _WzOrigin, const float4& _WzNeck, 
-		const float4& _WzEarOverHead, const float4& _WzEarBelowHead, 
-		const float4& _WzBrow);
-	void CalculationEarPos(GameEngineImageRenderer* _Renderer, 
-		const float4& _WzOrigin, const float4& _WzNeck, 
-		const float4& _WzEarOverHead, const float4& _WzEarBelowHead, 
-		const float4& _WzBrow);
-	void CalculationHairPos(GameEngineImageRenderer* _Renderer, 
-		const float4& _WzOrigin, const float4& _WzBrow);
-	void CalculationFacePos(GameEngineImageRenderer* _Renderer, 
-		const float4& _WzOrigin, const float4& _WzBrow);
-	void CalculationClothesPos(GameEngineImageRenderer* _Renderer, 
-		const float4& _WzOrigin, const float4& _WzNavel);
-	void CalculationWeaponPos(GameEngineImageRenderer* _Renderer, 
-		const float4& _WzOrigin, const float4& _WzHand);
 
 	float4 OriginPosition_;
 	float4 NeckPosition_;

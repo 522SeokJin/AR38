@@ -18,6 +18,13 @@ Player::Player()
 	, Pants_(nullptr)
 	, Shoes_(nullptr)
 	, Weapon_(nullptr)
+	, OriginPosition_()
+	, NeckPosition_()
+	, NavelPosition_()
+	, HandPosition_()
+	, EarOverHeadPosition_()
+	, EarBelowHeadPosition_()
+	, BrowPosition_()
 {
 }
 

@@ -22,6 +22,5 @@ private:
 	void CreateAnimation();
 
 	GameEngineImageRenderer* DemianRenderer_;
-	GameEngineImageRenderer* SkillObjRenderer_;
 };
 
