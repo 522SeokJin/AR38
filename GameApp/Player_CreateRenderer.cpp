@@ -54,7 +54,6 @@ void Player::CreatePlayerRenderer()
 	Hair_ = CreateTransformComponent<GameEngineImageRenderer>(GetTransform());
 	Hair_->SetImage("default.hair.png");
 	CalculationHairPos(Hair_, float4(14.0f, 12.0f), float4(0.0f, 0.0f));
-	Hair_->Off();
 
 	HairOverHead_ = CreateTransformComponent<GameEngineImageRenderer>(GetTransform());
 	HairOverHead_->SetImage("default.hairOverHead.png");

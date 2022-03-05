@@ -52,7 +52,6 @@ private:
 	GameEngineImageRenderer* Weapon_;
 
 	float4 CalculationOriginPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin);
-	float4 CalculationOriginPos(const float4& _WzSize, const float4& _WzOrigin);
 	void CalculationBodyPos(GameEngineImageRenderer* _Renderer, 
 		const float4& _WzOrigin, const float4& _WzNeck, const float4& _WzNavel);
 	void CalculationArmPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin,
