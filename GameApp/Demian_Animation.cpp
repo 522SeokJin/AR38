@@ -5,6 +5,8 @@
 void Demian::CreateAnimation()
 {
 	DemianRenderer_ = CreateTransformComponent<GameEngineImageRenderer>(GetTransform());
+	SkillObjRenderer_ = CreateTransformComponent<GameEngineImageRenderer>(GetTransform());
+
 
 	{
 		DemianRenderer_->CreateAnimationFolder("Act1_attack1", "Act1_attack1", 0.1f);
@@ -64,7 +66,7 @@ void Demian::CreateAnimation()
 	}
 
 	{
-		DemianRenderer_->CreateAnimationFolder("Act1_attack1_areaWarning", "Act1_attack1_areaWarning", 0.09f);
+		SkillObjRenderer_->CreateAnimationFolder("Act1_attack1_areaWarning", "Act1_attack1_areaWarning", 0.09f);
 	}
 
 	DemianRenderer_->SetChangeAnimation("Act1_attack1");

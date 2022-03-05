@@ -9,8 +9,8 @@ public:
 	Demian();
 	~Demian();
 
-	virtual void Start() override;
-	virtual void Update(float _DeltaTime) override;
+	void Start() override;
+	void Update(float _DeltaTime) override;
 
 protected:
 	Demian(const Demian& _other) = delete; 
@@ -22,5 +22,6 @@ private:
 	void CreateAnimation();
 
 	GameEngineImageRenderer* DemianRenderer_;
+	GameEngineImageRenderer* SkillObjRenderer_;
 };
 

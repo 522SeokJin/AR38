@@ -8,8 +8,8 @@ public:
 	MenuUI();
 	~MenuUI();
 
-	virtual void Start() override;
-	virtual void Update(float _DeltaTime) override;
+	void Start() override;
+	void Update(float _DeltaTime) override;
 
 protected:
 	MenuUI(const MenuUI& _other) = delete; 

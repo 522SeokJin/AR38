@@ -8,15 +8,15 @@ public:
 	UserGame();
 	~UserGame();
 
-	virtual void Initialize() override;
-	virtual void ResourceLoad() override;
-	virtual void Release() override;
+	void Initialize() override;
+	void ResourceLoad() override;
+	void Release() override;
 
-	virtual float4 StartWindowPos() override
+	float4 StartWindowPos() override
 	{
 		return { 0, 0 };
 	}
-	virtual float4 StartWindowSize() override
+	float4 StartWindowSize() override
 	{
 		return { 1024, 768 };
 	}

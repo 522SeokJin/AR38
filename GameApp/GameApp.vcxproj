@@ -184,8 +184,16 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="DemianMap.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Demian_Animation.cpp" />
     <ClCompile Include="EntranceDemianLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EntranceDemianMap.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -269,7 +277,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="DemianMap.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EntranceDemianLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EntranceDemianMap.h">
       <SubType>
       </SubType>
     </ClInclude>

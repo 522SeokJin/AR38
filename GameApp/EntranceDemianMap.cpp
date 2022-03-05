@@ -1,19 +1,19 @@
 #include "PreCompile.h"
-#include "LithHarbor.h"
-#include "PlayerRenderer.h"
+#include "EntranceDemianMap.h"
 #include <GameEngine/GameEngineImageRenderer.h>
 
-LithHarbor::LithHarbor()
+EntranceDemianMap::EntranceDemianMap()
 {
 
 }
 
-LithHarbor::~LithHarbor()
+EntranceDemianMap::~EntranceDemianMap()
 {
 
 }
 
-void LithHarbor::Start()
+
+void EntranceDemianMap::Start()
 {
 	{
 		GameEngineImageRenderer* Renderer = CreateTransformComponent<GameEngineImageRenderer>(GetTransform());
@@ -21,7 +21,6 @@ void LithHarbor::Start()
 	}
 }
 
-void LithHarbor::Update(float _DeltaTime)
+void EntranceDemianMap::Update(float _DeltaTime)
 {
 }
-

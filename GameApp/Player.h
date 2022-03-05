@@ -16,8 +16,8 @@ public:
 	Player();
 	~Player();
 
-	virtual void Start() override;
-	virtual void Update(float _DeltaTime) override;
+	void Start() override;
+	void Update(float _DeltaTime) override;
 
 	PlayerDir GetDir()
 	{

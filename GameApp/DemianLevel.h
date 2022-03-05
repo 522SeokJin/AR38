@@ -8,10 +8,10 @@ public:
 	DemianLevel();
 	~DemianLevel();
 
-	virtual void LevelStart() override;
-	virtual void LevelUpdate(float _DeltaTime) override;
-	virtual void LevelChangeEndEvent() override;
-	virtual void LevelChangeStartEvent() override;
+	void LevelStart() override;
+	void LevelUpdate(float _DeltaTime) override;
+	void LevelChangeEndEvent() override;
+	void LevelChangeStartEvent() override;
 
 protected:
 	DemianLevel(const DemianLevel& _other) = delete; 

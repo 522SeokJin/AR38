@@ -83,6 +83,12 @@
     <ClCompile Include="Demian_Animation.cpp">
       <Filter>Actor\Monster\BOSS</Filter>
     </ClCompile>
+    <ClCompile Include="DemianMap.cpp">
+      <Filter>Actor\Map\Demian</Filter>
+    </ClCompile>
+    <ClCompile Include="EntranceDemianMap.cpp">
+      <Filter>Actor\Map\Demian</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -144,6 +150,9 @@
     </Filter>
     <Filter Include="Actor\UI\MainBar\QuickSlot">
       <UniqueIdentifier>{a77aef23-3af5-434e-a631-ebd758e245ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Map\Demian">
+      <UniqueIdentifier>{80fdbf4c-2465-4d92-99e1-544a771eab93}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +233,12 @@
     </ClInclude>
     <ClInclude Include="Demian.h">
       <Filter>Actor\Monster\BOSS</Filter>
+    </ClInclude>
+    <ClInclude Include="DemianMap.h">
+      <Filter>Actor\Map\Demian</Filter>
+    </ClInclude>
+    <ClInclude Include="EntranceDemianMap.h">
+      <Filter>Actor\Map\Demian</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
