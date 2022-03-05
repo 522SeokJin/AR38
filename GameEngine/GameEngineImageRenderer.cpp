@@ -59,6 +59,11 @@ void GameEngineImageRenderer::SetImage(const std::string& _ImageName,
 
 void GameEngineImageRenderer::ImageLocalFlipYAxis()
 {
+	if (nullptr == this)
+	{
+		return;
+	}
+
 	SetLocalPosition(GetLocalPosition().InvertX());
 	AddLocalRotation(float4(0.0f, 180.0f, 0.0f));
 

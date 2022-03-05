@@ -1,6 +1,5 @@
 #include "PreCompile.h"
 #include "LithHarbor.h"
-#include "PlayerRenderer.h"
 #include <GameEngine/GameEngineImageRenderer.h>
 
 LithHarbor::LithHarbor()

@@ -20,9 +20,6 @@
     <ClCompile Include="Monster.cpp">
       <Filter>Actor\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerRenderer.cpp">
-      <Filter>Wz\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
@@ -115,14 +112,8 @@
     <Filter Include="Actor\Monster\BOSS">
       <UniqueIdentifier>{c21ac8a3-9e06-4c1d-af4c-ca687fbe5aa6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Wz">
-      <UniqueIdentifier>{4dd958d5-a0fc-4333-b007-3da3ecbbe842}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\UI">
       <UniqueIdentifier>{c9f9e47b-c1c8-44fc-b891-f4d3d8b44932}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Wz\Component">
-      <UniqueIdentifier>{8d6864ba-c02f-4f5b-b34d-22a8343a0cb0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\UI\Login">
       <UniqueIdentifier>{512fe019-c86d-49b5-833e-8624cf6f780f}</UniqueIdentifier>
@@ -174,14 +165,8 @@
     <ClInclude Include="Monster.h">
       <Filter>Actor\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerRenderer.h">
-      <Filter>Wz\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="WzPhysicsValue.h">
-      <Filter>Wz</Filter>
     </ClInclude>
     <ClInclude Include="TitleUI.h">
       <Filter>Actor\UI\Login</Filter>
@@ -239,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="EntranceDemianMap.h">
       <Filter>Actor\Map\Demian</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsDefine.h">
+      <Filter>Actor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
