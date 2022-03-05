@@ -121,7 +121,7 @@ void GameEngineShader::ResCheck()
 
 			// D3D11_FILTER_MIN_MAG_MIP_LINEAR : 뭉개라
 			// D3D11_FILTER_MIN_MAG_MIP_POINT : 도트게임처럼 뭉개지않는다.
-			SmpDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+			SmpDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 
 			SmpDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
 			SmpDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;

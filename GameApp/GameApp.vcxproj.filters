@@ -86,6 +86,12 @@
     <ClCompile Include="EntranceDemianMap.cpp">
       <Filter>Actor\Map\Demian</Filter>
     </ClCompile>
+    <ClCompile Include="ItemUI.cpp">
+      <Filter>Actor\UI\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemUI_CreateRenderer.cpp">
+      <Filter>Actor\UI\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -144,6 +150,9 @@
     </Filter>
     <Filter Include="Actor\Map\Demian">
       <UniqueIdentifier>{80fdbf4c-2465-4d92-99e1-544a771eab93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI\Item">
+      <UniqueIdentifier>{758cfe3e-7815-4223-b675-09be6e62ed8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +236,9 @@
     </ClInclude>
     <ClInclude Include="PhysicsDefine.h">
       <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemUI.h">
+      <Filter>Actor\UI\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@
 #include "StatusUI.h"
 #include "QuickSlotUI.h"
 #include "QuickSlotKeyUI.h"
+#include "ItemUI.h"
 
 #include "Demian.h"
 
@@ -65,6 +66,11 @@ void LithHarborLevel::LevelStart()
 	{
 		Demian* Actor = CreateActor<Demian>();
 		Actor->GetTransform()->SetWorldPosition({ 200.0f, 0.0f });
+	}
+
+	{
+		ItemUI* Actor = CreateActor<ItemUI>();
+		Actor->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
 	}
 }
 
