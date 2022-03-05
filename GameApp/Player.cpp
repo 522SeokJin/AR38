@@ -112,6 +112,20 @@ float4 Player::CalculationOriginPos(GameEngineImageRenderer* _Renderer, const fl
 	return (_WzOrigin + CenterDiff).InvertY();
 }
 
+float4 Player::CalculationOriginPos(const float4& _WzSize, const float4& _WzOrigin)
+{
+	// 위컴알 기준 센터의 좌표는 크기의 절반값
+	float4 WzCenter = _WzSize.halffloat4();
+
+	// 지금 센터는 내 월드포지션
+	float4 Center = GetTransform()->GetWorldPosition();
+
+	// Center값에서 Origin 좌표를 구하기위해서는 기존의 Origin좌표에
+	// Y축반전을 하고, Center의 차이값만큼 이동을 해야함
+	float4 CenterDiff = Center - WzCenter;
+	return (_WzOrigin + CenterDiff).InvertY();
+}
+
 void Player::CalculationBodyPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin,
 	const float4& _WzNeck, const float4& _WzNavel)
 {
