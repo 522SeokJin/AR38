@@ -31,10 +31,14 @@ public:
 
 	void CreateAnimationFolder(const std::string& _Name, 
 		const std::string& _FolderTexName, float _InterTime, bool _Loop = true);
+	void CreateAnimationFolder(const std::string& _Name, 
+		float _InterTime, bool _Loop = true);
 
 	// _IsForce : 같은 애니매이션이여도 바꾼다.
 	void SetChangeAnimation(const std::string& _Name, bool _IsForce = false);
 	void SetOffsetAnimation(const std::string& _Name, int _Frame, float4 _Offset);
+	Animation2D* FindAnimation(const std::string& _Name);
+	float4 GetAnimationTextureSize(const std::string& _Name, int _Index);
 
 	void SetStartCallBack(const std::string& _Name, std::function<void()> _CallBack);
 	void SetEndCallBack(const std::string& _Name, std::function<void()> _CallBack);
@@ -78,6 +82,7 @@ private:
 		void Update(float _DeltaTime);
 
 		void SetOffset(int _Index, float4 _Offset);
+		float4 GetTextureSize(int _Index);
 
 		GameEngineFolderTexture*	FolderTextures_;
 		std::vector<float4>			Offsets_;

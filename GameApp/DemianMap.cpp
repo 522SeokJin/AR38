@@ -24,44 +24,32 @@ void DemianMap::Start()
 	SkillObjRenderer_ = CreateTransformComponent<GameEngineImageRenderer>(GetTransform());
 
 	{
-		SkillObjRenderer_->CreateAnimationFolder("Act1_attack1_areaWarning", "Act1_attack1_areaWarning", 0.09f);
+		SkillObjRenderer_->CreateAnimationFolder("Act1_attack1_areaWarning", 0.59f);
 
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 0, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 1, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 2, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 3, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 4, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 5, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 6, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 7, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 8, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 9, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 10, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 11, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 12, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 13, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 14, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 15, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 16, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 17, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 18, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 19, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 20, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 21, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 22, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 23, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 24, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 25, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 26, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 27, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 28, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 29, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 30, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 31, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 32, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 33, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 34, { 0.0f, 0.0f });
-		SkillObjRenderer_->SetOffsetAnimation("Act1_attack1_areaWarning", 35, { 0.0f, 0.0f });
+		/*SetOffsetAnimation(SkillObjRenderer_, "Act1_attack1_areaWarning", 
+			0, { 59.0f, 201.0f } );
+		SetOffsetAnimation(SkillObjRenderer_, "Act1_attack1_areaWarning",
+			1, { 109.0f, 327.0f });
+		SetOffsetAnimation(SkillObjRenderer_, "Act1_attack1_areaWarning",
+			2, { 148.0f, 370.0f });
+		SetOffsetAnimation(SkillObjRenderer_, "Act1_attack1_areaWarning",
+			3, { 177.0f, 389.0f });
+		SetOffsetAnimation(SkillObjRenderer_, "Act1_attack1_areaWarning",
+			4, { 176.0f, 388.0f });
+		SetOffsetAnimation(SkillObjRenderer_, "Act1_attack1_areaWarning",
+			5, { 178.0f, 390.0f });
+		SetOffsetAnimation(SkillObjRenderer_, "Act1_attack1_areaWarning",
+			6, { 178.0f, 389.0f });
+		SetOffsetAnimation(SkillObjRenderer_, "Act1_attack1_areaWarning",
+			7, { 178.0f, 385.0f });
+		SetOffsetAnimation(SkillObjRenderer_, "Act1_attack1_areaWarning",
+			8, { 177.0f, 386.0f });
+		SetOffsetAnimation(SkillObjRenderer_, "Act1_attack1_areaWarning",
+			9, { 177.0f, 386.0f });
+		SetOffsetAnimation(SkillObjRenderer_, "Act1_attack1_areaWarning",
+			10, { 177.0f, 386.0f });
+		SetOffsetAnimation(SkillObjRenderer_, "Act1_attack1_areaWarning",
+			11, { 177.0f, 389.0f });*/
 	}
 
 	SkillObjRenderer_->SetChangeAnimation("Act1_attack1_areaWarning");
@@ -69,4 +57,20 @@ void DemianMap::Start()
 
 void DemianMap::Update(float _DeltaTime)
 {
+}
+
+float4 DemianMap::CalculationOriginPos(GameEngineImageRenderer* _Renderer, const std::string& _Name, int _Index, const float4& _WzOrigin)
+{
+	float4 WzCenter = _Renderer->GetAnimationTextureSize(_Name, _Index).halffloat4();
+
+	float4 Center = _Renderer->GetTransform()->GetWorldPosition();
+
+	float4 CenterDiff = Center - WzCenter;
+	return (_WzOrigin + CenterDiff).InvertY();
+}
+
+void DemianMap::SetOffsetAnimation(GameEngineImageRenderer* _Renderer, 
+	const std::string& _Name, int _Index, const float4& _WzOrigin)
+{
+	_Renderer->SetOffsetAnimation(_Name, _Index, CalculationOriginPos(_Renderer, _Name, _Index, _WzOrigin));
 }

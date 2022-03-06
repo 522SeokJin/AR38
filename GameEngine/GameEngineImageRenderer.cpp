@@ -160,33 +160,36 @@ void GameEngineImageRenderer::CreateAnimationFolder(const std::string& _Name,
 		value_type(_Name, NewAnimation));
 }
 
+void GameEngineImageRenderer::CreateAnimationFolder(const std::string& _Name, 
+	float _InterTime, bool _Loop)
+{
+	CreateAnimationFolder(_Name, _Name, _InterTime, _Loop);
+}
+
 void GameEngineImageRenderer::SetChangeAnimation(const std::string& _Name,
 	bool _IsForce)
 {
-	std::map<std::string, Animation2D*>::iterator FindIter = AllAnimations_.find(_Name);
+	Animation2D* FindAni = FindAnimation(_Name);
 
-	if (AllAnimations_.end() == FindIter)
-	{
-		GameEngineDebug::MsgBoxError("존재하지 않는 애니메이션을 세팅하려고 했습니다");
-	}
-
-	if (nullptr == FindIter->second)
-	{
-		GameEngineDebug::MsgBoxError("Animation2D* 가 nullptr 입니다");
-	}
-
-	if (false == _IsForce && CurAnimation_ == FindIter->second)
+	if (false == _IsForce && CurAnimation_ == FindAni)
 	{
 		return;	// Same Animation
 	}
 
-	CurAnimation_ = FindIter->second;
+	CurAnimation_ = FindAni;
 	CurAnimation_->Reset();
 	CurAnimation_->CallStart();
 }
 
 void GameEngineImageRenderer::SetOffsetAnimation(const std::string& _Name, int _Index, float4 _Offset)
 {
+	Animation2D* FindAni = FindAnimation(_Name);
+
+	FindAni->SetOffset(_Index, _Offset);
+}
+
+GameEngineImageRenderer::Animation2D* GameEngineImageRenderer::FindAnimation(const std::string& _Name)
+{
 	std::map<std::string, Animation2D*>::iterator FindIter = AllAnimations_.find(_Name);
 
 	if (AllAnimations_.end() == FindIter)
@@ -199,7 +202,12 @@ void GameEngineImageRenderer::SetOffsetAnimation(const std::string& _Name, int _
 		GameEngineDebug::MsgBoxError("Animation2D* 가 nullptr 입니다");
 	}
 
-	FindIter->second->SetOffset(_Index, _Offset);
+	return FindIter->second;
+}
+
+float4 GameEngineImageRenderer::GetAnimationTextureSize(const std::string& _Name, int _Index)
+{
+	return FindAnimation(_Name)->GetTextureSize(_Index);
 }
 
 void GameEngineImageRenderer::SetStartCallBack(const std::string& _Name,
@@ -375,4 +383,14 @@ void GameEngineImageRenderer::Animation2D::SetOffset(int _Index, float4 _Offset)
 	}
 
 	Offsets_[_Index] = _Offset;
+}
+
+float4 GameEngineImageRenderer::Animation2D::GetTextureSize(int _Index)
+{
+	if (EndFrame_ < _Index || 0 > _Index)
+	{
+		GameEngineDebug::MsgBoxError("잘못된 오프셋 프레임입니다.");
+	}
+
+	return FolderTextures_->GetTextureIndex(_Index)->GetTextureSize();
 }
