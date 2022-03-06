@@ -5,6 +5,7 @@
 #include "GameEngineTransform.h"
 #include "CameraActor.h"
 #include "CameraComponent.h"
+#include "GameEngineCollision.h"
 
 GameEngineLevel::GameEngineLevel()
 	: MainCameraActor_(nullptr)
@@ -94,6 +95,40 @@ void GameEngineLevel::Release(float _DeltaTime)
 	GetMainCamera()->ReleaseRenderer();
 	GetUICamera()->ReleaseRenderer();
 
+	// 콜리전 삭제
+	{
+		std::map<int, std::list<GameEngineCollision*>>::iterator RenderMapBeginIter = CollisionList_.begin();
+		std::map<int, std::list<GameEngineCollision*>>::iterator RenderMapEndIter = CollisionList_.end();
+
+
+		for (; RenderMapBeginIter != RenderMapEndIter; ++RenderMapBeginIter)
+		{
+			std::list<GameEngineCollision*>& Collisions = RenderMapBeginIter->second;
+
+			std::list<GameEngineCollision*>::iterator BeginIter = Collisions.begin();
+			std::list<GameEngineCollision*>::iterator EndIter = Collisions.end();
+
+			for (; BeginIter != EndIter; )
+			{
+				GameEngineCollision* ReleaseCollision = *BeginIter;
+
+				if (nullptr == ReleaseCollision)
+				{
+					GameEngineDebug::MsgBoxError("Release Actor Is Nullptr!!!!");
+				}
+
+				if (true == ReleaseCollision->IsDeath())
+				{
+					BeginIter = Collisions.erase(BeginIter);
+
+					continue;
+				}
+
+				++BeginIter;
+			}
+		}
+	}
+
 	{
 		std::map<int, std::list<GameEngineActor*>>::iterator ActorMapBeginIter = ActorList_.begin();
 		std::map<int, std::list<GameEngineActor*>>::iterator ActorMapEndIter = ActorList_.end();
@@ -139,4 +174,19 @@ void GameEngineLevel::Init()
 	UICameraActor_ = CreateActor<CameraActor>();
 	UICameraActor_->GetCamera()->SetProjectionMode(ProjectionMode::ORTHOGRAPHIC);
 	UICameraActor_->GetCamera()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
+}
+
+void GameEngineLevel::PushCollision(GameEngineCollision* _Collision, int _Group)
+{
+	CollisionList_[_Group].push_back(_Collision);
+}
+
+void GameEngineLevel::ChangeCollisionGroup(int _Group, GameEngineCollision* _Collision)
+{
+	CollisionList_[_Collision->GetOrder()].remove(_Collision);
+
+	_Collision->SetOrder(_Group);
+
+	CollisionList_[_Collision->GetOrder()].push_back(_Collision);
+
 }

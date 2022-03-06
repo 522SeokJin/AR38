@@ -86,7 +86,7 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineTransform.h">
-      <Filter>Object\Transform</Filter>
+      <Filter>Object\Component\Transform</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineComponent.h">
       <Filter>Object\Component</Filter>
@@ -135,6 +135,9 @@
     </ClInclude>
     <ClInclude Include="GameEngineFolderTextureManager.h">
       <Filter>Resources\99. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineCollision.h">
+      <Filter>Object\Component\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -223,7 +226,7 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineTransform.cpp">
-      <Filter>Object\Transform</Filter>
+      <Filter>Object\Component\Transform</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineComponent.cpp">
       <Filter>Object\Component</Filter>
@@ -269,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineFolderTextureManager.cpp">
       <Filter>Resources\99. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineCollision.cpp">
+      <Filter>Object\Component\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -323,9 +329,6 @@
     <Filter Include="Control">
       <UniqueIdentifier>{1a59472a-0a26-4ab3-af85-607a6925bf68}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Transform">
-      <UniqueIdentifier>{9aa90d38-0ccc-480b-9d31-b7b01bfa8816}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Component\Renderer\Sub">
       <UniqueIdentifier>{0f26e041-0e52-4fae-9503-8766ca677fe8}</UniqueIdentifier>
     </Filter>
@@ -346,6 +349,12 @@
     </Filter>
     <Filter Include="Lib\DitectXTex\Release">
       <UniqueIdentifier>{27a9b5f8-04d4-407c-a2c8-3a1626904972}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\Transform">
+      <UniqueIdentifier>{9aa90d38-0ccc-480b-9d31-b7b01bfa8816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\Collision">
+      <UniqueIdentifier>{7748f26d-1ca2-4e97-96dd-7caa9609f729}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

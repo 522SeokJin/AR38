@@ -5,10 +5,12 @@ class CameraActor;
 class CameraComponent;
 class GameEngineActor;
 class GameEngineRenderer;
+class GameEngineCollision;
 class GameEngineLevel : public GameEngineObjectNameBase
 {
 	friend class GameEngineCore;
 	friend class GameEngineRenderer;
+	friend class GameEngineCollision;
 
 public:
 	GameEngineLevel(); // default constructer 디폴트 생성자
@@ -54,16 +56,33 @@ protected:
 	GameEngineLevel& operator=(const GameEngineLevel&& _other) = delete;
 
 private:
+	void Init();
+
 	// int 는 업데이트 그룹의 순서를 정하기위함이다. Ordering
 	// 순서가 없다면, 먼저 생성된 것이 먼저 행동한다.
 	std::map<int, std::list<GameEngineActor*>> ActorList_;
-
 	CameraActor* MainCameraActor_;
 	CameraActor* UICameraActor_;
 
-	////////////////////////////////////////////////////// Renderer
+
+	//////////////////////////////////////////		Collision
+public:
+	template<typename UserEnumType>
+	void PushCollision(GameEngineCollision* _Collision, UserEnumType _Group)
+	{
+		PushCollision(_Collision, static_cast<int>(_Group));
+	}
+
+	void PushCollision(GameEngineCollision* _Collision, int _Group);
 
 private:
-	void Init();
+	inline std::list<GameEngineCollision*>& GetCollisionGroup(int _Group)
+	{
+		return CollisionList_[_Group];
+	}
+
+	void ChangeCollisionGroup(int _Group, GameEngineCollision* _Collision);
+
+	std::map<int, std::list<GameEngineCollision*>> CollisionList_;
 };
 

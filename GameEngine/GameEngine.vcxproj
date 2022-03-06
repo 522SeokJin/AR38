@@ -33,6 +33,10 @@
     </ClInclude>
     <ClInclude Include="GameEngineBlend.h" />
     <ClInclude Include="GameEngineBlendManager.h" />
+    <ClInclude Include="GameEngineCollision.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineComponent.h">
       <SubType>
       </SubType>
@@ -188,6 +192,10 @@
     </ClCompile>
     <ClCompile Include="GameEngineBlend.cpp" />
     <ClCompile Include="GameEngineBlendManager.cpp" />
+    <ClCompile Include="GameEngineCollision.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameEngineComponent.cpp">
       <SubType>
       </SubType>

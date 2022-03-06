@@ -3,6 +3,7 @@
 
 // Ό³Έν : 
 class GameEngineImageRenderer;
+class GameEngineCollision;
 class Demian : public Monster
 {
 public:
@@ -22,5 +23,6 @@ private:
 	void CreateAnimation();
 
 	GameEngineImageRenderer* DemianRenderer_;
+	GameEngineCollision* Collision_;
 };
 

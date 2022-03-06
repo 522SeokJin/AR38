@@ -51,6 +51,20 @@ public:
 	}
 
 	template <typename ComponentType>
+	ComponentType* CreateTransformComponent(int _Order = 0)
+	{
+		GameEngineTransformComponent* NewComponent = new ComponentType();
+		NewComponent->SetParent(this);
+		NewComponent->SetOrder(_Order);
+		NewComponent->InitComponent(this);
+		NewComponent->AttachTransform(GetTransform());
+		TransformComponentList_.push_back(NewComponent);
+
+		NewComponent->Start();
+		return dynamic_cast<ComponentType*>(NewComponent);
+	}
+
+	template <typename ComponentType>
 	ComponentType* CreateTransformComponent(GameEngineTransform* _Parent, int _Order = 0)
 	{
 		GameEngineTransformComponent* NewComponent = new ComponentType();

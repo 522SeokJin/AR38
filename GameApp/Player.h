@@ -10,6 +10,7 @@ enum class PlayerDir
 
 // Ό³Έν : 
 class GameEngineImageRenderer;
+class GameEngineCollision;
 class Player : public GameEngineActor
 {
 public:
@@ -79,5 +80,7 @@ private:
 	float4 EarOverHeadPosition_;
 	float4 EarBelowHeadPosition_;
 	float4 BrowPosition_;
+
+	GameEngineCollision* Collision_;
 };
 

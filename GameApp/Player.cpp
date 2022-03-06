@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include <GameEngine/GameEngineImageRenderer.h>
+#include <GameEngine/GameEngineCollision.h>
 #include "PhysicsDefine.h"
 
 Player::Player()
@@ -52,6 +53,13 @@ void Player::Start()
 {
 	CreatePlayerRenderer();
 
+	{
+		Collision_ = CreateTransformComponent<GameEngineCollision>(10);
+
+		Collision_->GetTransform()->SetLocalScaling(float4{ 100.0f, 100.0f, 1.0f });
+	}
+
+
 	GameEngineInput::GetInst().CreateKey("MoveLeft", VK_LEFT);
 	GameEngineInput::GetInst().CreateKey("MoveRight", VK_RIGHT);
 	GameEngineInput::GetInst().CreateKey("MoveUp", VK_UP);
@@ -63,6 +71,16 @@ void Player::Start()
 void Player::Update(float _DeltaTime)
 {
 	PlayerDir CurrentDir = Dir_;
+
+	Collision_->Collision(CollisionType::SPHERE, CollisionType::SPHERE, 20,
+		[](GameEngineCollision* _OtherCollision)
+		{
+			_OtherCollision->GetActor()->Death();
+		}
+	);
+
+
+
 
 	if (true == GameEngineInput::GetInst().Press("MoveLeft"))
 	{
