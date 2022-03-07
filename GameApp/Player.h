@@ -92,35 +92,37 @@ private:
 	/// //////////////////// Calculate Parts Position
 	/// </summary>
 	
-	float4 CalculationOriginPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin);
-	void CalculationBodyPos(GameEngineImageRenderer* _Renderer,
+	float4 CalculationOriginPos(const std::string& _Name, int _Frame, 
+		GameEngineImageRenderer* _Renderer, const float4& _WzOrigin);
+	void CalculationBodyPos(const std::string& _Name, int _Frame,
 		const float4& _WzOrigin, const float4& _WzNeck, const float4& _WzNavel);
-	void CalculationArmPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin,
-		const float4& _WzNavel, const float4& _WzHand);
-	void CalculationHeadPos(GameEngineImageRenderer* _Renderer,
-		const float4& _WzOrigin, const float4& _WzNeck,
-		const float4& _WzEarOverHead, const float4& _WzEarBelowHead,
-		const float4& _WzBrow);
-	void CalculationEarPos(GameEngineImageRenderer* _Renderer,
-		const float4& _WzOrigin, const float4& _WzNeck,
-		const float4& _WzEarOverHead, const float4& _WzEarBelowHead,
-		const float4& _WzBrow);
+	float4 CalculationArmPos(const std::string& _Name, int _Frame,
+		const float4& _WzOrigin, const float4& _WzNavel, const float4& _WzHand);
+	float4 CalculationHeadPos(const std::string& _Name, int _Frame,
+		const float4& _WzOrigin, const float4& _WzNeck, const float4& _WzEarOverHead, 
+		const float4& _WzEarBelowHead, const float4& _WzBrow);
+	float4 CalculationEarPos(const std::string& _Name, int _Frame,
+		const float4& _WzOrigin, const float4& _WzNeck, const float4& _WzEarOverHead,
+		const float4& _WzEarBelowHead, const float4& _WzBrow);
+
 	void CalculationHairPos(GameEngineImageRenderer* _Renderer,
 		const float4& _WzOrigin, const float4& _WzBrow);
-	void CalculationFacePos(GameEngineImageRenderer* _Renderer,
+
+	float4 CalculationFacePos(const std::string& _Name, int _Frame,
 		const float4& _WzOrigin, const float4& _WzBrow);
+
 	void CalculationClothesPos(GameEngineImageRenderer* _Renderer,
 		const float4& _WzOrigin, const float4& _WzNavel);
 	void CalculationWeaponPos(GameEngineImageRenderer* _Renderer,
 		const float4& _WzOrigin, const float4& _WzHand);
 
-	float4 OriginPosition_;
-	float4 NeckPosition_;
-	float4 NavelPosition_;
-	float4 HandPosition_;
-	float4 EarOverHeadPosition_;
-	float4 EarBelowHeadPosition_;
-	float4 BrowPosition_;
+	float4 OriginPosition_[4];
+	float4 NeckPosition_[4];
+	float4 NavelPosition_[4];
+	float4 HandPosition_[4];
+	float4 EarOverHeadPosition_[4];
+	float4 EarBelowHeadPosition_[4];
+	float4 BrowPosition_[4];
 
 };
 

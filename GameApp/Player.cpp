@@ -123,12 +123,11 @@ void Player::Update(float _DeltaTime)
 }
 
 
-float4 Player::CalculationOriginPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin)
+float4 Player::CalculationOriginPos(const std::string& _Name, int _Frame, 
+	GameEngineImageRenderer* _Renderer, const float4& _WzOrigin)
 {
 	// 위컴알 기준 센터의 좌표는 크기의 절반값
-	float4 WzCenter = float4();
-	WzCenter.x = _Renderer->GetTransform()->GetLocalScaling().hx();
-	WzCenter.y = _Renderer->GetTransform()->GetLocalScaling().hy();
+	float4 WzCenter = _Renderer->GetAnimationTextureSize(_Name, _Frame).halffloat4();
 
 	// 지금 센터는 내 월드포지션
 	float4 Center = _Renderer->GetTransform()->GetWorldPosition();
@@ -139,69 +138,73 @@ float4 Player::CalculationOriginPos(GameEngineImageRenderer* _Renderer, const fl
 	return (_WzOrigin + CenterDiff).InvertY();
 }
 
-void Player::CalculationBodyPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin,
-	const float4& _WzNeck, const float4& _WzNavel)
+void Player::CalculationBodyPos(const std::string& _Name, int _Frame,
+	const float4& _WzOrigin, const float4& _WzNeck, const float4& _WzNavel)
 {
-	OriginPosition_ = CalculationOriginPos(_Renderer, _WzOrigin);
+	OriginPosition_[_Frame] = CalculationOriginPos(_Name, _Frame, Body_, _WzOrigin);
 
 	// Neck, Navel 위치는 Origin을 기준으로 _WzNeck, _WzNavel 만큼 이동한곳이 된다.
-	NeckPosition_ = OriginPosition_ + _WzNeck * float4::INVERT_Y;
-	NavelPosition_ = OriginPosition_ + _WzNavel * float4::INVERT_Y;
+	NeckPosition_[_Frame] = OriginPosition_[_Frame] + _WzNeck * float4::INVERT_Y;
+	NavelPosition_[_Frame] = OriginPosition_[_Frame] + _WzNavel * float4::INVERT_Y;
 }
 
-void Player::CalculationArmPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin, const float4& _WzNavel,
-	const float4& _WzHand)
+float4 Player::CalculationArmPos(const std::string& _Name, int _Frame,
+	const float4& _WzOrigin, const float4& _WzNavel, const float4& _WzHand)
 {
-	float4 ArmNavelPos = CalculationOriginPos(_Renderer, _WzOrigin) + _WzNavel * float4::INVERT_Y;
-	_Renderer->SetLocalPosition(NavelPosition_ - ArmNavelPos);
+	float4 ArmNavelPos = CalculationOriginPos(_Name, _Frame, Arm_, _WzOrigin) + _WzNavel * float4::INVERT_Y;
 	
-	HandPosition_ = _Renderer->GetLocalPosition() + _WzHand * float4::INVERT_Y;
+	HandPosition_[_Frame] = NavelPosition_[_Frame] - ArmNavelPos + _WzHand * float4::INVERT_Y;
+
+	return NavelPosition_[_Frame] - ArmNavelPos;
 }
 
-void Player::CalculationHeadPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin, const float4& _WzNeck,
-	const float4& _WzEarOverHead, const float4& _WzEarBelowHead, const float4& _WzBrow)
+float4 Player::CalculationHeadPos(const std::string& _Name, int _Frame,
+	const float4& _WzOrigin, const float4& _WzNeck, const float4& _WzEarOverHead,
+	const float4& _WzEarBelowHead, const float4& _WzBrow)
 {
-	float4 HeadNeckPos = CalculationOriginPos(_Renderer, _WzOrigin) + _WzNeck * float4::INVERT_Y;
+	float4 HeadNeckPos = CalculationOriginPos(_Name, _Frame, Head_, _WzOrigin) + _WzNeck * float4::INVERT_Y;
 
-	_Renderer->SetLocalPosition(NeckPosition_ - HeadNeckPos);
+	EarOverHeadPosition_[_Frame] = NeckPosition_[_Frame] - HeadNeckPos + _WzEarOverHead * float4::INVERT_Y;
+	EarBelowHeadPosition_[_Frame] = NeckPosition_[_Frame] - HeadNeckPos + _WzEarBelowHead * float4::INVERT_Y;
+	BrowPosition_[_Frame] = NeckPosition_[_Frame] - HeadNeckPos + _WzBrow * float4::INVERT_Y;
 
-	EarOverHeadPosition_ = _Renderer->GetLocalPosition() + _WzEarOverHead * float4::INVERT_Y;
-	EarBelowHeadPosition_ = _Renderer->GetLocalPosition() + _WzEarBelowHead * float4::INVERT_Y;
-	BrowPosition_ = _Renderer->GetLocalPosition() + _WzBrow * float4::INVERT_Y;
+	return NeckPosition_[_Frame] - HeadNeckPos;
 }
 
-void Player::CalculationEarPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin, const float4& _WzNeck,
-	const float4& _WzEarOverHead, const float4& _WzEarBelowHead, const float4& _WzBrow)
+float4 Player::CalculationEarPos(const std::string& _Name, int _Frame,
+	const float4& _WzOrigin, const float4& _WzNeck, const float4& _WzEarOverHead,
+	const float4& _WzEarBelowHead, const float4& _WzBrow)
 {
-	float4 EarPos = CalculationOriginPos(_Renderer, _WzOrigin) + _WzNeck * float4::INVERT_Y;
+	float4 EarPos = CalculationOriginPos(_Name, _Frame, Ear_, _WzOrigin) + _WzNeck * float4::INVERT_Y;
 
-	_Renderer->SetLocalPosition(NeckPosition_ - EarPos);
+	return NeckPosition_[_Frame] - EarPos;
 }
 
-void Player::CalculationHairPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin, const float4& _WzBrow)
+//void Player::CalculationHairPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin, const float4& _WzBrow)
+//{
+//	float4 HairPos = CalculationOriginPos(_Renderer, _WzOrigin) + _WzBrow * float4::INVERT_Y;
+//
+//	_Renderer->SetLocalPosition(BrowPosition_ - HairPos);
+//}
+
+float4 Player::CalculationFacePos(const std::string& _Name, int _Frame, 
+	const float4& _WzOrigin, const float4& _WzBrow)
 {
-	float4 HairPos = CalculationOriginPos(_Renderer, _WzOrigin) + _WzBrow * float4::INVERT_Y;
+	float4 FacePos = CalculationOriginPos(_Name, _Frame, Face_, _WzOrigin) + _WzBrow * float4::INVERT_Y;
 
-	_Renderer->SetLocalPosition(BrowPosition_ - HairPos);
+	return  BrowPosition_[_Frame] - FacePos;
 }
 
-void Player::CalculationFacePos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin, const float4& _WzBrow)
-{
-	float4 FacePos = CalculationOriginPos(_Renderer, _WzOrigin) + _WzBrow * float4::INVERT_Y;
-
-	_Renderer->SetLocalPosition(BrowPosition_ - FacePos);
-}
-
-void Player::CalculationClothesPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin, const float4& _WzNavel)
-{
-	float4 ClothesPos = CalculationOriginPos(_Renderer, _WzOrigin) + _WzNavel * float4::INVERT_Y;
-
-	_Renderer->SetLocalPosition(NavelPosition_ - ClothesPos);
-}
-
-void Player::CalculationWeaponPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin, const float4& _WzHand)
-{
-	float4 HandPos = CalculationOriginPos(_Renderer, _WzOrigin) + _WzHand * float4::INVERT_Y;
-
-	Weapon_->SetLocalPosition(HandPosition_ - HandPos);
-}
+//void Player::CalculationClothesPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin, const float4& _WzNavel)
+//{
+//	float4 ClothesPos = CalculationOriginPos(_Renderer, _WzOrigin) + _WzNavel * float4::INVERT_Y;
+//
+//	_Renderer->SetLocalPosition(NavelPosition_ - ClothesPos);
+//}
+//
+//void Player::CalculationWeaponPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin, const float4& _WzHand)
+//{
+//	float4 HandPos = CalculationOriginPos(_Renderer, _WzOrigin) + _WzHand * float4::INVERT_Y;
+//
+//	Weapon_->SetLocalPosition(HandPosition_ - HandPos);
+//}

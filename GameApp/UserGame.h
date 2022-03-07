@@ -14,11 +14,11 @@ public:
 
 	float4 StartWindowPos() override
 	{
-		return { 0, 0 };
+		return { 0.0f, 0.0f };
 	}
 	float4 StartWindowSize() override
 	{
-		return { 1024, 768 };
+		return { 1024.0f, 768.0f };
 	}
 
 	void PlayerResourceLoad();
