@@ -14,7 +14,7 @@ void Player::CreateAnimation()
 
 	State_ = PlayerState::swingO1;
 	Avatar_->SetChangeAnimation("swingO1");
-	Face_->SetChangeAnimation("default_face1");
+	Face_->SetChangeAnimation("blink_face1");
 
 }
 
@@ -56,7 +56,7 @@ void Player::AvatarAnimation()
 
 void Player::UpdatePartsOffset()
 {
-	int CurFrame = Avatar_->GetCurFrame();
+	int CurFrame = Avatar_->GetCurAnimation()->CurFrame_;
 
 	switch (State_)
 	{
@@ -92,13 +92,13 @@ void Player::UpdatePartsOffset()
 		switch (CurFrame)
 		{
 		case 0:
-			SetPartsDirection(Face_, "default_face1", 0, { -7.0f, 5.0f });
+			SetPartsDirection(Face_, {-7.0f, 5.0f});
 			break;
 		case 1:
-			SetPartsDirection(Face_, "default_face1", 0, { -8.0f, 10.0f });
+			SetPartsDirection(Face_, { -8.0f, 10.0f });
 			break;
 		case 2:
-			SetPartsDirection(Face_, "default_face1", 0, { -34.0f, 5.0f });
+			SetPartsDirection(Face_, { -34.0f, 5.0f });
 			break;
 		default:
 			GameEngineDebug::MsgBoxError("UpdatePartsPosition Error");

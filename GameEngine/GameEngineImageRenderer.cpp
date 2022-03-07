@@ -213,11 +213,6 @@ float4 GameEngineImageRenderer::GetAnimationTextureSize(const std::string& _Name
 	return FindAnimation(_Name)->GetTextureSize(_Index);
 }
 
-int GameEngineImageRenderer::GetCurFrame()
-{
-	return CurAnimation_->GetCurFrame();
-}
-
 void GameEngineImageRenderer::SetStartCallBack(const std::string& _Name,
 	std::function<void()> _CallBack)
 {

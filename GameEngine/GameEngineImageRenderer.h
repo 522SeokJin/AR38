@@ -44,7 +44,6 @@ public:
 	{
 		return CurAnimation_;
 	}
-	int GetCurFrame();
 
 	void SetStartCallBack(const std::string& _Name, std::function<void()> _CallBack);
 	void SetEndCallBack(const std::string& _Name, std::function<void()> _CallBack);
@@ -90,16 +89,6 @@ private:
 		void SetOffset(int _Index, float4 _Offset);
 
 		float4 GetTextureSize(int _Index);
-
-		int GetCurFrame()
-		{
-			return CurFrame_;
-		}
-
-		std::string GetName()
-		{
-			return Name_;
-		}
 
 		GameEngineFolderTexture*	FolderTextures_;
 		std::vector<float4>			Offsets_;

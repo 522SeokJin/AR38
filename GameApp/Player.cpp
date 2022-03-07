@@ -38,16 +38,23 @@ void Player::ChangeImageDirection()
 	Weapon_->ImageLocalFlipYAxis();
 }
 
-void Player::SetPartsDirection(GameEngineImageRenderer* _Renderer, const std::string& _Name,
-	int _CurFrame, float4 _Offset)
+void Player::SetPartsDirection(GameEngineImageRenderer* _Renderer, float4 _Offset)
 {
 	switch (Dir_)
 	{
 	case PlayerDir::LEFT:
-		_Renderer->SetOffsetAnimation(_Name, _CurFrame, _Offset);
+		for (int i = 0; i < _Renderer->GetCurAnimation()->EndFrame_ + 1; i++)
+		{
+			_Renderer->SetOffsetAnimation(_Renderer->GetCurAnimation()->Name_,
+				i, _Offset);
+		}
 		break;
 	case PlayerDir::RIGHT:
-		_Renderer->SetOffsetAnimation(_Name, _CurFrame, _Offset.InvertX());
+		for (int i = 0; i < _Renderer->GetCurAnimation()->EndFrame_ + 1; i++)
+		{
+			_Renderer->SetOffsetAnimation(_Renderer->GetCurAnimation()->Name_,
+				i, { -_Offset.x, _Offset.y });
+		}
 		break;
 	case PlayerDir::MIDDLE:
 		break;
