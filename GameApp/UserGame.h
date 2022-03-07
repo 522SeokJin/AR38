@@ -21,8 +21,6 @@ public:
 		return { 1024.0f, 768.0f };
 	}
 
-	void PlayerResourceLoad();
-
 protected:
 	UserGame(const UserGame& _other) = delete;
 	UserGame(UserGame&& _other) = delete;
