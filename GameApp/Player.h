@@ -97,11 +97,7 @@ private:
 		const float4& _WzOrigin, const float4& _WzNeck, const float4& _WzNavel);
 	void CalculationArmPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin,
 		const float4& _WzNavel, const float4& _WzHand);
-	//void CalculationHeadPos(GameEngineImageRenderer* _Renderer,
-	//	const float4& _WzOrigin, const float4& _WzNeck,
-	//	const float4& _WzEarOverHead, const float4& _WzEarBelowHead,
-	//	const float4& _WzBrow);
-	float4 CalculationHeadPos(GameEngineImageRenderer* _Renderer,
+	void CalculationHeadPos(GameEngineImageRenderer* _Renderer,
 		const float4& _WzOrigin, const float4& _WzNeck,
 		const float4& _WzEarOverHead, const float4& _WzEarBelowHead,
 		const float4& _WzBrow);
