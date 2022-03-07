@@ -40,6 +40,10 @@ public:
 	Animation2D* FindAnimation(const std::string& _Name);
 
 	float4 GetAnimationTextureSize(const std::string& _Name, int _Index);
+	Animation2D* GetCurAnimation()
+	{
+		return CurAnimation_;
+	}
 	int GetCurFrame();
 
 	void SetStartCallBack(const std::string& _Name, std::function<void()> _CallBack);
@@ -84,16 +88,25 @@ private:
 		void Update(float _DeltaTime);
 
 		void SetOffset(int _Index, float4 _Offset);
+
 		float4 GetTextureSize(int _Index);
+
 		int GetCurFrame()
 		{
 			return CurFrame_;
+		}
+
+		std::string GetName()
+		{
+			return Name_;
 		}
 
 		GameEngineFolderTexture*	FolderTextures_;
 		std::vector<float4>			Offsets_;
 
 		GameEngineImageRenderer*	Renderer_;
+
+		std::string Name_;
 
 		bool IsEnd_;
 		bool Loop_;

@@ -38,6 +38,24 @@ void Player::ChangeImageDirection()
 	Weapon_->ImageLocalFlipYAxis();
 }
 
+void Player::SetPartsDirection(GameEngineImageRenderer* _Renderer, const std::string& _Name,
+	int _CurFrame, float4 _Offset)
+{
+	switch (Dir_)
+	{
+	case PlayerDir::LEFT:
+		_Renderer->SetOffsetAnimation(_Name, _CurFrame, _Offset);
+		break;
+	case PlayerDir::RIGHT:
+		_Renderer->SetOffsetAnimation(_Name, _CurFrame, _Offset.InvertX());
+		break;
+	case PlayerDir::MIDDLE:
+		break;
+	default:
+		break;
+	}
+}
+
 void Player::KeyInputSetting()
 {
 	GameEngineInput::GetInst().CreateKey("MoveLeft", VK_LEFT);
@@ -102,7 +120,7 @@ void Player::Start()
 void Player::Update(float _DeltaTime)
 {
 	KeyInputUpdate();
-	UpdatePartsPosition();
+	UpdatePartsOffset();
 
 	Collision_->SetLocalScaling(Avatar_->GetImageSize());
 

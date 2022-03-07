@@ -67,7 +67,9 @@ private:
 
 	void CreateAnimation();
 	void AvatarAnimation();
-	void UpdatePartsPosition();
+	void UpdatePartsOffset();
+	void SetPartsDirection(GameEngineImageRenderer* _Renderer, const std::string& _Name,
+		int _CurFrame, float4 _Offset);
 
 	void KeyInputSetting();
 	void KeyInputUpdate();

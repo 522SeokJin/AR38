@@ -108,8 +108,10 @@ void GameEngineImageRenderer::CreateAnimation(const std::string& _Name,
 		GameEngineDebug::MsgBoxError("이미 존재하는 애니메이션을 또 만들었습니다.");
 	}
 
+
 	Animation2D* NewAnimation = new Animation2D();
 
+	NewAnimation->Name_ = _Name;
 	NewAnimation->IsEnd_ = false;
 	NewAnimation->Loop_ = _Loop;
 	NewAnimation->InterTime_ = _InterTime;
@@ -144,6 +146,7 @@ void GameEngineImageRenderer::CreateAnimationFolder(const std::string& _Name,
 
 	Animation2D* NewAnimation = new Animation2D();
 
+	NewAnimation->Name_ = _Name;
 	NewAnimation->IsEnd_ = false;
 	NewAnimation->Loop_ = _Loop;
 	NewAnimation->InterTime_ = _InterTime;
