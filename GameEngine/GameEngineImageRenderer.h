@@ -38,7 +38,9 @@ public:
 	void SetChangeAnimation(const std::string& _Name, bool _IsForce = false);
 	void SetOffsetAnimation(const std::string& _Name, int _Frame, float4 _Offset);
 	Animation2D* FindAnimation(const std::string& _Name);
+
 	float4 GetAnimationTextureSize(const std::string& _Name, int _Index);
+	int GetCurFrame();
 
 	void SetStartCallBack(const std::string& _Name, std::function<void()> _CallBack);
 	void SetEndCallBack(const std::string& _Name, std::function<void()> _CallBack);
@@ -83,6 +85,10 @@ private:
 
 		void SetOffset(int _Index, float4 _Offset);
 		float4 GetTextureSize(int _Index);
+		int GetCurFrame()
+		{
+			return CurFrame_;
+		}
 
 		GameEngineFolderTexture*	FolderTextures_;
 		std::vector<float4>			Offsets_;

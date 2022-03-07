@@ -89,9 +89,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Actor\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Player_CreateRenderer.cpp">
-      <Filter>Actor\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Player_Animation.cpp">
       <Filter>Actor\Player</Filter>
     </ClCompile>

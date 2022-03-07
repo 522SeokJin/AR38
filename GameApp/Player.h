@@ -63,9 +63,14 @@ protected:
 	Player& operator=(const Player&& _other) = delete;
 
 private:
-	void CreatePlayerRenderer();
-	void CreateAnimation();
 	void ChangeImageDirection();
+
+	void CreateAnimation();
+	void AvatarAnimation();
+	void UpdatePartsPosition();
+
+	void KeyInputSetting();
+	void KeyInputUpdate();
 
 	PlayerDir Dir_;
 	PlayerState State_;

@@ -38,18 +38,8 @@ void Player::ChangeImageDirection()
 	Weapon_->ImageLocalFlipYAxis();
 }
 
-void Player::Start()
+void Player::KeyInputSetting()
 {
-	//CreatePlayerRenderer();
-
-	CreateAnimation();
-
-	{
-		Collision_ = CreateTransformComponent<GameEngineCollision>(10);
-		Collision_->GetTransform()->SetLocalScaling(float4{ 100.0f, 100.0f, 1.0f });
-	}
-
-
 	GameEngineInput::GetInst().CreateKey("MoveLeft", VK_LEFT);
 	GameEngineInput::GetInst().CreateKey("MoveRight", VK_RIGHT);
 	GameEngineInput::GetInst().CreateKey("MoveUp", VK_UP);
@@ -58,18 +48,9 @@ void Player::Start()
 	GameEngineInput::GetInst().CreateKey("Jump", VK_MENU);	// ALT KEY
 }
 
-void Player::Update(float _DeltaTime)
+void Player::KeyInputUpdate()
 {
 	PlayerDir CurrentDir = Dir_;
-
-	Collision_->Collision(CollisionType::SPHERE, CollisionType::SPHERE, 20,
-		[](GameEngineCollision* _OtherCollision)
-		{
-			_OtherCollision->GetActor()->Death();
-		}
-	);
-
-
 
 	if (true == GameEngineInput::GetInst().Press("MoveLeft"))
 	{
@@ -104,6 +85,33 @@ void Player::Update(float _DeltaTime)
 	{
 		ChangeImageDirection();
 	}
+}
+
+void Player::Start()
+{
+	CreateAnimation();
+
+	KeyInputSetting();
+
+	{
+		Collision_ = CreateTransformComponent<GameEngineCollision>(10);
+		Collision_->SetLocalScaling(Avatar_->GetImageSize());
+	}
+}
+
+void Player::Update(float _DeltaTime)
+{
+	KeyInputUpdate();
+	UpdatePartsPosition();
+
+	Collision_->SetLocalScaling(Avatar_->GetImageSize());
+
+	Collision_->Collision(CollisionType::SPHERE, CollisionType::SPHERE, 20,
+		[](GameEngineCollision* _OtherCollision)
+		{
+			_OtherCollision->GetActor()->Death();
+		}
+	);
 
 	GetLevel()->GetMainCameraActor()->GetTransform()->
 		SetLocalPosition(GetTransform()->GetLocalPosition());

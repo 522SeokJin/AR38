@@ -210,6 +210,11 @@ float4 GameEngineImageRenderer::GetAnimationTextureSize(const std::string& _Name
 	return FindAnimation(_Name)->GetTextureSize(_Index);
 }
 
+int GameEngineImageRenderer::GetCurFrame()
+{
+	return CurAnimation_->GetCurFrame();
+}
+
 void GameEngineImageRenderer::SetStartCallBack(const std::string& _Name,
 	std::function<void()> _CallBack)
 {
@@ -371,6 +376,7 @@ void GameEngineImageRenderer::Animation2D::Update(float _DeltaTime)
 		Renderer_->ShaderHelper.SettingTexture("Tex", 
 			FolderTextures_->GetTextureIndex(CurFrame_));
 		Renderer_->SetLocalScaling(FolderTextures_->GetTextureIndex(CurFrame_)->GetTextureSize());
+		Renderer_->SetImageSize(Renderer_->GetLocalScaling());
 		Renderer_->SetLocalPosition({Offsets_[CurFrame_].x, Offsets_[CurFrame_].y });
 	}
 }
