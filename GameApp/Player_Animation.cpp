@@ -4,17 +4,36 @@
 
 void Player::CreateAnimation()
 {
+
 	Avatar_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Face_ = CreateTransformComponent<GameEngineImageRenderer>();
+	Hair_ = CreateTransformComponent<GameEngineImageRenderer>();
+	HairOverHead_ = CreateTransformComponent<GameEngineImageRenderer>();
+	HairBelowBody_ = CreateTransformComponent<GameEngineImageRenderer>();
 
 	AvatarAnimation();
 
 	Face_->CreateAnimationFolder("default_face1", "default_face1", 0.5f, false);
 	Face_->CreateAnimationFolder("blink_face1", "blink_face1", 0.06f);
 
+	Hair_->CreateAnimationFolder("default_hair1", "default_hair1", 0.5f, false);
+	HairOverHead_->CreateAnimationFolder("default_hairOverHead1", "default_hairOverHead1", 0.5f, false);
+	HairBelowBody_->CreateAnimationFolder("default_hairBelowBody1", "default_hairBelowBody1", 0.5f, false);
+
+
 	State_ = PlayerState::swingO1;
 	Avatar_->SetChangeAnimation("swingO1");
-	Face_->SetChangeAnimation("blink_face1");
+
+	Face_->SetChangeAnimation("default_face1");
+	HairOverHead_->SetChangeAnimation("default_hairOverHead1");
+
+	// 깊이버퍼 만들고 On() 할 예정
+	HairBelowBody_->SetChangeAnimation("default_hairBelowBody1");
+	HairBelowBody_->Off();
+
+	// Wear a Hat
+	Hair_->SetChangeAnimation("default_hair1");
+	Hair_->Off();
 
 }
 
@@ -92,13 +111,22 @@ void Player::UpdatePartsOffset()
 		switch (CurFrame)
 		{
 		case 0:
-			SetPartsDirection(Face_, {-7.0f, 5.0f});
+			SetPartsOffset(Face_, { -7.0f, 5.0f });
+			SetPartsOffset(Hair_, { -4.0f, 14.0f });
+			SetPartsOffset(HairOverHead_, { -6.0f, 14.0f });
+			SetPartsOffset(HairBelowBody_, { -3.0f, 9.0f });
 			break;
 		case 1:
-			SetPartsDirection(Face_, { -8.0f, 10.0f });
+			SetPartsOffset(Face_, { -4.0f, 8.0f });
+			SetPartsOffset(Hair_, { -1.0f, 16.0f });
+			SetPartsOffset(HairOverHead_, { -3.0f, 17.0f });
+			SetPartsOffset(HairBelowBody_, { 1.0f, 11.0f });
 			break;
 		case 2:
-			SetPartsDirection(Face_, { -34.0f, 5.0f });
+			SetPartsOffset(Face_, { -12.0f, 5.0f });
+			SetPartsOffset(Hair_, { -10.0f, 13.0f });
+			SetPartsOffset(HairOverHead_, { -12.0f, 14.0f });
+			SetPartsOffset(HairBelowBody_, { -8.0f, 8.0f });
 			break;
 		default:
 			GameEngineDebug::MsgBoxError("UpdatePartsPosition Error");

@@ -7,6 +7,7 @@
 Player::Player()
 	: Dir_(PlayerDir::LEFT)
 	, State_(PlayerState::stand1)
+	, WearHat_(false)
 	, Avatar_(nullptr)
 	, Face_(nullptr)
 	, HairBelowBody_(nullptr)
@@ -38,22 +39,33 @@ void Player::ChangeImageDirection()
 	Weapon_->ImageLocalFlipYAxis();
 }
 
-void Player::SetPartsDirection(GameEngineImageRenderer* _Renderer, float4 _Offset)
+void Player::SetPartsOffset(GameEngineImageRenderer* _Renderer, float4 _Offset)
 {
+	if (nullptr == _Renderer)
+	{
+		return;
+	}
+
+	if (nullptr == _Renderer->GetCurAnimation())
+	{
+		return;
+	}
+
 	switch (Dir_)
 	{
 	case PlayerDir::LEFT:
 		for (int i = 0; i < _Renderer->GetCurAnimation()->EndFrame_ + 1; i++)
 		{
 			_Renderer->SetOffsetAnimation(_Renderer->GetCurAnimation()->Name_,
-				i, _Offset);
+				i, _Offset + Avatar_->GetCurAnimation()->Offsets_[Avatar_->GetCurAnimation()->CurFrame_]);
 		}
 		break;
 	case PlayerDir::RIGHT:
 		for (int i = 0; i < _Renderer->GetCurAnimation()->EndFrame_ + 1; i++)
 		{
 			_Renderer->SetOffsetAnimation(_Renderer->GetCurAnimation()->Name_,
-				i, { -_Offset.x, _Offset.y });
+				i, { -_Offset.x + Avatar_->GetCurAnimation()->Offsets_[Avatar_->GetCurAnimation()->CurFrame_].x,
+				_Offset.y + Avatar_->GetCurAnimation()->Offsets_[Avatar_->GetCurAnimation()->CurFrame_].y });
 		}
 		break;
 	case PlayerDir::MIDDLE:

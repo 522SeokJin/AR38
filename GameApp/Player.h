@@ -68,13 +68,15 @@ private:
 	void CreateAnimation();
 	void AvatarAnimation();
 	void UpdatePartsOffset();
-	void SetPartsDirection(GameEngineImageRenderer* _Renderer, float4 _Offset);
+	void SetPartsOffset(GameEngineImageRenderer* _Renderer, float4 _Offset);
 
 	void KeyInputSetting();
 	void KeyInputUpdate();
 
 	PlayerDir Dir_;
 	PlayerState State_;
+
+	bool WearHat_;
 
 	GameEngineImageRenderer* Avatar_;
 	GameEngineImageRenderer* Face_;
