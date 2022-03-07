@@ -4,6 +4,8 @@
 #include <GameEngine/GameEngineCollision.h>
 
 Demian::Demian()
+	: DemianRenderer_(nullptr)
+	, Collision_(nullptr)
 {
 
 }

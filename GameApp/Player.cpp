@@ -26,6 +26,7 @@ Player::Player()
 	, EarOverHeadPosition_()
 	, EarBelowHeadPosition_()
 	, BrowPosition_()
+	, Collision_(nullptr)
 {
 }
 
@@ -55,7 +56,6 @@ void Player::Start()
 
 	{
 		Collision_ = CreateTransformComponent<GameEngineCollision>(10);
-
 		Collision_->GetTransform()->SetLocalScaling(float4{ 100.0f, 100.0f, 1.0f });
 	}
 
