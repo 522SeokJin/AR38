@@ -41,6 +41,8 @@ void UserGame::ResourceLoad()
 		GameEngineFolderTextureManager::GetInst().Load(AllDir[i].GetFullPath());
 	}
 
+	PlayerResourceLoad();
+
 	AppShaderLoad();
 
 	{
@@ -273,5 +275,44 @@ void UserGame::ResourceLoad()
 		Pipe->SetRasterizer("EngineBaseRasterizer");
 		Pipe->SetPixelShader("Texture_PS");
 		Pipe->SetOutputMergerBlend("AlphaBlend");
+	}
+}
+
+
+void UserGame::PlayerResourceLoad()
+{
+	GameEngineDirectory Dir;
+
+	Dir.MoveParent();
+	Dir.MoveChild("Resources");
+	Dir.MoveChild("Image");
+	Dir.MoveChild("Player");
+	Dir.MoveChild("PlayerBody");
+
+	std::vector<GameEngineFile> AllDir = Dir.GetAllDir();
+
+	for (size_t i = 0; i < AllDir.size(); i++)
+	{
+		GameEngineFolderTextureManager::GetInst().Load(AllDir[i].GetFullPath());
+	}
+
+	Dir.MoveParent();
+	Dir.MoveChild("PlayerFace");
+
+	AllDir = Dir.GetAllDir();
+
+	for (size_t i = 0; i < AllDir.size(); i++)
+	{
+		GameEngineFolderTextureManager::GetInst().Load(AllDir[i].GetFullPath());
+	}
+
+	Dir.MoveParent();
+	Dir.MoveChild("PlayerHead");
+
+	AllDir = Dir.GetAllDir();
+
+	for (size_t i = 0; i < AllDir.size(); i++)
+	{
+		GameEngineFolderTextureManager::GetInst().Load(AllDir[i].GetFullPath());
 	}
 }

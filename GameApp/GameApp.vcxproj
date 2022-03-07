@@ -219,6 +219,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="PerionRoomLevel.cpp" />
+    <ClCompile Include="Player_Animation.cpp" />
     <ClCompile Include="QuickSlotKeyUI.cpp" />
     <ClCompile Include="SahelLevel.cpp">
       <SubType>

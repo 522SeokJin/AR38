@@ -6,6 +6,7 @@
 
 Player::Player()
 	: Dir_(PlayerDir::LEFT)
+	, State_(PlayerState::stand1)
 	, Body_(nullptr)
 	, Arm_(nullptr)
 	, Head_(nullptr)
@@ -52,7 +53,9 @@ void Player::ChangeImageDirection()
 
 void Player::Start()
 {
-	CreatePlayerRenderer();
+	//CreatePlayerRenderer();
+
+	CreateAnimation();
 
 	{
 		Collision_ = CreateTransformComponent<GameEngineCollision>(10);
@@ -156,16 +159,29 @@ void Player::CalculationArmPos(GameEngineImageRenderer* _Renderer, const float4&
 	HandPosition_ = _Renderer->GetLocalPosition() + _WzHand * float4::INVERT_Y;
 }
 
-void Player::CalculationHeadPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin, const float4& _WzNeck,
+//void Player::CalculationHeadPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin, const float4& _WzNeck,
+//	const float4& _WzEarOverHead, const float4& _WzEarBelowHead, const float4& _WzBrow)
+//{
+//	float4 HeadNeckPos = CalculationOriginPos(_Renderer, _WzOrigin) + _WzNeck * float4::INVERT_Y;
+//
+//	_Renderer->SetLocalPosition(NeckPosition_ - HeadNeckPos);
+//
+//	EarOverHeadPosition_ = _Renderer->GetLocalPosition() + _WzEarOverHead * float4::INVERT_Y;
+//	EarBelowHeadPosition_ = _Renderer->GetLocalPosition() + _WzEarBelowHead * float4::INVERT_Y;
+//	BrowPosition_ = _Renderer->GetLocalPosition() + _WzBrow * float4::INVERT_Y;
+//}
+
+float4 Player::CalculationHeadPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin, const float4& _WzNeck,
 	const float4& _WzEarOverHead, const float4& _WzEarBelowHead, const float4& _WzBrow)
 {
 	float4 HeadNeckPos = CalculationOriginPos(_Renderer, _WzOrigin) + _WzNeck * float4::INVERT_Y;
 
-	_Renderer->SetLocalPosition(NeckPosition_ - HeadNeckPos);
 
 	EarOverHeadPosition_ = _Renderer->GetLocalPosition() + _WzEarOverHead * float4::INVERT_Y;
 	EarBelowHeadPosition_ = _Renderer->GetLocalPosition() + _WzEarBelowHead * float4::INVERT_Y;
 	BrowPosition_ = _Renderer->GetLocalPosition() + _WzBrow * float4::INVERT_Y;
+
+	return NeckPosition_ - HeadNeckPos;
 }
 
 void Player::CalculationEarPos(GameEngineImageRenderer* _Renderer, const float4& _WzOrigin, const float4& _WzNeck,

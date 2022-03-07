@@ -68,10 +68,10 @@ void LithHarborLevel::LevelStart()
 		Actor->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
 	}
 
-	{
-		Demian* Actor = CreateActor<Demian>();
-		Actor->GetTransform()->SetWorldPosition({ 500.0f, 0.0f });
-	}
+	//{
+	//	Demian* Actor = CreateActor<Demian>();
+	//	Actor->GetTransform()->SetWorldPosition({ 500.0f, 0.0f });
+	//}
 }
 
 void LithHarborLevel::LevelUpdate(float _DeltaTime)

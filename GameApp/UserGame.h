@@ -21,6 +21,8 @@ public:
 		return { 1024, 768 };
 	}
 
+	void PlayerResourceLoad();
+
 protected:
 	UserGame(const UserGame& _other) = delete;
 	UserGame(UserGame&& _other) = delete;
@@ -28,6 +30,5 @@ protected:
 	UserGame& operator=(const UserGame&& _other) = delete;
 
 private:
-
 };
 
