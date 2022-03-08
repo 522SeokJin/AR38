@@ -141,9 +141,9 @@ void Player::Update(float _DeltaTime)
 	KeyInputUpdate();
 	UpdatePartsOffset();
 
-	Collision_->SetLocalScaling(Avatar_->GetImageSize());
+	Collision_->SetLocalScaling({ 100.0f, 100.0f, 1.0f });
 
-	Collision_->Collision(CollisionType::SPHERE, CollisionType::SPHERE, 20,
+	Collision_->Collision(CollisionType::AABBBox, CollisionType::AABBBox, 20,
 		[](GameEngineCollision* _OtherCollision)
 		{
 			_OtherCollision->GetActor()->Death();

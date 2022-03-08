@@ -5,6 +5,7 @@
 #include "GameEngineDevice.h"
 #include "GameEngineLevel.h"
 #include "GameEngineInput.h"
+#include "GameEngineCollision.h"
 #include <GameEngineBase/GameEngineFile.h>
 #include <GameEngineBase/GameEngineDirectory.h>
 
@@ -45,6 +46,8 @@ void GameEngineCore::EngineInitialize()
 	{
 		GameEngineTextureManager::GetInst().Load(AllTexture[i].GetFullPath());
 	}
+
+	GameEngineCollision::Init();
 
 	GameEngineSoundManager::GetInst().Initialize();
 }

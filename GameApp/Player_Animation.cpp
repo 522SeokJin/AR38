@@ -15,6 +15,7 @@ void Player::CreateAnimation()
 
 	Face_->CreateAnimationFolder("default_face1", "default_face1", 0.5f, false);
 	Face_->CreateAnimationFolder("blink_face1", "blink_face1", 0.06f);
+	Face_->CreateAnimationFolder("hit_face1", "hit_face1", 0.5f, false);
 
 	Hair_->CreateAnimationFolder("default_hair1", "default_hair1", 0.5f, false);
 	HairOverHead_->CreateAnimationFolder("default_hairOverHead1", "default_hairOverHead1", 0.5f, false);

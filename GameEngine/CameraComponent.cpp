@@ -110,6 +110,15 @@ void CameraComponent::ReleaseRenderer()
 	}
 }
 
+void CameraComponent::ChangeRendererGroup(int _Group, GameEngineRenderer* _Renderer)
+{
+	RendererList_[_Renderer->GetOrder()].remove(_Renderer);
+
+	_Renderer->SetOrder(_Group);
+
+	RendererList_[_Renderer->GetOrder()].push_back(_Renderer);
+}
+
 void CameraComponent::PushRenderer(int _Order, GameEngineRenderer* _Renderer)
 {
 	RendererList_[_Order].push_back(_Renderer);

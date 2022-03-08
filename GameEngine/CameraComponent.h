@@ -42,6 +42,8 @@ private:
 	void Render();
 	void ReleaseRenderer();
 
+	void ChangeRendererGroup(int _Group, GameEngineRenderer* _Renderer);
+
 	std::map<int, std::list<GameEngineRenderer*>> RendererList_;
 
 	ProjectionMode		ProjectionMode_;

@@ -25,8 +25,10 @@ protected:
 	GameEngineRenderer& operator=(const GameEngineRenderer& _other) = delete;
 	GameEngineRenderer& operator=(const GameEngineRenderer&& _other) = delete;
 
-	virtual void Start() override;
-	virtual void Update(float _DeltaTime) override;
+	void Start() override;
+	void Update(float _DeltaTime) override;
+
+	virtual void SetRenderGroup(int _Order);
 
 	GameEngineRenderingPipeLine* PipeLine_;
 

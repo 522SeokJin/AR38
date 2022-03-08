@@ -1,7 +1,24 @@
 #pragma once
 
+#include <DirectXCollision.h>
+#include <DirectXCollision.inl>
+
 // 설명 : 위치를 나타내는 기능이라 도저히 컴포넌트라고 부를수 없을정도로 중요하다.
 //		충돌도 담당하게 된다.
+
+union CollisionData
+{
+public:
+	DirectX::BoundingSphere Sphere;
+	DirectX::BoundingBox AABB;	// 회전 고려하지않음
+	DirectX::BoundingOrientedBox OBB; // 회전을 고려함
+
+	CollisionData()
+		: OBB()
+	{
+
+	}
+};
 
 class TransformData
 {
@@ -70,6 +87,26 @@ public:
 	TransformData& GetTransformData()
 	{
 		return TransformData_;
+	}
+
+	const CollisionData& GetCollisionData()
+	{
+		return ColData_;
+	}
+
+	const DirectX::BoundingSphere& GetSphere()
+	{
+		return ColData_.Sphere;
+	}
+
+	const DirectX::BoundingOrientedBox& GetOBB()
+	{
+		return ColData_.OBB;
+	}
+
+	const DirectX::BoundingBox& GetAABB()
+	{
+		return ColData_.AABB;
 	}
 
 	void AttachTransform(GameEngineTransform* _Transform);
@@ -143,7 +180,8 @@ protected:
 	GameEngineTransform& operator=(const GameEngineTransform& _other) = delete;
 	GameEngineTransform& operator=(const GameEngineTransform&& _other) = delete;
 
-	TransformData					TransformData_;
+	TransformData TransformData_;
+	CollisionData ColData_;
 
 	GameEngineTransform*			Parent_;
 	std::vector<GameEngineTransform*> Childs_;

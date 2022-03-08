@@ -30,6 +30,11 @@ void GameEngineRenderer::Update(float _DeltaTime)
 
 }
 
+void GameEngineRenderer::SetRenderGroup(int _Order)
+{
+	GetLevel()->ChangeRendererGroup(_Order, this);
+}
+
 void GameEngineRenderer::Render()
 {
 	ShaderHelper.Setting();
