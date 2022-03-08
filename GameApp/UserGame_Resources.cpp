@@ -2,8 +2,7 @@
 #include "UserGame.h"
 #include "CustomVertex.h"
 #include "UserGame_Resources_Shader.h"
-#include "GameEngine/GameEngineWindow.h"
-
+#include <GameEngine/GameEngineWindow.h>
 
 void UserGame::ResourceLoad()
 {
