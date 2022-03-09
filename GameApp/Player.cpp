@@ -3,10 +3,12 @@
 #include <GameEngine/GameEngineImageRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 #include "PhysicsDefine.h"
+#include "Player_Enum.h"
 
 Player::Player()
 	: Dir_(PlayerDir::LEFT)
 	, State_(PlayerState::stand1)
+	, PlayerEquip_()
 	, WearHat_(false)
 	, Avatar_(nullptr)
 	, Face_(nullptr)

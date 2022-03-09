@@ -172,6 +172,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="GameEngineWindow.h" />
+    <ClInclude Include="magic_enum.hpp" />
     <ClInclude Include="PreCompile.h">
       <SubType>
       </SubType>

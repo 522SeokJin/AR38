@@ -139,6 +139,9 @@
     <ClInclude Include="GameEngineCollision.h">
       <Filter>Object\Component\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="magic_enum.hpp">
+      <Filter>enum</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -355,6 +358,9 @@
     </Filter>
     <Filter Include="Object\Component\Collision">
       <UniqueIdentifier>{7748f26d-1ca2-4e97-96dd-7caa9609f729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="enum">
+      <UniqueIdentifier>{9594a8b6-39fc-4153-8eaa-fa04b30b1cbb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

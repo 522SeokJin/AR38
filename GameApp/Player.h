@@ -1,42 +1,9 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 
-enum class PlayerDir
+struct PlayerEquipment
 {
-	LEFT,
-	RIGHT,
-	MIDDLE,
-};
-
-enum class PlayerState
-{
-	alert,
-	dead,
-	jump,
-	ladder,
-	proneStab,
-	rope,
-	stabO1,
-	stabO2,
-	stabOF,
-	stabT1,
-	stabT2,
-	stabTF,
-	stand1,
-	stand2,
-	swingO1,
-	swingO2,
-	swingO3,
-	swingOF,
-	swingP1,
-	swingP2,
-	swingPF,
-	swingT1,
-	swingT2,
-	swingT3,
-	swingTF,
-	walk1,
-	walk2,
+	PlayerWeapon Weapon;
 };
 
 // Ό³Έν : 
@@ -66,7 +33,8 @@ private:
 	void ChangeImageDirection();
 
 	void CreateAnimation();
-	void AvatarAnimation();
+	void CreateAvatarAnimation();
+	void ChangePlayerAnimation(PlayerState _State);
 	void UpdatePartsOffset();
 	void SetPartsOffset(GameEngineImageRenderer* _Renderer, float4 _Offset);
 
@@ -75,6 +43,7 @@ private:
 
 	PlayerDir Dir_;
 	PlayerState State_;
+	PlayerEquipment PlayerEquip_;
 
 	bool WearHat_;
 
