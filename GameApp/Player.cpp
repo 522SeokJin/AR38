@@ -8,7 +8,6 @@
 Player::Player()
 	: Dir_(PlayerDir::LEFT)
 	, State_(PlayerState::stand1)
-	, PlayerEquip_()
 	, WearHat_(false)
 	, Avatar_(nullptr)
 	, Face_(nullptr)

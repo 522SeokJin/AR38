@@ -201,11 +201,15 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="ItemUI.cpp">
+    <ClCompile Include="Item.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="ItemUI_CreateRenderer.cpp" />
+    <ClCompile Include="InventoryUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="InventoryUI_CreateRenderer.cpp" />
     <ClCompile Include="LithHarbor.cpp">
       <SubType>
       </SubType>
@@ -294,7 +298,11 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ItemUI.h">
+    <ClInclude Include="Item.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="InventoryUI.h">
       <SubType>
       </SubType>
     </ClInclude>

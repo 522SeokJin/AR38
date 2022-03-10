@@ -1,12 +1,9 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 
-struct PlayerEquipment
-{
-	PlayerWeapon Weapon;
-};
-
 // Ό³Έν : 
+enum class PlayerDir;
+enum class PlayerState;
 class GameEngineImageRenderer;
 class GameEngineCollision;
 class Player : public GameEngineActor
@@ -34,6 +31,11 @@ private:
 
 	void CreateAnimation();
 	void CreateAvatarAnimation();
+	void CreateMailAnimation();
+	void CreateMailArmAnimation();
+	void CreatePantsAnimation();
+	void CreateShoesAnimation();
+	void CreateWeaponAnimation();
 	void ChangePlayerAnimation(PlayerState _State);
 	void UpdatePartsOffset();
 	void SetPartsOffset(GameEngineImageRenderer* _Renderer, float4 _Offset);
@@ -43,7 +45,6 @@ private:
 
 	PlayerDir Dir_;
 	PlayerState State_;
-	PlayerEquipment PlayerEquip_;
 
 	bool WearHat_;
 

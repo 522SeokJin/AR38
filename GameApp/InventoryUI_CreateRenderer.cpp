@@ -1,8 +1,8 @@
 #include "PreCompile.h"
-#include "ItemUI.h"
+#include "InventoryUI.h"
 #include <GameEngine/GameEngineImageUIRenderer.h>
 
-void ItemUI::CreateRenderer()
+void InventoryUI::CreateRenderer()
 {
 	{
 		GameEngineImageUIRenderer* Renderer = CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
@@ -118,3 +118,4 @@ void ItemUI::CreateRenderer()
 		Renderer->SetLocalPosition({ 64.0f, -125.0f });
 	}
 }
+

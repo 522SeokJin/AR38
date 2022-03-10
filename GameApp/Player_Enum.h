@@ -18,11 +18,7 @@ enum class PlayerState
 	stabO1,
 	stabO2,
 	stabOF,
-	stabT1,
-	stabT2,
-	stabTF,
 	stand1,
-	stand2,
 	swingO1,
 	swingO2,
 	swingO3,
@@ -36,9 +32,4 @@ enum class PlayerState
 	swingTF,
 	walk1,
 	walk2,
-};
-
-enum class PlayerWeapon
-{
-	sword = 1,
 };

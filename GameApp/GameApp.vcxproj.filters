@@ -77,11 +77,11 @@
     <ClCompile Include="EntranceDemianMap.cpp">
       <Filter>Actor\Map\Demian</Filter>
     </ClCompile>
-    <ClCompile Include="ItemUI.cpp">
-      <Filter>Actor\UI\Item</Filter>
+    <ClCompile Include="InventoryUI.cpp">
+      <Filter>Actor\UI\Inventory</Filter>
     </ClCompile>
-    <ClCompile Include="ItemUI_CreateRenderer.cpp">
-      <Filter>Actor\UI\Item</Filter>
+    <ClCompile Include="InventoryUI_CreateRenderer.cpp">
+      <Filter>Actor\UI\Inventory</Filter>
     </ClCompile>
     <ClCompile Include="ExpBarUI.cpp">
       <Filter>Actor\UI\MainBar</Filter>
@@ -91,6 +91,9 @@
     </ClCompile>
     <ClCompile Include="Player_Animation.cpp">
       <Filter>Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Actor\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,11 +154,14 @@
     <Filter Include="Actor\Map\Demian">
       <UniqueIdentifier>{80fdbf4c-2465-4d92-99e1-544a771eab93}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\UI\Item">
-      <UniqueIdentifier>{758cfe3e-7815-4223-b675-09be6e62ed8b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\Player">
       <UniqueIdentifier>{aa6748f1-cc28-4389-866e-b706de81f30e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI\Inventory">
+      <UniqueIdentifier>{758cfe3e-7815-4223-b675-09be6e62ed8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Item">
+      <UniqueIdentifier>{7bcbadb6-7dde-4b48-9fb9-2b3faa5d5667}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -234,8 +240,8 @@
     <ClInclude Include="PhysicsDefine.h">
       <Filter>Actor</Filter>
     </ClInclude>
-    <ClInclude Include="ItemUI.h">
-      <Filter>Actor\UI\Item</Filter>
+    <ClInclude Include="InventoryUI.h">
+      <Filter>Actor\UI\Inventory</Filter>
     </ClInclude>
     <ClInclude Include="ExpBarUI.h">
       <Filter>Actor\UI\MainBar</Filter>
@@ -245,6 +251,9 @@
     </ClInclude>
     <ClInclude Include="Player_Enum.h">
       <Filter>Actor\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Actor\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
