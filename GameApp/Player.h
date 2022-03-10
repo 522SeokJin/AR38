@@ -46,8 +46,6 @@ private:
 	PlayerDir Dir_;
 	PlayerState State_;
 
-	bool WearHat_;
-
 	GameEngineImageRenderer* Avatar_;
 	GameEngineImageRenderer* Face_;
 	GameEngineImageRenderer* HairBelowBody_;

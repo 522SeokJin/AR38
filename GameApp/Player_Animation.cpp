@@ -2,20 +2,20 @@
 #include "Player.h"
 #include <GameEngine/GameEngineImageRenderer.h>
 #include <GameEngine\magic_enum.hpp>
-#include "Player_Enum.h"
+#include "Player_Define.h"
 
 void Player::CreateAnimation()
 {
-	Weapon_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Avatar_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Face_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Hair_ = CreateTransformComponent<GameEngineImageRenderer>();
 	HairOverHead_ = CreateTransformComponent<GameEngineImageRenderer>();
 	HairBelowBody_ = CreateTransformComponent<GameEngineImageRenderer>();
-	Mail_ = CreateTransformComponent<GameEngineImageRenderer>(1);
-	MailArm_ = CreateTransformComponent<GameEngineImageRenderer>(2);
 	Pants_ = CreateTransformComponent<GameEngineImageRenderer>();
+	Mail_ = CreateTransformComponent<GameEngineImageRenderer>();
+	MailArm_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Shoes_ = CreateTransformComponent<GameEngineImageRenderer>();
+	Weapon_ = CreateTransformComponent<GameEngineImageRenderer>();
 
 	CreateAvatarAnimation();
 	CreateMailAnimation();
@@ -32,7 +32,7 @@ void Player::CreateAnimation()
 	HairOverHead_->CreateAnimationFolder("default_hairOverHead1", 0.5f, false);
 	HairBelowBody_->CreateAnimationFolder("default_hairBelowBody1", 0.5f, false);
 
-	ChangePlayerAnimation(PlayerState::swingO1);
+	ChangePlayerAnimation(PlayerState::stand1);
 
 	Face_->SetChangeAnimation("default_face1");
 
@@ -43,6 +43,16 @@ void Player::CreateAnimation()
 	// Wear a Hat
 	Hair_->SetChangeAnimation("default_hair1");
 	Hair_->Off();
+
+	//Weapon_->Off();
+	//Avatar_->Off();
+	//Face_->Off();
+	//HairOverHead_->Off();
+	//Mail_->Off();
+	//MailArm_->Off();
+	//Pants_->Off();
+	//Shoes_->Off();
+
 }
 
 void Player::ChangePlayerAnimation(PlayerState _State)
@@ -83,6 +93,56 @@ void Player::UpdatePartsOffset()
 	case PlayerState::stabOF:
 		break;
 	case PlayerState::stand1:
+		switch (CurFrame)
+		{
+		case 0:
+			SetPartsOffset(Face_, { -3.0f, 8.0f });
+			SetPartsOffset(Hair_, { 0.0f, 17.0f });
+			SetPartsOffset(HairOverHead_, { -3.0f, 17.0f });
+			SetPartsOffset(HairBelowBody_, { 1.0f, 12.0f });
+			SetPartsOffset(Mail_, { 0.0f, -8.0f });
+			SetPartsOffset(MailArm_, { 7.0f, -6.0f });
+			SetPartsOffset(Pants_, { 0.0f, -16.0f });
+			SetPartsOffset(Shoes_, { -1.0f, -28.0f });
+			SetPartsOffset(Weapon_, { -3.0f, -22.0f });
+			break;
+		case 1:
+			SetPartsOffset(Face_, { -3.0f, 8.0f });
+			SetPartsOffset(Hair_, { 0.0f, 17.0f });
+			SetPartsOffset(HairOverHead_, { -3.0f, 17.0f });
+			SetPartsOffset(HairBelowBody_, { 1.0f, 12.0f });
+			SetPartsOffset(Mail_, { 0.0f, -8.0f });
+			SetPartsOffset(MailArm_, { 7.0f, -6.0f });
+			SetPartsOffset(Pants_, { 0.0f, -16.0f });
+			SetPartsOffset(Shoes_, { -1.0f, -28.0f });
+			SetPartsOffset(Weapon_, { -2.0f, -22.0f });
+			break;
+		case 2:
+			SetPartsOffset(Face_, { -3.0f, 8.0f });
+			SetPartsOffset(Hair_, { 0.0f, 17.0f });
+			SetPartsOffset(HairOverHead_, { -3.0f, 17.0f });
+			SetPartsOffset(HairBelowBody_, { 1.0f, 12.0f });
+			SetPartsOffset(Mail_, { 0.0f, -8.0f });
+			SetPartsOffset(MailArm_, { 7.0f, -5.0f });
+			SetPartsOffset(Pants_, { 0.0f, -16.0f });
+			SetPartsOffset(Shoes_, { -1.0f, -28.0f });
+			SetPartsOffset(Weapon_, { -1.0f, -22.0f });
+			break;
+		case 3:
+			SetPartsOffset(Face_, { -3.0f, 8.0f });
+			SetPartsOffset(Hair_, { 0.0f, 17.0f });
+			SetPartsOffset(HairOverHead_, { -3.0f, 17.0f });
+			SetPartsOffset(HairBelowBody_, { 1.0f, 12.0f });
+			SetPartsOffset(Mail_, { 0.0f, -8.0f });
+			SetPartsOffset(MailArm_, { 7.0f, -6.0f });
+			SetPartsOffset(Pants_, { 0.0f, -16.0f });
+			SetPartsOffset(Shoes_, { -1.0f, -28.0f });
+			SetPartsOffset(Weapon_, { -2.0f, -22.0f });
+			break;
+		default:
+			GameEngineDebug::MsgBoxError("UpdatePartsPosition Error");
+			break;
+		}
 		break;
 	case PlayerState::swingO1:
 		switch (CurFrame)
@@ -162,7 +222,6 @@ void Player::CreateAvatarAnimation()
 	Avatar_->CreateAnimationFolder("prone", "avatar_prone", 0.5f);
 	Avatar_->CreateAnimationFolder("proneStab", "avatar_proneStab", 0.5f);
 	Avatar_->CreateAnimationFolder("rope", "avatar_rope", 0.5f);
-	Avatar_->CreateAnimationFolder("sit", "avatar_sit", 0.5f);
 	Avatar_->CreateAnimationFolder("stabO1", "avatar_stabO1", 0.5f);
 	Avatar_->CreateAnimationFolder("stabO2", "avatar_stabO2", 0.5f);
 	Avatar_->CreateAnimationFolder("stabOF", "avatar_stabOF", 0.5f);
@@ -194,7 +253,6 @@ void Player::CreateMailAnimation()
 	Mail_->CreateAnimationFolder("prone_mail1", 0.5f);
 	Mail_->CreateAnimationFolder("proneStab_mail1", 0.5f);
 	Mail_->CreateAnimationFolder("rope_mail1", 0.5f);
-	Mail_->CreateAnimationFolder("sit_mail1", 0.5f);
 	Mail_->CreateAnimationFolder("stabO1_mail1", 0.5f);
 	Mail_->CreateAnimationFolder("stabO2_mail1", 0.5f);
 	Mail_->CreateAnimationFolder("stabOF_mail1", 0.5f);
@@ -219,7 +277,6 @@ void Player::CreateMailArmAnimation()
 	MailArm_->CreateAnimationFolder("jump_mailArm1", 0.5f);
 	MailArm_->CreateAnimationFolder("prone_mailArm1", 0.5f);
 	MailArm_->CreateAnimationFolder("proneStab_mailArm1", 0.5f);
-	MailArm_->CreateAnimationFolder("sit_mailArm1", 0.5f);
 	MailArm_->CreateAnimationFolder("stabO1_mailArm1", 0.5f);
 	MailArm_->CreateAnimationFolder("stabO2_mailArm1", 0.5f);
 	MailArm_->CreateAnimationFolder("stabOF_mailArm1", 0.5f);
@@ -246,7 +303,6 @@ void Player::CreatePantsAnimation()
 	Pants_->CreateAnimationFolder("prone_pants1", 0.5f);
 	Pants_->CreateAnimationFolder("proneStab_pants1", 0.5f);
 	Pants_->CreateAnimationFolder("rope_pants1", 0.5f);
-	Pants_->CreateAnimationFolder("sit_pants1", 0.5f);
 	Pants_->CreateAnimationFolder("stabO1_pants1", 0.5f);
 	Pants_->CreateAnimationFolder("stabO2_pants1", 0.5f);
 	Pants_->CreateAnimationFolder("stabOF_pants1", 0.5f);
@@ -273,7 +329,6 @@ void Player::CreateShoesAnimation()
 	Shoes_->CreateAnimationFolder("prone_shoes1", 0.5f);
 	Shoes_->CreateAnimationFolder("proneStab_shoes1", 0.5f);
 	Shoes_->CreateAnimationFolder("rope_shoes1", 0.5f);
-	Shoes_->CreateAnimationFolder("sit_shoes1", 0.5f);
 	Shoes_->CreateAnimationFolder("stabO1_shoes1", 0.5f);
 	Shoes_->CreateAnimationFolder("stabO2_shoes1", 0.5f);
 	Shoes_->CreateAnimationFolder("stabOF_shoes1", 0.5f);

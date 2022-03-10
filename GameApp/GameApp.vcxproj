@@ -319,7 +319,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="PerionRoomLevel.h" />
-    <ClInclude Include="Player_Enum.h" />
+    <ClInclude Include="Player_Define.h" />
     <ClInclude Include="QuickSlotKeyUI.h" />
     <ClInclude Include="SahelLevel.h">
       <SubType>

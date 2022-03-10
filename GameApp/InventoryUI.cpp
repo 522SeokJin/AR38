@@ -2,6 +2,7 @@
 #include "InventoryUI.h"
 #include <GameEngine/GameEngineImageUIRenderer.h>
 #include <GameEngine/magic_enum.hpp>
+#include "Item.h"
 
 InventoryUI::InventoryUI()
 {
