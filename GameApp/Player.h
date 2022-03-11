@@ -57,6 +57,16 @@ private:
 	GameEngineImageRenderer* Shoes_;
 	GameEngineImageRenderer* Weapon_;
 
+	std::map<int, float4> FaceOffsets_;
+	std::map<int, float4> HairBelowBodyOffsets_;
+	std::map<int, float4> HairOverHeadOffsets_;
+	std::map<int, float4> HairOffsets_;
+	std::map<int, float4> MailOffsets_;
+	std::map<int, float4> MailArmOffsets_;
+	std::map<int, float4> PantsOffsets_;
+	std::map<int, float4> ShoesOffsets_;
+	std::map<int, float4> WeaponOffsets_;
+
 	GameEngineCollision* Collision_;
 };
 

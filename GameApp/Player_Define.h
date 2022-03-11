@@ -32,4 +32,5 @@ enum class PlayerState
 	swingTF,
 	walk1,
 	walk2,
+	MAX,
 };
