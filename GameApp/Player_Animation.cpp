@@ -32,10 +32,11 @@ void Player::CreateAnimation()
 	HairOverHead_->CreateAnimationFolder("default_hairOverHead1", 0.5f, false);
 	HairBelowBody_->CreateAnimationFolder("default_hairBelowBody1", 0.5f, false);
 
-	ChangePlayerAnimation(PlayerState::stand1);
+	SetPartsOffset();
+
+	ChangePlayerAnimation(PlayerState::swingO1);
 
 	Face_->SetChangeAnimation("default_face1");
-
 	HairOverHead_->SetChangeAnimation("default_hairOverHead1");
 	// 깊이버퍼 만들고 On() 할 예정
 	HairBelowBody_->SetChangeAnimation("default_hairBelowBody1");
@@ -52,7 +53,6 @@ void Player::CreateAnimation()
 	//MailArm_->Off();
 	//Pants_->Off();
 	//Shoes_->Off();
-
 }
 
 void Player::ChangePlayerAnimation(PlayerState _State)
@@ -61,157 +61,114 @@ void Player::ChangePlayerAnimation(PlayerState _State)
 	std::string AnimationName = magic_enum::enum_flags_name(_State);
 
 	Avatar_->SetChangeAnimation(AnimationName);
-	Mail_->SetChangeAnimation(AnimationName + "_mail1");
-	MailArm_->SetChangeAnimation(AnimationName + "_mailArm1");
-	Pants_->SetChangeAnimation(AnimationName + "_pants1");
-	Shoes_->SetChangeAnimation(AnimationName + "_shoes1");
-	Weapon_->SetChangeAnimation(AnimationName + "_weapon1");
+	Mail_->SetChangeAnimation(AnimationName + "_mail" + std::to_string(MailImageIndex_));
+	MailArm_->SetChangeAnimation(AnimationName + "_mailArm" + std::to_string(MailArmImageIndex_));
+	Pants_->SetChangeAnimation(AnimationName + "_pants" + std::to_string(PantsImageIndex_));
+	Shoes_->SetChangeAnimation(AnimationName + "_shoes" + std::to_string(ShoesImageIndex_));
+	Weapon_->SetChangeAnimation(AnimationName + "_weapon" + std::to_string(WeaponImageIndex_));
 }
 
 void Player::UpdatePartsOffset()
 {
 	int CurFrame = Avatar_->GetCurAnimation()->CurFrame_;
 
-	switch (State_)
-	{
-	case PlayerState::alert:
-		break;
-	case PlayerState::dead:
-		break;
-	case PlayerState::jump:
-		break;
-	case PlayerState::ladder:
-		break;
-	case PlayerState::proneStab:
-		break;
-	case PlayerState::rope:
-		break;
-	case PlayerState::stabO1:
-		break;
-	case PlayerState::stabO2:
-		break;
-	case PlayerState::stabOF:
-		break;
-	case PlayerState::stand1:
-		switch (CurFrame)
-		{
-		case 0:
-			SetPartsOffset(Face_, { -3.0f, 8.0f });
-			SetPartsOffset(Hair_, { 0.0f, 17.0f });
-			SetPartsOffset(HairOverHead_, { -3.0f, 17.0f });
-			SetPartsOffset(HairBelowBody_, { 1.0f, 12.0f });
-			SetPartsOffset(Mail_, { 0.0f, -8.0f });
-			SetPartsOffset(MailArm_, { 7.0f, -6.0f });
-			SetPartsOffset(Pants_, { 0.0f, -16.0f });
-			SetPartsOffset(Shoes_, { -1.0f, -28.0f });
-			SetPartsOffset(Weapon_, { -3.0f, -22.0f });
-			break;
-		case 1:
-			SetPartsOffset(Face_, { -3.0f, 8.0f });
-			SetPartsOffset(Hair_, { 0.0f, 17.0f });
-			SetPartsOffset(HairOverHead_, { -3.0f, 17.0f });
-			SetPartsOffset(HairBelowBody_, { 1.0f, 12.0f });
-			SetPartsOffset(Mail_, { 0.0f, -8.0f });
-			SetPartsOffset(MailArm_, { 7.0f, -6.0f });
-			SetPartsOffset(Pants_, { 0.0f, -16.0f });
-			SetPartsOffset(Shoes_, { -1.0f, -28.0f });
-			SetPartsOffset(Weapon_, { -2.0f, -22.0f });
-			break;
-		case 2:
-			SetPartsOffset(Face_, { -3.0f, 8.0f });
-			SetPartsOffset(Hair_, { 0.0f, 17.0f });
-			SetPartsOffset(HairOverHead_, { -3.0f, 17.0f });
-			SetPartsOffset(HairBelowBody_, { 1.0f, 12.0f });
-			SetPartsOffset(Mail_, { 0.0f, -8.0f });
-			SetPartsOffset(MailArm_, { 7.0f, -5.0f });
-			SetPartsOffset(Pants_, { 0.0f, -16.0f });
-			SetPartsOffset(Shoes_, { -1.0f, -28.0f });
-			SetPartsOffset(Weapon_, { -1.0f, -22.0f });
-			break;
-		case 3:
-			SetPartsOffset(Face_, { -3.0f, 8.0f });
-			SetPartsOffset(Hair_, { 0.0f, 17.0f });
-			SetPartsOffset(HairOverHead_, { -3.0f, 17.0f });
-			SetPartsOffset(HairBelowBody_, { 1.0f, 12.0f });
-			SetPartsOffset(Mail_, { 0.0f, -8.0f });
-			SetPartsOffset(MailArm_, { 7.0f, -6.0f });
-			SetPartsOffset(Pants_, { 0.0f, -16.0f });
-			SetPartsOffset(Shoes_, { -1.0f, -28.0f });
-			SetPartsOffset(Weapon_, { -2.0f, -22.0f });
-			break;
-		default:
-			GameEngineDebug::MsgBoxError("UpdatePartsPosition Error");
-			break;
-		}
-		break;
-	case PlayerState::swingO1:
-		switch (CurFrame)
-		{
-		case 0:
-			SetPartsOffset(Face_, { -6.0f, 5.0f });
-			SetPartsOffset(Hair_, { -4.0f, 14.0f });
-			SetPartsOffset(HairOverHead_, { -6.0f, 14.0f });
-			SetPartsOffset(HairBelowBody_, { -3.0f, 9.0f });
-			SetPartsOffset(Mail_, { 6.0f, -9.0f });
-			SetPartsOffset(MailArm_, { -1.0f, -7.0f });
-			SetPartsOffset(Pants_, { 7.0f, -17.0f });
-			SetPartsOffset(Shoes_, { 8.5f, -24.0f });
-			SetPartsOffset(Weapon_, { 16.0f, -13.0f });
-			break;
-		case 1:
-			SetPartsOffset(Face_, { -3.0f, 7.0f });
-			SetPartsOffset(Hair_, { -1.0f, 16.0f });
-			SetPartsOffset(HairOverHead_, { -3.0f, 16.0f });
-			SetPartsOffset(HairBelowBody_, { 1.0f, 11.0f });
-			SetPartsOffset(Mail_, { 6.0f, -9.5f });
-			SetPartsOffset(MailArm_, { 0.0f, -3.0f });
-			SetPartsOffset(Pants_, { 7.0f, -16.0f });
-			SetPartsOffset(Shoes_, { 7.0f, -28.0f });
-			SetPartsOffset(Weapon_, { 7.0f, -15.0f });
-			break;
-		case 2:
-			SetPartsOffset(Face_, { -12.0f, 4.0f });
-			SetPartsOffset(Hair_, { -10.0f, 13.0f });
-			SetPartsOffset(HairOverHead_, { -12.0f, 13.0f });
-			SetPartsOffset(HairBelowBody_, { -8.0f, 8.0f });
-			SetPartsOffset(Mail_, { 2.0f, -8.0f });
-			SetPartsOffset(MailArm_, { 4.0f, -2.0f });
-			SetPartsOffset(Pants_, { 4.5f, -16.0f });
-			SetPartsOffset(Shoes_, { 9.0f, -25.0f });
-			SetPartsOffset(Weapon_, { 27.0f, 18.0f });
-			break;
-		default:
-			GameEngineDebug::MsgBoxError("UpdatePartsPosition Error");
-			break;
-		}
-		break;
-	case PlayerState::swingO2:
-		break;
-	case PlayerState::swingO3:
-		break;
-	case PlayerState::swingOF:
-		break;
-	case PlayerState::swingP1:
-		break;
-	case PlayerState::swingP2:
-		break;
-	case PlayerState::swingPF:
-		break;
-	case PlayerState::swingT1:
-		break;
-	case PlayerState::swingT2:
-		break;
-	case PlayerState::swingT3:
-		break;
-	case PlayerState::swingTF:
-		break;
-	case PlayerState::walk1:
-		break;
-	case PlayerState::walk2:
-		break;
-	default:
-		break;
-	}
+	ChangePartsOffset(Face_, FaceOffsets_.find(KeyOffset(State_, FaceImageIndex_))->second[CurFrame]);
+	ChangePartsOffset(Hair_, HairOffsets_.find(KeyOffset(State_, HairImageIndex_))->second[CurFrame]);
+	ChangePartsOffset(HairOverHead_, HairOverHeadOffsets_.find(KeyOffset(State_, HairOverHeadImageIndex_))->second[CurFrame]);
+	ChangePartsOffset(HairBelowBody_, HairBelowBodyOffsets_.find(KeyOffset(State_, HairBelowBodyImageIndex_))->second[CurFrame]);
+	ChangePartsOffset(Mail_, MailOffsets_.find(KeyOffset(State_, MailImageIndex_))->second[CurFrame]);
+	ChangePartsOffset(MailArm_, MailArmOffsets_.find(KeyOffset(State_, MailArmImageIndex_))->second[CurFrame]);
+	ChangePartsOffset(Pants_, PantsOffsets_.find(KeyOffset(State_, PantsImageIndex_))->second[CurFrame]);
+	ChangePartsOffset(Shoes_, ShoesOffsets_.find(KeyOffset(State_, ShoesImageIndex_))->second[CurFrame]);
+	ChangePartsOffset(Weapon_, WeaponOffsets_.find(KeyOffset(State_, WeaponImageIndex_))->second[CurFrame]);
+}
+
+void Player::SetPartsOffset()
+{
+	PlayerState State = PlayerState::stand1;
+
+	FaceOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 8.0f });
+	FaceOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 8.0f });
+	FaceOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 8.0f });
+	FaceOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 8.0f });
+
+	HairOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, 17.0f });
+	HairOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, 17.0f });
+	HairOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, 17.0f });
+	HairOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, 17.0f });
+
+	HairOverHeadOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 17.0f });
+	HairOverHeadOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 17.0f });
+	HairOverHeadOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 17.0f });
+	HairOverHeadOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 17.0f });
+
+	HairBelowBodyOffsets_[KeyOffset(State, 1)].push_back({ 1.0f, 12.0f });
+	HairBelowBodyOffsets_[KeyOffset(State, 1)].push_back({ 1.0f, 12.0f });
+	HairBelowBodyOffsets_[KeyOffset(State, 1)].push_back({ 1.0f, 12.0f });
+	HairBelowBodyOffsets_[KeyOffset(State, 1)].push_back({ 1.0f, 12.0f });
+
+	MailOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, -8.0f });
+	MailOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, -8.0f });
+	MailOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, -8.0f });
+	MailOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, -8.0f });
+
+	MailArmOffsets_[KeyOffset(State, 1)].push_back({ 7.0f, -6.0f });
+	MailArmOffsets_[KeyOffset(State, 1)].push_back({ 7.0f, -6.0f });
+	MailArmOffsets_[KeyOffset(State, 1)].push_back({ 7.0f, -5.0f });
+	MailArmOffsets_[KeyOffset(State, 1)].push_back({ 7.0f, -6.0f });
+
+	PantsOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, -16.0f });
+	PantsOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, -16.0f });
+	PantsOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, -16.0f });
+	PantsOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, -16.0f });
+
+	ShoesOffsets_[KeyOffset(State, 1)].push_back({ -1.0f, -28.0f });
+	ShoesOffsets_[KeyOffset(State, 1)].push_back({ -1.0f, -28.0f });
+	ShoesOffsets_[KeyOffset(State, 1)].push_back({ -1.0f, -28.0f });
+	ShoesOffsets_[KeyOffset(State, 1)].push_back({ -1.0f, -28.0f });
+
+	WeaponOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, -22.0f });
+	WeaponOffsets_[KeyOffset(State, 1)].push_back({ -2.0f, -22.0f });
+	WeaponOffsets_[KeyOffset(State, 1)].push_back({ -1.0f, -22.0f });
+	WeaponOffsets_[KeyOffset(State, 1)].push_back({ -2.0f, -22.0f });
+
+	State = PlayerState::swingO1;
+
+	FaceOffsets_[KeyOffset(State, 1)].push_back({ -6.0f, 5.0f });
+	FaceOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 7.0f });
+	FaceOffsets_[KeyOffset(State, 1)].push_back({ -12.0f, 4.0f });
+
+	HairOffsets_[KeyOffset(State, 1)].push_back({ -4.0f, 14.0f });
+	HairOffsets_[KeyOffset(State, 1)].push_back({ -1.0f, 16.0f });
+	HairOffsets_[KeyOffset(State, 1)].push_back({ -10.0f, 13.0f });
+
+	HairOverHeadOffsets_[KeyOffset(State, 1)].push_back({ -6.0f, 14.0f });
+	HairOverHeadOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 16.0f });
+	HairOverHeadOffsets_[KeyOffset(State, 1)].push_back({ -12.0f, 13.0f });
+
+	HairBelowBodyOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 9.0f });
+	HairBelowBodyOffsets_[KeyOffset(State, 1)].push_back({ 1.0f, 11.0f });
+	HairBelowBodyOffsets_[KeyOffset(State, 1)].push_back({ -8.0f, 8.0f });
+
+	MailOffsets_[KeyOffset(State, 1)].push_back({ 6.0f, -9.0f });
+	MailOffsets_[KeyOffset(State, 1)].push_back({ 6.0f, -9.5f });
+	MailOffsets_[KeyOffset(State, 1)].push_back({ 2.0f, -8.0f });
+
+	MailArmOffsets_[KeyOffset(State, 1)].push_back({ -1.0f, -7.0f });
+	MailArmOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, -3.0f });
+	MailArmOffsets_[KeyOffset(State, 1)].push_back({ 4.0f, -2.0f });
+
+	PantsOffsets_[KeyOffset(State, 1)].push_back({ 7.0f, -17.0f });
+	PantsOffsets_[KeyOffset(State, 1)].push_back({ 7.0f, -16.0f });
+	PantsOffsets_[KeyOffset(State, 1)].push_back({ 4.5f, -16.0f });
+
+	ShoesOffsets_[KeyOffset(State, 1)].push_back({ 8.5f, -24.0f });
+	ShoesOffsets_[KeyOffset(State, 1)].push_back({ 7.0f, -28.0f });
+	ShoesOffsets_[KeyOffset(State, 1)].push_back({ 9.0f, -25.0f });
+
+	WeaponOffsets_[KeyOffset(State, 1)].push_back({ 16.0f, -13.0f });
+	WeaponOffsets_[KeyOffset(State, 1)].push_back({ 7.0f, -15.0f });
+	WeaponOffsets_[KeyOffset(State, 1)].push_back({ 27.0f, 18.0f });
 }
 
 void Player::CreateAvatarAnimation()

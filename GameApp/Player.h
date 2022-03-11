@@ -1,6 +1,31 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 
+enum class PlayerState;
+struct KeyOffset
+{
+	PlayerState State_;
+	int ImageIndex_;
+
+	inline bool operator<(const KeyOffset& p) const
+	{
+		if (State_ != p.State_)
+		{
+			return static_cast<int>(State_) < static_cast<int>(p.State_);
+		}
+		else
+		{
+			return ImageIndex_ < p.ImageIndex_;
+		}
+	}
+public:
+	KeyOffset(PlayerState _State, int _ImageIndex)
+	{
+		State_ = _State;
+		ImageIndex_ = _ImageIndex;
+	}
+};
+
 // Ό³Έν : 
 enum class PlayerDir;
 enum class PlayerState;
@@ -38,7 +63,8 @@ private:
 	void CreateWeaponAnimation();
 	void ChangePlayerAnimation(PlayerState _State);
 	void UpdatePartsOffset();
-	void SetPartsOffset(GameEngineImageRenderer* _Renderer, float4 _Offset);
+	void SetPartsOffset();
+	void ChangePartsOffset(GameEngineImageRenderer* _Renderer, float4 _Offset);
 
 	void KeyInputSetting();
 	void KeyInputUpdate();
@@ -57,15 +83,25 @@ private:
 	GameEngineImageRenderer* Shoes_;
 	GameEngineImageRenderer* Weapon_;
 
-	std::map<int, float4> FaceOffsets_;
-	std::map<int, float4> HairBelowBodyOffsets_;
-	std::map<int, float4> HairOverHeadOffsets_;
-	std::map<int, float4> HairOffsets_;
-	std::map<int, float4> MailOffsets_;
-	std::map<int, float4> MailArmOffsets_;
-	std::map<int, float4> PantsOffsets_;
-	std::map<int, float4> ShoesOffsets_;
-	std::map<int, float4> WeaponOffsets_;
+	int FaceImageIndex_;
+	int HairBelowBodyImageIndex_;
+	int HairOverHeadImageIndex_;
+	int HairImageIndex_;
+	int MailImageIndex_;
+	int MailArmImageIndex_;
+	int PantsImageIndex_;
+	int ShoesImageIndex_;
+	int WeaponImageIndex_;
+
+	std::map<KeyOffset, std::vector<float4>> FaceOffsets_;
+	std::map<KeyOffset, std::vector<float4>> HairBelowBodyOffsets_;
+	std::map<KeyOffset, std::vector<float4>> HairOverHeadOffsets_;
+	std::map<KeyOffset, std::vector<float4>> HairOffsets_;
+	std::map<KeyOffset, std::vector<float4>> MailOffsets_;
+	std::map<KeyOffset, std::vector<float4>> MailArmOffsets_;
+	std::map<KeyOffset, std::vector<float4>> PantsOffsets_;
+	std::map<KeyOffset, std::vector<float4>> ShoesOffsets_;
+	std::map<KeyOffset, std::vector<float4>> WeaponOffsets_;
 
 	GameEngineCollision* Collision_;
 };
