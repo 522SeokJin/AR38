@@ -19,14 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="CBufferHeader.fx" />
-    <FxCompile Include="Color.fx">
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">main</EntryPointName>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">main</EntryPointName>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">main</EntryPointName>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">main</EntryPointName>
-    </FxCompile>
-    <FxCompile Include="Texture.fx" />
+    <FxCompile Include="EngineResources\Shader\CBufferHeader.fx" />
+    <FxCompile Include="EngineResources\Shader\Color.fx" />
+    <FxCompile Include="EngineResources\Shader\Texture.fx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -1,22 +1,6 @@
 #pragma once
 #include "GameEngineTransformComponent.h"
-
-enum class CollisionType
-{
-	// 2D
-	Point2D,
-	Circle,
-	Rect,
-	OrientedRect,
-
-	// 3D
-	Point3D,
-	Sphere,
-	AABBBox,
-	OBBBox,
-
-	MAX,
-};
+#include "Enums.h"
 
 // Ό³Έν : 
 class GameEngineCore;

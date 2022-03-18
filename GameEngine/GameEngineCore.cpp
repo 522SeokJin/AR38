@@ -35,17 +35,8 @@ GameEngineCore::~GameEngineCore() // default destructer 디폴트 소멸자
 
 void GameEngineCore::EngineInitialize()
 {
-	GameEngineDirectory Dir;
-	Dir.MoveParent();
-	Dir.MoveChild("EngineResources");
-	Dir.MoveChild("Texture");
-
-	std::vector<GameEngineFile> AllTexture = Dir.GetAllFile();
-
-	for (size_t i = 0; i < AllTexture.size(); i++)
-	{
-		GameEngineTextureManager::GetInst().Load(AllTexture[i].GetFullPath());
-	}
+	EngineResourcesLoad();
+	EngineResourcesCreate();
 
 	GameEngineCollision::Init();
 

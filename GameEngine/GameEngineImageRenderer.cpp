@@ -98,8 +98,8 @@ void GameEngineImageRenderer::SetIndex(const int _Index)
 	CutData_ = CurTexture_->GetCutData(_Index);
 }
 
-void GameEngineImageRenderer::CreateAnimation(const std::string& _Name,
-	int _StartFrame,int _EndFrame, float _InterTime, bool _Loop)
+void GameEngineImageRenderer::CreateAnimation(const std::string& _TextureName,
+	const std::string& _Name, int _StartFrame,int _EndFrame, float _InterTime, bool _Loop)
 {
 	std::map<std::string, Animation2D*>::iterator FindIter = AllAnimations_.find(_Name);
 
@@ -108,8 +108,14 @@ void GameEngineImageRenderer::CreateAnimation(const std::string& _Name,
 		GameEngineDebug::MsgBoxError("이미 존재하는 애니메이션을 또 만들었습니다.");
 	}
 
-
 	Animation2D* NewAnimation = new Animation2D();
+
+	NewAnimation->AnimationTexture_ = GameEngineTextureManager::GetInst().Find(_TextureName);
+
+	if (nullptr == NewAnimation->AnimationTexture_)
+	{
+		GameEngineDebug::MsgBoxError("존재하지 않는 텍스처로 애니메이션을 만들려고 했습니다.");
+	}
 
 	NewAnimation->Name_ = _Name;
 	NewAnimation->IsEnd_ = false;
@@ -366,6 +372,8 @@ void GameEngineImageRenderer::Animation2D::Update(float _DeltaTime)
 
 	if (nullptr == FolderTextures_)
 	{
+		Renderer_->ShaderHelper.SettingTexture("Tex", AnimationTexture_);
+		Renderer_->CurTexture_ = AnimationTexture_;
 		Renderer_->SetIndex(CurFrame_);
 	}
 	else

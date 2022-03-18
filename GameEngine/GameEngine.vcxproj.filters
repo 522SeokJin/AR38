@@ -142,6 +142,15 @@
     <ClInclude Include="magic_enum.hpp">
       <Filter>enum</Filter>
     </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineVertex.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineDebugRenderData.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -279,6 +288,12 @@
     <ClCompile Include="GameEngineCollision.cpp">
       <Filter>Object\Component\Collision</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineDebugRenderData.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineCore_Resources.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -361,6 +376,12 @@
     </Filter>
     <Filter Include="enum">
       <UniqueIdentifier>{9594a8b6-39fc-4153-8eaa-fa04b30b1cbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{041c8393-89d5-4452-8c8a-34b32058a047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{7a7d2e0d-06dd-488f-89f6-a3ee5d2fac39}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -76,7 +76,9 @@ void GameEngineLevel::Render()
 
 	GetMainCamera()->Render();
 	GetUICamera()->Render();
-	
+
+	// GetMainCamera()->DebugRender();
+
 	GameEngineDevice::RenderEnd();
 }
 
@@ -194,4 +196,9 @@ void GameEngineLevel::ChangeCollisionGroup(int _Group, GameEngineCollision* _Col
 void GameEngineLevel::ChangeRendererGroup(int _Group, GameEngineRenderer* _Renderer)
 {
 	MainCameraActor_->GetCamera()->ChangeRendererGroup(_Group, _Renderer);
+}
+
+void GameEngineLevel::DebugRender(GameEngineTransform* _Transform, CollisionType _Type)
+{
+
 }

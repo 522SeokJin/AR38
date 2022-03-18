@@ -53,6 +53,8 @@ private:
 	static void MainLoop();
 
 	void EngineInitialize();
+	void EngineResourcesLoad();
+	void EngineResourcesCreate();
 	void EngineDestroy();
 
 	static GameEngineCore* MainCore_;

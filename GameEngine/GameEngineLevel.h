@@ -1,11 +1,14 @@
 #pragma once
 
+#include <GameEngine/Enums.h>
+
 // Ό³Έν : 
 class CameraActor;
 class CameraComponent;
 class GameEngineActor;
 class GameEngineRenderer;
 class GameEngineCollision;
+class GameEngineTransform;
 class GameEngineLevel : public GameEngineObjectNameBase
 {
 	friend class GameEngineCore;
@@ -83,6 +86,8 @@ private:
 
 	void ChangeCollisionGroup(int _Group, GameEngineCollision* _Collision);
 	void ChangeRendererGroup(int _Group, GameEngineRenderer* _Renderer);
+	
+	void DebugRender(GameEngineTransform* _Transform, CollisionType _Type);
 
 	std::map<int, std::list<GameEngineCollision*>> CollisionList_;
 };

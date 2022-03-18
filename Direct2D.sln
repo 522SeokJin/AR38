@@ -46,8 +46,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DirectX", "DirectX", "{B1E4
 		Doc\DirectX 개념파악.txt = Doc\DirectX 개념파악.txt
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderProject", "Resources\Shader\ShaderProject.vcxproj", "{8C185799-CFAD-4B89-9D82-B44253316982}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04Shader", "04Shader", "{EAD73892-B58C-4BF0-919A-CC1644F6E807}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demian Skeleton", "Demian Skeleton", "{5EBADCB6-AA30-4665-A3B6-A9DF70577C79}"
@@ -55,6 +53,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demian Skeleton", "Demian S
 		Doc\Demain.json = Doc\Demain.json
 		Doc\Demian.atlas = Doc\Demian.atlas
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderProject", "ShaderProject.vcxproj", "{8C185799-CFAD-4B89-9D82-B44253316982}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,8 +105,8 @@ Global
 		{21C307B8-E743-4E92-9CC7-A254A05449CA} = {0DA65D44-5FE1-44D1-9C3D-2E429A366BA9}
 		{8C5FE973-FD79-4A72-9F00-2C66E45E7FD5} = {0DA65D44-5FE1-44D1-9C3D-2E429A366BA9}
 		{B1E48C41-4983-40E5-9B27-BA6DF42F9E1F} = {3607B2C2-EF36-4A72-BC27-74098DFB8050}
-		{8C185799-CFAD-4B89-9D82-B44253316982} = {EAD73892-B58C-4BF0-919A-CC1644F6E807}
 		{5EBADCB6-AA30-4665-A3B6-A9DF70577C79} = {3607B2C2-EF36-4A72-BC27-74098DFB8050}
+		{8C185799-CFAD-4B89-9D82-B44253316982} = {EAD73892-B58C-4BF0-919A-CC1644F6E807}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93F3A4E3-AB22-407C-9A45-98196FCC3916}

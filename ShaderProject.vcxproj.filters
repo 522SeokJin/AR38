@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="EngineShader">
+      <UniqueIdentifier>{7c46f32f-acbc-436c-a85a-a7d78757b4aa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="EngineResources\Shader\CBufferHeader.fx">
+      <Filter>EngineShader</Filter>
+    </FxCompile>
+    <FxCompile Include="EngineResources\Shader\Color.fx">
+      <Filter>EngineShader</Filter>
+    </FxCompile>
+    <FxCompile Include="EngineResources\Shader\Texture.fx">
+      <Filter>EngineShader</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>

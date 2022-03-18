@@ -1,5 +1,7 @@
 #pragma once
 #include "GameEngineTransformComponent.h"
+#include "GameEngineDebugRenderData.h"
+#include "Enums.h"
 
 enum class ProjectionMode
 {
@@ -25,6 +27,8 @@ public:
 
 	void PushRenderer(int _Order, GameEngineRenderer* _Renderer);
 
+	void PushDebug(GameEngineTransform* _Trans, CollisionType _Type);
+
 	void FileCompile();
 
 protected:
@@ -40,6 +44,8 @@ private:
 	void CameraTransformUpdate();
 
 	void Render();
+	void DebugRender();
+
 	void ReleaseRenderer();
 
 	void ChangeRendererGroup(int _Group, GameEngineRenderer* _Renderer);
@@ -52,5 +58,8 @@ private:
 	float				NearZ_;
 	float				FarZ_;
 	float4				CamSize_;
+
+	int DebugRenderCount_;
+	std::vector<GameEngineDebugRenderData> DebugVector_;
 };
 

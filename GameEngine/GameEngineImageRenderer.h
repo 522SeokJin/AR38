@@ -26,7 +26,7 @@ public:
 	void SetIndex(const int _Index);
 
 	// CutData ±â¹Ý
-	void CreateAnimation(const std::string& _Name, int _StartFrame, int _EndFrame,
+	void CreateAnimation(const std::string& _TextureName, const std::string& _Name, int _StartFrame, int _EndFrame,
 		float _InterTime, bool _Loop = true);
 
 	void CreateAnimationFolder(const std::string& _Name, 
@@ -91,6 +91,7 @@ private:
 		float4 GetTextureSize(int _Index);
 
 		GameEngineFolderTexture*	FolderTextures_;
+		GameEngineTexture*			AnimationTexture_;
 		std::vector<float4>			Offsets_;
 
 		GameEngineImageRenderer*	Renderer_;

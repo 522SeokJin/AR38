@@ -103,9 +103,6 @@
     <Filter Include="UserCore">
       <UniqueIdentifier>{6594ca4b-42c5-47f7-a71c-b445e496b9e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CustomVertex">
-      <UniqueIdentifier>{810c8b06-4134-474b-91be-1ef2def1fd66}</UniqueIdentifier>
-    </Filter>
     <Filter Include="UserCore\Resources">
       <UniqueIdentifier>{44a8332f-5a76-4b09-b066-375147aff382}</UniqueIdentifier>
     </Filter>
@@ -163,6 +160,9 @@
     <Filter Include="Actor\Item">
       <UniqueIdentifier>{7bcbadb6-7dde-4b48-9fb9-2b3faa5d5667}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Custom">
+      <UniqueIdentifier>{810c8b06-4134-474b-91be-1ef2def1fd66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -172,7 +172,7 @@
       <Filter>UserCore</Filter>
     </ClInclude>
     <ClInclude Include="CustomVertex.h">
-      <Filter>CustomVertex</Filter>
+      <Filter>Custom</Filter>
     </ClInclude>
     <ClInclude Include="UserGame_Resources_Shader.h">
       <Filter>UserCore\Resources</Filter>
