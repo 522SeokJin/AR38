@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineBase/GameEngineObjectNameBase.h>
+#include "GameEngineTransform.h"
 
 // Ό³Έν : 
 class GameEngineLevel;
@@ -21,7 +22,7 @@ public:
 
 	GameEngineTransform* GetTransform()
 	{
-		return Transform_;
+		return &Transform_;
 	}
 
 	void Release(float _Time = 0.0f)
@@ -101,7 +102,7 @@ private:
 
 	void ReleaseUpdate(float _DeltaTime);
 
-	GameEngineTransform* Transform_;
+	GameEngineTransform Transform_;
 
 	GameEngineLevel* Level_;
 

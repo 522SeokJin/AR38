@@ -1,8 +1,8 @@
 #pragma once
 #include "GameEngineComponent.h"
+#include "GameEngineTransform.h"
 
 // 설명 : 위치가 필요한 Component
-class GameEngineTransform;
 class GameEngineTransformComponent : public GameEngineComponent
 {
 public:
@@ -11,7 +11,7 @@ public:
 
 	GameEngineTransform* GetTransform()
 	{
-		return Transform_;
+		return &Transform_;
 	}
 
 	float4 GetLocalScaling();
@@ -53,6 +53,6 @@ protected:
 	GameEngineTransformComponent& operator=(const GameEngineTransformComponent&& _other) = delete;
 
 private:
-	GameEngineTransform* Transform_;
+	GameEngineTransform Transform_;
 };
 

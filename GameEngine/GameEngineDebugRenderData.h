@@ -14,11 +14,18 @@ public:
 	GameEngineDebugRenderData();
 	~GameEngineDebugRenderData();
 
+	GameEngineDebugRenderData(const GameEngineDebugRenderData& _Other)
+		: Data_(_Other.Data_)
+		, ShaderHelper(_Other.ShaderHelper)
+		, PipeLine_(_Other.PipeLine_)
+	{
+
+	}
+	//GameEngineDebugRenderData(GameEngineDebugRenderData&& _other) noexcept = delete;
+	//GameEngineDebugRenderData& operator=(const GameEngineDebugRenderData& _other) = delete;
+	//GameEngineDebugRenderData& operator=(const GameEngineDebugRenderData&& _other) = delete;
+
 protected:
-	GameEngineDebugRenderData(const GameEngineDebugRenderData& _other) = delete; 
-	GameEngineDebugRenderData(GameEngineDebugRenderData&& _other) noexcept = delete;
-	GameEngineDebugRenderData& operator=(const GameEngineDebugRenderData& _other) = delete;
-	GameEngineDebugRenderData& operator=(const GameEngineDebugRenderData&& _other) = delete;
 
 private:
 	TransformData Data_;

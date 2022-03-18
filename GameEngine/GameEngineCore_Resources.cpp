@@ -154,6 +154,35 @@ void GameEngineCore::EngineResourcesCreate()
 		GameEngineIndexBufferManager::GetInst().Create("Rect", RectIndex, D3D11_USAGE::D3D11_USAGE_DEFAULT);
 	}
 
+
+	{
+		std::vector<GameEngineVertex> RectVertex = std::vector<GameEngineVertex>(5);
+
+		{
+			// ¾Õ¸é
+			RectVertex[0] = { float4({ -0.5f, 0.5f, 0.0f }),  { 0.0f, 0.0f } };
+			RectVertex[1] = { float4({ 0.5f, 0.5f, 0.0f }),  { 1.0f, 0.0f } };
+			RectVertex[2] = { float4({ 0.5f, -0.5f, 0.0f }),  { 1.0f, 1.0f } };
+			RectVertex[3] = { float4({ -0.5f, -0.5f, 0.0f }),  { 0.0f, 1.0f } };
+			RectVertex[4] = { float4({ -0.5f, 0.5f, 0.0f }),  { 0.0f, 0.0f } };
+		}
+
+		GameEngineVertexBufferManager::GetInst().Create("DebugRect", RectVertex, D3D11_USAGE::D3D11_USAGE_DEFAULT);
+	}
+
+	{
+		std::vector<UINT> RectIndex;
+
+		RectIndex.push_back(0);
+		RectIndex.push_back(1);
+		RectIndex.push_back(2);
+		RectIndex.push_back(3);
+		RectIndex.push_back(4);
+
+		GameEngineIndexBufferManager::GetInst().Create("DebugRect", RectIndex, D3D11_USAGE::D3D11_USAGE_DEFAULT);
+	}
+
+
 	{
 		std::vector<GameEngineVertex> RectVertex = std::vector<GameEngineVertex>(4);
 
@@ -236,5 +265,17 @@ void GameEngineCore::EngineResourcesCreate()
 		// BlendInfo.RenderTarget[0].DestBlendAlpha = D3D11_BLEND::D3D11_BLEND_BLEND_FACTOR;
 
 		GameEngineBlendManager::GetInst().Create("AlphaBlend", BlendInfo);
+	}
+
+	{
+		GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Create("DebugColorRect");
+		Pipe->SetInputAssembler1VertexBufferSetting("DebugRect");
+		Pipe->SetInputAssembler1InputLayoutSetting("Color_VS");
+		Pipe->SetVertexShader("Color_VS");
+		Pipe->SetInputAssembler2IndexBufferSetting("DebugRect");
+		Pipe->SetInputAssembler2TopologySetting(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
+		Pipe->SetRasterizer("EngineBaseRasterizer");
+		Pipe->SetPixelShader("Color_PS");
+		Pipe->SetOutputMergerBlend("AlphaBlend");
 	}
 }

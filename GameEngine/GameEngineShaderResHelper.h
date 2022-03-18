@@ -74,10 +74,10 @@ public:
 	void SettingTexture(const std::string& _SettingName, GameEngineTexture* _Texture);
 
 protected:
-	GameEngineShaderResHelper(const GameEngineShaderResHelper& _other) = delete; 
-	GameEngineShaderResHelper(GameEngineShaderResHelper&& _other) noexcept = delete;
-	GameEngineShaderResHelper& operator=(const GameEngineShaderResHelper& _other) = delete;
-	GameEngineShaderResHelper& operator=(const GameEngineShaderResHelper&& _other) = delete;
+	//GameEngineShaderResHelper(const GameEngineShaderResHelper& _other) = delete; 
+	//GameEngineShaderResHelper(GameEngineShaderResHelper&& _other) noexcept = delete;
+	//GameEngineShaderResHelper& operator=(const GameEngineShaderResHelper& _other) = delete;
+	//GameEngineShaderResHelper& operator=(const GameEngineShaderResHelper&& _other) = delete;
 
 private:
 	void Setting();
