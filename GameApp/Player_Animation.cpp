@@ -34,7 +34,7 @@ void Player::CreateAnimation()
 
 	SetPartsOffset();
 
-	ChangePlayerAnimation(PlayerState::swingO1);
+	ChangePlayerAnimation(PlayerState::walk1);
 
 	Face_->SetChangeAnimation("default_face1");
 	HairOverHead_->SetChangeAnimation("default_hairOverHead1");
@@ -46,7 +46,6 @@ void Player::CreateAnimation()
 	Hair_->Off();
 
 	//Weapon_->Off();
-	//Avatar_->Off();
 	//Face_->Off();
 	//HairOverHead_->Off();
 	//Mail_->Off();
@@ -169,6 +168,53 @@ void Player::SetPartsOffset()
 	WeaponOffsets_[KeyOffset(State, 1)].push_back({ 16.0f, -13.0f });
 	WeaponOffsets_[KeyOffset(State, 1)].push_back({ 7.0f, -15.0f });
 	WeaponOffsets_[KeyOffset(State, 1)].push_back({ 27.0f, 18.0f });
+
+	State = PlayerState::walk1;
+
+	FaceOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 8.0f });
+	FaceOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 7.0f });
+	FaceOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 8.0f });
+	FaceOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 7.0f });
+
+	HairOffsets_[KeyOffset(State, 1)].push_back({ -1.0f, 17.0f });
+	HairOffsets_[KeyOffset(State, 1)].push_back({ -1.0f, 16.0f });
+	HairOffsets_[KeyOffset(State, 1)].push_back({ -1.0f, 17.0f });
+	HairOffsets_[KeyOffset(State, 1)].push_back({ -1.0f, 16.0f });
+
+	HairOverHeadOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 17.0f });
+	HairOverHeadOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 16.0f });
+	HairOverHeadOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 17.0f });
+	HairOverHeadOffsets_[KeyOffset(State, 1)].push_back({ -3.0f, 16.0f });
+
+	HairBelowBodyOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, 12.0f });
+	HairBelowBodyOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, 12.0f });
+	HairBelowBodyOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, 12.0f });
+	HairBelowBodyOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, 12.0f });
+
+	MailOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, -7.0f });
+	MailOffsets_[KeyOffset(State, 1)].push_back({ 1.0f, -8.0f });
+	MailOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, -7.0f });
+	MailOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, -8.0f });
+
+	MailArmOffsets_[KeyOffset(State, 1)].push_back({ 6.0f, -4.0f });
+	MailArmOffsets_[KeyOffset(State, 1)].push_back({ 6.0f, -7.0f });
+	MailArmOffsets_[KeyOffset(State, 1)].push_back({ 6.0f, -4.0f });
+	MailArmOffsets_[KeyOffset(State, 1)].push_back({ 6.0f, -5.0f });
+
+	PantsOffsets_[KeyOffset(State, 1)].push_back({ 1.0f, -18.0f });
+	PantsOffsets_[KeyOffset(State, 1)].push_back({ 0.0f, -19.0f });
+	PantsOffsets_[KeyOffset(State, 1)].push_back({ 1.0f, -18.0f });
+	PantsOffsets_[KeyOffset(State, 1)].push_back({ 1.0f, -19.0f });
+
+	ShoesOffsets_[KeyOffset(State, 1)].push_back({ 7.0f, -26.0f });
+	ShoesOffsets_[KeyOffset(State, 1)].push_back({ 1.0f, -27.0f });
+	ShoesOffsets_[KeyOffset(State, 1)].push_back({ 3.0f, -27.0f });
+	ShoesOffsets_[KeyOffset(State, 1)].push_back({ 1.0f, -27.0f });
+
+	WeaponOffsets_[KeyOffset(State, 1)].push_back({ -1.0f, -14.0f });
+	WeaponOffsets_[KeyOffset(State, 1)].push_back({ -9.0f, -13.0f });
+	WeaponOffsets_[KeyOffset(State, 1)].push_back({ -1.0f, -15.0f });
+	WeaponOffsets_[KeyOffset(State, 1)].push_back({ 1.0f, -15.0f });
 }
 
 void Player::CreateAvatarAnimation()
@@ -225,8 +271,8 @@ void Player::CreateMailAnimation()
 	Mail_->CreateAnimationFolder("swingT2_mail1", 0.5f);
 	Mail_->CreateAnimationFolder("swingT3_mail1", 0.5f);
 	Mail_->CreateAnimationFolder("swingTF_mail1", 0.5f);
-	Mail_->CreateAnimationFolder("walk1_mail1", 0.5f);
-	Mail_->CreateAnimationFolder("walk2_mail1", 0.5f);
+	Mail_->CreateAnimationFolder("walk1_mail1", 0.180f);
+	Mail_->CreateAnimationFolder("walk2_mail1", 0.180f);
 }
 void Player::CreateMailArmAnimation()
 {
@@ -249,8 +295,8 @@ void Player::CreateMailArmAnimation()
 	MailArm_->CreateAnimationFolder("swingT2_mailArm1", 0.5f);
 	MailArm_->CreateAnimationFolder("swingT3_mailArm1", 0.5f);
 	MailArm_->CreateAnimationFolder("swingTF_mailArm1", 0.5f);
-	MailArm_->CreateAnimationFolder("walk1_mailArm1", 0.5f);
-	MailArm_->CreateAnimationFolder("walk2_mailArm1", 0.5f);
+	MailArm_->CreateAnimationFolder("walk1_mailArm1", 0.180f);
+	MailArm_->CreateAnimationFolder("walk2_mailArm1", 0.180f);
 }
 void Player::CreatePantsAnimation()
 {
@@ -275,8 +321,8 @@ void Player::CreatePantsAnimation()
 	Pants_->CreateAnimationFolder("swingT2_pants1", 0.5f);
 	Pants_->CreateAnimationFolder("swingT3_pants1", 0.5f);
 	Pants_->CreateAnimationFolder("swingTF_pants1", 0.5f);
-	Pants_->CreateAnimationFolder("walk1_pants1", 0.5f);
-	Pants_->CreateAnimationFolder("walk2_pants1", 0.5f);
+	Pants_->CreateAnimationFolder("walk1_pants1", 0.180f);
+	Pants_->CreateAnimationFolder("walk2_pants1", 0.180f);
 }
 void Player::CreateShoesAnimation()
 {
@@ -301,8 +347,8 @@ void Player::CreateShoesAnimation()
 	Shoes_->CreateAnimationFolder("swingT2_shoes1", 0.5f);
 	Shoes_->CreateAnimationFolder("swingT3_shoes1", 0.5f);
 	Shoes_->CreateAnimationFolder("swingTF_shoes1", 0.5f);
-	Shoes_->CreateAnimationFolder("walk1_shoes1", 0.5f);
-	Shoes_->CreateAnimationFolder("walk2_shoes1", 0.5f);
+	Shoes_->CreateAnimationFolder("walk1_shoes1", 0.180f);
+	Shoes_->CreateAnimationFolder("walk2_shoes1", 0.180f);
 }
 void Player::CreateWeaponAnimation()
 {
@@ -318,5 +364,5 @@ void Player::CreateWeaponAnimation()
 	Weapon_->CreateAnimationFolder("swingO2_weapon1", 0.5f);
 	Weapon_->CreateAnimationFolder("swingO3_weapon1", 0.5f);
 	Weapon_->CreateAnimationFolder("swingOF_weapon1", 0.5f);
-	Weapon_->CreateAnimationFolder("walk1_weapon1", 0.5f);
+	Weapon_->CreateAnimationFolder("walk1_weapon1", 0.180f);
 }

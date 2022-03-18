@@ -1,34 +1,12 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 
-enum class PlayerState;
-struct KeyOffset
-{
-	PlayerState State_;
-	int ImageIndex_;
-
-	inline bool operator<(const KeyOffset& p) const
-	{
-		if (State_ != p.State_)
-		{
-			return static_cast<int>(State_) < static_cast<int>(p.State_);
-		}
-		else
-		{
-			return ImageIndex_ < p.ImageIndex_;
-		}
-	}
-public:
-	KeyOffset(PlayerState _State, int _ImageIndex)
-	{
-		State_ = _State;
-		ImageIndex_ = _ImageIndex;
-	}
-};
-
 // Ό³Έν : 
+struct KeyOffset;
+
 enum class PlayerDir;
 enum class PlayerState;
+
 class GameEngineImageRenderer;
 class GameEngineCollision;
 class Player : public GameEngineActor
@@ -62,9 +40,10 @@ private:
 	void CreateShoesAnimation();
 	void CreateWeaponAnimation();
 	void ChangePlayerAnimation(PlayerState _State);
+
 	void UpdatePartsOffset();
-	void SetPartsOffset();
 	void ChangePartsOffset(GameEngineImageRenderer* _Renderer, float4 _Offset);
+	void SetPartsOffset();
 
 	void KeyInputSetting();
 	void KeyInputUpdate();
