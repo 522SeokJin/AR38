@@ -77,7 +77,7 @@ void GameEngineLevel::Render()
 	GetMainCamera()->Render();
 	GetUICamera()->Render();
 
-	// GetMainCamera()->DebugRender();
+	GetMainCamera()->DebugRender();
 
 	GameEngineDevice::RenderEnd();
 }
@@ -198,7 +198,7 @@ void GameEngineLevel::ChangeRendererGroup(int _Group, GameEngineRenderer* _Rende
 	MainCameraActor_->GetCamera()->ChangeRendererGroup(_Group, _Renderer);
 }
 
-void GameEngineLevel::DebugRender(GameEngineTransform* _Transform, CollisionType _Type)
+void GameEngineLevel::PushDebugRender(GameEngineTransform* _Transform, CollisionType _Type)
 {
-
+	GetMainCamera()->PushDebugRender(_Transform, _Type);
 }

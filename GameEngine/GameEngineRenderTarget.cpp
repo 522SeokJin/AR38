@@ -10,7 +10,10 @@ GameEngineRenderTarget::GameEngineRenderTarget()
 
 GameEngineRenderTarget::~GameEngineRenderTarget()
 {
-	
+	for (size_t i = 0; i < ReleaseTextures_.size(); i++)
+	{
+		delete ReleaseTextures_[i];
+	}
 }
 
 void GameEngineRenderTarget::Clear()
@@ -30,9 +33,37 @@ void GameEngineRenderTarget::Create(const std::string& _TextureName, float4 _Cle
 		GameEngineDebug::MsgBoxError("FindTexture is null Create RenderTarget Error");
 	}
 	
-	Textures_.push_back(FindTexture);
-	RenderTargetViews_.push_back(FindTexture->CreateRenderTargetView());
+	FindTexture->CreateRenderTargetView();
+
+	Create(FindTexture, _ClearColor);
+}
+
+void GameEngineRenderTarget::Create(float4 _Scale, float4 _ClearColor)
+{
+	GameEngineTexture* NewTexture = new GameEngineTexture();
+
+	NewTexture->Create(_Scale, DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT);
+
+	ReleaseTextures_.push_back(NewTexture);
+
+	Create(NewTexture, _ClearColor);
+}
+
+void GameEngineRenderTarget::Create(GameEngineTexture* _Texture, float4 _ClearColor)
+{
+	Textures_.push_back(_Texture);
+	RenderTargetViews_.push_back(_Texture->GetRenderTargetView());
 	ClearColor_.push_back(_ClearColor);
+}
+
+void GameEngineRenderTarget::Merge(GameEngineRenderTarget* _Other)
+{
+}
+
+void GameEngineRenderTarget::Copy(GameEngineRenderTarget* _Other)
+{
+	Clear();
+	Merge(_Other);
 }
 
 void GameEngineRenderTarget::Setting(int _Index)

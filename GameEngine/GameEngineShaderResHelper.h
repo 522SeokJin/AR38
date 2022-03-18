@@ -8,6 +8,7 @@ class GameEngineSampler;
 class GameEngineTexture;
 class GameEngineShaderResHelper
 {
+	friend class CameraComponent;
 	friend class GameEngineRenderer;
 
 public:

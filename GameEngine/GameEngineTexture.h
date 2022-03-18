@@ -10,14 +10,30 @@ public:
 	GameEngineTexture();
 	~GameEngineTexture();
 
-	ID3D11RenderTargetView* GetRenderTargetView();
-	ID3D11ShaderResourceView** GetShaderResourceView();
+	inline ID3D11RenderTargetView* GetRenderTargetView()
+	{
+		return RenderTargetView_;
+	}
+
+	inline ID3D11ShaderResourceView** GetShaderResourceView()
+	{
+		return &ShaderResourceView_;
+	}
 	float4 GetImageSize();
 
 	void Create(ID3D11Texture2D* _Texture2D);
+	void Create(
+		float4 _TextureSize,
+		DXGI_FORMAT _Format,
+		D3D11_USAGE _Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT,
+		unsigned int _BindFlag = D3D11_BIND_FLAG::D3D11_BIND_RENDER_TARGET | D3D11_BIND_FLAG::D3D11_BIND_SHADER_RESOURCE
+	);
+	void Create(D3D11_TEXTURE2D_DESC _Desc);
+
 	void Load(const std::string& _Path);
 
 	ID3D11RenderTargetView* CreateRenderTargetView();
+	ID3D11ShaderResourceView* CreateShaderResourceView();
 
 	bool IsCut();
 	void Cut(int _x, int _y);

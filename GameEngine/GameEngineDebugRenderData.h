@@ -18,6 +18,7 @@ public:
 		: Data_(_Other.Data_)
 		, ShaderHelper(_Other.ShaderHelper)
 		, PipeLine_(_Other.PipeLine_)
+		, Color_(_Other.Color_)
 	{
 
 	}
@@ -29,6 +30,7 @@ protected:
 
 private:
 	TransformData Data_;
+	float4 Color_;
 	GameEngineShaderResHelper ShaderHelper;
 	GameEngineRenderingPipeLine* PipeLine_;
 

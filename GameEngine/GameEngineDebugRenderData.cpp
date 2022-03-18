@@ -5,6 +5,7 @@ GameEngineDebugRenderData::GameEngineDebugRenderData()
 	: Data_()
 	, ShaderHelper()
 	, PipeLine_(nullptr)
+	, Color_()
 {
 
 }

@@ -75,8 +75,9 @@ public:
 	{
 		PushCollision(_Collision, static_cast<int>(_Group));
 	}
-
 	void PushCollision(GameEngineCollision* _Collision, int _Group);
+
+	void PushDebugRender(GameEngineTransform* _Transform, CollisionType _Type);
 
 private:
 	inline std::list<GameEngineCollision*>& GetCollisionGroup(int _Group)
@@ -87,7 +88,6 @@ private:
 	void ChangeCollisionGroup(int _Group, GameEngineCollision* _Collision);
 	void ChangeRendererGroup(int _Group, GameEngineRenderer* _Renderer);
 	
-	void DebugRender(GameEngineTransform* _Transform, CollisionType _Type);
 
 	std::map<int, std::list<GameEngineCollision*>> CollisionList_;
 };

@@ -27,9 +27,11 @@ public:
 
 	void PushRenderer(int _Order, GameEngineRenderer* _Renderer);
 
-	void PushDebug(GameEngineTransform* _Trans, CollisionType _Type);
+	void PushDebugRender(GameEngineTransform* _Trans, CollisionType _Type);
 
 	void FileCompile();
+
+	GameEngineRenderTarget* CameraBufferTarget_;
 
 protected:
 	CameraComponent(const CameraComponent& _other) = delete; 
@@ -42,6 +44,8 @@ protected:
 
 private:
 	void CameraTransformUpdate();
+
+	void ClearCameraTarget();
 
 	void Render();
 	void DebugRender();
