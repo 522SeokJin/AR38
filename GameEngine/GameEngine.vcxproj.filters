@@ -35,7 +35,7 @@
       <Filter>Resources\99. Manager</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineRasterizer.h">
-      <Filter>Resources\03. Rasterizer</Filter>
+      <Filter>Resources\03. Setting</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineRasterizerManager.h">
       <Filter>Resources\99. Manager</Filter>
@@ -151,6 +151,9 @@
     <ClInclude Include="GameEngineDebugRenderData.h">
       <Filter>Debug</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineDepthStencil.h">
+      <Filter>Resources\03. Setting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -184,7 +187,7 @@
       <Filter>Resources\99. Manager</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineRasterizer.cpp">
-      <Filter>Resources\03. Rasterizer</Filter>
+      <Filter>Resources\03. Setting</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineRasterizerManager.cpp">
       <Filter>Resources\99. Manager</Filter>
@@ -294,6 +297,9 @@
     <ClCompile Include="GameEngineCore_Resources.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineDepthStencil.cpp">
+      <Filter>Resources\03. Setting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -353,9 +359,6 @@
     <Filter Include="Lib">
       <UniqueIdentifier>{1ad8f818-d77b-41d6-ab50-a31cc6dc5ee1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\03. Rasterizer">
-      <UniqueIdentifier>{c51986b5-61f2-40b1-a271-b9e8058eb03e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\99. Manager\ResourceManager">
       <UniqueIdentifier>{da9f6a34-95aa-4b16-b5a7-b585066393fe}</UniqueIdentifier>
     </Filter>
@@ -382,6 +385,9 @@
     </Filter>
     <Filter Include="Debug">
       <UniqueIdentifier>{7a7d2e0d-06dd-488f-89f6-a3ee5d2fac39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\03. Setting">
+      <UniqueIdentifier>{c51986b5-61f2-40b1-a271-b9e8058eb03e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

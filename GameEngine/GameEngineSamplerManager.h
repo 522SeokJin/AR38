@@ -29,6 +29,7 @@ private: // member Var
 public:
 	// 직접 만들수 있다.
 	GameEngineSampler* Create(const std::string& _Name, const D3D11_SAMPLER_DESC& _Info);
+	GameEngineSampler* CreateAndFind(const std::string& _Name, const D3D11_SAMPLER_DESC& _Info);
 	// 목록에서 찾는다.
 	GameEngineSampler* Find(const std::string& _Name);
 

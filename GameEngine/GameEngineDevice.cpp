@@ -22,6 +22,11 @@ ID3D11DeviceContext* GameEngineDevice::GetContext()
 	return Context_;
 }
 
+GameEngineRenderTarget* GameEngineDevice::GetBackBufferTarget()
+{
+	return BackBufferTarget_;
+}
+
 GameEngineDevice::GameEngineDevice()
 {
 
@@ -87,7 +92,7 @@ void GameEngineDevice::Initialize()
 		GameEngineDebug::MsgBoxError("D3D11 Not FEATURE LEVEL 11 ERROR");
 	}
 
-	CreateSwapChain();
+	// CreateSwapChain();
 }
 
 void GameEngineDevice::CreateSwapChain()

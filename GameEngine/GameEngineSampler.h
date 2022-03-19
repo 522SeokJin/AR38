@@ -15,7 +15,10 @@ public:
 	inline ID3D11SamplerState** GetSamplerState() { return &State_; }
 
 	// 실시간으로 수정가능
+	void ReCreate();
 	void ReCreate(const D3D11_SAMPLER_DESC& _Info);
+
+	D3D11_SAMPLER_DESC	Info_;
 
 protected:
 	GameEngineSampler(const GameEngineSampler& _other) = delete; 
@@ -27,6 +30,5 @@ private:
 	void Create(const D3D11_SAMPLER_DESC& _Info);
 
 	ID3D11SamplerState* State_;
-	D3D11_SAMPLER_DESC	Info_;
 };
 

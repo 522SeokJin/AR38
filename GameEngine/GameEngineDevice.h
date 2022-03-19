@@ -37,17 +37,14 @@ public:
 public:
 	static ID3D11Device* GetDevice();
 	static ID3D11DeviceContext* GetContext();
-	
-	// 메모리로서의 텍스처의 역할
-	// ID3D11Texutre2D* BackBufferTexture_;
-
-	// 렌더링파이프라인에 세팅하기 위한 역할
-	// ID3D11RenderTargetView* BackBufferViewTexture_;
+	static GameEngineRenderTarget* GetBackBufferTarget();
 
 	void Initialize();
 
 	static void RenderStart();
 	static void RenderEnd();
+
+	void CreateSwapChain();
 
 protected:
 	GameEngineDevice(const GameEngineDevice& _other) = delete;
@@ -58,8 +55,6 @@ protected:
 private:
 	GameEngineDevice();
 	~GameEngineDevice();
-
-	void CreateSwapChain();
 
 	static ID3D11Device* Device_;
 	// 그래픽카드에 공간을 할당하려고하면 디바이스를 거쳐야한다.

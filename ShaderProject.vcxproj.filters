@@ -15,5 +15,8 @@
     <FxCompile Include="EngineResources\Shader\Texture.fx">
       <Filter>EngineShader</Filter>
     </FxCompile>
+    <FxCompile Include="EngineResources\Shader\TargetMerge.fx">
+      <Filter>EngineShader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

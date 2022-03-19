@@ -32,6 +32,22 @@ GameEngineSampler* GameEngineSamplerManager::Create(const std::string& _Name,
 		GameEngineDebug::MsgBoxError(_Name + " Is Overlap Create");
 	}
 
+	GameEngineSampler* NewRes = new GameEngineSampler();
+	NewRes->SetName(_Name);
+	NewRes->Create(_Info);
+
+	ResourcesMap.insert(std::map<std::string, GameEngineSampler*>::value_type(_Name, NewRes));
+	return NewRes;
+}
+
+GameEngineSampler* GameEngineSamplerManager::CreateAndFind(const std::string& _Name, const D3D11_SAMPLER_DESC& _Info)
+{
+	GameEngineSampler* FindRes = Find(_Name);
+
+	if (nullptr != FindRes)
+	{
+		return FindRes;
+	}
 
 	GameEngineSampler* NewRes = new GameEngineSampler();
 	NewRes->SetName(_Name);

@@ -3,6 +3,7 @@
 #include "GameEngineShader.h"
 
 // Ό³Έν : 
+class GameEngineRenderingPipeLine;
 class GameEngineConstantBuffer;
 class GameEngineSampler;
 class GameEngineTexture;
@@ -16,6 +17,8 @@ public:
 	~GameEngineShaderResHelper();
 
 	bool IsConstantBuffer(const std::string& _SettingName);
+
+	void ShaderResourcesCheck(GameEngineRenderingPipeLine* _Pipe);
 
 	void ShaderResourcesCheck(GameEngineShader* _Shader);
 
@@ -74,6 +77,9 @@ public:
 
 	void SettingTexture(const std::string& _SettingName, GameEngineTexture* _Texture);
 
+	void Setting();
+	void Reset();
+
 protected:
 	//GameEngineShaderResHelper(const GameEngineShaderResHelper& _other) = delete; 
 	//GameEngineShaderResHelper(GameEngineShaderResHelper&& _other) noexcept = delete;
@@ -81,8 +87,7 @@ protected:
 	//GameEngineShaderResHelper& operator=(const GameEngineShaderResHelper&& _other) = delete;
 
 private:
-	void Setting();
-	void Reset();
+	void Clear();
 
 	std::map<std::string, GameEngineConstantBufferSetting*> AllConstantBufferData_;
 	std::map<std::string, GameEngineSamplerSetting*>		AllSamplerData_;

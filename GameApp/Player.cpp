@@ -158,6 +158,8 @@ void Player::Update(float _DeltaTime)
 		}
 	);
 
+	GetLevel()->PushDebugRender(Collision_->GetTransform(), CollisionType::Rect);
+
 	GetLevel()->GetMainCameraActor()->GetTransform()->
 		SetLocalPosition(GetTransform()->GetLocalPosition());
 }

@@ -3,6 +3,9 @@
 #include "GameEngineSampler.h"
 #include "GameEngineTexture.h"
 #include "GameEngineTextureManager.h"
+#include "GameEngineRenderingPipeLine.h"
+#include "GameEngineVertexShader.h"
+#include "GameEnginePixelShader.h"
 
 GameEngineShaderResHelper::GameEngineShaderResHelper()
 {
@@ -11,32 +14,7 @@ GameEngineShaderResHelper::GameEngineShaderResHelper()
 
 GameEngineShaderResHelper::~GameEngineShaderResHelper()
 {
-	for (auto& Setting : AllConstantBufferData_)
-	{
-		if (nullptr != Setting.second)
-		{
-			delete Setting.second;
-			Setting.second = nullptr;
-		}
-	}
-
-	for (auto& Setting : AllSamplerData_)
-	{
-		if (nullptr != Setting.second)
-		{
-			delete Setting.second;
-			Setting.second = nullptr;
-		}
-	}
-
-	for (auto& Setting : AllTextureData_)
-	{
-		if (nullptr != Setting.second)
-		{
-			delete Setting.second;
-			Setting.second = nullptr;
-		}
-	}
+	Clear();
 }
 
 bool GameEngineShaderResHelper::IsConstantBuffer(const std::string& _SettingName)
@@ -50,6 +28,13 @@ bool GameEngineShaderResHelper::IsConstantBuffer(const std::string& _SettingName
 	}
 
 	return true;
+}
+
+void GameEngineShaderResHelper::ShaderResourcesCheck(GameEngineRenderingPipeLine* _Pipe)
+{
+	Clear();
+	ShaderResourcesCheck(_Pipe->GetVertexShader());
+	ShaderResourcesCheck(_Pipe->GetPixelShader());
 }
 
 void GameEngineShaderResHelper::ShaderResourcesCheck(GameEngineShader* _Shader)
@@ -153,6 +138,36 @@ void GameEngineShaderResHelper::Reset()
 	for (auto& Setting : AllTextureData_)
 	{
 		Setting.second->ShaderReset();
+	}
+}
+
+void GameEngineShaderResHelper::Clear()
+{
+	for (auto& Setting : AllConstantBufferData_)
+	{
+		if (nullptr != Setting.second)
+		{
+			delete Setting.second;
+			Setting.second = nullptr;
+		}
+	}
+
+	for (auto& Setting : AllSamplerData_)
+	{
+		if (nullptr != Setting.second)
+		{
+			delete Setting.second;
+			Setting.second = nullptr;
+		}
+	}
+
+	for (auto& Setting : AllTextureData_)
+	{
+		if (nullptr != Setting.second)
+		{
+			delete Setting.second;
+			Setting.second = nullptr;
+		}
 	}
 }
 

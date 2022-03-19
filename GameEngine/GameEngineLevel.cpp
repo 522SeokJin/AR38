@@ -6,6 +6,7 @@
 #include "CameraActor.h"
 #include "CameraComponent.h"
 #include "GameEngineCollision.h"
+#include "GameEngineRenderTarget.h"
 
 GameEngineLevel::GameEngineLevel()
 	: MainCameraActor_(nullptr)
@@ -75,9 +76,12 @@ void GameEngineLevel::Render()
 	GameEngineDevice::RenderStart();
 
 	GetMainCamera()->Render();
+	GetMainCamera()->DebugRender();
+
 	GetUICamera()->Render();
 
-	GetMainCamera()->DebugRender();
+	GameEngineDevice::GetBackBufferTarget()->Merge(GetMainCamera()->CameraBufferTarget_);
+	GameEngineDevice::GetBackBufferTarget()->Merge(GetUICamera()->CameraBufferTarget_);
 
 	GameEngineDevice::RenderEnd();
 }

@@ -2,10 +2,15 @@
 #include "GameEngineRenderTarget.h"
 #include "GameEngineTextureManager.h"
 #include "GameEngineTexture.h"
+#include "GameEngineRenderingPipeLine.h"
+#include "GameEngineRenderingPipeLineManager.h"
 
 GameEngineRenderTarget::GameEngineRenderTarget() 
+	: Pipe_(nullptr)
+	, Res_()
 {
-
+	Pipe_ = GameEngineRenderingPipeLineManager::GetInst().Find("TargetMerge");
+	Res_.ShaderResourcesCheck(Pipe_);
 }
 
 GameEngineRenderTarget::~GameEngineRenderTarget()
@@ -56,8 +61,15 @@ void GameEngineRenderTarget::Create(GameEngineTexture* _Texture, float4 _ClearCo
 	ClearColor_.push_back(_ClearColor);
 }
 
-void GameEngineRenderTarget::Merge(GameEngineRenderTarget* _Other)
+void GameEngineRenderTarget::Merge(GameEngineRenderTarget* _Other, int _Index/* = 0*/)
 {
+	Setting();
+
+	Res_.SettingTexture("Tex", _Other->Textures_[_Index]);
+	Res_.Setting();
+	Pipe_->Rendering();
+	Pipe_->Reset();
+	Res_.Reset();
 }
 
 void GameEngineRenderTarget::Copy(GameEngineRenderTarget* _Other)

@@ -1,5 +1,6 @@
 #pragma once
 #include "GameEngineDevice.h"
+#include "GameEngineShaderResHelper.h"
 
 // 분류 : 
 // 용도 : 
@@ -24,7 +25,7 @@ public:
 	void Create(GameEngineTexture* _Texture, float4 _ClearColor);
 
 	// 기존에 그려진 그림 위에 이 랜더타겟의 그림을 합친다.
-	void Merge(GameEngineRenderTarget* _Other);
+	void Merge(GameEngineRenderTarget* _Other, int _Index = 0);
 
 	// 기존에 뭐가 그려졌든 그걸 지우고. 넣어준걸로 바꾼다.
 	void Copy(GameEngineRenderTarget* _Other);
@@ -44,5 +45,8 @@ private:
 	//std::vector<D3D11_VIEWPORT> ViewPort_;
 	std::vector<ID3D11RenderTargetView*> RenderTargetViews_;
 	std::vector<float4> ClearColor_;
+
+	GameEngineRenderingPipeLine*	Pipe_;
+	GameEngineShaderResHelper		Res_;
 };
 
