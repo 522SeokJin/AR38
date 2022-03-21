@@ -50,7 +50,7 @@ void UserGame::ResourceLoad()
 		GameEngineFolderTextureManager::GetInst().Load(AllDir[i].GetFullPath());
 	}
 
-	AppShaderLoad();
+	//AppShaderLoad();
 
 	{
 		GameEngineRenderingPipeLine* Pipe = 
