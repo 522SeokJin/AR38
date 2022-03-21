@@ -50,6 +50,7 @@ void CameraComponent::Start()
 
 	CameraBufferTarget_ = new GameEngineRenderTarget();
 	CameraBufferTarget_->Create(GameEngineWindow::GetInst().GetSize(), float4::NONE);
+	CameraBufferTarget_->CreateDepthBuffer(GameEngineWindow::GetInst().GetSize());
 }
 
 void CameraComponent::Update(float _DeltaTime)

@@ -8,13 +8,17 @@ GameEngineRenderingPipeLine::GameEngineRenderingPipeLine()
 	, InputLayoutVertexShader_(nullptr)
 	, VertexShader_(nullptr)
 	, IndexBuffer_(nullptr)
-	, Topology_(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+	, Topology_(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
 	, Rasterizer_(nullptr)
 	, PixelShader_(nullptr)
 	, RenderTarget_(nullptr)
 	, Blend_(nullptr)
+	, DepthStencil_(nullptr)
 {
-
+	SetOutputMergerBlend("AlphaBlend");
+	SetRasterizer("EngineBaseRasterizer");
+	SetOutputMergerDepthStencil("BaseDepthOn");
+	SetInputAssembler2TopologySetting(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
 GameEngineRenderingPipeLine::~GameEngineRenderingPipeLine()
@@ -96,7 +100,17 @@ void GameEngineRenderingPipeLine::SetOutputMergerBlend(const std::string& _Name)
 		GameEngineDebug::MsgBoxError("존재하지 않는 블렌드를 세팅하려고 했습니다.");
 		return;
 	}
+}
 
+void GameEngineRenderingPipeLine::SetOutputMergerDepthStencil(const std::string& _Name)
+{
+	DepthStencil_ = GameEngineDepthStencilManager::GetInst().Find(_Name);
+
+	if (nullptr == DepthStencil_)
+	{
+		GameEngineDebug::MsgBoxError("존재하지 않는 DepthStencil 세팅을 하려고 했습니다.");
+		return;
+	}
 }
 
 void GameEngineRenderingPipeLine::InputAssembler1()
@@ -133,6 +147,7 @@ void GameEngineRenderingPipeLine::PixelShader()
 void GameEngineRenderingPipeLine::OutputMerger()
 {
 	Blend_->Setting();
+	DepthStencil_->Setting();
 }
 
 void GameEngineRenderingPipeLine::RenderingPipeLineSetting()
@@ -163,4 +178,5 @@ void GameEngineRenderingPipeLine::Reset()
 {
 	// 나머지는 리셋이 필요할때 추가
 	Blend_->Reset();
+	DepthStencil_->Reset();
 }

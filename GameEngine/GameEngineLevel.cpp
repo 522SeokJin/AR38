@@ -75,6 +75,8 @@ void GameEngineLevel::Render()
 {
 	GameEngineDevice::RenderStart();
 
+	GetMainCamera()->ClearCameraTarget();
+
 	GetMainCamera()->Render();
 	GetMainCamera()->DebugRender();
 

@@ -59,10 +59,7 @@ void UserGame::ResourceLoad()
 		Pipe->SetInputAssembler1InputLayoutSetting("Color_VS");
 		Pipe->SetVertexShader("Color_VS");
 		Pipe->SetInputAssembler2IndexBufferSetting("Rect");
-		Pipe->SetInputAssembler2TopologySetting(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		Pipe->SetRasterizer("EngineBaseRasterizer");
 		Pipe->SetPixelShader("Color_PS");
-		Pipe->SetOutputMergerBlend("AlphaBlend");
 	}
 
 	{
@@ -72,9 +69,6 @@ void UserGame::ResourceLoad()
 		Pipe->SetInputAssembler1InputLayoutSetting("Texture_VS");
 		Pipe->SetVertexShader("Texture_VS");
 		Pipe->SetInputAssembler2IndexBufferSetting("Rect");
-		Pipe->SetInputAssembler2TopologySetting(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		Pipe->SetRasterizer("EngineBaseRasterizer");
 		Pipe->SetPixelShader("Texture_PS");
-		Pipe->SetOutputMergerBlend("AlphaBlend");
 	}
 }

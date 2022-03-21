@@ -2,6 +2,9 @@
 #include "GameEngineDepthStencil.h"
 
 GameEngineDepthStencil::GameEngineDepthStencil()
+	: Info_()
+	, State_(nullptr)
+
 {
 
 }
@@ -42,7 +45,7 @@ void GameEngineDepthStencil::Create(const D3D11_DEPTH_STENCIL_DESC& _Info)
 
 	if (S_OK != GameEngineDevice::GetDevice()->CreateDepthStencilState(&_Info, &State))
 	{
-		GameEngineDebug::MsgBox("깊이 버퍼 생성에 실패했습니다.");
+		GameEngineDebug::MsgBox("DepthStencil State 생성에 실패했습니다.");
 		return;
 	}
 

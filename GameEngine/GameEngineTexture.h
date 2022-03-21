@@ -19,6 +19,12 @@ public:
 	{
 		return &ShaderResourceView_;
 	}
+
+	inline ID3D11DepthStencilView* GetDepthStencilView()
+	{
+		return DepthStencilView_;
+	}
+
 	float4 GetImageSize();
 
 	void Create(ID3D11Texture2D* _Texture2D);
@@ -34,6 +40,7 @@ public:
 
 	ID3D11RenderTargetView* CreateRenderTargetView();
 	ID3D11ShaderResourceView* CreateShaderResourceView();
+	ID3D11DepthStencilView* CreateDepthStencilView();
 
 	bool IsCut();
 	void Cut(int _x, int _y);
@@ -58,6 +65,7 @@ private:
 
 	ID3D11RenderTargetView* RenderTargetView_;
 	ID3D11ShaderResourceView* ShaderResourceView_;
+	ID3D11DepthStencilView* DepthStencilView_;
 
 	DirectX::ScratchImage Image_;
 

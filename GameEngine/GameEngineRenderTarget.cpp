@@ -4,10 +4,12 @@
 #include "GameEngineTexture.h"
 #include "GameEngineRenderingPipeLine.h"
 #include "GameEngineRenderingPipeLineManager.h"
+#include "GameEngineDepthBuffer.h"
 
-GameEngineRenderTarget::GameEngineRenderTarget() 
+GameEngineRenderTarget::GameEngineRenderTarget()
 	: Pipe_(nullptr)
 	, Res_()
+	, DepthBuffer_(nullptr)
 {
 	Pipe_ = GameEngineRenderingPipeLineManager::GetInst().Find("TargetMerge");
 	Res_.ShaderResourcesCheck(Pipe_);
@@ -19,6 +21,11 @@ GameEngineRenderTarget::~GameEngineRenderTarget()
 	{
 		delete ReleaseTextures_[i];
 	}
+
+	if (nullptr != DepthBuffer_)
+	{
+		delete DepthBuffer_;
+	}
 }
 
 void GameEngineRenderTarget::Clear()
@@ -27,6 +34,12 @@ void GameEngineRenderTarget::Clear()
 	{
 		GameEngineDevice::GetContext()->ClearRenderTargetView(
 			RenderTargetViews_[i], ClearColor_[i].Arr1D);
+	}
+
+	if (nullptr != DepthBuffer_)
+	{
+		GameEngineDevice::GetContext()->ClearDepthStencilView(DepthBuffer_->GetDepthStencilView(),
+			D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	}
 }
 
@@ -78,6 +91,17 @@ void GameEngineRenderTarget::Copy(GameEngineRenderTarget* _Other)
 	Merge(_Other);
 }
 
+void GameEngineRenderTarget::CreateDepthBuffer(float4 _Size)
+{
+	if (nullptr != DepthBuffer_)
+	{
+		return;
+	}
+
+	DepthBuffer_ = new GameEngineDepthBuffer();
+	DepthBuffer_->Create(_Size);
+}
+
 void GameEngineRenderTarget::Setting(int _Index)
 {
 	if ( 0 >= RenderTargetViews_.size())
@@ -85,13 +109,20 @@ void GameEngineRenderTarget::Setting(int _Index)
 		GameEngineDebug::MsgBoxError("RenderTarget Setting Error Size Zero");
 	}
 
+	ID3D11DepthStencilView* View = nullptr;
+
+	if (nullptr != DepthBuffer_)
+	{
+		View = DepthBuffer_->GetDepthStencilView();
+	}
+
 	if (-1 == _Index)
 	{
 		GameEngineDevice::GetContext()->OMSetRenderTargets(
-			static_cast<UINT>(RenderTargetViews_.size()), &RenderTargetViews_[0], nullptr);
+			static_cast<UINT>(RenderTargetViews_.size()), &RenderTargetViews_[0], View);
 	}
 	else
 	{
-		GameEngineDevice::GetContext()->OMSetRenderTargets(1, &RenderTargetViews_[_Index], nullptr);
+		GameEngineDevice::GetContext()->OMSetRenderTargets(1, &RenderTargetViews_[_Index], View);
 	}
 }

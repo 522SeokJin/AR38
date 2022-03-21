@@ -13,6 +13,8 @@
 #include "GameEngineFolderTextureManager.h"
 #include "GameEngineSamplerManager.h"
 #include "GameEngineBlendManager.h"
+#include "GameEngineDepthStencilManager.h"
+#include "GameEngineDepthBufferManager.h"
 
 #include "GameEngineRenderingPipeLineManager.h"
 
@@ -27,6 +29,8 @@
 #include "GameEngineFolderTexture.h"
 #include "GameEngineSampler.h"
 #include "GameEngineBlend.h"
+#include "GameEngineDepthStencil.h"
+#include "GameEngineDepthBuffer.h"
 
 #include "GameEngineRenderingPipeLine.h"
 
@@ -51,5 +55,7 @@ public:
 		GameEngineSamplerManager::Destroy();
 		GameEngineTextureManager::Destroy();
 		GameEngineBlendManager::Destroy();
+		GameEngineDepthStencilManager::Destroy();
+		GameEngineDepthBufferManager::Destroy();
 	}
 };

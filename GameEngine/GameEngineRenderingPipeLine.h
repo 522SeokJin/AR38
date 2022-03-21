@@ -7,6 +7,7 @@
 // 설명 : 렌더링파이프라인을 직접 설정하기위해 만든 클래스
 class GameEngineBlend;
 class GameEngineShader;
+class GameEngineDepthStencil;
 class GameEngineConstantBuffer;
 class GameEngineVertexBuffer;
 class GameEngineVertexShader;
@@ -42,6 +43,8 @@ public:
 	void SetPixelShader(const std::string& _Name);
 
 	void SetOutputMergerBlend(const std::string& _Name);
+
+	void SetOutputMergerDepthStencil(const std::string& _Name);
 
 	void RenderingPipeLineSetting();
 
@@ -81,6 +84,6 @@ private:
 	// OM
 	GameEngineRenderTarget*		RenderTarget_;
 
-
+	GameEngineDepthStencil*		DepthStencil_;
 };
 

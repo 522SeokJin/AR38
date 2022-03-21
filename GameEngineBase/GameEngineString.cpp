@@ -17,9 +17,12 @@ GameEngineString::GameEngineString(GameEngineString&& _other) noexcept  // defau
 
 }
 
-void GameEngineString::toupper(std::string& _Text)
+std::string GameEngineString::toupper(const std::string& _Text)
 {
-	std::transform(_Text.begin(), _Text.end(), _Text.begin(), ::toupper);
+	std::string Text = _Text;
+	std::transform(Text.begin(), Text.end(), Text.begin(), ::toupper);
+
+	return Text;
 }
 
 void GameEngineString::StringToWString(const std::string& _Text, std::wstring& _Out)

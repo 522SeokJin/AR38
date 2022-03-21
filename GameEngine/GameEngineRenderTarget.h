@@ -6,6 +6,7 @@
 // 용도 : 
 // 설명 : 
 class GameEngineTexture;
+class GameEngineDepthBuffer;
 class GameEngineRenderTarget : public GameEngineObjectNameBase
 {
 public:
@@ -30,6 +31,8 @@ public:
 	// 기존에 뭐가 그려졌든 그걸 지우고. 넣어준걸로 바꾼다.
 	void Copy(GameEngineRenderTarget* _Other);
 
+	void CreateDepthBuffer(float4 _Size);
+
 protected:
 	GameEngineRenderTarget(const GameEngineRenderTarget& _other) = delete;
 	GameEngineRenderTarget(GameEngineRenderTarget&& _other) = delete;
@@ -48,5 +51,7 @@ private:
 
 	GameEngineRenderingPipeLine*	Pipe_;
 	GameEngineShaderResHelper		Res_;
+
+	GameEngineDepthBuffer* DepthBuffer_;
 };
 

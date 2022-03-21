@@ -130,9 +130,6 @@
     <Filter Include="Actor\Map\LithHarbor">
       <UniqueIdentifier>{e335b05d-15cd-475a-a91e-b0a6a40eee32}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\UI\MainBar">
-      <UniqueIdentifier>{bf319917-55eb-463d-842e-84f14f4f408e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Level\Town">
       <UniqueIdentifier>{c241f2ed-7d11-4b06-b4ef-04cbdbe926c8}</UniqueIdentifier>
     </Filter>
@@ -144,9 +141,6 @@
     </Filter>
     <Filter Include="Level\HuntingGround\Demian">
       <UniqueIdentifier>{5247f2c1-c26d-4932-b321-14d614563cfb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\UI\MainBar\QuickSlot">
-      <UniqueIdentifier>{a77aef23-3af5-434e-a631-ebd758e245ff}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Map\Demian">
       <UniqueIdentifier>{80fdbf4c-2465-4d92-99e1-544a771eab93}</UniqueIdentifier>
@@ -162,6 +156,12 @@
     </Filter>
     <Filter Include="Custom">
       <UniqueIdentifier>{810c8b06-4134-474b-91be-1ef2def1fd66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI\MainBar">
+      <UniqueIdentifier>{bf319917-55eb-463d-842e-84f14f4f408e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI\MainBar\QuickSlot">
+      <UniqueIdentifier>{a77aef23-3af5-434e-a631-ebd758e245ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

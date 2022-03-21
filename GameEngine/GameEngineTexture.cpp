@@ -10,6 +10,7 @@ GameEngineTexture::GameEngineTexture()
 	, Texture2D_(nullptr)
 	, RenderTargetView_(nullptr)
 	, ShaderResourceView_(nullptr)
+	, DepthStencilView_(nullptr)
 {
 
 }
@@ -17,6 +18,12 @@ GameEngineTexture::GameEngineTexture()
 GameEngineTexture::~GameEngineTexture()
 {
 	
+	if (nullptr != DepthStencilView_)
+	{
+		DepthStencilView_->Release();
+		DepthStencilView_ = nullptr;
+	}
+
 	if (nullptr != ShaderResourceView_)
 	{
 		ShaderResourceView_->Release();
@@ -41,7 +48,7 @@ float4 GameEngineTexture::GetImageSize()
 	float Width = static_cast<float>(TextureDesc_.Width);
 	float Height = static_cast<float>(TextureDesc_.Height);
 
-	return { Width , Height };
+	return { Width , Height, 1.0f };
 }
 
 void GameEngineTexture::Create(ID3D11Texture2D* _Texture2D)
@@ -101,6 +108,11 @@ void GameEngineTexture::Create(D3D11_TEXTURE2D_DESC _Desc)
 	if (_Desc.BindFlags & D3D11_BIND_FLAG::D3D11_BIND_SHADER_RESOURCE)
 	{
 		CreateShaderResourceView();
+	}
+
+	if (_Desc.BindFlags & D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL)
+	{
+		CreateDepthStencilView();
 	}
 }
 
@@ -172,6 +184,23 @@ ID3D11ShaderResourceView* GameEngineTexture::CreateShaderResourceView()
 	}
 
 	return ShaderResourceView_;
+}
+
+ID3D11DepthStencilView* GameEngineTexture::CreateDepthStencilView()
+{
+	if (nullptr != DepthStencilView_)
+	{
+		//GameEngineDebug::MsgBoxError("DepthStencilView OverLap Create Error");
+		return DepthStencilView_;
+	}
+
+	if (S_OK != GameEngineDevice::GetDevice()->CreateDepthStencilView(Texture2D_,
+		nullptr, &DepthStencilView_))
+	{
+		GameEngineDebug::MsgBoxError("RenderTargetView Create Error");
+	}
+
+	return DepthStencilView_;
 }
 
 bool GameEngineTexture::IsCut()

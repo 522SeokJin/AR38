@@ -18,7 +18,7 @@ private:		//delete operator
 	GameEngineString& operator=(const GameEngineString&& _other) = delete;
 
 public:
-	static void toupper(std::string& _Text);
+	static std::string toupper(const std::string& _Text);
 	static void StringToWString(const std::string& _Text, std::wstring& _Out);
 };
 
