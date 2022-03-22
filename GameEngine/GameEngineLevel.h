@@ -61,6 +61,9 @@ protected:
 private:
 	void Init();
 
+	void LevelChangeStartActorEvent();
+	void LevelChangeEndActorEvent();
+
 	// int 는 업데이트 그룹의 순서를 정하기위함이다. Ordering
 	// 순서가 없다면, 먼저 생성된 것이 먼저 행동한다.
 	std::map<int, std::list<GameEngineActor*>> ActorList_;

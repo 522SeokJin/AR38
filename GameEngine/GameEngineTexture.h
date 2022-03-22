@@ -53,6 +53,8 @@ public:
 			static_cast<float>(TextureDesc_.Height));
 	}
 
+	float4 GetPixel(int _x, int _y);
+
 protected:
 	GameEngineTexture(const GameEngineTexture& _other) = delete;
 	GameEngineTexture(GameEngineTexture&& _other) noexcept = delete;

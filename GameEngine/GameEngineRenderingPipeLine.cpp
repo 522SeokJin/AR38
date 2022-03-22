@@ -17,7 +17,7 @@ GameEngineRenderingPipeLine::GameEngineRenderingPipeLine()
 {
 	SetOutputMergerBlend("AlphaBlend");
 	SetRasterizer("EngineBaseRasterizer");
-	SetOutputMergerDepthStencil("BaseDepthOff");
+	SetOutputMergerDepthStencil("BaseDepthOn");
 	SetInputAssembler2TopologySetting(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 

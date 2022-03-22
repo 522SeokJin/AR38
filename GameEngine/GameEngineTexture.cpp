@@ -186,6 +186,17 @@ ID3D11ShaderResourceView* GameEngineTexture::CreateShaderResourceView()
 	return ShaderResourceView_;
 }
 
+float4 GameEngineTexture::GetPixel(int _x, int _y)
+{
+	DXGI_FORMAT Fmt = Image_.GetMetadata().format;
+
+	uint8_t* Color = Image_.GetImages()->pixels;
+
+	int* ColorPtr = reinterpret_cast<int*>(Color);
+
+	return float4();
+}
+
 ID3D11DepthStencilView* GameEngineTexture::CreateDepthStencilView()
 {
 	if (nullptr != DepthStencilView_)

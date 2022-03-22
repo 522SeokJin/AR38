@@ -184,6 +184,32 @@ void GameEngineLevel::Init()
 	UICameraActor_->GetCamera()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
 }
 
+void GameEngineLevel::LevelChangeStartActorEvent()
+{
+	for (std::pair<int, std::list<GameEngineActor*>> Pair : ActorList_)
+	{
+		std::list<GameEngineActor*>& Actors = Pair.second;
+
+		for (GameEngineActor* Actor : Actors)
+		{
+			Actor->LevelChangeStartEvent();
+		}
+	}
+}
+
+void GameEngineLevel::LevelChangeEndActorEvent()
+{
+	for (std::pair<int, std::list<GameEngineActor*>> Pair : ActorList_)
+	{
+		std::list<GameEngineActor*>& Actors = Pair.second;
+
+		for (GameEngineActor* Actor : Actors)
+		{
+			Actor->LevelChangeEndEvent();
+		}
+	}
+}
+
 void GameEngineLevel::PushCollision(GameEngineCollision* _Collision, int _Group)
 {
 	CollisionList_[_Group].push_back(_Collision);

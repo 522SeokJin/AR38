@@ -95,6 +95,9 @@
     <ClCompile Include="Item.cpp">
       <Filter>Actor\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Actor\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -254,6 +257,9 @@
     </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Actor\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Actor\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -79,17 +79,20 @@ void GameEngineCore::MainLoop()
 
 	if (nullptr != NextLevel_)
 	{
+		NextLevel_->LevelChangeStartActorEvent();
+		NextLevel_->LevelChangeStartEvent();
+
 		if (nullptr == CurrentLevel_)
 		{
-			NextLevel_->LevelChangeStartEvent();
 			CurrentLevel_ = NextLevel_;
 		}
 		else
 		{
+			CurrentLevel_->LevelChangeEndActorEvent();
 			CurrentLevel_->LevelChangeEndEvent();
-			NextLevel_->LevelChangeStartEvent();
 			CurrentLevel_ = NextLevel_;
 		}
+
 		GameEngineTime::GetInst().TimeCheckReset();
 	}
 

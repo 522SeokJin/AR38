@@ -149,6 +149,8 @@ void Player::Update(float _DeltaTime)
 	KeyInputUpdate();
 	UpdatePartsOffset();
 
+	//GetTransform()->SetLocalDeltaTimeMove(float4::DOWN * FALLSPEED);
+
 	Collision_->SetLocalScaling({ 100.0f, 100.0f, 1.0f });
 
 	Collision_->Collision(CollisionType::AABBBox, CollisionType::AABBBox, 20,

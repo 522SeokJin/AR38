@@ -40,9 +40,15 @@ public:
 	Animation2D* FindAnimation(const std::string& _Name);
 
 	float4 GetAnimationTextureSize(const std::string& _Name, int _Index);
-	Animation2D* GetCurAnimation()
+
+	inline Animation2D* GetCurAnimation()
 	{
 		return CurAnimation_;
+	}
+
+	inline GameEngineTexture* GetCurTexture()
+	{
+		return CurTexture_;
 	}
 
 	void SetStartCallBack(const std::string& _Name, std::function<void()> _CallBack);
@@ -73,7 +79,7 @@ private:
 	{
 	public:
 		Animation2D() 
-			: FolderTextures_(nullptr), Renderer_(nullptr)
+			: FolderTextures_(nullptr), AnimationTexture_(nullptr), Renderer_(nullptr)
 			, IsEnd_(false), Loop_(true)
 			, InterTime_(0.0f), CurTime_(0.0f)
 			, CurFrame_(0), StartFrame_(0), EndFrame_(0)
