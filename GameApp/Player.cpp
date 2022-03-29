@@ -4,6 +4,7 @@
 #include <GameEngine/GameEngineCollision.h>
 #include "PhysicsDefine.h"
 #include "Player_Define.h"
+#include "Map.h"
 
 Player::Player()
 	: Dir_(PlayerDir::LEFT)
@@ -65,14 +66,14 @@ void Player::ChangePartsOffset(GameEngineImageRenderer* _Renderer, float4 _Offse
 	case PlayerDir::LEFT:
 		for (int i = 0; i < _Renderer->GetCurAnimation()->EndFrame_ + 1; i++)
 		{
-			_Renderer->SetOffsetAnimation(_Renderer->GetCurAnimation()->Name_,
+			_Renderer->SetOffsetAnimation(_Renderer->GetCurAnimation()->GetName(),
 				i, _Offset + Avatar_->GetCurAnimation()->Offsets_[Avatar_->GetCurAnimation()->CurFrame_]);
 		}
 		break;
 	case PlayerDir::RIGHT:
 		for (int i = 0; i < _Renderer->GetCurAnimation()->EndFrame_ + 1; i++)
 		{
-			_Renderer->SetOffsetAnimation(_Renderer->GetCurAnimation()->Name_,
+			_Renderer->SetOffsetAnimation(_Renderer->GetCurAnimation()->GetName(),
 				i, _Offset * float4::INVERT_X + Avatar_->GetCurAnimation()->Offsets_[Avatar_->GetCurAnimation()->CurFrame_]);
 		}
 		break;
@@ -149,7 +150,16 @@ void Player::Update(float _DeltaTime)
 	KeyInputUpdate();
 	UpdatePartsOffset();
 
-	//GetTransform()->SetLocalDeltaTimeMove(float4::DOWN * FALLSPEED);
+	float4 Color = Map::GetColor(GetTransform());
+
+	if (Color != float4::BLACK)
+	{
+		GetTransform()->SetLocalDeltaTimeMove(float4::DOWN * 50.0f);
+	}
+	else
+	{
+		int a = 0;
+	}
 
 	Collision_->SetLocalScaling({ 100.0f, 100.0f, 1.0f });
 

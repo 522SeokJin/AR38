@@ -32,11 +32,11 @@ void LithHarborLevel::LevelStart()
 		LithHarbor* Actor = CreateActor<LithHarbor>();
 	}
 
-	{
-		Player* Actor = CreateActor<Player>();
-		GetMainCameraActor()->GetTransform()->SetWorldPosition(
-			Actor->GetTransform()->GetLocalPosition());
-	}
+	//{
+	//	Player* Actor = CreateActor<Player>();
+	//	GetMainCameraActor()->GetTransform()->SetWorldPosition(
+	//		Actor->GetTransform()->GetLocalPosition());
+	//}
 	
 	{
 		ExpBarUI* Actor = CreateActor<ExpBarUI>();

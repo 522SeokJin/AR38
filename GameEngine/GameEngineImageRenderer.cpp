@@ -33,6 +33,7 @@ void GameEngineImageRenderer::SetImageSize(const float4& _ImageSize)
 {
 	ImageSize_ = _ImageSize;
 
+	GetTransform()->SetLocalPosition(ImageSize_.halffloat4().InvertY());
 	GetTransform()->SetLocalScaling(ImageSize_);
 }
 
@@ -47,14 +48,12 @@ void GameEngineImageRenderer::SetImage(const std::string& _ImageName,
 		return;
 	}
 
-	ShaderHelper.SettingTexture("Tex", _ImageName);
-
-	if (false == _ScaleToImageSize)
+	if (true == _ScaleToImageSize)
 	{
-		return;
+		SetImageSize(CurTexture_->GetImageSize());
 	}
 
-	SetImageSize(CurTexture_->GetImageSize());
+	ShaderHelper.SettingTexture("Tex", _ImageName);
 }
 
 void GameEngineImageRenderer::ImageLocalFlipYAxis()
@@ -117,7 +116,7 @@ void GameEngineImageRenderer::CreateAnimation(const std::string& _TextureName,
 		GameEngineDebug::MsgBoxError("존재하지 않는 텍스처로 애니메이션을 만들려고 했습니다.");
 	}
 
-	NewAnimation->Name_ = _Name;
+	NewAnimation->SetName(_Name);
 	NewAnimation->IsEnd_ = false;
 	NewAnimation->Loop_ = _Loop;
 	NewAnimation->InterTime_ = _InterTime;
@@ -152,7 +151,7 @@ void GameEngineImageRenderer::CreateAnimationFolder(const std::string& _Name,
 
 	Animation2D* NewAnimation = new Animation2D();
 
-	NewAnimation->Name_ = _Name;
+	NewAnimation->SetName(_Name);
 	NewAnimation->IsEnd_ = false;
 	NewAnimation->Loop_ = _Loop;
 	NewAnimation->InterTime_ = _InterTime;

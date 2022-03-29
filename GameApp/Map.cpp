@@ -2,10 +2,10 @@
 #include "Map.h"
 #include <GameEngine/GameEngineImageRenderer.h>
 
-Map* Map::CurrentMap_ = nullptr;
+Map* Map::CurrentMap = nullptr;
 
 Map::Map()
-	: Renderer_(nullptr)
+	: PixelCollideImage_(nullptr)
 {
 
 }
@@ -21,12 +21,26 @@ void Map::Start()
 
 void Map::LevelChangeStartEvent()
 {
+	CurrentMap = this;
 }
 
-float4 Map::GetColor(GameEngineTransform* _Ptr)
+float4 Map::GetColor(GameEngineTransform* _Ptr, bool _YReverse/* = true*/)
 {
 	float4 Pos = _Ptr->GetWorldPosition();
 
-	return CurrentMap_->Renderer_->GetCurTexture()->GetPixel(Pos.ix(), Pos.iy());
+	std::string TestStr = std::to_string(Pos.x) + " " + std::to_string(Pos.y) + "\n";
+
+	OutputDebugStringA(TestStr.c_str());
+
+	if (true == _YReverse)
+	{
+		Pos.y *= -1.0f;
+	}
+
+	return GetColor(Pos);
 }
 
+float4 Map::GetColor(float4 _Position)
+{
+	return CurrentMap->PixelCollideImage_->GetCurrentTexture()->GetPixel(_Position.ix(), _Position.iy());
+}

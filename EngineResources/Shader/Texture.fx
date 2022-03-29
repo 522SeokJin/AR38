@@ -40,6 +40,11 @@ float4 Texture_PS(VertexOut _in) : SV_Target0
 {
     float4 Color = Tex.Sample(Smp, _in.Texcoord.xy);
     
+    if (0.0f == Color.a)
+    {
+        clip(-1);
+    }
+
     return Color;
 }
 

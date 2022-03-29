@@ -1,8 +1,8 @@
 #pragma once
-#include "GameEngine/GameEngineActor.h"
+#include "Map.h"
 
 // Ό³Έν : 
-class LithHarbor : public GameEngineActor
+class LithHarbor : public Map
 {
 public:
 	LithHarbor();

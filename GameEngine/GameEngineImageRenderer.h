@@ -1,5 +1,6 @@
 #pragma once
 #include "GameEngineRenderer.h"
+#include <GameEngineBase\GameEngineObjectNameBase.h>
 
 // Ό³Έν : 
 class GameEngineTexture;
@@ -46,9 +47,24 @@ public:
 		return CurAnimation_;
 	}
 
-	inline GameEngineTexture* GetCurTexture()
+	inline GameEngineTexture* GetCurrentTexture()
 	{
 		return CurTexture_;
+	}
+
+	inline std::string GetCurrentAnimationName()
+	{
+		return CurAnimation_->GetName();
+	}
+
+	inline bool IsCurrentAnimationString(const std::string& _Name)
+	{
+		return CurAnimation_->GetName() == _Name;
+	}
+
+	inline bool IsCurrentAnimationPtr(const char* _Name)
+	{
+		return CurAnimation_->GetName() == _Name;
 	}
 
 	void SetStartCallBack(const std::string& _Name, std::function<void()> _CallBack);
@@ -75,7 +91,7 @@ private:
 	Animation2D* CurAnimation_;
 	float4 CutData_; // float2 TextureCutDataPos, float2 TextureCutDataSize
 
-	struct Animation2D
+	struct Animation2D : public GameEngineObjectNameBase
 	{
 	public:
 		Animation2D() 
@@ -101,8 +117,6 @@ private:
 		std::vector<float4>			Offsets_;
 
 		GameEngineImageRenderer*	Renderer_;
-
-		std::string Name_;
 
 		bool IsEnd_;
 		bool Loop_;

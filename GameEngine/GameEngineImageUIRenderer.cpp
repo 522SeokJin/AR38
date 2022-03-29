@@ -41,6 +41,7 @@ void GameEngineImageUIRenderer::SetImage(const std::string& _ImageName,
 	}
 
 	ImageSize_ = FindTexture->GetImageSize();
+	GetTransform()->SetLocalPosition(ImageSize_.halffloat4() + float4{0.0f, 0.0f, 100.0f});
 	GetTransform()->SetLocalScaling(ImageSize_);
 }
 

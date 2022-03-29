@@ -7,9 +7,12 @@ class Map : public GameEngineActor
 {
 public:
 	Map();
-	~Map();
+	virtual ~Map();
 
-	GameEngineImageRenderer* Renderer_;
+	static float4 GetColor(GameEngineTransform* _Ptr, bool _YReverse = true);
+	static float4 GetColor(float4 _Position);
+
+	GameEngineImageRenderer* PixelCollideImage_;
 
 protected:
 	Map(const Map& _other) = delete; 
@@ -20,10 +23,14 @@ protected:
 	void Start() override;
 	void LevelChangeStartEvent() override;
 
-	static float4 GetColor(GameEngineTransform* _Ptr);
+
+	inline void SetPixelCollideImage(GameEngineImageRenderer* _Renderer)
+	{
+		PixelCollideImage_ = _Renderer;
+	}
 
 private:
-	static Map* CurrentMap_;
+	static Map* CurrentMap;
 
 };
 
