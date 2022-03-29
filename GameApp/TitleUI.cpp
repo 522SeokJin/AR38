@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "TitleUI.h"
 #include "GameEngine/GameEngineInput.h"
-#include "GameEngine/GameEngineImageUIRenderer.h"
+#include "GameEngine/GameEngineUIRenderer.h"
 
 TitleUI::TitleUI()
 {
@@ -16,12 +16,12 @@ TitleUI::~TitleUI()
 void TitleUI::Start()
 {
 	{
-		GameEngineImageUIRenderer* Renderer = CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>();
 		Renderer->SetImage("UI_login.img.back.0.png");
 	}
 
 	{
-		GameEngineImageUIRenderer* Renderer = CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>();
 		Renderer->SetImage("Title_new.BtLogin.normal.0.png");
 		Renderer->SetLocalPosition({ 0.0f, -120.0f });
 	}

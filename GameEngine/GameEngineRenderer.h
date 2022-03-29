@@ -17,6 +17,8 @@ public:
 	void SetRenderingPipeLine(const std::string& _Value);
 	void FileCompile();
 
+	virtual void SetRenderGroup(int _Order);
+
 	GameEngineShaderResHelper ShaderHelper;
 
 protected:
@@ -28,7 +30,6 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
-	virtual void SetRenderGroup(int _Order);
 
 	GameEngineRenderingPipeLine* PipeLine_;
 

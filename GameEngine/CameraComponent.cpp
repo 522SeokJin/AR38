@@ -188,7 +188,7 @@ void CameraComponent::ChangeRendererGroup(int _Group, GameEngineRenderer* _Rende
 
 	_Renderer->SetOrder(_Group);
 
-	RendererList_[_Renderer->GetOrder()].push_back(_Renderer);
+	RendererList_[_Group].push_back(_Renderer);
 }
 
 void CameraComponent::PushRenderer(int _Order, GameEngineRenderer* _Renderer)

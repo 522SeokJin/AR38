@@ -23,6 +23,7 @@ void LithHarbor::Start()
 	{
 		GameEngineImageRenderer* Renderer = CreateTransformComponent<GameEngineImageRenderer>();
 		Renderer->SetImage("testmap.png");
+		Renderer->GetTransform()->SetLocalPosition(Renderer->GetImageSize().halffloat4().InvertY());
 		SetPixelCollideImage(Renderer);
 	}
 }

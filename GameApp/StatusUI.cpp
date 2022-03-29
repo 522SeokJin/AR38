@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "StatusUI.h"
-#include "GameEngine/GameEngineImageUIRenderer.h"
+#include "GameEngine/GameEngineUIRenderer.h"
 
 StatusUI::StatusUI()
 	: HPBar_(nullptr)
@@ -28,49 +28,49 @@ StatusUI::~StatusUI()
 void StatusUI::Start()
 {
 	{
-		GameEngineImageUIRenderer* Renderer = 
-			CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform(), 1);
+		GameEngineUIRenderer* Renderer = 
+			CreateTransformComponent<GameEngineUIRenderer>(GetTransform(), 1);
 		Renderer->SetImage("mainBar.status.layer_cover.png");
 	}
 
 	{
-		GameEngineImageUIRenderer* Renderer = 
-			CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+		GameEngineUIRenderer* Renderer = 
+			CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		Renderer->SetImage("mainBar.status.backgrnd.png");
 		Renderer->SetLocalPosition({ -2.0f, -12.0f });
 	}
 
 	{
-		GameEngineImageUIRenderer* Renderer = 
-			CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform(), 2);
+		GameEngineUIRenderer* Renderer = 
+			CreateTransformComponent<GameEngineUIRenderer>(GetTransform(), 2);
 		Renderer->SetImage("mainBar.status.layer_Lv.png");
 		Renderer->SetLocalPosition({ -70.5f, 22.0f });
 	}
 
 	{
-		HPBar_ = CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+		HPBar_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		HPBar_->SetImage("mainBar.status.gauge.hp.layer_0.png");
 		HPBar_->SetLocalPosition({ 10.0f, 0.0f });
 		Ratio_ = HPBar_->GetImageSize().x / 100.0f;
 	}
 
 	{
-		MPBar_ = CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+		MPBar_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		MPBar_->SetImage("mainBar.status.gauge.mp.layer_0.png");
 		MPBar_->SetLocalPosition({ 10.0f, -16.0f });
 		Ratio_ = MPBar_->GetImageSize().x / 100.0f;
 	}
 
 	{
-		GameEngineImageUIRenderer* Renderer = 
-			CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+		GameEngineUIRenderer* Renderer = 
+			CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		Renderer->SetImage("status.gauge.number._.png");
 		Renderer->SetLocalPosition({ 10.0f, 0.0f });
 	}
 
 	{
-		GameEngineImageUIRenderer* Renderer = 
-			CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+		GameEngineUIRenderer* Renderer = 
+			CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		Renderer->SetImage("status.gauge.number._.png");
 		Renderer->SetLocalPosition({ 10.0f, -16.0f });
 	}
@@ -79,8 +79,8 @@ void StatusUI::Start()
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			GameEngineImageUIRenderer* Renderer =
-				CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+			GameEngineUIRenderer* Renderer =
+				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
 			Renderer->Off();
 
@@ -92,8 +92,8 @@ void StatusUI::Start()
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			GameEngineImageUIRenderer* Renderer =
-				CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+			GameEngineUIRenderer* Renderer =
+				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
 			Renderer->Off();
 
@@ -105,8 +105,8 @@ void StatusUI::Start()
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			GameEngineImageUIRenderer* Renderer =
-				CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+			GameEngineUIRenderer* Renderer =
+				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
 			Renderer->Off();
 
@@ -118,8 +118,8 @@ void StatusUI::Start()
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			GameEngineImageUIRenderer* Renderer =
-				CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform());
+			GameEngineUIRenderer* Renderer =
+				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
 			Renderer->Off();
 
@@ -131,8 +131,8 @@ void StatusUI::Start()
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			GameEngineImageUIRenderer* Renderer =
-				CreateTransformComponent<GameEngineImageUIRenderer>(GetTransform(), 3);
+			GameEngineUIRenderer* Renderer =
+				CreateTransformComponent<GameEngineUIRenderer>(GetTransform(), 3);
 			Renderer->SetImage("status.lvNumber." + std::to_string(j) + ".png");
 			Renderer->Off();
 			LvNumber_[i].push_back(Renderer);

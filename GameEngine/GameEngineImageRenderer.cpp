@@ -33,7 +33,6 @@ void GameEngineImageRenderer::SetImageSize(const float4& _ImageSize)
 {
 	ImageSize_ = _ImageSize;
 
-	GetTransform()->SetLocalPosition(ImageSize_.halffloat4().InvertY());
 	GetTransform()->SetLocalScaling(ImageSize_);
 }
 
@@ -284,13 +283,18 @@ void GameEngineImageRenderer::Update(float _DeltaTime)
 	CurAnimation_->Update(_DeltaTime);
 }
 
+void GameEngineImageRenderer::ImageRendererStart()
+{
+
+	ShaderHelper.SettingConstantBufferLink("TextureCutData", CutData_);
+}
+
 void GameEngineImageRenderer::Start()
 {
 	GameEngineRenderer::Start();
 
 	SetRenderingPipeLine("Texture");
-
-	ShaderHelper.SettingConstantBufferLink("TextureCutData", CutData_);
+	ImageRendererStart();
 }
 
 void GameEngineImageRenderer::Animation2D::Reset()

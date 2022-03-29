@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "InventoryUI.h"
-#include <GameEngine/GameEngineImageUIRenderer.h>
+#include <GameEngine/GameEngineUIRenderer.h>
 #include <GameEngine/magic_enum.hpp>
 #include "Item.h"
 

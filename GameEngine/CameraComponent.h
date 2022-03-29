@@ -31,6 +31,8 @@ public:
 
 	void FileCompile();
 
+	void ChangeRendererGroup(int _Group, GameEngineRenderer* _Renderer);
+
 	GameEngineRenderTarget* CameraBufferTarget_;
 
 protected:
@@ -51,8 +53,6 @@ private:
 	void DebugRender();
 
 	void ReleaseRenderer();
-
-	void ChangeRendererGroup(int _Group, GameEngineRenderer* _Renderer);
 
 	std::map<int, std::list<GameEngineRenderer*>> RendererList_;
 

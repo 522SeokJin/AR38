@@ -89,8 +89,6 @@ private:
 	}
 
 	void ChangeCollisionGroup(int _Group, GameEngineCollision* _Collision);
-	void ChangeRendererGroup(int _Group, GameEngineRenderer* _Renderer);
-	
 
 	std::map<int, std::list<GameEngineCollision*>> CollisionList_;
 };

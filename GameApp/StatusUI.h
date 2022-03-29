@@ -2,7 +2,7 @@
 #include "GameEngine/GameEngineActor.h"
 
 // Ό³Έν : 
-class GameEngineImageUIRenderer;
+class GameEngineUIRenderer;
 class StatusUI : public GameEngineActor
 {
 public:
@@ -51,8 +51,8 @@ private:
 	void UpdateMPBar();
 	void UpdateStatusLv();
 
-	GameEngineImageUIRenderer* HPBar_;
-	GameEngineImageUIRenderer* MPBar_;
+	GameEngineUIRenderer* HPBar_;
+	GameEngineUIRenderer* MPBar_;
 
 	float Ratio_;
 
@@ -70,10 +70,10 @@ private:
 	float MPTimeTest_;
 
 	// Number Image
-	std::map<int, std::vector<GameEngineImageUIRenderer*>> HPNumber_;
-	std::map<int, std::vector<GameEngineImageUIRenderer*>> MPNumber_;
-	std::map<int, std::vector<GameEngineImageUIRenderer*>> MaxHPNumber_;
-	std::map<int, std::vector<GameEngineImageUIRenderer*>> MaxMPNumber_;
-	std::map<int, std::vector<GameEngineImageUIRenderer*>> LvNumber_;
+	std::map<int, std::vector<GameEngineUIRenderer*>> HPNumber_;
+	std::map<int, std::vector<GameEngineUIRenderer*>> MPNumber_;
+	std::map<int, std::vector<GameEngineUIRenderer*>> MaxHPNumber_;
+	std::map<int, std::vector<GameEngineUIRenderer*>> MaxMPNumber_;
+	std::map<int, std::vector<GameEngineUIRenderer*>> LvNumber_;
 };
 

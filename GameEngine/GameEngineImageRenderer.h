@@ -79,6 +79,7 @@ protected:
 	GameEngineImageRenderer& operator=(const GameEngineImageRenderer&& _other) = delete;
 
 	void Update(float _DeltaTime) override;
+	void ImageRendererStart();
 
 private:
 	void Start() override;

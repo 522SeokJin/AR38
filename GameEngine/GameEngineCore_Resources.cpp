@@ -310,4 +310,37 @@ void GameEngineCore::EngineResourcesCreate()
 		Pipe->SetInputAssembler2IndexBufferSetting("FullRect");
 		Pipe->SetPixelShader("TargetMerge_PS");
 	}
+
+
+	{
+		GameEngineRenderingPipeLine* Pipe =
+			GameEngineRenderingPipeLineManager::GetInst().Create("Color");
+		Pipe->SetInputAssembler1VertexBufferSetting("Rect");
+		Pipe->SetInputAssembler1InputLayoutSetting("Color_VS");
+		Pipe->SetVertexShader("Color_VS");
+		Pipe->SetInputAssembler2IndexBufferSetting("Rect");
+		Pipe->SetPixelShader("Color_PS");
+	}
+
+	{
+		GameEngineRenderingPipeLine* Pipe =
+			GameEngineRenderingPipeLineManager::GetInst().Create("Texture");
+		Pipe->SetInputAssembler1VertexBufferSetting("Rect");
+		Pipe->SetInputAssembler1InputLayoutSetting("Texture_VS");
+		Pipe->SetVertexShader("Texture_VS");
+		Pipe->SetInputAssembler2IndexBufferSetting("Rect");
+		Pipe->SetPixelShader("Texture_PS");
+	}
+
+	{
+		GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Create("TextureUI");
+		Pipe->SetInputAssembler1VertexBufferSetting("Rect");
+		Pipe->SetInputAssembler1InputLayoutSetting("Texture_VS");
+		Pipe->SetVertexShader("Texture_VS");
+		Pipe->SetInputAssembler2IndexBufferSetting("Rect");
+		Pipe->SetRasterizer("EngineBaseRasterizer");
+		Pipe->SetPixelShader("Texture_PS");
+		Pipe->SetOutputMergerBlend("AlphaBlend");
+		Pipe->SetOutputMergerDepthStencil("BaseDepthOff");
+	}
 }
