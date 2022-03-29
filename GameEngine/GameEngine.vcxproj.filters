@@ -163,6 +163,9 @@
     <ClInclude Include="GameEngineDepthBufferManager.h">
       <Filter>Resources\99. Manager</Filter>
     </ClInclude>
+    <ClInclude Include="MouseActor.h">
+      <Filter>Object\EngineActor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -317,6 +320,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineDepthBufferManager.cpp">
       <Filter>Resources\99. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseActor.cpp">
+      <Filter>Object\EngineActor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

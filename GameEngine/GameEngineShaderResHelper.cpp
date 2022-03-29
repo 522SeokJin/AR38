@@ -152,6 +152,8 @@ void GameEngineShaderResHelper::Clear()
 		}
 	}
 
+	AllConstantBufferData_.clear();
+
 	for (auto& Setting : AllSamplerData_)
 	{
 		if (nullptr != Setting.second)
@@ -161,6 +163,8 @@ void GameEngineShaderResHelper::Clear()
 		}
 	}
 
+	AllSamplerData_.clear();
+
 	for (auto& Setting : AllTextureData_)
 	{
 		if (nullptr != Setting.second)
@@ -169,6 +173,8 @@ void GameEngineShaderResHelper::Clear()
 			Setting.second = nullptr;
 		}
 	}
+
+	AllTextureData_.clear();
 }
 
 void GameEngineShaderResHelper::SettingTexture(const std::string& _SettingName, const std::string& _ImageName)

@@ -28,6 +28,8 @@ UserGame::~UserGame() // default destructer 디폴트 소멸자
 
 void UserGame::Initialize()
 {
+	GameEngineInput::GetInst().HideCursor();
+
 	// Title
 	LevelCreate<TitleLevel>("Title");
 
@@ -46,7 +48,7 @@ void UserGame::Initialize()
 	LevelCreate<EntranceDemianLevel>("EntranceDemian");
 	LevelCreate<DemianLevel>("Demian");
 
-	LevelChange("Perion");
+	LevelChange("LithHarbor");
 }
 
 void UserGame::Release()

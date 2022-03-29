@@ -195,6 +195,10 @@
     </ClInclude>
     <ClInclude Include="GameEngineWindow.h" />
     <ClInclude Include="magic_enum.hpp" />
+    <ClInclude Include="MouseActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="PreCompile.h">
       <SubType>
       </SubType>
@@ -374,6 +378,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineWindow.cpp" />
+    <ClCompile Include="MouseActor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="PreCompile.cpp">
       <SubType>
       </SubType>

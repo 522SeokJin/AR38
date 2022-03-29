@@ -22,11 +22,11 @@ void PerionLevel::LevelStart()
 		LithHarbor* Actor = CreateActor<LithHarbor>();
 	}
 
-	{
-		Player* Actor = CreateActor<Player>();
-		GetMainCameraActor()->GetTransform()->SetWorldPosition(
-			Actor->GetTransform()->GetLocalPosition());
-	}
+	//{
+	//	Player* Actor = CreateActor<Player>();
+	//	GetMainCameraActor()->GetTransform()->SetWorldPosition(
+	//		Actor->GetTransform()->GetLocalPosition());
+	//}
 }
 
 void PerionLevel::LevelUpdate(float _DeltaTime)

@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineWindow.h>
 #include "LithHarborLevel.h"
 #include "LithHarbor.h"
+#include <GameEngine/MouseActor.h>
 #include "Player.h"
 
 #include "MenuUI.h"
@@ -29,14 +30,20 @@ void LithHarborLevel::LevelStart()
 	GetMainCamera()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
 
 	{
+		MouseActor* Actor = CreateActor<MouseActor>();
+		Actor->GetUIRenderer()->SetRenderGroup(1000);
+		Actor->SetCursor("Cursor.0.0.png");
+	}
+
+	{
 		LithHarbor* Actor = CreateActor<LithHarbor>();
 	}
 
-	//{
-	//	Player* Actor = CreateActor<Player>();
-	//	GetMainCameraActor()->GetTransform()->SetWorldPosition(
-	//		Actor->GetTransform()->GetLocalPosition());
-	//}
+	{
+		Player* Actor = CreateActor<Player>();
+		GetMainCameraActor()->GetTransform()->SetWorldPosition(
+			Actor->GetTransform()->GetLocalPosition());
+	}
 	
 	{
 		ExpBarUI* Actor = CreateActor<ExpBarUI>();
