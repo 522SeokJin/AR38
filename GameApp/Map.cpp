@@ -28,10 +28,6 @@ float4 Map::GetColor(GameEngineTransform* _Ptr, bool _YReverse/* = true*/)
 {
 	float4 Pos = _Ptr->GetWorldPosition();
 
-	std::string TestStr = std::to_string(Pos.x) + " " + std::to_string(Pos.y) + "\n";
-
-	OutputDebugStringA(TestStr.c_str());
-
 	if (true == _YReverse)
 	{
 		Pos.y *= -1.0f;

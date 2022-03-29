@@ -3,7 +3,7 @@
 #include "GameEngineInput.h"
 
 MouseActor::MouseActor()
-	: UIRenderer(nullptr)
+	: UIRenderer_(nullptr)
 {
 
 }
@@ -15,19 +15,19 @@ MouseActor::~MouseActor()
 
 void MouseActor::SetCursor(const std::string& _Name)
 {
-	UIRenderer->SetImage(_Name);
+	UIRenderer_->SetImage(_Name);
 }
 
 void MouseActor::SetCursor(const std::string& _Name, int _Index)
 {
-	UIRenderer->SetImage(_Name);
-	UIRenderer->SetIndex(_Index);
+	UIRenderer_->SetImage(_Name);
+	UIRenderer_->SetIndex(_Index);
 }
 
 void MouseActor::Start()
 {
-	UIRenderer = CreateTransformComponent<GameEngineUIRenderer>();
-	UIRenderer->GetTransform()->SetLocalScaling({ 50.0f, 50.0f });
+	UIRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();
+	UIRenderer_->GetTransform()->SetLocalScaling({ 50.0f, 50.0f });
 }
 
 void MouseActor::Update(float _DeltaTime)

@@ -17,6 +17,21 @@ GameEngineLevel::GameEngineLevel()
 
 GameEngineLevel::~GameEngineLevel()
 {
+	for (auto& Event : AddEvent_)
+	{
+		delete Event;
+	}
+
+	AddEvent_.clear();
+
+
+	for (auto& Event : AllEvent_)
+	{
+		delete Event;
+	}
+
+	AllEvent_.clear();
+
 	for (std::pair<int, std::list<GameEngineActor*>> Pair : ActorList_)
 	{
 		std::list<GameEngineActor*>& Actors = Pair.second;
@@ -54,6 +69,8 @@ CameraComponent* GameEngineLevel::GetUICamera()
 
 void GameEngineLevel::ActorUpdate(float _DeltaTime)
 {
+	TimeEventUpdate();
+
 	for (std::pair<int, std::list<GameEngineActor*>> Pair : ActorList_)
 	{
 		std::list<GameEngineActor*>& Actors = Pair.second;
@@ -176,6 +193,11 @@ void GameEngineLevel::Release(float _DeltaTime)
 	}
 }
 
+void GameEngineLevel::AddTimeEvent(float _Time, std::function<void()> _Event)
+{
+	AddEvent_.push_back(new TimeEvent{ _Time, _Event });
+}
+
 void GameEngineLevel::Init()
 {
 	MainCameraActor_ = CreateActor<CameraActor>();
@@ -183,6 +205,38 @@ void GameEngineLevel::Init()
 	UICameraActor_ = CreateActor<CameraActor>();
 	UICameraActor_->GetCamera()->SetProjectionMode(ProjectionMode::ORTHOGRAPHIC);
 	UICameraActor_->GetCamera()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
+}
+
+void GameEngineLevel::TimeEventUpdate()
+{
+	for (auto& Event : AddEvent_)
+	{
+		AllEvent_.push_back(Event);
+	}
+	AddEvent_.clear();
+
+	for (auto& Event : AllEvent_)
+	{
+		Event->Time_ -= GameEngineTime::GetInst().GetDeltaTime();
+		if (0 >= Event->Time_)
+		{
+			Event->Event_();
+		}
+	}
+
+	std::list<TimeEvent*>::iterator StartIter = AllEvent_.begin();
+	std::list<TimeEvent*>::iterator EndIter = AllEvent_.end();
+
+	for (; StartIter != EndIter; )
+	{
+		if (0 >= (*StartIter)->Time_)
+		{
+			delete* StartIter;
+			StartIter = AllEvent_.erase(StartIter);
+			continue;
+		}
+		++StartIter;
+	}
 }
 
 void GameEngineLevel::LevelChangeStartActorEvent()

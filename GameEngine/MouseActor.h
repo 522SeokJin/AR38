@@ -14,7 +14,7 @@ public:
 
 	GameEngineUIRenderer* GetUIRenderer()
 	{
-		return UIRenderer;
+		return UIRenderer_;
 	}
 
 protected:
@@ -27,7 +27,7 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
-	GameEngineUIRenderer* UIRenderer;
+	GameEngineUIRenderer* UIRenderer_;
 
 };
 

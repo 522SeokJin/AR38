@@ -51,6 +51,8 @@ public:
 
 	void Release(float _DeltaTime);
 
+	void AddTimeEvent(float _Time, std::function<void()> _Event);
+
 protected:
 	// delete Function
 	GameEngineLevel(const GameEngineLevel& _other) = delete; 
@@ -60,16 +62,17 @@ protected:
 
 private:
 	void Init();
+	void TimeEventUpdate();
 
 	void LevelChangeStartActorEvent();
 	void LevelChangeEndActorEvent();
 
-	// int 는 업데이트 그룹의 순서를 정하기위함이다. Ordering
-	// 순서가 없다면, 먼저 생성된 것이 먼저 행동한다.
 	std::map<int, std::list<GameEngineActor*>> ActorList_;
 	CameraActor* MainCameraActor_;
 	CameraActor* UICameraActor_;
 
+	std::list<TimeEvent*> AllEvent_;
+	std::list<TimeEvent*> AddEvent_;
 
 	//////////////////////////////////////////		Collision
 public:

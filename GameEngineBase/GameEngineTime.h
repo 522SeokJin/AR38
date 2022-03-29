@@ -1,8 +1,12 @@
 #pragma once
 // #include <chrono>
 
-// 분류 :
-// 용도 :
+struct TimeEvent
+{
+	float Time_;
+	std::function<void()> Event_;
+};
+
 // 설명 :
 class GameEngineTime
 {
@@ -31,6 +35,9 @@ private:
 	LARGE_INTEGER endCheck_;
 	double deltaTime_;
 
+	std::list<TimeEvent*> AllEvent_;
+	std::list<TimeEvent*> AddEvent_;
+
 public:
 	// 여기에 이렇게 헤더에 구현한 이유
 	// 리턴하는게 기본자료형이어서
@@ -58,5 +65,6 @@ public:		//delete operator
 public:		//member Func
 	void TimeCheckReset();
 	void TimeCheck();
+	void AddTimeEvent(float _Time, std::function<void()> _Event);
 };
 

@@ -127,9 +127,6 @@
     <ClInclude Include="GameEngineResourcesManager.h">
       <Filter>Resources\99. Manager\ResourceManager</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineImageUIRenderer.h">
-      <Filter>Object\Component\Renderer\Sub</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngineFolderTexture.h">
       <Filter>Resources\02. Image</Filter>
     </ClInclude>
@@ -290,9 +287,6 @@
     </ClCompile>
     <ClCompile Include="GameEngineBlendManager.cpp">
       <Filter>Resources\99. Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngineImageUIRenderer.cpp">
-      <Filter>Object\Component\Renderer\Sub</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineFolderTexture.cpp">
       <Filter>Resources\02. Image</Filter>
