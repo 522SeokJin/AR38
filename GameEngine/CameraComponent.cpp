@@ -85,6 +85,11 @@ void CameraComponent::ClearCameraTarget()
 	CameraBufferTarget_->Clear();
 }
 
+bool ZSort(GameEngineRenderer* _Left, GameEngineRenderer* _Right)
+{
+	return _Left->GetTransform()->GetWorldPosition().z > _Right->GetTransform()->GetWorldPosition().z;
+}
+
 void CameraComponent::Render()
 {
 	CameraBufferTarget_->Setting();
@@ -97,6 +102,8 @@ void CameraComponent::Render()
 	for (std::pair<int, std::list<GameEngineRenderer*>> Pair : RendererList_)
 	{
 		std::list<GameEngineRenderer*>& Renderers = Pair.second;
+
+		Renderers.sort(ZSort);
 
 		for (GameEngineRenderer* Renderer : Renderers)
 		{
@@ -142,10 +149,6 @@ void CameraComponent::DebugRender()
 	DebugRenderCount_ = 0;
 }
 
-bool ZSort(GameEngineRenderer* _Left, GameEngineRenderer* _Right)
-{
-	return _Left->GetTransform()->GetWorldPosition().z > _Right->GetTransform()->GetWorldPosition().z;
-}
 
 void CameraComponent::ReleaseRenderer()
 {
@@ -155,8 +158,6 @@ void CameraComponent::ReleaseRenderer()
 	for (; RenderMapBeginIter != RenderMapEndIter; ++RenderMapBeginIter)
 	{
 		std::list<GameEngineRenderer*>& Renderers = RenderMapBeginIter->second;
-
-		Renderers.sort(ZSort);
 
 		std::list<GameEngineRenderer*>::iterator BeginIter = Renderers.begin();
 		std::list<GameEngineRenderer*>::iterator EndIter = Renderers.end();
