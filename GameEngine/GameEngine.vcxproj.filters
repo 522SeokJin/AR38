@@ -163,6 +163,9 @@
     <ClInclude Include="MouseActor.h">
       <Filter>Object\EngineActor</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineFSM.h">
+      <Filter>Object\Contents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -318,6 +321,9 @@
     <ClCompile Include="MouseActor.cpp">
       <Filter>Object\EngineActor</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineFSM.cpp">
+      <Filter>Object\Contents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -406,6 +412,9 @@
     </Filter>
     <Filter Include="Resources\03. Setting">
       <UniqueIdentifier>{c51986b5-61f2-40b1-a271-b9e8058eb03e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Contents">
+      <UniqueIdentifier>{15304989-80a6-4756-b539-9630a3a80bc7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

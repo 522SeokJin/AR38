@@ -81,6 +81,10 @@
     </ClInclude>
     <ClInclude Include="GameEngineFolderTexture.h" />
     <ClInclude Include="GameEngineFolderTextureManager.h" />
+    <ClInclude Include="GameEngineFSM.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineImageRenderer.h">
       <SubType>
       </SubType>
@@ -265,6 +269,10 @@
     </ClCompile>
     <ClCompile Include="GameEngineFolderTexture.cpp" />
     <ClCompile Include="GameEngineFolderTextureManager.cpp" />
+    <ClCompile Include="GameEngineFSM.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameEngineImageRenderer.cpp">
       <SubType>
       </SubType>

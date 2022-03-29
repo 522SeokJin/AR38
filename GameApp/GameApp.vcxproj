@@ -272,6 +272,7 @@
     </ClCompile>
     <ClCompile Include="UserGame_Resources.cpp" />
     <ClCompile Include="UserGame_Resources_Shader.cpp" />
+    <ClCompile Include="Player_FSM.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DeepeningForestLevel.h">

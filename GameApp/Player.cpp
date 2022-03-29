@@ -143,32 +143,27 @@ void Player::Start()
 		Collision_ = CreateTransformComponent<GameEngineCollision>(10);
 		Collision_->SetLocalScaling(Avatar_->GetImageSize());
 	}
+
+	FSM_.CreateState("stand1", std::bind(&Player::stand1, this),
+		std::bind(&Player::stand1_Start, this),
+		std::bind(&Player::stand1_End, this));
+
+	FSM_.CreateState("walk1", std::bind(&Player::walk1, this),
+		std::bind(&Player::walk1_Start, this),
+		std::bind(&Player::walk1_End, this));
+
+	FSM_.CreateState("jump", std::bind(&Player::jump, this),
+		std::bind(&Player::jump_Start, this),
+		std::bind(&Player::jump_End, this));
+
+	FSM_.ChangeState("stand1");
 }
 
 void Player::Update(float _DeltaTime)
 {
-	KeyInputUpdate();
 	UpdatePartsOffset();
 
-	float4 Color = Map::GetColor(GetTransform());
-
-	if (Color != float4::BLACK)
-	{
-		GetTransform()->SetLocalDeltaTimeMove(float4::DOWN * 50.0f);
-	}
-	else
-	{
-		int a = 0;
-	}
-
-	Collision_->SetLocalScaling({ 100.0f, 100.0f, 1.0f });
-
-	Collision_->Collision(CollisionType::AABBBox, CollisionType::AABBBox, 20,
-		[](GameEngineCollision* _OtherCollision)
-		{
-			_OtherCollision->GetActor()->Death();
-		}
-	);
+	FSM_.Update();
 
 	GetLevel()->PushDebugRender(Collision_->GetTransform(), CollisionType::Rect);
 

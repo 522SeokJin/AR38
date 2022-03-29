@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineFSM.h>
 
 // Ό³Έν : 
 struct KeyOffset;
@@ -40,6 +41,7 @@ private:
 	void CreateShoesAnimation();
 	void CreateWeaponAnimation();
 	void ChangePlayerAnimation(PlayerState _State);
+	void ChangePlayerAnimation(const std::string& _Name);
 
 	void UpdatePartsOffset();
 	void ChangePartsOffset(GameEngineImageRenderer* _Renderer, float4 _Offset);
@@ -50,6 +52,8 @@ private:
 
 	PlayerDir Dir_;
 	PlayerState State_;
+
+	GameEngineFSM FSM_;
 
 	GameEngineImageRenderer* Avatar_;
 	GameEngineImageRenderer* Face_;
@@ -83,5 +87,21 @@ private:
 	std::map<KeyOffset, std::vector<float4>> WeaponOffsets_;
 
 	GameEngineCollision* Collision_;
+
+
+	////////////////////////////////////////////	FSM
+
+private:
+	void stand1_Start();
+	void stand1();
+	void stand1_End();
+
+	void walk1_Start();
+	void walk1();
+	void walk1_End();
+
+	void jump_Start();
+	void jump();
+	void jump_End();
 };
 

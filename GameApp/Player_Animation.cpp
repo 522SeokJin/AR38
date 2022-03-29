@@ -45,13 +45,13 @@ void Player::CreateAnimation()
 	Hair_->SetChangeAnimation("default_hair1");
 	Hair_->Off();
 
-	//Weapon_->Off();
-	//Face_->Off();
-	//HairOverHead_->Off();
-	//Mail_->Off();
-	//MailArm_->Off();
-	//Pants_->Off();
-	//Shoes_->Off();
+	Weapon_->Off();
+	Face_->Off();
+	HairOverHead_->Off();
+	Mail_->Off();
+	MailArm_->Off();
+	Pants_->Off();
+	Shoes_->Off();
 }
 
 void Player::ChangePlayerAnimation(PlayerState _State)
@@ -65,6 +65,16 @@ void Player::ChangePlayerAnimation(PlayerState _State)
 	Pants_->SetChangeAnimation(AnimationName + "_pants" + std::to_string(PantsImageIndex_));
 	Shoes_->SetChangeAnimation(AnimationName + "_shoes" + std::to_string(ShoesImageIndex_));
 	Weapon_->SetChangeAnimation(AnimationName + "_weapon" + std::to_string(WeaponImageIndex_));
+}
+
+void Player::ChangePlayerAnimation(const std::string& _Name)
+{
+	Avatar_->SetChangeAnimation(_Name);
+	Mail_->SetChangeAnimation(_Name + "_mail" + std::to_string(MailImageIndex_));
+	MailArm_->SetChangeAnimation(_Name + "_mailArm" + std::to_string(MailArmImageIndex_));
+	Pants_->SetChangeAnimation(_Name + "_pants" + std::to_string(PantsImageIndex_));
+	Shoes_->SetChangeAnimation(_Name + "_shoes" + std::to_string(ShoesImageIndex_));
+	Weapon_->SetChangeAnimation(_Name + "_weapon" + std::to_string(WeaponImageIndex_));
 }
 
 void Player::UpdatePartsOffset()

@@ -98,6 +98,9 @@
     <ClCompile Include="Map.cpp">
       <Filter>Actor\Map</Filter>
     </ClCompile>
+    <ClCompile Include="Player_FSM.cpp">
+      <Filter>Actor\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
