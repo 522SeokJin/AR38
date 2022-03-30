@@ -27,10 +27,13 @@ StatusUI::~StatusUI()
 
 void StatusUI::Start()
 {
+
+
 	{
 		GameEngineUIRenderer* Renderer = 
 			CreateTransformComponent<GameEngineUIRenderer>(GetTransform(), 1);
 		Renderer->SetImage("mainBar.status.layer_cover.png");
+		Renderer->TextSetting("궁서", "테스트 중입니다", 50);
 	}
 
 	{

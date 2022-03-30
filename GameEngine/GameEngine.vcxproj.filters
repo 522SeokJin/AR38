@@ -166,6 +166,12 @@
     <ClInclude Include="GameEngineFSM.h">
       <Filter>Object\Contents</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineFont.h">
+      <Filter>Resources\02. Image</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineFontManager.h">
+      <Filter>Resources\99. Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -324,6 +330,12 @@
     <ClCompile Include="GameEngineFSM.cpp">
       <Filter>Object\Contents</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineFont.cpp">
+      <Filter>Resources\02. Image</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineFontManager.cpp">
+      <Filter>Resources\99. Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -416,6 +428,9 @@
     <Filter Include="Object\Contents">
       <UniqueIdentifier>{15304989-80a6-4756-b539-9630a3a80bc7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lib\FW1Font">
+      <UniqueIdentifier>{8d1ddfa0-f145-436c-b2d2-f0c6aa5351ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\ThirdParty\x64\Debug\DirectXTex\DirectXTex.lib">
@@ -423,6 +438,12 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="..\ThirdParty\x64\Release\DirectXTex\DirectXTex.lib">
       <Filter>Lib\DitectXTex\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\ThirdParty\x64\Release\FW1Font\FW1FontWrapper.dll">
+      <Filter>Lib\FW1Font</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\ThirdParty\x64\Release\FW1Font\FW1FontWrapper.lib">
+      <Filter>Lib\FW1Font</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

@@ -30,10 +30,11 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
+	virtual void Render();
 
 	GameEngineRenderingPipeLine* PipeLine_;
 
 private:
-	virtual void Render();
+
 };
 

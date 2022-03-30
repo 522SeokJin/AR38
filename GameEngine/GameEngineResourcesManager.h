@@ -15,6 +15,7 @@
 #include "GameEngineBlendManager.h"
 #include "GameEngineDepthStencilManager.h"
 #include "GameEngineDepthBufferManager.h"
+#include "GameEngineFontManager.h" 
 
 #include "GameEngineRenderingPipeLineManager.h"
 
@@ -31,6 +32,7 @@
 #include "GameEngineBlend.h"
 #include "GameEngineDepthStencil.h"
 #include "GameEngineDepthBuffer.h"
+#include "GameEngineFont.h"
 
 #include "GameEngineRenderingPipeLine.h"
 
@@ -44,6 +46,7 @@ public:
 
 		GameEngineRenderingPipeLineManager::Destroy();
 
+		GameEngineFontManager::Destroy();
 		GameEngineConstantBufferManager::Destroy();
 		GameEngineFolderTextureManager::Destroy();
 		GameEngineVertexBufferManager::Destroy();

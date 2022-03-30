@@ -95,6 +95,21 @@ void GameEngineDevice::Initialize()
 	// CreateSwapChain();
 }
 
+void GameEngineDevice::ShaderReset()
+{
+	Context_->VSSetShader(nullptr, nullptr, 0);
+	Context_->HSSetShader(nullptr, nullptr, 0);
+	Context_->GSSetShader(nullptr, nullptr, 0);
+	Context_->DSSetShader(nullptr, nullptr, 0);
+	Context_->PSSetShader(nullptr, nullptr, 0);
+}
+
+void GameEngineDevice::ResourceReset()
+{
+	// Resource 전체 리셋, 필요시에 더 추가
+	ShaderReset();
+}
+
 void GameEngineDevice::CreateSwapChain()
 {
 	if (0 >= GameEngineWindow::GetInst().GetSize().x &&

@@ -41,6 +41,8 @@ public:
 
 	void Initialize();
 
+	static void ShaderReset();
+	static void ResourceReset();
 	static void RenderStart();
 	static void RenderEnd();
 

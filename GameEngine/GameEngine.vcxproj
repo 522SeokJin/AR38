@@ -81,6 +81,14 @@
     </ClInclude>
     <ClInclude Include="GameEngineFolderTexture.h" />
     <ClInclude Include="GameEngineFolderTextureManager.h" />
+    <ClInclude Include="GameEngineFont.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEngineFontManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineFSM.h">
       <SubType>
       </SubType>
@@ -269,6 +277,14 @@
     </ClCompile>
     <ClCompile Include="GameEngineFolderTexture.cpp" />
     <ClCompile Include="GameEngineFolderTextureManager.cpp" />
+    <ClCompile Include="GameEngineFont.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEngineFontManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameEngineFSM.cpp">
       <SubType>
       </SubType>
@@ -407,6 +423,16 @@
       <FileType>Document</FileType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="..\ThirdParty\x64\Release\FW1Font\FW1FontWrapper.lib">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="..\ThirdParty\x64\Release\FW1Font\FW1FontWrapper.dll">
+      <FileType>Document</FileType>
     </CopyFileToFolders>
   </ItemGroup>
   <PropertyGroup Label="Globals">

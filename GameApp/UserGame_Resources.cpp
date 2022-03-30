@@ -3,9 +3,12 @@
 #include <GameEngine\EngineVertex.h>
 #include "UserGame_Resources_Shader.h"
 #include <GameEngine/GameEngineWindow.h>
+#include <GameEngine/GameEngineFontManager.h>
 
 void UserGame::ResourceLoad()
 {
+	GameEngineFontManager::GetInst().Load("±Ã¼­");
+
 	GameEngineDirectory Dir;
 
 	Dir.MoveParent();

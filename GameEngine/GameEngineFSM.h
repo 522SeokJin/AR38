@@ -40,6 +40,11 @@ public:
 		return Current_->GetName();
 	}
 
+	inline bool IsCurrentState(const std::string& _Name) const
+	{
+		return Current_->GetName() == _Name;
+	}
+
 protected:
 	GameEngineFSM(const GameEngineFSM& _other) = delete; 
 	GameEngineFSM(GameEngineFSM&& _other) noexcept = delete;
