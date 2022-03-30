@@ -8,6 +8,7 @@
 #include "GameEngineCollision.h"
 #include "GameEngineRenderTarget.h"
 #include "GameEngineUIRenderer.h"
+#include "GameEngineGUI.h"
 
 GameEngineLevel::GameEngineLevel()
 	: MainCameraActor_(nullptr)
@@ -93,8 +94,6 @@ void GameEngineLevel::Render()
 {
 	GameEngineDevice::RenderStart();
 
-	GameEngineUIRenderer::GlobalFontTargetClear();
-
 	GetMainCamera()->ClearCameraTarget();
 	GetUICamera()->ClearCameraTarget();
 
@@ -105,6 +104,9 @@ void GameEngineLevel::Render()
 
 	GameEngineDevice::GetBackBufferTarget()->Merge(GetMainCamera()->CameraBufferTarget_);
 	GameEngineDevice::GetBackBufferTarget()->Merge(GetUICamera()->CameraBufferTarget_);
+
+	GameEngineGUI::GetInst()->GUIRenderStart();
+	GameEngineGUI::GetInst()->GUIRenderEnd();
 
 	GameEngineDevice::RenderEnd();
 }

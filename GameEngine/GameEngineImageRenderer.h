@@ -67,6 +67,11 @@ public:
 		return CurAnimation_->GetName() == _Name;
 	}
 
+	inline void SetAlpha(float _Value)
+	{
+		ResultColor_.a = _Value;
+	}
+
 	void SetStartCallBack(const std::string& _Name, std::function<void()> _CallBack);
 	void SetEndCallBack(const std::string& _Name, std::function<void()> _CallBack);
 	void SetFrameCallBack(const std::string& _Name, int _Index,
@@ -88,8 +93,10 @@ private:
 	float4		ImageSize_;
 
 	std::map<std::string, Animation2D*> AllAnimations_;
-	GameEngineTexture* CurTexture_;
 	Animation2D* CurAnimation_;
+	GameEngineTexture* CurTexture_;
+
+	float4 ResultColor_;
 	float4 CutData_; // float2 TextureCutDataPos, float2 TextureCutDataSize
 
 	struct Animation2D : public GameEngineObjectNameBase

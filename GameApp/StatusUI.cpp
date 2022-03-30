@@ -29,7 +29,15 @@ void StatusUI::Start()
 		GameEngineUIRenderer* Renderer = 
 			CreateTransformComponent<GameEngineUIRenderer>(GetTransform(), 1);
 		Renderer->SetImage("mainBar.status.layer_cover.png");
-		Renderer->TextSetting("궁서", "테스트 중입니다", 50);
+		Renderer->TextSetting("돋움", "초보자", 11, float4::WHITE, { 10.0f, 23.0f });
+	}
+
+	{
+		GameEngineUIRenderer* Renderer =
+			CreateTransformComponent<GameEngineUIRenderer>(GetTransform(), 1);
+		Renderer->GetTransform()->SetLocalScaling({ 100.0f, 100.0f, 1.0f });
+		Renderer->GetTransform()->SetLocalPosition({ 0.0f, 200.0f, 0.0f });
+		Renderer->TextSetting("돋움", "테스트 2", 50);
 	}
 
 	{

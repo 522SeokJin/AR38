@@ -17,9 +17,7 @@ public:
 	void SetRenderGroup(int _Order) override;
 
 	void TextSetting(const std::string& _FontName, const std::string& _PrintText, 
-		float _FontSize, float4 _Color = float4::RED);
-
-	static void GlobalFontTargetClear();
+		float _FontSize, float4 _Color = float4::RED, float4 _Pivot = float4::ZERO);
 
 protected:
 	GameEngineUIRenderer(const GameEngineUIRenderer& _other) = delete; 

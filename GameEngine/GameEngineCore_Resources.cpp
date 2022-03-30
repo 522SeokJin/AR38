@@ -293,7 +293,8 @@ void GameEngineCore::EngineResourcesCreate()
 	}
 
 	{
-		GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Create("DebugRect");
+		GameEngineRenderingPipeLine* Pipe = 
+			GameEngineRenderingPipeLineManager::GetInst().Create("DebugRect");
 		Pipe->SetInputAssembler1VertexBufferSetting("DebugRect");
 		Pipe->SetInputAssembler1InputLayoutSetting("Color_VS");
 		Pipe->SetVertexShader("Color_VS");
@@ -303,12 +304,14 @@ void GameEngineCore::EngineResourcesCreate()
 	}
 
 	{
-		GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Create("TargetMerge");
+		GameEngineRenderingPipeLine* Pipe = 
+			GameEngineRenderingPipeLineManager::GetInst().Create("TargetMerge");
 		Pipe->SetInputAssembler1VertexBufferSetting("FullRect");
 		Pipe->SetInputAssembler1InputLayoutSetting("TargetMerge_VS");
 		Pipe->SetVertexShader("TargetMerge_VS");
 		Pipe->SetInputAssembler2IndexBufferSetting("FullRect");
 		Pipe->SetPixelShader("TargetMerge_PS");
+		Pipe->SetOutputMergerDepthStencil("BaseDepthOff");
 	}
 
 
@@ -333,7 +336,8 @@ void GameEngineCore::EngineResourcesCreate()
 	}
 
 	{
-		GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Create("TextureUI");
+		GameEngineRenderingPipeLine* Pipe = 
+			GameEngineRenderingPipeLineManager::GetInst().Create("TextureUI");
 		Pipe->SetInputAssembler1VertexBufferSetting("Rect");
 		Pipe->SetInputAssembler1InputLayoutSetting("Texture_VS");
 		Pipe->SetVertexShader("Texture_VS");

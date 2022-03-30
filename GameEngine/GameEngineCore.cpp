@@ -6,6 +6,7 @@
 #include "GameEngineLevel.h"
 #include "GameEngineInput.h"
 #include "GameEngineCollision.h"
+#include "GameEngineGUI.h"
 #include <GameEngineBase/GameEngineFile.h>
 #include <GameEngineBase/GameEngineDirectory.h>
 
@@ -44,6 +45,8 @@ void GameEngineCore::EngineInitialize()
 
 	GameEngineDevice::GetInst().CreateSwapChain();
 
+	GameEngineGUI::GetInst()->Initialize();
+
 	GameEngineCollision::Init();
 
 	GameEngineSoundManager::GetInst().Initialize();
@@ -63,6 +66,7 @@ void GameEngineCore::EngineDestroy()
 	GameEngineManagerHelper::ManagerRelease();
 	GameEngineInput::Destroy();
 	GameEngineTime::Destroy();
+	GameEngineGUI::Destroy();
 	GameEngineDevice::Destroy();
 	GameEngineWindow::Destroy();
 }

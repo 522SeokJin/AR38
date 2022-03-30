@@ -285,8 +285,10 @@ void GameEngineImageRenderer::Update(float _DeltaTime)
 
 void GameEngineImageRenderer::ImageRendererStart()
 {
-
 	ShaderHelper.SettingConstantBufferLink("TextureCutData", CutData_);
+
+	ResultColor_ = float4::ONE;
+	ShaderHelper.SettingConstantBufferLink("ResultColor", ResultColor_);
 }
 
 void GameEngineImageRenderer::Start()
@@ -424,7 +426,7 @@ void GameEngineImageRenderer::Animation2D::ReverseFrameUpdate()
 
 			IsEnd_ = true;
 
-			CurFrame_ = StartFrame_;
+			CurFrame_ = EndFrame_;
 		}
 	}
 

@@ -8,6 +8,7 @@
 void UserGame::ResourceLoad()
 {
 	GameEngineFontManager::GetInst().Load("±Ã¼­");
+	GameEngineFontManager::GetInst().Load("µ¸¿ò");
 
 	GameEngineDirectory Dir;
 

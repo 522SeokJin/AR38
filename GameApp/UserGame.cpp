@@ -28,7 +28,7 @@ UserGame::~UserGame() // default destructer 디폴트 소멸자
 
 void UserGame::Initialize()
 {
-	GameEngineInput::GetInst().HideCursor();
+	//GameEngineInput::GetInst().HideCursor();
 
 	// Title
 	LevelCreate<TitleLevel>("Title");

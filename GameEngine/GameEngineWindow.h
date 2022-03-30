@@ -29,6 +29,13 @@ public:
 	}
 
 public:
+	friend LRESULT CALLBACK WndProc(HWND _hWnd, UINT _message, WPARAM _wParam, LPARAM _lParam);
+
+	static inline void SetMessageCallBack(std::function<LRESULT(HWND, UINT, WPARAM, LPARAM)> _CallBack)
+	{
+		MessageCallBack_ = _CallBack;
+	}
+
 	HWND  GetWindowHWND()
 	{
 		return windowhandle_;
@@ -56,6 +63,8 @@ private:
 	~GameEngineWindow();
 
 	int CreateMainWindowClass();
+
+	static std::function<LRESULT(HWND, UINT, WPARAM, LPARAM)> MessageCallBack_;
 
 	std::string className_;
 	std::string windowTitle_;

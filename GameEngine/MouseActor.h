@@ -17,6 +17,9 @@ public:
 		return UIRenderer_;
 	}
 
+	void WindowCursorOn();
+	void WindowCursorOff();
+
 protected:
 	MouseActor(const MouseActor& _other) = delete; 
 	MouseActor(MouseActor&& _other) noexcept = delete;

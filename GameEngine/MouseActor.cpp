@@ -24,6 +24,16 @@ void MouseActor::SetCursor(const std::string& _Name, int _Index)
 	UIRenderer_->SetIndex(_Index);
 }
 
+void MouseActor::WindowCursorOn()
+{
+	ShowCursor(true);
+}
+
+void MouseActor::WindowCursorOff()
+{
+	ShowCursor(false);
+}
+
 void MouseActor::Start()
 {
 	UIRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();

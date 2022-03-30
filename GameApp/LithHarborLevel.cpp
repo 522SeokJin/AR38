@@ -30,10 +30,13 @@ void LithHarborLevel::LevelStart()
 	GetMainCamera()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
 
 	{
-		MouseActor* Actor = CreateActor<MouseActor>();
-		Actor->GetUIRenderer()->SetRenderGroup(1000);
-		Actor->SetCursor("Cursor.0.0.png");
+		Cursor_ = CreateActor<MouseActor>();
+		Cursor_->GetUIRenderer()->SetRenderGroup(1000);
+		Cursor_->SetCursor("Cursor.0.0.png");
 	}
+
+	GameEngineInput::GetInst().CreateKey("MOn", 'p');
+	GameEngineInput::GetInst().CreateKey("MOff", 'o');
 
 	{
 		LithHarbor* Actor = CreateActor<LithHarbor>();
@@ -83,7 +86,15 @@ void LithHarborLevel::LevelStart()
 
 void LithHarborLevel::LevelUpdate(float _DeltaTime)
 {
-	
+	if (true == GameEngineInput::GetInst().Down("MOn"))
+	{
+		Cursor_->WindowCursorOn();
+	}
+
+	if (true == GameEngineInput::GetInst().Down("MOff"))
+	{
+		Cursor_->WindowCursorOff();
+	}
 }
 
 void LithHarborLevel::LevelChangeEndEvent()

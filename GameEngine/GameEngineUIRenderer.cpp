@@ -33,17 +33,14 @@ void GameEngineUIRenderer::SetRenderGroup(int _Order)
 	GetLevel()->GetUICamera()->ChangeRendererGroup(_Order, this);;
 }
 
-void GameEngineUIRenderer::TextSetting(const std::string& _FontName, const std::string& _PrintText, float _FontSize, float4 _Color)
+void GameEngineUIRenderer::TextSetting(const std::string& _FontName, 
+	const std::string& _PrintText, float _FontSize, float4 _Color, float4 _Pivot)
 {
 	FontName_ = _FontName;
 	PrintText_ = _PrintText;
 	FontSize_ = _FontSize;
 	Color_ = _Color;
-}
-
-void GameEngineUIRenderer::GlobalFontTargetClear()
-{
-	FontTarget_->Clear();
+	FontPivot_ = _Pivot.InvertY();
 }
 
 void GameEngineUIRenderer::Start()
@@ -76,11 +73,11 @@ void GameEngineUIRenderer::Render()
 
 	GameEngineRenderTarget* RenderTarget = GameEngineRenderTarget::GetLastRenderTarget();
 
-	//FontTarget_->Clear();
+	FontTarget_->Clear();
 	FontTarget_->Setting();
 
 	GameEngineFont* Font = GameEngineFontManager::GetInst().Find(FontName_);
-	Font->DrawFont(PrintText_, FontSize_, ScreenSize - UIPos, Color_, FW1_CENTER);
+	Font->DrawFont(PrintText_, FontSize_, ScreenSize + UIPos.InvertY() + FontPivot_, Color_, FW1_CENTER | FW1_VCENTER);
 	GameEngineDevice::ShaderReset();
 
 	RenderTarget->Merge(FontTarget_);

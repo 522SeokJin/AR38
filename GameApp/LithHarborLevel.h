@@ -2,6 +2,7 @@
 #include "GameEngine/GameEngineLevel.h"
 
 // Ό³Έν : 
+class MouseActor;
 class LithHarborLevel : public GameEngineLevel
 {
 public:
@@ -20,6 +21,6 @@ protected:
 	LithHarborLevel& operator=(const LithHarborLevel&& _other) = delete;
 
 private:
-	
+	MouseActor* Cursor_;
 };
 
