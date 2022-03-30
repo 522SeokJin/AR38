@@ -10,8 +10,6 @@ StatusUI::StatusUI()
 	, CurMP_(2000.0f)
 	, MaxHP_(5000.0f)
 	, MaxMP_(2000.0f)
-	, HPTimeTest_(0.0f)
-	, MPTimeTest_(0.0f)
 	, HPChanged_(true)
 	, MPChanged_(true)
 	, Level_(10)
@@ -27,8 +25,6 @@ StatusUI::~StatusUI()
 
 void StatusUI::Start()
 {
-
-
 	{
 		GameEngineUIRenderer* Renderer = 
 			CreateTransformComponent<GameEngineUIRenderer>(GetTransform(), 1);
@@ -145,12 +141,6 @@ void StatusUI::Start()
 
 void StatusUI::Update(float _DeltaTime)
 {
-	HPTimeTest_ += 20.0f * _DeltaTime;
-	MPTimeTest_ += 10.0f * _DeltaTime;
-
-	SetHPPer(HPTimeTest_);
-	SetMPPer(MPTimeTest_);
-
 	if (true == HPChanged_)
 	{
 		UpdateHPBar();

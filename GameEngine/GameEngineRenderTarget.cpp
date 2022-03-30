@@ -6,6 +6,9 @@
 #include "GameEngineRenderingPipeLineManager.h"
 #include "GameEngineDepthBuffer.h"
 
+GameEngineRenderTarget* GameEngineRenderTarget::LastRenderTarget_ = nullptr;
+GameEngineDepthBuffer* GameEngineRenderTarget::LastDepthBuffer_ = nullptr;
+
 GameEngineRenderTarget::GameEngineRenderTarget()
 	: Pipe_(nullptr)
 	, Res_()
@@ -114,7 +117,10 @@ void GameEngineRenderTarget::Setting(int _Index)
 	if (nullptr != DepthBuffer_)
 	{
 		View = DepthBuffer_->GetDepthStencilView();
+		LastDepthBuffer_ = DepthBuffer_;
 	}
+
+	LastRenderTarget_ = this;
 
 	if (-1 == _Index)
 	{

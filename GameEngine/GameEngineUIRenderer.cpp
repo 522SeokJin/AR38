@@ -5,7 +5,9 @@
 #include "GameEngineFont.h"
 #include "GameEngineFontManager.h"
 #include "GameEngineWindow.h"
+#include "GameEngineRenderTarget.h"
 
+GameEngineRenderTarget* GameEngineUIRenderer::FontTarget_ = nullptr;
 
 GameEngineUIRenderer::GameEngineUIRenderer()
 	: FontName_("±Ã¼­")
@@ -19,7 +21,11 @@ GameEngineUIRenderer::GameEngineUIRenderer()
 
 GameEngineUIRenderer::~GameEngineUIRenderer()
 {
-
+	if (nullptr != FontTarget_)
+	{
+		delete FontTarget_;
+		FontTarget_ = nullptr;
+	}
 }
 
 void GameEngineUIRenderer::SetRenderGroup(int _Order)
@@ -35,12 +41,23 @@ void GameEngineUIRenderer::TextSetting(const std::string& _FontName, const std::
 	Color_ = _Color;
 }
 
+void GameEngineUIRenderer::GlobalFontTargetClear()
+{
+	FontTarget_->Clear();
+}
+
 void GameEngineUIRenderer::Start()
 {
 	GetLevel()->GetUICamera()->PushRenderer(GetOrder(), this);
 
 	SetRenderingPipeLine("TextureUI");
 	ImageRendererStart();
+
+	if (nullptr == FontTarget_)
+	{
+		FontTarget_ = new GameEngineRenderTarget();
+		FontTarget_->Create(GameEngineWindow::GetInst().GetSize(), float4::NONE);
+	}
 }
 
 void GameEngineUIRenderer::Render()
@@ -55,10 +72,18 @@ void GameEngineUIRenderer::Render()
 	float4 ScreenSize = GameEngineWindow::GetInst().GetSize();
 
 	ScreenSize = ScreenSize.halffloat4();
-
 	float4 UIPos = GetTransform()->GetWorldPosition();
+
+	GameEngineRenderTarget* RenderTarget = GameEngineRenderTarget::GetLastRenderTarget();
+
+	//FontTarget_->Clear();
+	FontTarget_->Setting();
 
 	GameEngineFont* Font = GameEngineFontManager::GetInst().Find(FontName_);
 	Font->DrawFont(PrintText_, FontSize_, ScreenSize - UIPos, Color_, FW1_CENTER);
 	GameEngineDevice::ShaderReset();
+
+	RenderTarget->Merge(FontTarget_);
+
+	RenderTarget->Setting();
 }

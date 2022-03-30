@@ -66,9 +66,6 @@ private:
 	int	Level_;
 	bool LevelChanged_;
 
-	float HPTimeTest_;
-	float MPTimeTest_;
-
 	// Number Image
 	std::map<int, std::vector<GameEngineUIRenderer*>> HPNumber_;
 	std::map<int, std::vector<GameEngineUIRenderer*>> MPNumber_;

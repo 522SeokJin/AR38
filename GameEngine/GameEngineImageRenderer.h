@@ -109,6 +109,9 @@ private:
 		void CallFrame();
 		void Update(float _DeltaTime);
 
+		void FrameUpdate();
+		void ReverseFrameUpdate();
+
 		void SetOffset(int _Index, float4 _Offset);
 
 		float4 GetTextureSize(int _Index);

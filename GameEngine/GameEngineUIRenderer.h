@@ -19,6 +19,8 @@ public:
 	void TextSetting(const std::string& _FontName, const std::string& _PrintText, 
 		float _FontSize, float4 _Color = float4::RED);
 
+	static void GlobalFontTargetClear();
+
 protected:
 	GameEngineUIRenderer(const GameEngineUIRenderer& _other) = delete; 
 	GameEngineUIRenderer(GameEngineUIRenderer&& _other) noexcept = delete;
@@ -30,6 +32,8 @@ protected:
 	float FontSize_;
 	float4 FontPivot_;
 	float4 Color_;
+
+	static GameEngineRenderTarget* FontTarget_;
 
 private:
 	void Start() override;

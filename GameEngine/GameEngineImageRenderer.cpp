@@ -345,6 +345,36 @@ void GameEngineImageRenderer::Animation2D::Update(float _DeltaTime)
 {
 	CurTime_ -= _DeltaTime;
 
+	if (StartFrame_ < EndFrame_)
+	{
+		FrameUpdate();
+	}
+	else
+	{
+		ReverseFrameUpdate();
+	}
+
+	CallFrame();
+
+	if (nullptr == FolderTextures_)
+	{
+		Renderer_->ShaderHelper.SettingTexture("Tex", AnimationTexture_);
+		Renderer_->CurTexture_ = AnimationTexture_;
+		Renderer_->SetIndex(CurFrame_);
+	}
+	else
+	{
+		Renderer_->CutData_ = float4(0, 0, 1, 1);
+		Renderer_->ShaderHelper.SettingTexture("Tex", 
+			FolderTextures_->GetTextureIndex(CurFrame_));
+		Renderer_->SetLocalScaling(FolderTextures_->GetTextureIndex(CurFrame_)->GetTextureSize());
+		Renderer_->SetImageSize(Renderer_->GetLocalScaling());
+		Renderer_->SetLocalPosition({Offsets_[CurFrame_].x, Offsets_[CurFrame_].y });
+	}
+}
+
+void GameEngineImageRenderer::Animation2D::FrameUpdate()
+{
 	if (CurTime_ <= 0.0f)
 	{
 		++CurFrame_;
@@ -370,24 +400,34 @@ void GameEngineImageRenderer::Animation2D::Update(float _DeltaTime)
 			CurFrame_ = EndFrame_;
 		}
 	}
+}
 
-	CallFrame();
+void GameEngineImageRenderer::Animation2D::ReverseFrameUpdate()
+{
+	if (CurTime_ <= 0.0f)
+	{
+		--CurFrame_;
+		CurTime_ = InterTime_;
+		if (true == Loop_
+			&& CurFrame_ < EndFrame_)
+		{
+			CallEnd();
+			CurFrame_ = StartFrame_;
+		}
+		else if (false == Loop_
+			&& CurFrame_ < EndFrame_)
+		{
+			if (false == IsEnd_)
+			{
+				CallEnd();
+			}
 
-	if (nullptr == FolderTextures_)
-	{
-		Renderer_->ShaderHelper.SettingTexture("Tex", AnimationTexture_);
-		Renderer_->CurTexture_ = AnimationTexture_;
-		Renderer_->SetIndex(CurFrame_);
+			IsEnd_ = true;
+
+			CurFrame_ = StartFrame_;
+		}
 	}
-	else
-	{
-		Renderer_->CutData_ = float4(0, 0, 1, 1);
-		Renderer_->ShaderHelper.SettingTexture("Tex", 
-			FolderTextures_->GetTextureIndex(CurFrame_));
-		Renderer_->SetLocalScaling(FolderTextures_->GetTextureIndex(CurFrame_)->GetTextureSize());
-		Renderer_->SetImageSize(Renderer_->GetLocalScaling());
-		Renderer_->SetLocalPosition({Offsets_[CurFrame_].x, Offsets_[CurFrame_].y });
-	}
+
 }
 
 void GameEngineImageRenderer::Animation2D::SetOffset(int _Index, float4 _Offset)

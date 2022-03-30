@@ -7,6 +7,7 @@
 #include "CameraComponent.h"
 #include "GameEngineCollision.h"
 #include "GameEngineRenderTarget.h"
+#include "GameEngineUIRenderer.h"
 
 GameEngineLevel::GameEngineLevel()
 	: MainCameraActor_(nullptr)
@@ -91,6 +92,8 @@ void GameEngineLevel::ActorUpdate(float _DeltaTime)
 void GameEngineLevel::Render()
 {
 	GameEngineDevice::RenderStart();
+
+	GameEngineUIRenderer::GlobalFontTargetClear();
 
 	GetMainCamera()->ClearCameraTarget();
 	GetUICamera()->ClearCameraTarget();

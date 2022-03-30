@@ -33,6 +33,16 @@ public:
 
 	void CreateDepthBuffer(float4 _Size);
 
+	static GameEngineRenderTarget* GetLastRenderTarget()
+	{
+		return LastRenderTarget_;
+	}
+
+	static GameEngineDepthBuffer* GetLastDepthBuffer()
+	{
+		return LastDepthBuffer_;
+	}
+
 protected:
 	GameEngineRenderTarget(const GameEngineRenderTarget& _other) = delete;
 	GameEngineRenderTarget(GameEngineRenderTarget&& _other) = delete;
@@ -40,6 +50,9 @@ protected:
 	GameEngineRenderTarget& operator=(const GameEngineRenderTarget&& _other) = delete;
 
 private:
+	static GameEngineRenderTarget* LastRenderTarget_;
+	static GameEngineDepthBuffer* LastDepthBuffer_;
+
 	std::vector<GameEngineTexture*> ReleaseTextures_;
 
 	// 텍스처에게서 빌려온것, 렌더타겟이 지우면안된다.
