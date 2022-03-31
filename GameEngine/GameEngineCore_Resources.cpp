@@ -347,4 +347,14 @@ void GameEngineCore::EngineResourcesCreate()
 		Pipe->SetOutputMergerBlend("AlphaBlend");
 		Pipe->SetOutputMergerDepthStencil("BaseDepthOff");
 	}
+
+	{
+		GameEngineRenderingPipeLine* Pipe =
+			GameEngineRenderingPipeLineManager::GetInst().Create("ProgressBar");
+		Pipe->SetInputAssembler1VertexBufferSetting("Rect");
+		Pipe->SetInputAssembler1InputLayoutSetting("ProgressBar_VS");
+		Pipe->SetVertexShader("ProgressBar_VS");
+		Pipe->SetInputAssembler2IndexBufferSetting("Rect");
+		Pipe->SetPixelShader("ProgressBar_PS");
+	}
 }

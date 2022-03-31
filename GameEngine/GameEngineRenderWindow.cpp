@@ -20,7 +20,7 @@ void GameEngineRenderWindow::OnGUI()
 			->GetShaderResourcesView(0));
 		float4& Size = DrawRenderTarget_[i].Size_;
 
-		if (true == ImGui::ImageButton(Id, { Size.x, Size.y }));
+		if (true == ImGui::ImageButton(Id, { Size.x, Size.y }))
 		{
 			int a = 0;
 		}

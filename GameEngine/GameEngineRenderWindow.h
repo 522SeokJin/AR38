@@ -21,9 +21,9 @@ public:
 		DrawRenderTarget_.clear();
 	}
 
-	void PushRenderTarget(std::string _Name, GameEngineRenderTarget* _RenderTarget, float4 Size_)
+	void PushRenderTarget(std::string _Name, GameEngineRenderTarget* _RenderTarget, float4 _Size)
 	{
-		DrawRenderTarget_.push_back({ _Name, _RenderTarget, Size_, false });
+		DrawRenderTarget_.push_back({ _Name, _RenderTarget, _Size });
 	}
 
 protected:

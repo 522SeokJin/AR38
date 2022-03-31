@@ -96,7 +96,7 @@ void LithHarborLevel::LevelUpdate(float _DeltaTime)
 	{
 		Window = GameEngineGUI::GetInst()->
 			CreateGUIWindow<GameEngineRenderWindow>("RenderWindow");
-		float4 Size = GameEngineWindow::GetInst().GetSize() * 0.1f;
+		float4 Size = GameEngineWindow::GetInst().GetSize() * 0.25f;
 		Window->PushRenderTarget("메인 카메라 타겟", 
 			GetMainCamera()->GetCameraRenderTarget(), Size);
 		Window->PushRenderTarget("UI 카메라 타겟",

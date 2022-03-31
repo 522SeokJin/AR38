@@ -5,6 +5,15 @@
 class GameEngineUIRenderer;
 class StatusUI : public GameEngineActor
 {
+	class ProgressBar
+	{
+	public:
+		float Percent;
+		int ProgressDirection;
+		float Empty1;
+		float Empty2;
+	};
+
 public:
 	StatusUI();
 	~StatusUI();
@@ -50,6 +59,9 @@ private:
 	void UpdateHPBar();
 	void UpdateMPBar();
 	void UpdateStatusLv();
+
+	ProgressBar HPBarValue_;
+	ProgressBar MPBarValue_;
 
 	GameEngineUIRenderer* HPBar_;
 	GameEngineUIRenderer* MPBar_;

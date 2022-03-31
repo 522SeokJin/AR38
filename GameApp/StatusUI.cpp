@@ -3,7 +3,9 @@
 #include "GameEngine/GameEngineUIRenderer.h"
 
 StatusUI::StatusUI()
-	: HPBar_(nullptr)
+	: HPBarValue_({ 1.0f, 2, 0, 0 })
+	, MPBarValue_({ 1.0f, 2, 0, 0 })
+	, HPBar_(nullptr)
 	, MPBar_(nullptr)
 	, Ratio_(0.0f)
 	, CurHP_(5000.0f)
@@ -15,7 +17,6 @@ StatusUI::StatusUI()
 	, Level_(10)
 	, LevelChanged_(true)
 {
-
 }
 
 StatusUI::~StatusUI()
@@ -30,14 +31,6 @@ void StatusUI::Start()
 			CreateTransformComponent<GameEngineUIRenderer>(GetTransform(), 1);
 		Renderer->SetImage("mainBar.status.layer_cover.png");
 		Renderer->TextSetting("µ¸¿ò", "ÃÊº¸ÀÚ", 11, float4::WHITE, { 10.0f, 23.0f });
-	}
-
-	{
-		GameEngineUIRenderer* Renderer =
-			CreateTransformComponent<GameEngineUIRenderer>(GetTransform(), 1);
-		Renderer->GetTransform()->SetLocalScaling({ 100.0f, 100.0f, 1.0f });
-		Renderer->GetTransform()->SetLocalPosition({ 0.0f, 200.0f, 0.0f });
-		Renderer->TextSetting("µ¸¿ò", "Å×½ºÆ® 2", 50);
 	}
 
 	{
@@ -56,6 +49,9 @@ void StatusUI::Start()
 
 	{
 		HPBar_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+		HPBar_->SetRenderingPipeLine("ProgressBar");
+		HPBar_->ImageRendererStart();
+		HPBar_->ShaderHelper.SettingConstantBufferLink("ProgressBarCBuffer", HPBarValue_);
 		HPBar_->SetImage("mainBar.status.gauge.hp.layer_0.png");
 		HPBar_->SetLocalPosition({ 10.0f, 0.0f });
 		Ratio_ = HPBar_->GetImageSize().x / 100.0f;
@@ -63,6 +59,9 @@ void StatusUI::Start()
 
 	{
 		MPBar_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+		MPBar_->SetRenderingPipeLine("ProgressBar");
+		MPBar_->ShaderHelper.SettingConstantBufferLink("ProgressBarCBuffer", MPBarValue_);
+		MPBar_->ImageRendererStart();
 		MPBar_->SetImage("mainBar.status.gauge.mp.layer_0.png");
 		MPBar_->SetLocalPosition({ 10.0f, -16.0f });
 		Ratio_ = MPBar_->GetImageSize().x / 100.0f;
