@@ -31,6 +31,7 @@ protected:
 	float4 FontPivot_;
 	float4 Color_;
 
+	static int UIRendererCount_;
 	static GameEngineRenderTarget* FontTarget_;
 
 private:

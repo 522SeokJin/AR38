@@ -8,6 +8,7 @@
 #include "GameEngineRenderTarget.h"
 
 GameEngineRenderTarget* GameEngineUIRenderer::FontTarget_ = nullptr;
+int GameEngineUIRenderer::UIRendererCount_ = 0;
 
 GameEngineUIRenderer::GameEngineUIRenderer()
 	: FontName_("±Ã¼­")
@@ -16,12 +17,14 @@ GameEngineUIRenderer::GameEngineUIRenderer()
 	, FontPivot_(float4::ZERO)
 	, Color_(float4::BLACK)
 {
-
+	++UIRendererCount_;
 }
 
 GameEngineUIRenderer::~GameEngineUIRenderer()
 {
-	if (nullptr != FontTarget_)
+	--UIRendererCount_;
+
+	if (0 == UIRendererCount_ && nullptr != FontTarget_)
 	{
 		delete FontTarget_;
 		FontTarget_ = nullptr;
