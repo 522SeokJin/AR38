@@ -43,6 +43,11 @@ public:
 		return LastDepthBuffer_;
 	}
 
+	inline ID3D11ShaderResourceView* GetShaderResourcesView(size_t _Index)
+	{
+		return ShaderResourcesViews_[_Index];
+	}
+
 protected:
 	GameEngineRenderTarget(const GameEngineRenderTarget& _other) = delete;
 	GameEngineRenderTarget(GameEngineRenderTarget&& _other) = delete;
@@ -60,6 +65,8 @@ private:
 
 	//std::vector<D3D11_VIEWPORT> ViewPort_;
 	std::vector<ID3D11RenderTargetView*> RenderTargetViews_;
+	std::vector<ID3D11ShaderResourceView*> ShaderResourcesViews_;
+
 	std::vector<float4> ClearColor_;
 
 	GameEngineRenderingPipeLine*	Pipe_;

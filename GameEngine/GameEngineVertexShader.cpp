@@ -134,7 +134,7 @@ bool GameEngineVertexShader::FileCompile(const std::string& _Path)
 	ID3DBlob* ErrorBlob = nullptr;
 
 	std::wstring Path;
-	GameEngineString::StringToWString(_Path, Path);
+	GameEngineString::AnsiToUnicode(_Path, Path);
 
 	// D3DCompile()			: 직접 문자열을 넣음
 	// D3DCompileFromFile() : 텍스트파일 읽어옴

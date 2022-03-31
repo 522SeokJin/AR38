@@ -5,6 +5,7 @@
 #include "imgui_impl_win32.h"
 #include "GameEngineWindow.h"
 #include "GameEngineDevice.h"
+#include <GameEngineBase/GameEngineDirectory.h>
 
 GameEngineGUI* GameEngineGUI::Inst_ = new GameEngineGUI();
 
@@ -15,6 +16,11 @@ GameEngineGUI::GameEngineGUI()
 
 GameEngineGUI::~GameEngineGUI()
 {
+    for (auto& Window : Windows_)
+    {
+        delete Window.second;
+    }
+
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();
     ImGui::DestroyContext();
@@ -43,6 +49,13 @@ void GameEngineGUI::Initialize()
         style.Colors[ImGuiCol_WindowBg].w = 1.0f;
     }
 
+    GameEngineDirectory Dir;
+    Dir.MoveParent();
+    Dir.MoveChild("EngineResources");
+    Dir.MoveChild("Font");
+
+    io.Fonts->AddFontFromFileTTF(Dir.PathToPlusFileName("malgun.ttf").c_str(), 18.0f, NULL, io.Fonts->GetGlyphRangesKorean());
+
     ImGui_ImplWin32_Init(GameEngineWindow::GetInst().GetWindowHWND());
     ImGui_ImplDX11_Init(GameEngineDevice::GetDevice(), GameEngineDevice::GetContext());
 
@@ -55,28 +68,22 @@ void GameEngineGUI::GUIRenderStart()
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
+
+    for (auto& Window : Windows_)
+    {
+        if (false == Window.second->IsUpdate())
+        {
+            continue;
+        }
+
+        Window.second->Begin();
+        Window.second->OnGUI();
+        Window.second->End();
+    }
 }
 
 void GameEngineGUI::GUIRenderEnd()
 {
-    {
-        static float f = 0.0f;
-        static int counter = 0;
-
-        ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
-        ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-        ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-        if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-            counter++;
-
-        ImGui::SameLine();
-        ImGui::Text("counter = %d", counter);
-
-        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-        ImGui::End();
-    }
-
     ImGuiIO& io = ImGui::GetIO();
     (void)io;
 
@@ -95,4 +102,15 @@ void GameEngineGUI::GUIRenderEnd()
         ImGui::UpdatePlatformWindows();
         ImGui::RenderPlatformWindowsDefault();
     }
+}
+
+//////////////////////////////////// window;
+
+GameEngineGUIWindow::GameEngineGUIWindow()
+{
+
+}
+GameEngineGUIWindow::~GameEngineGUIWindow()
+{
+
 }

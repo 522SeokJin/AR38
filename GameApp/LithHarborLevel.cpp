@@ -1,9 +1,12 @@
 #include "PreCompile.h"
-#include <GameEngine/GameEngineWindow.h>
 #include "LithHarborLevel.h"
 #include "LithHarbor.h"
+#include <GameEngine/GameEngineWindow.h>
 #include <GameEngine/MouseActor.h>
 #include "Player.h"
+
+#include <GameEngine/GameEngineGUI.h>
+#include <GameEngine/GameEngineRenderWindow.h>
 
 #include "MenuUI.h"
 #include "ExpBarUI.h"
@@ -15,6 +18,7 @@
 #include "Demian.h"
 
 LithHarborLevel::LithHarborLevel()
+	: Cursor_(nullptr)
 {
 
 }
@@ -86,13 +90,28 @@ void LithHarborLevel::LevelStart()
 
 void LithHarborLevel::LevelUpdate(float _DeltaTime)
 {
+	static GameEngineRenderWindow* Window = nullptr;
+
+	if (nullptr == GameEngineGUI::GetInst()->FindGUIWindow("RenderWindow"))
+	{
+		Window = GameEngineGUI::GetInst()->
+			CreateGUIWindow<GameEngineRenderWindow>("RenderWindow");
+		float4 Size = GameEngineWindow::GetInst().GetSize() * 0.1f;
+		Window->PushRenderTarget("메인 카메라 타겟", 
+			GetMainCamera()->GetCameraRenderTarget(), Size);
+		Window->PushRenderTarget("UI 카메라 타겟",
+			GetUICamera()->GetCameraRenderTarget(), Size);
+	}
+
 	if (true == GameEngineInput::GetInst().Down("MOn"))
 	{
+		Window->On();
 		Cursor_->WindowCursorOn();
 	}
 
 	if (true == GameEngineInput::GetInst().Down("MOff"))
 	{
+		Window->Off();
 		Cursor_->WindowCursorOff();
 	}
 }

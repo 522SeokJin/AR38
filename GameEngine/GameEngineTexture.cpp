@@ -124,7 +124,7 @@ void GameEngineTexture::Load(const std::string& _Path)
 	GameEngineString::toupper(Extension);
 
 	std::wstring wPath;
-	GameEngineString::StringToWString(_Path, wPath);
+	GameEngineString::AnsiToUnicode(_Path, wPath);
 
 	if ("TGA" == Extension)
 	{

@@ -30,8 +30,8 @@ public:
 	void CreateAnimation(const std::string& _TextureName, const std::string& _Name, int _StartFrame, int _EndFrame,
 		float _InterTime, bool _Loop = true);
 
-	void CreateAnimationFolder(const std::string& _Name, 
-		const std::string& _FolderTexName, float _InterTime, bool _Loop = true);
+	void CreateAnimationFolder(const std::string& _FolderTexName,
+		const std::string& _Name, float _InterTime, bool _Loop = true);
 	void CreateAnimationFolder(const std::string& _Name, 
 		float _InterTime, bool _Loop = true);
 
@@ -55,6 +55,11 @@ public:
 	inline std::string GetCurrentAnimationName()
 	{
 		return CurAnimation_->GetName();
+	}
+
+	inline void IsCurrentAnimationIndex(const int _Index)
+	{
+		CurAnimation_->SetCurrentIndex(_Index);
 	}
 
 	inline bool IsCurrentAnimationString(const std::string& _Name)
@@ -108,6 +113,10 @@ private:
 			, InterTime_(0.0f), CurTime_(0.0f)
 			, CurFrame_(0), StartFrame_(0), EndFrame_(0)
 		{
+		}
+		void SetCurrentIndex(int _Index)
+		{
+			CurFrame_ = _Index;
 		}
 
 		void Reset();

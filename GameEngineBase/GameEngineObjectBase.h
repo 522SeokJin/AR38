@@ -93,6 +93,11 @@ public:
 		return isDebug_;
 	}
 
+	bool& GetIsUpdateRef()
+	{
+		return isUpdate_; // 부모도 켜져있어야함
+	}
+
 public:
 	GameEngineObjectBase();
 	virtual ~GameEngineObjectBase();

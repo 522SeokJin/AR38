@@ -33,6 +33,11 @@ public:
 
 	void ChangeRendererGroup(int _Group, GameEngineRenderer* _Renderer);
 
+	inline GameEngineRenderTarget* GetCameraRenderTarget()
+	{
+		return CameraBufferTarget_;
+	}
+
 	GameEngineRenderTarget* CameraBufferTarget_;
 
 protected:
