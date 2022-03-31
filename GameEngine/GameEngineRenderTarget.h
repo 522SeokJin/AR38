@@ -48,6 +48,11 @@ public:
 		return ShaderResourcesViews_[_Index];
 	}
 
+	inline float4 GetTextureSize(int _Index)
+	{
+		return Textures_[_Index]->GetTextureSize();
+	}
+
 protected:
 	GameEngineRenderTarget(const GameEngineRenderTarget& _other) = delete;
 	GameEngineRenderTarget(GameEngineRenderTarget&& _other) = delete;

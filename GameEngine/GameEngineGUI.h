@@ -35,23 +35,14 @@ public:
 
 		NewWindow->SetName(_Name);
 
-		Windows_.insert(std::map<std::string, GameEngineGUIWindow*>
-			::value_type(_Name, NewWindow));
+		Windows_.push_back(NewWindow);
 
 		return NewWindow;
 	}
 
-	GameEngineGUIWindow* FindGUIWindow(const std::string& _Name)
-	{
-		std::map<std::string, GameEngineGUIWindow*>::iterator FindIter = Windows_.find(_Name);
+	GameEngineGUIWindow* FindGUIWindow(const std::string& _Name);
 
-		if (FindIter == Windows_.end())
-		{
-			return nullptr;
-		}
-
-		return FindIter->second;
-	}
+	std::list<GameEngineGUIWindow*> FindGUIWindowForList(const std::string& _Name);
 
 protected:
 	GameEngineGUI(const GameEngineGUI& _other) = delete; 
@@ -67,7 +58,7 @@ private:
 	void GUIRenderStart();
 	void GUIRenderEnd();
 
-	std::map<std::string, GameEngineGUIWindow*> Windows_;
+	std::list<GameEngineGUIWindow*> Windows_;
 
 };
 
@@ -76,9 +67,11 @@ class GameEngineGUIWindow : public GameEngineObjectNameBase
 	friend GameEngineGUI;
 
 public:
+	virtual void Start() {};
+
 	void Begin()
 	{
-		ImGui::Begin(GetName().c_str(), &GetIsUpdateRef());
+		ImGui::Begin(GetName().c_str(), &GetIsUpdateRef(), Style_);
 	}
 
 	virtual void OnGUI() = 0;
@@ -97,5 +90,8 @@ protected:
 	GameEngineGUIWindow& operator=(const GameEngineGUIWindow& _Other) = delete;
 	GameEngineGUIWindow& operator=(GameEngineGUIWindow&& _Other) noexcept = delete;
 
+	int Style_;
+
 private:
+
 };

@@ -202,6 +202,9 @@
     <ClInclude Include="GameEngineRenderWindow.h">
       <Filter>Imgui\EngineWindow</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineImageShotWindow.h">
+      <Filter>Imgui\EngineWindow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -388,6 +391,9 @@
       <Filter>Imgui</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineRenderWindow.cpp">
+      <Filter>Imgui\EngineWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineImageShotWindow.cpp">
       <Filter>Imgui\EngineWindow</Filter>
     </ClCompile>
   </ItemGroup>

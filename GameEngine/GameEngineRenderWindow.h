@@ -12,6 +12,7 @@ class GameEngineRenderWindow : public GameEngineGUIWindow
 		GameEngineRenderTarget* Target_;
 		float4 Size_;
 	};
+
 public:
 	GameEngineRenderWindow();
 	~GameEngineRenderWindow();
@@ -36,5 +37,6 @@ protected:
 
 private:
 	std::vector<RenderTargetDrawData> DrawRenderTarget_;
+	std::list<class GameEngineImageShotWindow*> ImageShot_;
 };
 

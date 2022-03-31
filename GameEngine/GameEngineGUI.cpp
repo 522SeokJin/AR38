@@ -18,7 +18,7 @@ GameEngineGUI::~GameEngineGUI()
 {
     for (auto& Window : Windows_)
     {
-        delete Window.second;
+        delete Window;
     }
 
     ImGui_ImplDX11_Shutdown();
@@ -71,16 +71,48 @@ void GameEngineGUI::GUIRenderStart()
 
     for (auto& Window : Windows_)
     {
-        if (false == Window.second->IsUpdate())
+        if (false == Window->IsUpdate())
         {
             continue;
         }
 
-        Window.second->Begin();
-        Window.second->OnGUI();
-        Window.second->End();
+        Window->Begin();
+        Window->OnGUI();
+        Window->End();
     }
 }
+
+
+GameEngineGUIWindow* GameEngineGUI::FindGUIWindow(const std::string& _Name)
+{
+    for (auto& FindIter : Windows_)
+    {
+        if (FindIter->GetName() == _Name)
+        {
+            return FindIter;
+        }
+
+        return FindIter;
+    }
+
+    return nullptr;
+}
+
+std::list<GameEngineGUIWindow*> GameEngineGUI::FindGUIWindowForList(const std::string& _Name)
+{
+    std::list<GameEngineGUIWindow*> NewList;
+
+    for (auto& FindIter : Windows_)
+    {
+        if (FindIter->GetName() == _Name)
+        {
+            NewList.push_back(FindIter);
+        }
+    }
+
+    return NewList;
+}
+
 
 void GameEngineGUI::GUIRenderEnd()
 {
@@ -107,6 +139,7 @@ void GameEngineGUI::GUIRenderEnd()
 //////////////////////////////////// window;
 
 GameEngineGUIWindow::GameEngineGUIWindow()
+    : Style_(0)
 {
 
 }
