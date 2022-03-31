@@ -53,7 +53,8 @@ void GameEngineUIRenderer::Start()
 	SetRenderingPipeLine("TextureUI");
 	ImageRendererStart();
 
-	if (nullptr == FontTarget_)
+	if (nullptr == FontTarget_
+		&& UIRendererCount_ == 1)
 	{
 		FontTarget_ = new GameEngineRenderTarget();
 		FontTarget_->Create(GameEngineWindow::GetInst().GetSize(), float4::NONE);

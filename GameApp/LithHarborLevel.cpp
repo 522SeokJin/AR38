@@ -49,6 +49,7 @@ void LithHarborLevel::LevelStart()
 
 	{
 		Player* Actor = CreateActor<Player>();
+		Actor->GetTransform()->SetWorldPosition({ 1935.0f, -1300.0f });
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(
 			Actor->GetTransform()->GetLocalPosition());
 	}

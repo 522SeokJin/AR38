@@ -9,6 +9,14 @@ enum class ProjectionMode
 	ORTHOGRAPHIC
 };
 
+class PostProcess
+{
+public:
+	GameEngineRenderTarget* OriginalTarget; // 효과를 주고 싶은 타겟
+	GameEngineRenderingPipeLine* Effect;
+	GameEngineRenderTarget* ResultTarget;	// 효과를 받을 타겟
+};
+
 // 설명 : 
 class GameEngineRenderer;
 class CameraComponent : public GameEngineTransformComponent
@@ -70,5 +78,21 @@ private:
 
 	int DebugRenderCount_;
 	std::vector<GameEngineDebugRenderData> DebugVector_;
+
+
+
+	//////////////////////////////////		PostProcessing
+
+	template<typename PostEffect>
+	void AddPostProcessing(GameEngineRenderTarget* _ResultTarget, std::string _EffectName)
+	{
+		PostProcess NewEffect = PostProcess();
+		NewEffect.OriginalTarget = CameraBufferTarget_;
+
+		//if (_ResultTarget == BackBuffer)
+		//{
+		//}
+	}
+
 };
 

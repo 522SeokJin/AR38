@@ -55,6 +55,7 @@ void GameEngineRenderTarget::Create(const std::string& _TextureName, float4 _Cle
 	}
 	
 	FindTexture->CreateRenderTargetView();
+	FindTexture->CreateShaderResourceView();
 
 	Create(FindTexture, _ClearColor);
 }
