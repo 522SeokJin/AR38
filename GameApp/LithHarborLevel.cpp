@@ -41,6 +41,7 @@ void LithHarborLevel::LevelStart()
 
 	GameEngineInput::GetInst().CreateKey("MOn", 'p');
 	GameEngineInput::GetInst().CreateKey("MOff", 'o');
+	GameEngineInput::GetInst().CreateKey("LevelControl", 'i');
 
 	{
 		LithHarbor* Actor = CreateActor<LithHarbor>();
@@ -101,6 +102,12 @@ void LithHarborLevel::LevelUpdate(float _DeltaTime)
 			GetMainCamera()->GetCameraRenderTarget(), Size);
 		Window->PushRenderTarget("UI Ä«¸Þ¶ó Å¸°Ù",
 			GetUICamera()->GetCameraRenderTarget(), Size);
+	}
+
+	if (true == GameEngineInput::GetInst().Down("LevelControl"))
+	{
+		GameEngineGUIWindow* LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
+		LevelControl->OnOffChange();
 	}
 
 	if (true == GameEngineInput::GetInst().Down("MOn"))

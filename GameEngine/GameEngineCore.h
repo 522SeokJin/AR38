@@ -6,6 +6,8 @@
 // Ό³Έν : 
 class GameEngineCore : public GameEngineObjectBase
 {
+	friend class GameEngineLevelControlWindow;
+
 public:
 	virtual float4 StartWindowPos() = 0;
 	virtual float4 StartWindowSize() = 0;

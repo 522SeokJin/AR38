@@ -2,8 +2,10 @@
 #include "UserGame.h"
 #include <conio.h> //_getch();
 
-#include "GameEngine/GameEngineWindow.h"
-#include "GameEngine/GameEngineRenderingPipeLine.h"
+#include <GameEngine/GameEngineWindow.h>
+#include <GameEngine/GameEngineRenderingPipeLine.h>
+
+#include <GameEngine/GameEngineLevelControlWindow.h>
 
 #include "TitleLevel.h"
 #include "LithHarborLevel.h"
@@ -29,6 +31,8 @@ UserGame::~UserGame() // default destructer 디폴트 소멸자
 void UserGame::Initialize()
 {
 	//GameEngineInput::GetInst().HideCursor();
+
+	GameEngineGUI::GetInst()->CreateGUIWindow<GameEngineLevelControlWindow>("LevelControlWindow");
 
 	// Title
 	LevelCreate<TitleLevel>("Title");

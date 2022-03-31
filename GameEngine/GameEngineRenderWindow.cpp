@@ -33,6 +33,7 @@ void GameEngineRenderWindow::OnGUI()
 				Window->On();
 				Window->SetView(DrawRenderTarget_[i].Target_->GetShaderResourcesView(0),
 					DrawRenderTarget_[i].Target_->GetTextureSize(0));
+				return;
 			}
 
 			GameEngineImageShotWindow* ImageWindow = GameEngineGUI::GetInst()->CreateGUIWindow

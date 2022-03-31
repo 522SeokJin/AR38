@@ -63,6 +63,11 @@ public:
 		isDeath_ = true;
 	}
 
+	void OnOffChange()
+	{
+		isUpdate_ = !isUpdate_;
+	}
+
 	void On()
 	{
 		isUpdate_ = true;
