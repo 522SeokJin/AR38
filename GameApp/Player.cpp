@@ -8,7 +8,6 @@
 
 Player::Player()
 	: Dir_(PlayerDir::LEFT)
-	, State_(PlayerState::stand1)
 	, FaceImageIndex_(1)
 	, HairBelowBodyImageIndex_(1)
 	, HairOverHeadImageIndex_(1)
@@ -161,9 +160,9 @@ void Player::Start()
 
 void Player::Update(float _DeltaTime)
 {
-	UpdatePartsOffset();
-
 	FSM_.Update();
+
+	// UpdatePartsOffset();
 
 	GetLevel()->PushDebugRender(Collision_->GetTransform(), CollisionType::Rect);
 

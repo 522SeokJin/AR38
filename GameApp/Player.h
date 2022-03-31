@@ -3,10 +3,8 @@
 #include <GameEngine/GameEngineFSM.h>
 
 // Ό³Έν : 
-struct KeyOffset;
 
 enum class PlayerDir;
-enum class PlayerState;
 
 class GameEngineImageRenderer;
 class GameEngineCollision;
@@ -40,7 +38,6 @@ private:
 	void CreatePantsAnimation();
 	void CreateShoesAnimation();
 	void CreateWeaponAnimation();
-	void ChangePlayerAnimation(PlayerState _State);
 	void ChangePlayerAnimation(const std::string& _Name);
 
 	void UpdatePartsOffset();
@@ -51,7 +48,6 @@ private:
 	void KeyInputUpdate();
 
 	PlayerDir Dir_;
-	PlayerState State_;
 
 	GameEngineFSM FSM_;
 
@@ -76,18 +72,17 @@ private:
 	int ShoesImageIndex_;
 	int WeaponImageIndex_;
 
-	std::map<KeyOffset, std::vector<float4>> FaceOffsets_;
-	std::map<KeyOffset, std::vector<float4>> HairBelowBodyOffsets_;
-	std::map<KeyOffset, std::vector<float4>> HairOverHeadOffsets_;
-	std::map<KeyOffset, std::vector<float4>> HairOffsets_;
-	std::map<KeyOffset, std::vector<float4>> MailOffsets_;
-	std::map<KeyOffset, std::vector<float4>> MailArmOffsets_;
-	std::map<KeyOffset, std::vector<float4>> PantsOffsets_;
-	std::map<KeyOffset, std::vector<float4>> ShoesOffsets_;
-	std::map<KeyOffset, std::vector<float4>> WeaponOffsets_;
+	std::map<std::string, std::vector<float4>> FaceOffsets_[1];
+	std::map<std::string, std::vector<float4>> HairBelowBodyOffsets_[1];
+	std::map<std::string, std::vector<float4>> HairOverHeadOffsets_[1];
+	std::map<std::string, std::vector<float4>> HairOffsets_[1];
+	std::map<std::string, std::vector<float4>> MailOffsets_[1];
+	std::map<std::string, std::vector<float4>> MailArmOffsets_[1];
+	std::map<std::string, std::vector<float4>> PantsOffsets_[1];
+	std::map<std::string, std::vector<float4>> ShoesOffsets_[1];
+	std::map<std::string, std::vector<float4>> WeaponOffsets_[1];
 
 	GameEngineCollision* Collision_;
-
 
 	////////////////////////////////////////////	FSM
 
