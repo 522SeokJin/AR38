@@ -66,12 +66,11 @@ private:
 	GameEngineUIRenderer* HPBar_;
 	GameEngineUIRenderer* MPBar_;
 
-	float Ratio_;
-
 	float CurHP_;
 	float CurMP_;
 	float MaxHP_;
 	float MaxMP_;
+
 	bool HPChanged_;
 	bool MPChanged_;
 

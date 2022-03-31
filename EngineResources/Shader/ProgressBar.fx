@@ -64,7 +64,7 @@ float4 ProgressBar_PS(VertexOut _in) : SV_Target0
     {
         clip(-1); // Down
     }
-    else if (ProgressDirection == 2 && 1.0f - Percent < _in.Texcoord.x)
+    else if (ProgressDirection == 2 && Percent < _in.Texcoord.x)
     {
         clip(-1); // Left
     }

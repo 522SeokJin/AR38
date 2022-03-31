@@ -7,7 +7,6 @@ StatusUI::StatusUI()
 	, MPBarValue_({ 1.0f, 2, 0, 0 })
 	, HPBar_(nullptr)
 	, MPBar_(nullptr)
-	, Ratio_(0.0f)
 	, CurHP_(5000.0f)
 	, CurMP_(2000.0f)
 	, MaxHP_(5000.0f)
@@ -54,7 +53,6 @@ void StatusUI::Start()
 		HPBar_->ShaderHelper.SettingConstantBufferLink("ProgressBarCBuffer", HPBarValue_);
 		HPBar_->SetImage("mainBar.status.gauge.hp.layer_0.png");
 		HPBar_->SetLocalPosition({ 10.0f, 0.0f });
-		Ratio_ = HPBar_->GetImageSize().x / 100.0f;
 	}
 
 	{
@@ -64,7 +62,6 @@ void StatusUI::Start()
 		MPBar_->ImageRendererStart();
 		MPBar_->SetImage("mainBar.status.gauge.mp.layer_0.png");
 		MPBar_->SetLocalPosition({ 10.0f, -16.0f });
-		Ratio_ = MPBar_->GetImageSize().x / 100.0f;
 	}
 
 	{
@@ -144,6 +141,9 @@ void StatusUI::Start()
 			LvNumber_[i].push_back(Renderer);
 		}
 	}
+
+	SetHPPer(0.3f);
+	SetMP(1000.0f);
 }
 
 void StatusUI::Update(float _DeltaTime)
@@ -175,7 +175,8 @@ void StatusUI::SetMaxHP(float _Value)
 	}
 
 	MaxHP_ = _Value;
-	SetHP(CurHP_);
+
+	HPChanged_ = true;
 }
 
 void StatusUI::SetMaxMP(float _Value)
@@ -186,184 +187,138 @@ void StatusUI::SetMaxMP(float _Value)
 	}
 
 	MaxMP_ = _Value;
-	SetMP(CurMP_);
+
+	HPChanged_ = true;
 }
 
 void StatusUI::SetHPPer(float _Percent)
 {
-	float Percent = _Percent;
-
-	if (0 >= Percent)
+	if (0.0f > _Percent &&
+		1.0f >= _Percent)
 	{
-		GameEngineDebug::MsgBoxError("HP Percent를 0 이하로 설정했습니다.");
+		GameEngineDebug::MsgBoxError("HP Percent 설정을 잘못했습니다.");
 		return;
 	}
 
-	if (100.0f < Percent)
-	{
-		Percent = 100.0f;
-	}
+	HPBarValue_.Percent = _Percent;
 
-	float CurrentBar = HPBar_->GetImageSize().x;
-
-	if (CurrentBar == Ratio_ * Percent)
-	{
-		return;
-	}
-
-	CurHP_ = MaxHP_ * Percent * 0.01f;
+	CurHP_ = MaxHP_ * _Percent;
 
 	if (CurHP_ > MaxHP_)
 	{
 		CurHP_ = MaxHP_;
 	}
-
-	HPBar_->SetImageSize({ Ratio_ * Percent, HPBar_->GetImageSize().y });
-	HPBar_->SetLocalMove({ (HPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
 
 	HPChanged_ = true;
 }
 
 void StatusUI::SetMPPer(float _Percent)
 {
-	float Percent = _Percent;
-
-	if (0 >= Percent)
+	if (0.0f > _Percent &&
+		1.0f >= _Percent)
 	{
-		GameEngineDebug::MsgBoxError("MP Percent를 0 이하로 설정했습니다.");
+		GameEngineDebug::MsgBoxError("MP Percent 설정을 잘못했습니다.");
 		return;
 	}
 
-	if (100.0f < Percent)
-	{
-		Percent = 100.0f;
-	}
+	MPBarValue_.Percent = _Percent;
 
-	float CurrentBar = MPBar_->GetImageSize().x;
-
-	if (CurrentBar == Ratio_ * Percent)
-	{
-		return;
-	}
-
-	CurMP_ = MaxMP_ * Percent * 0.01f;
+	CurMP_ = MaxMP_ * _Percent;
 
 	if (CurMP_ > MaxMP_)
 	{
 		CurMP_ = MaxMP_;
 	}
-
-	MPBar_->SetImageSize({ Ratio_ * Percent, MPBar_->GetImageSize().y });
-	MPBar_->SetLocalMove({ (MPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
 
 	MPChanged_ = true;
 }
 
 void StatusUI::AddHPPer(float _Percent)
 {
-	if (0 > _Percent)
+	if (0.0f > _Percent &&
+		1.0f >= _Percent)
 	{
 		return;
 	}
 
-	float CurrentBar = HPBar_->GetImageSize().x;
+	HPBarValue_.Percent += _Percent;
 
-	float Result = CurrentBar + Ratio_ * _Percent;
-
-	if (171.0f < Result)
+	if (HPBarValue_.Percent > 1.0f)
 	{
-		Result = 171.0f;	// Full ImageSize
+		HPBarValue_.Percent = 1.0f;
 	}
 
-	CurHP_ += MaxHP_ * _Percent * 0.01f;
+	CurHP_ += MaxHP_ * _Percent;
 
 	if (CurHP_ > MaxHP_)
 	{
 		CurHP_ = MaxHP_;
 	}
 
-	HPBar_->SetImageSize({ Result, HPBar_->GetImageSize().y });
-	HPBar_->SetLocalMove({ (HPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
-
 	HPChanged_ = true;
 }
 
 void StatusUI::AddMPPer(float _Percent)
 {
-	if (0 > _Percent)
+	if (0.0f > _Percent &&
+		1.0f >= _Percent)
 	{
 		return;
 	}
 
-	float CurrentBar = MPBar_->GetImageSize().x;
+	MPBarValue_.Percent += _Percent;
 
-	float Result = CurrentBar + Ratio_ * _Percent;
-
-	if (171.0f < Result)
+	if (MPBarValue_.Percent > 1.0f)
 	{
-		Result = 171.0f;	// Full ImageSize
+		MPBarValue_.Percent = 1.0f;
 	}
 
-	CurMP_ += MaxMP_ * _Percent * 0.01f;
+	CurMP_ += MaxMP_ * _Percent;
 
 	if (CurMP_ > MaxMP_)
 	{
 		CurMP_ = MaxMP_;
 	}
 
-
-	MPBar_->SetImageSize({ Result, MPBar_->GetImageSize().y });
-	MPBar_->SetLocalMove({ (MPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
-
 	MPChanged_ = true;
 }
 
 void StatusUI::SubHPPer(float _Percent)
 {
-	if (0 > _Percent)
+	if (0.0f > _Percent &&
+		1.0f >= _Percent)
 	{
 		return;
 	}
 
-	float CurrentBar = HPBar_->GetImageSize().x;
+	HPBarValue_.Percent -= _Percent;
 
-	float Result = CurrentBar - Ratio_ * _Percent;
-
-	if (0.0f > Result)
+	if (HPBarValue_.Percent < 0.0f)
 	{
-		Result = 0.0f;
-		//Death();
+		HPBarValue_.Percent = 0.0f;
 	}
 
-	CurHP_ -= MaxHP_ * _Percent * 0.01f;
-
-	HPBar_->SetImageSize({ Result, HPBar_->GetImageSize().y });
-	HPBar_->SetLocalMove({ (HPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
+	CurHP_ -= MaxHP_ * _Percent;
 
 	HPChanged_ = true;
 }
 
 void StatusUI::SubMPPer(float _Percent)
 {
-	if (0 > _Percent)
+	if (0.0f > _Percent &&
+		1.0f >= _Percent)
 	{
 		return;
 	}
 
-	float CurrentBar = MPBar_->GetImageSize().x;
+	MPBarValue_.Percent -= _Percent;
 
-	float Result = CurrentBar - Ratio_ * _Percent;
-
-	if (0.0f > Result)
+	if (MPBarValue_.Percent < 0.0f)
 	{
-		Result = 0.0f;
-		//Death();
+		MPBarValue_.Percent = 0.0f;
 	}
 
-	CurMP_ -= MaxMP_ * _Percent * 0.01f;
-
-	MPBar_->SetImageSize({ Result, MPBar_->GetImageSize().y });
-	MPBar_->SetLocalMove({ (MPBar_->GetImageSize().x - CurrentBar) / 2.0f, 0.0f });
+	CurMP_ -= MaxMP_ * _Percent;
 
 	MPChanged_ = true;
 }
@@ -381,19 +336,14 @@ void StatusUI::SetHP(float _Value)
 		return;
 	}
 
+	CurHP_ = _Value;
+
 	if (MaxHP_ < _Value)
 	{
 		CurHP_ = MaxHP_;
-		return;
 	}
 
-	CurHP_ = _Value;
-
-	float CurrentBar = HPBar_->GetImageSize().x;
-	float AfterBar = (CurHP_ / MaxHP_) * Ratio_ * 100.0f;
-
-	HPBar_->SetImageSize({ AfterBar, HPBar_->GetImageSize().y });
-	HPBar_->SetLocalMove({ (AfterBar - CurrentBar) / 2.0f, 0.0f });
+	HPBarValue_.Percent = CurHP_ / MaxHP_;
 
 	HPChanged_ = true;
 }
@@ -411,19 +361,14 @@ void StatusUI::SetMP(float _Value)
 		return;
 	}
 
+	CurMP_ = _Value;
+
 	if (MaxMP_ < _Value)
 	{
 		CurMP_ = MaxMP_;
-		return;
 	}
 
-	CurMP_ = _Value;
-
-	float CurrentBar = MPBar_->GetImageSize().x;
-	float AfterBar = (CurMP_ / MaxMP_) * Ratio_ * 100.0f;
-
-	MPBar_->SetImageSize({ AfterBar, MPBar_->GetImageSize().y });
-	MPBar_->SetLocalMove({ (AfterBar - CurrentBar) / 2.0f, 0.0f });
+	MPBarValue_.Percent = CurMP_ / MaxMP_;
 
 	MPChanged_ = true;
 }
@@ -445,11 +390,7 @@ void StatusUI::AddHP(float _Value)
 
 	CurHP_ = Result;
 
-	float CurrentBar = HPBar_->GetImageSize().x;
-	float AfterBar = (CurHP_ / MaxHP_) * Ratio_ * 100.0f;
-
-	HPBar_->SetImageSize({ AfterBar, HPBar_->GetImageSize().y });
-	HPBar_->SetLocalMove({ (AfterBar - CurrentBar) / 2.0f, 0.0f });
+	HPBarValue_.Percent = CurHP_ / MaxHP_;
 
 	HPChanged_ = true;
 }
@@ -471,11 +412,7 @@ void StatusUI::AddMP(float _Value)
 
 	CurMP_ = Result;
 
-	float CurrentBar = MPBar_->GetImageSize().x;
-	float AfterBar = (CurMP_ / MaxMP_) * Ratio_ * 100.0f;
-
-	MPBar_->SetImageSize({ AfterBar, MPBar_->GetImageSize().y });
-	MPBar_->SetLocalMove({ (AfterBar - CurrentBar) / 2.0f, 0.0f });
+	MPBarValue_.Percent = CurMP_ / MaxMP_;
 
 	MPChanged_ = true;
 }
@@ -497,11 +434,7 @@ void StatusUI::SubHP(float _Value)
 
 	CurHP_ = Result;
 
-	float CurrentBar = HPBar_->GetImageSize().x;
-	float AfterBar = (CurHP_ / MaxHP_) * Ratio_ * 100.0f;
-
-	HPBar_->SetImageSize({ AfterBar, HPBar_->GetImageSize().y });
-	HPBar_->SetLocalMove({ (AfterBar - CurrentBar) / 2.0f, 0.0f });
+	HPBarValue_.Percent = CurHP_ / MaxHP_;
 
 	HPChanged_ = true;
 }
@@ -523,11 +456,7 @@ void StatusUI::SubMP(float _Value)
 
 	CurMP_ = Result;
 
-	float CurrentBar = MPBar_->GetImageSize().x;
-	float AfterBar = (CurMP_ / MaxMP_) * Ratio_ * 100.0f;
-
-	MPBar_->SetImageSize({ AfterBar, MPBar_->GetImageSize().y });
-	MPBar_->SetLocalMove({ (AfterBar - CurrentBar) / 2.0f, 0.0f });
+	MPBarValue_.Percent = CurMP_ / MaxMP_;
 
 	MPChanged_ = true;
 }
