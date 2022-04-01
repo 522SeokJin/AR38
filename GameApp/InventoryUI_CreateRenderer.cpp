@@ -40,23 +40,23 @@ void InventoryUI::CreateRenderer()
 		EtcRenderer_->SetLocalPosition({ -75.0f + 2.0f * 30.0f, 154.0f - 1.0f });
 	}
 
-	{
-		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-		Renderer->SetImage("Item.Tab.disabled.3.png");
-		Renderer->SetLocalPosition({ -75.0f + 3.0f * 30.0f, 154.0f - 1.0f });
-	}
+	//{
+	//	GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+	//	Renderer->SetImage("Item.Tab.disabled.3.png");
+	//	Renderer->SetLocalPosition({ -75.0f + 3.0f * 30.0f, 154.0f - 1.0f });
+	//}
 
-	{
-		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-		Renderer->SetImage("Item.Tab.disabled.4.png");
-		Renderer->SetLocalPosition({ -75.0f + 4.0f * 30.0f, 154.0f - 1.0f });
-	}
+	//{
+	//	GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+	//	Renderer->SetImage("Item.Tab.disabled.4.png");
+	//	Renderer->SetLocalPosition({ -75.0f + 4.0f * 30.0f, 154.0f - 1.0f });
+	//}
 
-	{
-		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-		Renderer->SetImage("Item.Tab.disabled.5.png");
-		Renderer->SetLocalPosition({ -75.0f + 5.0f * 30.0f, 154.0f - 1.0f });
-	}
+	//{
+	//	GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+	//	Renderer->SetImage("Item.Tab.disabled.5.png");
+	//	Renderer->SetLocalPosition({ -75.0f + 5.0f * 30.0f, 154.0f - 1.0f });
+	//}
 
 	{
 		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
