@@ -2,6 +2,8 @@
 #include "GameEngine/GameEngineActor.h"
 
 // Ό³Έν : 
+class GameEngineCollision;
+class GameEngineUIRenderer;
 class TitleUI : public GameEngineActor
 {
 public:
@@ -18,6 +20,9 @@ protected:
 	TitleUI& operator=(const TitleUI&& _other) = delete;
 
 private:
-	
+	void MouseEvent(GameEngineCollision* _OtherCollision);
+
+	GameEngineUIRenderer* LoginRenderer_;
+	GameEngineCollision* LoginButton_;
 };
 

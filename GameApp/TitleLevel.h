@@ -2,6 +2,8 @@
 #include <GameEngine/GameEngineLevel.h>
 
 // Ό³Έν : 
+class MouseActor;
+class GameEngineRenderWindow;
 class TitleLevel : public GameEngineLevel
 {
 public:
@@ -20,6 +22,8 @@ protected:
 	TitleLevel& operator=(const TitleLevel&& _other) = delete;
 
 private:
+	MouseActor* Cursor_;
+	GameEngineRenderWindow* RenderWindow_;
 
 };
 

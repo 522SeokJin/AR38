@@ -101,6 +101,7 @@ void GameEngineLevel::Render()
 	GetMainCamera()->DebugRender();
 
 	GetUICamera()->Render();
+	GetUICamera()->DebugRender();
 
 	GameEngineDevice::GetBackBufferTarget()->Merge(GetMainCamera()->CameraBufferTarget_);
 	GameEngineDevice::GetBackBufferTarget()->Merge(GetUICamera()->CameraBufferTarget_);
@@ -288,4 +289,9 @@ void GameEngineLevel::ChangeCollisionGroup(int _Group, GameEngineCollision* _Col
 void GameEngineLevel::PushDebugRender(GameEngineTransform* _Transform, CollisionType _Type)
 {
 	GetMainCamera()->PushDebugRender(_Transform, _Type);
+}
+
+void GameEngineLevel::PushUIDebugRender(GameEngineTransform* _Transform, CollisionType _Type)
+{
+	GetUICamera()->PushDebugRender(_Transform, _Type);
 }

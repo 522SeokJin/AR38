@@ -44,7 +44,6 @@ private:
 	void ChangePartsOffset(GameEngineImageRenderer* _Renderer, float4 _Offset);
 	void SetPartsOffset();
 
-	void KeyInputSetting();
 	void KeyInputUpdate();
 
 	PlayerDir Dir_;

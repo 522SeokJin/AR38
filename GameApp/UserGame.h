@@ -11,6 +11,7 @@ public:
 	void Initialize() override;
 	void ResourceLoad() override;
 	void Release() override;
+	void CreateKey();
 
 	float4 StartWindowPos() override
 	{

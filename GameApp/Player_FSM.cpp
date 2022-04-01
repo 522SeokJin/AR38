@@ -12,17 +12,17 @@ void Player::stand1_Start()
 void Player::stand1()
 {
 	if (
-		true == GameEngineInput::GetInst().Press("MoveLeft") ||
-		true == GameEngineInput::GetInst().Press("MoveRight") ||
-		true == GameEngineInput::GetInst().Press("MoveUp") ||
-		true == GameEngineInput::GetInst().Press("MoveDown")
+		true == GameEngineInput::GetInst().Press("Left") ||
+		true == GameEngineInput::GetInst().Press("Right") ||
+		true == GameEngineInput::GetInst().Press("Up") ||
+		true == GameEngineInput::GetInst().Press("Down")
 		)
 	{
 		FSM_.ChangeState("walk1");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("Jump"))
+	if (true == GameEngineInput::GetInst().Press("Alt"))
 	{
 		FSM_.ChangeState("jump");
 		return;
@@ -54,17 +54,17 @@ void Player::walk1_Start()
 void Player::walk1()
 {
 	if (
-		false == GameEngineInput::GetInst().Press("MoveLeft") &&
-		false == GameEngineInput::GetInst().Press("MoveRight") &&
-		false == GameEngineInput::GetInst().Press("MoveUp") &&
-		false == GameEngineInput::GetInst().Press("MoveDown")
+		false == GameEngineInput::GetInst().Press("Left") &&
+		false == GameEngineInput::GetInst().Press("Right") &&
+		false == GameEngineInput::GetInst().Press("Up") &&
+		false == GameEngineInput::GetInst().Press("Down")
 		)
 	{
 		FSM_.ChangeState("stand1");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("Jump"))
+	if (true == GameEngineInput::GetInst().Press("Alt"))
 	{
 		FSM_.ChangeState("jump");
 		return;
@@ -99,10 +99,10 @@ void Player::jump()
 	if (float4::BLACK == Map::GetColor(GetTransform()))
 	{
 		if (
-			false == GameEngineInput::GetInst().Press("MoveLeft") &&
-			false == GameEngineInput::GetInst().Press("MoveRight") &&
-			false == GameEngineInput::GetInst().Press("MoveUp") &&
-			false == GameEngineInput::GetInst().Press("MoveDown")
+			false == GameEngineInput::GetInst().Press("Left") &&
+			false == GameEngineInput::GetInst().Press("Right") &&
+			false == GameEngineInput::GetInst().Press("Up") &&
+			false == GameEngineInput::GetInst().Press("Down")
 			)
 		{
 			FSM_.ChangeState("stand1");

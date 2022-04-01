@@ -83,45 +83,35 @@ void Player::ChangePartsOffset(GameEngineImageRenderer* _Renderer, float4 _Offse
 	}
 }
 
-void Player::KeyInputSetting()
-{
-	GameEngineInput::GetInst().CreateKey("MoveLeft", VK_LEFT);
-	GameEngineInput::GetInst().CreateKey("MoveRight", VK_RIGHT);
-	GameEngineInput::GetInst().CreateKey("MoveUp", VK_UP);
-	GameEngineInput::GetInst().CreateKey("MoveDown", VK_DOWN);
-	GameEngineInput::GetInst().CreateKey("Attack", VK_CONTROL);
-	GameEngineInput::GetInst().CreateKey("Jump", VK_MENU);	// ALT KEY
-}
-
 void Player::KeyInputUpdate()
 {
 	PlayerDir CurrentDir = Dir_;
 
-	if (true == GameEngineInput::GetInst().Press("MoveLeft"))
+	if (true == GameEngineInput::GetInst().Press("Left"))
 	{
 		Dir_ = PlayerDir::LEFT;
 		GetTransform()->SetLocalDeltaTimeMove(float4::LEFT * WALKSPEED);
 	}
-	if (true == GameEngineInput::GetInst().Press("MoveRight"))
+	if (true == GameEngineInput::GetInst().Press("Right"))
 	{
 		Dir_ = PlayerDir::RIGHT;
 		GetTransform()->SetLocalDeltaTimeMove(float4::RIGHT * WALKSPEED);
 	}
-	if (true == GameEngineInput::GetInst().Press("MoveUp"))
+	if (true == GameEngineInput::GetInst().Press("Up"))
 	{
 		GetTransform()->SetLocalDeltaTimeMove(float4::UP * WALKSPEED);
 	}
-	if (true == GameEngineInput::GetInst().Press("MoveDown"))
+	if (true == GameEngineInput::GetInst().Press("Down"))
 	{
 		GetTransform()->SetLocalDeltaTimeMove(float4::DOWN * WALKSPEED);
 	}
 
-	if (true == GameEngineInput::GetInst().Down("Attack"))
+	if (true == GameEngineInput::GetInst().Down("Ctrl"))
 	{
 		// Attack
 	}
 
-	if (true == GameEngineInput::GetInst().Press("Jump"))
+	if (true == GameEngineInput::GetInst().Press("Alt"))
 	{
 		GetTransform()->SetLocalDeltaTimeMove(float4::UP * JUMPSPEED);
 	}
@@ -135,8 +125,6 @@ void Player::KeyInputUpdate()
 void Player::Start()
 {
 	CreateAnimation();
-
-	KeyInputSetting();
 
 	{
 		Collision_ = CreateTransformComponent<GameEngineCollision>(10);

@@ -3,6 +3,7 @@
 #include "GameEngineUIRenderer.h"
 
 // Ό³Έν : 
+class GameEngineCollision;
 class MouseActor : public GameEngineActor
 {
 public:
@@ -31,6 +32,7 @@ protected:
 
 private:
 	GameEngineUIRenderer* UIRenderer_;
+	GameEngineCollision* Collision_;
 
 };
 

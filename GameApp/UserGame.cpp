@@ -30,7 +30,7 @@ UserGame::~UserGame() // default destructer 디폴트 소멸자
 
 void UserGame::Initialize()
 {
-	//GameEngineInput::GetInst().HideCursor();
+	CreateKey();
 
 	GameEngineGUI::GetInst()->CreateGUIWindow<GameEngineLevelControlWindow>("LevelControlWindow");
 
@@ -52,12 +52,32 @@ void UserGame::Initialize()
 	LevelCreate<EntranceDemianLevel>("EntranceDemian");
 	LevelCreate<DemianLevel>("Demian");
 
-	LevelChange("LithHarbor");
+	LevelChange("Title");
 }
 
 void UserGame::Release()
 {
 	
+}
+
+void UserGame::CreateKey()
+{
+	GameEngineInput::GetInst().CreateKey("Left", VK_LEFT);
+	GameEngineInput::GetInst().CreateKey("Right", VK_RIGHT);
+	GameEngineInput::GetInst().CreateKey("Up", VK_UP);
+	GameEngineInput::GetInst().CreateKey("Down", VK_DOWN);
+	GameEngineInput::GetInst().CreateKey("Ctrl", VK_CONTROL);
+	GameEngineInput::GetInst().CreateKey("Alt", VK_MENU);
+	GameEngineInput::GetInst().CreateKey("Enter", VK_RETURN);
+
+	// Mouse
+	GameEngineInput::GetInst().CreateKey("MLBtn", VK_LBUTTON);
+	GameEngineInput::GetInst().CreateKey("MRBtn", VK_RBUTTON);
+	GameEngineInput::GetInst().CreateKey("MOn", 'p');
+	GameEngineInput::GetInst().CreateKey("MOff", 'o');
+
+	// Imgui
+	GameEngineInput::GetInst().CreateKey("LevelControl", 'i');
 }
 
 

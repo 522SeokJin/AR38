@@ -3,6 +3,7 @@
 
 // Ό³Έν : 
 class MouseActor;
+class GameEngineRenderWindow;
 class LithHarborLevel : public GameEngineLevel
 {
 public:
@@ -22,5 +23,6 @@ protected:
 
 private:
 	MouseActor* Cursor_;
+	GameEngineRenderWindow* RenderWindow_;
 };
 

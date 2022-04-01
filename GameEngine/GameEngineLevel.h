@@ -85,6 +85,7 @@ public:
 	void PushCollision(GameEngineCollision* _Collision, int _Group);
 
 	void PushDebugRender(GameEngineTransform* _Transform, CollisionType _Type);
+	void PushUIDebugRender(GameEngineTransform* _Transform, CollisionType _Type);
 
 private:
 	inline std::list<GameEngineCollision*>& GetCollisionGroup(int _Group)
