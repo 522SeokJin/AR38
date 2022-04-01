@@ -35,7 +35,7 @@ void UserGame::ResourceLoad()
 	}
 
 	Dir.MoveParent();
-	Dir.MoveChild("Demian");
+	Dir.MoveChild("FolderAnimation");
 
 	std::vector<GameEngineFile> AllDir = Dir.GetAllDir();
 
@@ -44,15 +44,6 @@ void UserGame::ResourceLoad()
 		GameEngineFolderTextureManager::GetInst().Load(AllDir[i].GetFullPath());
 	}
 
-	Dir.MoveParent();
-	Dir.MoveChild("Player");
-
-	AllDir = Dir.GetAllDir();
-
-	for (size_t i = 0; i < AllDir.size(); i++)
-	{
-		GameEngineFolderTextureManager::GetInst().Load(AllDir[i].GetFullPath());
-	}
-
+	int a = 0;
 	//AppShaderLoad();
 }

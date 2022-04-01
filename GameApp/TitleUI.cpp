@@ -4,6 +4,7 @@
 #include <GameEngine/GameEngineUIRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineCore.h>
+#include "EnumDefine.h"
 
 TitleUI::TitleUI()
 	: LoginRenderer_(nullptr)
@@ -49,7 +50,7 @@ void TitleUI::Update(float _DeltaTime)
 		std::bind(&TitleUI::MouseEvent, this, std::placeholders::_1);
 
 	LoginButton_->Collision(CollisionType::Rect, CollisionType::Rect,
-		0, Func);
+		static_cast<int>(ColGroup::MOUSE), Func);
 }
 
 void TitleUI::MouseEvent(GameEngineCollision* _OtherCollision)

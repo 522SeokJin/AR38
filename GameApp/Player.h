@@ -71,6 +71,7 @@ private:
 	int ShoesImageIndex_;
 	int WeaponImageIndex_;
 
+	// [FolderIndex]
 	std::map<std::string, std::vector<float4>> FaceOffsets_[1];
 	std::map<std::string, std::vector<float4>> HairBelowBodyOffsets_[1];
 	std::map<std::string, std::vector<float4>> HairOverHeadOffsets_[1];

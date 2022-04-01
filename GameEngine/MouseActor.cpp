@@ -45,7 +45,6 @@ void MouseActor::Start()
 	{
 		Collision_ = CreateTransformComponent<GameEngineCollision>(0);
 		Collision_->SetLocalScaling({ 5.0f, 5.0f });
-		//Collision_->SetLocalPosition();
 	}
 }
 

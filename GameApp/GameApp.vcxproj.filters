@@ -101,6 +101,9 @@
     <ClCompile Include="Player_FSM.cpp">
       <Filter>Actor\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Actor\UI\Mouse</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -168,6 +171,12 @@
     </Filter>
     <Filter Include="Actor\UI\MainBar\QuickSlot">
       <UniqueIdentifier>{a77aef23-3af5-434e-a631-ebd758e245ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI\Mouse">
+      <UniqueIdentifier>{ebb90fd2-ac79-4a26-b1f5-e3c729ad32ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{111ab022-a3b5-4b6b-bf39-7168dcdb9c48}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -243,9 +252,6 @@
     <ClInclude Include="EntranceDemianMap.h">
       <Filter>Actor\Map\Demian</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsDefine.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
     <ClInclude Include="InventoryUI.h">
       <Filter>Actor\UI\Inventory</Filter>
     </ClInclude>
@@ -263,6 +269,15 @@
     </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>Actor\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Actor\UI\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsDefine.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumDefine.h">
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

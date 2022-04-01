@@ -36,7 +36,7 @@ void InventoryUI::Update(float _DeltaTime)
 
 void InventoryUI::PushItem(InventoryCategory _Category, Item* _Item)
 {
-	if (128 <= ItemList_[static_cast<int>(_Category)].size())
+	if (32 <= ItemList_[static_cast<int>(_Category)].size())
 	{
 		GameEngineDebug::MsgBoxError("인벤토리 아이템 칸이 꽉찼습니다.");
 	}

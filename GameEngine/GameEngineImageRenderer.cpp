@@ -371,7 +371,7 @@ void GameEngineImageRenderer::Animation2D::Update(float _DeltaTime)
 			FolderTextures_->GetTextureIndex(CurFrame_));
 		Renderer_->SetLocalScaling(FolderTextures_->GetTextureIndex(CurFrame_)->GetTextureSize());
 		Renderer_->SetImageSize(Renderer_->GetLocalScaling());
-		Renderer_->SetLocalPosition({Offsets_[CurFrame_].x, Offsets_[CurFrame_].y });
+		Renderer_->SetLocalMove(Offsets_[CurFrame_]);
 	}
 }
 

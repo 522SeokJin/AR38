@@ -2,7 +2,7 @@
 #include "LithHarborLevel.h"
 #include "LithHarbor.h"
 #include <GameEngine/GameEngineWindow.h>
-#include <GameEngine/MouseActor.h>
+#include "Mouse.h"
 #include "Player.h"
 
 #include <GameEngine/GameEngineGUI.h>
@@ -35,9 +35,7 @@ void LithHarborLevel::LevelStart()
 	GetMainCamera()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
 
 	{
-		Cursor_ = CreateActor<MouseActor>();
-		Cursor_->GetUIRenderer()->SetRenderGroup(1000);
-		Cursor_->SetCursor("Cursor.0.0.png");
+		Cursor_ = CreateActor<Mouse>();
 	}
 
 	{

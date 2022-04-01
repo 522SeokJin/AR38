@@ -73,11 +73,11 @@ void UserGame::CreateKey()
 	// Mouse
 	GameEngineInput::GetInst().CreateKey("MLBtn", VK_LBUTTON);
 	GameEngineInput::GetInst().CreateKey("MRBtn", VK_RBUTTON);
-	GameEngineInput::GetInst().CreateKey("MOn", 'p');
-	GameEngineInput::GetInst().CreateKey("MOff", 'o');
+	GameEngineInput::GetInst().CreateKey("MOn", '1');
+	GameEngineInput::GetInst().CreateKey("MOff", '2');
 
 	// Imgui
-	GameEngineInput::GetInst().CreateKey("LevelControl", 'i');
+	GameEngineInput::GetInst().CreateKey("LevelControl", '3');
 }
 
 

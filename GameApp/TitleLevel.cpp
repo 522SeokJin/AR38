@@ -2,13 +2,14 @@
 #include "TitleLevel.h"
 #include "TitleUI.h"
 #include "GameEngineBase/GameEngineSoundManager.h"
-#include <GameEngine/MouseActor.h>
+#include "Mouse.h"
 #include <GameEngine/GameEngineWindow.h>
 #include <GameEngine/GameEngineGUI.h>
 #include <GameEngine/GameEngineRenderWindow.h>
 
 TitleLevel::TitleLevel()
 	: Cursor_(nullptr)
+	, RenderWindow_(nullptr)
 {
 
 }
@@ -24,11 +25,7 @@ void TitleLevel::LevelStart()
 	GetMainCamera()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
 
 	{
-		Cursor_ = CreateActor<MouseActor>();
-		Cursor_->GetUIRenderer()->SetRenderGroup(1000);
-		Cursor_->SetCursor("Cursor.0.0.png");
-		float4 Size = Cursor_->GetUIRenderer()->GetImageSize().InvertY();
-		Cursor_->GetUIRenderer()->GetTransform()->SetLocalPosition(Size.halffloat4());
+		Cursor_ = CreateActor<Mouse>();
 	}
 
 	{
@@ -36,7 +33,6 @@ void TitleLevel::LevelStart()
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(
 			Actor->GetTransform()->GetLocalPosition());
 	}
-
 }
 
 void TitleLevel::LevelUpdate(float _DeltaTime)
@@ -68,13 +64,11 @@ void TitleLevel::LevelUpdate(float _DeltaTime)
 	if (true == GameEngineInput::GetInst().Down("MOn"))
 	{
 		RenderWindow_->On();
-		Cursor_->WindowCursorOn();
 	}
 
 	if (true == GameEngineInput::GetInst().Down("MOff"))
 	{
 		RenderWindow_->Off();
-		Cursor_->WindowCursorOff();
 	}
 }
 

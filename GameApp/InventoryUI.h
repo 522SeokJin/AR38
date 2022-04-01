@@ -10,6 +10,7 @@ enum class InventoryCategory
 
 // Ό³Έν : 
 class Item;
+class GameEngineCollision;
 class InventoryUI : public GameEngineActor
 {
 public:
@@ -33,5 +34,7 @@ private:
 	void EraseItem(InventoryCategory _Category, int _Index);
 
 	std::map<int, std::vector<Item*>> ItemList_;
+	GameEngineCollision* TitleBar_;
+	GameEngineCollision* Items_[32];
 };
 
