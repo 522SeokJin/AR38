@@ -44,6 +44,16 @@ void UserGame::ResourceLoad()
 		GameEngineFolderTextureManager::GetInst().Load(AllDir[i].GetFullPath());
 	}
 
-	int a = 0;
-	//AppShaderLoad();
+	AppShaderLoad();
+
+	{
+		GameEngineRenderingPipeLine* Pipe =
+			GameEngineRenderingPipeLineManager::GetInst().Create("PointTextureUI");
+		Pipe->SetInputAssembler1VertexBufferSetting("Rect");
+		Pipe->SetInputAssembler1InputLayoutSetting("PointTexture_VS");
+		Pipe->SetVertexShader("PointTexture_VS");
+		Pipe->SetInputAssembler2IndexBufferSetting("Rect");
+		Pipe->SetPixelShader("PointTexture_PS");
+		Pipe->SetOutputMergerDepthStencil("BaseDepthOff");
+	}
 }

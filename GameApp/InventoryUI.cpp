@@ -67,6 +67,7 @@ void InventoryUI::Start()
 void InventoryUI::Update(float _DeltaTime)
 {
 	GetLevel()->PushUIDebugRender(TitleBar_->GetTransform(), CollisionType::Rect);
+
 	GetLevel()->PushUIDebugRender(EquipmentTab_->GetTransform(), CollisionType::Rect);
 	GetLevel()->PushUIDebugRender(UseableTab_->GetTransform(), CollisionType::Rect);
 	GetLevel()->PushUIDebugRender(EtcTab_->GetTransform(), CollisionType::Rect);

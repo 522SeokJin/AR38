@@ -84,6 +84,9 @@ void StatusUI::Start()
 		{
 			GameEngineUIRenderer* Renderer =
 				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+			Renderer->SetRenderingPipeLine("PointTextureUI");
+			Renderer->ImageRendererStart();
+
 			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
 			Renderer->Off();
 
@@ -97,6 +100,9 @@ void StatusUI::Start()
 		{
 			GameEngineUIRenderer* Renderer =
 				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+			Renderer->SetRenderingPipeLine("PointTextureUI");
+			Renderer->ImageRendererStart();
+
 			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
 			Renderer->Off();
 
@@ -110,6 +116,9 @@ void StatusUI::Start()
 		{
 			GameEngineUIRenderer* Renderer =
 				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+			Renderer->SetRenderingPipeLine("PointTextureUI");
+			Renderer->ImageRendererStart();
+
 			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
 			Renderer->Off();
 
@@ -123,6 +132,9 @@ void StatusUI::Start()
 		{
 			GameEngineUIRenderer* Renderer =
 				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+			Renderer->SetRenderingPipeLine("PointTextureUI");
+			Renderer->ImageRendererStart();
+
 			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
 			Renderer->Off();
 

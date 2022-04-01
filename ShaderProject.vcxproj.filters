@@ -4,6 +4,9 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{7c46f32f-acbc-436c-a85a-a7d78757b4aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="User">
+      <UniqueIdentifier>{8883b93b-d019-4e11-b0e2-0c4a42dd8efd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="EngineResources\Shader\CBufferHeader.fx">
@@ -20,6 +23,9 @@
     </FxCompile>
     <FxCompile Include="EngineResources\Shader\ProgressBar.fx">
       <Filter>Engine</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\PointTexture.fx">
+      <Filter>User</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
