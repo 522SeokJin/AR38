@@ -6,3 +6,5 @@ enum class ColGroup	// Collision Group Number
 	BUTTON,
 	TAB,
 };
+
+static bool gLevelUp = false;

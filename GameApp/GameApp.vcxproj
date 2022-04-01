@@ -303,7 +303,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="EnumDefine.h" />
+    <ClInclude Include="GlobalValue.h" />
     <ClInclude Include="ExpBarUI.h">
       <SubType>
       </SubType>

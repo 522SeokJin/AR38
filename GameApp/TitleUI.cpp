@@ -4,7 +4,7 @@
 #include <GameEngine/GameEngineUIRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineCore.h>
-#include "EnumDefine.h"
+#include "GlobalValue.h"
 
 TitleUI::TitleUI()
 	: LoginRenderer_(nullptr)

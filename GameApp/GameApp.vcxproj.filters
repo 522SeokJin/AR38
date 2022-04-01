@@ -276,7 +276,7 @@
     <ClInclude Include="PhysicsDefine.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="EnumDefine.h">
+    <ClInclude Include="GlobalValue.h">
       <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "StatusUI.h"
 #include "GameEngine/GameEngineUIRenderer.h"
+#include "GlobalValue.h"
 
 StatusUI::StatusUI()
 	: HPBarValue_({ 1.0f, 2, 0, 0 })
@@ -170,6 +171,11 @@ void StatusUI::Update(float _DeltaTime)
 	{
 		UpdateMPBar();
 		MPChanged_ = false;
+	}
+
+	if (true == gLevelUp)
+	{
+		LevelUp();
 	}
 
 	if (true == LevelChanged_)

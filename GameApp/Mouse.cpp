@@ -2,7 +2,7 @@
 #include "Mouse.h"
 #include <GameEngine/MouseActor.h>
 #include <GameEngine/GameEngineCollision.h>
-#include "EnumDefine.h"
+#include "GlobalValue.h"
 
 Mouse::Mouse()
 {
