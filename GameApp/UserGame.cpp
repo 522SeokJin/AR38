@@ -78,6 +78,8 @@ void UserGame::CreateKey()
 
 	// Imgui
 	GameEngineInput::GetInst().CreateKey("LevelControl", '3');
+
+	GameEngineInput::GetInst().CreateKey("Inventory", 'i');
 }
 
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "GameEngine/GameEngineActor.h"
 
-enum class InventoryCategory
+enum class InventoryTab
 {
 	Equipment,
 	Useable,
@@ -11,6 +11,7 @@ enum class InventoryCategory
 // Ό³Έν : 
 class Item;
 class GameEngineCollision;
+class GameEngineUIRenderer;
 class InventoryUI : public GameEngineActor
 {
 public:
@@ -29,12 +30,27 @@ protected:
 private:
 	void CreateRenderer();
 
-	void PushItem(InventoryCategory _Category, Item* _Item);
+	void TitleBarEvent(GameEngineCollision* _OtherCollision);
 
-	void EraseItem(InventoryCategory _Category, int _Index);
+	void ChangeTabEvent();
+
+	void PushItem(InventoryTab _Category, Item* _Item);
+
+	void EraseItem(InventoryTab _Category, int _Index);
 
 	std::map<int, std::vector<Item*>> ItemList_;
+
 	GameEngineCollision* TitleBar_;
-	GameEngineCollision* Items_[32];
+	GameEngineCollision* ItemBlocks_[32];
+
+	GameEngineUIRenderer* EquipmentRenderer_;
+	GameEngineUIRenderer* UseableRenderer_;
+	GameEngineUIRenderer* EtcRenderer_;
+
+	GameEngineCollision* EquipmentTab_;
+	GameEngineCollision* UseableTab_;
+	GameEngineCollision* EtcTab_;
+
+	InventoryTab EnabledTab_;
 };
 

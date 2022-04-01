@@ -75,8 +75,8 @@ void LithHarborLevel::LevelStart()
 	}
 
 	{
-		InventoryUI* Actor = CreateActor<InventoryUI>();
-		Actor->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
+		Inventory_ = CreateActor<InventoryUI>();
+		Inventory_->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
 	}
 
 	{
@@ -121,6 +121,11 @@ void LithHarborLevel::LevelUpdate(float _DeltaTime)
 	{
 		RenderWindow_->Off();
 		Cursor_->WindowCursorOff();
+	}
+
+	if (true == GameEngineInput::GetInst().Down("Inventory"))
+	{
+		Inventory_->OnOffChange();
 	}
 }
 

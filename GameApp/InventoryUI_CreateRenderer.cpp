@@ -22,22 +22,22 @@ void InventoryUI::CreateRenderer()
 	}
 
 	{
-		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-		Renderer->SetImage("Item.Tab.enabled.0.png");
-		Renderer->SetLocalPosition({ -75.0f + 0.0f * 30.0f, 154.0f });
+		EquipmentRenderer_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+		EquipmentRenderer_->SetImage("Item.Tab.enabled.0.png");
+		EquipmentRenderer_->SetLocalPosition({ -75.0f + 0.0f * 30.0f, 154.0f - 1.0f });
 	}
 
 	{
 		// disabled size diffrent -> y : 19 -> 17
-		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-		Renderer->SetImage("Item.Tab.disabled.1.png");
-		Renderer->SetLocalPosition({ -75.0f + 1.0f * 30.0f, 154.0f - 1.0f });
+		UseableRenderer_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+		UseableRenderer_->SetImage("Item.Tab.disabled.1.png");
+		UseableRenderer_->SetLocalPosition({ -75.0f + 1.0f * 30.0f, 154.0f - 1.0f });
 	}
 
 	{
-		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-		Renderer->SetImage("Item.Tab.disabled.2.png");
-		Renderer->SetLocalPosition({ -75.0f + 2.0f * 30.0f, 154.0f - 1.0f });
+		EtcRenderer_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+		EtcRenderer_->SetImage("Item.Tab.disabled.2.png");
+		EtcRenderer_->SetLocalPosition({ -75.0f + 2.0f * 30.0f, 154.0f - 1.0f });
 	}
 
 	{
