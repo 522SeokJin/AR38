@@ -3,6 +3,7 @@
 
 // Ό³Έν : 
 class Mouse;
+class Player;
 class GameEngineRenderWindow;
 class InventoryUI;
 class LithHarborLevel : public GameEngineLevel
@@ -24,6 +25,7 @@ protected:
 
 private:
 	Mouse* Cursor_;
+	Player* Player_;
 	GameEngineRenderWindow* RenderWindow_;
 	InventoryUI* Inventory_;
 };

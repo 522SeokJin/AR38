@@ -17,9 +17,12 @@
 
 #include "Demian.h"
 
+#include "GlobalValue.h"
+
 LithHarborLevel::LithHarborLevel()
 	: Cursor_(nullptr)
 	, RenderWindow_(nullptr)
+	, Inventory_(nullptr)
 {
 
 }
@@ -43,10 +46,10 @@ void LithHarborLevel::LevelStart()
 	}
 
 	{
-		Player* Actor = CreateActor<Player>();
-		Actor->GetTransform()->SetWorldPosition({ 1935.0f, -1280.0f });
+		Player_ = CreateActor<Player>();
+		Player_->GetTransform()->SetWorldPosition({ 1935.0f, -1280.0f });
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(
-			Actor->GetTransform()->GetLocalPosition());
+			Player_->GetTransform()->GetLocalPosition());
 	}
 	
 	{
@@ -135,5 +138,6 @@ void LithHarborLevel::LevelChangeEndEvent()
 
 void LithHarborLevel::LevelChangeStartEvent()
 {
-
+	GlobalValue::CurrentPlayer = Player_;
+	GlobalValue::CurrentMouse = Cursor_;
 }

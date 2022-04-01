@@ -104,6 +104,9 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>Actor\UI\Mouse</Filter>
     </ClCompile>
+    <ClCompile Include="GlobalValue.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">

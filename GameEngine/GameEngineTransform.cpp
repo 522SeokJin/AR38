@@ -25,8 +25,8 @@ void GameEngineTransform::AttachTransform(GameEngineTransform* _Transform)
 
 void GameEngineTransform::DetachChildTransform(GameEngineTransform* _Transform)
 {
-	static std::vector<GameEngineTransform*>::iterator StartIter = Childs_.begin();
-	static std::vector<GameEngineTransform*>::iterator EndIter = Childs_.end();
+	std::vector<GameEngineTransform*>::iterator StartIter = Childs_.begin();
+	std::vector<GameEngineTransform*>::iterator EndIter = Childs_.end();
 	
 	for (; StartIter != EndIter; )
 	{
@@ -37,6 +37,11 @@ void GameEngineTransform::DetachChildTransform(GameEngineTransform* _Transform)
 		}
 
 		StartIter = Childs_.erase(StartIter);
+
+		if (StartIter == Childs_.end())
+		{
+			break;
+		}
 	}
 }
 

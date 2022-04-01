@@ -42,10 +42,8 @@ void MouseActor::Start()
 	UIRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();
 	UIRenderer_->GetTransform()->SetLocalScaling({ 50.0f, 50.0f });
 
-	{
-		Collision_ = CreateTransformComponent<GameEngineCollision>(0);
-		Collision_->SetLocalScaling({ 5.0f, 5.0f });
-	}
+	Collision_ = CreateTransformComponent<GameEngineCollision>(0);
+	Collision_->SetLocalScaling({ 5.0f, 5.0f });
 }
 
 void MouseActor::Update(float _DeltaTime)

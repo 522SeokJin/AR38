@@ -4,6 +4,7 @@
 #include <GameEngine/GameEngineCollision.h>
 #include "GlobalValue.h"
 #include "Item.h"
+#include "Mouse.h"
 
 InventoryUI::InventoryUI()
 	: TitleBar_(nullptr)
@@ -84,9 +85,17 @@ void InventoryUI::Update(float _DeltaTime)
 
 void InventoryUI::TitleBarEvent(GameEngineCollision* _OtherCollision)
 {
-	if (true == GameEngineInput::GetInst().Press("MLBtn"))
+	if (true == GameEngineInput::GetInst().Down("MLBtn"))
 	{
-		int a = 0;
+		float4 Value = GetTransform()->GetWorldPosition() - GameEngineInput::GetMouse3DPos();
+
+		GetTransform()->AttachTransform(GlobalValue::CurrentMouse->GetTransform());
+		GetTransform()->SetLocalPosition(Value);
+	}
+
+	if (true == GameEngineInput::GetInst().Up("MLBtn"))
+	{
+		GlobalValue::CurrentMouse->GetTransform()->DetachChildTransform(GetTransform());
 	}
 }
 
