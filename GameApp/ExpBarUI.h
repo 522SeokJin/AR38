@@ -3,6 +3,7 @@
 
 // Ό³Έν : 
 class GameEngineUIRenderer;
+class StatusUI;
 class ExpBarUI : public GameEngineActor
 {
 	class ProgressBar
@@ -24,6 +25,11 @@ public:
 	void SetExp(float _Value);
 	void AddExp(float _Value);
 
+	void LinkStatus(StatusUI* _Status)
+	{
+		Status_ = _Status;
+	}
+
 protected:
 	ExpBarUI(const ExpBarUI& _other) = delete; 
 	ExpBarUI(ExpBarUI&& _other) noexcept = delete;
@@ -31,6 +37,8 @@ protected:
 	ExpBarUI& operator=(const ExpBarUI&& _other) = delete;
 
 private:
+	StatusUI* Status_;
+
 	ProgressBar ExpBarValue_;
 	GameEngineUIRenderer* ExpBarRenderer_;
 

@@ -2,7 +2,7 @@
 #include "ExpBarUI.h"
 #include <GameEngine/GameEngineUIRenderer.h>
 #include <GameEngineBase/GameEngineTime.h>
-#include "GlobalValue.h"
+#include "StatusUI.h"
 
 ExpBarUI::ExpBarUI()
 	: ExpBarValue_({ 0.0f, 2, 0, 0 })
@@ -59,7 +59,7 @@ void ExpBarUI::SetExp(float _Value)
 	if (CurrentExp_ >= MaxExp_)
 	{
 		CurrentExp_ = 0.0f;
-		gLevelUp = true;
+		Status_->LevelUp();
 	}
 
 	ExpBarValue_.Percent = CurrentExp_ / MaxExp_;
@@ -72,7 +72,7 @@ void ExpBarUI::AddExp(float _Value)
 	if (CurrentExp_ >= MaxExp_)
 	{
 		CurrentExp_ = 0.0f;
-		gLevelUp = true;
+		Status_->LevelUp();
 	}
 
 	ExpBarValue_.Percent = CurrentExp_ / MaxExp_;

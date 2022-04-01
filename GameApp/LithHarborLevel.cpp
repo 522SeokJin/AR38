@@ -50,13 +50,12 @@ void LithHarborLevel::LevelStart()
 	}
 	
 	{
-		ExpBarUI* Actor = CreateActor<ExpBarUI>();
-		Actor->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
-	}
+		StatusUI* Status = CreateActor<StatusUI>();
+		Status->GetTransform()->SetWorldPosition({ 5.0f, 45.0f - GameEngineWindow::GetInst().GetSize().hy() });
 
-	{
-		StatusUI* Actor = CreateActor<StatusUI>();
-		Actor->GetTransform()->SetWorldPosition({ 5.0f, 45.0f - GameEngineWindow::GetInst().GetSize().hy() });
+		ExpBarUI* ExpBar = CreateActor<ExpBarUI>();
+		ExpBar->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
+		ExpBar->LinkStatus(Status);
 	}
 
 	{

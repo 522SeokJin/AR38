@@ -173,11 +173,6 @@ void StatusUI::Update(float _DeltaTime)
 		MPChanged_ = false;
 	}
 
-	if (true == gLevelUp)
-	{
-		LevelUp();
-	}
-
 	if (true == LevelChanged_)
 	{
 		UpdateStatusLv();
