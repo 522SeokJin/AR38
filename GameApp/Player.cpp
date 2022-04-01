@@ -104,24 +104,6 @@ void Player::KeyInputUpdate()
 
 		GetTransform()->SetLocalDeltaTimeMove(float4::RIGHT * Speed_.x);
 	}
-	//if (true == GameEngineInput::GetInst().Press("Up"))
-	//{
-	//	GetTransform()->SetLocalDeltaTimeMove(float4::UP * WALKSPEED);
-	//}
-	//if (true == GameEngineInput::GetInst().Press("Down"))
-	//{
-	//	GetTransform()->SetLocalDeltaTimeMove(float4::DOWN * WALKSPEED);
-	//}
-
-	//if (true == GameEngineInput::GetInst().Down("Ctrl"))
-	//{
-	//	// Attack
-	//}
-
-	//if (true == GameEngineInput::GetInst().Press("Alt"))
-	//{
-	//	GetTransform()->SetLocalDeltaTimeMove(float4::UP * JUMPSPEED);
-	//}
 
 	if (CurrentDir != Dir_)
 	{
@@ -136,7 +118,6 @@ void Player::Start()
 	{
 		Collision_ = CreateTransformComponent<GameEngineCollision>(10);
 		Collision_->SetLocalScaling({ 39.0f, 64.0f });
-		Collision_->SetLocalPosition({ 0.0f, 32.0f });
 	}
 
 	FSM_.CreateState("stand1", std::bind(&Player::stand1, this),
@@ -154,6 +135,10 @@ void Player::Start()
 	FSM_.CreateState("fall", std::bind(&Player::fall, this),
 		std::bind(&Player::fall_Start, this),
 		std::bind(&Player::fall_End, this));
+
+	FSM_.CreateState("swingO1", std::bind(&Player::swingO1, this),
+		std::bind(&Player::swingO1_Start, this),
+		std::bind(&Player::swingO1_End, this));
 
 	FSM_.ChangeState("stand1");
 }

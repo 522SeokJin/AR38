@@ -6,8 +6,6 @@
 void Player::CreateAnimation()
 {
 	Avatar_ = CreateTransformComponent<GameEngineImageRenderer>();
-	Avatar_->SetLocalPosition({ 0.0f, 32.0f });
-
 	Face_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Hair_ = CreateTransformComponent<GameEngineImageRenderer>();
 	HairOverHead_ = CreateTransformComponent<GameEngineImageRenderer>();
@@ -228,8 +226,8 @@ void Player::CreateAvatarAnimation()
 	Avatar_->CreateAnimationFolder("avatar_stabOF", "stabOF", 0.5f);
 	Avatar_->CreateAnimationFolder("avatar_stand1", "stand1", 0.5f);
 
-	Avatar_->CreateAnimationFolder("avatar_swingO1", "swingO1", 0.3f);	// 300 150 350
-	Avatar_->SetOffsetAnimation("swingO1", 1, { -4.0f, 2.0f });
+	Avatar_->CreateAnimationFolder("avatar_swingO1", "swingO1", 0.3f, false);	// 300 150 350
+	Avatar_->SetOffsetAnimation("swingO1", 1, { -4.0f, 0.0f });
 	Avatar_->SetOffsetAnimation("swingO1", 2, { -22.0f, 0.0f });
 
 	Avatar_->CreateAnimationFolder("avatar_swingO2", "swingO2", 0.5f);

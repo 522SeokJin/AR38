@@ -101,9 +101,13 @@ private:
 	void jump_Start();
 	void jump();
 	void jump_End();
-
+	
 	void fall_Start();
 	void fall();
 	void fall_End();
+
+	void swingO1_Start();
+	void swingO1();
+	void swingO1_End();
 };
 

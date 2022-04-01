@@ -29,9 +29,15 @@ void Player::stand1()
 		return;
 	}
 
-	if (float4::BLACK != Map::GetColor(GetTransform()))
+	if (float4::BLACK != Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f)))
 	{
-		FSM_.ChangeState("jump");
+		FSM_.ChangeState("fall");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Ctrl"))
+	{
+		FSM_.ChangeState("swingO1");
 		return;
 	}
 }
@@ -64,9 +70,15 @@ void Player::walk1()
 
 	KeyInputUpdate();
 
-	if (float4::BLACK != Map::GetColor(GetTransform()))
+	if (float4::BLACK != Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f)))
 	{
 		FSM_.ChangeState("fall");
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Ctrl"))
+	{
+		FSM_.ChangeState("swingO1");
+		return;
 	}
 }
 
@@ -83,7 +95,7 @@ void Player::jump_Start()
 
 void Player::jump()
 {
-	if (float4::BLACK == Map::GetColor(GetTransform()))
+	if (float4::BLACK == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f)))
 	{
 		if (
 			false == GameEngineInput::GetInst().Press("Left") &&
@@ -129,7 +141,7 @@ void Player::fall_Start()
 
 void Player::fall()
 {
-	if (float4::BLACK == Map::GetColor(GetTransform()))
+	if (float4::BLACK == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f)))
 	{
 		if (
 			false == GameEngineInput::GetInst().Press("Left") &&
@@ -166,4 +178,22 @@ void Player::fall()
 void Player::fall_End()
 {
 	Speed_.y = 0.0f;
+}
+
+void Player::swingO1_Start()
+{
+	ChangePlayerAnimation("swingO1");
+}
+
+void Player::swingO1()
+{
+	if (Avatar_->GetCurAnimation()->IsEnd_)
+	{
+		FSM_.ChangeState("stand1");
+	}
+}
+
+void Player::swingO1_End()
+{
+	Avatar_->SetLocalPosition(float4::ZERO);
 }
