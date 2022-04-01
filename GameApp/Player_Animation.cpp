@@ -1,12 +1,13 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include <GameEngine/GameEngineImageRenderer.h>
-#include <GameEngine\magic_enum.hpp>
 #include "Player_Define.h"
 
 void Player::CreateAnimation()
 {
 	Avatar_ = CreateTransformComponent<GameEngineImageRenderer>();
+	Avatar_->SetLocalPosition({ 0.0f, 32.0f });
+
 	Face_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Hair_ = CreateTransformComponent<GameEngineImageRenderer>();
 	HairOverHead_ = CreateTransformComponent<GameEngineImageRenderer>();

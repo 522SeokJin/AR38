@@ -59,22 +59,22 @@ void MenuUI::Start()
 	
 	{
 		CharCol_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
-			ColGroup::BUTTON));
-		CharCol_->SetLocalScaling({ 34.0f, 37.0f });
+			ColGroup::TAB));
+		CharCol_->SetLocalScaling({ 24.0f, 27.0f });
 		CharCol_->SetLocalPosition({ 69.0f, 0.0f });
 	}
 
 	{
 		SettingCol_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
-			ColGroup::BUTTON));
-		SettingCol_->SetLocalScaling({ 34.0f, 37.0f });
+			ColGroup::TAB));
+		SettingCol_->SetLocalScaling({ 24.0f, 27.0f });
 		SettingCol_->SetLocalPosition({ 139.0f, 0.0f });
 	}
 
 	{
 		MenuCol_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
-			ColGroup::BUTTON));
-		MenuCol_->SetLocalScaling({ 34.0f, 37.0f });
+			ColGroup::TAB));
+		MenuCol_->SetLocalScaling({ 24.0f, 27.0f });
 		MenuCol_->SetLocalPosition({ 174.0f, 0.0f });
 	}
 }

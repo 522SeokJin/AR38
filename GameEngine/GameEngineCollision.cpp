@@ -103,6 +103,37 @@ void GameEngineCollision::Collision(CollisionType _ThisType, CollisionType _Othe
 	}
 }
 
+bool GameEngineCollision::IsCollision(CollisionType _ThisType, CollisionType _OtherType, int _OtherGroup)
+{
+	bool Result = false;
+
+	std::list<GameEngineCollision*>& Group = GetLevel()->GetCollisionGroup(_OtherGroup);
+
+	for (GameEngineCollision* OtherCollision : Group)
+	{
+		if (false == OtherCollision->IsUpdate())
+		{
+			continue;
+		}
+
+		auto& CheckFunction = CollisionCheckFunction[static_cast<int>(_ThisType)]
+			[static_cast<int>(_OtherType)];
+
+		if (nullptr == CheckFunction)
+		{
+			GameEngineDebug::MsgBoxError("아직 구현하지 않은 타입간에 충돌입니다.");
+		}
+
+		if (true ==
+			CheckFunction(GetTransform(), OtherCollision->GetTransform()))
+		{
+			Result = true;
+		}
+	}
+
+	return Result;
+}
+
 void GameEngineCollision::SphereToSphereCollision(int _OtherGroup, std::function<void(GameEngineCollision*)> _CallBack)
 {
 	Collision(CollisionType::Sphere, CollisionType::Sphere, _OtherGroup, _CallBack);

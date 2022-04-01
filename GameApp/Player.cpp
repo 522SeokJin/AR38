@@ -8,6 +8,7 @@
 
 Player::Player()
 	: Dir_(PlayerDir::LEFT)
+	, Speed_(float4::ZERO)
 	, FaceImageIndex_(1)
 	, HairBelowBodyImageIndex_(1)
 	, HairOverHeadImageIndex_(1)
@@ -90,31 +91,37 @@ void Player::KeyInputUpdate()
 	if (true == GameEngineInput::GetInst().Press("Left"))
 	{
 		Dir_ = PlayerDir::LEFT;
-		GetTransform()->SetLocalDeltaTimeMove(float4::LEFT * WALKSPEED);
+
+		Speed_.x = WALKSPEED;
+
+		GetTransform()->SetLocalDeltaTimeMove(float4::LEFT * Speed_.x);
 	}
 	if (true == GameEngineInput::GetInst().Press("Right"))
 	{
 		Dir_ = PlayerDir::RIGHT;
-		GetTransform()->SetLocalDeltaTimeMove(float4::RIGHT * WALKSPEED);
-	}
-	if (true == GameEngineInput::GetInst().Press("Up"))
-	{
-		GetTransform()->SetLocalDeltaTimeMove(float4::UP * WALKSPEED);
-	}
-	if (true == GameEngineInput::GetInst().Press("Down"))
-	{
-		GetTransform()->SetLocalDeltaTimeMove(float4::DOWN * WALKSPEED);
-	}
 
-	if (true == GameEngineInput::GetInst().Down("Ctrl"))
-	{
-		// Attack
-	}
+		Speed_.x = WALKSPEED;
 
-	if (true == GameEngineInput::GetInst().Press("Alt"))
-	{
-		GetTransform()->SetLocalDeltaTimeMove(float4::UP * JUMPSPEED);
+		GetTransform()->SetLocalDeltaTimeMove(float4::RIGHT * Speed_.x);
 	}
+	//if (true == GameEngineInput::GetInst().Press("Up"))
+	//{
+	//	GetTransform()->SetLocalDeltaTimeMove(float4::UP * WALKSPEED);
+	//}
+	//if (true == GameEngineInput::GetInst().Press("Down"))
+	//{
+	//	GetTransform()->SetLocalDeltaTimeMove(float4::DOWN * WALKSPEED);
+	//}
+
+	//if (true == GameEngineInput::GetInst().Down("Ctrl"))
+	//{
+	//	// Attack
+	//}
+
+	//if (true == GameEngineInput::GetInst().Press("Alt"))
+	//{
+	//	GetTransform()->SetLocalDeltaTimeMove(float4::UP * JUMPSPEED);
+	//}
 
 	if (CurrentDir != Dir_)
 	{
@@ -128,7 +135,8 @@ void Player::Start()
 
 	{
 		Collision_ = CreateTransformComponent<GameEngineCollision>(10);
-		Collision_->SetLocalScaling(Avatar_->GetImageSize());
+		Collision_->SetLocalScaling({ 39.0f, 64.0f });
+		Collision_->SetLocalPosition({ 0.0f, 32.0f });
 	}
 
 	FSM_.CreateState("stand1", std::bind(&Player::stand1, this),
@@ -142,6 +150,10 @@ void Player::Start()
 	FSM_.CreateState("jump", std::bind(&Player::jump, this),
 		std::bind(&Player::jump_Start, this),
 		std::bind(&Player::jump_End, this));
+
+	FSM_.CreateState("fall", std::bind(&Player::fall, this),
+		std::bind(&Player::fall_Start, this),
+		std::bind(&Player::fall_End, this));
 
 	FSM_.ChangeState("stand1");
 }

@@ -50,6 +50,8 @@ private:
 
 	GameEngineFSM FSM_;
 
+	float4 Speed_;
+
 	GameEngineImageRenderer* Avatar_;
 	GameEngineImageRenderer* Face_;
 	GameEngineImageRenderer* HairBelowBody_;
@@ -60,6 +62,8 @@ private:
 	GameEngineImageRenderer* Pants_;
 	GameEngineImageRenderer* Shoes_;
 	GameEngineImageRenderer* Weapon_;
+
+	GameEngineCollision* Collision_;
 
 	int FaceImageIndex_;
 	int HairBelowBodyImageIndex_;
@@ -82,7 +86,6 @@ private:
 	std::map<std::string, std::vector<float4>> ShoesOffsets_[1];
 	std::map<std::string, std::vector<float4>> WeaponOffsets_[1];
 
-	GameEngineCollision* Collision_;
 
 	////////////////////////////////////////////	FSM
 
@@ -98,5 +101,9 @@ private:
 	void jump_Start();
 	void jump();
 	void jump_End();
+
+	void fall_Start();
+	void fall();
+	void fall_End();
 };
 

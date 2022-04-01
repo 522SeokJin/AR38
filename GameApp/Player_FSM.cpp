@@ -3,19 +3,20 @@
 #include <GameEngine/GameEngineImageRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 #include "Map.h"
+#include "PhysicsDefine.h"
+#include "Player_Define.h"
 
 void Player::stand1_Start()
 {
 	ChangePlayerAnimation("stand1");
+	Speed_.x = 0.0f;
 }
 
 void Player::stand1()
 {
 	if (
 		true == GameEngineInput::GetInst().Press("Left") ||
-		true == GameEngineInput::GetInst().Press("Right") ||
-		true == GameEngineInput::GetInst().Press("Up") ||
-		true == GameEngineInput::GetInst().Press("Down")
+		true == GameEngineInput::GetInst().Press("Right")
 		)
 	{
 		FSM_.ChangeState("walk1");
@@ -29,17 +30,10 @@ void Player::stand1()
 	}
 
 	if (float4::BLACK != Map::GetColor(GetTransform()))
-		GetTransform()->SetLocalDeltaTimeMove(float4::DOWN * 50.0f);
-
-	Collision_->SetLocalScaling({ 100.0f, 100.0f, 1.0f });
-
-	Collision_->Collision(CollisionType::AABBBox, CollisionType::AABBBox, 20,
-		[](GameEngineCollision* _OtherCollision)
-		{
-			_OtherCollision->GetActor()->Death();
-		}
-	);
-
+	{
+		FSM_.ChangeState("jump");
+		return;
+	}
 }
 
 void Player::stand1_End()
@@ -55,9 +49,7 @@ void Player::walk1()
 {
 	if (
 		false == GameEngineInput::GetInst().Press("Left") &&
-		false == GameEngineInput::GetInst().Press("Right") &&
-		false == GameEngineInput::GetInst().Press("Up") &&
-		false == GameEngineInput::GetInst().Press("Down")
+		false == GameEngineInput::GetInst().Press("Right")
 		)
 	{
 		FSM_.ChangeState("stand1");
@@ -73,16 +65,9 @@ void Player::walk1()
 	KeyInputUpdate();
 
 	if (float4::BLACK != Map::GetColor(GetTransform()))
-		GetTransform()->SetLocalDeltaTimeMove(float4::DOWN * 50.0f);
-	
-	Collision_->SetLocalScaling({ 100.0f, 100.0f, 1.0f });
-
-	Collision_->Collision(CollisionType::AABBBox, CollisionType::AABBBox, 20,
-		[](GameEngineCollision* _OtherCollision)
-		{
-			_OtherCollision->GetActor()->Death();
-		}
-	);
+	{
+		FSM_.ChangeState("fall");
+	}
 }
 
 void Player::walk1_End()
@@ -92,6 +77,8 @@ void Player::walk1_End()
 void Player::jump_Start()
 {
 	ChangePlayerAnimation("jump");
+	Speed_.y = JUMPSPEED;
+	GetTransform()->SetLocalMove({ 0.0f, 1.0f });
 }
 
 void Player::jump()
@@ -100,9 +87,7 @@ void Player::jump()
 	{
 		if (
 			false == GameEngineInput::GetInst().Press("Left") &&
-			false == GameEngineInput::GetInst().Press("Right") &&
-			false == GameEngineInput::GetInst().Press("Up") &&
-			false == GameEngineInput::GetInst().Press("Down")
+			false == GameEngineInput::GetInst().Press("Right")
 			)
 		{
 			FSM_.ChangeState("stand1");
@@ -115,10 +100,70 @@ void Player::jump()
 		}
 	}
 
-	GetTransform()->SetLocalDeltaTimeMove(float4::DOWN * 50.0f);
+	Speed_.y -= GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
+
+	if (-FALLSPEED >= Speed_.y)
+	{
+		Speed_.y = -FALLSPEED;
+	}
+
+	if (PlayerDir::LEFT == Dir_)
+	{
+		GetTransform()->SetLocalDeltaTimeMove({ -Speed_.x, Speed_.y });
+	}
+	else
+	{
+		GetTransform()->SetLocalDeltaTimeMove(Speed_);
+	}
 }
 
 void Player::jump_End()
 {
+	Speed_.y = 0.0f;
+}
 
+void Player::fall_Start()
+{
+	ChangePlayerAnimation("jump");
+}
+
+void Player::fall()
+{
+	if (float4::BLACK == Map::GetColor(GetTransform()))
+	{
+		if (
+			false == GameEngineInput::GetInst().Press("Left") &&
+			false == GameEngineInput::GetInst().Press("Right")
+			)
+		{
+			FSM_.ChangeState("stand1");
+			return;
+		}
+		else
+		{
+			FSM_.ChangeState("walk1");
+			return;
+		}
+	}
+
+	Speed_.y -= GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
+
+	if (-FALLSPEED >= Speed_.y)
+	{
+		Speed_.y = -FALLSPEED;
+	}
+
+	if (PlayerDir::LEFT == Dir_)
+	{
+		GetTransform()->SetLocalDeltaTimeMove({ -Speed_.x, Speed_.y });
+	}
+	else
+	{
+		GetTransform()->SetLocalDeltaTimeMove(Speed_);
+	}
+}
+
+void Player::fall_End()
+{
+	Speed_.y = 0.0f;
 }
