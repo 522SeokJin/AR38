@@ -48,8 +48,6 @@ void MouseActor::Start()
 
 void MouseActor::Update(float _DeltaTime)
 {
-	GetLevel()->PushUIDebugRender(Collision_->GetTransform(), CollisionType::Rect);
-
 	GetTransform()->SetWorldPosition(GameEngineInput::GetInst().GetMouse3DPos());
 }
 

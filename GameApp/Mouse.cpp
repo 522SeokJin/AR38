@@ -19,19 +19,24 @@ void Mouse::Start()
 {
 	MouseActor::Start();
 
-	UIRenderer_->SetRenderGroup(1000);
-	UIRenderer_->GetTransform()->SetLocalPosition({12.0f, -14.0f});
-	UIRenderer_->CreateAnimationFolder("Normal", "Normal", 0.5f, false);
-	UIRenderer_->CreateAnimationFolder("ClickHovered", "ClickHovered", 0.5f);
-	UIRenderer_->CreateAnimationFolder("Click", "Click", 0.5f, false);
-	UIRenderer_->CreateAnimationFolder("GrapHovered", "GrapHovered", 0.2f);
-	UIRenderer_->CreateAnimationFolder("Grap", "Grap", 0.5f, false);
-	UIRenderer_->SetChangeAnimation("Normal");
+	GetUIRenderer()->SetRenderingPipeLine("PointTextureUI");
+	GetUIRenderer()->ImageRendererStart();
+
+	GetUIRenderer()->SetRenderGroup(1000);
+	GetUIRenderer()->GetTransform()->SetLocalPosition({12.0f, -14.0f});
+	GetUIRenderer()->CreateAnimationFolder("Normal", "Normal", 0.5f, false);
+	GetUIRenderer()->CreateAnimationFolder("ClickHovered", "ClickHovered", 0.5f);
+	GetUIRenderer()->CreateAnimationFolder("Click", "Click", 0.5f, false);
+	GetUIRenderer()->CreateAnimationFolder("GrapHovered", "GrapHovered", 0.2f);
+	GetUIRenderer()->CreateAnimationFolder("Grap", "Grap", 0.5f, false);
+	GetUIRenderer()->SetChangeAnimation("Normal");
 }
 
 void Mouse::Update(float _DeltaTime)
 {
 	MouseActor::Update(_DeltaTime);
+
+	GetLevel()->PushUIDebugRender(GetCollision()->GetTransform(), CollisionType::Rect);
 
 	if (true == GameEngineInput::GetInst().Down("MOn"))
 	{
@@ -45,27 +50,27 @@ void Mouse::Update(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst().Down("MLBtn"))
 	{
-		UIRenderer_->SetChangeAnimation("Click");
+		GetUIRenderer()->SetChangeAnimation("Click");
 	}
 
 	if (true == GameEngineInput::GetInst().Up("MLBtn"))
 	{
-		UIRenderer_->SetChangeAnimation("Normal");
+		GetUIRenderer()->SetChangeAnimation("Normal");
 	}
 
 	std::function<void(GameEngineCollision*)> Func =
 		std::bind(&Mouse::ChangeAnimationEvent, this, std::placeholders::_1);
 
-	Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
+	GetCollision()->Collision(CollisionType::Rect, CollisionType::Rect,
 		static_cast<int>(ColGroup::BUTTON), Func);
 }
 
 void Mouse::ChangeAnimationEvent(GameEngineCollision* _OtherCollision)
 {
 	if (false == GameEngineInput::GetInst().Press("MLBtn") &&
-		"ClickHovered" != UIRenderer_->GetCurrentAnimationName())
+		"ClickHovered" != GetUIRenderer()->GetCurrentAnimationName())
 	{
-		UIRenderer_->SetChangeAnimation("ClickHovered");
+		GetUIRenderer()->SetChangeAnimation("ClickHovered");
 		return;
 	}
 }

@@ -8,11 +8,12 @@
 
 InventoryUI::InventoryUI()
 	: TitleBar_(nullptr)
-	, ItemBlocks_{0, }
+	, Grabbed_(false)
 	, EquipmentTab_(nullptr)
 	, UseableTab_(nullptr)
 	, EtcTab_(nullptr)
 	, EnabledTab_(InventoryTab::Equipment)
+	, ItemBlocks_{0, }
 {
 
 }
@@ -85,17 +86,21 @@ void InventoryUI::Update(float _DeltaTime)
 
 void InventoryUI::TitleBarEvent(GameEngineCollision* _OtherCollision)
 {
-	if (true == GameEngineInput::GetInst().Down("MLBtn"))
+	if (true == GameEngineInput::GetInst().Down("MLBtn") &&
+		false == Grabbed_)
 	{
 		float4 Value = GetTransform()->GetWorldPosition() - GameEngineInput::GetMouse3DPos();
 
 		GetTransform()->AttachTransform(GlobalValue::CurrentMouse->GetTransform());
 		GetTransform()->SetLocalPosition(Value);
+		Grabbed_ = true;
 	}
 
-	if (true == GameEngineInput::GetInst().Up("MLBtn"))
+	if (true == GameEngineInput::GetInst().Up("MLBtn") &&
+		true == Grabbed_)
 	{
 		GlobalValue::CurrentMouse->GetTransform()->DetachChildTransform(GetTransform());
+		Grabbed_ = false;
 	}
 }
 

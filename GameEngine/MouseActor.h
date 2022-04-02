@@ -35,10 +35,9 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
+private:
 	GameEngineUIRenderer* UIRenderer_;
 	GameEngineCollision* Collision_;
-
-private:
 
 };
 

@@ -41,7 +41,7 @@ private:
 	std::map<int, std::vector<Item*>> ItemList_;
 
 	GameEngineCollision* TitleBar_;
-	GameEngineCollision* ItemBlocks_[32];
+	bool Grabbed_;
 
 	GameEngineUIRenderer* EquipmentRenderer_;
 	GameEngineUIRenderer* UseableRenderer_;
@@ -52,5 +52,7 @@ private:
 	GameEngineCollision* EtcTab_;
 
 	InventoryTab EnabledTab_;
+
+	GameEngineCollision* ItemBlocks_[32];
 };
 
