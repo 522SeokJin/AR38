@@ -21,6 +21,7 @@
 
 LithHarborLevel::LithHarborLevel()
 	: Cursor_(nullptr)
+	, Player_(nullptr)
 	, RenderWindow_(nullptr)
 	, Inventory_(nullptr)
 {

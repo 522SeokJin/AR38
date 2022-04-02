@@ -107,6 +107,9 @@
     <ClCompile Include="GlobalValue.cpp">
       <Filter>Global</Filter>
     </ClCompile>
+    <ClCompile Include="ValueCheckWindow.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -180,6 +183,9 @@
     </Filter>
     <Filter Include="Global">
       <UniqueIdentifier>{111ab022-a3b5-4b6b-bf39-7168dcdb9c48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Imgui">
+      <UniqueIdentifier>{77ca2217-0065-454a-a945-38d1f23530d9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -281,6 +287,9 @@
     </ClInclude>
     <ClInclude Include="GlobalValue.h">
       <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="ValueCheckWindow.h">
+      <Filter>Imgui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

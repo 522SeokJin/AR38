@@ -6,7 +6,7 @@
 #include "Player_Define.h"
 #include "Map.h"
 #include <GameEngine/GameEngineGUI.h>
-#include <GameEngine/GameEngineLevelControlWindow.h>
+#include "ValueCheckWindow.h"
 
 Player::Player()
 	: Dir_(PlayerDir::LEFT)
@@ -159,19 +159,19 @@ void Player::Start()
 
 void Player::Update(float _DeltaTime)
 {
-	GameEngineLevelControlWindow* Window = reinterpret_cast<GameEngineLevelControlWindow*>
-		(GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow"));
+	ValueCheckWindow* Window = reinterpret_cast<ValueCheckWindow*>
+		(GameEngineGUI::GetInst()->FindGUIWindow("ValueCheckWindow"));
 
 	if (nullptr == Window)
 	{
-		Window = GameEngineGUI::GetInst()->CreateGUIWindow<GameEngineLevelControlWindow>("LevelControlWindow");
+		Window = GameEngineGUI::GetInst()->CreateGUIWindow<ValueCheckWindow>("ValueCheckWindow");
 	}
 	
 	float4 body = Map::GetColor(GetTransform()->GetWorldPosition().InvertY());
 	float4 foot = Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f));
 
-	Window->SetText1(body.ToString());
-	Window->SetText2(foot.ToString());
+	Window->Values_[0] = "BodyPixelCheck : " + body.ToString();
+	Window->Values_[1] = "FootPixelCheck : " + foot.ToString();
 
 	FSM_.Update();
 
