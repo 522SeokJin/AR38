@@ -17,7 +17,7 @@ public:
 	GameEngineRenderWindow();
 	~GameEngineRenderWindow();
 
-	void ClaerRenderTarget()
+	void ClearRenderTarget()
 	{
 		DrawRenderTarget_.clear();
 	}

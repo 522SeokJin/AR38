@@ -29,7 +29,7 @@ void Player::stand1()
 		return;
 	}
 
-	if (float4::BLACK != Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f)))
+	if (FootPixelColor_ > GetFootCollideColor())
 	{
 		FSM_.ChangeState("fall");
 		return;
@@ -70,7 +70,7 @@ void Player::walk1()
 
 	KeyInputUpdate();
 
-	if (float4::BLACK != Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f)))
+	if (FootPixelColor_ > GetFootCollideColor())
 	{
 		FSM_.ChangeState("fall");
 	}
@@ -91,11 +91,14 @@ void Player::jump_Start()
 	ChangePlayerAnimation("jump");
 	Speed_.y = JUMPSPEED;
 	GetTransform()->SetLocalMove({ 0.0f, 1.0f });
+
+	BodyPixelColor_ = GetBodyCollideColor();
+	FootPixelColor_ = GetBodyCollideColor();
 }
 
 void Player::jump()
 {
-	if (float4::BLACK == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f)))
+	if (FootPixelColor_ < GetFootCollideColor())
 	{
 		if (
 			false == GameEngineInput::GetInst().Press("Left") &&
@@ -110,6 +113,11 @@ void Player::jump()
 			FSM_.ChangeState("walk1");
 			return;
 		}
+	}
+
+	if (FootPixelColor_ != GetFootCollideColor())
+	{
+		FootPixelColor_ = GetFootCollideColor();
 	}
 
 	Speed_.y -= GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
@@ -132,16 +140,23 @@ void Player::jump()
 void Player::jump_End()
 {
 	Speed_.y = 0.0f;
+
+	BodyPixelColor_ = GetBodyCollideColor();
+	FootPixelColor_ = GetFootCollideColor();
 }
 
 void Player::fall_Start()
 {
 	ChangePlayerAnimation("jump");
+
+	BodyPixelColor_ = GetBodyCollideColor();
+	FootPixelColor_ = GetBodyCollideColor();
+
 }
 
 void Player::fall()
 {
-	if (float4::BLACK == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f)))
+	if (FootPixelColor_ < GetFootCollideColor())
 	{
 		if (
 			false == GameEngineInput::GetInst().Press("Left") &&
@@ -178,6 +193,9 @@ void Player::fall()
 void Player::fall_End()
 {
 	Speed_.y = 0.0f;
+
+	BodyPixelColor_ = GetBodyCollideColor();
+	FootPixelColor_ = GetFootCollideColor();
 }
 
 void Player::swingO1_Start()

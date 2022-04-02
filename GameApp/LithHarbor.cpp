@@ -25,6 +25,7 @@ void LithHarbor::Start()
 		GameEngineImageRenderer* Renderer = CreateTransformComponent<GameEngineImageRenderer>();
 		Renderer->SetImage("LithHarborPixelCollide.png");
 		Renderer->GetTransform()->SetLocalPosition(Renderer->GetImageSize().halffloat4().InvertY());
+		Renderer->SetAlpha(0.5f);
 		SetPixelCollideImage(Renderer);
 	}
 }

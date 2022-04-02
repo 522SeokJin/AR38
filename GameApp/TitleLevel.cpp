@@ -46,7 +46,7 @@ void TitleLevel::LevelUpdate(float _DeltaTime)
 			CreateGUIWindow<GameEngineRenderWindow>("RenderWindow");
 	}
 
-	RenderWindow_->ClaerRenderTarget();
+	RenderWindow_->ClearRenderTarget();
 
 	float4 Size = GameEngineWindow::GetInst().GetSize() * 0.25f;
 

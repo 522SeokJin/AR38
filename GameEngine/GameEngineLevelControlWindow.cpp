@@ -3,6 +3,8 @@
 #include "GameEngineCore.h"
 
 GameEngineLevelControlWindow::GameEngineLevelControlWindow()
+	: strValue1_("")
+	, strValue2_("")
 {
 
 }
@@ -25,6 +27,9 @@ void GameEngineLevelControlWindow::OnGUI()
 		Acc = 1.0f;
 	}
 	ImGui::Text(FrameText.c_str());
+
+	ImGui::Text(strValue1_.c_str());
+	ImGui::Text(strValue2_.c_str());
 
 	int Count = 3;
 

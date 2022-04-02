@@ -46,11 +46,19 @@ private:
 
 	void KeyInputUpdate();
 
+	float GetBodyCollideColor();
+	float GetFootCollideColor();
+
 	PlayerDir Dir_;
 
 	GameEngineFSM FSM_;
 
 	float4 Speed_;
+
+	float BodyPixelColor_;
+	float FootPixelColor_;
+
+	GameEngineCollision* Collision_;
 
 	GameEngineImageRenderer* Avatar_;
 	GameEngineImageRenderer* Face_;
@@ -62,8 +70,6 @@ private:
 	GameEngineImageRenderer* Pants_;
 	GameEngineImageRenderer* Shoes_;
 	GameEngineImageRenderer* Weapon_;
-
-	GameEngineCollision* Collision_;
 
 	int FaceImageIndex_;
 	int HairBelowBodyImageIndex_;

@@ -5,10 +5,14 @@
 #include "PhysicsDefine.h"
 #include "Player_Define.h"
 #include "Map.h"
+#include <GameEngine/GameEngineGUI.h>
+#include <GameEngine/GameEngineLevelControlWindow.h>
 
 Player::Player()
 	: Dir_(PlayerDir::LEFT)
 	, Speed_(float4::ZERO)
+	, BodyPixelColor_(0.0f)
+	, FootPixelColor_(1.0f)
 	, FaceImageIndex_(1)
 	, HairBelowBodyImageIndex_(1)
 	, HairOverHeadImageIndex_(1)
@@ -111,6 +115,16 @@ void Player::KeyInputUpdate()
 	}
 }
 
+float Player::GetBodyCollideColor()
+{
+	return Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 16.0f)).g;
+}
+
+float Player::GetFootCollideColor()
+{
+	return Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f)).g;
+}
+
 void Player::Start()
 {
 	CreateAnimation();
@@ -145,6 +159,20 @@ void Player::Start()
 
 void Player::Update(float _DeltaTime)
 {
+	GameEngineLevelControlWindow* Window = reinterpret_cast<GameEngineLevelControlWindow*>
+		(GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow"));
+
+	if (nullptr == Window)
+	{
+		Window = GameEngineGUI::GetInst()->CreateGUIWindow<GameEngineLevelControlWindow>("LevelControlWindow");
+	}
+	
+	float4 body = Map::GetColor(GetTransform()->GetWorldPosition().InvertY());
+	float4 foot = Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f));
+
+	Window->SetText1(body.ToString());
+	Window->SetText2(foot.ToString());
+
 	FSM_.Update();
 
 	// UpdatePartsOffset();
