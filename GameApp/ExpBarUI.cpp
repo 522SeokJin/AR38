@@ -49,7 +49,7 @@ void ExpBarUI::Start()
 
 void ExpBarUI::Update(float _DeltaTime)
 {
-	AddExp(250.0f * GameEngineTime::GetInst().GetDeltaTime());
+
 }
 
 void ExpBarUI::SetExp(float _Value)

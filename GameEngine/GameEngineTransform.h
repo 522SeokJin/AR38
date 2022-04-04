@@ -33,7 +33,7 @@ public:
 
 	float4x4 LocalScaling_;
 	float4x4 LocalRotation_;
-	float4x4 LocalTranslation_;
+	float4x4 LocalPosition_;
 	float4x4 LocalWorld_;
 
 	float4x4 Parent_;
@@ -54,9 +54,9 @@ public:
 	{
 		LocalScaling_.Scaling(vLocalScaling_);
 		LocalRotation_.RotationDeg(vLocalRotation_);
-		LocalTranslation_.Translation(vLocalPosition_);
+		LocalPosition_.Translation(vLocalPosition_);
 
-		LocalWorld_ = LocalScaling_ * LocalRotation_ * LocalTranslation_;
+		LocalWorld_ = LocalScaling_ * LocalRotation_ * LocalPosition_;
 	}
 
 	void ParentSetting(const float4x4& _Parent)
@@ -66,7 +66,7 @@ public:
 		WorldWorld_ *= Parent_;
 	}
 
-	void CalWVP()
+	void WVPCalculation()
 	{
 		WVP_ = WorldWorld_ * View_ * Projection_;
 	}
@@ -83,34 +83,6 @@ class GameEngineTransform
 public:
 	GameEngineTransform();
 	~GameEngineTransform();
-
-	TransformData& GetTransformData()
-	{
-		return TransformData_;
-	}
-
-	const CollisionData& GetCollisionData()
-	{
-		return ColData_;
-	}
-
-	const DirectX::BoundingSphere& GetSphere()
-	{
-		return ColData_.Sphere;
-	}
-
-	const DirectX::BoundingOrientedBox& GetOBB()
-	{
-		return ColData_.OBB;
-	}
-
-	const DirectX::BoundingBox& GetAABB()
-	{
-		return ColData_.AABB;
-	}
-
-	void AttachTransform(GameEngineTransform* _Transform);
-	void DetachChildTransform(GameEngineTransform* _Transform);
 
 	void TransformUpdate();
 
@@ -139,6 +111,7 @@ public:
 	{
 		SetLocalRotation(TransformData_.vLocalRotation_ + _Value);
 	}
+
 	void AddWorldRotation(const float4& _Value)
 	{
 		SetWorldRotation(TransformData_.vWorldRotation_ + _Value);
@@ -148,6 +121,7 @@ public:
 	{
 		SetLocalRotation(TransformData_.vLocalRotation_ + _Value * GameEngineTime::GetInst().GetDeltaTime());
 	}
+
 	void SetWorldDeltaTimeRotation(const float4& _Value)
 	{
 		SetWorldRotation(TransformData_.vWorldRotation_ + _Value * GameEngineTime::GetInst().GetDeltaTime());
@@ -160,6 +134,7 @@ public:
 	{
 		SetLocalPosition(TransformData_.vLocalPosition_ + _Value);
 	}
+
 	void SetWorldMove(const float4& _Value)
 	{
 		SetWorldPosition(TransformData_.vWorldPosition_ + _Value);
@@ -169,9 +144,38 @@ public:
 	{
 		SetLocalPosition(TransformData_.vLocalPosition_ + _Value * GameEngineTime::GetInst().GetDeltaTime());
 	}
+
 	void SetWorldDeltaTimeMove(const float4& _Value)
 	{
 		SetWorldPosition(TransformData_.vWorldPosition_ + _Value * GameEngineTime::GetInst().GetDeltaTime());
+	}
+
+	void DetachChildTransform(GameEngineTransform* _Transform);
+	void AttachTransform(GameEngineTransform* _Transform);
+
+	TransformData& GetTransformData()
+	{
+		return TransformData_;
+	}
+
+	const CollisionData& GetCollisionData()
+	{
+		return ColData_;
+	}
+
+	const DirectX::BoundingSphere& GetSphere()
+	{
+		return ColData_.Sphere;
+	}
+
+	const DirectX::BoundingOrientedBox& GetOBB()
+	{
+		return ColData_.OBB;
+	}
+
+	const DirectX::BoundingBox& GetAABB()
+	{
+		return ColData_.AABB;
 	}
 
 protected:
