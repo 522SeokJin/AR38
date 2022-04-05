@@ -92,21 +92,25 @@ void Player::KeyInputUpdate()
 {
 	PlayerDir CurrentDir = Dir_;
 
+	Speed_.x = WALKSPEED;
+
 	if (true == GameEngineInput::GetInst().Press("Left"))
 	{
 		Dir_ = PlayerDir::LEFT;
 
-		Speed_.x = WALKSPEED;
-
-		GetTransform()->SetLocalDeltaTimeMove(float4::LEFT * Speed_.x);
+		if (FootPixelColor_ > GetLeftCollideColor())
+		{
+			GetTransform()->SetLocalDeltaTimeMove(float4::LEFT * Speed_.x);
+		}
 	}
 	if (true == GameEngineInput::GetInst().Press("Right"))
 	{
 		Dir_ = PlayerDir::RIGHT;
 
-		Speed_.x = WALKSPEED;
-
-		GetTransform()->SetLocalDeltaTimeMove(float4::RIGHT * Speed_.x);
+		if (FootPixelColor_ > GetRightCollideColor())
+		{
+			GetTransform()->SetLocalDeltaTimeMove(float4::RIGHT * Speed_.x);
+		}
 	}
 
 	if (CurrentDir != Dir_)
@@ -117,12 +121,38 @@ void Player::KeyInputUpdate()
 
 float Player::GetBodyCollideColor()
 {
-	return Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 16.0f)).g;
+	return Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
+		+ float4(0.0f, 16.0f)).g;
 }
 
 float Player::GetFootCollideColor()
 {
-	return Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f)).g;
+	return Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
+		+ float4(0.0f, 32.0f)).g;
+}
+
+float Player::GetLeftCollideColor()
+{
+	return Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
+		+ float4(-10.0f, 16.0f)).g;
+}
+
+float Player::GetRightCollideColor()
+{
+	return Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
+		+ float4(10.0f, 16.0f)).g;
+}
+
+bool Player::IsRopeColor()
+{
+	return 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f)).r
+		|| 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 16.0f)).r;
+}
+
+bool Player::IsLadderColor()
+{
+	return 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f)).b
+		|| 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 16.0f)).b;
 }
 
 void Player::Start()
@@ -170,9 +200,6 @@ void Player::Update(float _DeltaTime)
 	float4 body = Map::GetColor(GetTransform()->GetWorldPosition().InvertY());
 	float4 foot = Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f));
 
-	Window->Values_[0] = "BodyPixelCheck : " + body.ToString();
-	Window->Values_[1] = "FootPixelCheck : " + foot.ToString();
-
 	FSM_.Update();
 
 	// UpdatePartsOffset();
@@ -181,4 +208,8 @@ void Player::Update(float _DeltaTime)
 
 	GetLevel()->GetMainCameraActor()->GetTransform()->
 		SetLocalPosition(GetTransform()->GetLocalPosition());
+
+	Window->Values_[0] = "Player State : " + FSM_.GetCurrentName();
+	Window->Values_[1] = "BodyPixelCheck : " + body.ToString();
+	Window->Values_[2] = "FootPixelCheck : " + foot.ToString();
 }

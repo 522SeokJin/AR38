@@ -51,6 +51,7 @@ void LithHarborLevel::LevelStart()
 		Player_->GetTransform()->SetWorldPosition({ 1935.0f, -1280.0f });
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(
 			Player_->GetTransform()->GetLocalPosition());
+		Player_->Off();
 	}
 	
 	{
@@ -141,4 +142,6 @@ void LithHarborLevel::LevelChangeStartEvent()
 {
 	GlobalValue::CurrentPlayer = Player_;
 	GlobalValue::CurrentMouse = Cursor_;
+
+	Player_->On();
 }

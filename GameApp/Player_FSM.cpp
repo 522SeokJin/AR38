@@ -10,6 +10,9 @@ void Player::stand1_Start()
 {
 	ChangePlayerAnimation("stand1");
 	Speed_.x = 0.0f;
+
+	BodyPixelColor_ = GetBodyCollideColor();
+	FootPixelColor_ = GetFootCollideColor();
 }
 
 void Player::stand1()
@@ -73,6 +76,7 @@ void Player::walk1()
 	if (FootPixelColor_ > GetFootCollideColor())
 	{
 		FSM_.ChangeState("fall");
+		return;
 	}
 
 	if (true == GameEngineInput::GetInst().Press("Ctrl"))
@@ -98,23 +102,6 @@ void Player::jump_Start()
 
 void Player::jump()
 {
-	if (FootPixelColor_ < GetFootCollideColor())
-	{
-		if (
-			false == GameEngineInput::GetInst().Press("Left") &&
-			false == GameEngineInput::GetInst().Press("Right")
-			)
-		{
-			FSM_.ChangeState("stand1");
-			return;
-		}
-		else
-		{
-			FSM_.ChangeState("walk1");
-			return;
-		}
-	}
-
 	if (FootPixelColor_ != GetFootCollideColor())
 	{
 		FootPixelColor_ = GetFootCollideColor();
@@ -122,9 +109,9 @@ void Player::jump()
 
 	Speed_.y -= GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
 
-	if (-FALLSPEED >= Speed_.y)
+	if (0 > Speed_.y)
 	{
-		Speed_.y = -FALLSPEED;
+		FSM_.ChangeState("fall");
 	}
 
 	if (PlayerDir::LEFT == Dir_)
@@ -149,14 +136,30 @@ void Player::fall_Start()
 {
 	ChangePlayerAnimation("jump");
 
-	BodyPixelColor_ = GetBodyCollideColor();
-	FootPixelColor_ = GetBodyCollideColor();
-
+	if (IsRopeColor() ||
+		IsLadderColor())
+	{
+		BodyPixelColor_ = 0.0f;
+		FootPixelColor_ = 0.0f;
+	}
+	else
+	{
+		BodyPixelColor_ = GetBodyCollideColor();
+		FootPixelColor_ = GetFootCollideColor();
+	}
 }
 
 void Player::fall()
 {
-	if (FootPixelColor_ < GetFootCollideColor())
+	if (FootPixelColor_ > GetFootCollideColor())
+	{
+		// 바닥에 닿은건 아니나, 갱신이 필요
+		FootPixelColor_ = GetFootCollideColor();
+	}
+
+	if (FootPixelColor_ < GetFootCollideColor() &&
+		false == IsRopeColor() &&
+		false == IsLadderColor())
 	{
 		if (
 			false == GameEngineInput::GetInst().Press("Left") &&

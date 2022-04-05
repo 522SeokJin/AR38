@@ -52,7 +52,7 @@ void UserGame::Initialize()
 	LevelCreate<EntranceDemianLevel>("EntranceDemian");
 	LevelCreate<DemianLevel>("Demian");
 
-	LevelChange("Title");
+	LevelChange("LithHarbor");
 }
 
 void UserGame::Release()
