@@ -81,6 +81,7 @@ void LithHarborLevel::LevelStart()
 	{
 		Inventory_ = CreateActor<InventoryUI>();
 		Inventory_->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
+		Inventory_->Off();
 	}
 
 	{

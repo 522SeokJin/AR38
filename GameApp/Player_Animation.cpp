@@ -217,7 +217,7 @@ void Player::CreateAvatarAnimation()
 {
 	Avatar_->CreateAnimationFolder("avatar_dead", "dead", 0.5f, false);
 	Avatar_->CreateAnimationFolder("avatar_jump", "jump", 0.5f, false);
-	Avatar_->CreateAnimationFolder("avatar_ladder", "ladder", 0.5f);
+	Avatar_->CreateAnimationFolder("avatar_ladder", "ladder", 0.25f);
 	Avatar_->CreateAnimationFolder("avatar_prone", "prone", 0.5f);
 	Avatar_->CreateAnimationFolder("avatar_proneStab", "proneStab", 0.5f);
 	Avatar_->CreateAnimationFolder("avatar_rope", "rope", 0.25f);
@@ -226,7 +226,7 @@ void Player::CreateAvatarAnimation()
 	Avatar_->CreateAnimationFolder("avatar_stabOF", "stabOF", 0.5f);
 	Avatar_->CreateAnimationFolder("avatar_stand1", "stand1", 0.5f);
 
-	Avatar_->CreateAnimationFolder("avatar_swingO1", "swingO1", 0.3f, false);	// 300 150 350
+	Avatar_->CreateAnimationFolder("avatar_swingO1", "swingO1", 0.2f, false);	// 300 150 350
 	Avatar_->SetOffsetAnimation("swingO1", 1, { -4.0f, 0.0f });
 	Avatar_->SetOffsetAnimation("swingO1", 2, { -22.0f, 0.0f });
 

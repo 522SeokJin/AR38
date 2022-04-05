@@ -51,8 +51,11 @@ private:
 	float GetLeftCollideColor();
 	float GetRightCollideColor();
 
-	bool IsRopeColor();
-	bool IsLadderColor();
+	bool IsUpRopeColor();
+	bool IsUpLadderColor();
+
+	bool IsDownRopeColor();
+	bool IsDownLadderColor();
 
 	PlayerDir Dir_;
 

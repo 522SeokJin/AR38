@@ -38,16 +38,30 @@ void Player::stand1()
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("Up") ||
-		true == GameEngineInput::GetInst().Press("Down"))
+	if (true == GameEngineInput::GetInst().Press("Up"))
 	{
-		if (true == IsRopeColor())
+		if (true == IsUpRopeColor())
 		{
 			FSM_.ChangeState("rope");
 			return;
 		}
 
-		if (true == IsLadderColor())
+		if (true == IsUpLadderColor())
+		{
+			FSM_.ChangeState("ladder");
+			return;
+		}
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Down"))
+	{
+		if (true == IsDownRopeColor())
+		{
+			FSM_.ChangeState("rope");
+			return;
+		}
+
+		if (true == IsDownLadderColor())
 		{
 			FSM_.ChangeState("ladder");
 			return;
@@ -96,16 +110,30 @@ void Player::walk1()
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("Up") ||
-		true == GameEngineInput::GetInst().Press("Down"))
+	if (true == GameEngineInput::GetInst().Press("Up"))
 	{
-		if (true == IsRopeColor())
+		if (true == IsUpRopeColor())
 		{
 			FSM_.ChangeState("rope");
 			return;
 		}
 
-		if (true == IsLadderColor())
+		if (true == IsUpLadderColor())
+		{
+			FSM_.ChangeState("ladder");
+			return;
+		}
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Down"))
+	{
+		if (true == IsDownRopeColor())
+		{
+			FSM_.ChangeState("rope");
+			return;
+		}
+
+		if (true == IsDownLadderColor())
 		{
 			FSM_.ChangeState("ladder");
 			return;
@@ -158,13 +186,13 @@ void Player::jump()
 
 	if (true == GameEngineInput::GetInst().Press("Up"))
 	{
-		if (true == IsRopeColor())
+		if (true == IsUpRopeColor())
 		{
 			FSM_.ChangeState("rope");
 			return;
 		}
 
-		if (true == IsLadderColor())
+		if (true == IsUpLadderColor())
 		{
 			FSM_.ChangeState("ladder");
 			return;
@@ -184,8 +212,11 @@ void Player::fall_Start()
 {
 	ChangePlayerAnimation("jump");
 
-	if (IsRopeColor() ||
-		IsLadderColor())
+	if (IsUpRopeColor() ||
+		IsUpLadderColor() ||
+		IsDownRopeColor() ||
+		IsDownLadderColor()
+		)
 	{
 		BodyPixelColor_ = 0.0f;
 		FootPixelColor_ = 0.0f;
@@ -206,8 +237,8 @@ void Player::fall()
 	}
 
 	if (FootPixelColor_ < GetFootCollideColor() &&
-		false == IsRopeColor() &&
-		false == IsLadderColor())
+		false == IsUpRopeColor() &&
+		false == IsUpLadderColor())
 	{
 		if (
 			false == GameEngineInput::GetInst().Press("Left") &&
@@ -242,13 +273,13 @@ void Player::fall()
 
 	if (true == GameEngineInput::GetInst().Press("Up"))
 	{
-		if (true == IsRopeColor())
+		if (true == IsUpRopeColor())
 		{
 			FSM_.ChangeState("rope");
 			return;
 		}
 
-		if (true == IsLadderColor())
+		if (true == IsUpLadderColor())
 		{
 			FSM_.ChangeState("ladder");
 			return;
@@ -285,6 +316,14 @@ void Player::rope()
 		GetTransform()->SetLocalDeltaTimeMove(float4::DOWN * Speed_.y);
 	}
 
+	if (1.0f > Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
+		+ float4(0.0f, 31.0f)).r &&
+		1.0f > Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
+			+ float4(0.0f, -31.0f)).r)
+	{
+		FSM_.ChangeState("stand1");
+	}
+
 	if (true == GameEngineInput::GetInst().Press("Left") &&
 		true == GameEngineInput::GetInst().Press("Alt"))
 	{
@@ -299,10 +338,6 @@ void Player::rope()
 		Dir_ = PlayerDir::RIGHT;
 
 		FSM_.ChangeState("jump");
-	}
-	if (1.0f > Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 31.5f)).r)
-	{
-		FSM_.ChangeState("stand1");
 	}
 
 	if (CurrentDir != Dir_)
@@ -337,6 +372,14 @@ void Player::ladder()
 		GetTransform()->SetLocalDeltaTimeMove(float4::DOWN * Speed_.y);
 	}
 
+	if (1.0f > Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
+		+ float4(0.0f, 31.0f)).b &&
+		1.0f > Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
+			+ float4(0.0f, -31.0f)).b)
+	{
+		FSM_.ChangeState("stand1");
+	}
+
 	if (true == GameEngineInput::GetInst().Press("Left") &&
 		true == GameEngineInput::GetInst().Press("Alt"))
 	{
@@ -351,11 +394,6 @@ void Player::ladder()
 		Dir_ = PlayerDir::RIGHT;
 
 		FSM_.ChangeState("jump");
-	}
-
-	if (1.0f > Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 30.0f)).b)
-	{
-		FSM_.ChangeState("stand1");
 	}
 
 	if (CurrentDir != Dir_)
