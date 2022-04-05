@@ -44,7 +44,7 @@ private:
 	void ChangePartsOffset(GameEngineImageRenderer* _Renderer, float4 _Offset);
 	void SetPartsOffset();
 
-	void KeyInputUpdate();
+	void HorizonMovement();
 
 	float GetBodyCollideColor();
 	float GetFootCollideColor();
@@ -116,6 +116,14 @@ private:
 	void fall_Start();
 	void fall();
 	void fall_End();
+
+	void rope_Start();
+	void rope();
+	void rope_End();
+
+	void ladder_Start();
+	void ladder();
+	void ladder_End();
 
 	void swingO1_Start();
 	void swingO1();

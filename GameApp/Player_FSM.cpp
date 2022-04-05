@@ -38,6 +38,22 @@ void Player::stand1()
 		return;
 	}
 
+	if (true == GameEngineInput::GetInst().Press("Up") ||
+		true == GameEngineInput::GetInst().Press("Down"))
+	{
+		if (true == IsRopeColor())
+		{
+			FSM_.ChangeState("rope");
+			return;
+		}
+
+		if (true == IsLadderColor())
+		{
+			FSM_.ChangeState("ladder");
+			return;
+		}
+	}
+
 	if (true == GameEngineInput::GetInst().Press("Ctrl"))
 	{
 		FSM_.ChangeState("swingO1");
@@ -52,6 +68,7 @@ void Player::stand1_End()
 void Player::walk1_Start()
 {
 	ChangePlayerAnimation("walk1");
+	Speed_.x = WALKSPEED;
 }
 
 void Player::walk1()
@@ -71,12 +88,28 @@ void Player::walk1()
 		return;
 	}
 
-	KeyInputUpdate();
+	HorizonMovement();
 
 	if (FootPixelColor_ > GetFootCollideColor())
 	{
 		FSM_.ChangeState("fall");
 		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Up") ||
+		true == GameEngineInput::GetInst().Press("Down"))
+	{
+		if (true == IsRopeColor())
+		{
+			FSM_.ChangeState("rope");
+			return;
+		}
+
+		if (true == IsLadderColor())
+		{
+			FSM_.ChangeState("ladder");
+			return;
+		}
 	}
 
 	if (true == GameEngineInput::GetInst().Press("Ctrl"))
@@ -121,6 +154,21 @@ void Player::jump()
 	else
 	{
 		GetTransform()->SetLocalDeltaTimeMove(Speed_);
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Up"))
+	{
+		if (true == IsRopeColor())
+		{
+			FSM_.ChangeState("rope");
+			return;
+		}
+
+		if (true == IsLadderColor())
+		{
+			FSM_.ChangeState("ladder");
+			return;
+		}
 	}
 }
 
@@ -191,6 +239,21 @@ void Player::fall()
 	{
 		GetTransform()->SetLocalDeltaTimeMove(Speed_);
 	}
+
+	if (true == GameEngineInput::GetInst().Press("Up"))
+	{
+		if (true == IsRopeColor())
+		{
+			FSM_.ChangeState("rope");
+			return;
+		}
+
+		if (true == IsLadderColor())
+		{
+			FSM_.ChangeState("ladder");
+			return;
+		}
+	}
 }
 
 void Player::fall_End()
@@ -199,6 +262,111 @@ void Player::fall_End()
 
 	BodyPixelColor_ = GetBodyCollideColor();
 	FootPixelColor_ = GetFootCollideColor();
+}
+
+void Player::rope_Start()
+{
+	Avatar_->SetChangeAnimation("rope");
+	//ChangePlayerAnimation("rope");
+	Speed_.y = WALKSPEED;
+}
+
+void Player::rope()
+{
+	PlayerDir CurrentDir = Dir_;
+
+	if (true == GameEngineInput::GetInst().Press("Up"))
+	{
+		GetTransform()->SetLocalDeltaTimeMove(float4::UP * Speed_.y);
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Down"))
+	{
+		GetTransform()->SetLocalDeltaTimeMove(float4::DOWN * Speed_.y);
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Left") &&
+		true == GameEngineInput::GetInst().Press("Alt"))
+	{
+		Dir_ = PlayerDir::LEFT;
+
+		FSM_.ChangeState("jump");
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Right") &&
+		true == GameEngineInput::GetInst().Press("Alt"))
+	{
+		Dir_ = PlayerDir::RIGHT;
+
+		FSM_.ChangeState("jump");
+	}
+	if (1.0f > Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 31.5f)).r)
+	{
+		FSM_.ChangeState("stand1");
+	}
+
+	if (CurrentDir != Dir_)
+	{
+		ChangeImageDirection();
+	}
+}
+
+void Player::rope_End()
+{
+	Speed_.y = 0.0f;
+}
+
+void Player::ladder_Start()
+{
+	Avatar_->SetChangeAnimation("ladder");
+	//ChangePlayerAnimation("ladder");
+	Speed_.y = WALKSPEED;
+}
+
+void Player::ladder()
+{
+	PlayerDir CurrentDir = Dir_;
+
+	if (true == GameEngineInput::GetInst().Press("Up"))
+	{
+		GetTransform()->SetLocalDeltaTimeMove(float4::UP * Speed_.y);
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Down"))
+	{
+		GetTransform()->SetLocalDeltaTimeMove(float4::DOWN * Speed_.y);
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Left") &&
+		true == GameEngineInput::GetInst().Press("Alt"))
+	{
+		Dir_ = PlayerDir::LEFT;
+
+		FSM_.ChangeState("jump");
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Right") &&
+		true == GameEngineInput::GetInst().Press("Alt"))
+	{
+		Dir_ = PlayerDir::RIGHT;
+
+		FSM_.ChangeState("jump");
+	}
+
+	if (1.0f > Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 30.0f)).b)
+	{
+		FSM_.ChangeState("stand1");
+	}
+
+	if (CurrentDir != Dir_)
+	{
+		ChangeImageDirection();
+	}
+}
+
+void Player::ladder_End()
+{
+	Speed_.y = 0.0f;
 }
 
 void Player::swingO1_Start()

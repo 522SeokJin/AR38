@@ -88,11 +88,9 @@ void Player::ChangePartsOffset(GameEngineImageRenderer* _Renderer, float4 _Offse
 	}
 }
 
-void Player::KeyInputUpdate()
+void Player::HorizonMovement()
 {
 	PlayerDir CurrentDir = Dir_;
-
-	Speed_.x = WALKSPEED;
 
 	if (true == GameEngineInput::GetInst().Press("Left"))
 	{
@@ -146,13 +144,17 @@ float Player::GetRightCollideColor()
 bool Player::IsRopeColor()
 {
 	return 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f)).r
-		|| 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 16.0f)).r;
+		|| 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 16.0f)).r
+		|| 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 0.0f)).r
+		|| 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, -16.0f)).r;
 }
 
 bool Player::IsLadderColor()
 {
 	return 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f)).b
-		|| 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 16.0f)).b;
+		|| 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 16.0f)).b
+		|| 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 0.0f)).b
+		|| 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, -16.0f)).b;
 }
 
 void Player::Start()
@@ -179,6 +181,15 @@ void Player::Start()
 	FSM_.CreateState("fall", std::bind(&Player::fall, this),
 		std::bind(&Player::fall_Start, this),
 		std::bind(&Player::fall_End, this));
+
+	FSM_.CreateState("rope", std::bind(&Player::rope, this),
+		std::bind(&Player::rope_Start, this),
+		std::bind(&Player::rope_End, this));
+
+	FSM_.CreateState("ladder", std::bind(&Player::ladder, this),
+		std::bind(&Player::ladder_Start, this),
+		std::bind(&Player::ladder_End, this));
+
 
 	FSM_.CreateState("swingO1", std::bind(&Player::swingO1, this),
 		std::bind(&Player::swingO1_Start, this),

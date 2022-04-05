@@ -220,7 +220,7 @@ void Player::CreateAvatarAnimation()
 	Avatar_->CreateAnimationFolder("avatar_ladder", "ladder", 0.5f);
 	Avatar_->CreateAnimationFolder("avatar_prone", "prone", 0.5f);
 	Avatar_->CreateAnimationFolder("avatar_proneStab", "proneStab", 0.5f);
-	Avatar_->CreateAnimationFolder("avatar_rope", "rope", 0.5f);
+	Avatar_->CreateAnimationFolder("avatar_rope", "rope", 0.25f);
 	Avatar_->CreateAnimationFolder("avatar_stabO1", "stabO1", 0.5f);
 	Avatar_->CreateAnimationFolder("avatar_stabO2", "stabO2", 0.5f);
 	Avatar_->CreateAnimationFolder("avatar_stabOF", "stabOF", 0.5f);
