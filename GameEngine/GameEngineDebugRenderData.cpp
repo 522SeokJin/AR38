@@ -3,7 +3,7 @@
 
 GameEngineDebugRenderData::GameEngineDebugRenderData()
 	: Data_()
-	, ShaderHelper()
+	, ShaderHelper_()
 	, PipeLine_(nullptr)
 	, Color_()
 {

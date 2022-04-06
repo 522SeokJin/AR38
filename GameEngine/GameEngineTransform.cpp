@@ -230,11 +230,7 @@ void GameEngineTransform::DetachChildTransform(GameEngineTransform* _Transform)
 		}
 
 		StartIter = Childs_.erase(StartIter);
-
-		if (StartIter == Childs_.end())
-		{
-			break;
-		}
+		EndIter = Childs_.end();
 	}
 }
 

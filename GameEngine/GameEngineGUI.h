@@ -81,6 +81,11 @@ public:
 		ImGui::End();
 	}
 
+	inline void SetLevel(GameEngineLevel* _Level)
+	{
+		Level_ = _Level;
+	}
+
 protected:
 	GameEngineGUIWindow();
 	~GameEngineGUIWindow();
@@ -93,5 +98,6 @@ protected:
 	int Style_;
 
 private:
+	GameEngineLevel* Level_;
 
 };

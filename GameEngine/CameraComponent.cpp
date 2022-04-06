@@ -41,11 +41,11 @@ void CameraComponent::Start()
 
 	for (size_t i = 0; i < DebugVector_.size(); i++)
 	{
-		DebugVector_[i].ShaderHelper.ShaderResourcesCheck(Pipe->GetVertexShader());
-		DebugVector_[i].ShaderHelper.ShaderResourcesCheck(Pipe->GetPixelShader());
+		DebugVector_[i].ShaderHelper_.ShaderResourcesCheck(Pipe->GetVertexShader());
+		DebugVector_[i].ShaderHelper_.ShaderResourcesCheck(Pipe->GetPixelShader());
 		DebugVector_[i].Color_ = float4::RED;
-		DebugVector_[i].ShaderHelper.SettingConstantBufferLink("ResultColor", DebugVector_[i].Color_);
-		DebugVector_[i].ShaderHelper.SettingConstantBufferLink("TransformData", DebugVector_[i].Data_);
+		DebugVector_[i].ShaderHelper_.SettingConstantBufferLink("ResultColor", DebugVector_[i].Color_);
+		DebugVector_[i].ShaderHelper_.SettingConstantBufferLink("TransformData", DebugVector_[i].Data_);
 	}
 
 	CameraBufferTarget_ = new GameEngineRenderTarget();
@@ -140,9 +140,9 @@ void CameraComponent::DebugRender()
 		DebugVector_[i].Data_.WVPCalculation();
 
 
-		DebugVector_[i].ShaderHelper.Setting();
+		DebugVector_[i].ShaderHelper_.Setting();
 		DebugVector_[i].PipeLine_->Rendering();
-		DebugVector_[i].ShaderHelper.Reset();
+		DebugVector_[i].ShaderHelper_.Reset();
 		DebugVector_[i].PipeLine_->Reset();
 	}
 

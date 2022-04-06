@@ -16,7 +16,7 @@ public:
 
 	GameEngineDebugRenderData(const GameEngineDebugRenderData& _Other)
 		: Data_(_Other.Data_)
-		, ShaderHelper(_Other.ShaderHelper)
+		, ShaderHelper_(_Other.ShaderHelper_)
 		, PipeLine_(_Other.PipeLine_)
 		, Color_(_Other.Color_)
 	{
@@ -31,7 +31,7 @@ protected:
 private:
 	TransformData Data_;
 	float4 Color_;
-	GameEngineShaderResHelper ShaderHelper;
+	GameEngineShaderResHelper ShaderHelper_;
 	GameEngineRenderingPipeLine* PipeLine_;
 
 };
