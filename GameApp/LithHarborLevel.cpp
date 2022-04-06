@@ -35,6 +35,9 @@ LithHarborLevel::~LithHarborLevel()
 
 void LithHarborLevel::LevelStart()
 {
+	RenderWindow_ = GameEngineGUI::GetInst()->FindGUIWindowConvert
+		<GameEngineRenderWindow>("RenderWindow");
+
 	GetMainCamera()->SetProjectionMode(ProjectionMode::ORTHOGRAPHIC);
 	GetMainCamera()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
 
@@ -92,23 +95,21 @@ void LithHarborLevel::LevelStart()
 
 void LithHarborLevel::LevelUpdate(float _DeltaTime)
 {
-	RenderWindow_ = reinterpret_cast<GameEngineRenderWindow*>
-		(GameEngineGUI::GetInst()->FindGUIWindow("RenderWindow"));
+	static bool Check = false;
 
-	if (nullptr == RenderWindow_)
+	if (false == Check && nullptr != GameEngineGUI::GetInst()->FindGUIWindow("RenderWindow"))
 	{
-		RenderWindow_ = GameEngineGUI::GetInst()->
-			CreateGUIWindow<GameEngineRenderWindow>("RenderWindow");
+		RenderWindow_->ClearRenderTarget();
+
+		float4 Size = GameEngineWindow::GetInst().GetSize() * 0.25f;
+
+		RenderWindow_->PushRenderTarget("메인 카메라 타겟",
+			GetMainCamera()->GetCameraRenderTarget(), Size);
+		RenderWindow_->PushRenderTarget("UI 카메라 타겟",
+			GetUICamera()->GetCameraRenderTarget(), Size);
+
+		Check = true;
 	}
-
-	RenderWindow_->ClearRenderTarget();
-
-	float4 Size = GameEngineWindow::GetInst().GetSize() * 0.25f;
-
-	RenderWindow_->PushRenderTarget("메인 카메라 타겟",
-		GetMainCamera()->GetCameraRenderTarget(), Size);
-	RenderWindow_->PushRenderTarget("UI 카메라 타겟",
-		GetUICamera()->GetCameraRenderTarget(), Size);
 
 	if (true == GameEngineInput::GetInst().Down("LevelControl"))
 	{

@@ -6,6 +6,7 @@
 #include <GameEngine/GameEngineRenderingPipeLine.h>
 
 #include <GameEngine/GameEngineLevelControlWindow.h>
+#include <GameEngine/GameEngineRenderWindow.h>
 
 #include "TitleLevel.h"
 #include "LithHarborLevel.h"
@@ -33,6 +34,7 @@ void UserGame::Initialize()
 	CreateKey();
 
 	GameEngineGUI::GetInst()->CreateGUIWindow<GameEngineLevelControlWindow>("LevelControlWindow");
+	GameEngineGUI::GetInst()->CreateGUIWindow<GameEngineRenderWindow>("RenderWindow");
 
 	// Title
 	LevelCreate<TitleLevel>("Title");

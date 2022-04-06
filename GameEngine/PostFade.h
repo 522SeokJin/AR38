@@ -12,6 +12,8 @@ struct FadeData
 	// 0, 투명도가 0인 애들도 효과를 준다
 	int Clip_;
 
+	int Temp;
+
 	FadeData()
 		: Dir_(1),
 		Speed_(10.0f),

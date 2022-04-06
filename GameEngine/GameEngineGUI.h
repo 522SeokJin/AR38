@@ -42,6 +42,12 @@ public:
 
 	GameEngineGUIWindow* FindGUIWindow(const std::string& _Name);
 
+	template<typename ConvertType>
+	ConvertType* FindGUIWindowConvert(const std::string& _Name)
+	{
+		return dynamic_cast<ConvertType*>(FindGUIWindow(_Name));
+	}
+
 	std::list<GameEngineGUIWindow*> FindGUIWindowForList(const std::string& _Name);
 
 protected:
@@ -81,11 +87,6 @@ public:
 		ImGui::End();
 	}
 
-	inline void SetLevel(GameEngineLevel* _Level)
-	{
-		Level_ = _Level;
-	}
-
 protected:
 	GameEngineGUIWindow();
 	~GameEngineGUIWindow();
@@ -98,6 +99,4 @@ protected:
 	int Style_;
 
 private:
-	GameEngineLevel* Level_;
-
 };
