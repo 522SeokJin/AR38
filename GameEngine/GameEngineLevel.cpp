@@ -14,7 +14,8 @@ GameEngineLevel::GameEngineLevel()
 	: MainCameraActor_(nullptr)
 	, UICameraActor_(nullptr)
 {
-
+	PostRender_["CameraMergePrev"];
+	PostRender_["CameraMergeNext"];
 }
 
 GameEngineLevel::~GameEngineLevel()
@@ -103,8 +104,14 @@ void GameEngineLevel::Render()
 	GetUICamera()->Render();
 	GetUICamera()->DebugRender();
 
+	std::vector<GameEnginePostProcessRender*>& PostCameraMergePrev = 
+		PostRender_["CameraMergePrev"];
+
 	GameEngineDevice::GetBackBufferTarget()->Merge(GetMainCamera()->CameraBufferTarget_);
 	GameEngineDevice::GetBackBufferTarget()->Merge(GetUICamera()->CameraBufferTarget_);
+
+	std::vector<GameEnginePostProcessRender*>& PostCameraMergeNext =
+		PostRender_["CameraMergeNext"];
 
 	GameEngineGUI::GetInst()->GUIRenderStart();
 	GameEngineGUI::GetInst()->GUIRenderEnd();

@@ -9,6 +9,7 @@ class GameEngineActor;
 class GameEngineRenderer;
 class GameEngineCollision;
 class GameEngineTransform;
+class GameEnginePostProcessRender;
 class GameEngineLevel : public GameEngineObjectNameBase
 {
 	friend class GameEngineLevelControlWindow;
@@ -96,5 +97,32 @@ private:
 	void ChangeCollisionGroup(int _Group, GameEngineCollision* _Collision);
 
 	std::map<int, std::list<GameEngineCollision*>> CollisionList_;
+
+
+////////////////////////////////////////////////// GameEnginePostProcessRender
+
+public:
+	template<typename PostProcess, typename ... Parameter>
+	PostProcess* AddPostProcessCameraMergePrev(Parameter ... _Arg)
+	{
+		AddPostProcess<PostProcess>("CameraMergePrev", _Arg...);
+	}
+
+	template<typename PostProcess, typename ... Parameter>
+	PostProcess* AddPostProcessCameraMergeNext(Parameter ... _Arg)
+	{
+		AddPostProcess<PostProcess>("CameraMergeNext", _Arg...);
+	}
+
+	template<typename PostProcess, typename ... Parameter>
+	PostProcess* AddPostProcess(const std::string& _Key, Parameter ... _Arg)
+	{
+		PostProcess* NewPost = new PostProcess(_Arg...);
+		PostRender_[_Key].push_back(NewPost);
+		return NewPost;
+	}
+
+private:
+	std::map<std::string, std::vector<GameEnginePostProcessRender*>> PostRender_;
 };
 

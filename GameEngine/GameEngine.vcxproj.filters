@@ -208,6 +208,12 @@
     <ClInclude Include="GameEngineLevelControlWindow.h">
       <Filter>Imgui\EngineWindow</Filter>
     </ClInclude>
+    <ClInclude Include="GameEnginePostProcessRender.h">
+      <Filter>Object\PostProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="PostFade.h">
+      <Filter>Object\PostProcess\EngineEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -402,6 +408,12 @@
     <ClCompile Include="GameEngineLevelControlWindow.cpp">
       <Filter>Imgui\EngineWindow</Filter>
     </ClCompile>
+    <ClCompile Include="GameEnginePostProcessRender.cpp">
+      <Filter>Object\PostProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="PostFade.cpp">
+      <Filter>Object\PostProcess\EngineEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -505,6 +517,12 @@
     </Filter>
     <Filter Include="Imgui\EngineWindow">
       <UniqueIdentifier>{64897c84-9060-44dc-9405-a1a98c7d7a71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\PostProcess">
+      <UniqueIdentifier>{357540da-7638-41df-8dfc-3e1ee828b33e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\PostProcess\EngineEffect">
+      <UniqueIdentifier>{1008b383-fa71-416e-8140-4251421bd801}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
