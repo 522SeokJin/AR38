@@ -21,7 +21,6 @@ void Map::Start()
 
 void Map::LevelChangeStartEvent()
 {
-	CurrentMap = this;
 }
 
 float4 Map::GetColor(GameEngineTransform* _Ptr, bool _YReverse/* = true*/)

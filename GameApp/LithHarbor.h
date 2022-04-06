@@ -10,6 +10,7 @@ public:
 
 	void Start() override;
 	void Update(float _DeltaTime) override;
+	void LevelChangeStartEvent() override;
 
 protected:
 	LithHarbor(const LithHarbor& _other) = delete; 
@@ -18,6 +19,6 @@ protected:
 	LithHarbor& operator=(const LithHarbor&& _other) = delete;
 
 private:
-
+	GameEngineImageRenderer* PixelCollide_;
 };
 

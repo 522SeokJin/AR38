@@ -2,6 +2,10 @@
 #include <GameEngine/GameEngineLevel.h>
 
 // Ό³Έν : 
+class Mouse;
+class Player;
+class GameEngineRenderWindow;
+class InventoryUI;
 class PerionRoomLevel : public GameEngineLevel
 {
 public:
@@ -20,6 +24,9 @@ protected:
 	PerionRoomLevel& operator=(const PerionRoomLevel&& _other) = delete;
 
 private:
-
+	Mouse* Cursor_;
+	Player* Player_;
+	GameEngineRenderWindow* RenderWindow_;
+	InventoryUI* Inventory_;
 };
 

@@ -226,6 +226,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Perion.cpp" />
     <ClCompile Include="PerionLevel.cpp">
       <SubType>
       </SubType>
@@ -234,6 +235,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="PerionRoom.cpp" />
     <ClCompile Include="PerionRoomLevel.cpp" />
     <ClCompile Include="Player_Animation.cpp" />
     <ClCompile Include="QuickSlotKeyUI.cpp" />
@@ -336,6 +338,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Perion.h" />
     <ClInclude Include="PerionLevel.h">
       <SubType>
       </SubType>
@@ -344,6 +347,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="PerionRoom.h" />
     <ClInclude Include="PerionRoomLevel.h" />
     <ClInclude Include="Player_Define.h" />
     <ClInclude Include="QuickSlotKeyUI.h" />

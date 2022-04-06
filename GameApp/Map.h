@@ -9,6 +9,11 @@ public:
 	Map();
 	virtual ~Map();
 
+	static void SetCurrentMap(Map* _Map)
+	{
+		CurrentMap = _Map;
+	}
+
 	static float4 GetColor(GameEngineTransform* _Ptr, bool _YReverse = true);
 	static float4 GetColor(float4 _Position);
 

@@ -110,6 +110,12 @@
     <ClCompile Include="ValueCheckWindow.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
+    <ClCompile Include="Perion.cpp">
+      <Filter>Actor\Map\Perion</Filter>
+    </ClCompile>
+    <ClCompile Include="PerionRoom.cpp">
+      <Filter>Actor\Map\Perion\PerionRoom</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -186,6 +192,12 @@
     </Filter>
     <Filter Include="Imgui">
       <UniqueIdentifier>{77ca2217-0065-454a-a945-38d1f23530d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Map\Perion">
+      <UniqueIdentifier>{fcec1b56-d71a-4180-b66a-54440801090f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Map\Perion\PerionRoom">
+      <UniqueIdentifier>{eebcaa4b-bbbc-46ae-a567-b4af94ce44c1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -290,6 +302,12 @@
     </ClInclude>
     <ClInclude Include="ValueCheckWindow.h">
       <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Perion.h">
+      <Filter>Actor\Map\Perion</Filter>
+    </ClInclude>
+    <ClInclude Include="PerionRoom.h">
+      <Filter>Actor\Map\Perion\PerionRoom</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

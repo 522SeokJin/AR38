@@ -3,6 +3,7 @@
 #include <GameEngine/GameEngineImageRenderer.h>
 
 LithHarbor::LithHarbor()
+	: PixelCollide_(nullptr)
 {
 
 }
@@ -22,11 +23,10 @@ void LithHarbor::Start()
 	}
 
 	{
-		GameEngineImageRenderer* Renderer = CreateTransformComponent<GameEngineImageRenderer>();
-		Renderer->SetImage("LithHarborPixelCollide.png");
-		Renderer->GetTransform()->SetLocalPosition(Renderer->GetImageSize().halffloat4().InvertY());
-		Renderer->SetAlpha(0.5f);
-		SetPixelCollideImage(Renderer);
+		PixelCollide_ = CreateTransformComponent<GameEngineImageRenderer>();
+		PixelCollide_->SetImage("LithHarborPixelCollide.png");
+		PixelCollide_->GetTransform()->SetLocalPosition(PixelCollide_->GetImageSize().halffloat4().InvertY());
+		PixelCollide_->SetAlpha(0.5f);
 	}
 }
 
@@ -34,3 +34,8 @@ void LithHarbor::Update(float _DeltaTime)
 {
 }
 
+void LithHarbor::LevelChangeStartEvent()
+{
+	SetPixelCollideImage(PixelCollide_);
+	SetCurrentMap(this);
+}
