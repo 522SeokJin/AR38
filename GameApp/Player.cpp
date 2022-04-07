@@ -96,7 +96,9 @@ void Player::HorizonMovement()
 	{
 		Dir_ = PlayerDir::LEFT;
 
-		if (FootPixelColor_.g > GetLeftColor().g)
+		if (FootPixelColor_.g > GetLeftColor().g ||
+			0.0f < GetLeftColor().r ||	// rope
+			0.0f < GetLeftColor().b )	// ladder
 		{
 			GetTransform()->SetLocalDeltaTimeMove(float4::LEFT * Speed_.x);
 		}
@@ -105,7 +107,9 @@ void Player::HorizonMovement()
 	{
 		Dir_ = PlayerDir::RIGHT;
 
-		if (FootPixelColor_.g > GetRightColor().g)
+		if (FootPixelColor_.g > GetRightColor().g ||
+			0.0f < GetRightColor().r ||
+			0.0f < GetRightColor().b)
 		{
 			GetTransform()->SetLocalDeltaTimeMove(float4::RIGHT * Speed_.x);
 		}
@@ -232,9 +236,6 @@ void Player::Update(float _DeltaTime)
 	// UpdatePartsOffset();
 
 	GetLevel()->PushDebugRender(Collision_->GetTransform(), CollisionType::Rect);
-
-	GetLevel()->GetMainCameraActor()->GetTransform()->
-		SetLocalPosition(GetTransform()->GetLocalPosition());
 
 	Window->Values_[0] = "Player State : " + FSM_.GetCurrentName();
 	Window->Values_[1] = "BodyPixelCheck : " + body.ToString();

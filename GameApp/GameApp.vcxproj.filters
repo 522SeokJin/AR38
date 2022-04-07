@@ -23,9 +23,6 @@
     <ClCompile Include="TitleUI.cpp">
       <Filter>Actor\UI\Login</Filter>
     </ClCompile>
-    <ClCompile Include="LithHarbor.cpp">
-      <Filter>Actor\Map\LithHarbor</Filter>
-    </ClCompile>
     <ClCompile Include="MenuUI.cpp">
       <Filter>Actor\UI\MainBar</Filter>
     </ClCompile>
@@ -40,9 +37,6 @@
     </ClCompile>
     <ClCompile Include="PerionRoomLevel.cpp">
       <Filter>Level\Town</Filter>
-    </ClCompile>
-    <ClCompile Include="PerionNorthernRidgeLevel.cpp">
-      <Filter>Level\HuntingGround</Filter>
     </ClCompile>
     <ClCompile Include="DeepeningForestLevel.cpp">
       <Filter>Level\HuntingGround</Filter>
@@ -72,10 +66,10 @@
       <Filter>Actor\Monster\BOSS</Filter>
     </ClCompile>
     <ClCompile Include="DemianMap.cpp">
-      <Filter>Actor\Map\Demian</Filter>
+      <Filter>Actor\Map\HuntingGround\Demian</Filter>
     </ClCompile>
     <ClCompile Include="EntranceDemianMap.cpp">
-      <Filter>Actor\Map\Demian</Filter>
+      <Filter>Actor\Map\HuntingGround\Demian</Filter>
     </ClCompile>
     <ClCompile Include="InventoryUI.cpp">
       <Filter>Actor\UI\Inventory</Filter>
@@ -110,11 +104,20 @@
     <ClCompile Include="ValueCheckWindow.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Perion.cpp">
-      <Filter>Actor\Map\Perion</Filter>
+    <ClCompile Include="LithHarbor.cpp">
+      <Filter>Actor\Map\Town</Filter>
     </ClCompile>
     <ClCompile Include="PerionRoom.cpp">
-      <Filter>Actor\Map\Perion\PerionRoom</Filter>
+      <Filter>Actor\Map\Town</Filter>
+    </ClCompile>
+    <ClCompile Include="Perion.cpp">
+      <Filter>Actor\Map\Town</Filter>
+    </ClCompile>
+    <ClCompile Include="PerionNorthernRidge.cpp">
+      <Filter>Actor\Map\HuntingGround</Filter>
+    </ClCompile>
+    <ClCompile Include="PerionNorthernRidgeLevel.cpp">
+      <Filter>Level\HuntingGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,9 +151,6 @@
     <Filter Include="Actor\Map">
       <UniqueIdentifier>{7ab2ae4a-cf96-462a-bcbc-f7ff0c56e979}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Map\LithHarbor">
-      <UniqueIdentifier>{e335b05d-15cd-475a-a91e-b0a6a40eee32}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Level\Town">
       <UniqueIdentifier>{c241f2ed-7d11-4b06-b4ef-04cbdbe926c8}</UniqueIdentifier>
     </Filter>
@@ -162,9 +162,6 @@
     </Filter>
     <Filter Include="Level\HuntingGround\Demian">
       <UniqueIdentifier>{5247f2c1-c26d-4932-b321-14d614563cfb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Map\Demian">
-      <UniqueIdentifier>{80fdbf4c-2465-4d92-99e1-544a771eab93}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Player">
       <UniqueIdentifier>{aa6748f1-cc28-4389-866e-b706de81f30e}</UniqueIdentifier>
@@ -193,11 +190,14 @@
     <Filter Include="Imgui">
       <UniqueIdentifier>{77ca2217-0065-454a-a945-38d1f23530d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Map\Perion">
-      <UniqueIdentifier>{fcec1b56-d71a-4180-b66a-54440801090f}</UniqueIdentifier>
+    <Filter Include="Actor\Map\Town">
+      <UniqueIdentifier>{f0ce851b-7074-44ff-a858-8cddab08ee16}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Map\Perion\PerionRoom">
-      <UniqueIdentifier>{eebcaa4b-bbbc-46ae-a567-b4af94ce44c1}</UniqueIdentifier>
+    <Filter Include="Actor\Map\HuntingGround">
+      <UniqueIdentifier>{d371576b-2ea8-41d5-88ac-faeb6f201ba6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Map\HuntingGround\Demian">
+      <UniqueIdentifier>{80fdbf4c-2465-4d92-99e1-544a771eab93}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -222,9 +222,6 @@
     <ClInclude Include="TitleUI.h">
       <Filter>Actor\UI\Login</Filter>
     </ClInclude>
-    <ClInclude Include="LithHarbor.h">
-      <Filter>Actor\Map\LithHarbor</Filter>
-    </ClInclude>
     <ClInclude Include="MenuUI.h">
       <Filter>Actor\UI\MainBar</Filter>
     </ClInclude>
@@ -239,9 +236,6 @@
     </ClInclude>
     <ClInclude Include="PerionRoomLevel.h">
       <Filter>Level\Town</Filter>
-    </ClInclude>
-    <ClInclude Include="PerionNorthernRidgeLevel.h">
-      <Filter>Level\HuntingGround</Filter>
     </ClInclude>
     <ClInclude Include="DeepeningForestLevel.h">
       <Filter>Level\HuntingGround</Filter>
@@ -268,10 +262,10 @@
       <Filter>Actor\Monster\BOSS</Filter>
     </ClInclude>
     <ClInclude Include="DemianMap.h">
-      <Filter>Actor\Map\Demian</Filter>
+      <Filter>Actor\Map\HuntingGround\Demian</Filter>
     </ClInclude>
     <ClInclude Include="EntranceDemianMap.h">
-      <Filter>Actor\Map\Demian</Filter>
+      <Filter>Actor\Map\HuntingGround\Demian</Filter>
     </ClInclude>
     <ClInclude Include="InventoryUI.h">
       <Filter>Actor\UI\Inventory</Filter>
@@ -303,11 +297,20 @@
     <ClInclude Include="ValueCheckWindow.h">
       <Filter>Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="Perion.h">
-      <Filter>Actor\Map\Perion</Filter>
+    <ClInclude Include="LithHarbor.h">
+      <Filter>Actor\Map\Town</Filter>
     </ClInclude>
     <ClInclude Include="PerionRoom.h">
-      <Filter>Actor\Map\Perion\PerionRoom</Filter>
+      <Filter>Actor\Map\Town</Filter>
+    </ClInclude>
+    <ClInclude Include="Perion.h">
+      <Filter>Actor\Map\Town</Filter>
+    </ClInclude>
+    <ClInclude Include="PerionNorthernRidge.h">
+      <Filter>Actor\Map\HuntingGround</Filter>
+    </ClInclude>
+    <ClInclude Include="PerionNorthernRidgeLevel.h">
+      <Filter>Level\HuntingGround</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

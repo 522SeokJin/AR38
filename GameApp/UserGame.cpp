@@ -51,8 +51,8 @@ void UserGame::Initialize()
 	LevelCreate<SahelLevel>("Sahel");
 
 	// Demian
-	LevelCreate<EntranceDemianLevel>("EntranceDemian");
-	LevelCreate<DemianLevel>("Demian");
+	//LevelCreate<EntranceDemianLevel>("EntranceDemian");
+	//LevelCreate<DemianLevel>("Demian");
 
 	LevelChange("Perion");
 }

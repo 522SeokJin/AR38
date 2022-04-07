@@ -46,6 +46,8 @@ private:
 
 	void HorizonMovement();
 
+	// r : Rope Color, g : Ground Color, b : Ladder Color
+	
 	float4 GetBodyColor();
 	float4 GetFootColor();
 	float4 GetLeftColor();

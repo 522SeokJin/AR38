@@ -12,6 +12,11 @@ public:
 	void Update(float _DeltaTime) override;
 	void LevelChangeStartEvent() override;
 
+	GameEngineImageRenderer* GetPixelCollide()
+	{
+		return PixelCollide_;
+	}
+
 protected:
 	PerionRoom(const PerionRoom& _other) = delete; 
 	PerionRoom(PerionRoom&& _other) noexcept = delete;

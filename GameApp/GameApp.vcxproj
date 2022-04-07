@@ -231,10 +231,8 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="PerionNorthernRidgeLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
+    <ClCompile Include="PerionNorthernRidge.cpp" />
+    <ClCompile Include="PerionNorthernRidgeLevel.cpp" />
     <ClCompile Include="PerionRoom.cpp" />
     <ClCompile Include="PerionRoomLevel.cpp" />
     <ClCompile Include="Player_Animation.cpp" />
@@ -343,10 +341,8 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="PerionNorthernRidgeLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
+    <ClInclude Include="PerionNorthernRidge.h" />
+    <ClInclude Include="PerionNorthernRidgeLevel.h" />
     <ClInclude Include="PerionRoom.h" />
     <ClInclude Include="PerionRoomLevel.h" />
     <ClInclude Include="Player_Define.h" />

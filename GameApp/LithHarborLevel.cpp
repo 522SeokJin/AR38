@@ -51,7 +51,7 @@ void LithHarborLevel::LevelStart()
 
 	{
 		Player_ = CreateActor<Player>();
-		Player_->GetTransform()->SetWorldPosition({ 1935.0f, -1280.0f });
+		Player_->GetTransform()->SetWorldPosition({ 1935.0f, -1298.0f });
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(
 			Player_->GetTransform()->GetLocalPosition());
 		Player_->Off();
@@ -86,15 +86,13 @@ void LithHarborLevel::LevelStart()
 		Inventory_->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
 		Inventory_->Off();
 	}
-
-	{
-		Demian* Actor = CreateActor<Demian>();
-		Actor->GetTransform()->SetWorldPosition({ 500.0f, 0.0f });
-	}
 }
 
 void LithHarborLevel::LevelUpdate(float _DeltaTime)
 {
+	GetMainCameraActor()->GetTransform()->
+		SetLocalPosition(Player_->GetTransform()->GetLocalPosition());
+
 	static bool Check = false;
 
 	if (false == Check && nullptr != GameEngineGUI::GetInst()->FindGUIWindow("RenderWindow"))
