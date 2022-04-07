@@ -3,7 +3,6 @@
 #include "Player.h"
 #include "PerionNorthernRidge.h"
 #include "Mouse.h"
-#include "GlobalValue.h"
 
 #include <GameEngine/GameEngineGUI.h>
 #include <GameEngine/GameEngineRenderWindow.h>

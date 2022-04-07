@@ -38,9 +38,6 @@
     <ClCompile Include="PerionRoomLevel.cpp">
       <Filter>Level\Town</Filter>
     </ClCompile>
-    <ClCompile Include="DeepeningForestLevel.cpp">
-      <Filter>Level\HuntingGround</Filter>
-    </ClCompile>
     <ClCompile Include="SilentSwampLevel.cpp">
       <Filter>Level\HuntingGround</Filter>
     </ClCompile>
@@ -118,6 +115,15 @@
     </ClCompile>
     <ClCompile Include="PerionNorthernRidgeLevel.cpp">
       <Filter>Level\HuntingGround</Filter>
+    </ClCompile>
+    <ClCompile Include="DeepeningForest.cpp">
+      <Filter>Actor\Map\HuntingGround</Filter>
+    </ClCompile>
+    <ClCompile Include="DeepeningForestLevel.cpp">
+      <Filter>Level\HuntingGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>Actor\Portal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +205,9 @@
     <Filter Include="Actor\Map\HuntingGround\Demian">
       <UniqueIdentifier>{80fdbf4c-2465-4d92-99e1-544a771eab93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Portal">
+      <UniqueIdentifier>{3b8c0cb4-af83-4767-b413-14afc69d7ef0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h">
@@ -236,9 +245,6 @@
     </ClInclude>
     <ClInclude Include="PerionRoomLevel.h">
       <Filter>Level\Town</Filter>
-    </ClInclude>
-    <ClInclude Include="DeepeningForestLevel.h">
-      <Filter>Level\HuntingGround</Filter>
     </ClInclude>
     <ClInclude Include="SilentSwampLevel.h">
       <Filter>Level\HuntingGround</Filter>
@@ -311,6 +317,15 @@
     </ClInclude>
     <ClInclude Include="PerionNorthernRidgeLevel.h">
       <Filter>Level\HuntingGround</Filter>
+    </ClInclude>
+    <ClInclude Include="DeepeningForest.h">
+      <Filter>Actor\Map\HuntingGround</Filter>
+    </ClInclude>
+    <ClInclude Include="DeepeningForestLevel.h">
+      <Filter>Level\HuntingGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>Actor\Portal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

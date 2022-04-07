@@ -1,9 +1,5 @@
 #include "PreCompile.h"
 #include "PerionLevel.h"
-#include "Player.h"
-#include "Perion.h"
-#include "Mouse.h"
-#include "GlobalValue.h"
 
 #include <GameEngine/GameEngineGUI.h>
 #include <GameEngine/GameEngineRenderWindow.h>
@@ -16,6 +12,10 @@
 #include "QuickSlotKeyUI.h"
 #include "InventoryUI.h"
 
+#include "Player.h"
+#include "Mouse.h"
+#include "Portal.h"
+#include "Perion.h"
 
 PerionLevel::PerionLevel()
 	: Cursor_(nullptr)
@@ -74,15 +74,21 @@ void PerionLevel::LevelStart()
 	}
 
 	{
+		Player_ = CreateActor<Player>();
+		GetMainCameraActor()->GetTransform()->SetWorldPosition(
+			Player_->GetTransform()->GetLocalPosition());
+		Player_->GetTransform()->SetWorldPosition({ 1190.0f, -2007.0f });
+		Player_->Off();
+	}
+
+	{
 		Perion* Actor = CreateActor<Perion>();
 	}
 
 	{
-		Player_ = CreateActor<Player>();
-		GetMainCameraActor()->GetTransform()->SetWorldPosition(
-			Player_->GetTransform()->GetLocalPosition());
-		Player_->GetTransform()->SetWorldPosition({1190.0f, -2007.0f});
-		Player_->Off();
+		Portal* Actor = CreateActor<Portal>();
+		Actor->SetDestination("PerionRoom");
+		Actor->GetTransform()->SetWorldPosition({ 2625.0f, -1877.0f, -10.0f });
 	}
 }
 

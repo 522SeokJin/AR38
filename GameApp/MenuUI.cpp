@@ -2,7 +2,6 @@
 #include "MenuUI.h"
 #include "GameEngine/GameEngineUIRenderer.h"
 #include <GameEngine/GameEngineCollision.h>
-#include "GlobalValue.h"
 
 MenuUI::MenuUI()
 	: CharRenderer_(nullptr)

@@ -2,9 +2,20 @@
 
 enum class ColGroup	// Collision Group Number
 {
+	PLAYER,
 	MOUSE,
 	BUTTON,
 	TAB,
+	PORTAL,
+};
+
+enum class DepthOrder
+{
+	SKILL = -2,
+	PORTAL = -1,
+	PLAYER = 0,	// Default
+	MONSTER,
+	MAP,
 };
 
 // Ό³Έν : 

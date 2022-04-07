@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "StatusUI.h"
 #include "GameEngine/GameEngineUIRenderer.h"
-#include "GlobalValue.h"
 
 StatusUI::StatusUI()
 	: HPBarValue_({ 1.0f, 2, 0, 0 })

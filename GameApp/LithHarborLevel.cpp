@@ -17,8 +17,6 @@
 
 #include "Demian.h"
 
-#include "GlobalValue.h"
-
 LithHarborLevel::LithHarborLevel()
 	: Cursor_(nullptr)
 	, Player_(nullptr)

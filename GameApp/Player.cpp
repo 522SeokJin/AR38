@@ -182,7 +182,8 @@ void Player::Start()
 	CreateAnimation();
 
 	{
-		Collision_ = CreateTransformComponent<GameEngineCollision>(10);
+		Collision_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
+			ColGroup::PLAYER));
 		Collision_->SetLocalScaling({ 39.0f, 64.0f });
 	}
 

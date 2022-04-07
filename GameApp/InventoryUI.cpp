@@ -2,7 +2,6 @@
 #include "InventoryUI.h"
 #include <GameEngine/GameEngineUIRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
-#include "GlobalValue.h"
 #include "Item.h"
 #include "Mouse.h"
 

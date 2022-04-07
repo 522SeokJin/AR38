@@ -172,10 +172,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AppMain.cpp" />
-    <ClCompile Include="DeepeningForestLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
+    <ClCompile Include="DeepeningForest.cpp" />
+    <ClCompile Include="DeepeningForestLevel.cpp" />
     <ClCompile Include="Demian.cpp">
       <SubType>
       </SubType>
@@ -236,6 +234,10 @@
     <ClCompile Include="PerionRoom.cpp" />
     <ClCompile Include="PerionRoomLevel.cpp" />
     <ClCompile Include="Player_Animation.cpp" />
+    <ClCompile Include="Portal.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="QuickSlotKeyUI.cpp" />
     <ClCompile Include="SahelLevel.cpp">
       <SubType>
@@ -284,10 +286,8 @@
     <ClCompile Include="ValueCheckWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DeepeningForestLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
+    <ClInclude Include="DeepeningForest.h" />
+    <ClInclude Include="DeepeningForestLevel.h" />
     <ClInclude Include="Demian.h">
       <SubType>
       </SubType>
@@ -346,6 +346,10 @@
     <ClInclude Include="PerionRoom.h" />
     <ClInclude Include="PerionRoomLevel.h" />
     <ClInclude Include="Player_Define.h" />
+    <ClInclude Include="Portal.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="QuickSlotKeyUI.h" />
     <ClInclude Include="SahelLevel.h">
       <SubType>
