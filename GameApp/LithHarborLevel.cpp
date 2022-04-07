@@ -2,9 +2,6 @@
 #include "LithHarborLevel.h"
 #include "LithHarbor.h"
 #include <GameEngine/GameEngineWindow.h>
-#include "Mouse.h"
-#include "Player.h"
-
 #include <GameEngine/GameEngineGUI.h>
 #include <GameEngine/GameEngineRenderWindow.h>
 
@@ -15,7 +12,10 @@
 #include "QuickSlotKeyUI.h"
 #include "InventoryUI.h"
 
-#include "Demian.h"
+#include "Mouse.h"
+#include "Player.h"
+
+#include "UtilDlgEx.h"
 
 LithHarborLevel::LithHarborLevel()
 	: Cursor_(nullptr)
@@ -83,6 +83,10 @@ void LithHarborLevel::LevelStart()
 		Inventory_ = CreateActor<InventoryUI>();
 		Inventory_->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
 		Inventory_->Off();
+	}
+	{
+		Dlg_ = CreateActor<UtilDlgEx>();
+		//Dlg_->Off();
 	}
 }
 

@@ -125,6 +125,9 @@
     <ClCompile Include="Portal.cpp">
       <Filter>Actor\Portal</Filter>
     </ClCompile>
+    <ClCompile Include="UtilDlgEx.cpp">
+      <Filter>Actor\UI\UtilDlgEx</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -207,6 +210,9 @@
     </Filter>
     <Filter Include="Actor\Portal">
       <UniqueIdentifier>{3b8c0cb4-af83-4767-b413-14afc69d7ef0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI\UtilDlgEx">
+      <UniqueIdentifier>{ca693987-ef18-41cd-a9d9-4bedb0752214}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -326,6 +332,9 @@
     </ClInclude>
     <ClInclude Include="Portal.h">
       <Filter>Actor\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="UtilDlgEx.h">
+      <Filter>Actor\UI\UtilDlgEx</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

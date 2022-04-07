@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "MenuUI.h"
-#include "GameEngine/GameEngineUIRenderer.h"
+#include <GameEngine/GameEngineUIRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 
 MenuUI::MenuUI()

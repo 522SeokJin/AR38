@@ -29,6 +29,8 @@ void Mouse::Start()
 	GetUIRenderer()->CreateAnimationFolder("GrapHovered", "GrapHovered", 0.2f);
 	GetUIRenderer()->CreateAnimationFolder("Grap", "Grap", 0.5f, false);
 	GetUIRenderer()->SetChangeAnimation("Normal");
+
+	GetCollision()->SetCollisionGroup(static_cast<int>(ColGroup::MOUSE));
 }
 
 void Mouse::Update(float _DeltaTime)

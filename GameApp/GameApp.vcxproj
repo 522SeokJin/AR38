@@ -283,6 +283,10 @@
     <ClCompile Include="UserGame_Resources.cpp" />
     <ClCompile Include="UserGame_Resources_Shader.cpp" />
     <ClCompile Include="Player_FSM.cpp" />
+    <ClCompile Include="UtilDlgEx.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ValueCheckWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -390,6 +394,10 @@
     </ClInclude>
     <ClInclude Include="CustomVertex.h" />
     <ClInclude Include="UserGame_Resources_Shader.h" />
+    <ClInclude Include="UtilDlgEx.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ValueCheckWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

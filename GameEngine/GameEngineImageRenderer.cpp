@@ -11,6 +11,7 @@ GameEngineImageRenderer::GameEngineImageRenderer()
 	, CurTexture_(nullptr)
 	, CurAnimation_(nullptr)
 	, CutData_(0, 0, 1, 1)
+	, IsPlay_(true)
 {
 
 }
@@ -39,7 +40,14 @@ void GameEngineImageRenderer::SetImageSize(const float4& _ImageSize)
 void GameEngineImageRenderer::SetImage(const std::string& _ImageName,
 	bool _ScaleToImageSize/* = true*/)
 {
-	CurTexture_ = GameEngineTextureManager::GetInst().Find(_ImageName);
+	GameEngineTexture* Texture = GameEngineTextureManager::GetInst().Find(_ImageName);
+
+	if (Texture == CurTexture_)
+	{
+		return;
+	}
+
+	CurTexture_ = Texture;
 
 	if (nullptr == CurTexture_)
 	{
