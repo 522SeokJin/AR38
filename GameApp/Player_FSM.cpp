@@ -312,6 +312,12 @@ void Player::rope()
 {
 	PlayerDir CurrentDir = Dir_;
 
+	if (false == GameEngineInput::GetInst().Press("Up") &&
+		false == GameEngineInput::GetInst().Press("Down"))
+	{
+		FSM_.ChangeState("ropeStop");
+	}
+
 	if (true == GameEngineInput::GetInst().Press("Up"))
 	{
 		GetTransform()->SetLocalDeltaTimeMove(float4::UP * Speed_.y);
@@ -368,6 +374,12 @@ void Player::ladder()
 {
 	PlayerDir CurrentDir = Dir_;
 
+	if (false == GameEngineInput::GetInst().Press("Up") &&
+		false == GameEngineInput::GetInst().Press("Down"))
+	{
+		FSM_.ChangeState("ladderStop");
+	}
+
 	if (true == GameEngineInput::GetInst().Press("Up"))
 	{
 		GetTransform()->SetLocalDeltaTimeMove(float4::UP * Speed_.y);
@@ -411,6 +423,90 @@ void Player::ladder()
 void Player::ladder_End()
 {
 	Speed_.y = 0.0f;
+}
+
+void Player::ropeStop_Start()
+{
+	Avatar_->AnimationStop();
+}
+
+void Player::ropeStop()
+{
+	PlayerDir CurrentDir = Dir_;
+
+	if (true == GameEngineInput::GetInst().Press("Up") ||
+		true == GameEngineInput::GetInst().Press("Down"))
+	{
+		FSM_.ChangeState("rope");
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Left") &&
+		true == GameEngineInput::GetInst().Press("Alt"))
+	{
+		Dir_ = PlayerDir::LEFT;
+
+		FSM_.ChangeState("jump");
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Right") &&
+		true == GameEngineInput::GetInst().Press("Alt"))
+	{
+		Dir_ = PlayerDir::RIGHT;
+
+		FSM_.ChangeState("jump");
+	}
+
+	if (CurrentDir != Dir_)
+	{
+		ChangeImageDirection();
+	}
+}
+
+void Player::ropeStop_End()
+{
+	Avatar_->AnimationPlay();
+}
+
+void Player::ladderStop_Start()
+{
+	Avatar_->AnimationStop();
+}
+
+void Player::ladderStop()
+{
+	PlayerDir CurrentDir = Dir_;
+
+	if (true == GameEngineInput::GetInst().Press("Up") ||
+		true == GameEngineInput::GetInst().Press("Down"))
+	{
+		FSM_.ChangeState("ladderStop");
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Left") &&
+		true == GameEngineInput::GetInst().Press("Alt"))
+	{
+		Dir_ = PlayerDir::LEFT;
+
+		FSM_.ChangeState("jump");
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Right") &&
+		true == GameEngineInput::GetInst().Press("Alt"))
+	{
+		Dir_ = PlayerDir::RIGHT;
+
+		FSM_.ChangeState("jump");
+	}
+
+	if (CurrentDir != Dir_)
+	{
+		ChangeImageDirection();
+	}
+}
+
+void Player::ladderStop_End()
+{
+	Avatar_->AnimationPlay();
 }
 
 void Player::swingO1_Start()

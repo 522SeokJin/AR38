@@ -192,6 +192,7 @@ void GameEngineImageRenderer::SetChangeAnimation(const std::string& _Name,
 
 	CurAnimation_->Reset();
 	CurAnimation_->CallStart();
+	AnimationPlay();
 }
 
 void GameEngineImageRenderer::SetOffsetAnimation(const std::string& _Name, int _Index, float4 _Offset)
@@ -351,7 +352,10 @@ void GameEngineImageRenderer::Animation2D::CallFrame()
 
 void GameEngineImageRenderer::Animation2D::Update(float _DeltaTime)
 {
-	CurTime_ -= _DeltaTime;
+	if (true == Renderer_->IsPlay_)
+	{
+		CurTime_ -= _DeltaTime;
+	}
 
 	if (StartFrame_ < EndFrame_)
 	{

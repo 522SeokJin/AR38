@@ -126,9 +126,17 @@ private:
 	void rope();
 	void rope_End();
 
+	void ropeStop_Start();
+	void ropeStop();
+	void ropeStop_End();
+
 	void ladder_Start();
 	void ladder();
 	void ladder_End();
+
+	void ladderStop_Start();
+	void ladderStop();
+	void ladderStop_End();
 
 	void swingO1_Start();
 	void swingO1();

@@ -207,10 +207,17 @@ void Player::Start()
 		std::bind(&Player::rope_Start, this),
 		std::bind(&Player::rope_End, this));
 
+	FSM_.CreateState("ropeStop", std::bind(&Player::ropeStop, this),
+		std::bind(&Player::ropeStop_Start, this),
+		std::bind(&Player::ropeStop_End, this));
+
 	FSM_.CreateState("ladder", std::bind(&Player::ladder, this),
 		std::bind(&Player::ladder_Start, this),
 		std::bind(&Player::ladder_End, this));
 
+	FSM_.CreateState("ladderStop", std::bind(&Player::ladderStop, this),
+		std::bind(&Player::ladderStop_Start, this),
+		std::bind(&Player::ladderStop_End, this));
 
 	FSM_.CreateState("swingO1", std::bind(&Player::swingO1, this),
 		std::bind(&Player::swingO1_Start, this),

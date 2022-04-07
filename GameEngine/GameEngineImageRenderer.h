@@ -77,6 +77,16 @@ public:
 		ResultColor_.a = _Value;
 	}
 
+	inline void AnimationStop()
+	{
+		IsPlay_ = false;
+	}
+
+	inline void AnimationPlay()
+	{
+		IsPlay_ = true;
+	}
+
 	void SetStartCallBack(const std::string& _Name, std::function<void()> _CallBack);
 	void SetEndCallBack(const std::string& _Name, std::function<void()> _CallBack);
 	void SetFrameCallBack(const std::string& _Name, int _Index,
@@ -104,6 +114,8 @@ private:
 
 	float4 ResultColor_;
 	float4 CutData_; // float2 TextureCutDataPos, float2 TextureCutDataSize
+
+	bool IsPlay_;
 
 	struct Animation2D : public GameEngineObjectNameBase
 	{
