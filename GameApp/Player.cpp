@@ -11,8 +11,8 @@
 Player::Player()
 	: Dir_(PlayerDir::LEFT)
 	, Speed_(float4::ZERO)
-	, BodyPixelColor_(0.0f)
-	, FootPixelColor_(1.0f)
+	, BodyPixelColor_(float4::ZERO)
+	, FootPixelColor_({0.0f, 1.0f, 0.0f, 0.0f})
 	, FaceImageIndex_(1)
 	, HairBelowBodyImageIndex_(1)
 	, HairOverHeadImageIndex_(1)
@@ -96,7 +96,7 @@ void Player::HorizonMovement()
 	{
 		Dir_ = PlayerDir::LEFT;
 
-		if (FootPixelColor_ > GetLeftCollideColor())
+		if (FootPixelColor_.g > GetLeftColor().g)
 		{
 			GetTransform()->SetLocalDeltaTimeMove(float4::LEFT * Speed_.x);
 		}
@@ -105,7 +105,7 @@ void Player::HorizonMovement()
 	{
 		Dir_ = PlayerDir::RIGHT;
 
-		if (FootPixelColor_ > GetRightCollideColor())
+		if (FootPixelColor_.g > GetRightColor().g)
 		{
 			GetTransform()->SetLocalDeltaTimeMove(float4::RIGHT * Speed_.x);
 		}
@@ -117,28 +117,28 @@ void Player::HorizonMovement()
 	}
 }
 
-float Player::GetBodyCollideColor()
+float4 Player::GetBodyColor()
 {
 	return Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
-		+ float4(0.0f, 16.0f)).g;
+		+ float4(0.0f, 16.0f));
 }
 
-float Player::GetFootCollideColor()
+float4 Player::GetFootColor()
 {
 	return Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
-		+ float4(0.0f, 32.0f)).g;
+		+ float4(0.0f, 32.0f));
 }
 
-float Player::GetLeftCollideColor()
+float4 Player::GetLeftColor()
 {
 	return Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
-		+ float4(-10.0f, 16.0f)).g;
+		+ float4(-10.0f, 16.0f));
 }
 
-float Player::GetRightCollideColor()
+float4 Player::GetRightColor()
 {
 	return Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
-		+ float4(10.0f, 16.0f)).g;
+		+ float4(10.0f, 16.0f));
 }
 
 bool Player::IsUpRopeColor()

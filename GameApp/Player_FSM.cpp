@@ -11,8 +11,8 @@ void Player::stand1_Start()
 	ChangePlayerAnimation("stand1");
 	Speed_.x = 0.0f;
 
-	BodyPixelColor_ = GetBodyCollideColor();
-	FootPixelColor_ = GetFootCollideColor();
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetFootColor();
 }
 
 void Player::stand1()
@@ -32,7 +32,7 @@ void Player::stand1()
 		return;
 	}
 
-	if (FootPixelColor_ > GetFootCollideColor())
+	if (FootPixelColor_.g > GetFootColor().g)
 	{
 		FSM_.ChangeState("fall");
 		return;
@@ -104,7 +104,13 @@ void Player::walk1()
 
 	HorizonMovement();
 
-	if (FootPixelColor_ > GetFootCollideColor())
+	if (0.0f != FootPixelColor_.r ||
+		0.0f != FootPixelColor_.b)
+	{
+		FootPixelColor_ = GetFootColor();
+	}
+
+	if (FootPixelColor_.g > GetFootColor().g)
 	{
 		FSM_.ChangeState("fall");
 		return;
@@ -157,15 +163,15 @@ void Player::jump_Start()
 	Speed_.y = JUMPSPEED;
 	GetTransform()->SetLocalMove({ 0.0f, 1.0f });
 
-	BodyPixelColor_ = GetBodyCollideColor();
-	FootPixelColor_ = GetBodyCollideColor();
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetBodyColor();
 }
 
 void Player::jump()
 {
-	if (FootPixelColor_ != GetFootCollideColor())
+	if (FootPixelColor_ != GetFootColor())
 	{
-		FootPixelColor_ = GetFootCollideColor();
+		FootPixelColor_ = GetFootColor();
 	}
 
 	Speed_.y -= GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
@@ -204,8 +210,8 @@ void Player::jump_End()
 {
 	Speed_.y = 0.0f;
 
-	BodyPixelColor_ = GetBodyCollideColor();
-	FootPixelColor_ = GetFootCollideColor();
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetFootColor();
 }
 
 void Player::fall_Start()
@@ -218,25 +224,25 @@ void Player::fall_Start()
 		IsDownLadderColor()
 		)
 	{
-		BodyPixelColor_ = 0.0f;
-		FootPixelColor_ = 0.0f;
+		BodyPixelColor_ = float4::ZERO;
+		FootPixelColor_ = float4::ZERO;
 	}
 	else
 	{
-		BodyPixelColor_ = GetBodyCollideColor();
-		FootPixelColor_ = GetFootCollideColor();
+		BodyPixelColor_ = GetBodyColor();
+		FootPixelColor_ = GetFootColor();
 	}
 }
 
 void Player::fall()
 {
-	if (FootPixelColor_ > GetFootCollideColor())
+	if (FootPixelColor_.g > GetFootColor().g)
 	{
 		// 바닥에 닿은건 아니나, 갱신이 필요
-		FootPixelColor_ = GetFootCollideColor();
+		FootPixelColor_ = GetFootColor();
 	}
 
-	if (FootPixelColor_ < GetFootCollideColor() &&
+	if (FootPixelColor_.g < GetFootColor().g &&
 		false == IsUpRopeColor() &&
 		false == IsUpLadderColor())
 	{
@@ -291,8 +297,8 @@ void Player::fall_End()
 {
 	Speed_.y = 0.0f;
 
-	BodyPixelColor_ = GetBodyCollideColor();
-	FootPixelColor_ = GetFootCollideColor();
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetFootColor();
 }
 
 void Player::rope_Start()

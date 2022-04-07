@@ -46,10 +46,10 @@ private:
 
 	void HorizonMovement();
 
-	float GetBodyCollideColor();
-	float GetFootCollideColor();
-	float GetLeftCollideColor();
-	float GetRightCollideColor();
+	float4 GetBodyColor();
+	float4 GetFootColor();
+	float4 GetLeftColor();
+	float4 GetRightColor();
 
 	bool IsUpRopeColor();
 	bool IsUpLadderColor();
@@ -63,8 +63,8 @@ private:
 
 	float4 Speed_;
 
-	float BodyPixelColor_;
-	float FootPixelColor_;
+	float4 BodyPixelColor_;
+	float4 FootPixelColor_;
 
 	GameEngineCollision* Collision_;
 
