@@ -15,7 +15,7 @@ public:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
-	void SetScript(const std::string& _Script)
+	void SetScript(const std::wstring& _Script)
 	{
 		Script_ = _Script;
 	}
@@ -50,8 +50,8 @@ private:
 	float FontDelay_;
 	float CurFontDelay_;
 
-	std::string Script_;
-	std::string PrintScript_;
+	std::wstring Script_;
+	std::wstring PrintScript_;
 	bool EndScriptAni_;
 };
 

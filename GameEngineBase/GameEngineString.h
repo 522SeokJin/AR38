@@ -21,6 +21,7 @@ public:
 	static std::string toupper(const std::string& _Text);
 
 	static void AnsiToUnicode(const std::string& _Text, std::wstring& _Out);
+	static void UniCodeToAnsi(const std::wstring& _Text, std::string& _Out);
 	static void UniCodeToUTF8(const std::wstring& _Text, std::string& _Out);
 
 	static void AnsiToUTF8(const std::string& _Text, std::string& _Out);

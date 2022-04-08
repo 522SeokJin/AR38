@@ -46,6 +46,27 @@ void GameEngineString::AnsiToUnicode(const std::string& _Text, std::wstring& _Ou
 	}
 }
 
+void GameEngineString::UniCodeToAnsi(const std::wstring& _Text, std::string& _Out)
+{
+	int Size = WideCharToMultiByte(CP_ACP, 0, _Text.c_str(), static_cast<int>(_Text.size()), nullptr, 0, nullptr, nullptr);
+
+	if (Size == 0)
+	{
+		GameEngineDebug::MsgBoxError("스트링 변환에 실패했습니다.");
+		return;
+	}
+
+	_Out.resize(Size);
+
+	Size = WideCharToMultiByte(CP_ACP, 0, _Text.c_str(), static_cast<int>(_Text.size()), &_Out[0], static_cast<int>(_Out.size()), nullptr, nullptr);
+
+	if (Size == 0)
+	{
+		GameEngineDebug::MsgBoxError("스트링 변환에 실패했습니다.");
+		return;
+	}
+}
+
 void GameEngineString::UniCodeToUTF8(const std::wstring& _Text, std::string& _Out)
 {
 

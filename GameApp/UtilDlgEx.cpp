@@ -17,10 +17,10 @@ UtilDlgEx::UtilDlgEx()
 	, Grabbed_(false)
 	, GrabEventCol_(nullptr)
 	, FontIndex_(0)
-	, FontDelay_(0.025f)
+	, FontDelay_(0.03f)
 	, CurFontDelay_(0.0f)
-	, Script_("")
-	, PrintScript_("")
+	, Script_(L"")
+	, PrintScript_(L"")
 	, EndScriptAni_(false)
 {
 
@@ -36,8 +36,6 @@ void UtilDlgEx::Start()
 	{
 		BackGroundRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();
 		BackGroundRenderer_->SetImage("UtilDlgTaxiBg.png");
-		/*BackGroundRenderer_->TextSetting("µ¸¿ò", "Æä¸®¿ÂÀ¸·Î ÀÌµ¿ÇÏ½Ã°Ú½À´Ï±î?", 13, 
-			float4::BLACK, { -135.0f, 12.0f });*/
 	}
 
 	{
@@ -94,14 +92,14 @@ void UtilDlgEx::Start()
 	{
 		GrabEventCol_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
 			ColGroup::TAB));
-		GrabEventCol_->SetLocalScaling({ 519.0f, 30.0f });
-		GrabEventCol_->SetLocalPosition({ 0.0f, 80.0f });
+		GrabEventCol_->SetLocalScaling({ 519.0f, 155.0f });
+		GrabEventCol_->SetLocalPosition({ 0.0f, 15.0f });
 	}
 }
 
 void UtilDlgEx::Update(float _DeltaTime)
 {
-	if ("" != Script_ &&
+	if (L"" != Script_ &&
 		false == EndScriptAni_)
 	{
 		CurFontDelay_ += _DeltaTime;
@@ -112,7 +110,11 @@ void UtilDlgEx::Update(float _DeltaTime)
 
 			PrintScript_.push_back(Script_.at(FontIndex_));
 
-			BackGroundRenderer_->TextSetting("µ¸¿ò", PrintScript_, 13,
+			std::string TempStr = "";
+
+			GameEngineString::UniCodeToAnsi(PrintScript_, TempStr);
+
+			BackGroundRenderer_->TextSetting("µ¸¿ò", TempStr, 13,
 				float4::BLACK, { -228.0f, 12.0f });
 			BackGroundRenderer_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
 
@@ -158,8 +160,6 @@ void UtilDlgEx::Update(float _DeltaTime)
 		static_cast<int>(ColGroup::MOUSE), Func);
 
 #pragma endregion
-
-	
 }
 
 void UtilDlgEx::BtnYesEvent(GameEngineCollision* _OtherCollision)
@@ -185,6 +185,12 @@ void UtilDlgEx::BtnNoEvent(GameEngineCollision* _OtherCollision)
 	{
 		Off();
 		GetTransform()->SetWorldPosition(float4::ZERO);
+		PrintScript_ = L"";
+		BackGroundRenderer_->TextSetting("µ¸¿ò", "", 13,
+			float4::BLACK, { -228.0f, 12.0f });
+		FontIndex_ = 0;
+		CurFontDelay_ = 0.0f;
+		EndScriptAni_ = false;
 		return;
 	}
 
@@ -203,6 +209,12 @@ void UtilDlgEx::BtnCloseEvent(GameEngineCollision* _OtherCollision)
 	{
 		Off();
 		GetTransform()->SetWorldPosition(float4::ZERO);
+		PrintScript_ = L"";
+		BackGroundRenderer_->TextSetting("µ¸¿ò", "", 13,
+			float4::BLACK, { -228.0f, 12.0f });
+		FontIndex_ = 0;
+		CurFontDelay_ = 0.0f;
+		EndScriptAni_ = false;
 		return;
 	}
 
