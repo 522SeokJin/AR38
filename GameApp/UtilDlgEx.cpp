@@ -30,10 +30,14 @@ void UtilDlgEx::Start()
 	{
 		BackGroundRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();
 		BackGroundRenderer_->SetImage("UtilDlgTaxiBg.png");
+		BackGroundRenderer_->TextSetting("돋움", "페리온으로 이동하시겠습니까?", 13, 
+			float4::BLACK, { -135.0f, 12.0f });
 	}
 
 	{
 		NPCRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();
+		NPCRenderer_->SetRenderingPipeLine("PointTextureUI");
+		NPCRenderer_->ImageRendererStart();
 		NPCRenderer_->SetImage("UtilDlgTaxi.png");
 		NPCRenderer_->SetLocalPosition({ 183.0f, 11.0f });
 	}
