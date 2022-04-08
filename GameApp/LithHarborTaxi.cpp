@@ -3,7 +3,7 @@
 #include <GameEngine/GameEngineImageRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineCore.h>
-#include "UtilDlgEx.h"
+#include "TaxiDlg.h"
 #include "Mouse.h"
 
 LithHarborTaxi::LithHarborTaxi()

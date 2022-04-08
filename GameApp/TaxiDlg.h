@@ -1,22 +1,16 @@
 #pragma once
 #include "GameEngine/GameEngineActor.h"
 
-enum class DlgType
-{
-	YESNO,
-	OK,
-};
-
 // Ό³Έν : 
 class GameEngineUIRenderer;
 class GameEngineCollision;
-class UtilDlgEx : public GameEngineActor
+class TaxiDlg : public GameEngineActor
 {
 	friend class GameEngineLevel;
 
 public:
-	UtilDlgEx();
-	~UtilDlgEx();
+	TaxiDlg();
+	~TaxiDlg();
 
 	void Start() override;
 	void Update(float _DeltaTime) override;
@@ -28,22 +22,21 @@ public:
 	}
 
 protected:
-	UtilDlgEx(const UtilDlgEx& _other) = delete; 
-	UtilDlgEx(UtilDlgEx&& _other) noexcept = delete;
-	UtilDlgEx& operator=(const UtilDlgEx& _other) = delete;
-	UtilDlgEx& operator=(const UtilDlgEx&& _other) = delete;
+	TaxiDlg(const TaxiDlg& _other) = delete; 
+	TaxiDlg(TaxiDlg&& _other) noexcept = delete;
+	TaxiDlg& operator=(const TaxiDlg& _other) = delete;
+	TaxiDlg& operator=(const TaxiDlg&& _other) = delete;
 
 private:
 	void BtnYesEvent(GameEngineCollision* _OtherCollision);
 	void BtnNoEvent(GameEngineCollision* _OtherCollision);
 	void BtnCloseEvent(GameEngineCollision* _OtherCollision);
+	void BtnNextEvent(GameEngineCollision* _OtherCollision);
 	void GrabEvent(GameEngineCollision* _OtherCollision);
 
 	void FontUpdate(float _DeltaTime);
 
 	void SetPage(int _Page);
-
-	DlgType Type_;
 
 	GameEngineUIRenderer* BackGroundRenderer_;
 	GameEngineUIRenderer* NPCRenderer_;
@@ -51,10 +44,12 @@ private:
 	GameEngineUIRenderer* BtnYesRenderer_;
 	GameEngineUIRenderer* BtnNoRenderer_;
 	GameEngineUIRenderer* BtnCloseRenderer_;
+	GameEngineUIRenderer* BtnNextRenderer_;
 
 	GameEngineCollision* BtnYesCol_;
 	GameEngineCollision* BtnNoCol_;
 	GameEngineCollision* BtnCloseCol_;
+	GameEngineCollision* BtnNextCol_;
 
 	bool Grabbed_;
 	GameEngineCollision* GrabEventCol_;

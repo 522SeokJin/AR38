@@ -2,7 +2,7 @@
 #include <GameEngine/GameEngineActor.h>
 
 // Ό³Έν : 
-class UtilDlgEx;
+class TaxiDlg;
 class GameEngineCollision;
 class LithHarborTaxi : public GameEngineActor
 {
@@ -13,7 +13,7 @@ public:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
-	void SetDlg(UtilDlgEx* _Dlg)
+	void SetDlg(TaxiDlg* _Dlg)
 	{
 		Dlg_ = _Dlg;
 	}
@@ -25,7 +25,7 @@ protected:
 	LithHarborTaxi& operator=(const LithHarborTaxi&& _other) = delete;
 
 private:
-	UtilDlgEx* Dlg_;
+	TaxiDlg* Dlg_;
 	GameEngineCollision* Collision_;
 };
 

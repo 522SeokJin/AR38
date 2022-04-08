@@ -6,7 +6,7 @@ class Mouse;
 class Player;
 class GameEngineRenderWindow;
 class InventoryUI;
-class UtilDlgEx;
+class TaxiDlg;
 class LithHarborTaxi;
 class LithHarborLevel : public GameEngineLevel
 {
@@ -30,7 +30,7 @@ private:
 	Player* Player_;
 	GameEngineRenderWindow* RenderWindow_;
 	InventoryUI* Inventory_;
-	UtilDlgEx* TaxiDlg_;
+	TaxiDlg* TaxiDlg_;
 	LithHarborTaxi* Taxi_;
 };
 

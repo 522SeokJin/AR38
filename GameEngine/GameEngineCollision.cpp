@@ -77,6 +77,11 @@ void GameEngineCollision::SetCollisionGroup(int _Type)
 void GameEngineCollision::Collision(CollisionType _ThisType, CollisionType _OtherType, 
 	int _OtherGroup, std::function<void(GameEngineCollision*)> _CallBack)
 {
+	if (false == this->IsUpdate())
+	{
+		return;
+	}
+	
 	std::list<GameEngineCollision*>& Group = GetLevel()->GetCollisionGroup(_OtherGroup);
 
 	for (GameEngineCollision* OtherCollision : Group)

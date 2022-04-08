@@ -284,7 +284,7 @@
     <ClCompile Include="UserGame_Resources.cpp" />
     <ClCompile Include="UserGame_Resources_Shader.cpp" />
     <ClCompile Include="Player_FSM.cpp" />
-    <ClCompile Include="UtilDlgEx.cpp">
+    <ClCompile Include="TaxiDlg.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -396,7 +396,7 @@
     </ClInclude>
     <ClInclude Include="CustomVertex.h" />
     <ClInclude Include="UserGame_Resources_Shader.h" />
-    <ClInclude Include="UtilDlgEx.h">
+    <ClInclude Include="TaxiDlg.h">
       <SubType>
       </SubType>
     </ClInclude>

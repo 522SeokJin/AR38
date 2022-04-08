@@ -16,7 +16,7 @@
 #include "Player.h"
 
 #include "LithHarborTaxi.h"
-#include "UtilDlgEx.h"
+#include "TaxiDlg.h"
 
 LithHarborLevel::LithHarborLevel()
 	: Cursor_(nullptr)
@@ -89,9 +89,9 @@ void LithHarborLevel::LevelStart()
 	}
 
 	{
-		TaxiDlg_ = CreateActor<UtilDlgEx>();
+		TaxiDlg_ = CreateActor<TaxiDlg>();
 		TaxiDlg_->PushScript(L"페리온으로 이동하시겠습니까?");
-		TaxiDlg_->PushScript(L"2번째 페이지 테스트");
+		TaxiDlg_->PushScript(L"언제든지 저희 택시를 이용해 주세요~");
 		TaxiDlg_->Off();
 	}
 

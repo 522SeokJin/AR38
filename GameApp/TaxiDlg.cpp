@@ -1,20 +1,21 @@
 #include "PreCompile.h"
-#include "UtilDlgEx.h"
+#include "TaxiDlg.h"
 #include <GameEngine/GameEngineUIRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 #include "Mouse.h"
 #include <GameEngine/GameEngineCore.h>
 
-UtilDlgEx::UtilDlgEx()
-	: Type_(DlgType::YESNO)
-	, BackGroundRenderer_(nullptr)
+TaxiDlg::TaxiDlg()
+	: BackGroundRenderer_(nullptr)
 	, NPCRenderer_(nullptr)
 	, BtnYesRenderer_(nullptr)
 	, BtnNoRenderer_(nullptr)
 	, BtnCloseRenderer_(nullptr)
+	, BtnNextRenderer_(nullptr)
 	, BtnYesCol_(nullptr)
 	, BtnNoCol_(nullptr)
 	, BtnCloseCol_(nullptr)
+	, BtnNextCol_(nullptr)
 	, Grabbed_(false)
 	, GrabEventCol_(nullptr)
 	, FontIndex_(0)
@@ -28,12 +29,12 @@ UtilDlgEx::UtilDlgEx()
 
 }
 
-UtilDlgEx::~UtilDlgEx()
+TaxiDlg::~TaxiDlg()
 {
 
 }
 
-void UtilDlgEx::Start()
+void TaxiDlg::Start()
 {
 	{
 		BackGroundRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();
@@ -71,6 +72,13 @@ void UtilDlgEx::Start()
 	}
 
 	{
+		BtnNextRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();
+		BtnNextRenderer_->SetImage("UtilDlgEx.BtNext.normal.0.png");
+		BtnNextRenderer_->SetLocalPosition({ 80.0f, -46.0f });
+		BtnNextRenderer_->Off();
+	}
+
+	{
 		BtnYesCol_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
 			ColGroup::BUTTON));
 		BtnYesCol_->SetLocalScaling(BtnYesRenderer_->GetImageSize());
@@ -92,6 +100,14 @@ void UtilDlgEx::Start()
 	}
 
 	{
+		BtnNextCol_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
+			ColGroup::BUTTON));
+		BtnNextCol_->SetLocalScaling(BtnNextRenderer_->GetImageSize());
+		BtnNextCol_->SetLocalPosition(BtnNextRenderer_->GetLocalPosition());
+		BtnNextCol_->Off();
+	}
+
+	{
 		GrabEventCol_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
 			ColGroup::TAB));
 		GrabEventCol_->SetLocalScaling({ 519.0f, 155.0f });
@@ -99,46 +115,53 @@ void UtilDlgEx::Start()
 	}
 }
 
-void UtilDlgEx::Update(float _DeltaTime)
+void TaxiDlg::Update(float _DeltaTime)
 {
 	FontUpdate(_DeltaTime);
 
 	GetLevel()->PushUIDebugRender(BtnYesCol_->GetTransform(), CollisionType::Rect);
 	GetLevel()->PushUIDebugRender(BtnNoCol_->GetTransform(), CollisionType::Rect);
 	GetLevel()->PushUIDebugRender(BtnCloseCol_->GetTransform(), CollisionType::Rect);
+	GetLevel()->PushUIDebugRender(BtnNextCol_->GetTransform(), CollisionType::Rect);
 	GetLevel()->PushUIDebugRender(GrabEventCol_->GetTransform(), CollisionType::Rect);
 
 	BtnYesRenderer_->SetImage("UtilDlgEx.BtYes.normal.0.png");
 	BtnNoRenderer_->SetImage("UtilDlgEx.BtNo.normal.0.png");
 	BtnCloseRenderer_->SetImage("UtilDlgEx.BtClose.normal.0.png");
+	BtnNextRenderer_->SetImage("UtilDlgEx.BtNext.normal.0.png");
 
 #pragma region CollisionEvent
 
 	std::function<void(GameEngineCollision*)> Func =
-		std::bind(&UtilDlgEx::GrabEvent, this, std::placeholders::_1);
+		std::bind(&TaxiDlg::GrabEvent, this, std::placeholders::_1);
 
 	GrabEventCol_->Collision(CollisionType::Rect, CollisionType::Rect,
 		static_cast<int>(ColGroup::MOUSE), Func);
 
-	Func = std::bind(&UtilDlgEx::BtnYesEvent, this, std::placeholders::_1);
+	Func = std::bind(&TaxiDlg::BtnYesEvent, this, std::placeholders::_1);
 
 	BtnYesCol_->Collision(CollisionType::Rect, CollisionType::Rect,
 		static_cast<int>(ColGroup::MOUSE), Func);
 
-	Func = std::bind(&UtilDlgEx::BtnNoEvent, this, std::placeholders::_1);
+	Func = std::bind(&TaxiDlg::BtnNoEvent, this, std::placeholders::_1);
 
 	BtnNoCol_->Collision(CollisionType::Rect, CollisionType::Rect,
 		static_cast<int>(ColGroup::MOUSE), Func);
 
-	Func = std::bind(&UtilDlgEx::BtnCloseEvent, this, std::placeholders::_1);
+	Func = std::bind(&TaxiDlg::BtnCloseEvent, this, std::placeholders::_1);
 
 	BtnCloseCol_->Collision(CollisionType::Rect, CollisionType::Rect,
 		static_cast<int>(ColGroup::MOUSE), Func);
 
+	Func = std::bind(&TaxiDlg::BtnNextEvent, this, std::placeholders::_1);
+
+	BtnNextCol_->Collision(CollisionType::Rect, CollisionType::Rect,
+		static_cast<int>(ColGroup::MOUSE), Func);
+	
 #pragma endregion
 }
 
-void UtilDlgEx::BtnYesEvent(GameEngineCollision* _OtherCollision)
+void TaxiDlg::BtnYesEvent(GameEngineCollision* _OtherCollision)
 {
 	if (true == GameEngineInput::GetInst().Up("MLBtn"))
 	{
@@ -155,18 +178,20 @@ void UtilDlgEx::BtnYesEvent(GameEngineCollision* _OtherCollision)
 	BtnYesRenderer_->SetImage("UtilDlgEx.BtYes.mouseOver.0.png");
 }
 
-void UtilDlgEx::BtnNoEvent(GameEngineCollision* _OtherCollision)
+void TaxiDlg::BtnNoEvent(GameEngineCollision* _OtherCollision)
 {
 	if (true == GameEngineInput::GetInst().Up("MLBtn"))
 	{
-		Off();
-		GetTransform()->SetWorldPosition(float4::ZERO);
-		PrintScript_ = L"";
-		BackGroundRenderer_->TextSetting("µ¸¿ò", "", 13,
-			float4::BLACK, { -228.0f, 12.0f });
-		FontIndex_ = 0;
-		CurrentFontDelay_ = 0.0f;
-		EndScriptAni_ = false;
+		SetPage(2);
+
+		BtnYesRenderer_->Off();
+		BtnNoRenderer_->Off();
+		BtnYesCol_->Off();
+		BtnNoCol_->Off();
+
+		BtnNextRenderer_->On();
+		BtnNextCol_->On();
+
 		return;
 	}
 
@@ -179,18 +204,21 @@ void UtilDlgEx::BtnNoEvent(GameEngineCollision* _OtherCollision)
 	BtnNoRenderer_->SetImage("UtilDlgEx.BtNo.mouseOver.0.png");
 }
 
-void UtilDlgEx::BtnCloseEvent(GameEngineCollision* _OtherCollision)
+void TaxiDlg::BtnCloseEvent(GameEngineCollision* _OtherCollision)
 {
 	if (true == GameEngineInput::GetInst().Up("MLBtn"))
 	{
 		Off();
-		GetTransform()->SetWorldPosition(float4::ZERO);
-		PrintScript_ = L"";
-		BackGroundRenderer_->TextSetting("µ¸¿ò", "", 13,
-			float4::BLACK, { -228.0f, 12.0f });
-		FontIndex_ = 0;
-		CurrentFontDelay_ = 0.0f;
-		EndScriptAni_ = false;
+		SetPage(1);
+
+		BtnNextRenderer_->Off();
+		BtnNextCol_->Off();
+
+		BtnYesRenderer_->On();
+		BtnNoRenderer_->On();
+		BtnYesCol_->On();
+		BtnNoCol_->On();
+
 		return;
 	}
 
@@ -203,7 +231,34 @@ void UtilDlgEx::BtnCloseEvent(GameEngineCollision* _OtherCollision)
 	BtnCloseRenderer_->SetImage("UtilDlgEx.BtClose.mouseOver.0.png");
 }
 
-void UtilDlgEx::GrabEvent(GameEngineCollision* _OtherCollision)
+void TaxiDlg::BtnNextEvent(GameEngineCollision* _OtherCollision)
+{
+	if (true == GameEngineInput::GetInst().Up("MLBtn"))
+	{
+		Off();
+		SetPage(1);
+
+		BtnNextRenderer_->Off();
+		BtnNextCol_->Off();
+
+		BtnYesRenderer_->On();
+		BtnNoRenderer_->On();
+		BtnYesCol_->On();
+		BtnNoCol_->On();
+
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("MLBtn"))
+	{
+		BtnNextRenderer_->SetImage("UtilDlgEx.BtNext.pressed.0.png");
+		return;
+	}
+
+	BtnNextRenderer_->SetImage("UtilDlgEx.BtNext.mouseOver.0.png");
+}
+
+void TaxiDlg::GrabEvent(GameEngineCollision* _OtherCollision)
 {
 	if (true == GameEngineInput::GetInst().Down("MLBtn") &&
 		false == Grabbed_)
@@ -223,7 +278,7 @@ void UtilDlgEx::GrabEvent(GameEngineCollision* _OtherCollision)
 	}
 }
 
-void UtilDlgEx::FontUpdate(float _DeltaTime)
+void TaxiDlg::FontUpdate(float _DeltaTime)
 {
 	if (Scripts_.empty() ||
 		true == EndScriptAni_)
@@ -267,7 +322,7 @@ void UtilDlgEx::FontUpdate(float _DeltaTime)
 	
 }
 
-void UtilDlgEx::SetPage(int _Page)
+void TaxiDlg::SetPage(int _Page)
 {
 	GetTransform()->SetWorldPosition(float4::ZERO);
 	PrintScript_ = L"";

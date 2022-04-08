@@ -125,11 +125,11 @@
     <ClCompile Include="Portal.cpp">
       <Filter>Actor\Portal</Filter>
     </ClCompile>
-    <ClCompile Include="UtilDlgEx.cpp">
-      <Filter>Actor\UI\UtilDlgEx</Filter>
-    </ClCompile>
     <ClCompile Include="LithHarborTaxi.cpp">
-      <Filter>Actor\NPC</Filter>
+      <Filter>Actor\NPC\Taxi</Filter>
+    </ClCompile>
+    <ClCompile Include="TaxiDlg.cpp">
+      <Filter>Actor\NPC\Taxi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -214,8 +214,8 @@
     <Filter Include="Actor\Portal">
       <UniqueIdentifier>{3b8c0cb4-af83-4767-b413-14afc69d7ef0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\UI\UtilDlgEx">
-      <UniqueIdentifier>{ca693987-ef18-41cd-a9d9-4bedb0752214}</UniqueIdentifier>
+    <Filter Include="Actor\NPC\Taxi">
+      <UniqueIdentifier>{c9211b61-4d60-4d09-9425-3db7ab9f8635}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -336,11 +336,11 @@
     <ClInclude Include="Portal.h">
       <Filter>Actor\Portal</Filter>
     </ClInclude>
-    <ClInclude Include="UtilDlgEx.h">
-      <Filter>Actor\UI\UtilDlgEx</Filter>
-    </ClInclude>
     <ClInclude Include="LithHarborTaxi.h">
-      <Filter>Actor\NPC</Filter>
+      <Filter>Actor\NPC\Taxi</Filter>
+    </ClInclude>
+    <ClInclude Include="TaxiDlg.h">
+      <Filter>Actor\NPC\Taxi</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
