@@ -15,6 +15,11 @@ public:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
+	void SetScript(const std::string& _Script)
+	{
+		Script_ = _Script;
+	}
+
 protected:
 	UtilDlgEx(const UtilDlgEx& _other) = delete; 
 	UtilDlgEx(UtilDlgEx&& _other) noexcept = delete;
@@ -40,5 +45,13 @@ private:
 
 	bool Grabbed_;
 	GameEngineCollision* GrabEventCol_;
+
+	int FontIndex_;
+	float FontDelay_;
+	float CurFontDelay_;
+
+	std::string Script_;
+	std::string PrintScript_;
+	bool EndScriptAni_;
 };
 

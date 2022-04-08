@@ -19,6 +19,11 @@ public:
 	void TextSetting(const std::string& _FontName, const std::string& _PrintText, 
 		float _FontSize, float4 _Color = float4::RED, float4 _Pivot = float4::ZERO);
 
+	void SetTextFlag(int _Flag)
+	{
+		TextFlag_ = _Flag;
+	}
+
 protected:
 	GameEngineUIRenderer(const GameEngineUIRenderer& _other) = delete; 
 	GameEngineUIRenderer(GameEngineUIRenderer&& _other) noexcept = delete;
@@ -33,6 +38,7 @@ protected:
 
 	static int UIRendererCount_;
 	static GameEngineRenderTarget* FontTarget_;
+	int TextFlag_;
 
 private:
 	void Start() override;

@@ -16,6 +16,7 @@ GameEngineUIRenderer::GameEngineUIRenderer()
 	, FontSize_(20.0f)
 	, FontPivot_(float4::ZERO)
 	, Color_(float4::BLACK)
+	, TextFlag_(FW1_CENTER | FW1_VCENTER)
 {
 	++UIRendererCount_;
 }
@@ -81,7 +82,8 @@ void GameEngineUIRenderer::Render()
 	FontTarget_->Setting();
 
 	GameEngineFont* Font = GameEngineFontManager::GetInst().Find(FontName_);
-	Font->DrawFont(PrintText_, FontSize_, ScreenSize + UIPos.InvertY() + FontPivot_, Color_, FW1_CENTER | FW1_VCENTER);
+	Font->DrawFont(PrintText_, FontSize_, ScreenSize + UIPos.InvertY()
+		+ FontPivot_, Color_, TextFlag_);
 	GameEngineDevice::ShaderReset();
 
 	RenderTarget->Merge(FontTarget_);

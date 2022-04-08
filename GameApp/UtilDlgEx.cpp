@@ -16,6 +16,12 @@ UtilDlgEx::UtilDlgEx()
 	, BtnCloseCol_(nullptr)
 	, Grabbed_(false)
 	, GrabEventCol_(nullptr)
+	, FontIndex_(0)
+	, FontDelay_(0.025f)
+	, CurFontDelay_(0.0f)
+	, Script_("")
+	, PrintScript_("")
+	, EndScriptAni_(false)
 {
 
 }
@@ -30,8 +36,8 @@ void UtilDlgEx::Start()
 	{
 		BackGroundRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();
 		BackGroundRenderer_->SetImage("UtilDlgTaxiBg.png");
-		BackGroundRenderer_->TextSetting("돋움", "페리온으로 이동하시겠습니까?", 13, 
-			float4::BLACK, { -135.0f, 12.0f });
+		/*BackGroundRenderer_->TextSetting("돋움", "페리온으로 이동하시겠습니까?", 13, 
+			float4::BLACK, { -135.0f, 12.0f });*/
 	}
 
 	{
@@ -95,6 +101,30 @@ void UtilDlgEx::Start()
 
 void UtilDlgEx::Update(float _DeltaTime)
 {
+	if ("" != Script_ &&
+		false == EndScriptAni_)
+	{
+		CurFontDelay_ += _DeltaTime;
+
+		if (FontDelay_ < CurFontDelay_)
+		{
+			CurFontDelay_ = 0.0f;
+
+			PrintScript_.push_back(Script_.at(FontIndex_));
+
+			BackGroundRenderer_->TextSetting("돋움", PrintScript_, 13,
+				float4::BLACK, { -228.0f, 12.0f });
+			BackGroundRenderer_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
+
+			FontIndex_ += 1;
+
+			if (FontIndex_ >= Script_.size())
+			{
+				EndScriptAni_ = true;
+			}
+		}
+	}
+
 	GetLevel()->PushUIDebugRender(BtnYesCol_->GetTransform(), CollisionType::Rect);
 	GetLevel()->PushUIDebugRender(BtnNoCol_->GetTransform(), CollisionType::Rect);
 	GetLevel()->PushUIDebugRender(BtnCloseCol_->GetTransform(), CollisionType::Rect);
