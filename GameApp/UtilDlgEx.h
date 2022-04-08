@@ -32,6 +32,8 @@ private:
 	void BtnCloseEvent(GameEngineCollision* _OtherCollision);
 	void GrabEvent(GameEngineCollision* _OtherCollision);
 
+	void FontUpdate(float _DeltaTime);
+
 	GameEngineUIRenderer* BackGroundRenderer_;
 	GameEngineUIRenderer* NPCRenderer_;
 
@@ -53,5 +55,7 @@ private:
 	std::wstring Script_;
 	std::wstring PrintScript_;
 	bool EndScriptAni_;
+
+	int Page_;
 };
 

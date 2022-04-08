@@ -22,6 +22,7 @@ UtilDlgEx::UtilDlgEx()
 	, Script_(L"")
 	, PrintScript_(L"")
 	, EndScriptAni_(false)
+	, Page_(1)
 {
 
 }
@@ -99,33 +100,7 @@ void UtilDlgEx::Start()
 
 void UtilDlgEx::Update(float _DeltaTime)
 {
-	if (L"" != Script_ &&
-		false == EndScriptAni_)
-	{
-		CurFontDelay_ += _DeltaTime;
-
-		if (FontDelay_ < CurFontDelay_)
-		{
-			CurFontDelay_ = 0.0f;
-
-			PrintScript_.push_back(Script_.at(FontIndex_));
-
-			std::string TempStr = "";
-
-			GameEngineString::UniCodeToAnsi(PrintScript_, TempStr);
-
-			BackGroundRenderer_->TextSetting("µ¸¿ò", TempStr, 13,
-				float4::BLACK, { -228.0f, 12.0f });
-			BackGroundRenderer_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
-
-			FontIndex_ += 1;
-
-			if (FontIndex_ >= Script_.size())
-			{
-				EndScriptAni_ = true;
-			}
-		}
-	}
+	FontUpdate(_DeltaTime);
 
 	GetLevel()->PushUIDebugRender(BtnYesCol_->GetTransform(), CollisionType::Rect);
 	GetLevel()->PushUIDebugRender(BtnNoCol_->GetTransform(), CollisionType::Rect);
@@ -245,4 +220,41 @@ void UtilDlgEx::GrabEvent(GameEngineCollision* _OtherCollision)
 		GlobalValue::CurrentMouse->GetTransform()->DetachChildTransform(GetTransform());
 		Grabbed_ = false;
 	}
+}
+
+void UtilDlgEx::FontUpdate(float _DeltaTime)
+{
+	if (L"" == Script_ ||
+		true == EndScriptAni_)
+	{
+		return;
+	}
+	
+	CurFontDelay_ += _DeltaTime;
+
+	if (FontDelay_ >= CurFontDelay_)
+	{
+		return;
+	}
+
+	CurFontDelay_ = 0.0f;
+
+	PrintScript_.push_back(Script_.at(FontIndex_));
+
+	std::string TempStr = "";
+
+	GameEngineString::UniCodeToAnsi(PrintScript_, TempStr);
+
+	BackGroundRenderer_->TextSetting("µ¸¿ò", TempStr, 13,
+		float4::BLACK, { -228.0f, 12.0f });
+
+	BackGroundRenderer_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
+
+	FontIndex_ += 1;
+
+	if (FontIndex_ >= Script_.size())
+	{
+		EndScriptAni_ = true;
+	}
+	
 }
