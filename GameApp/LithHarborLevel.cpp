@@ -90,7 +90,8 @@ void LithHarborLevel::LevelStart()
 
 	{
 		TaxiDlg_ = CreateActor<UtilDlgEx>();
-		TaxiDlg_->SetScript(L"페리온으로 이동하시겠습니까?");
+		TaxiDlg_->PushScript(L"페리온으로 이동하시겠습니까?");
+		TaxiDlg_->PushScript(L"2번째 페이지 테스트");
 		TaxiDlg_->Off();
 	}
 

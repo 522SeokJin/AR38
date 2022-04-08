@@ -1,6 +1,12 @@
 #pragma once
 #include "GameEngine/GameEngineActor.h"
 
+enum class DlgType
+{
+	YESNO,
+	OK,
+};
+
 // Ό³Έν : 
 class GameEngineUIRenderer;
 class GameEngineCollision;
@@ -15,9 +21,10 @@ public:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
-	void SetScript(const std::wstring& _Script)
+	void PushScript(const std::wstring& _Script)
 	{
-		Script_ = _Script;
+		Scripts_.push_back(_Script);
+		++MaxPage_;
 	}
 
 protected:
@@ -33,6 +40,10 @@ private:
 	void GrabEvent(GameEngineCollision* _OtherCollision);
 
 	void FontUpdate(float _DeltaTime);
+
+	void SetPage(int _Page);
+
+	DlgType Type_;
 
 	GameEngineUIRenderer* BackGroundRenderer_;
 	GameEngineUIRenderer* NPCRenderer_;
@@ -50,12 +61,13 @@ private:
 
 	int FontIndex_;
 	float FontDelay_;
-	float CurFontDelay_;
+	float CurrentFontDelay_;
 
-	std::wstring Script_;
+	std::vector<std::wstring> Scripts_;
 	std::wstring PrintScript_;
 	bool EndScriptAni_;
 
-	int Page_;
+	int CurrentPage_;
+	int MaxPage_;
 };
 

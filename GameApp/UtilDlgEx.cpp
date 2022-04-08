@@ -6,7 +6,8 @@
 #include <GameEngine/GameEngineCore.h>
 
 UtilDlgEx::UtilDlgEx()
-	: BackGroundRenderer_(nullptr)
+	: Type_(DlgType::YESNO)
+	, BackGroundRenderer_(nullptr)
 	, NPCRenderer_(nullptr)
 	, BtnYesRenderer_(nullptr)
 	, BtnNoRenderer_(nullptr)
@@ -18,11 +19,11 @@ UtilDlgEx::UtilDlgEx()
 	, GrabEventCol_(nullptr)
 	, FontIndex_(0)
 	, FontDelay_(0.03f)
-	, CurFontDelay_(0.0f)
-	, Script_(L"")
+	, CurrentFontDelay_(0.0f)
 	, PrintScript_(L"")
 	, EndScriptAni_(false)
-	, Page_(1)
+	, CurrentPage_(1)
+	, MaxPage_(0)
 {
 
 }
@@ -164,7 +165,7 @@ void UtilDlgEx::BtnNoEvent(GameEngineCollision* _OtherCollision)
 		BackGroundRenderer_->TextSetting("돋움", "", 13,
 			float4::BLACK, { -228.0f, 12.0f });
 		FontIndex_ = 0;
-		CurFontDelay_ = 0.0f;
+		CurrentFontDelay_ = 0.0f;
 		EndScriptAni_ = false;
 		return;
 	}
@@ -188,7 +189,7 @@ void UtilDlgEx::BtnCloseEvent(GameEngineCollision* _OtherCollision)
 		BackGroundRenderer_->TextSetting("돋움", "", 13,
 			float4::BLACK, { -228.0f, 12.0f });
 		FontIndex_ = 0;
-		CurFontDelay_ = 0.0f;
+		CurrentFontDelay_ = 0.0f;
 		EndScriptAni_ = false;
 		return;
 	}
@@ -224,22 +225,29 @@ void UtilDlgEx::GrabEvent(GameEngineCollision* _OtherCollision)
 
 void UtilDlgEx::FontUpdate(float _DeltaTime)
 {
-	if (L"" == Script_ ||
+	if (Scripts_.empty() ||
 		true == EndScriptAni_)
 	{
 		return;
 	}
 	
-	CurFontDelay_ += _DeltaTime;
+	CurrentFontDelay_ += _DeltaTime;
 
-	if (FontDelay_ >= CurFontDelay_)
+	if (FontDelay_ >= CurrentFontDelay_)
 	{
 		return;
 	}
 
-	CurFontDelay_ = 0.0f;
+	if (CurrentPage_ > MaxPage_)
+	{
+		GameEngineDebug::MsgBoxError("if (CurrentPage_ > MaxPage_)");
+	}
 
-	PrintScript_.push_back(Script_.at(FontIndex_));
+	CurrentFontDelay_ = 0.0f;
+
+	int PageIndex = CurrentPage_ - 1;
+
+	PrintScript_.push_back(Scripts_[PageIndex].at(FontIndex_));
 
 	std::string TempStr = "";
 
@@ -252,9 +260,27 @@ void UtilDlgEx::FontUpdate(float _DeltaTime)
 
 	FontIndex_ += 1;
 
-	if (FontIndex_ >= Script_.size())
+	if (FontIndex_ >= Scripts_[PageIndex].size())
 	{
 		EndScriptAni_ = true;
 	}
 	
+}
+
+void UtilDlgEx::SetPage(int _Page)
+{
+	GetTransform()->SetWorldPosition(float4::ZERO);
+	PrintScript_ = L"";
+	BackGroundRenderer_->TextSetting("돋움", "", 13,
+		float4::BLACK, { -228.0f, 12.0f });
+	FontIndex_ = 0;
+	CurrentFontDelay_ = 0.0f;
+	EndScriptAni_ = false;
+
+	if (MaxPage_ < _Page)
+	{
+		GameEngineDebug::MsgBoxError("존재하지 않는 페이지입니다.");
+	}
+
+	CurrentPage_ = _Page;
 }
