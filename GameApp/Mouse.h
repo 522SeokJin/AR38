@@ -18,6 +18,9 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
-	void ChangeAnimationEvent(GameEngineCollision* _OtherCollision);
+	void ButtonEvent(GameEngineCollision* _OtherCollision);
+	void NPCEvent(GameEngineCollision* _OtherCollision);
+
+	GameEngineCollision* Collision_;
 };
 

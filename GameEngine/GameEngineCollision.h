@@ -32,6 +32,9 @@ public:
 	void Collision(CollisionType _ThisType, CollisionType _OtherType, int _OtherGroup,
 		std::function<void(GameEngineCollision*)> _CallBack);
 
+	void UICollision(CollisionType _ThisType, CollisionType _OtherType, int _OtherUIGroup,
+		std::function<void(GameEngineCollision*)> _CallBack);
+
 	bool IsCollision(CollisionType _ThisType, CollisionType _OtherType, int _OtherGroup);
 
 	void SphereToSphereCollision(int _OtherGroup, 

@@ -88,11 +88,12 @@ public:
 	void PushDebugRender(GameEngineTransform* _Transform, CollisionType _Type);
 	void PushUIDebugRender(GameEngineTransform* _Transform, CollisionType _Type);
 
-private:
 	inline std::list<GameEngineCollision*>& GetCollisionGroup(int _Group)
 	{
 		return CollisionList_[_Group];
 	}
+
+private:
 
 	void ChangeCollisionGroup(int _Group, GameEngineCollision* _Collision);
 

@@ -233,7 +233,6 @@
     <ClInclude Include="imstb_rectpack.h" />
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
-    <ClInclude Include="magic_enum.hpp" />
     <ClInclude Include="MouseActor.h">
       <SubType>
       </SubType>

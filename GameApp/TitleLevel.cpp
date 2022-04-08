@@ -79,5 +79,7 @@ void TitleLevel::LevelChangeEndEvent()
 
 void TitleLevel::LevelChangeStartEvent()
 {
+	GlobalValue::CurrentMouse = Cursor_;
+
 	//GameEngineSoundManager::GetInst().PlaySoundOneShot("Title.mp3");
 }

@@ -20,7 +20,7 @@ public:
 
 	GameEngineCollision* GetCollision()
 	{
-		return Collision_;
+		return UICollision_;
 	}
 
 	void WindowCursorOn();
@@ -37,7 +37,7 @@ protected:
 
 private:
 	GameEngineUIRenderer* UIRenderer_;
-	GameEngineCollision* Collision_;
+	GameEngineCollision* UICollision_;
 
 };
 

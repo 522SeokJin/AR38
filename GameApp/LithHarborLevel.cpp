@@ -15,6 +15,7 @@
 #include "Mouse.h"
 #include "Player.h"
 
+#include "LithHarborTaxi.h"
 #include "UtilDlgEx.h"
 
 LithHarborLevel::LithHarborLevel()
@@ -22,6 +23,8 @@ LithHarborLevel::LithHarborLevel()
 	, Player_(nullptr)
 	, RenderWindow_(nullptr)
 	, Inventory_(nullptr)
+	, TaxiDlg_(nullptr)
+	, Taxi_(nullptr)
 {
 
 }
@@ -84,9 +87,16 @@ void LithHarborLevel::LevelStart()
 		Inventory_->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
 		Inventory_->Off();
 	}
+
 	{
-		Dlg_ = CreateActor<UtilDlgEx>();
-		//Dlg_->Off();
+		TaxiDlg_ = CreateActor<UtilDlgEx>();
+		TaxiDlg_->Off();
+	}
+
+	{
+		Taxi_ = CreateActor<LithHarborTaxi>();
+		Taxi_->GetTransform()->SetWorldPosition({ 3064.5f, -626.0f });
+		Taxi_->SetDlg(TaxiDlg_);
 	}
 }
 

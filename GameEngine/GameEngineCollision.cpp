@@ -2,6 +2,7 @@
 #include "GameEngineCollision.h"
 #include "GameEngineLevel.h"
 #include "GameEngineTransform.h"
+#include "CameraActor.h"
 
 std::function<bool(GameEngineTransform*, GameEngineTransform*)>
 GameEngineCollision::CollisionCheckFunction[static_cast<int>(CollisionType::MAX)]
@@ -101,6 +102,48 @@ void GameEngineCollision::Collision(CollisionType _ThisType, CollisionType _Othe
 
 		_CallBack(OtherCollision);
 	}
+}
+
+void GameEngineCollision::UICollision(CollisionType _ThisType, CollisionType _OtherType,
+	int _OtherUIGroup, std::function<void(GameEngineCollision*)> _CallBack)
+{
+	std::list<GameEngineCollision*>& Group = GetLevel()->GetCollisionGroup(_OtherUIGroup);
+
+	GameEngineTransform* ConvertTransform = new GameEngineTransform();
+
+	for (GameEngineCollision* OtherCollision : Group)
+	{
+		if (false == OtherCollision->IsUpdate())
+		{
+			continue;
+		}
+
+		auto& CheckFunction = CollisionCheckFunction[static_cast<int>(_ThisType)]
+			[static_cast<int>(_OtherType)];
+
+		if (nullptr == CheckFunction)
+		{
+			GameEngineDebug::MsgBoxError("아직 구현하지 않은 타입간에 충돌입니다.");
+		}
+
+		float4 ConvertToUIPosition = GetActor()->GetTransform()->GetLocalPosition();
+		float4 OtherUIPosition = GetLevel()->GetMainCameraActor()->GetTransform()->GetLocalPosition();
+
+		float4 Result = ConvertToUIPosition - OtherUIPosition;
+
+		ConvertTransform->SetWorldPosition(Result);
+		ConvertTransform->SetWorldScaling(GetTransform()->GetWorldScaling());
+
+		if (false ==
+			CheckFunction(ConvertTransform, OtherCollision->GetTransform()))
+		{
+			continue;
+		}
+
+		_CallBack(OtherCollision);
+	}
+
+	delete ConvertTransform;
 }
 
 bool GameEngineCollision::IsCollision(CollisionType _ThisType, CollisionType _OtherType, int _OtherGroup)

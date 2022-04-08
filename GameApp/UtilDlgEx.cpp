@@ -3,6 +3,7 @@
 #include <GameEngine/GameEngineUIRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 #include "Mouse.h"
+#include <GameEngine/GameEngineCore.h>
 
 UtilDlgEx::UtilDlgEx()
 	: BackGroundRenderer_(nullptr)
@@ -99,6 +100,8 @@ void UtilDlgEx::Update(float _DeltaTime)
 	BtnNoRenderer_->SetImage("UtilDlgEx.BtNo.normal.0.png");
 	BtnCloseRenderer_->SetImage("UtilDlgEx.BtClose.normal.0.png");
 
+#pragma region CollisionEvent
+
 	std::function<void(GameEngineCollision*)> Func =
 		std::bind(&UtilDlgEx::GrabEvent, this, std::placeholders::_1);
 
@@ -119,10 +122,20 @@ void UtilDlgEx::Update(float _DeltaTime)
 
 	BtnCloseCol_->Collision(CollisionType::Rect, CollisionType::Rect,
 		static_cast<int>(ColGroup::MOUSE), Func);
+
+#pragma endregion
+
+	
 }
 
 void UtilDlgEx::BtnYesEvent(GameEngineCollision* _OtherCollision)
 {
+	if (true == GameEngineInput::GetInst().Up("MLBtn"))
+	{
+		GameEngineCore::LevelChange("Perion");
+		return;
+	}
+
 	if (true == GameEngineInput::GetInst().Press("MLBtn"))
 	{
 		BtnYesRenderer_->SetImage("UtilDlgEx.BtYes.pressed.0.png");
@@ -134,6 +147,13 @@ void UtilDlgEx::BtnYesEvent(GameEngineCollision* _OtherCollision)
 
 void UtilDlgEx::BtnNoEvent(GameEngineCollision* _OtherCollision)
 {
+	if (true == GameEngineInput::GetInst().Up("MLBtn"))
+	{
+		Off();
+		GetTransform()->SetWorldPosition(float4::ZERO);
+		return;
+	}
+
 	if (true == GameEngineInput::GetInst().Press("MLBtn"))
 	{
 		BtnNoRenderer_->SetImage("UtilDlgEx.BtNo.pressed.0.png");
@@ -145,6 +165,13 @@ void UtilDlgEx::BtnNoEvent(GameEngineCollision* _OtherCollision)
 
 void UtilDlgEx::BtnCloseEvent(GameEngineCollision* _OtherCollision)
 {
+	if (true == GameEngineInput::GetInst().Up("MLBtn"))
+	{
+		Off();
+		GetTransform()->SetWorldPosition(float4::ZERO);
+		return;
+	}
+
 	if (true == GameEngineInput::GetInst().Press("MLBtn"))
 	{
 		BtnCloseRenderer_->SetImage("UtilDlgEx.BtClose.pressed.0.png");

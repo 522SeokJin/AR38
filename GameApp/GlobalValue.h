@@ -7,6 +7,7 @@ enum class ColGroup	// Collision Group Number
 	BUTTON,
 	TAB,
 	PORTAL,
+	NPC
 };
 
 enum class DepthOrder

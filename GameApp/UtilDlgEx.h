@@ -6,6 +6,8 @@ class GameEngineUIRenderer;
 class GameEngineCollision;
 class UtilDlgEx : public GameEngineActor
 {
+	friend class GameEngineLevel;
+
 public:
 	UtilDlgEx();
 	~UtilDlgEx();

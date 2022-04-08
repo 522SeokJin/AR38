@@ -128,6 +128,9 @@
     <ClCompile Include="UtilDlgEx.cpp">
       <Filter>Actor\UI\UtilDlgEx</Filter>
     </ClCompile>
+    <ClCompile Include="LithHarborTaxi.cpp">
+      <Filter>Actor\NPC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -335,6 +338,9 @@
     </ClInclude>
     <ClInclude Include="UtilDlgEx.h">
       <Filter>Actor\UI\UtilDlgEx</Filter>
+    </ClInclude>
+    <ClInclude Include="LithHarborTaxi.h">
+      <Filter>Actor\NPC</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

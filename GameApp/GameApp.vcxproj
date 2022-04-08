@@ -216,6 +216,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="LithHarborTaxi.cpp" />
     <ClCompile Include="Map.cpp">
       <SubType>
       </SubType>
@@ -332,6 +333,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="LithHarborTaxi.h" />
     <ClInclude Include="Map.h">
       <SubType>
       </SubType>

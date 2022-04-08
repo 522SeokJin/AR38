@@ -4,9 +4,9 @@
 #include <GameEngine/GameEngineCollision.h>
 
 Mouse::Mouse()
+	: Collision_(nullptr)
 {
 
-	
 }
 
 Mouse::~Mouse()
@@ -31,6 +31,11 @@ void Mouse::Start()
 	GetUIRenderer()->SetChangeAnimation("Normal");
 
 	GetCollision()->SetCollisionGroup(static_cast<int>(ColGroup::MOUSE));
+
+	Collision_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
+		ColGroup::MOUSE));
+
+	Collision_->SetWorldScaling(GetCollision()->GetWorldScaling());
 }
 
 void Mouse::Update(float _DeltaTime)
@@ -60,13 +65,36 @@ void Mouse::Update(float _DeltaTime)
 	}
 
 	std::function<void(GameEngineCollision*)> Func =
-		std::bind(&Mouse::ChangeAnimationEvent, this, std::placeholders::_1);
+		std::bind(&Mouse::ButtonEvent, this, std::placeholders::_1);
 
 	GetCollision()->Collision(CollisionType::Rect, CollisionType::Rect,
 		static_cast<int>(ColGroup::BUTTON), Func);
+
+
+	float4 ConvertPos = GetTransform()->GetLocalPosition();
+	float4 OtherPos = GetLevel()->GetMainCameraActor()->GetTransform()->GetLocalPosition();
+
+	float4 Result = ConvertPos + OtherPos;
+
+	Collision_->SetWorldPosition(Result);
+
+	Func = std::bind(&Mouse::NPCEvent, this, std::placeholders::_1);
+
+	Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
+		static_cast<int>(ColGroup::NPC), Func);
 }
 
-void Mouse::ChangeAnimationEvent(GameEngineCollision* _OtherCollision)
+void Mouse::ButtonEvent(GameEngineCollision* _OtherCollision)
+{
+	if (false == GameEngineInput::GetInst().Press("MLBtn") &&
+		"ClickHovered" != GetUIRenderer()->GetCurrentAnimationName())
+	{
+		GetUIRenderer()->SetChangeAnimation("ClickHovered");
+		return;
+	}
+}
+
+void Mouse::NPCEvent(GameEngineCollision* _OtherCollision)
 {
 	if (false == GameEngineInput::GetInst().Press("MLBtn") &&
 		"ClickHovered" != GetUIRenderer()->GetCurrentAnimationName())

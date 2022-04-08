@@ -31,7 +31,8 @@ void TitleUI::Start()
 	}
 
 	{
-		LoginButton_ = CreateTransformComponent<GameEngineCollision>(1);
+		LoginButton_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
+			ColGroup::BUTTON));
 		LoginButton_->SetLocalScaling(LoginRenderer_->GetImageSize());
 		LoginButton_->SetLocalPosition({ 0.0f, -120.0f });
 	}
