@@ -15,11 +15,16 @@
 #include "QuickSlotKeyUI.h"
 #include "InventoryUI.h"
 
+#include "JobsNPC.h"
+#include "JobsNPC_Dlg.h"
+
 PerionRoomLevel::PerionRoomLevel()
 	: Cursor_(nullptr)
 	, Player_(nullptr)
 	, RenderWindow_(nullptr)
 	, Inventory_(nullptr)
+	, JobsNPCDlg_(nullptr)
+	, JobsNPC_(nullptr)
 {
 
 }
@@ -81,6 +86,21 @@ void PerionRoomLevel::LevelStart()
 		Player_ = CreateActor<Player>();
 		Player_->GetTransform()->SetWorldPosition({ 649.0f, -390.0f });
 		Player_->Off();
+	}
+
+	{
+		JobsNPCDlg_ = CreateActor<JobsNPC_Dlg>();
+		JobsNPCDlg_->PushScript(L"자네... 전사가 되고 싶어서 찾아왔는가? 흐음.. 그러기 \n위해선 레벨은 10 이상이어야 한다네.. 어디, 자네는 어\n떤지 한번 볼까?");
+		JobsNPCDlg_->PushScript(L"호오. 자네라면 충분히 전사가 될 자질이 있어 보이는군. \n정말 전사로서의 삶을 살아가겠나? 정말 전사가 되고싶\n은가?");
+		JobsNPCDlg_->PushScript(L"좋네. 자네는 전사가 되었네. 내 능력치를 조금 나누어 \n주겠네. 그리고 SP를 1 주었으니, 원하는 스킬에 찍어\n보도록 하게.");
+		JobsNPCDlg_->PushScript(L"그래, 한번 더 생각해보게나.");
+		JobsNPCDlg_->Off();
+	}
+
+	{
+		JobsNPC_ = CreateActor<JobsNPC>();
+		JobsNPC_->GetTransform()->SetWorldPosition({ 91.0f, -272.0f });
+		JobsNPC_->SetDlg(JobsNPCDlg_);
 	}
 }
 

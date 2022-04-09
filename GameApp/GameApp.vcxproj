@@ -212,6 +212,8 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="InventoryUI_CreateRenderer.cpp" />
+    <ClCompile Include="JobsNPC.cpp" />
+    <ClCompile Include="JobsNPC_Dlg.cpp" />
     <ClCompile Include="LithHarbor.cpp">
       <SubType>
       </SubType>
@@ -329,6 +331,8 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="JobsNPC.h" />
+    <ClInclude Include="JobsNPC_Dlg.h" />
     <ClInclude Include="LithHarbor.h">
       <SubType>
       </SubType>

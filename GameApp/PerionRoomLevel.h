@@ -6,6 +6,8 @@ class Mouse;
 class Player;
 class GameEngineRenderWindow;
 class InventoryUI;
+class JobsNPC_Dlg;
+class JobsNPC;
 class PerionRoomLevel : public GameEngineLevel
 {
 public:
@@ -28,5 +30,8 @@ private:
 	Player* Player_;
 	GameEngineRenderWindow* RenderWindow_;
 	InventoryUI* Inventory_;
+
+	JobsNPC_Dlg* JobsNPCDlg_;
+	JobsNPC* JobsNPC_;
 };
 

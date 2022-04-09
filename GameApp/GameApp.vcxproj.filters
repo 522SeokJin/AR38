@@ -131,6 +131,12 @@
     <ClCompile Include="TaxiDlg.cpp">
       <Filter>Actor\NPC\Taxi</Filter>
     </ClCompile>
+    <ClCompile Include="JobsNPC.cpp">
+      <Filter>Actor\NPC\JobsNPC</Filter>
+    </ClCompile>
+    <ClCompile Include="JobsNPC_Dlg.cpp">
+      <Filter>Actor\NPC\JobsNPC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -216,6 +222,9 @@
     </Filter>
     <Filter Include="Actor\NPC\Taxi">
       <UniqueIdentifier>{c9211b61-4d60-4d09-9425-3db7ab9f8635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\NPC\JobsNPC">
+      <UniqueIdentifier>{558437a8-3fed-49cf-a969-32cb5cf38ba5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +350,12 @@
     </ClInclude>
     <ClInclude Include="TaxiDlg.h">
       <Filter>Actor\NPC\Taxi</Filter>
+    </ClInclude>
+    <ClInclude Include="JobsNPC.h">
+      <Filter>Actor\NPC\JobsNPC</Filter>
+    </ClInclude>
+    <ClInclude Include="JobsNPC_Dlg.h">
+      <Filter>Actor\NPC\JobsNPC</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
