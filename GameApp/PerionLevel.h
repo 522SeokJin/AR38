@@ -6,6 +6,7 @@ class Mouse;
 class Player;
 class GameEngineRenderWindow;
 class InventoryUI;
+class StatusUI;
 class PerionLevel : public GameEngineLevel
 {
 public:
@@ -28,5 +29,6 @@ private:
 	Player* Player_;
 	GameEngineRenderWindow* RenderWindow_;
 	InventoryUI* Inventory_;
+	StatusUI* Status_;
 };
 

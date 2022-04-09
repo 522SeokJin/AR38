@@ -8,6 +8,7 @@ class GameEngineRenderWindow;
 class InventoryUI;
 class TaxiDlg;
 class LithHarborTaxi;
+class StatusUI;
 class LithHarborLevel : public GameEngineLevel
 {
 public:
@@ -30,6 +31,8 @@ private:
 	Player* Player_;
 	GameEngineRenderWindow* RenderWindow_;
 	InventoryUI* Inventory_;
+	StatusUI* Status_;
+
 	TaxiDlg* TaxiDlg_;
 	LithHarborTaxi* Taxi_;
 };

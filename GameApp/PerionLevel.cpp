@@ -22,6 +22,7 @@ PerionLevel::PerionLevel()
 	, Player_(nullptr)
 	, RenderWindow_(nullptr)
 	, Inventory_(nullptr)
+	, Status_(nullptr)
 {
 
 }
@@ -44,12 +45,14 @@ void PerionLevel::LevelStart()
 	}
 
 	{
-		StatusUI* Status = CreateActor<StatusUI>();
-		Status->GetTransform()->SetWorldPosition({ 5.0f, 45.0f - GameEngineWindow::GetInst().GetSize().hy() });
+		Status_ = CreateActor<StatusUI>();
+		Status_->GetTransform()->SetWorldPosition({ 5.0f, 45.0f - GameEngineWindow::GetInst().GetSize().hy() });
+	}
 
+	{
 		ExpBarUI* ExpBar = CreateActor<ExpBarUI>();
 		ExpBar->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
-		ExpBar->LinkStatus(Status);
+		ExpBar->LinkStatus(Status_);
 	}
 
 	{
@@ -146,6 +149,7 @@ void PerionLevel::LevelChangeStartEvent()
 {
 	GlobalValue::CurrentPlayer = Player_;
 	GlobalValue::CurrentMouse = Cursor_;
+	GlobalValue::CurrentStatusUI = Status_;
 
 	Player_->On();
 }

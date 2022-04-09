@@ -5,6 +5,7 @@
 #include "Mouse.h"
 #include <GameEngine/GameEngineCore.h>
 #include "Player.h"
+#include "StatusUI.h"
 
 JobsNPC_Dlg::JobsNPC_Dlg()
 	: BackGroundRenderer_(nullptr)
@@ -204,6 +205,7 @@ void JobsNPC_Dlg::BtnYesEvent(GameEngineCollision* _OtherCollision)
 		BtnOKCol_->On();
 
 		GlobalValue::CurrentPlayer->JobsChanged();
+		GlobalValue::CurrentStatusUI->SetNickName("ภüป็");
 
 		return;
 	}

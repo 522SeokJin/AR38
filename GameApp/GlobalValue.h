@@ -23,11 +23,13 @@ enum class DepthOrder
 // Ό³Έν : 
 class Player;
 class Mouse;
+class StatusUI;
 class GlobalValue
 {
 public:
 	static Player* CurrentPlayer;
 	static Mouse* CurrentMouse;
+	static StatusUI* CurrentStatusUI;
 
 protected:
 	GlobalValue(const GlobalValue& _other) = delete; 

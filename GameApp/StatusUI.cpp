@@ -8,6 +8,7 @@ StatusUI::StatusUI()
 	, MPBarValue_({ 1.0f, 2, 0, 0 })
 	, HPBar_(nullptr)
 	, MPBar_(nullptr)
+	, StatusLayer_(nullptr)
 	, CurHP_(5000.0f)
 	, CurMP_(2000.0f)
 	, MaxHP_(5000.0f)
@@ -27,10 +28,9 @@ StatusUI::~StatusUI()
 void StatusUI::Start()
 {
 	{
-		GameEngineUIRenderer* Renderer = 
-			CreateTransformComponent<GameEngineUIRenderer>(GetTransform(), 1);
-		Renderer->SetImage("mainBar.status.layer_cover.png");
-		Renderer->TextSetting("µ¸¿ò", "ÃÊº¸ÀÚ", 11, float4::WHITE, { 10.0f, 23.0f });
+		StatusLayer_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform(), 1);
+		StatusLayer_->SetImage("mainBar.status.layer_cover.png");
+		StatusLayer_->TextSetting("µ¸¿ò", "ÃÊº¸ÀÚ", 11, float4::WHITE, {10.0f, 23.0f});
 	}
 
 	{
@@ -560,4 +560,9 @@ void StatusUI::LevelUp()
 	Level_ += 1;
 	LevelChanged_ = true;
 	GlobalValue::CurrentPlayer->LevelUp();
+}
+
+void StatusUI::SetNickName(const std::string& _NickName)
+{
+	StatusLayer_->TextSetting("µ¸¿ò", _NickName, 11, float4::WHITE, { 10.0f, 23.0f });
 }

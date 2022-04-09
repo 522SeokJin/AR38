@@ -45,6 +45,8 @@ public:
 	}
 	void LevelUp();
 
+	void SetNickName(const std::string& _NickName);
+
 protected:
 	StatusUI(const StatusUI& _other) = delete; 
 	StatusUI(StatusUI&& _other) noexcept = delete;
@@ -61,6 +63,7 @@ private:
 
 	GameEngineUIRenderer* HPBar_;
 	GameEngineUIRenderer* MPBar_;
+	GameEngineUIRenderer* StatusLayer_;
 
 	float CurHP_;
 	float CurMP_;
