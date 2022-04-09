@@ -4,6 +4,7 @@
 #include <GameEngine/GameEngineCollision.h>
 #include "Mouse.h"
 #include <GameEngine/GameEngineCore.h>
+#include "Player.h"
 
 JobsNPC_Dlg::JobsNPC_Dlg()
 	: BackGroundRenderer_(nullptr)
@@ -202,7 +203,7 @@ void JobsNPC_Dlg::BtnYesEvent(GameEngineCollision* _OtherCollision)
 		BtnOKRenderer_->On();
 		BtnOKCol_->On();
 
-		// ÀüÁ÷
+		GlobalValue::CurrentPlayer->JobsChanged();
 
 		return;
 	}

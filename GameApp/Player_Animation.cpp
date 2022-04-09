@@ -16,6 +16,46 @@ void Player::CreateAnimation()
 	Shoes_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Weapon_ = CreateTransformComponent<GameEngineImageRenderer>();
 
+	LevelUpEffect_ = CreateTransformComponent<GameEngineImageRenderer>();
+	JobsChangedEffect_ = CreateTransformComponent<GameEngineImageRenderer>();
+
+	LevelUpEffect_->CreateAnimationFolder("LevelUp", 0.09f, false);
+	JobsChangedEffect_->CreateAnimationFolder("JobChanged", 0.1f, false);
+
+	LevelUpEffect_->SetChangeAnimation("LevelUp");
+	LevelUpEffect_->AnimationStop();
+	JobsChangedEffect_->SetChangeAnimation("JobChanged");
+	JobsChangedEffect_->AnimationStop();
+
+	LevelUpEffect_->Off();
+	JobsChangedEffect_->Off();
+
+	LevelUpEffect_->SetEndCallBack("LevelUp", [&]()
+		{
+			LevelUpEffect_->AnimationStop();
+			LevelUpEffect_->Off();
+		}
+	);
+
+	JobsChangedEffect_->SetEndCallBack("JobChanged", [&]() 
+		{ 
+			JobsChangedEffect_->AnimationStop();
+			JobsChangedEffect_->Off();
+		}
+	);
+
+	for (int i = 0; i < LevelUpEffect_->GetCurAnimation()->FolderTextures_->GetTextureCount(); i++)
+	{
+		LevelUpEffect_->SetOffsetAnimation("LevelUp", i,
+			{ 0.0f, LevelUpEffect_->GetCurAnimation()->GetTextureSize(i).hy() });
+	}
+
+	for (int i = 0; i < JobsChangedEffect_->GetCurAnimation()->FolderTextures_->GetTextureCount(); i++)
+	{
+		JobsChangedEffect_->SetOffsetAnimation("JobChanged", i,
+			{ 0.0f, JobsChangedEffect_->GetCurAnimation()->GetTextureSize(i).hy() });
+	}
+
 	CreateAvatarAnimation();
 	CreateMailAnimation();
 	CreateMailArmAnimation();

@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "StatusUI.h"
 #include "GameEngine/GameEngineUIRenderer.h"
+#include "Player.h"
 
 StatusUI::StatusUI()
 	: HPBarValue_({ 1.0f, 2, 0, 0 })
@@ -552,4 +553,11 @@ void StatusUI::UpdateStatusLv()
 		LvNumber_[i][Value]->On();
 		LvNumber_[i][Value]->SetLocalPosition({ CurPos - 8.0f * i, 22.0f});
 	}
+}
+
+void StatusUI::LevelUp()
+{
+	Level_ += 1;
+	LevelChanged_ = true;
+	GlobalValue::CurrentPlayer->LevelUp();
 }

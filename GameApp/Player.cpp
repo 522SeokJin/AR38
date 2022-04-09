@@ -22,6 +22,8 @@ Player::Player()
 	, PantsImageIndex_(1)
 	, ShoesImageIndex_(1)
 	, WeaponImageIndex_(1)
+	, LevelUpEffect_(nullptr)
+	, JobsChangedEffect_(nullptr)
 	, Avatar_(nullptr)
 	, Face_(nullptr)
 	, HairBelowBody_(nullptr)
@@ -175,6 +177,18 @@ bool Player::IsDownLadderColor()
 		|| 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 16.0f)).b
 		|| 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 0.0f)).b
 		|| 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, -16.0f)).b;
+}
+
+void Player::LevelUp()
+{
+	LevelUpEffect_->On();
+	LevelUpEffect_->SetChangeAnimation("LevelUp", true);
+}
+
+void Player::JobsChanged()
+{
+	JobsChangedEffect_->On();
+	JobsChangedEffect_->SetChangeAnimation("JobChanged", true);
 }
 
 void Player::Start()

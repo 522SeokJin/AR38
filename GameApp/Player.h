@@ -22,6 +22,9 @@ public:
 		return Dir_;
 	}
 
+	void LevelUp();
+	void JobsChanged();
+
 protected:
 	Player(const Player& _other) = delete; 
 	Player(Player&& _other) noexcept = delete;
@@ -69,6 +72,9 @@ private:
 	float4 FootPixelColor_;
 
 	GameEngineCollision* Collision_;
+
+	GameEngineImageRenderer* LevelUpEffect_;
+	GameEngineImageRenderer* JobsChangedEffect_;
 
 	GameEngineImageRenderer* Avatar_;
 	GameEngineImageRenderer* Face_;

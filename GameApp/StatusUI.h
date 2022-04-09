@@ -43,11 +43,7 @@ public:
 		Level_ = _Level;
 		LevelChanged_ = true;
 	}
-	void LevelUp()
-	{
-		Level_ += 1;
-		LevelChanged_ = true;
-	}
+	void LevelUp();
 
 protected:
 	StatusUI(const StatusUI& _other) = delete; 
