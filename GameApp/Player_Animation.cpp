@@ -17,6 +17,7 @@ void Player::CreateAnimation()
 	Weapon_ = CreateTransformComponent<GameEngineImageRenderer>();
 
 	LevelUpEffect_ = CreateTransformComponent<GameEngineImageRenderer>();
+	LevelUpEffect_->SetLocalMove({0.0f, 0.0f, static_cast<float>(DepthOrder::SKILL)});
 	JobsChangedEffect_ = CreateTransformComponent<GameEngineImageRenderer>();
 
 	LevelUpEffect_->CreateAnimationFolder("LevelUp", 0.09f, false);
@@ -47,7 +48,7 @@ void Player::CreateAnimation()
 	for (int i = 0; i < LevelUpEffect_->GetCurAnimation()->FolderTextures_->GetTextureCount(); i++)
 	{
 		LevelUpEffect_->SetOffsetAnimation("LevelUp", i,
-			{ 0.0f, LevelUpEffect_->GetCurAnimation()->GetTextureSize(i).hy() });
+			{ 0.0f, 160.0f });
 	}
 
 	for (int i = 0; i < JobsChangedEffect_->GetCurAnimation()->FolderTextures_->GetTextureCount(); i++)

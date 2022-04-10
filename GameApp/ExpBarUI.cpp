@@ -5,7 +5,8 @@
 #include "StatusUI.h"
 
 ExpBarUI::ExpBarUI()
-	: ExpBarValue_({ 0.0f, 2, 0, 0 })
+	: Status_(nullptr)
+	, ExpBarValue_({ 0.0f, 2, 0, 0 })
 	, ExpBarRenderer_(nullptr)
 	, CurrentExp_(0.0f)
 	, MaxExp_(1000.0f)
@@ -49,7 +50,7 @@ void ExpBarUI::Start()
 
 void ExpBarUI::Update(float _DeltaTime)
 {
-
+	AddExp(300.0f * _DeltaTime);
 }
 
 void ExpBarUI::SetExp(float _Value)
