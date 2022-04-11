@@ -137,6 +137,9 @@
     <ClCompile Include="JobsNPC_Dlg.cpp">
       <Filter>Actor\NPC\JobsNPC</Filter>
     </ClCompile>
+    <ClCompile Include="SkillUI.cpp">
+      <Filter>Actor\UI\Skill</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -225,6 +228,9 @@
     </Filter>
     <Filter Include="Actor\NPC\JobsNPC">
       <UniqueIdentifier>{558437a8-3fed-49cf-a969-32cb5cf38ba5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI\Skill">
+      <UniqueIdentifier>{788cfed7-d2ce-4366-b665-2b160774da9b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -356,6 +362,9 @@
     </ClInclude>
     <ClInclude Include="JobsNPC_Dlg.h">
       <Filter>Actor\NPC\JobsNPC</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillUI.h">
+      <Filter>Actor\UI\Skill</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
