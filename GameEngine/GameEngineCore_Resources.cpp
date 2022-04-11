@@ -357,4 +357,15 @@ void GameEngineCore::EngineResourcesCreate()
 		Pipe->SetInputAssembler2IndexBufferSetting("Rect");
 		Pipe->SetPixelShader("ProgressBar_PS");
 	}
+
+	{
+		GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Create("Fade");
+		Pipe->SetInputAssembler1VertexBufferSetting("FullRect");
+		Pipe->SetInputAssembler2IndexBufferSetting("FullRect");
+		Pipe->SetInputAssembler1InputLayoutSetting("Fade_VS");
+		Pipe->SetVertexShader("Fade_VS");
+		Pipe->SetPixelShader("Fade_PS");
+		Pipe->SetOutputMergerDepthStencil("BaseDepthOff");
+		Pipe->SetOutputMergerBlend("AlphaBlend");
+	}
 }

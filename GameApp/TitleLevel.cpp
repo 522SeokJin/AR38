@@ -6,10 +6,12 @@
 #include <GameEngine/GameEngineWindow.h>
 #include <GameEngine/GameEngineGUI.h>
 #include <GameEngine/GameEngineRenderWindow.h>
+#include <GameEngine/PostFade.h>
 
 TitleLevel::TitleLevel()
 	: Cursor_(nullptr)
 	, RenderWindow_(nullptr)
+	, FadeEffect_(nullptr)
 {
 
 }
@@ -36,6 +38,11 @@ void TitleLevel::LevelStart()
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(
 			Actor->GetTransform()->GetLocalPosition());
 	}
+
+	FadeEffect_ = AddPostProcessCameraMergeNext<PostFade>();
+	FadeEffect_->SetTarget(GameEngineDevice::GetBackBufferTarget());
+
+	FadeEffect_->SetData(1.5f, FadeOption::LIGHT);
 }
 
 void TitleLevel::LevelUpdate(float _DeltaTime)
@@ -52,6 +59,8 @@ void TitleLevel::LevelUpdate(float _DeltaTime)
 			GetMainCamera()->GetCameraRenderTarget(), Size);
 		RenderWindow_->PushRenderTarget("UI Ä«¸Þ¶ó Å¸°Ù",
 			GetUICamera()->GetCameraRenderTarget(), Size);
+		RenderWindow_->PushRenderTarget("PostEffectFade",
+			FadeEffect_->GetResult(), Size);
 
 		Check = true;
 	}

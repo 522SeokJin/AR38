@@ -31,7 +31,7 @@ GameEngineRenderTarget::~GameEngineRenderTarget()
 	}
 }
 
-void GameEngineRenderTarget::Clear()
+void GameEngineRenderTarget::Clear(bool _Depth /*= true*/)
 {
 	for (size_t i = 0; i < RenderTargetViews_.size(); i++)
 	{
@@ -39,7 +39,7 @@ void GameEngineRenderTarget::Clear()
 			RenderTargetViews_[i], ClearColor_[i].Arr1D);
 	}
 
-	if (nullptr != DepthBuffer_)
+	if (nullptr != DepthBuffer_ && true == _Depth)
 	{
 		GameEngineDevice::GetContext()->ClearDepthStencilView(DepthBuffer_->GetDepthStencilView(),
 			D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);

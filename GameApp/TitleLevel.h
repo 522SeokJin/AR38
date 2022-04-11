@@ -15,6 +15,8 @@ public:
 	void LevelChangeEndEvent() override;
 	void LevelChangeStartEvent() override;
 
+	class PostFade* FadeEffect_;
+
 protected:
 	TitleLevel(const TitleLevel& _other) = delete; 
 	TitleLevel(TitleLevel&& _other) noexcept = delete;

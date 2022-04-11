@@ -13,7 +13,7 @@ public:
 	GameEngineRenderTarget();
 	~GameEngineRenderTarget();
 
-	void Clear();
+	void Clear(bool _Depth = true); // false -> Depth는 Clear 하지않음
 
 	// -1 -> 전부다 세팅
 	// 0~n -> 그 Index 1개를 세팅
@@ -51,6 +51,11 @@ public:
 	inline float4 GetTextureSize(int _Index)
 	{
 		return Textures_[_Index]->GetTextureSize();
+	}
+
+	inline GameEngineTexture* GetTexture(int _Index)
+	{
+		return Textures_[_Index];
 	}
 
 protected:

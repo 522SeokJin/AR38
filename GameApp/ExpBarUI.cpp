@@ -50,7 +50,7 @@ void ExpBarUI::Start()
 
 void ExpBarUI::Update(float _DeltaTime)
 {
-	AddExp(300.0f * _DeltaTime);
+	//AddExp(300.0f * _DeltaTime);
 }
 
 void ExpBarUI::SetExp(float _Value)
