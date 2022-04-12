@@ -56,4 +56,15 @@ void UserGame::ResourceLoad()
 		Pipe->SetPixelShader("PointTexture_PS");
 		Pipe->SetOutputMergerDepthStencil("BaseDepthOff");
 	}
+
+	{
+		GameEngineRenderingPipeLine* Pipe =
+			GameEngineRenderingPipeLineManager::GetInst().Create("Curved");
+		Pipe->SetInputAssembler1VertexBufferSetting("FullRect");
+		Pipe->SetInputAssembler1InputLayoutSetting("Curved_VS");
+		Pipe->SetVertexShader("Curved_VS");
+		Pipe->SetInputAssembler2IndexBufferSetting("FullRect");
+		Pipe->SetPixelShader("Curved_PS");
+		Pipe->SetOutputMergerDepthStencil("BaseDepthOff");
+	}
 }

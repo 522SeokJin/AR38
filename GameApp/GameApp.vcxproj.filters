@@ -140,6 +140,9 @@
     <ClCompile Include="SkillUI.cpp">
       <Filter>Actor\UI\Skill</Filter>
     </ClCompile>
+    <ClCompile Include="CurvedEffect.cpp">
+      <Filter>Global\PostProcess</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -231,6 +234,9 @@
     </Filter>
     <Filter Include="Actor\UI\Skill">
       <UniqueIdentifier>{788cfed7-d2ce-4366-b665-2b160774da9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global\PostProcess">
+      <UniqueIdentifier>{6f719326-8d18-44ea-b928-dee40f707827}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -365,6 +371,9 @@
     </ClInclude>
     <ClInclude Include="SkillUI.h">
       <Filter>Actor\UI\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="CurvedEffect.h">
+      <Filter>Global\PostProcess</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

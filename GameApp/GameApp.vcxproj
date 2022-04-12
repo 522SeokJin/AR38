@@ -172,6 +172,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AppMain.cpp" />
+    <ClCompile Include="CurvedEffect.cpp" />
     <ClCompile Include="DeepeningForest.cpp" />
     <ClCompile Include="DeepeningForestLevel.cpp" />
     <ClCompile Include="Demian.cpp">
@@ -297,6 +298,7 @@
     <ClCompile Include="ValueCheckWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CurvedEffect.h" />
     <ClInclude Include="DeepeningForest.h" />
     <ClInclude Include="DeepeningForestLevel.h" />
     <ClInclude Include="Demian.h">

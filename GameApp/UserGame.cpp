@@ -54,7 +54,7 @@ void UserGame::Initialize()
 	//LevelCreate<EntranceDemianLevel>("EntranceDemian");
 	//LevelCreate<DemianLevel>("Demian");
 
-	LevelChange("LithHarbor");
+	LevelChange("Title");
 }
 
 void UserGame::Release()
@@ -82,6 +82,8 @@ void UserGame::CreateKey()
 	GameEngineInput::GetInst().CreateKey("LevelControl", '3');
 
 	GameEngineInput::GetInst().CreateKey("Inventory", 'i');
+
+	GameEngineInput::GetInst().CreateKey("FileCompile", 'u');
 }
 
 

@@ -30,5 +30,8 @@
     <FxCompile Include="EngineResources\Shader\Fade.fx">
       <Filter>Engine</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shader\Curved.fx">
+      <Filter>User</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

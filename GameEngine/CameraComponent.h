@@ -38,8 +38,6 @@ public:
 		return CameraBufferTarget_;
 	}
 
-	GameEngineRenderTarget* CameraBufferTarget_;
-
 protected:
 	CameraComponent(const CameraComponent& _other) = delete; 
 	CameraComponent(CameraComponent&& _other) noexcept = delete;
@@ -58,6 +56,8 @@ private:
 	void DebugRender();
 
 	void ReleaseRenderer();
+
+	GameEngineRenderTarget* CameraBufferTarget_;
 
 	std::map<int, std::list<GameEngineRenderer*>> RendererList_;
 
