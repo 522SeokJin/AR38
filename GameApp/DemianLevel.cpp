@@ -17,7 +17,7 @@ DemianLevel::~DemianLevel()
 void DemianLevel::LevelStart()
 {
 	GetMainCamera()->SetProjectionMode(ProjectionMode::ORTHOGRAPHIC);
-	GetMainCamera()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
+	GetMainCameraActor()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
 
 	{
 		DemianMap* Actor = CreateActor<DemianMap>();

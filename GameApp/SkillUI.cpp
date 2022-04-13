@@ -15,6 +15,10 @@ SkillUI::~SkillUI()
 
 void SkillUI::Start()
 {
+	{
+		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+		Renderer->SetImage("mainBar.EXPBar.backgrnd.png");
+	}
 }
 
 void SkillUI::Update(float _DeltaTime)

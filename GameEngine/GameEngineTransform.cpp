@@ -15,19 +15,6 @@ void GameEngineTransform::TransformUpdate()
 
 	TransformData_.LocalCalculation();
 
-	// TransData_.LocalWorld_;
-	// [][][][]
-	// [][][][]
-	// [][][][]
-	// [][][][]
-
-	// TransData_.WorldWorld_;
-	// [][][][]
-	// [][][][]
-	// [][][][]
-	// [][][][]
-
-
 	if (nullptr != Parent_)
 	{
 		TransformData_.ParentSetting(Parent_->TransformData_.WorldWorld_);
@@ -50,8 +37,6 @@ void GameEngineTransform::AllChildCalculationScaling()
 {
 	for (auto& Child : Childs_)
 	{
-		// 부모의 크기가 바뀐것이고 부모의 크기가 바뀌었다는것은
-		// 자식의 월드 포지션이 바뀌었다는것을 의미한다.
 		Child->CalculationWorldScaling();
 		Child->CalculationWorldPosition();
 		Child->AllChildCalculationScaling();
@@ -159,7 +144,6 @@ void GameEngineTransform::SetWorldScaling(const float4& _Value)
 	TransformUpdate();
 }
 
-// 무모건 디그리
 void GameEngineTransform::SetLocalRotationDegree(const float4& _Value)
 {
 	if (nullptr == Parent_)
@@ -235,9 +219,8 @@ void GameEngineTransform::SetWorldPosition(const float4& _Value)
 
 void GameEngineTransform::DetachChildTransform(GameEngineTransform* _Transform)
 {
-	// 지역변수 할당을 줄이려고
-	static std::vector<GameEngineTransform*>::iterator StartIter = Childs_.begin();
-	static std::vector<GameEngineTransform*>::iterator EndIter = Childs_.end();
+	std::vector<GameEngineTransform*>::iterator StartIter = Childs_.begin();
+	std::vector<GameEngineTransform*>::iterator EndIter = Childs_.end();
 
 	for (; StartIter != EndIter; )
 	{
@@ -255,8 +238,6 @@ void GameEngineTransform::DetachChildTransform(GameEngineTransform* _Transform)
 
 void GameEngineTransform::AttachTransform(GameEngineTransform* _Transform)
 {
-	// 나는 이제부터 _Parent를 따라다녀야 합니다.
-
 	if (nullptr != Parent_)
 	{
 		Parent_->DetachChildTransform(this);

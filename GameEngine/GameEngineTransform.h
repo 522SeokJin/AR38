@@ -80,15 +80,6 @@ public:
 	}
 };
 
-// 기능이란 
-// 위치가 존재해야 한다. => 기능
-
-// 어느 위치에 그려져야 한다. => 기능
-// 어느 위치에서 다른 애들과 충돌해야 한다 => 기능
-
-// 위치를 나타내는 기능이라 도저히 컴포넌트라고 부를수 없을정도로 중요하다.
-
-// 충돌도 이녀석이 담당할것이기 때문에 어마어마하게 중요하고 잘만들어야 한다.
 // 설명 :
 class GameEngineTransform
 {
@@ -149,9 +140,9 @@ public:
 	}
 	void AddWorldRotationDegreeX(const float _Value)
 	{
-		float4 Local = TransformData_.vLocalRotation_;
-		Local.x += _Value;
-		SetWorldRotationDegree(Local);
+		float4 World = TransformData_.vWorldRotation_;
+		World.x += _Value;
+		SetWorldRotationDegree(World);
 	}
 
 	void AddLocalRotationDegreeY(const float _Value)
@@ -163,9 +154,9 @@ public:
 
 	void AddWorldRotationDegreeY(const float _Value)
 	{
-		float4 Local = TransformData_.vLocalRotation_;
-		Local.y += _Value;
-		SetWorldRotationDegree(Local);
+		float4 World = TransformData_.vWorldRotation_;
+		World.y += _Value;
+		SetWorldRotationDegree(World);
 	}
 
 	void AddLocalRotationDegreeZ(const float _Value)
@@ -176,9 +167,9 @@ public:
 	}
 	void AddWorldRotationDegreeZ(const float _Value)
 	{
-		float4 Local = TransformData_.vLocalRotation_;
-		Local.z += _Value;
-		SetWorldRotationDegree(Local);
+		float4 World = TransformData_.vWorldRotation_;
+		World.z += _Value;
+		SetWorldRotationDegree(World);
 	}
 
 	inline void AddLocalDeltaTimeRotation(const float4& _Value)
