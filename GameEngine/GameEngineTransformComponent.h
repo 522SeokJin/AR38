@@ -27,8 +27,8 @@ public:
 	void SetWorldScaling(const float4& _Value);
 
 	// Degree Only
-	void SetLocalRotation(const float4& _Value);
-	void SetWorldRotation(const float4& _Value);
+	void SetLocalRotationDegree(const float4& _Value);
+	void SetWorldRotationDegree(const float4& _Value);
 
 	void AddLocalRotation(const float4& _Value);
 	void AddWorldRotation(const float4& _Value);

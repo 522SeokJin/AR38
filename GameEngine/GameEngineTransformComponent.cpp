@@ -49,29 +49,29 @@ void GameEngineTransformComponent::SetWorldScaling(const float4& _Value)
 {
 	Transform_.SetWorldScaling(_Value);
 }
-void GameEngineTransformComponent::SetLocalRotation(const float4& _Value)
+void GameEngineTransformComponent::SetLocalRotationDegree(const float4& _Value)
 {
-	Transform_.SetLocalRotation(_Value);
+	Transform_.SetLocalRotationDegree(_Value);
 }
-void GameEngineTransformComponent::SetWorldRotation(const float4& _Value)
+void GameEngineTransformComponent::SetWorldRotationDegree(const float4& _Value)
 {
-	Transform_.SetWorldRotation(_Value);
+	Transform_.SetWorldRotationDegree(_Value);
 }
 void GameEngineTransformComponent::AddLocalRotation(const float4& _Value)
 {
-	SetLocalRotation(Transform_.GetTransformData().vLocalRotation_ + _Value);
+	SetLocalRotationDegree(Transform_.GetTransformData().vLocalRotation_ + _Value);
 }
 void GameEngineTransformComponent::AddWorldRotation(const float4& _Value)
 {
-	SetWorldRotation(Transform_.GetTransformData().vWorldRotation_ + _Value);
+	SetWorldRotationDegree(Transform_.GetTransformData().vWorldRotation_ + _Value);
 }
 void GameEngineTransformComponent::SetLocalDeltaTimeRotation(const float4& _Value)
 {
-	SetLocalRotation(Transform_.GetLocalRotation() + _Value * GameEngineTime::GetInst().GetDeltaTime());
+	SetLocalRotationDegree(Transform_.GetLocalRotation() + _Value * GameEngineTime::GetInst().GetDeltaTime());
 }
 void GameEngineTransformComponent::SetWorldDeltaTimeRotation(const float4& _Value)
 {
-	SetWorldRotation(Transform_.GetWorldRotation() + _Value * GameEngineTime::GetInst().GetDeltaTime());
+	SetWorldRotationDegree(Transform_.GetWorldRotation() + _Value * GameEngineTime::GetInst().GetDeltaTime());
 }
 void GameEngineTransformComponent::SetLocalPosition(const float4& _Value)
 {

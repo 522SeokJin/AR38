@@ -41,7 +41,7 @@ void LithHarborLevel::LevelStart()
 		<GameEngineRenderWindow>("RenderWindow");
 
 	GetMainCamera()->SetProjectionMode(ProjectionMode::ORTHOGRAPHIC);
-	GetMainCamera()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
+	GetMainCameraActor()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
 
 	{
 		Cursor_ = CreateActor<Mouse>();
@@ -107,8 +107,11 @@ void LithHarborLevel::LevelStart()
 
 void LithHarborLevel::LevelUpdate(float _DeltaTime)
 {
-	GetMainCameraActor()->GetTransform()->
-		SetLocalPosition(Player_->GetTransform()->GetLocalPosition());
+	if (false == GetMainCameraActor()->IsFreeCameraMode())
+	{
+		GetMainCameraActor()->GetTransform()->
+			SetLocalPosition(Player_->GetTransform()->GetLocalPosition());
+	}
 
 	static bool Check = false;
 

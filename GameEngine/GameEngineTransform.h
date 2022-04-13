@@ -1,17 +1,18 @@
 #pragma once
+#include <GameEngineBase/GameEngineMath.h>
+#include "GameEngineComponent.h"
+#include <GameEngineBase/GameEngineTime.h>
 
 #include <DirectXCollision.h>
 #include <DirectXCollision.inl>
 
-// 설명 : 위치를 나타내는 기능이라 도저히 컴포넌트라고 부를수 없을정도로 중요하다.
-//		충돌도 담당하게 된다.
 
 union CollisionData
 {
 public:
 	DirectX::BoundingSphere Sphere;
-	DirectX::BoundingBox AABB;	// 회전 고려하지않음
-	DirectX::BoundingOrientedBox OBB; // 회전을 고려함
+	DirectX::BoundingBox AABB; // 회전이 고려하면 안되는 박스
+	DirectX::BoundingOrientedBox OBB; // 회전한 박스
 
 	CollisionData()
 		: OBB()
@@ -41,13 +42,15 @@ public:
 
 	float4x4 View_;
 	float4x4 Projection_;
+
 	float4x4 WVP_;
 
 public:
 	TransformData()
-		: vLocalScaling_(float4::ONE)
-		, vWorldScaling_(float4::ONE)
+		: vWorldScaling_(float4::ONE)
+		, vLocalScaling_(float4::ONE)
 	{
+
 	}
 
 	void LocalCalculation()
@@ -77,118 +80,178 @@ public:
 	}
 };
 
+// 기능이란 
+// 위치가 존재해야 한다. => 기능
+
+// 어느 위치에 그려져야 한다. => 기능
+// 어느 위치에서 다른 애들과 충돌해야 한다 => 기능
+
+// 위치를 나타내는 기능이라 도저히 컴포넌트라고 부를수 없을정도로 중요하다.
+
+// 충돌도 이녀석이 담당할것이기 때문에 어마어마하게 중요하고 잘만들어야 한다.
+// 설명 :
 class GameEngineTransform
 {
-
 public:
+	// constrcuter destructer
 	GameEngineTransform();
 	~GameEngineTransform();
 
+	// delete Function
+	//GameEngineTransform(const GameEngineTransform& _Other) = delete;
+	//GameEngineTransform(GameEngineTransform&& _Other) noexcept = delete;
+	GameEngineTransform& operator=(const GameEngineTransform& _Other) = delete;
+	GameEngineTransform& operator=(GameEngineTransform&& _Other) noexcept = delete;
+
 	void TransformUpdate();
 
-	float4 GetLocalScaling() { return TransformData_.vLocalScaling_; };
-	float4 GetWorldScaling() { return TransformData_.vWorldScaling_; };
-	float4 GetLocalRotation() { return TransformData_.vLocalRotation_; };
-	float4 GetWorldRotation() { return TransformData_.vWorldRotation_; };
-	float4 GetLocalPosition() { return TransformData_.vLocalPosition_; };
-	float4 GetWorldPosition() { return TransformData_.vWorldPosition_; };
+	float4 GetLocalScaling() { return TransformData_.vLocalScaling_; }
+	float4 GetWorldScaling() { return TransformData_.vWorldScaling_; }
+	float4 GetLocalRotation() { return TransformData_.vLocalRotation_; }
+	float4 GetWorldRotation() { return TransformData_.vWorldRotation_; }
+	float4 GetLocalPosition() { return TransformData_.vLocalPosition_; }
+	float4 GetWorldPosition() { return TransformData_.vWorldPosition_; }
 
-	float4 GetLocalForwardVector() { return TransformData_.LocalWorld_.vz.NormalizeReturn3D(); };
-	float4 GetWorldForwardVector() { return TransformData_.WorldWorld_.vz.NormalizeReturn3D(); };
-	float4 GetLocalRightVector() { return TransformData_.LocalWorld_.vx.NormalizeReturn3D(); };
-	float4 GetWorldRightVector() { return TransformData_.WorldWorld_.vx.NormalizeReturn3D(); };
-	float4 GetLocalUpVector() { return TransformData_.LocalWorld_.vy.NormalizeReturn3D(); };
-	float4 GetWorldUpVector() { return TransformData_.WorldWorld_.vy.NormalizeReturn3D(); };
+	// [1][0][0][0]
+	// [0][1][0][0]
+	// [0][0][1][0]
+	// [0][0][0][1]
+
+	float4 GetWorldForwardVector() { return TransformData_.WorldWorld_.vz.NormalizeReturn3D(); }
+	float4 GetLocalForwardVector() { return TransformData_.LocalWorld_.vz.NormalizeReturn3D(); }
+
+	float4 GetWorldBackVector() { return -TransformData_.WorldWorld_.vz.NormalizeReturn3D(); }
+	float4 GetLocalBackVector() { return -TransformData_.LocalWorld_.vz.NormalizeReturn3D(); }
+
+	float4 GetWorldRightVector() { return TransformData_.WorldWorld_.vx.NormalizeReturn3D(); }
+	float4 GetLocalRightVector() { return TransformData_.LocalWorld_.vx.NormalizeReturn3D(); }
+
+	float4 GetWorldLeftVector() { return -TransformData_.WorldWorld_.vx.NormalizeReturn3D(); }
+	float4 GetLocalLeftVector() { return -TransformData_.LocalWorld_.vx.NormalizeReturn3D(); }
+
+	float4 GetWorldUpVector() { return TransformData_.WorldWorld_.vy.NormalizeReturn3D(); }
+	float4 GetLocalUpVector() { return TransformData_.LocalWorld_.vy.NormalizeReturn3D(); }
+
+	float4 GetWorldDownVector() { return -TransformData_.WorldWorld_.vy.NormalizeReturn3D(); }
+	float4 GetLocalDownVector() { return -TransformData_.LocalWorld_.vy.NormalizeReturn3D(); }
 
 	void SetLocalScaling(const float4& _Value);
 	void SetWorldScaling(const float4& _Value);
 
-	// Degree Only
-	void SetLocalRotation(const float4& _Value);
-	void SetWorldRotation(const float4& _Value);
+	void SetLocalRotationDegree(const float4& _Value);
+	void SetWorldRotationDegree(const float4& _Value);
 
-	void AddLocalRotation(const float4& _Value)
+	void AddLocalRotationDegreeX(const float _Value)
 	{
-		SetLocalRotation(TransformData_.vLocalRotation_ + _Value);
+		float4 Local = TransformData_.vLocalRotation_;
+		Local.x += _Value;
+		SetLocalRotationDegree(Local);
+	}
+	void AddWorldRotationDegreeX(const float _Value)
+	{
+		float4 Local = TransformData_.vLocalRotation_;
+		Local.x += _Value;
+		SetWorldRotationDegree(Local);
 	}
 
-	void AddWorldRotation(const float4& _Value)
+	void AddLocalRotationDegreeY(const float _Value)
 	{
-		SetWorldRotation(TransformData_.vWorldRotation_ + _Value);
+		float4 Local = TransformData_.vLocalRotation_;
+		Local.y += _Value;
+		SetLocalRotationDegree(Local);
 	}
 
-	void SetLocalDeltaTimeRotation(const float4& _Value)
+	void AddWorldRotationDegreeY(const float _Value)
 	{
-		SetLocalRotation(TransformData_.vLocalRotation_ + _Value * GameEngineTime::GetInst().GetDeltaTime());
+		float4 Local = TransformData_.vLocalRotation_;
+		Local.y += _Value;
+		SetWorldRotationDegree(Local);
 	}
 
-	void SetWorldDeltaTimeRotation(const float4& _Value)
+	void AddLocalRotationDegreeZ(const float _Value)
 	{
-		SetWorldRotation(TransformData_.vWorldRotation_ + _Value * GameEngineTime::GetInst().GetDeltaTime());
+		float4 Local = TransformData_.vLocalRotation_;
+		Local.z += _Value;
+		SetLocalRotationDegree(Local);
+	}
+	void AddWorldRotationDegreeZ(const float _Value)
+	{
+		float4 Local = TransformData_.vLocalRotation_;
+		Local.z += _Value;
+		SetWorldRotationDegree(Local);
+	}
+
+	inline void AddLocalDeltaTimeRotation(const float4& _Value)
+	{
+		SetLocalRotationDegree(TransformData_.vLocalRotation_ + _Value * GameEngineTime::GetInst().GetDeltaTime());
+	}
+
+	inline void AddWorldDeltaTimeRotation(const float4& _Value)
+	{
+		SetWorldRotationDegree(TransformData_.vWorldRotation_ + _Value * GameEngineTime::GetInst().GetDeltaTime());
 	}
 
 	void SetLocalPosition(const float4& _Value);
 	void SetWorldPosition(const float4& _Value);
 
-	void SetLocalMove(const float4& _Value)
+	inline void SetLocalMove(const float4& _Value)
 	{
 		SetLocalPosition(TransformData_.vLocalPosition_ + _Value);
 	}
 
-	void SetWorldMove(const float4& _Value)
+	inline void SetWorldMove(const float4& _Value)
 	{
 		SetWorldPosition(TransformData_.vWorldPosition_ + _Value);
 	}
 
-	void SetLocalDeltaTimeMove(const float4& _Value)
+	inline void SetLocalDeltaTimeMove(const float4& _Value)
 	{
 		SetLocalPosition(TransformData_.vLocalPosition_ + _Value * GameEngineTime::GetInst().GetDeltaTime());
 	}
 
-	void SetWorldDeltaTimeMove(const float4& _Value)
+	inline void SetWorldDeltaTimeMove(const float4& _Value)
 	{
 		SetWorldPosition(TransformData_.vWorldPosition_ + _Value * GameEngineTime::GetInst().GetDeltaTime());
 	}
 
-	void DetachChildTransform(GameEngineTransform* _Transform);
+	void DetachChildTransform(GameEngineTransform* _Child);
 	void AttachTransform(GameEngineTransform* _Transform);
 
-	TransformData& GetTransformData()
+	inline TransformData& GetTransformData()
 	{
 		return TransformData_;
 	}
 
-	const CollisionData& GetCollisionData()
+	inline const CollisionData& GetCollisionData()
 	{
 		return ColData_;
 	}
 
-	const DirectX::BoundingSphere& GetSphere()
+	inline const DirectX::BoundingSphere& GetSphere()
 	{
 		return ColData_.Sphere;
 	}
 
-	const DirectX::BoundingOrientedBox& GetOBB()
+	inline const DirectX::BoundingOrientedBox& GetOBB()
 	{
 		return ColData_.OBB;
 	}
 
-	const DirectX::BoundingBox& GetAABB()
+	inline const DirectX::BoundingBox& GetAABB()
 	{
 		return ColData_.AABB;
 	}
 
-protected:
-	GameEngineTransform(const GameEngineTransform& _other) = delete; 
-	GameEngineTransform(GameEngineTransform&& _other) noexcept = delete;
-	GameEngineTransform& operator=(const GameEngineTransform& _other) = delete;
-	GameEngineTransform& operator=(const GameEngineTransform&& _other) = delete;
+	void Copy(const GameEngineTransform& _Other);
 
+
+protected:
 	TransformData TransformData_;
 	CollisionData ColData_;
 
-	GameEngineTransform*			Parent_;
+	GameEngineTransform* Parent_;
 	std::vector<GameEngineTransform*> Childs_;
+
 
 private:
 	void AllChildCalculationScaling();
@@ -198,12 +261,10 @@ private:
 	void CalculationLocalScaling();
 	void CalculationWorldScaling();
 
-	void CalculationLocalRotation();
 	void CalculationWorldRotation();
+	void CalculationLocalRotation();
 
 	void CalculationLocalPosition();
 	void CalculationWorldPosition();
-
-	
 };
 

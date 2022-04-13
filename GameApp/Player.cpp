@@ -242,6 +242,11 @@ void Player::Start()
 
 void Player::Update(float _DeltaTime)
 {
+	if (true == GameEngineInput::GetInst().Down("FreeCamera"))
+	{
+		GetLevel()->GetMainCameraActor()->FreeCameraModeSwitch();
+	}
+
 	ValueCheckWindow* Window = reinterpret_cast<ValueCheckWindow*>
 		(GameEngineGUI::GetInst()->FindGUIWindow("ValueCheckWindow"));
 

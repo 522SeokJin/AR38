@@ -61,7 +61,7 @@ void GameEngineTime::TimeCheck()
 
 	for (auto& Event : AllEvent_)
 	{
-		Event->Time_ -= GetDeltaTime();
+		Event->Time_ -= static_cast<float>(deltaTime_);
 		if (0 >= Event->Time_)
 		{
 			Event->Event_();

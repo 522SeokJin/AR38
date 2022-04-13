@@ -10,17 +10,29 @@ GameEngineTransform::~GameEngineTransform()
 {
 }
 
-
 void GameEngineTransform::TransformUpdate()
 {
+
 	TransformData_.LocalCalculation();
+
+	// TransData_.LocalWorld_;
+	// [][][][]
+	// [][][][]
+	// [][][][]
+	// [][][][]
+
+	// TransData_.WorldWorld_;
+	// [][][][]
+	// [][][][]
+	// [][][][]
+	// [][][][]
+
 
 	if (nullptr != Parent_)
 	{
 		TransformData_.ParentSetting(Parent_->TransformData_.WorldWorld_);
 	}
-	else
-	{
+	else {
 		TransformData_.RootCalculation();
 	}
 
@@ -28,9 +40,9 @@ void GameEngineTransform::TransformUpdate()
 	ColData_.OBB.Orientation = TransformData_.vWorldRotation_.ToDegreeQuaternion().DxXmfloat4;
 	ColData_.OBB.Center = TransformData_.vWorldPosition_.DxXmfloat3;
 
-	for (GameEngineTransform* ChildTransform : Childs_)
+	for (GameEngineTransform* ChildTransform_ : Childs_)
 	{
-		ChildTransform->TransformUpdate();
+		ChildTransform_->TransformUpdate();
 	}
 }
 
@@ -38,11 +50,10 @@ void GameEngineTransform::AllChildCalculationScaling()
 {
 	for (auto& Child : Childs_)
 	{
-		// 부모의 크기가 바뀌었다는 것은
-		// 자식의 월드포지션이 바뀌었다는 것을 의미한다.
+		// 부모의 크기가 바뀐것이고 부모의 크기가 바뀌었다는것은
+		// 자식의 월드 포지션이 바뀌었다는것을 의미한다.
 		Child->CalculationWorldScaling();
 		Child->CalculationWorldPosition();
-
 		Child->AllChildCalculationScaling();
 	}
 }
@@ -53,7 +64,6 @@ void GameEngineTransform::AllChildCalculationRotation()
 	{
 		Child->CalculationWorldRotation();
 		Child->CalculationWorldPosition();
-
 		Child->AllChildCalculationRotation();
 	}
 }
@@ -63,20 +73,23 @@ void GameEngineTransform::AllChildCalculationPosition()
 	for (auto& Child : Childs_)
 	{
 		Child->CalculationWorldPosition();
-
 		Child->AllChildCalculationPosition();
 	}
 }
 
+void GameEngineTransform::CalculationWorldScaling()
+{
+	TransformData_.vWorldScaling_ = Parent_->TransformData_.vWorldScaling_ * TransformData_.vLocalScaling_;
+}
 
 void GameEngineTransform::CalculationLocalScaling()
 {
-	TransformData_.vLocalScaling_ = TransformData_.vWorldScaling_ / Parent_->TransformData_.vLocalScaling_;
+	TransformData_.vLocalScaling_ = TransformData_.vWorldScaling_ / Parent_->TransformData_.vWorldScaling_;
 }
 
-void GameEngineTransform::CalculationWorldScaling()
+void GameEngineTransform::CalculationWorldRotation()
 {
-	TransformData_.vWorldScaling_ = TransformData_.vLocalScaling_ * Parent_->TransformData_.vWorldScaling_;
+	TransformData_.vWorldRotation_ = Parent_->TransformData_.vWorldRotation_ + TransformData_.vLocalRotation_;
 }
 
 void GameEngineTransform::CalculationLocalRotation()
@@ -84,14 +97,8 @@ void GameEngineTransform::CalculationLocalRotation()
 	TransformData_.vLocalRotation_ = TransformData_.vWorldRotation_ - Parent_->TransformData_.vWorldRotation_;
 }
 
-void GameEngineTransform::CalculationWorldRotation()
-{
-	TransformData_.vWorldRotation_ = TransformData_.vWorldRotation_ + Parent_->TransformData_.vWorldRotation_;
-}
-
 void GameEngineTransform::CalculationLocalPosition()
 {
-	// CalculationWorldPosition() 의 역으로 계산
 	float4 WorldPostion = TransformData_.vWorldPosition_ - Parent_->TransformData_.vWorldPosition_;
 
 	WorldPostion.Rotate3DDegree(-Parent_->TransformData_.vWorldRotation_);
@@ -100,6 +107,7 @@ void GameEngineTransform::CalculationLocalPosition()
 
 	TransformData_.vLocalPosition_ = WorldPostion;
 }
+
 
 void GameEngineTransform::CalculationWorldPosition()
 {
@@ -116,110 +124,120 @@ void GameEngineTransform::CalculationWorldPosition()
 
 void GameEngineTransform::SetLocalScaling(const float4& _Value)
 {
-	TransformData_.vLocalScaling_ = _Value;
-
-	if (nullptr == Parent_)
-	{
-		TransformData_.vWorldScaling_ = _Value;
-	}
-	else
-	{
-		CalculationWorldScaling();
-	}
-
-	AllChildCalculationScaling();
-	TransformUpdate();
-}
-
-void GameEngineTransform::SetWorldScaling(const float4& _Value)
-{
-	TransformData_.vWorldScaling_ = _Value;
-
 	if (nullptr == Parent_)
 	{
 		TransformData_.vLocalScaling_ = _Value;
-	}
-	else
-	{
-		CalculationLocalScaling();
+		TransformData_.vWorldScaling_ = _Value;
+		AllChildCalculationScaling();
+		TransformUpdate();
+		return;
 	}
 
+	TransformData_.vLocalScaling_ = _Value;
+	CalculationWorldScaling();
 	AllChildCalculationScaling();
 	TransformUpdate();
 }
 
-void GameEngineTransform::SetLocalRotation(const float4& _Value)
-{
-	TransformData_.vLocalRotation_ = _Value;
 
+
+void GameEngineTransform::SetWorldScaling(const float4& _Value)
+{
 	if (nullptr == Parent_)
 	{
-		TransformData_.vWorldRotation_ = _Value;
-	}
-	else
-	{
-		CalculationWorldRotation();
+		TransformData_.vLocalScaling_ = _Value;
+		TransformData_.vWorldScaling_ = _Value;
+		AllChildCalculationScaling();
+		TransformUpdate();
+		return;
 	}
 
-	AllChildCalculationRotation();
+	TransformData_.vWorldScaling_ = _Value;
+	CalculationLocalScaling();
+	AllChildCalculationScaling();
+
 	TransformUpdate();
 }
 
-void GameEngineTransform::SetWorldRotation(const float4& _Value)
+// 무모건 디그리
+void GameEngineTransform::SetLocalRotationDegree(const float4& _Value)
 {
-	TransformData_.vWorldRotation_ = _Value;
-
 	if (nullptr == Parent_)
 	{
 		TransformData_.vLocalRotation_ = _Value;
-	}
-	else
-	{
-		CalculationLocalRotation();
+		TransformData_.vWorldRotation_ = _Value;
+		AllChildCalculationRotation();
+		TransformUpdate();
+		return;
 	}
 
+	TransformData_.vLocalRotation_ = _Value;
+	CalculationWorldRotation();
 	AllChildCalculationRotation();
+
 	TransformUpdate();
 }
 
-void GameEngineTransform::SetLocalPosition(const float4& _Value)
+void GameEngineTransform::SetWorldRotationDegree(const float4& _Value)
 {
-	TransformData_.vLocalPosition_ = _Value;
-
 	if (nullptr == Parent_)
 	{
-		TransformData_.vWorldPosition_ = _Value;
-	}
-	else
-	{
-		CalculationWorldPosition();
+		TransformData_.vLocalRotation_ = _Value;
+		TransformData_.vWorldRotation_ = _Value;
+		AllChildCalculationRotation();
+		TransformUpdate();
+		return;
 	}
 
+	TransformData_.vWorldRotation_ = _Value;
+	CalculationLocalRotation();
+	AllChildCalculationRotation();
+
+	TransformUpdate();
+}
+
+
+void GameEngineTransform::SetLocalPosition(const float4& _Value)
+{
+	if (nullptr == Parent_)
+	{
+		TransformData_.vLocalPosition_ = _Value;
+		TransformData_.vWorldPosition_ = _Value;
+		AllChildCalculationPosition();
+		TransformUpdate();
+		return;
+	}
+
+	TransformData_.vLocalPosition_ = _Value;
+	CalculationWorldPosition();
 	AllChildCalculationPosition();
+
 	TransformUpdate();
 }
 
 void GameEngineTransform::SetWorldPosition(const float4& _Value)
 {
-	TransformData_.vWorldPosition_ = _Value;
-
 	if (nullptr == Parent_)
 	{
 		TransformData_.vLocalPosition_ = _Value;
-	}
-	else
-	{
-		CalculationLocalPosition();
+		TransformData_.vWorldPosition_ = _Value;
+		AllChildCalculationPosition();
+		TransformUpdate();
+		return;
 	}
 
-	AllChildCalculationPosition();
+	TransformData_.vWorldPosition_ = _Value;
+	CalculationLocalPosition();
+	AllChildCalculationRotation();
+
 	TransformUpdate();
 }
 
 void GameEngineTransform::DetachChildTransform(GameEngineTransform* _Transform)
 {
-	std::vector<GameEngineTransform*>::iterator StartIter = Childs_.begin();
-	std::vector<GameEngineTransform*>::iterator EndIter = Childs_.end();
+	// 지역변수 할당을 줄이려고
+	static std::vector<GameEngineTransform*>::iterator StartIter = Childs_.begin();
+	static std::vector<GameEngineTransform*>::iterator EndIter = Childs_.end();
 
 	for (; StartIter != EndIter; )
 	{
@@ -232,11 +250,12 @@ void GameEngineTransform::DetachChildTransform(GameEngineTransform* _Transform)
 		StartIter = Childs_.erase(StartIter);
 		EndIter = Childs_.end();
 	}
+
 }
 
 void GameEngineTransform::AttachTransform(GameEngineTransform* _Transform)
 {
-	// 이제부터 _Parent를 따라다닌다.
+	// 나는 이제부터 _Parent를 따라다녀야 합니다.
 
 	if (nullptr != Parent_)
 	{
@@ -245,4 +264,12 @@ void GameEngineTransform::AttachTransform(GameEngineTransform* _Transform)
 
 	Parent_ = _Transform;
 	Parent_->Childs_.push_back(this);
+}
+
+void GameEngineTransform::Copy(const GameEngineTransform& _Other)
+{
+	TransformData_ = _Other.TransformData_;
+	ColData_ = _Other.ColData_;
+	Parent_ = _Other.Parent_;
+	Childs_ = _Other.Childs_;
 }
