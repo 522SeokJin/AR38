@@ -11,6 +11,7 @@
 #include "QuickSlotUI.h"
 #include "QuickSlotKeyUI.h"
 #include "InventoryUI.h"
+#include "SkillUI.h"
 
 #include "Mouse.h"
 #include "Player.h"
@@ -24,6 +25,7 @@ LithHarborLevel::LithHarborLevel()
 	, RenderWindow_(nullptr)
 	, Inventory_(nullptr)
 	, Status_(nullptr)
+	, Skill_(nullptr)
 	, TaxiDlg_(nullptr)
 	, Taxi_(nullptr)
 {
@@ -89,6 +91,12 @@ void LithHarborLevel::LevelStart()
 		Inventory_ = CreateActor<InventoryUI>();
 		Inventory_->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
 		Inventory_->Off();
+	}
+
+	{
+		Skill_ = CreateActor<SkillUI>();
+		Skill_->GetTransform()->SetWorldPosition({ 200.0f, 200.0f });
+		//Skill_->Off();
 	}
 
 	{
