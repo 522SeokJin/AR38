@@ -41,7 +41,6 @@ void PerionRoomLevel::LevelStart()
 		<GameEngineRenderWindow>("RenderWindow");
 
 	GetMainCamera()->SetProjectionMode(ProjectionMode::ORTHOGRAPHIC);
-	GetMainCameraActor()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
 
 	{
 		Cursor_ = CreateActor<Mouse>();
@@ -82,7 +81,8 @@ void PerionRoomLevel::LevelStart()
 	{
 		PerionRoom* Actor = CreateActor<PerionRoom>();
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(
-			Actor->GetPixelCollide()->GetImageSize().halffloat4().InvertY());
+			{ Actor->GetPixelCollide()->GetImageSize().halffloat4().x,
+			-Actor->GetPixelCollide()->GetImageSize().halffloat4().y, -100.0f });
 	}
 
 	{
