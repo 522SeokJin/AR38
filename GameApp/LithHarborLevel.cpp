@@ -96,7 +96,7 @@ void LithHarborLevel::LevelStart()
 	{
 		Skill_ = CreateActor<SkillUI>();
 		Skill_->GetTransform()->SetWorldPosition({ 200.0f, 200.0f });
-		//Skill_->Off();
+		Skill_->Off();
 	}
 
 	{
