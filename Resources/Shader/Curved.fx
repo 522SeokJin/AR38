@@ -30,12 +30,14 @@ float4 Curved_PS(VertexOut _in) : SV_Target0
     float4 ColorUV = TexUV.Sample(PointSmp, _in.Texcoord.xy);
     
     float2 CalUV = _in.Texcoord.xy;
-
-    CalUV.y = CalUV.y + (CalUV.y * ColorUV.x * 0.25f);
-        
-    if (1.0f < CalUV.y)
-    {
-        CalUV.y -= 1.0f;
+    
+    if (ColorUV.x > 0.5f)
+    {                                   // 가중치
+        CalUV.y += (ColorUV.x - 0.5f) * 0.3f;
+    }
+    else if (ColorUV.x < 0.5f)
+    {                                   // 가중치
+        CalUV.y -= (0.5f - ColorUV.x) * 0.3f;
     }
     
     float4 Color = Tex.Sample(PointSmp, CalUV);
