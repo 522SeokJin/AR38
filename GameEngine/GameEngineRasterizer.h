@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineBase/GameEngineObjectNameBase.h>
 #include "GameEngineDevice.h"
+#include <GameEngine/GameEngineWindow.h>
 
 // Ό³Έν : 
 class GameEngineRasterizer : public GameEngineObjectNameBase
@@ -8,6 +9,16 @@ class GameEngineRasterizer : public GameEngineObjectNameBase
 public:
 	GameEngineRasterizer();
 	~GameEngineRasterizer();
+
+	void AddWindowSizeViewPort()
+	{
+		ViewPort_.Height = GameEngineWindow::GetInst().GetSize().y;
+		ViewPort_.Width = GameEngineWindow::GetInst().GetSize().x;
+		ViewPort_.TopLeftX = 0;
+		ViewPort_.TopLeftY = 0;
+		ViewPort_.MinDepth = 0;
+		ViewPort_.MaxDepth = 1.0f;
+	}
 
 	void SetViewPort(float _Width, float _Height, float _TopLeftX,
 		float _TopLeftY, float _MinDepth, float _MaxDepth)

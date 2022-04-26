@@ -97,7 +97,6 @@ public:
 	void SetFrameCallBack(const std::string& _Name, int _Index,
 		std::function<void()> _CallBack);
 
-	void ImageRendererStart();
 
 protected:
 	GameEngineImageRenderer(const GameEngineImageRenderer& _other) = delete; 
@@ -105,6 +104,7 @@ protected:
 	GameEngineImageRenderer& operator=(const GameEngineImageRenderer& _other) = delete;
 	GameEngineImageRenderer& operator=(const GameEngineImageRenderer&& _other) = delete;
 
+	void SetRenderingPipeLineSettingNext() override;
 	void Update(float _DeltaTime) override;
 
 private:

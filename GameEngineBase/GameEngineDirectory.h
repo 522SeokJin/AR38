@@ -50,6 +50,8 @@ public:
 	// 모든 하위 디렉토리의 파일 목록을 가져온다
 	std::vector<GameEngineFile> GetAllDirFile(const std::string& _filter = "*");
 
+	std::vector<GameEngineDirectory> GetAllDirectory(const std::string& _filter = "*");
+
 	std::vector<GameEngineFile> GetAllDir();
 };
 

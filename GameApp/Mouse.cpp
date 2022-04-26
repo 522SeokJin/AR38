@@ -19,7 +19,6 @@ void Mouse::Start()
 	MouseActor::Start();
 
 	GetUIRenderer()->SetRenderingPipeLine("PointTextureUI");
-	GetUIRenderer()->ImageRendererStart();
 
 	GetUIRenderer()->SetRenderGroup(1000);
 	GetUIRenderer()->GetTransform()->SetLocalPosition({12.0f, -14.0f});

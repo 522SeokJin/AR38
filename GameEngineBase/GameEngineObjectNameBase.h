@@ -25,7 +25,7 @@ public:
 	~GameEngineObjectNameBase();
 
 protected:		// delete function
-	GameEngineObjectNameBase(const GameEngineObjectNameBase& _other) = delete;
+	GameEngineObjectNameBase(const GameEngineObjectNameBase& _other);
 	GameEngineObjectNameBase(GameEngineObjectNameBase&& _other) noexcept = delete; 
 	GameEngineObjectNameBase& operator=(const GameEngineObjectNameBase& _other) = delete; 
 	GameEngineObjectNameBase& operator=(const GameEngineObjectNameBase&& _other) = delete;

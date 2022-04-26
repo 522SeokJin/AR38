@@ -64,6 +64,8 @@ void GameEngineRenderer::SetRenderingPipeLine(const std::string& _Value)
 			ShaderHelper.SettingConstantBufferLink("TransformData", GetTransform()->GetTransformData());
 		}
 	}
+
+	SetRenderingPipeLineSettingNext();
 }
 
 void GameEngineRenderer::FileCompile()

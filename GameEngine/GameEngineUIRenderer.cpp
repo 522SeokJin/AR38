@@ -52,7 +52,6 @@ void GameEngineUIRenderer::Start()
 	GetLevel()->GetUICamera()->PushRenderer(GetOrder(), this);
 
 	SetRenderingPipeLine("TextureUI");
-	ImageRendererStart();
 
 	if (nullptr == FontTarget_
 		&& UIRendererCount_ == 1)

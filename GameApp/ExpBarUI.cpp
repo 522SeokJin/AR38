@@ -35,7 +35,6 @@ void ExpBarUI::Start()
 	{
 		ExpBarRenderer_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		ExpBarRenderer_->SetRenderingPipeLine("ProgressBar");
-		ExpBarRenderer_->ImageRendererStart();
 		ExpBarRenderer_->ShaderHelper.SettingConstantBufferLink("ProgressBarCBuffer", ExpBarValue_);
 		ExpBarRenderer_->SetImage("mainBar.EXPBar.1024.layer_gauge.png");
 		ExpBarRenderer_->SetLocalPosition({8.0f, -7.0f});

@@ -18,7 +18,6 @@ void SkillUI::Start()
 	{
 		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>();
 		Renderer->SetRenderingPipeLine("PointTextureUI");
-		Renderer->ImageRendererStart();
 		Renderer->SetImage("Skill.main.backgrndui.png");
 		Renderer->TextSetting("µ¸¿ò", "Àü»ç", 11, float4::WHITE, { 16.0f, 111.0f });
 	}

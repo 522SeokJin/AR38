@@ -50,7 +50,6 @@ void StatusUI::Start()
 	{
 		HPBar_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		HPBar_->SetRenderingPipeLine("ProgressBar");
-		HPBar_->ImageRendererStart();
 		HPBar_->ShaderHelper.SettingConstantBufferLink("ProgressBarCBuffer", HPBarValue_);
 		HPBar_->SetImage("mainBar.status.gauge.hp.layer_0.png");
 		HPBar_->SetLocalPosition({ 10.0f, 0.0f });
@@ -60,7 +59,6 @@ void StatusUI::Start()
 		MPBar_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		MPBar_->SetRenderingPipeLine("ProgressBar");
 		MPBar_->ShaderHelper.SettingConstantBufferLink("ProgressBarCBuffer", MPBarValue_);
-		MPBar_->ImageRendererStart();
 		MPBar_->SetImage("mainBar.status.gauge.mp.layer_0.png");
 		MPBar_->SetLocalPosition({ 10.0f, -16.0f });
 	}
@@ -86,7 +84,6 @@ void StatusUI::Start()
 			GameEngineUIRenderer* Renderer =
 				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 			Renderer->SetRenderingPipeLine("PointTextureUI");
-			Renderer->ImageRendererStart();
 
 			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
 			Renderer->Off();
@@ -102,7 +99,6 @@ void StatusUI::Start()
 			GameEngineUIRenderer* Renderer =
 				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 			Renderer->SetRenderingPipeLine("PointTextureUI");
-			Renderer->ImageRendererStart();
 
 			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
 			Renderer->Off();
@@ -118,7 +114,6 @@ void StatusUI::Start()
 			GameEngineUIRenderer* Renderer =
 				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 			Renderer->SetRenderingPipeLine("PointTextureUI");
-			Renderer->ImageRendererStart();
 
 			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
 			Renderer->Off();
@@ -134,7 +129,6 @@ void StatusUI::Start()
 			GameEngineUIRenderer* Renderer =
 				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 			Renderer->SetRenderingPipeLine("PointTextureUI");
-			Renderer->ImageRendererStart();
 
 			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
 			Renderer->Off();

@@ -43,6 +43,9 @@
     <ClInclude Include="GameEngineSound.h">
       <Filter>Media</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineThread.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineObjectBase.cpp">
@@ -87,6 +90,9 @@
     <ClCompile Include="GameEngineSound.cpp">
       <Filter>Media</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineThread.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Object">
@@ -124,6 +130,9 @@
     </Filter>
     <Filter Include="Lib\FMOD\Release">
       <UniqueIdentifier>{16b45b7a-83c8-4ca6-b9e7-6fe6c8dd022a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{672c8ad9-8b1b-4fc0-8f97-13dbaf5f6734}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

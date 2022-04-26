@@ -10,3 +10,9 @@ GameEngineObjectNameBase::~GameEngineObjectNameBase() // default destructer µðÆú
 {
 
 }
+
+GameEngineObjectNameBase::GameEngineObjectNameBase(const GameEngineObjectNameBase& _other)
+	: name_(_other.name_)
+{
+
+}

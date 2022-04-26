@@ -7,7 +7,6 @@ void InventoryUI::CreateRenderer()
 	{
 		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		Renderer->SetRenderingPipeLine("PointTextureUI");
-		Renderer->ImageRendererStart();
 
 		Renderer->SetImage("Item.backgrnd.png");
 	}
@@ -27,7 +26,6 @@ void InventoryUI::CreateRenderer()
 	{
 		EquipmentRenderer_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		EquipmentRenderer_->SetRenderingPipeLine("PointTextureUI");
-		EquipmentRenderer_->ImageRendererStart();
 
 		EquipmentRenderer_->SetImage("Item.Tab.enabled.0.png");
 		EquipmentRenderer_->SetLocalPosition({ -75.0f + 0.0f * 30.0f, 154.0f - 1.0f });
@@ -37,7 +35,6 @@ void InventoryUI::CreateRenderer()
 		// disabled size diffrent -> y : 19 -> 17
 		UseableRenderer_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		UseableRenderer_->SetRenderingPipeLine("PointTextureUI");
-		UseableRenderer_->ImageRendererStart();
 
 		UseableRenderer_->SetImage("Item.Tab.disabled.1.png");
 		UseableRenderer_->SetLocalPosition({ -75.0f + 1.0f * 30.0f, 154.0f - 1.0f });
@@ -46,7 +43,6 @@ void InventoryUI::CreateRenderer()
 	{
 		EtcRenderer_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		EtcRenderer_->SetRenderingPipeLine("PointTextureUI");
-		EtcRenderer_->ImageRendererStart();
 
 		EtcRenderer_->SetImage("Item.Tab.disabled.2.png");
 		EtcRenderer_->SetLocalPosition({ -75.0f + 2.0f * 30.0f, 154.0f - 1.0f });

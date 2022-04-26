@@ -48,7 +48,6 @@ void JobsNPC_Dlg::Start()
 	{
 		NPCRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();
 		NPCRenderer_->SetRenderingPipeLine("PointTextureUI");
-		NPCRenderer_->ImageRendererStart();
 		NPCRenderer_->SetImage("JobsNPC_Dlg.png");
 		NPCRenderer_->SetLocalPosition({ -183.0f, 11.0f });
 	}
@@ -56,7 +55,6 @@ void JobsNPC_Dlg::Start()
 	{
 		BtnYesRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();
 		BtnYesRenderer_->SetRenderingPipeLine("PointTextureUI");
-		BtnYesRenderer_->ImageRendererStart();
 		BtnYesRenderer_->SetImage("UtilDlgEx.BtYes.normal.0.png");
 		BtnYesRenderer_->SetLocalPosition({ 158.0f, -80.0f });
 		BtnYesRenderer_->Off();
@@ -65,7 +63,6 @@ void JobsNPC_Dlg::Start()
 	{
 		BtnNoRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();
 		BtnNoRenderer_->SetRenderingPipeLine("PointTextureUI");
-		BtnNoRenderer_->ImageRendererStart();
 		BtnNoRenderer_->SetImage("UtilDlgEx.BtNo.normal.0.png");
 		BtnNoRenderer_->SetLocalPosition({ 158.0f + 65.0f, -80.0f });
 		BtnNoRenderer_->Off();

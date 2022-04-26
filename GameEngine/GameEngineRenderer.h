@@ -15,6 +15,9 @@ public:
 	~GameEngineRenderer();
 
 	void SetRenderingPipeLine(const std::string& _Value);
+
+	virtual void SetRenderingPipeLineSettingNext() {}
+
 	void FileCompile();
 
 	virtual void SetRenderGroup(int _Order);
