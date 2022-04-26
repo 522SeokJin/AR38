@@ -77,6 +77,8 @@ public:
 		AllLevel_[_Level]->LevelStart();
 	}
 
+	static void LevelDestroy(const std::string& _Level);
+
 	static GameEngineLevel* CurrentLevel()
 	{
 		return CurrentLevel_;

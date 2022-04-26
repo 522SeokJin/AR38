@@ -21,34 +21,7 @@ GameEngineLevel::GameEngineLevel()
 
 GameEngineLevel::~GameEngineLevel()
 {
-	for (auto& Event : AllEvent_)
-	{
-		delete Event;
-	}
-
-	AllEvent_.clear();
-
-	for (auto& Effects : PostRender_)
-	{
-		for (auto& Effect : Effects.second)
-		{
-			delete Effect;
-		}
-	}
-
-	for (std::pair<int, std::list<GameEngineActor*>> Pair : ActorList_)
-	{
-		std::list<GameEngineActor*>& Actors = Pair.second;
-
-		for (GameEngineActor* Actor : Actors)
-		{
-			if (nullptr != Actor)
-			{
-				delete Actor;
-				Actor = nullptr;
-			}
-		}
-	}
+	AllClear();
 }
 
 CameraActor* GameEngineLevel::GetMainCameraActor()
@@ -303,6 +276,38 @@ void GameEngineLevel::ChangeCollisionGroup(int _Group, GameEngineCollision* _Col
 
 	CollisionList_[_Collision->GetOrder()].push_back(_Collision);
 
+}
+
+void GameEngineLevel::AllClear()
+{
+	for (auto& Event : AllEvent_)
+	{
+		delete Event;
+	}
+
+	AllEvent_.clear();
+
+	for (auto& Effects : PostRender_)
+	{
+		for (auto& Effect : Effects.second)
+		{
+			delete Effect;
+		}
+	}
+
+	for (std::pair<int, std::list<GameEngineActor*>> Pair : ActorList_)
+	{
+		std::list<GameEngineActor*>& Actors = Pair.second;
+
+		for (GameEngineActor* Actor : Actors)
+		{
+			if (nullptr != Actor)
+			{
+				delete Actor;
+				Actor = nullptr;
+			}
+		}
+	}
 }
 
 void GameEngineLevel::PushDebugRender(GameEngineTransform* _Transform, CollisionType _Type)

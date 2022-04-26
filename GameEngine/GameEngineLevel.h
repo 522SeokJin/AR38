@@ -125,6 +125,8 @@ public:
 		return NewPost;
 	}
 
+	void AllClear();
+
 private:
 	std::map<std::string, std::vector<GameEnginePostProcessRender*>> PostRender_;
 };

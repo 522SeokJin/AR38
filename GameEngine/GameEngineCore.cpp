@@ -130,6 +130,7 @@ void GameEngineCore::Loop()
 	GameEngineWindow::GetInst().Loop(&GameEngineCore::MainLoop);
 }
 
+
 void GameEngineCore::LevelChange(const std::string& _Level)
 {
 	GameEngineLevel* FindLevel = LevelFind(_Level);
@@ -152,4 +153,19 @@ GameEngineLevel* GameEngineCore::LevelFind(const std::string& _Level)
 	}
 
 	return nullptr;
+}
+
+void GameEngineCore::LevelDestroy(const std::string& _Level)
+{
+	GameEngineLevel* Level = LevelFind(_Level);
+
+	if (nullptr == Level)
+	{
+		GameEngineDebug::MsgBoxError("존재하지 않는 레벨을 지우려고 했습니다.");
+		return;
+	}
+
+	AllLevel_.erase(AllLevel_.find(_Level));
+	delete Level;
+
 }
