@@ -46,6 +46,12 @@
     <ClInclude Include="GameEngineThread.h">
       <Filter>Thread</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineThreadQueue.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineIocp.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineObjectBase.cpp">
@@ -91,6 +97,12 @@
       <Filter>Media</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineThread.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineThreadQueue.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineIocp.cpp">
       <Filter>Thread</Filter>
     </ClCompile>
   </ItemGroup>

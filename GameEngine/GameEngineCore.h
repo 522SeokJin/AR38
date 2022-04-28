@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineBase/GameEngineObjectBase.h>
 #include "GameEngineLevel.h"
+#include <GameEngineBase\GameEngineThreadQueue.h>
 
 
 // Ό³Έν : 
@@ -91,6 +92,7 @@ private:
 	static std::map<std::string, GameEngineLevel*> AllLevel_;
 	static GameEngineLevel* CurrentLevel_;
 	static GameEngineLevel* NextLevel_;
+	static GameEngineThreadQueue ThreadQueue_;
 
 };
 

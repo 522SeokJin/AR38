@@ -13,6 +13,8 @@
 // static member
 GameEngineCore* GameEngineCore::MainCore_ = nullptr;
 
+GameEngineThreadQueue GameEngineCore::ThreadQueue_ = GameEngineThreadQueue("GameEngineThread");
+
 // level manager
 std::map<std::string, GameEngineLevel*> GameEngineCore::AllLevel_;
 GameEngineLevel* GameEngineCore::CurrentLevel_ = nullptr;
@@ -62,6 +64,8 @@ void GameEngineCore::EngineDestroy()
 			Level.second = nullptr;
 		}
 	}
+
+	ThreadQueue_.Destroy();
 
 	GameEngineManagerHelper::ManagerRelease();
 	GameEngineInput::Destroy();
