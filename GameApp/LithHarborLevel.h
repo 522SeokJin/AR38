@@ -28,6 +28,8 @@ protected:
 	LithHarborLevel& operator=(const LithHarborLevel&& _other) = delete;
 
 private:
+	void CreateActorLevel();
+
 	Mouse* Cursor_;
 	Player* Player_;
 	GameEngineRenderWindow* RenderWindow_;

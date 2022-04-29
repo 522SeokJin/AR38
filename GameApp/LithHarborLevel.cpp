@@ -4,6 +4,7 @@
 #include <GameEngine/GameEngineWindow.h>
 #include <GameEngine/GameEngineGUI.h>
 #include <GameEngine/GameEngineRenderWindow.h>
+#include "UserGame.h"
 
 #include "MenuUI.h"
 #include "ExpBarUI.h"
@@ -45,76 +46,20 @@ void LithHarborLevel::LevelStart()
 	GetMainCamera()->SetProjectionMode(ProjectionMode::ORTHOGRAPHIC);
 	GetMainCameraActor()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
 
-	{
-		Cursor_ = CreateActor<Mouse>();
-	}
-
-	{
-		LithHarbor* Actor = CreateActor<LithHarbor>();
-	}
-
-	{
-		Player_ = CreateActor<Player>();
-		Player_->GetTransform()->SetWorldPosition({ 1935.0f, -1298.0f });
-		GetMainCameraActor()->GetTransform()->SetWorldPosition(
-			Player_->GetTransform()->GetLocalPosition());
-		Player_->Off();
-	}
 	
-	{
-		Status_ = CreateActor<StatusUI>();
-		Status_->GetTransform()->SetWorldPosition({ 5.0f, 45.0f - GameEngineWindow::GetInst().GetSize().hy() });
-	}
-
-	{
-		ExpBarUI* ExpBar = CreateActor<ExpBarUI>();
-		ExpBar->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
-		ExpBar->LinkStatus(Status_);
-	}
-
-	{
-		MenuUI* Actor = CreateActor<MenuUI>();
-		Actor->GetTransform()->SetWorldPosition({ 133.0f, -355.5f });
-	}
-
-	{
-		QuickSlotUI* Actor = CreateActor<QuickSlotUI>();
-		Actor->GetTransform()->SetWorldPosition({ 617.0f, -337.5f });
-	}
-
-	{
-		QuickSlotKeyUI* Actor = CreateActor<QuickSlotKeyUI>();
-		Actor->GetTransform()->SetWorldPosition({ 338.5f, -310.0f });
-	}
-
-	{
-		Inventory_ = CreateActor<InventoryUI>();
-		Inventory_->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
-		Inventory_->Off();
-	}
-
-	{
-		Skill_ = CreateActor<SkillUI>();
-		Skill_->GetTransform()->SetWorldPosition({ 200.0f, 200.0f });
-		Skill_->Off();
-	}
-
-	{
-		TaxiDlg_ = CreateActor<TaxiDlg>();
-		TaxiDlg_->PushScript(L"페리온으로 이동하시겠습니까?");
-		TaxiDlg_->PushScript(L"언제든지 저희 택시를 이용해 주세요~");
-		TaxiDlg_->Off();
-	}
-
-	{
-		Taxi_ = CreateActor<LithHarborTaxi>();
-		Taxi_->GetTransform()->SetWorldPosition({ 3064.5f, -626.0f });
-		Taxi_->SetDlg(TaxiDlg_);
-	}
 }
 
 void LithHarborLevel::LevelUpdate(float _DeltaTime)
 {
+	static bool CreateActorCheck = false;
+
+	if (0 >= UserGame::LoadingFolder
+		&& false == CreateActorCheck)
+	{
+		CreateActorLevel();
+		CreateActorCheck = true;
+	}
+
 	if (false == GetMainCameraActor()->IsFreeCameraMode())
 	{
 		GetMainCameraActor()->GetTransform()->
@@ -168,6 +113,77 @@ void LithHarborLevel::LevelChangeEndEvent()
 
 void LithHarborLevel::LevelChangeStartEvent()
 {
+}
+
+void LithHarborLevel::CreateActorLevel()
+{
+	{
+		Cursor_ = CreateActor<Mouse>();
+	}
+
+	{
+		LithHarbor* Actor = CreateActor<LithHarbor>();
+	}
+
+	{
+		Player_ = CreateActor<Player>();
+		Player_->GetTransform()->SetWorldPosition({ 1935.0f, -1298.0f });
+		GetMainCameraActor()->GetTransform()->SetWorldPosition(
+			Player_->GetTransform()->GetLocalPosition());
+		Player_->Off();
+	}
+
+	{
+		Status_ = CreateActor<StatusUI>();
+		Status_->GetTransform()->SetWorldPosition({ 5.0f, 45.0f - GameEngineWindow::GetInst().GetSize().hy() });
+	}
+
+	{
+		ExpBarUI* ExpBar = CreateActor<ExpBarUI>();
+		ExpBar->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
+		ExpBar->LinkStatus(Status_);
+	}
+
+	{
+		MenuUI* Actor = CreateActor<MenuUI>();
+		Actor->GetTransform()->SetWorldPosition({ 133.0f, -355.5f });
+	}
+
+	{
+		QuickSlotUI* Actor = CreateActor<QuickSlotUI>();
+		Actor->GetTransform()->SetWorldPosition({ 617.0f, -337.5f });
+	}
+
+	{
+		QuickSlotKeyUI* Actor = CreateActor<QuickSlotKeyUI>();
+		Actor->GetTransform()->SetWorldPosition({ 338.5f, -310.0f });
+	}
+
+	{
+		Inventory_ = CreateActor<InventoryUI>();
+		Inventory_->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
+		Inventory_->Off();
+	}
+
+	{
+		Skill_ = CreateActor<SkillUI>();
+		Skill_->GetTransform()->SetWorldPosition({ 200.0f, 200.0f });
+		Skill_->Off();
+	}
+
+	{
+		TaxiDlg_ = CreateActor<TaxiDlg>();
+		TaxiDlg_->PushScript(L"페리온으로 이동하시겠습니까?");
+		TaxiDlg_->PushScript(L"언제든지 저희 택시를 이용해 주세요~");
+		TaxiDlg_->Off();
+	}
+
+	{
+		Taxi_ = CreateActor<LithHarborTaxi>();
+		Taxi_->GetTransform()->SetWorldPosition({ 3064.5f, -626.0f });
+		Taxi_->SetDlg(TaxiDlg_);
+	}
+
 	GlobalValue::CurrentPlayer = Player_;
 	GlobalValue::CurrentMouse = Cursor_;
 	GlobalValue::CurrentStatusUI = Status_;

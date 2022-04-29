@@ -5,6 +5,19 @@
 #include <GameEngine/GameEngineWindow.h>
 #include <GameEngine/GameEngineFontManager.h>
 
+void TextureLoading(GameEngineDirectory Dir)
+{
+	std::vector<GameEngineFile> AllFile = Dir.GetAllFile("png");
+
+	for (size_t i = 0; i < AllFile.size(); i++)
+	{
+		GameEngineTextureManager::GetInst().Load(AllFile[i].GetFullPath());
+		// Sleep(1);
+	}
+
+	--UserGame::LoadingFolder;
+}
+
 void UserGame::ResourceLoad()
 {
 	GameEngineFontManager::GetInst().Load("±Ã¼­");
@@ -23,16 +36,29 @@ void UserGame::ResourceLoad()
 		GameEngineSoundManager::GetInst().Load(AllSound[i].GetFullPath());
 	}
 
-	Dir.MoveParent();
-	Dir.MoveChild("Image");
-	Dir.MoveChild("Image");
 
-	std::vector<GameEngineFile> AllImage = Dir.GetAllDirFile("png");
-
-	for (size_t i = 0; i < AllImage.size(); i++)
 	{
-		GameEngineTextureManager::GetInst().Load(AllImage[i].GetFullPath());
+		Dir.MoveParent();
+		Dir.MoveChild("Image");
+		Dir.MoveChild("Image");
+
+		std::vector<GameEngineDirectory> AllDir = Dir.GetAllDirectoryRecursive();
+		LoadingFolder = AllDir.size();
+
+		for (size_t i = 0; i < AllDir.size(); i++)
+		{
+			GameEngineCore::ThreadQueue.JobPost(std::bind(TextureLoading, AllDir[i]));
+		}
+
+		//std::vector<GameEngineFile> AllImage = Dir.GetAllDirFile("png");
+
+		//for (size_t i = 0; i < AllImage.size(); i++)
+		//{
+		//	GameEngineTextureManager::GetInst().Load(AllImage[i].GetFullPath());
+		//}
+
 	}
+
 
 	Dir.MoveParent();
 	Dir.MoveChild("FolderAnimation");

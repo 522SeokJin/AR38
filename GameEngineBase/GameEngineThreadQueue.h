@@ -22,7 +22,12 @@ public:
 		{
 			SYSTEM_INFO Info;
 			GetSystemInfo(&Info);
-			ThreadCount_ = Info.dwNumberOfProcessors;
+			ThreadCount_ = Info.dwNumberOfProcessors - 2;
+		}
+
+		if (ThreadCount_ <= 0)
+		{
+			ThreadCount_ = 1;
 		}
 
 		Iocp_.Start(ThreadCount_);
@@ -68,14 +73,7 @@ public:
 		Threads_.clear();
 	}
 
-
-
-
-
-
 protected:
-
-
 
 private:
 	static void JobWorkThread(GameEngineThread* Thread, GameEngineIocp* _Iocp)
