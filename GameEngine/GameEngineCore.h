@@ -37,6 +37,8 @@ public:
 		NewUserGame.EngineDestroy();
 	}
 
+	static GameEngineThreadQueue ThreadQueue;
+
 protected:
 	GameEngineCore();
 	~GameEngineCore();
@@ -92,7 +94,6 @@ private:
 	static std::map<std::string, GameEngineLevel*> AllLevel_;
 	static GameEngineLevel* CurrentLevel_;
 	static GameEngineLevel* NextLevel_;
-	static GameEngineThreadQueue ThreadQueue_;
 
 };
 
