@@ -34,7 +34,7 @@ void LithHarbor::Update(float _DeltaTime)
 {
 }
 
-void LithHarbor::LevelChangeStartEvent()
+void LithHarbor::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 	SetPixelCollideImage(PixelCollide_);
 	SetCurrentMap(this);

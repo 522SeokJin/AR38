@@ -26,7 +26,7 @@ protected:
 	Map& operator=(const Map&& _other) = delete;
 
 	void Start() override;
-	void LevelChangeStartEvent() override;
+	void LevelChangeStartEvent(GameEngineLevel* _PrevLevel) override;
 
 
 	inline void SetPixelCollideImage(GameEngineImageRenderer* _Renderer)

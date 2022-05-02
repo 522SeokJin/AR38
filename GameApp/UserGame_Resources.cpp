@@ -43,7 +43,7 @@ void UserGame::ResourceLoad()
 		Dir.MoveChild("Image");
 
 		std::vector<GameEngineDirectory> AllDir = Dir.GetAllDirectoryRecursive();
-		LoadingFolder = AllDir.size();
+		LoadingFolder = static_cast<int>(AllDir.size());
 
 		for (size_t i = 0; i < AllDir.size(); i++)
 		{

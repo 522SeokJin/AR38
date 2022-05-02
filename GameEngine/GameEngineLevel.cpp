@@ -176,6 +176,16 @@ void GameEngineLevel::Release(float _DeltaTime)
 
 				if (true == ReleaseActor->IsDeath())
 				{
+					if (true == ReleaseActor->IsFindObject_)
+					{
+						if (FindMap_.end() == FindMap_.find(ReleaseActor->GetName()))
+						{
+							GameEngineDebug::MsgBoxError("찾을수 없는 액터가 찾을수 있는 액터라고 지정되어 있습니다.");
+						}
+
+						FindMap_.erase(ReleaseActor->GetName());
+					}
+
 					delete* BeginIter;
 					*BeginIter = nullptr;
 
@@ -237,7 +247,7 @@ void GameEngineLevel::TimeEventUpdate()
 	}
 }
 
-void GameEngineLevel::LevelChangeStartActorEvent()
+void GameEngineLevel::LevelChangeStartActorEvent(GameEngineLevel* _PrevLevel)
 {
 	for (std::pair<int, std::list<GameEngineActor*>> Pair : ActorList_)
 	{
@@ -245,12 +255,12 @@ void GameEngineLevel::LevelChangeStartActorEvent()
 
 		for (GameEngineActor* Actor : Actors)
 		{
-			Actor->LevelChangeStartEvent();
+			Actor->LevelChangeStartEvent(_PrevLevel);
 		}
 	}
 }
 
-void GameEngineLevel::LevelChangeEndActorEvent()
+void GameEngineLevel::LevelChangeEndActorEvent(GameEngineLevel* _NextLevel)
 {
 	for (std::pair<int, std::list<GameEngineActor*>> Pair : ActorList_)
 	{
@@ -258,7 +268,7 @@ void GameEngineLevel::LevelChangeEndActorEvent()
 
 		for (GameEngineActor* Actor : Actors)
 		{
-			Actor->LevelChangeEndEvent();
+			Actor->LevelChangeEndEvent(_NextLevel);
 		}
 	}
 }
@@ -318,4 +328,89 @@ void GameEngineLevel::PushDebugRender(GameEngineTransform* _Transform, Collision
 void GameEngineLevel::PushUIDebugRender(GameEngineTransform* _Transform, CollisionType _Type)
 {
 	GetUICamera()->PushDebugRender(_Transform, _Type);
+}
+
+
+void GameEngineLevel::GetLevelActorMove(GameEngineLevel* _NextLevel, GameEngineActor* _Actor)
+{
+
+	// 지금 내 카메라에서 어떠한 랜더러를 빼서
+	//MainCameraActor_->GetCamera()->ReleaseRenderer();
+	//UICameraActor_->GetCamera()->ReleaseRenderer();
+
+	// _NextLevel->MainCameraActor_->GetCamera();
+
+
+	//// 콜리전 삭제
+	//{
+	//	std::map<int, std::list<GameEngineCollision*>>::iterator RenderMapBeginIter = CollisionList_.begin();
+	//	std::map<int, std::list<GameEngineCollision*>>::iterator RenderMapEndIter = CollisionList_.end();
+
+
+	//	for (; RenderMapBeginIter != RenderMapEndIter; ++RenderMapBeginIter)
+	//	{
+	//		std::list<GameEngineCollision*>& Collisions = RenderMapBeginIter->second;
+
+	//		std::list<GameEngineCollision*>::iterator BeginIter = Collisions.begin();
+	//		std::list<GameEngineCollision*>::iterator EndIter = Collisions.end();
+
+	//		for (; BeginIter != EndIter; )
+	//		{
+	//			GameEngineCollision* ReleaseCollision = *BeginIter;
+
+	//			if (nullptr == ReleaseCollision)
+	//			{
+	//				GameEngineDebug::MsgBoxError("Release Actor Is Nullptr!!!!");
+	//			}
+
+	//			if (true == ReleaseCollision->IsDeath())
+	//			{
+	//				BeginIter = Collisions.erase(BeginIter);
+
+	//				continue;
+	//			}
+
+	//			++BeginIter;
+
+	//		}
+	//	}
+	//}
+
+	//{
+	//	std::map<int, std::list<GameEngineActor*>>::iterator ActorMapBeginIter = ActorList_.begin();
+	//	std::map<int, std::list<GameEngineActor*>>::iterator ActorMapEndIter = ActorList_.end();
+
+	//	for (; ActorMapBeginIter != ActorMapEndIter; ++ActorMapBeginIter)
+	//	{
+	//		std::list<GameEngineActor*>& Actors = ActorMapBeginIter->second;
+
+	//		std::list<GameEngineActor*>::iterator BeginIter = Actors.begin();
+	//		std::list<GameEngineActor*>::iterator EndIter = Actors.end();
+
+	//		for (; BeginIter != EndIter; )
+	//		{
+	//			GameEngineActor* ReleaseActor = *BeginIter;
+
+	//			if (nullptr == ReleaseActor)
+	//			{
+	//				GameEngineDebug::MsgBoxError("Release Actor Is Nullptr!!!!");
+	//			}
+
+	//			ReleaseActor->ComponentRelease();
+
+
+	//			if (true == ReleaseActor->IsDeath())
+	//			{
+	//				BeginIter = Actors.erase(BeginIter);
+
+	//				continue;
+	//			}
+
+	//			++BeginIter;
+	//		}
+
+	//	}
+	//}
+
+
 }

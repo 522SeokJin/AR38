@@ -22,12 +22,12 @@ void SilentSwampLevel::LevelUpdate(float _DeltaTime)
 
 }
 
-void SilentSwampLevel::LevelChangeEndEvent()
+void SilentSwampLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
 
 }
 
-void SilentSwampLevel::LevelChangeStartEvent()
+void SilentSwampLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 
 }

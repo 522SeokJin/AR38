@@ -34,7 +34,7 @@ void PerionNorthernRidge::Update(float _DeltaTime)
 {
 }
 
-void PerionNorthernRidge::LevelChangeStartEvent()
+void PerionNorthernRidge::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 	SetPixelCollideImage(PixelCollide_);
 	SetCurrentMap(this);

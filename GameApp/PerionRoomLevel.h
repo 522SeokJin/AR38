@@ -17,8 +17,8 @@ public:
 
 	void LevelStart() override;
 	void LevelUpdate(float _DeltaTime) override;
-	void LevelChangeEndEvent() override;
-	void LevelChangeStartEvent() override;
+	void LevelChangeEndEvent(GameEngineLevel* _NextLevel) override;
+	void LevelChangeStartEvent(GameEngineLevel* _PrevLevel) override;
 
 protected:
 	PerionRoomLevel(const PerionRoomLevel& _other) = delete; 

@@ -129,12 +129,12 @@ void DeepeningForestLevel::LevelUpdate(float _DeltaTime)
 	}
 }
 
-void DeepeningForestLevel::LevelChangeEndEvent()
+void DeepeningForestLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
 
 }
 
-void DeepeningForestLevel::LevelChangeStartEvent()
+void DeepeningForestLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 	GlobalValue::CurrentPlayer = Player_;
 	GlobalValue::CurrentMouse = Cursor_;

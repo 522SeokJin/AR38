@@ -34,7 +34,7 @@ void Perion::Update(float _DeltaTime)
 {
 }
 
-void Perion::LevelChangeStartEvent()
+void Perion::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 	SetPixelCollideImage(PixelCollide_);
 	SetCurrentMap(this);

@@ -34,7 +34,7 @@ void DeepeningForest::Update(float _DeltaTime)
 {
 }
 
-void DeepeningForest::LevelChangeStartEvent()
+void DeepeningForest::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 	SetPixelCollideImage(PixelCollide_);
 	SetCurrentMap(this);

@@ -23,12 +23,12 @@ void SahelLevel::LevelUpdate(float _DeltaTime)
 
 }
 
-void SahelLevel::LevelChangeEndEvent()
+void SahelLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
 
 }
 
-void SahelLevel::LevelChangeStartEvent()
+void SahelLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 
 }

@@ -22,12 +22,12 @@ void EntranceDemianLevel::LevelUpdate(float _DeltaTime)
 
 }
 
-void EntranceDemianLevel::LevelChangeEndEvent()
+void EntranceDemianLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
 
 }
 
-void EntranceDemianLevel::LevelChangeStartEvent()
+void EntranceDemianLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 
 }

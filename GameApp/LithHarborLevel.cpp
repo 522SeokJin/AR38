@@ -106,12 +106,12 @@ void LithHarborLevel::LevelUpdate(float _DeltaTime)
 	}
 }
 
-void LithHarborLevel::LevelChangeEndEvent()
+void LithHarborLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
 
 }
 
-void LithHarborLevel::LevelChangeStartEvent()
+void LithHarborLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 }
 

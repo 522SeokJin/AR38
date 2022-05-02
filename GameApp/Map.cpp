@@ -19,7 +19,7 @@ void Map::Start()
 {
 }
 
-void Map::LevelChangeStartEvent()
+void Map::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 }
 

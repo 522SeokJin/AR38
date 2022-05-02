@@ -129,12 +129,12 @@ void PerionNorthernRidgeLevel::LevelUpdate(float _DeltaTime)
 	}
 }
 
-void PerionNorthernRidgeLevel::LevelChangeEndEvent()
+void PerionNorthernRidgeLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
 
 }
 
-void PerionNorthernRidgeLevel::LevelChangeStartEvent()
+void PerionNorthernRidgeLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 	GlobalValue::CurrentPlayer = Player_;
 	GlobalValue::CurrentMouse = Cursor_;

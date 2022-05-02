@@ -36,12 +36,12 @@ void DemianLevel::LevelUpdate(float _DeltaTime)
 
 }
 
-void DemianLevel::LevelChangeEndEvent()
+void DemianLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
 
 }
 
-void DemianLevel::LevelChangeStartEvent()
+void DemianLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 
 }

@@ -10,7 +10,7 @@ public:
 
 	void Start() override;
 	void Update(float _DeltaTime) override;
-	void LevelChangeStartEvent() override;
+	void LevelChangeStartEvent(GameEngineLevel* _PrevLevel) override;
 
 protected:
 	PerionNorthernRidge(const PerionNorthernRidge& _other) = delete; 

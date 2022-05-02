@@ -38,6 +38,11 @@ public:
 		}
 	}
 
+	void MoveNextOn()
+	{
+		NextLevelMove_ = true;
+	}
+
 	template <typename ComponentType>
 	ComponentType* CreateComponent(int _Order = 0)
 	{
@@ -92,8 +97,8 @@ protected:
 	virtual void Start() {};
 	virtual void Update(float _DeltaTime) {};
 	virtual void ReleaseEvent() {};
-	virtual void LevelChangeStartEvent() {};
-	virtual void LevelChangeEndEvent() {};
+	virtual void LevelChangeEndEvent(GameEngineLevel* _NextLevel) {}
+	virtual void LevelChangeStartEvent(GameEngineLevel* _PrevLevel) {}
 
 private:
 	void SetLevel(GameEngineLevel* _Level);
@@ -108,6 +113,8 @@ private:
 
 	GameEngineLevel* Level_;
 
+	bool IsFindObject_;
+	bool NextLevelMove_;
 	bool	IsDestroyed_;
 	float	DeathTime_;
 

@@ -140,12 +140,12 @@ void PerionLevel::LevelUpdate(float _DeltaTime)
 	}
 }
 
-void PerionLevel::LevelChangeEndEvent()
+void PerionLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
 
 }
 
-void PerionLevel::LevelChangeStartEvent()
+void PerionLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 	GlobalValue::CurrentPlayer = Player_;
 	GlobalValue::CurrentMouse = Cursor_;

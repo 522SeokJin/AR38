@@ -23,8 +23,10 @@ public:
 
 	virtual void LevelStart() = 0;
 	virtual void LevelUpdate(float _DeltaTime) = 0;
-	virtual void LevelChangeEndEvent() = 0;
-	virtual void LevelChangeStartEvent() = 0;
+	virtual void LevelChangeEndEvent(GameEngineLevel* _NextLevel) = 0;
+	virtual void LevelChangeStartEvent(GameEngineLevel* _PrevLevel) = 0;
+
+	void GetLevelActorMove(GameEngineLevel* _NextLevel, GameEngineActor* _Actor);
 
 	CameraActor* GetMainCameraActor();
 	CameraComponent* GetMainCamera();
@@ -47,6 +49,38 @@ public:
 		return dynamic_cast<ActorType*>(NewActor);
 	}
 
+	template<typename ActorType>
+	ActorType* CreateActor(std::string _Name, bool _IsFind = false, int _UpdateOrder = 0)
+	{
+		GameEngineActor* NewActor = new ActorType();
+		NewActor->IsFindObject_ = _IsFind;
+		NewActor->SetName(_Name);
+		NewActor->SetLevel(this);
+		NewActor->Start();
+		NewActor->SetOrder(_UpdateOrder);
+
+		if (true == _IsFind)
+		{
+			FindMap_.insert(std::make_pair(_Name, NewActor));
+		}
+
+		// Insert + Find
+		std::list<GameEngineActor*>& List = ActorList_[_UpdateOrder];
+		List.push_back(NewActor);
+		return dynamic_cast<ActorType*>(NewActor);
+	}
+
+	template<typename ActorType>
+	ActorType* FindActor(std::string _Name)
+	{
+		if (FindMap_.end() == FindMap_.find(_Name))
+		{
+			return nullptr;
+		}
+
+		return dynamic_cast<ActorType>(FindMap_[_Name]);
+	}
+
 	void ActorUpdate(float _DeltaTime);
 
 	void Render(float _DeltaTime);
@@ -66,9 +100,10 @@ private:
 	void Init();
 	void TimeEventUpdate();
 
-	void LevelChangeStartActorEvent();
-	void LevelChangeEndActorEvent();
+	void LevelChangeStartActorEvent(GameEngineLevel* _PrevLevel);
+	void LevelChangeEndActorEvent(GameEngineLevel* _NextLevel);
 
+	std::map<std::string, GameEngineActor*> FindMap_;
 	std::map<int, std::list<GameEngineActor*>> ActorList_;
 	CameraActor* MainCameraActor_;
 	CameraActor* UICameraActor_;
