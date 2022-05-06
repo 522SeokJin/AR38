@@ -17,6 +17,15 @@ class GameEngineLevel : public GameEngineObjectNameBase
 	friend class GameEngineRenderer;
 	friend class GameEngineCollision;
 
+private:
+	// for문 중간에 삭제하는걸 방지하기 위함
+	class NextLevelActor
+	{
+	public:
+		GameEngineActor* Actor;
+		GameEngineLevel* Level;
+	};
+
 public:
 	GameEngineLevel(); // default constructer 디폴트 생성자
 	~GameEngineLevel(); // default destructer 디폴트 소멸자
@@ -26,7 +35,8 @@ public:
 	virtual void LevelChangeEndEvent(GameEngineLevel* _NextLevel) = 0;
 	virtual void LevelChangeStartEvent(GameEngineLevel* _PrevLevel) = 0;
 
-	void GetLevelActorMove(GameEngineLevel* _NextLevel, GameEngineActor* _Actor);
+	void SetLevelActorMove(GameEngineLevel* _NextLevel, GameEngineActor* _Actor);
+	void SetLevelActorMoveProcess();
 
 	CameraActor* GetMainCameraActor();
 	CameraComponent* GetMainCamera();
@@ -103,6 +113,7 @@ private:
 	void LevelChangeStartActorEvent(GameEngineLevel* _PrevLevel);
 	void LevelChangeEndActorEvent(GameEngineLevel* _NextLevel);
 
+	std::vector<NextLevelActor> NextLevelActorsData_;
 	std::map<std::string, GameEngineActor*> FindMap_;
 	std::map<int, std::list<GameEngineActor*>> ActorList_;
 	CameraActor* MainCameraActor_;
