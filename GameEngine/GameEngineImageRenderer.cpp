@@ -197,6 +197,10 @@ void GameEngineImageRenderer::SetChangeAnimation(const std::string& _Name,
 	{
 		ShaderHelper.SettingTexture("Tex", CurAnimation_->AnimationTexture_);
 	}
+	else
+	{
+		ShaderHelper.SettingTexture("Tex", CurAnimation_->FolderTextures_->GetTextureIndex(CurAnimation_->CurFrame_));
+	}
 
 	CurAnimation_->Reset();
 	CurAnimation_->CallStart();
