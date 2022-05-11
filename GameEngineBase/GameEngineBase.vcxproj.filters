@@ -52,6 +52,9 @@
     <ClInclude Include="GameEngineIocp.h">
       <Filter>Thread</Filter>
     </ClInclude>
+    <ClInclude Include="GameEnginePathFind.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineObjectBase.cpp">
@@ -104,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineIocp.cpp">
       <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEnginePathFind.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

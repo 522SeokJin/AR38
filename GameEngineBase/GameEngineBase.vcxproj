@@ -224,6 +224,7 @@
     </ClInclude>
     <ClInclude Include="GameEngineObjectNameBase.h" />
     <ClInclude Include="GameEnginePath.h" />
+    <ClInclude Include="GameEnginePathFind.h" />
     <ClInclude Include="GameEngineRandom.h" />
     <ClInclude Include="GameEngineSound.h">
       <SubType>
@@ -267,6 +268,7 @@
     </ClCompile>
     <ClCompile Include="GameEngineObjectNameBase.cpp" />
     <ClCompile Include="GameEnginePath.cpp" />
+    <ClCompile Include="GameEnginePathFind.cpp" />
     <ClCompile Include="GameEngineRandom.cpp" />
     <ClCompile Include="GameEngineSound.cpp">
       <SubType>
