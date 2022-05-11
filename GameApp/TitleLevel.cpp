@@ -7,7 +7,7 @@
 #include <GameEngine/GameEngineGUI.h>
 #include <GameEngine/GameEngineRenderWindow.h>
 #include <GameEngine/PostFade.h>
-#include "CurvedEffect.h"
+#include <GameEngine/PostBlur.h>
 
 TitleLevel::TitleLevel()
 	: Cursor_(nullptr)
@@ -45,8 +45,9 @@ void TitleLevel::LevelStart()
 
 	FadeEffect_->SetData(1.5f, FadeOption::LIGHT);
 
-	CurvedEffect* CurvedEff = AddPostProcessCameraMergePrev<CurvedEffect>();
-	CurvedEff->SetTarget(GetUICamera()->GetCameraRenderTarget());
+	PostBlur* BlurEff = AddPostProcessCameraMergePrev<PostBlur>();
+	BlurEff->SetTarget(GetUICamera()->GetCameraRenderTarget());
+	BlurEff->SetFilter("BlurFilter.png");
 }
 
 void TitleLevel::LevelUpdate(float _DeltaTime)

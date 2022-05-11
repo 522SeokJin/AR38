@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="EngineResources\Shader\Blur.fx" />
     <FxCompile Include="EngineResources\Shader\CBufferHeader.fx" />
     <FxCompile Include="EngineResources\Shader\Color.fx" />
     <FxCompile Include="EngineResources\Shader\Fade.fx" />
@@ -26,7 +27,6 @@
     <FxCompile Include="EngineResources\Shader\TargetMerge.fx" />
     <FxCompile Include="EngineResources\Shader\Texture.fx" />
     <FxCompile Include="Resources\Shader\Curved.fx" />
-    <FxCompile Include="Resources\Shader\PointTexture.fx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

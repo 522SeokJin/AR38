@@ -18,8 +18,6 @@ void Mouse::Start()
 {
 	MouseActor::Start();
 
-	GetUIRenderer()->SetRenderingPipeLine("PointTextureUI");
-
 	GetUIRenderer()->SetRenderGroup(1000);
 	GetUIRenderer()->GetTransform()->SetLocalPosition({12.0f, -14.0f});
 	GetUIRenderer()->CreateAnimationFolder("Normal", "Normal", 0.5f, false);

@@ -18,12 +18,12 @@ MouseActor::~MouseActor()
 
 void MouseActor::SetCursor(const std::string& _Name)
 {
-	UIRenderer_->SetImage(_Name);
+	UIRenderer_->SetImage(_Name, true, "PointSmp");
 }
 
 void MouseActor::SetCursor(const std::string& _Name, int _Index)
 {
-	UIRenderer_->SetImage(_Name);
+	UIRenderer_->SetImage(_Name, true, "PointSmp");
 	UIRenderer_->SetIndex(_Index);
 }
 

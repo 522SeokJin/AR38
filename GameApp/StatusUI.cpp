@@ -83,9 +83,8 @@ void StatusUI::Start()
 		{
 			GameEngineUIRenderer* Renderer =
 				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-			Renderer->SetRenderingPipeLine("PointTextureUI");
 
-			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
+			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png", true, "PointSmp");
 			Renderer->Off();
 
 			HPNumber_[i].push_back(Renderer);
@@ -98,9 +97,8 @@ void StatusUI::Start()
 		{
 			GameEngineUIRenderer* Renderer =
 				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-			Renderer->SetRenderingPipeLine("PointTextureUI");
 
-			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
+			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png", true, "PointSmp");
 			Renderer->Off();
 
 			MPNumber_[i].push_back(Renderer);
@@ -113,9 +111,8 @@ void StatusUI::Start()
 		{
 			GameEngineUIRenderer* Renderer =
 				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-			Renderer->SetRenderingPipeLine("PointTextureUI");
 
-			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
+			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png", true, "PointSmp");
 			Renderer->Off();
 
 			MaxHPNumber_[i].push_back(Renderer);
@@ -128,9 +125,8 @@ void StatusUI::Start()
 		{
 			GameEngineUIRenderer* Renderer =
 				CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-			Renderer->SetRenderingPipeLine("PointTextureUI");
 
-			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png");
+			Renderer->SetImage("status.gauge.number." + std::to_string(j) + ".png", true, "PointSmp");
 			Renderer->Off();
 
 			MaxMPNumber_[i].push_back(Renderer);

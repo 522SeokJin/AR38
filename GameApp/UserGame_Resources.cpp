@@ -74,17 +74,6 @@ void UserGame::ResourceLoad()
 
 	{
 		GameEngineRenderingPipeLine* Pipe =
-			GameEngineRenderingPipeLineManager::GetInst().Create("PointTextureUI");
-		Pipe->SetInputAssembler1VertexBufferSetting("Rect");
-		Pipe->SetInputAssembler1InputLayoutSetting("PointTexture_VS");
-		Pipe->SetVertexShader("PointTexture_VS");
-		Pipe->SetInputAssembler2IndexBufferSetting("Rect");
-		Pipe->SetPixelShader("PointTexture_PS");
-		Pipe->SetOutputMergerDepthStencil("BaseDepthOff");
-	}
-
-	{
-		GameEngineRenderingPipeLine* Pipe =
 			GameEngineRenderingPipeLineManager::GetInst().Create("Curved");
 		Pipe->SetInputAssembler1VertexBufferSetting("FullRect");
 		Pipe->SetInputAssembler1InputLayoutSetting("Curved_VS");

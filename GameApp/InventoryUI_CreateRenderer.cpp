@@ -6,9 +6,8 @@ void InventoryUI::CreateRenderer()
 {
 	{
 		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-		Renderer->SetRenderingPipeLine("PointTextureUI");
 
-		Renderer->SetImage("Item.backgrnd.png");
+		Renderer->SetImage("Item.backgrnd.png", true, "PointSmp");
 	}
 
 	{
@@ -25,26 +24,23 @@ void InventoryUI::CreateRenderer()
 
 	{
 		EquipmentRenderer_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-		EquipmentRenderer_->SetRenderingPipeLine("PointTextureUI");
 
-		EquipmentRenderer_->SetImage("Item.Tab.enabled.0.png");
+		EquipmentRenderer_->SetImage("Item.Tab.enabled.0.png", true, "PointSmp");
 		EquipmentRenderer_->SetLocalPosition({ -75.0f + 0.0f * 30.0f, 154.0f - 1.0f });
 	}
 
 	{
 		// disabled size diffrent -> y : 19 -> 17
 		UseableRenderer_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-		UseableRenderer_->SetRenderingPipeLine("PointTextureUI");
 
-		UseableRenderer_->SetImage("Item.Tab.disabled.1.png");
+		UseableRenderer_->SetImage("Item.Tab.disabled.1.png", true, "PointSmp");
 		UseableRenderer_->SetLocalPosition({ -75.0f + 1.0f * 30.0f, 154.0f - 1.0f });
 	}
 
 	{
 		EtcRenderer_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-		EtcRenderer_->SetRenderingPipeLine("PointTextureUI");
 
-		EtcRenderer_->SetImage("Item.Tab.disabled.2.png");
+		EtcRenderer_->SetImage("Item.Tab.disabled.2.png", true, "PointSmp");
 		EtcRenderer_->SetLocalPosition({ -75.0f + 2.0f * 30.0f, 154.0f - 1.0f });
 	}
 

@@ -52,6 +52,8 @@ public:
 
 	void Reset();
 
+	void InstanceRendering();
+
 protected:
 	GameEngineRenderingPipeLine(const GameEngineRenderingPipeLine& _other) = delete;
 	GameEngineRenderingPipeLine(GameEngineRenderingPipeLine&& _other) = delete;

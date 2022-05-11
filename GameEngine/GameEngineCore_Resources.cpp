@@ -444,6 +444,17 @@ void GameEngineCore::EngineResourcesCreate()
 	}
 
 	{
+		GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Create("Blur");
+		Pipe->SetInputAssembler1VertexBufferSetting("FullRect");
+		Pipe->SetInputAssembler2IndexBufferSetting("FullRect");
+		Pipe->SetInputAssembler1InputLayoutSetting("Blur_VS");
+		Pipe->SetVertexShader("Blur_VS");
+		Pipe->SetPixelShader("Blur_PS");
+		Pipe->SetOutputMergerDepthStencil("BaseDepthOff");
+		Pipe->SetOutputMergerBlend("AlphaBlend");
+	}
+
+	{
 		GameEngineRenderingPipeLine* Pipe = GameEngineRenderingPipeLineManager::GetInst().Create("TextureTrans");
 		Pipe->SetInputAssembler1VertexBufferSetting("Rect");
 		Pipe->SetInputAssembler1InputLayoutSetting("Texture_VS");

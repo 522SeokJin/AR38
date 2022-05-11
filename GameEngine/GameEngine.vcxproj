@@ -237,6 +237,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="PostBlur.h" />
     <ClInclude Include="PostFade.h">
       <SubType>
       </SubType>
@@ -461,6 +462,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="PostBlur.cpp" />
     <ClCompile Include="PostFade.cpp">
       <SubType>
       </SubType>

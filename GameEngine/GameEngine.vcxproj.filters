@@ -211,6 +211,9 @@
     <ClInclude Include="PostFade.h">
       <Filter>Object\PostProcess\EngineEffect</Filter>
     </ClInclude>
+    <ClInclude Include="PostBlur.h">
+      <Filter>Object\PostProcess\EngineEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -409,6 +412,9 @@
       <Filter>Object\PostProcess</Filter>
     </ClCompile>
     <ClCompile Include="PostFade.cpp">
+      <Filter>Object\PostProcess\EngineEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="PostBlur.cpp">
       <Filter>Object\PostProcess\EngineEffect</Filter>
     </ClCompile>
   </ItemGroup>

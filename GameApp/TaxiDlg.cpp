@@ -43,22 +43,19 @@ void TaxiDlg::Start()
 
 	{
 		NPCRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();
-		NPCRenderer_->SetRenderingPipeLine("PointTextureUI");
-		NPCRenderer_->SetImage("UtilDlgTaxi.png");
+		NPCRenderer_->SetImage("UtilDlgTaxi.png", true, "PointSmp");
 		NPCRenderer_->SetLocalPosition({ 183.0f, 11.0f });
 	}
 
 	{
 		BtnYesRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();
-		BtnYesRenderer_->SetRenderingPipeLine("PointTextureUI");
-		BtnYesRenderer_->SetImage("UtilDlgEx.BtYes.normal.0.png");
+		BtnYesRenderer_->SetImage("UtilDlgEx.BtYes.normal.0.png", true, "PointSmp");
 		BtnYesRenderer_->SetLocalPosition({ 158.0f, -80.0f });
 	}
 
 	{
 		BtnNoRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();
-		BtnNoRenderer_->SetRenderingPipeLine("PointTextureUI");
-		BtnNoRenderer_->SetImage("UtilDlgEx.BtNo.normal.0.png");
+		BtnNoRenderer_->SetImage("UtilDlgEx.BtNo.normal.0.png", true, "PointSmp");
 		BtnNoRenderer_->SetLocalPosition({ 158.0f + 65.0f, -80.0f });
 	}
 

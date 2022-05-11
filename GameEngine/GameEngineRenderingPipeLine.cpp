@@ -180,3 +180,14 @@ void GameEngineRenderingPipeLine::Reset()
 	Blend_->Reset();
 	DepthStencil_->Reset();
 }
+
+void GameEngineRenderingPipeLine::InstanceRendering()
+{
+	// 같은 매쉬를 쓰고
+	// 같은 랜더링 파이프라인을 사용할건데.
+	// 상수버퍼 
+	RenderingPipeLineSetting();
+
+	// GameEngineDevice::GetContext()->DrawIndexedInstanced(IndexBuffer_->GetIndexCount(), 0, 0);
+}
+
