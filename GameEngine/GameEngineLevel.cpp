@@ -52,6 +52,8 @@ void GameEngineLevel::ActorUpdate(float _DeltaTime)
 	{
 		std::list<GameEngineActor*>& Actors = Pair.second;
 
+		float Scale = GameEngineTime::GetInst().GetTimeScale(Pair.first);
+
 		for (GameEngineActor* Actor : Actors)
 		{
 			if (false == Actor->IsUpdate())
@@ -59,8 +61,8 @@ void GameEngineLevel::ActorUpdate(float _DeltaTime)
 				continue;
 			}
 
-			Actor->Update(_DeltaTime);
-			Actor->UpdateComponent(_DeltaTime);
+			Actor->Update(_DeltaTime * Scale);
+			Actor->UpdateComponent(_DeltaTime * Scale);
 		}
 	}
 }

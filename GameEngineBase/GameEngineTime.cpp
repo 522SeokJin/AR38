@@ -29,7 +29,7 @@ GameEngineTime::~GameEngineTime()
 	AllEvent_.clear();
 }
 
-GameEngineTime::GameEngineTime(const GameEngineTime&& _Other)	noexcept
+GameEngineTime::GameEngineTime(const GameEngineTime&& _Other)
 	: timeCount_(_Other.timeCount_),
 	startCheck_(_Other.startCheck_),
 	endCheck_(_Other.endCheck_),
