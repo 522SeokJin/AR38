@@ -1,21 +1,19 @@
 #include "PreCompile.h"
 #include "GameEngineShader.h"
+#include "GameEngineConstantBufferManager.h"
 #include "GameEngineResourcesManager.h"
 
 GameEngineShader::GameEngineShader(ShaderType _Type)
-	: Type_(_Type)
-	, VersionHigh_(5)
+	: VersionHigh_(5)
 	, VersionLow_(0)
-	, CodeBlob_(nullptr)
-	, Path_()
+	, Type_(_Type)
 {
-
 }
 
-GameEngineShader::~GameEngineShader()
+GameEngineShader::~GameEngineShader() 
 {
-	
 }
+
 
 void GameEngineShader::SetVersion(UINT _VersionHigh, UINT _VersionLow)
 {
@@ -26,7 +24,7 @@ void GameEngineShader::SetVersion(UINT _VersionHigh, UINT _VersionLow)
 void GameEngineShader::CreateVersion(const std::string& _ShaderType)
 {
 	Version_ = "";
-	Version_ += _ShaderType +"_";
+	Version_ += _ShaderType + "_";
 	Version_ += std::to_string(VersionHigh_);
 	Version_ += "_";
 	Version_ += std::to_string(VersionLow_);
@@ -42,105 +40,120 @@ void GameEngineShader::SetEntryPoint(const std::string& _EntryPoint)
 	EntryPoint_ = _EntryPoint;
 }
 
-void GameEngineShader::ResCheck()
+void GameEngineShader::ResCheck() 
 {
+
 	if (nullptr == CodeBlob_)
 	{
 		return;
 	}
 
-	// 내가 쉐이더에서 사용한 변수, 함수, 인자들 그 이외의 상수버퍼 등의
-	// 모든 정보를 알고있다.
-	// ex) 쉐이더에서 행렬을 1개 사용했다.
-	ID3D11ShaderReflection* CompileInfo = nullptr;
+	// 내가 쉐이더에서 사용한 변수 함수들 인자들 그 이외의 상수버퍼등등등등의 모든
+	// 정보를 알고 있는 녀석
+	// 이 사람 쉐이더에서 행렬1개사용함
+	ID3D11ShaderReflection* CompilInfo;
 
 	if (S_OK != D3DReflect
 	(
 		CodeBlob_->GetBufferPointer(),
 		CodeBlob_->GetBufferSize(),
 		IID_ID3D11ShaderReflection,
-		reinterpret_cast<void**>(&CompileInfo)
+		reinterpret_cast<void**>(&CompilInfo)
 	)
 		)
 	{
+		// 뭔가 코드가 이상함.
 		GameEngineDebug::MsgBoxError("쉐이더 컴파일 정보를 얻어오지 못했습니다.");
+		return;
 	}
 
 	D3D11_SHADER_DESC Info;
-
-	CompileInfo->GetDesc(&Info);
+	CompilInfo->GetDesc(&Info);
 
 	D3D11_SHADER_INPUT_BIND_DESC ResInfo;
 
-	for (UINT i = 0; i < Info.BoundResources; i++)
+	for (unsigned int i = 0; i < Info.BoundResources; i++)
 	{
-		CompileInfo->GetResourceBindingDesc(i, &ResInfo);
+		CompilInfo->GetResourceBindingDesc(i, &ResInfo);
 
-		// LPCSTR                      Name;           // Name of the resource
-		// D3D_SHADER_INPUT_TYPE       Type;           // Type of resource (e.g. texture, cbuffer, etc.)
-		// UINT                        BindPoint;      // Starting bind point
-		// UINT                        BindCount;      // Number of contiguous bind points (for arrays)
-		// UINT                        uFlags;         // Input binding flags
-		// D3D_RESOURCE_RETURN_TYPE    ReturnType;     // Return type (if texture)
-		// D3D_SRV_DIMENSION           Dimension;      // Dimension (if texture)	// 3차원 텍스처
-		// UINT                        NumSamples;     // Number of samples (0 if not MS texture)
+		//LPCSTR                      Name;           // Name of the resource
+		//D3D_SHADER_INPUT_TYPE       Type;           // Type of resource (e.g. texture, cbuffer, etc.)
+		//UINT                        BindPoint;      // Starting bind point
+		//UINT                        BindCount;      // Number of contiguous bind points (for arrays)
+		//UINT                        uFlags;         // Input binding flags
+		//D3D_RESOURCE_RETURN_TYPE    ReturnType;     // Return type (if texture) 
+		//D3D_SRV_DIMENSION           Dimension;      // Dimension (if texture) // 3차원 텍스처
+		//UINT                        NumSamples;     // Number of samples (0 if not MS texture)
 
-		std::string Name = ResInfo.Name;
-		UINT BindPoint = ResInfo.BindPoint;
+		std::string Name = GameEngineString::toupper(ResInfo.Name);
+		unsigned int BindPoint = ResInfo.BindPoint;
 		D3D_SHADER_INPUT_TYPE Type = ResInfo.Type;
 
 		switch (Type)
 		{
 		case D3D_SIT_CBUFFER:
 		{
-			ID3D11ShaderReflectionConstantBuffer* Buffer = CompileInfo->GetConstantBufferByName(Name.c_str());
+			ID3D11ShaderReflectionConstantBuffer* Buffer = CompilInfo->GetConstantBufferByName(ResInfo.Name);
 
 			D3D11_SHADER_BUFFER_DESC BufferDesc;
 			Buffer->GetDesc(&BufferDesc);
-			
-			GameEngineConstantBuffer* NewBuffer = GameEngineConstantBufferManager::GetInst().
-				CreateAndFind(Name, BufferDesc, Buffer);
+
+			GameEngineConstantBuffer* NewBuffer = GameEngineConstantBufferManager::GetInst().CreateAndFind(Name, BufferDesc, Buffer);
 
 			if (BufferDesc.Size != NewBuffer->GetBufferSize())
 			{
-				GameEngineDebug::MsgBoxError("이름은 같고 구조가 다른 상수버퍼가 이미 존재합니다.");
+				GameEngineDebug::MsgBoxError("구조가 다른 상수버퍼가 존재합니다.");
 				return;
 			}
 
 			ConstantBuffers_.insert(std::make_pair(ResInfo.BindPoint, NewBuffer));
 			break;
 		}
-		case D3D10_SIT_SAMPLER:
+		case D3D_SIT_SAMPLER:
 		{
-			D3D11_SAMPLER_DESC SmpDesc = {};
+			D3D11_SAMPLER_DESC Smp_Decs = {};
 
-			// D3D11_FILTER_MIN_MAG_MIP_LINEAR : 뭉개라
-			// D3D11_FILTER_MIN_MAG_MIP_POINT : 도트게임처럼 뭉개지않는다.
-			SmpDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+			memset(&Smp_Decs, 0, sizeof(D3D11_SAMPLER_DESC));
 
-			SmpDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
-			SmpDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
-			SmpDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+			// 뭉개라.
 
-			SmpDesc.MipLODBias = 0.0f;
-			SmpDesc.MaxAnisotropy = 1;
-			SmpDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
-			SmpDesc.MinLOD = -FLT_MAX;
-			SmpDesc.MaxLOD = FLT_MAX;
-			// SmpDesc.BorderColor;
-			// SmpDesc.MaxAnisotropy;
-			 
-			GameEngineSampler* NewRes = GameEngineSamplerManager::GetInst().CreateAndFind(Name, SmpDesc);
+			std::string CheckName = GameEngineString::toupper(Name);
+
+			Smp_Decs.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+
+			if (std::string::npos != CheckName.find("POINT"))
+			{
+				Smp_Decs.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+			}
+			else if (std::string::npos != CheckName.find("LINEAR"))
+			{
+				Smp_Decs.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+			}
+
+			Smp_Decs.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+			Smp_Decs.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+			Smp_Decs.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+
+			Smp_Decs.MipLODBias = 0.0f;
+			Smp_Decs.MaxAnisotropy = 1;
+			Smp_Decs.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+			Smp_Decs.MinLOD = -FLT_MAX;
+			Smp_Decs.MaxLOD = FLT_MAX;
+			// Smp_Decs.BorderColor;
+			// Smp_Decs.MaxAnisotropy;
+
+			GameEngineSampler* NewRes = GameEngineSamplerManager::GetInst().CreateAndFind(Name, Smp_Decs);
 			Samplers_.insert(std::make_pair(ResInfo.BindPoint, NewRes));
 			break;
 		}
+
 		case D3D_SIT_TEXTURE:
 		{
 			Textures_.insert(std::make_pair(ResInfo.BindPoint, Name));
 			break;
 		}
 		default:
-			GameEngineDebug::MsgBoxError("처리하지 못하는 타입의 쉐이더리소스가 발견되었습니다.");
+			GameEngineDebug::MsgBoxError("처리하지 못하는 타입의 쉐이더 리소스가 발견되었습니다");
 			break;
 		}
 	}

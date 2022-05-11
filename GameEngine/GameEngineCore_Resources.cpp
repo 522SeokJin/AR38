@@ -93,9 +93,9 @@ void GameEngineCore::EngineResourcesLoad()
 		}
 	}
 
-	GameEngineSampler* NewRes = GameEngineSamplerManager::GetInst().Find("PointSmp");
-	NewRes->Info_.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
-	NewRes->ReCreate();
+	//GameEngineSampler* NewRes = GameEngineSamplerManager::GetInst().Find("PointSmp");
+	//NewRes->Info_.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+	//NewRes->ReCreate();
 }
 void GameEngineCore::EngineResourcesCreate()
 {
@@ -330,6 +330,47 @@ void GameEngineCore::EngineResourcesCreate()
 		DepthInfo.DepthEnable = false;
 		DepthInfo.StencilEnable = false;
 		GameEngineDepthStencilManager::GetInst().Create("BaseDepthOff", DepthInfo);
+	}
+
+	{
+		D3D11_SAMPLER_DESC Smp_Decs = {};
+
+		memset(&Smp_Decs, 0, sizeof(D3D11_SAMPLER_DESC));
+		Smp_Decs.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+		Smp_Decs.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+		Smp_Decs.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+		Smp_Decs.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+
+		Smp_Decs.MipLODBias = 0.0f;
+		Smp_Decs.MaxAnisotropy = 1;
+		Smp_Decs.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+		Smp_Decs.MinLOD = -FLT_MAX;
+		Smp_Decs.MaxLOD = FLT_MAX;
+		// Smp_Decs.BorderColor;
+		// Smp_Decs.MaxAnisotropy;
+
+		GameEngineSampler* NewRes = GameEngineSamplerManager::GetInst().CreateAndFind("LinearSmp", Smp_Decs);
+	}
+
+
+	{
+		D3D11_SAMPLER_DESC Smp_Decs = {};
+
+		memset(&Smp_Decs, 0, sizeof(D3D11_SAMPLER_DESC));
+		Smp_Decs.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+		Smp_Decs.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+		Smp_Decs.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+		Smp_Decs.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+
+		Smp_Decs.MipLODBias = 0.0f;
+		Smp_Decs.MaxAnisotropy = 1;
+		Smp_Decs.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+		Smp_Decs.MinLOD = -FLT_MAX;
+		Smp_Decs.MaxLOD = FLT_MAX;
+		// Smp_Decs.BorderColor;
+		// Smp_Decs.MaxAnisotropy;
+
+		GameEngineSampler* NewRes = GameEngineSamplerManager::GetInst().CreateAndFind("PointSmp", Smp_Decs);
 	}
 
 	{

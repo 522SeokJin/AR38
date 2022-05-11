@@ -4,6 +4,7 @@
 #include "GameEngineTextureManager.h"
 #include "GameEngineFolderTextureManager.h"
 #include "GameEngineFolderTexture.h"
+#include "GameEngineSamplerManager.h"
 
 GameEngineImageRenderer::GameEngineImageRenderer()
 	: ScaleToImageSize_(true)
@@ -38,20 +39,14 @@ void GameEngineImageRenderer::SetImageSize(const float4& _ImageSize)
 }
 
 void GameEngineImageRenderer::SetImage(const std::string& _ImageName,
-	bool _ScaleToImageSize/* = true*/)
+	bool _ScaleToImageSize/* = true*/,
+	const std::string& _Sampler)
 {
-	GameEngineTexture* Texture = GameEngineTextureManager::GetInst().Find(_ImageName);
-
-	if (Texture == CurTexture_)
-	{
-		return;
-	}
-
-	CurTexture_ = Texture;
+	CurTexture_ = GameEngineTextureManager::GetInst().Find(_ImageName);
 
 	if (nullptr == CurTexture_)
 	{
-		GameEngineDebug::MsgBoxError("존재하지 않는 텍스처를 세팅하려고 했습니다" + _ImageName);
+		GameEngineDebug::MsgBoxError("존재하지 않는 텍스처를 세팅하려고 했습니다");
 		return;
 	}
 
@@ -61,6 +56,16 @@ void GameEngineImageRenderer::SetImage(const std::string& _ImageName,
 	}
 
 	ShaderHelper.SettingTexture("Tex", _ImageName);
+
+	GameEngineSampler* Sampler = GameEngineSamplerManager::GetInst().Find(_Sampler);
+
+	if (nullptr == Sampler)
+	{
+		return;
+	}
+
+	ShaderHelper.SettingSampler("Smp", _Sampler);
+
 }
 
 void GameEngineImageRenderer::ImageLocalFlipYAxis()

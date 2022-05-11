@@ -36,6 +36,12 @@ public:		//member Func
 	// 자식 폴더중 _DirName으로 이동
 	bool MoveChild(const std::string& _DirName);
 
+	GameEngineDirectory& operator/(const std::string& _DirName)
+	{
+		MoveChild(_DirName);
+		return *this;
+	}
+
 public:
 	std::string PathToPlusFileName(const std::string& _FileName);
 

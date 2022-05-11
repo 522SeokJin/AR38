@@ -19,7 +19,7 @@ public:
 		return ImageSize_;
 	}
 
-	void SetImage(const std::string& _ImageName, bool _ScaleToImageSize = true);
+	void SetImage(const std::string& _ImageName, bool _ScaleToImageSize = true, const std::string& _Sampler = "");
 	void SetImageSize(const float4& _ImageSize);
 
 	void ImageLocalFlipYAxis();

@@ -2,27 +2,46 @@
 #include <GameEngineBase/GameEngineObjectNameBase.h>
 #include "GameEngineTransform.h"
 
-// 설명 : 
+// 설명 :
+class GameEngineComponent;
 class GameEngineLevel;
 class GameEngineTransform;
 class GameEngineTransformComponent;
-class GameEngineComponent;
 class GameEngineActor : public GameEngineObjectNameBase
 {
 	friend GameEngineLevel;
 
 public:
+
+	// constrcuter destructer
 	GameEngineActor();
 	~GameEngineActor();
 
-	GameEngineLevel* GetLevel()
+	// delete Function
+	GameEngineActor(const GameEngineActor& _Other) = delete;
+	GameEngineActor(GameEngineActor&& _Other) noexcept = delete;
+	GameEngineActor& operator=(const GameEngineActor& _Other) = delete;
+	GameEngineActor& operator=(GameEngineActor&& _Other) noexcept = delete;
+
+	bool IsFindObject_;
+	bool NextLevelMove_;
+	bool IsDestroyed_;
+	float DeathTime_;
+
+	void MoveNextOn()
+	{
+		NextLevelMove_ = true;
+	}
+
+	GameEngineLevel* GetLevel() 
 	{
 		return Level_;
 	}
 
-	GameEngineTransform* GetTransform()
+	template<typename LevelType>
+	LevelType* GetLevelConvert()
 	{
-		return &Transform_;
+		return dynamic_cast<LevelType*>(Level_);
 	}
 
 	void Release(float _Time = 0.0f)
@@ -31,34 +50,29 @@ public:
 		{
 			Death();
 		}
-		else
+		else 
 		{
 			IsDestroyed_ = true;
 			DeathTime_ = _Time;
 		}
 	}
 
-	void MoveNextOn()
-	{
-		NextLevelMove_ = true;
-	}
-
-	template <typename ComponentType>
+	template<typename ComponentType>
 	ComponentType* CreateComponent(int _Order = 0)
 	{
-		GameEngineComponent* NewComponent = new ComponentType();
+		GameEngineComponent* NewComponent = new ComponentType(); 
 		NewComponent->SetParent(this);
 		NewComponent->SetOrder(_Order);
 		NewComponent->InitComponent(this);
 		ComponentList_.push_back(NewComponent);
-
 		NewComponent->Start();
-		return dynamic_cast<ComponentType*>(NewComponent);
+		return dynamic_cast<ComponentType*>(NewComponent);;
 	}
 
-	template <typename ComponentType>
+	template<typename ComponentType>
 	ComponentType* CreateTransformComponent(int _Order = 0)
 	{
+		// 업캐스팅을 이용해서 컴파일 에러를 낼것이다.
 		GameEngineTransformComponent* NewComponent = new ComponentType();
 		NewComponent->SetParent(this);
 		NewComponent->SetOrder(_Order);
@@ -67,58 +81,62 @@ public:
 		TransformComponentList_.push_back(NewComponent);
 
 		NewComponent->Start();
-		return dynamic_cast<ComponentType*>(NewComponent);
+		return dynamic_cast<ComponentType*>(NewComponent);;
 	}
 
-	template <typename ComponentType>
-	ComponentType* CreateTransformComponent(GameEngineTransform* _Parent, int _Order = 0)
+	template<typename ComponentType>
+	ComponentType* CreateTransformComponent(GameEngineTransform* _Transform, int _Order = 0)
 	{
+		// 업캐스팅을 이용해서 컴파일 에러를 낼것이다.
 		GameEngineTransformComponent* NewComponent = new ComponentType();
 		NewComponent->SetParent(this);
 		NewComponent->SetOrder(_Order);
 		NewComponent->InitComponent(this);
-		if (nullptr == _Parent)
+		if (nullptr == _Transform)
 		{
-			GameEngineDebug::MsgBoxError("GameEngineTransform* _Parent 을 세팅하지 않았습니다. CreateTransformComponent(_Parent, _Order)");
+			GameEngineDebug::MsgBoxError("트랜스폼을 세팅안 해줬습니다.");
 		}
-		NewComponent->AttachTransform(_Parent);
+		NewComponent->AttachTransform(_Transform);
 		TransformComponentList_.push_back(NewComponent);
 
 		NewComponent->Start();
-		return dynamic_cast<ComponentType*>(NewComponent);
+		return dynamic_cast<ComponentType*>(NewComponent);;
 	}
 
 protected:
-	GameEngineActor(const GameEngineActor& _other) = delete;
-	GameEngineActor(GameEngineActor&& _other) noexcept = delete;
-	GameEngineActor& operator=(const GameEngineActor& _other) = delete;
-	GameEngineActor& operator=(const GameEngineActor&& _other) = delete;
-
-	virtual void Start() {};
-	virtual void Update(float _DeltaTime) {};
-	virtual void ReleaseEvent() {};
+	virtual void Start() {}
+	virtual void Update(float _DeltaTime) {}
+	virtual void ReleaseEvent() {}
 	virtual void LevelChangeEndEvent(GameEngineLevel* _NextLevel) {}
 	virtual void LevelChangeStartEvent(GameEngineLevel* _PrevLevel) {}
 
+
+	// 트랜스폼을 변화시킨다는걸 기본적으로 생각할겁니다.
+
+////////////////////////
+
+public:
+	GameEngineTransform* GetTransform() 
+	{
+		return &Transform_;
+	}
+
+
 private:
-	void SetLevel(GameEngineLevel* _Level);
+	GameEngineTransform Transform_;
+	GameEngineLevel* Level_;
+
+	// Status
+	std::list<GameEngineComponent*> ComponentList_;
+
+	std::list<GameEngineTransformComponent*> TransformComponentList_;
+
+	void SetLevel(GameEngineLevel* Level);
 
 	void UpdateComponent(float _DeltaTime);
 
 	void ComponentRelease();
 
 	void ReleaseUpdate(float _DeltaTime);
-
-	GameEngineTransform Transform_;
-
-	GameEngineLevel* Level_;
-
-	bool IsFindObject_;
-	bool NextLevelMove_;
-	bool	IsDestroyed_;
-	float	DeathTime_;
-
-	std::list<GameEngineComponent*> ComponentList_;
-	std::list<GameEngineTransformComponent*> TransformComponentList_;
 };
 

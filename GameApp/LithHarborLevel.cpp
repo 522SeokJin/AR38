@@ -46,7 +46,9 @@ void LithHarborLevel::LevelStart()
 	GetMainCamera()->SetProjectionMode(ProjectionMode::ORTHOGRAPHIC);
 	GetMainCameraActor()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
 
-	
+	{
+		LithHarbor* Actor = CreateActor<LithHarbor>();
+	}
 }
 
 void LithHarborLevel::LevelUpdate(float _DeltaTime)
@@ -122,10 +124,6 @@ void LithHarborLevel::CreateActorLevel()
 	}
 
 	{
-		LithHarbor* Actor = CreateActor<LithHarbor>();
-	}
-
-	{
 		Player_ = CreateActor<Player>();
 		Player_->GetTransform()->SetWorldPosition({ 1935.0f, -1298.0f });
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(
@@ -168,7 +166,7 @@ void LithHarborLevel::CreateActorLevel()
 	{
 		Skill_ = CreateActor<SkillUI>();
 		Skill_->GetTransform()->SetWorldPosition({ 200.0f, 200.0f });
-		Skill_->Off();
+		//Skill_->Off();
 	}
 
 	{
