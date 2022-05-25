@@ -6,6 +6,7 @@ Map* Map::CurrentMap = nullptr;
 
 Map::Map()
 	: PixelCollideImage_(nullptr)
+	, MapImage_(nullptr)
 {
 
 }

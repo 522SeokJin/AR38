@@ -106,6 +106,16 @@ void LithHarborLevel::LevelUpdate(float _DeltaTime)
 	{
 		Inventory_->OnOffChange();
 	}
+
+	if (true == GameEngineInput::GetInst().Down("Skill"))
+	{
+		Skill_->OnOffChange();
+	}
+
+	if (true == GameEngineInput::GetInst().Down("PixelCollide"))
+	{
+		Map_->GetPixelCollideImage()->OnOffChange();
+	}
 }
 
 void LithHarborLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
@@ -166,7 +176,7 @@ void LithHarborLevel::CreateActorLevel()
 	{
 		Skill_ = CreateActor<SkillUI>();
 		Skill_->GetTransform()->SetWorldPosition({ 200.0f, 200.0f });
-		//Skill_->Off();
+		Skill_->Off();
 	}
 
 	{

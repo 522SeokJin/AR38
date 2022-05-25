@@ -19,6 +19,5 @@ protected:
 	DeepeningForest& operator=(const DeepeningForest&& _other) = delete;
 
 private:
-	GameEngineImageRenderer* PixelCollide_;
 };
 

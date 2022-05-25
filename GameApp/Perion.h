@@ -19,6 +19,5 @@ protected:
 	Perion& operator=(const Perion&& _other) = delete;
 
 private:
-	GameEngineImageRenderer* PixelCollide_;
 };
 

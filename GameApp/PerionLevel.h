@@ -7,6 +7,7 @@ class Player;
 class GameEngineRenderWindow;
 class InventoryUI;
 class StatusUI;
+class Perion;
 class PerionLevel : public GameEngineLevel
 {
 public:
@@ -30,5 +31,6 @@ private:
 	GameEngineRenderWindow* RenderWindow_;
 	InventoryUI* Inventory_;
 	StatusUI* Status_;
+	Perion* Map_;
 };
 

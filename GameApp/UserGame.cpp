@@ -84,8 +84,10 @@ void UserGame::CreateKey()
 	GameEngineInput::GetInst().CreateKey("LevelControl", '3');
 
 	GameEngineInput::GetInst().CreateKey("Inventory", 'i');
+	GameEngineInput::GetInst().CreateKey("Skill", 'k');
 
 	GameEngineInput::GetInst().CreateKey("FreeCamera", 'o');
+	GameEngineInput::GetInst().CreateKey("PixelCollide", 'p');
 }
 
 

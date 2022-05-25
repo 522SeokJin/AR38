@@ -23,6 +23,7 @@ PerionLevel::PerionLevel()
 	, RenderWindow_(nullptr)
 	, Inventory_(nullptr)
 	, Status_(nullptr)
+	, Map_(nullptr)
 {
 
 }
@@ -85,7 +86,7 @@ void PerionLevel::LevelStart()
 	}
 
 	{
-		Perion* Actor = CreateActor<Perion>();
+		Map_ = CreateActor<Perion>();
 	}
 
 	{
@@ -139,6 +140,11 @@ void PerionLevel::LevelUpdate(float _DeltaTime)
 	if (true == GameEngineInput::GetInst().Down("Inventory"))
 	{
 		Inventory_->OnOffChange();
+	}
+
+	if (true == GameEngineInput::GetInst().Down("PixelCollide"))
+	{
+		Map_->GetPixelCollideImage()->OnOffChange();
 	}
 }
 

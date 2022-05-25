@@ -19,6 +19,5 @@ protected:
 	PerionNorthernRidge& operator=(const PerionNorthernRidge&& _other) = delete;
 
 private:
-	GameEngineImageRenderer* PixelCollide_;
 };
 

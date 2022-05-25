@@ -19,6 +19,5 @@ protected:
 	LithHarbor& operator=(const LithHarbor&& _other) = delete;
 
 private:
-	GameEngineImageRenderer* PixelCollide_;
 };
 

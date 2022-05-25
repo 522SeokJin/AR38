@@ -19,7 +19,20 @@ public:
 
 	float4 GetMapSize();
 
-	GameEngineImageRenderer* PixelCollideImage_;
+	inline GameEngineImageRenderer* GetMapImage()
+	{
+		return MapImage_;
+	}
+
+	inline void SetPixelCollideImage(GameEngineImageRenderer* _Renderer)
+	{
+		PixelCollideImage_ = _Renderer;
+	}
+
+	inline GameEngineImageRenderer* GetPixelCollideImage()
+	{
+		return PixelCollideImage_;
+	}
 
 	static Map* CurrentMap;
 
@@ -32,13 +45,10 @@ protected:
 	void Start() override;
 	void LevelChangeStartEvent(GameEngineLevel* _PrevLevel) override;
 
+	GameEngineImageRenderer* PixelCollideImage_;
 
-	inline void SetPixelCollideImage(GameEngineImageRenderer* _Renderer)
-	{
-		PixelCollideImage_ = _Renderer;
-	}
+	GameEngineImageRenderer* MapImage_;
 
 private:
-
 };
 

@@ -81,8 +81,8 @@ void PerionRoomLevel::LevelStart()
 	{
 		PerionRoom* Actor = CreateActor<PerionRoom>();
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(
-			{ Actor->GetPixelCollide()->GetImageSize().halffloat4().x,
-			-Actor->GetPixelCollide()->GetImageSize().halffloat4().y, -100.0f });
+			{ Actor->GetPixelCollideImage()->GetImageSize().halffloat4().x,
+			-Actor->GetPixelCollideImage()->GetImageSize().halffloat4().y, -100.0f});
 	}
 
 	{
