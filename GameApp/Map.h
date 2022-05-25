@@ -21,6 +21,8 @@ public:
 
 	GameEngineImageRenderer* PixelCollideImage_;
 
+	static Map* CurrentMap;
+
 protected:
 	Map(const Map& _other) = delete; 
 	Map(Map&& _other) noexcept = delete;
@@ -37,7 +39,6 @@ protected:
 	}
 
 private:
-	static Map* CurrentMap;
 
 };
 

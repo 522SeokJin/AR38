@@ -65,41 +65,7 @@ void LithHarborLevel::LevelUpdate(float _DeltaTime)
 
 	if (false == GetMainCameraActor()->IsFreeCameraMode())
 	{
-		
-		float4 ResultCameraPos = Player_->GetTransform()->GetLocalPosition();
-
-		float4 MapSize = Map_->GetMapSize();
-		
-		if (MapSize.x < ResultCameraPos.x + 
-			GameEngineWindow::GetInst().GetSize().hx())
-		{
-			ResultCameraPos.x -= ResultCameraPos.x + 
-				GameEngineWindow::GetInst().GetSize().hx() - MapSize.x;
-		}
-
-		if (0.0f > ResultCameraPos.x -
-			GameEngineWindow::GetInst().GetSize().hx())
-		{
-			ResultCameraPos.x += GameEngineWindow::GetInst().GetSize().hx() - 
-				ResultCameraPos.x;
-		}
-
-		if (-MapSize.y > ResultCameraPos.y -
-			GameEngineWindow::GetInst().GetSize().hy())
-		{
-			ResultCameraPos.y -= ResultCameraPos.y -
-				GameEngineWindow::GetInst().GetSize().hy() + MapSize.y;
-		}
-
-		if (0.0f < ResultCameraPos.y +
-			GameEngineWindow::GetInst().GetSize().hy())
-		{
-			ResultCameraPos.y -= ResultCameraPos.y +
-				GameEngineWindow::GetInst().GetSize().hy();
-		}
-
-		GetMainCameraActor()->GetTransform()->
-			SetLocalPosition(ResultCameraPos);
+		GlobalLevelControl::PlayerCameraControl();
 	}
 
 	static bool Check = false;

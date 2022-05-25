@@ -14,3 +14,4 @@
 #include <GameEngine/GameEngineLevel.h>
 
 #include "GlobalValue.h"
+#include "GlobalLevelControl.h"

@@ -97,8 +97,10 @@ void PerionLevel::LevelStart()
 
 void PerionLevel::LevelUpdate(float _DeltaTime)
 {
-	GetMainCameraActor()->GetTransform()->
-		SetLocalPosition(Player_->GetTransform()->GetLocalPosition());
+	if (false == GetMainCameraActor()->IsFreeCameraMode())
+	{
+		GlobalLevelControl::PlayerCameraControl();
+	}
 
 	static bool Check = false;
 

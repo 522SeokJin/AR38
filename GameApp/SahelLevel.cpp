@@ -20,7 +20,10 @@ void SahelLevel::LevelStart()
 
 void SahelLevel::LevelUpdate(float _DeltaTime)
 {
-
+	if (false == GetMainCameraActor()->IsFreeCameraMode())
+	{
+		GlobalLevelControl::PlayerCameraControl();
+	}
 }
 
 void SahelLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)

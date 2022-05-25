@@ -19,7 +19,10 @@ void SilentSwampLevel::LevelStart()
 
 void SilentSwampLevel::LevelUpdate(float _DeltaTime)
 {
-
+	if (false == GetMainCameraActor()->IsFreeCameraMode())
+	{
+		GlobalLevelControl::PlayerCameraControl();
+	}
 }
 
 void SilentSwampLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)

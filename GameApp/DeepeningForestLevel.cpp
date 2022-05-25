@@ -86,8 +86,10 @@ void DeepeningForestLevel::LevelStart()
 
 void DeepeningForestLevel::LevelUpdate(float _DeltaTime)
 {
-	GetMainCameraActor()->GetTransform()->
-		SetLocalPosition(Player_->GetTransform()->GetLocalPosition());
+	if (false == GetMainCameraActor()->IsFreeCameraMode())
+	{
+		GlobalLevelControl::PlayerCameraControl();
+	}
 
 	static bool Check = false;
 
