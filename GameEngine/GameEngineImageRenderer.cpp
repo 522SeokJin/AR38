@@ -87,11 +87,6 @@ void GameEngineImageRenderer::ImageLocalFlipYAxis()
 	{
 		return;
 	}
-
-	for (size_t i = 0; i < CurAnimation_->Offsets_.size(); i++)
-	{
-		CurAnimation_->Offsets_[i].InvertX();
-	}
 }
 
 void GameEngineImageRenderer::SetIndex(const int _Index)
@@ -174,7 +169,6 @@ void GameEngineImageRenderer::CreateAnimationFolder(const std::string& _FolderTe
 	NewAnimation->EndFrame_ = FolderTexture->GetTextureCount() - 1;
 	NewAnimation->StartFrame_ = 0;
 	NewAnimation->Renderer_ = this;
-	NewAnimation->Offsets_.resize(FolderTexture->GetTextureCount());
 	
 	AllAnimations_.insert(std::map<std::string, Animation2D*>::
 		value_type(_Name, NewAnimation));
@@ -210,13 +204,6 @@ void GameEngineImageRenderer::SetChangeAnimation(const std::string& _Name,
 	CurAnimation_->Reset();
 	CurAnimation_->CallStart();
 	AnimationPlay();
-}
-
-void GameEngineImageRenderer::SetOffsetAnimation(const std::string& _Name, int _Index, float4 _Offset)
-{
-	Animation2D* FindAni = FindAnimation(_Name);
-
-	FindAni->SetOffset(_Index, _Offset);
 }
 
 GameEngineImageRenderer::Animation2D* GameEngineImageRenderer::FindAnimation(const std::string& _Name)
@@ -397,11 +384,6 @@ void GameEngineImageRenderer::Animation2D::Update(float _DeltaTime)
 			FolderTextures_->GetTextureIndex(CurFrame_));
 		Renderer_->SetLocalScaling(FolderTextures_->GetTextureIndex(CurFrame_)->GetTextureSize());
 		Renderer_->SetImageSize(Renderer_->GetLocalScaling());
-
-		if (float4::ZERO != Offsets_[CurFrame_])
-		{
-			Renderer_->SetLocalPosition(Offsets_[CurFrame_]);
-		}
 	}
 }
 
@@ -460,16 +442,6 @@ void GameEngineImageRenderer::Animation2D::ReverseFrameUpdate()
 		}
 	}
 
-}
-
-void GameEngineImageRenderer::Animation2D::SetOffset(int _Index, float4 _Offset)
-{
-	if (EndFrame_ < _Index || 0 > _Index)
-	{
-		GameEngineDebug::MsgBoxError("잘못된 오프셋 프레임입니다.");
-	}
-
-	Offsets_[_Index] = _Offset;
 }
 
 float4 GameEngineImageRenderer::Animation2D::GetTextureSize(int _Index)

@@ -37,7 +37,6 @@ public:
 
 	// _IsForce : 같은 애니매이션이여도 바꾼다.
 	void SetChangeAnimation(const std::string& _Name, bool _IsForce = false);
-	void SetOffsetAnimation(const std::string& _Name, int _Frame, float4 _Offset);
 	Animation2D* FindAnimation(const std::string& _Name);
 
 	float4 GetAnimationTextureSize(const std::string& _Name, int _Index);
@@ -146,13 +145,10 @@ private:
 		void FrameUpdate();
 		void ReverseFrameUpdate();
 
-		void SetOffset(int _Index, float4 _Offset);
-
 		float4 GetTextureSize(int _Index);
 
 		GameEngineFolderTexture*	FolderTextures_;
 		GameEngineTexture*			AnimationTexture_;
-		std::vector<float4>			Offsets_;
 
 		GameEngineImageRenderer*	Renderer_;
 

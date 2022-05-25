@@ -21,12 +21,7 @@ void Portal::Start()
 	GameEngineImageRenderer* Renderer = CreateTransformComponent<GameEngineImageRenderer>();
 	Renderer->CreateAnimationFolder("Portal", "Portal", 0.1f);
 	Renderer->SetChangeAnimation("Portal");
-
-	for (int i = 0; i < 8; i++)
-	{
-		Renderer->SetOffsetAnimation("Portal", i, 
-			{0.0f, Renderer->GetCurAnimation()->GetTextureSize(i).hy()});
-	}
+	Renderer->SetLocalPosition({0.0f, 71.0f, static_cast<float>(DepthOrder::PORTAL) });
 
 	Collision_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
 		ColGroup::PORTAL));

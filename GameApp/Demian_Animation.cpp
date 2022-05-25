@@ -6,7 +6,7 @@ void Demian::CreateAnimation()
 {
 	DemianRenderer_ = CreateTransformComponent<GameEngineImageRenderer>(GetTransform());
 
-	{
+	/*{
 		DemianRenderer_->CreateAnimationFolder("Act1_attack1", "Act1_attack1", 0.1f);
 		DemianRenderer_->SetOffsetAnimation("Act1_attack1", 1, { -28.0f, 15.0f });
 		DemianRenderer_->SetOffsetAnimation("Act1_attack1", 2, { -27.5f, 21.5f });
@@ -63,5 +63,5 @@ void Demian::CreateAnimation()
 		DemianRenderer_->SetOffsetAnimation("Act1_stand", 7, { -0.0f, -0.5f });
 	}
 
-	DemianRenderer_->SetChangeAnimation("Act1_attack1");
+	DemianRenderer_->SetChangeAnimation("Act1_attack1");*/
 }

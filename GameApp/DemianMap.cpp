@@ -69,8 +69,3 @@ float4 DemianMap::CalculationOriginPos(GameEngineImageRenderer* _Renderer, const
 	return (_WzOrigin + CenterDiff).InvertY();
 }
 
-void DemianMap::SetOffsetAnimation(GameEngineImageRenderer* _Renderer, 
-	const std::string& _Name, int _Index, const float4& _WzOrigin)
-{
-	_Renderer->SetOffsetAnimation(_Name, _Index, CalculationOriginPos(_Renderer, _Name, _Index, _WzOrigin));
-}
