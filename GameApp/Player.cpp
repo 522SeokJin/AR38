@@ -13,81 +13,15 @@ Player::Player()
 	, Speed_(float4::ZERO)
 	, BodyPixelColor_(float4::ZERO)
 	, FootPixelColor_({0.0f, 1.0f, 0.0f, 0.0f})
-	, FaceImageIndex_(1)
-	, HairBelowBodyImageIndex_(1)
-	, HairOverHeadImageIndex_(1)
-	, HairImageIndex_(1)
-	, MailImageIndex_(1)
-	, MailArmImageIndex_(1)
-	, PantsImageIndex_(1)
-	, ShoesImageIndex_(1)
-	, WeaponImageIndex_(1)
 	, LevelUpEffect_(nullptr)
 	, JobsChangedEffect_(nullptr)
 	, Avatar_(nullptr)
-	, Face_(nullptr)
-	, HairBelowBody_(nullptr)
-	, HairOverHead_(nullptr)
-	, Hair_(nullptr)
-	, Mail_(nullptr)
-	, MailArm_(nullptr)
-	, Pants_(nullptr)
-	, Shoes_(nullptr)
-	, Weapon_(nullptr)
 	, Collision_(nullptr)
 {
 }
 
 Player::~Player()
 {
-}
-
-void Player::ChangeImageDirection()
-{
-	Avatar_->ImageLocalFlipYAxis();
-	Face_->ImageLocalFlipYAxis();
-	HairOverHead_->ImageLocalFlipYAxis();
-	Hair_->ImageLocalFlipYAxis();
-	Mail_->ImageLocalFlipYAxis();
-	MailArm_->ImageLocalFlipYAxis();
-	Pants_->ImageLocalFlipYAxis();
-	Shoes_->ImageLocalFlipYAxis();
-	Weapon_->ImageLocalFlipYAxis();
-}
-
-void Player::ChangePartsOffset(GameEngineImageRenderer* _Renderer, float4 _Offset)
-{
-	if (nullptr == _Renderer)
-	{
-		return;
-	}
-
-	if (nullptr == _Renderer->GetCurAnimation())
-	{
-		return;
-	}
-
-	switch (Dir_)
-	{
-	case PlayerDir::LEFT:
-		for (int i = 0; i < _Renderer->GetCurAnimation()->EndFrame_ + 1; i++)
-		{
-			_Renderer->SetOffsetAnimation(_Renderer->GetCurAnimation()->GetName(),
-				i, _Offset + Avatar_->GetCurAnimation()->Offsets_[Avatar_->GetCurAnimation()->CurFrame_]);
-		}
-		break;
-	case PlayerDir::RIGHT:
-		for (int i = 0; i < _Renderer->GetCurAnimation()->EndFrame_ + 1; i++)
-		{
-			_Renderer->SetOffsetAnimation(_Renderer->GetCurAnimation()->GetName(),
-				i, _Offset * float4::INVERT_X + Avatar_->GetCurAnimation()->Offsets_[Avatar_->GetCurAnimation()->CurFrame_]);
-		}
-		break;
-	case PlayerDir::MIDDLE:
-		break;
-	default:
-		break;
-	}
 }
 
 void Player::HorizonMovement()
@@ -119,7 +53,7 @@ void Player::HorizonMovement()
 
 	if (CurrentDir != Dir_)
 	{
-		ChangeImageDirection();
+		Avatar_->ImageLocalFlipYAxis();
 	}
 }
 

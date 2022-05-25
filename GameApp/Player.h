@@ -32,21 +32,7 @@ protected:
 	Player& operator=(const Player&& _other) = delete;
 
 private:
-	void ChangeImageDirection();
-
 	void CreateAnimation();
-	void CreateAvatarAnimation();
-	void CreateMailAnimation();
-	void CreateMailArmAnimation();
-	void CreatePantsAnimation();
-	void CreateShoesAnimation();
-	void CreateWeaponAnimation();
-	void ChangePlayerAnimation(const std::string& _Name);
-
-	void UpdatePartsOffset();
-	void ChangePartsOffset(GameEngineImageRenderer* _Renderer, float4 _Offset);
-	void SetPartsOffset();
-
 	void HorizonMovement();
 
 	// r : Rope Color, g : Ground Color, b : Ladder Color
@@ -77,37 +63,6 @@ private:
 	GameEngineImageRenderer* JobsChangedEffect_;
 
 	GameEngineImageRenderer* Avatar_;
-	GameEngineImageRenderer* Face_;
-	GameEngineImageRenderer* HairBelowBody_;
-	GameEngineImageRenderer* HairOverHead_;
-	GameEngineImageRenderer* Hair_;
-	GameEngineImageRenderer* Mail_;
-	GameEngineImageRenderer* MailArm_;
-	GameEngineImageRenderer* Pants_;
-	GameEngineImageRenderer* Shoes_;
-	GameEngineImageRenderer* Weapon_;
-
-	int FaceImageIndex_;
-	int HairBelowBodyImageIndex_;
-	int HairOverHeadImageIndex_;
-	int HairImageIndex_;
-	int MailImageIndex_;
-	int MailArmImageIndex_;
-	int PantsImageIndex_;
-	int ShoesImageIndex_;
-	int WeaponImageIndex_;
-
-	// [FolderIndex]
-	std::map<std::string, std::vector<float4>> FaceOffsets_[1];
-	std::map<std::string, std::vector<float4>> HairBelowBodyOffsets_[1];
-	std::map<std::string, std::vector<float4>> HairOverHeadOffsets_[1];
-	std::map<std::string, std::vector<float4>> HairOffsets_[1];
-	std::map<std::string, std::vector<float4>> MailOffsets_[1];
-	std::map<std::string, std::vector<float4>> MailArmOffsets_[1];
-	std::map<std::string, std::vector<float4>> PantsOffsets_[1];
-	std::map<std::string, std::vector<float4>> ShoesOffsets_[1];
-	std::map<std::string, std::vector<float4>> WeaponOffsets_[1];
-
 
 	////////////////////////////////////////////	FSM
 

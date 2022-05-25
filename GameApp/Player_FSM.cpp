@@ -8,7 +8,7 @@
 
 void Player::stand1_Start()
 {
-	ChangePlayerAnimation("stand1");
+	Avatar_->SetChangeAnimation("stand1");
 	Speed_.x = 0.0f;
 
 	BodyPixelColor_ = GetBodyColor();
@@ -81,7 +81,7 @@ void Player::stand1_End()
 
 void Player::walk1_Start()
 {
-	ChangePlayerAnimation("walk1");
+	Avatar_->SetChangeAnimation("walk1");
 	Speed_.x = WALKSPEED;
 }
 
@@ -159,7 +159,7 @@ void Player::walk1_End()
 
 void Player::jump_Start()
 {
-	ChangePlayerAnimation("jump");
+	Avatar_->SetChangeAnimation("jump");
 	Speed_.y = JUMPSPEED;
 	GetTransform()->SetLocalMove({ 0.0f, 1.0f });
 
@@ -216,7 +216,7 @@ void Player::jump_End()
 
 void Player::fall_Start()
 {
-	ChangePlayerAnimation("jump");
+	Avatar_->SetChangeAnimation("jump");
 
 	if (IsUpRopeColor() ||
 		IsUpLadderColor() ||
@@ -354,7 +354,7 @@ void Player::rope()
 
 	if (CurrentDir != Dir_)
 	{
-		ChangeImageDirection();
+		Avatar_->ImageLocalFlipYAxis();
 	}
 }
 
@@ -416,7 +416,7 @@ void Player::ladder()
 
 	if (CurrentDir != Dir_)
 	{
-		ChangeImageDirection();
+		Avatar_->ImageLocalFlipYAxis();
 	}
 }
 
@@ -458,7 +458,7 @@ void Player::ropeStop()
 
 	if (CurrentDir != Dir_)
 	{
-		ChangeImageDirection();
+		Avatar_->ImageLocalFlipYAxis();
 	}
 }
 
@@ -500,7 +500,7 @@ void Player::ladderStop()
 
 	if (CurrentDir != Dir_)
 	{
-		ChangeImageDirection();
+		Avatar_->ImageLocalFlipYAxis();
 	}
 }
 
@@ -511,7 +511,7 @@ void Player::ladderStop_End()
 
 void Player::swingO1_Start()
 {
-	ChangePlayerAnimation("swingO1");
+	Avatar_->SetChangeAnimation("swingO1");
 }
 
 void Player::swingO1()

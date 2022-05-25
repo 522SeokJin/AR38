@@ -144,7 +144,7 @@
       <Filter>Global\PostProcess</Filter>
     </ClCompile>
     <ClCompile Include="GlobalLevelControl.cpp">
-      <Filter>Level</Filter>
+      <Filter>Global</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -379,7 +379,7 @@
       <Filter>Global\PostProcess</Filter>
     </ClInclude>
     <ClInclude Include="GlobalLevelControl.h">
-      <Filter>Level</Filter>
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
