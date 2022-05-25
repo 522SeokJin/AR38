@@ -39,3 +39,8 @@ float4 Map::GetColor(float4 _Position)
 {
 	return CurrentMap->PixelCollideImage_->GetCurrentTexture()->GetPixel(_Position.ix(), _Position.iy());
 }
+
+float4 Map::GetMapSize()
+{
+	return PixelCollideImage_->GetImageSize();
+}

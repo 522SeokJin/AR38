@@ -17,6 +17,8 @@ public:
 	static float4 GetColor(GameEngineTransform* _Ptr, bool _YReverse = true);
 	static float4 GetColor(float4 _Position);
 
+	float4 GetMapSize();
+
 	GameEngineImageRenderer* PixelCollideImage_;
 
 protected:
