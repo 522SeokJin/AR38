@@ -49,28 +49,34 @@ void Player::CreateAnimation()
 
 void Player::CreateAvatarAnimation()
 {
-	Avatar_->CreateAnimationFolder("avatar_dead", "dead", 0.5f, false);
-	Avatar_->CreateAnimationFolder("avatar_jump", "jump", 0.5f, false);
-	Avatar_->CreateAnimationFolder("avatar_ladder", "ladder", 0.25f);
-	Avatar_->CreateAnimationFolder("avatar_prone", "prone", 0.5f);
-	Avatar_->CreateAnimationFolder("avatar_proneStab", "proneStab", 0.5f);
-	Avatar_->CreateAnimationFolder("avatar_rope", "rope", 0.25f);
-	Avatar_->CreateAnimationFolder("avatar_stabO1", "stabO1", 0.5f);
-	Avatar_->CreateAnimationFolder("avatar_stabO2", "stabO2", 0.5f);
-	Avatar_->CreateAnimationFolder("avatar_stabOF", "stabOF", 0.5f);
 	Avatar_->CreateAnimationFolder("avatar_stand1", "stand1", 0.5f);
+	Avatar_->CreateAnimationFolder("avatar_jump", "jump", 0.5f, false);
+
+	Avatar_->CreateAnimationFolder("avatar_prone", "prone", 0.5f, false);
+	Avatar_->CreateAnimationFolder("avatar_proneStab", "proneStab", { 0.3f, 0.4f }, false);
+
+	Avatar_->CreateAnimationFolder("avatar_ladder", "ladder", 0.25f);
+	Avatar_->CreateAnimationFolder("avatar_rope", "rope", 0.25f);
+
+	Avatar_->CreateAnimationFolder("avatar_dead", "dead", 0.5f, false);
+
+	Avatar_->CreateAnimationFolder("avatar_stabO1", "stabO1", { 0.35f, 0.45f }, false);
+	Avatar_->CreateAnimationFolder("avatar_stabO2", "stabO2", { 0.35f, 0.45f }, false);
+	Avatar_->CreateAnimationFolder("avatar_stabOF", "stabOF", { 0.25f, 0.15f, 0.3f }, false);
 
 	Avatar_->CreateAnimationFolder("avatar_swingO1", "swingO1", { 0.3f, 0.15f, 0.35f }, false);	// 300 150 350
+	Avatar_->CreateAnimationFolder("avatar_swingO2", "swingO2", { 0.3f, 0.15f, 0.35f }, false);
+	Avatar_->CreateAnimationFolder("avatar_swingO3", "swingO3", { 0.3f, 0.15f, 0.35f }, false);
+	Avatar_->CreateAnimationFolder("avatar_swingOF", "swingOF", { 0.2f, 0.1f, 0.1f, 0.35f }, false);
 
-	Avatar_->CreateAnimationFolder("avatar_swingO2", "swingO2", 0.5f);
-	Avatar_->CreateAnimationFolder("avatar_swingO3", "swingO3", 0.5f);
-	Avatar_->CreateAnimationFolder("avatar_swingOF", "swingOF", 0.5f);
-	Avatar_->CreateAnimationFolder("avatar_swingP2", "swingP2", 0.5f);
-	Avatar_->CreateAnimationFolder("avatar_swingPF", "swingPF", 0.5f);
-	Avatar_->CreateAnimationFolder("avatar_swingT1", "swingT1", 0.5f);
-	Avatar_->CreateAnimationFolder("avatar_swingT2", "swingT2", 0.5f);
-	Avatar_->CreateAnimationFolder("avatar_swingT3", "swingT3", 0.5f);
-	Avatar_->CreateAnimationFolder("avatar_swingTF", "swingTF", 0.5f);
+	Avatar_->CreateAnimationFolder("avatar_swingP2", "swingP2", { 0.3f, 0.15f, 0.35f }, false);
+	Avatar_->CreateAnimationFolder("avatar_swingPF", "swingPF", { 0.1f, 0.2f, 0.2f, 0.2f }, false);
+
+	Avatar_->CreateAnimationFolder("avatar_swingT1", "swingT1", { 0.3f, 0.15f, 0.35f }, false);
+	Avatar_->CreateAnimationFolder("avatar_swingT2", "swingT2", { 0.3f, 0.15f, 0.35f }, false);
+	Avatar_->CreateAnimationFolder("avatar_swingT3", "swingT3", { 0.3f, 0.15f, 0.35f }, false);
+	Avatar_->CreateAnimationFolder("avatar_swingTF", "swingTF", { 0.2f, 0.15f, 0.15f, 0.2f }, false);
+
 	Avatar_->CreateAnimationFolder("avatar_walk1", "walk1", 0.180f);
 
 	// Skill Animation
