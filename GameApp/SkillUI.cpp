@@ -124,7 +124,7 @@ void SkillUI::Start()
 	{
 		SpUpBtn2_ = CreateTransformComponent<GameEngineUIRenderer>();
 		SpUpBtn2_->SetImage("Skill.main.BtSpUp.normal.0.png", true, "PointSmp");
-		SpUpBtn2_->TextSetting("µ¸¿ò", "10", 13.5f, float4::BLACK, { -90.0f, 0.0f });
+		SpUpBtn2_->TextSetting("µ¸¿ò", std::to_string(SP2_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
 		SpUpBtn2_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
 		SpUpBtn2_->SetLocalPosition({ -18.0f + 142.0f * 1.0f, 61.5f - 40.0f * 0.0f, -1.0f });
 	}
@@ -143,14 +143,6 @@ void SkillUI::Start()
 		SpUpBtn4_->TextSetting("µ¸¿ò", std::to_string(SP1_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
 		SpUpBtn4_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
 		SpUpBtn4_->SetLocalPosition({ -18.0f + 142.0f * 1.0f,61.5f - 40.0f * 1.0f, -1.0f });
-	}
-
-	{
-		SpUpBtn5_ = CreateTransformComponent<GameEngineUIRenderer>();
-		SpUpBtn5_->SetImage("Skill.main.BtSpUp.normal.0.png", true, "PointSmp");
-		SpUpBtn5_->TextSetting("µ¸¿ò", std::to_string(SP1_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
-		SpUpBtn5_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
-		SpUpBtn5_->SetLocalPosition({ -18.0f + 142.0f * 0.0f, 61.5f - 40.0f * 2.0f, -1.0f });
 	}
 
 	{
@@ -179,13 +171,6 @@ void SkillUI::Start()
 			ColGroup::TAB));
 		SpUpCol4_->SetLocalScaling(SpUpBtn4_->GetImageSize());
 		SpUpCol4_->SetLocalPosition({ -18.0f + 142.0f * 1.0f, 61.5f - 40.0f * 1.0f });
-	}
-
-	{
-		SpUpCol5_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
-			ColGroup::TAB));
-		SpUpCol5_->SetLocalScaling(SpUpBtn5_->GetImageSize());
-		SpUpCol5_->SetLocalPosition({ -18.0f + 142.0f * 0.0f, 61.5f - 40.0f * 2.0f });
 	}
 
 	{	
@@ -219,47 +204,35 @@ void SkillUI::Start()
 	}
 
 	{
-		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>();
-		Renderer->SetImage("Skill.main.skill1.png");
-		Renderer->SetLocalPosition({ -80.0f, -10.0f });
-	}
-
-	{
-		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>();
-		Renderer->SetImage("Skill.main.skill1.png");
-		Renderer->SetLocalPosition({ -80.0f, -50.0f });
-	}
-
-	{
 		Skill1_ = CreateTransformComponent<GameEngineUIRenderer>();
 		Skill1_->SetImage("1001005.icon.png");
-		Skill1_->TextSetting("µ¸¿ò", "Å×½ºÆ®", 13.0f, float4::BLACK, {25.0f, 10.0f});
+		Skill1_->TextSetting("µ¸¿ò", "½½·¡½Ã ºí·¯½ºÆ®", 13.0f, float4::BLACK, {25.0f, 10.0f});
 		Skill1_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
 		Skill1_->SetLocalPosition({ -132.0f, 70.0f });
 	}
 
 	{
 		Skill2_ = CreateTransformComponent<GameEngineUIRenderer>();
-		Skill2_->SetImage("1001005.icon.png");
+		Skill2_->SetImage("1001008.icon.png");
+		Skill2_->TextSetting("µ¸¿ò", "¿ö¸®¾î ¸®ÇÁ", 13.0f, float4::BLACK, {25.0f, 10.0f});
+		Skill2_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
 		Skill2_->SetLocalPosition({ 10.0f, 70.0f });
 	}
 
 	{
 		Skill3_ = CreateTransformComponent<GameEngineUIRenderer>();
-		Skill3_->SetImage("1001005.icon.png");
+		Skill3_->SetImage("1001011.icon.png");
+		Skill3_->TextSetting("µ¸¿ò", "¾îÆÛ Â÷Áö", 13.0f, float4::BLACK, { 25.0f, 10.0f });
+		Skill3_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
 		Skill3_->SetLocalPosition({ -132.0f, 30.0f });
 	}
 
 	{
 		Skill4_ = CreateTransformComponent<GameEngineUIRenderer>();
-		Skill4_->SetImage("1001005.icon.png");
+		Skill4_->SetImage("1001010.icon.png");
+		Skill4_->TextSetting("µ¸¿ò", "¸®ÇÁ ¾îÅÃ", 13.0f, float4::BLACK, { 25.0f, 10.0f });
+		Skill4_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
 		Skill4_->SetLocalPosition({ 10.0f, 30.0f });
-	}
-
-	{
-		Skill5_ = CreateTransformComponent<GameEngineUIRenderer>();
-		Skill5_->SetImage("1001005.icon.png");
-		Skill5_->SetLocalPosition({ -132.0f, -10.0f });
 	}
 
 	{
@@ -283,13 +256,11 @@ void SkillUI::Update(float _DeltaTime)
 	GetLevel()->PushUIDebugRender(SpUpCol2_->GetTransform(), CollisionType::Rect);
 	GetLevel()->PushUIDebugRender(SpUpCol3_->GetTransform(), CollisionType::Rect);
 	GetLevel()->PushUIDebugRender(SpUpCol4_->GetTransform(), CollisionType::Rect);
-	GetLevel()->PushUIDebugRender(SpUpCol5_->GetTransform(), CollisionType::Rect);
 
 	SpUpBtn1_->SetImage("Skill.main.BtSpUp.normal.0.png", true, "PointSmp");
 	SpUpBtn2_->SetImage("Skill.main.BtSpUp.normal.0.png", true, "PointSmp");
 	SpUpBtn3_->SetImage("Skill.main.BtSpUp.normal.0.png", true, "PointSmp");
 	SpUpBtn4_->SetImage("Skill.main.BtSpUp.normal.0.png", true, "PointSmp");
-	SpUpBtn5_->SetImage("Skill.main.BtSpUp.normal.0.png", true, "PointSmp");
 
 	std::function<void(GameEngineCollision*)> Func =
 		std::bind(&SkillUI::TitleBarEvent, this, std::placeholders::_1);
@@ -315,11 +286,6 @@ void SkillUI::Update(float _DeltaTime)
 	Func = std::bind(&SkillUI::SpUpBtnEvent4, this, std::placeholders::_1);
 
 	SpUpCol4_->Collision(CollisionType::Rect, CollisionType::Rect,
-		static_cast<int>(ColGroup::MOUSE), Func);
-
-	Func = std::bind(&SkillUI::SpUpBtnEvent5, this, std::placeholders::_1);
-
-	SpUpCol5_->Collision(CollisionType::Rect, CollisionType::Rect,
 		static_cast<int>(ColGroup::MOUSE), Func);
 
 	ChangeTabEvent();

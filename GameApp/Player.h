@@ -18,6 +18,7 @@ public:
 	void Update(float _DeltaTime) override;
 
 	PlayerDir GetDir()
+
 	{
 		return Dir_;
 	}
