@@ -32,8 +32,12 @@ public:
 
 	void CreateAnimationFolder(const std::string& _FolderTexName,
 		const std::string& _Name, float _InterTime, bool _Loop = true);
+	void CreateAnimationFolder(const std::string& _FolderTexName,
+		const std::string& _Name, std::vector<float> _InterTimes, bool _Loop = true);
 	void CreateAnimationFolder(const std::string& _Name, 
 		float _InterTime, bool _Loop = true);
+	void CreateAnimationFolder(const std::string& _Name, 
+		std::vector<float> _InterTimes, bool _Loop = true);
 
 	// _IsForce : 같은 애니매이션이여도 바꾼다.
 	void SetChangeAnimation(const std::string& _Name, bool _IsForce = false);
@@ -96,7 +100,6 @@ public:
 	void SetFrameCallBack(const std::string& _Name, int _Index,
 		std::function<void()> _CallBack);
 
-
 protected:
 	GameEngineImageRenderer(const GameEngineImageRenderer& _other) = delete; 
 	GameEngineImageRenderer(GameEngineImageRenderer&& _other) noexcept = delete;
@@ -128,7 +131,7 @@ private:
 			: FolderTextures_(nullptr), AnimationTexture_(nullptr), Renderer_(nullptr)
 			, IsEnd_(false), Loop_(true)
 			, InterTime_(0.0f), CurTime_(0.0f)
-			, CurFrame_(0), StartFrame_(0), EndFrame_(0)
+			, CurFrame_(0), StartFrame_(0), EndFrame_(0), IsSameInterTime_(true)
 		{
 		}
 		void SetCurrentIndex(int _Index)
@@ -161,6 +164,9 @@ private:
 		int	CurFrame_;
 		int	StartFrame_;
 		int	EndFrame_;
+
+		std::vector<float> InterTimes_;
+		bool IsSameInterTime_;
 
 		std::map<int, std::vector<std::function<void()>>> FrameCallBack_;
 		std::vector<std::function<void()>> StartCallBack_;

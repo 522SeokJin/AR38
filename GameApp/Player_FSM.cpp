@@ -538,3 +538,16 @@ void Player::swingO1_End()
 {
 	Avatar_->SetLocalPosition(float4::ZERO);
 }
+
+void Player::SlashBlast_Start()
+{
+
+}
+
+void Player::SlashBlast()
+{
+}
+
+void Player::SlashBlast_End()
+{
+}

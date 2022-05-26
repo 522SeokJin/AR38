@@ -103,5 +103,10 @@ private:
 	void swingO1_Start();
 	void swingO1();
 	void swingO1_End();
+
+	void SlashBlast_Start();
+	void SlashBlast();
+	void SlashBlast_End();
+
 };
 

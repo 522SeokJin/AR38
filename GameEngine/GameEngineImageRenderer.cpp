@@ -174,10 +174,53 @@ void GameEngineImageRenderer::CreateAnimationFolder(const std::string& _FolderTe
 		value_type(_Name, NewAnimation));
 }
 
+void GameEngineImageRenderer::CreateAnimationFolder(const std::string& _FolderTexName, 
+	const std::string& _Name, std::vector<float> _InterTimes, bool _Loop)
+{
+	std::map<std::string, Animation2D*>::iterator FindIter = AllAnimations_.find(_Name);
+
+	if (AllAnimations_.end() != FindIter)
+	{
+		GameEngineDebug::MsgBoxError("이미 존재하는 애니메이션을 또 만들었습니다.");
+	}
+
+	GameEngineFolderTexture* FolderTexture = GameEngineFolderTextureManager::GetInst().Find(_FolderTexName);
+
+	if (nullptr == FolderTexture)
+	{
+		GameEngineDebug::MsgBoxError("존재하지 않는 폴더 텍스처를 세팅하려고 했습니다..");
+	}
+
+	Animation2D* NewAnimation = new Animation2D();
+
+	NewAnimation->SetName(_Name);
+	NewAnimation->IsEnd_ = false;
+	NewAnimation->Loop_ = _Loop;
+	NewAnimation->InterTime_ = _InterTimes[0];
+	NewAnimation->CurTime_ = _InterTimes[0];
+
+	NewAnimation->FolderTextures_ = FolderTexture;
+	NewAnimation->CurFrame_ = 0;
+	NewAnimation->EndFrame_ = FolderTexture->GetTextureCount() - 1;
+	NewAnimation->StartFrame_ = 0;
+	NewAnimation->Renderer_ = this;
+	NewAnimation->InterTimes_ = _InterTimes;
+	NewAnimation->IsSameInterTime_ = false;
+
+	AllAnimations_.insert(std::map<std::string, Animation2D*>::
+		value_type(_Name, NewAnimation));
+}
+
 void GameEngineImageRenderer::CreateAnimationFolder(const std::string& _Name, 
 	float _InterTime, bool _Loop)
 {
 	CreateAnimationFolder(_Name, _Name, _InterTime, _Loop);
+}
+
+void GameEngineImageRenderer::CreateAnimationFolder(const std::string& _Name, 
+	std::vector<float> _InterTimes, bool _Loop)
+{
+	CreateAnimationFolder(_Name, _Name, _InterTimes, _Loop);
 }
 
 void GameEngineImageRenderer::SetChangeAnimation(const std::string& _Name,
@@ -392,7 +435,6 @@ void GameEngineImageRenderer::Animation2D::FrameUpdate()
 	if (CurTime_ <= 0.0f)
 	{
 		++CurFrame_;
-		CurTime_ = InterTime_;
 
 		if (true == Loop_ &&
 			CurFrame_ > EndFrame_)
@@ -412,6 +454,16 @@ void GameEngineImageRenderer::Animation2D::FrameUpdate()
 			IsEnd_ = true;
 
 			CurFrame_ = EndFrame_;
+		}
+
+
+		if (true == IsSameInterTime_)
+		{
+			CurTime_ = InterTime_;
+		}
+		else
+		{
+			CurTime_ = InterTimes_[CurFrame_];
 		}
 	}
 }
