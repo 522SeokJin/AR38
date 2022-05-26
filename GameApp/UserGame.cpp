@@ -88,6 +88,17 @@ void UserGame::CreateKey()
 
 	GameEngineInput::GetInst().CreateKey("FreeCamera", 'o');
 	GameEngineInput::GetInst().CreateKey("PixelCollide", 'p');
+
+	// Skill
+	GameEngineInput::GetInst().CreateKey("a", 'a');
+	GameEngineInput::GetInst().CreateKey("s", 's');
+	GameEngineInput::GetInst().CreateKey("d", 'd');
+	GameEngineInput::GetInst().CreateKey("f", 'f');
+	GameEngineInput::GetInst().CreateKey("q", 'q');
+	GameEngineInput::GetInst().CreateKey("w", 'w');
+	GameEngineInput::GetInst().CreateKey("e", 'e');
+	GameEngineInput::GetInst().CreateKey("r", 'r');
+	GameEngineInput::GetInst().CreateKey("Shift", VK_SHIFT);
 }
 
 

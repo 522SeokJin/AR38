@@ -48,7 +48,7 @@ void Player::CreateAnimation()
 	Avatar_->CreateAnimationFolder("avatar_stabOF", "stabOF", 0.5f);
 	Avatar_->CreateAnimationFolder("avatar_stand1", "stand1", 0.5f);
 
-	Avatar_->CreateAnimationFolder("avatar_swingO1", "swingO1", 0.2f, false);	// 300 150 350
+	Avatar_->CreateAnimationFolder("avatar_swingO1", "swingO1", 0.15f, false);	// 300 150 350
 
 	Avatar_->CreateAnimationFolder("avatar_swingO2", "swingO2", 0.5f);
 	Avatar_->CreateAnimationFolder("avatar_swingO3", "swingO3", 0.5f);

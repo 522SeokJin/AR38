@@ -512,6 +512,18 @@ void Player::ladderStop_End()
 void Player::swingO1_Start()
 {
 	Avatar_->SetChangeAnimation("swingO1");
+
+	switch (Dir_)
+	{
+	case PlayerDir::LEFT:
+		Avatar_->SetLocalPosition({ -40.0f, 0.0f, 0.0f });
+		break;
+	case PlayerDir::RIGHT:
+		Avatar_->SetLocalPosition({ 40.0f, 0.0f, 0.0f });
+		break;
+	default:
+		break;
+	}
 }
 
 void Player::swingO1()
