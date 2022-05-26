@@ -117,5 +117,9 @@ private:
 	void doubleJump_Start();
 	void doubleJump();
 	void doubleJump_End();
+
+	void upperCharge_Start();
+	void upperCharge();
+	void upperCharge_End();
 };
 

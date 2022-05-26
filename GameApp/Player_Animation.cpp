@@ -82,6 +82,7 @@ void Player::CreateAvatarAnimation()
 	// Skill Animation
 	Avatar_->CreateAnimationFolder("slashBlast",
 		{ 0.06f, 0.06f, 0.18f, 0.12f, 0.12f, 0.21f }, false);
+	Avatar_->CreateAnimationFolder("upperCharge", 0.06f);
 
 	Avatar_->SetChangeAnimation("stand1");
 }
@@ -101,4 +102,11 @@ void Player::CreateSkillAnimation()
 			SkillEffect1_->Off();
 		}
 	);
+	SkillEffect1_->CreateAnimationFolder("UpperCharge_effect0", 0.06f, false);
+	SkillEffect1_->SetEndCallBack("UpperCharge_effect0", [&]()
+		{
+			SkillEffect1_->Off();	
+		}
+	);
+
 }

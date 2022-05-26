@@ -181,6 +181,10 @@ void Player::Start()
 		std::bind(&Player::doubleJump_Start, this),
 		std::bind(&Player::doubleJump_End, this));
 
+	FSM_.CreateState("upperCharge", std::bind(&Player::upperCharge, this),
+		std::bind(&Player::upperCharge_Start, this),
+		std::bind(&Player::upperCharge_End, this));
+
 	FSM_.ChangeState("stand1");
 }
 

@@ -642,3 +642,22 @@ void Player::doubleJump_End()
 	BodyPixelColor_ = GetBodyColor();
 	FootPixelColor_ = GetFootColor();
 }
+
+void Player::upperCharge_Start()
+{
+	Avatar_->SetChangeAnimation("upperCharge");
+	SkillEffect1_->On();
+	SkillEffect1_->SetChangeAnimation("UpperCharge_effect0", true);
+}
+
+void Player::upperCharge()
+{
+	if (Avatar_->GetCurAnimation()->IsEnd_)
+	{
+		FSM_.ChangeState("fall");
+	}
+}
+
+void Player::upperCharge_End()
+{
+}
