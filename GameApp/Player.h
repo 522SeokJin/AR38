@@ -34,6 +34,10 @@ protected:
 
 private:
 	void CreateAnimation();
+
+	void CreateAvatarAnimation();
+	void CreateSkillAnimation();
+
 	void HorizonMovement();
 
 	// r : Rope Color, g : Ground Color, b : Ladder Color
@@ -64,6 +68,8 @@ private:
 	GameEngineImageRenderer* JobsChangedEffect_;
 
 	GameEngineImageRenderer* Avatar_;
+	GameEngineImageRenderer* SkillEffect1_;
+	GameEngineImageRenderer* SkillEffect2_;
 
 	////////////////////////////////////////////	FSM
 
@@ -104,9 +110,9 @@ private:
 	void swingO1();
 	void swingO1_End();
 
-	void SlashBlast_Start();
-	void SlashBlast();
-	void SlashBlast_End();
+	void slashBlast_Start();
+	void slashBlast();
+	void slashBlast_End();
 
 };
 

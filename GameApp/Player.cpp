@@ -16,6 +16,8 @@ Player::Player()
 	, LevelUpEffect_(nullptr)
 	, JobsChangedEffect_(nullptr)
 	, Avatar_(nullptr)
+	, SkillEffect1_(nullptr)
+	, SkillEffect2_(nullptr)
 	, Collision_(nullptr)
 {
 }
@@ -170,6 +172,10 @@ void Player::Start()
 	FSM_.CreateState("swingO1", std::bind(&Player::swingO1, this),
 		std::bind(&Player::swingO1_Start, this),
 		std::bind(&Player::swingO1_End, this));
+
+	FSM_.CreateState("slashBlast", std::bind(&Player::slashBlast, this),
+		std::bind(&Player::slashBlast_Start, this),
+		std::bind(&Player::slashBlast_End, this));
 
 	FSM_.ChangeState("stand1");
 }

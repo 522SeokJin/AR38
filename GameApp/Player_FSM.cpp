@@ -73,6 +73,12 @@ void Player::stand1()
 		FSM_.ChangeState("swingO1");
 		return;
 	}
+
+	if (true == GameEngineInput::GetInst().Press("Shift"))
+	{
+		FSM_.ChangeState("slashBlast");
+		return;
+	}
 }
 
 void Player::stand1_End()
@@ -539,15 +545,34 @@ void Player::swingO1_End()
 	Avatar_->SetLocalPosition(float4::ZERO);
 }
 
-void Player::SlashBlast_Start()
+void Player::slashBlast_Start()
 {
+	Avatar_->SetChangeAnimation("slashBlast");
+	SkillEffect1_->On();
+	SkillEffect1_->SetChangeAnimation("Slashblast_effect", true);
 
+	switch (Dir_)
+	{
+	case PlayerDir::LEFT:
+		Avatar_->SetLocalPosition({ -40.0f, 0.0f, 0.0f });
+		break;
+	case PlayerDir::RIGHT:
+		Avatar_->SetLocalPosition({ 40.0f, 0.0f, 0.0f });
+		break;
+	default:
+		break;
+	}
 }
 
-void Player::SlashBlast()
+void Player::slashBlast()
 {
+	if (Avatar_->GetCurAnimation()->IsEnd_)
+	{
+		FSM_.ChangeState("stand1");
+	}
 }
 
-void Player::SlashBlast_End()
+void Player::slashBlast_End()
 {
+	Avatar_->SetLocalPosition(float4::ZERO);
 }

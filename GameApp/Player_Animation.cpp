@@ -7,6 +7,12 @@ void Player::CreateAnimation()
 {
 	Avatar_ = CreateTransformComponent<GameEngineImageRenderer>();
 
+	SkillEffect1_ = CreateTransformComponent<GameEngineImageRenderer>();
+	SkillEffect2_ = CreateTransformComponent<GameEngineImageRenderer>();
+
+	SkillEffect1_->Off();
+	SkillEffect2_->Off();
+
 	LevelUpEffect_ = CreateTransformComponent<GameEngineImageRenderer>();
 	LevelUpEffect_->SetLocalPosition({0.0f, 160.0f, static_cast<float>(DepthOrder::SKILL)});
 	JobsChangedEffect_ = CreateTransformComponent<GameEngineImageRenderer>();
@@ -37,6 +43,12 @@ void Player::CreateAnimation()
 		}
 	);
 
+	CreateAvatarAnimation();
+	CreateSkillAnimation();
+}
+
+void Player::CreateAvatarAnimation()
+{
 	Avatar_->CreateAnimationFolder("avatar_dead", "dead", 0.5f, false);
 	Avatar_->CreateAnimationFolder("avatar_jump", "jump", 0.5f, false);
 	Avatar_->CreateAnimationFolder("avatar_ladder", "ladder", 0.25f);
@@ -62,9 +74,18 @@ void Player::CreateAnimation()
 	Avatar_->CreateAnimationFolder("avatar_walk1", "walk1", 0.180f);
 
 	// Skill Animation
-	Avatar_->CreateAnimationFolder("slashBlast", 0.180f);
-
-	// animation frame별 웨잇 설정기능 필요
+	Avatar_->CreateAnimationFolder("slashBlast",
+		{ 0.06f, 0.06f, 0.18f, 0.12f, 0.12f, 0.21f }, false);
 
 	Avatar_->SetChangeAnimation("stand1");
+}
+
+void Player::CreateSkillAnimation()
+{
+	SkillEffect1_->CreateAnimationFolder("Slashblast_effect", 0.06f, false);
+	SkillEffect1_->SetEndCallBack("Slashblast_effect", [&]()
+		{
+			SkillEffect1_->Off();
+		}
+	);
 }
