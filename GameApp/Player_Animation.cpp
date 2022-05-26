@@ -94,4 +94,11 @@ void Player::CreateSkillAnimation()
 			SkillEffect1_->Off();
 		}
 	);
+
+	SkillEffect1_->CreateAnimationFolder("WarriorLeap_effect0", 0.06f, false);
+	SkillEffect1_->SetEndCallBack("WarriorLeap_effect0", [&]()
+		{
+			SkillEffect1_->Off();
+		}
+	);
 }

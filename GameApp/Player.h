@@ -114,5 +114,8 @@ private:
 	void slashBlast();
 	void slashBlast_End();
 
+	void doubleJump_Start();
+	void doubleJump();
+	void doubleJump_End();
 };
 

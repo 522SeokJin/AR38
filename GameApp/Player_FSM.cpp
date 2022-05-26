@@ -210,6 +210,12 @@ void Player::jump()
 			return;
 		}
 	}
+
+	if (true == GameEngineInput::GetInst().Down("Alt"))
+	{
+		FSM_.ChangeState("doubleJump");
+		return;
+	}
 }
 
 void Player::jump_End()
@@ -575,4 +581,64 @@ void Player::slashBlast()
 void Player::slashBlast_End()
 {
 	Avatar_->SetLocalPosition(float4::ZERO);
+}
+
+void Player::doubleJump_Start()
+{
+	SkillEffect1_->On();
+	SkillEffect1_->SetChangeAnimation("WarriorLeap_effect0", true);
+
+	Speed_.x += JUMPSPEED;
+	Speed_.y += JUMPSPEED;
+
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetBodyColor();
+}
+
+void Player::doubleJump()
+{
+	if (FootPixelColor_ != GetFootColor())
+	{
+		FootPixelColor_ = GetFootColor();
+	}
+
+	Speed_.y -= GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
+
+	if (0 > Speed_.y)
+	{
+		FSM_.ChangeState("fall");
+	}
+
+	if (PlayerDir::LEFT == Dir_)
+	{
+		GetTransform()->SetLocalDeltaTimeMove({ -Speed_.x, Speed_.y });
+	}
+	else
+	{
+		GetTransform()->SetLocalDeltaTimeMove(Speed_);
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Up"))
+	{
+		if (true == IsUpRopeColor())
+		{
+			FSM_.ChangeState("rope");
+			return;
+		}
+
+		if (true == IsUpLadderColor())
+		{
+			FSM_.ChangeState("ladder");
+			return;
+		}
+	}
+
+}
+
+void Player::doubleJump_End()
+{
+	Speed_.y = 0.0f;
+
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetFootColor();
 }

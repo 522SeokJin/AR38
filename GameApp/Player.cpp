@@ -177,6 +177,10 @@ void Player::Start()
 		std::bind(&Player::slashBlast_Start, this),
 		std::bind(&Player::slashBlast_End, this));
 
+	FSM_.CreateState("doubleJump", std::bind(&Player::doubleJump, this),
+		std::bind(&Player::doubleJump_Start, this),
+		std::bind(&Player::doubleJump_End, this));
+
 	FSM_.ChangeState("stand1");
 }
 
