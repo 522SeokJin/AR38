@@ -15,6 +15,8 @@
 #include "QuickSlotKeyUI.h"
 #include "InventoryUI.h"
 
+#include "Stump.h"
+
 PerionNorthernRidgeLevel::PerionNorthernRidgeLevel()
 	: Cursor_(nullptr)
 	, Player_(nullptr)
@@ -81,6 +83,11 @@ void PerionNorthernRidgeLevel::LevelStart()
 			Player_->GetTransform()->GetLocalPosition());
 		Player_->GetTransform()->SetWorldPosition({126.0f, -1390.0f});
 		Player_->Off();
+	}
+
+	{
+		Stump* Actor = CreateActor<Stump>();
+		Actor->GetTransform()->SetWorldPosition({ 226.0f, -1390.0f });
 	}
 }
 

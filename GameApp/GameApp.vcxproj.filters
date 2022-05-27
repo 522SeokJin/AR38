@@ -146,6 +146,9 @@
     <ClCompile Include="GlobalLevelControl.cpp">
       <Filter>Global</Filter>
     </ClCompile>
+    <ClCompile Include="Stump.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -380,6 +383,9 @@
     </ClInclude>
     <ClInclude Include="GlobalLevelControl.h">
       <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Stump.h">
+      <Filter>Actor\Monster</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
