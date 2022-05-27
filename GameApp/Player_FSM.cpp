@@ -79,6 +79,12 @@ void Player::stand1()
 		FSM_.ChangeState("slashBlast");
 		return;
 	}
+
+	if (true == GameEngineInput::GetInst().Press("a"))
+	{
+		FSM_.ChangeState("upperCharge");
+		return;
+	}
 }
 
 void Player::stand1_End()
@@ -157,6 +163,18 @@ void Player::walk1()
 		FSM_.ChangeState("swingO1");
 		return;
 	}
+
+	if (true == GameEngineInput::GetInst().Press("Shift"))
+	{
+		FSM_.ChangeState("slashBlast");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("a"))
+	{
+		FSM_.ChangeState("upperCharge");
+		return;
+	}
 }
 
 void Player::walk1_End()
@@ -214,6 +232,24 @@ void Player::jump()
 	if (true == GameEngineInput::GetInst().Down("Alt"))
 	{
 		FSM_.ChangeState("doubleJump");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Ctrl"))
+	{
+		FSM_.ChangeState("swingO1");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Shift"))
+	{
+		FSM_.ChangeState("slashBlast");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("a"))
+	{
+		FSM_.ChangeState("upperCharge");
 		return;
 	}
 }
@@ -302,6 +338,24 @@ void Player::fall()
 			FSM_.ChangeState("ladder");
 			return;
 		}
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Ctrl"))
+	{
+		FSM_.ChangeState("swingO1");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Shift"))
+	{
+		FSM_.ChangeState("slashBlast");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("a"))
+	{
+		FSM_.ChangeState("upperCharge");
+		return;
 	}
 }
 
@@ -633,6 +687,23 @@ void Player::doubleJump()
 		}
 	}
 
+	if (true == GameEngineInput::GetInst().Press("Ctrl"))
+	{
+		FSM_.ChangeState("swingO1");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("Shift"))
+	{
+		FSM_.ChangeState("slashBlast");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("a"))
+	{
+		FSM_.ChangeState("upperCharge");
+		return;
+	}
 }
 
 void Player::doubleJump_End()
@@ -645,6 +716,12 @@ void Player::doubleJump_End()
 
 void Player::upperCharge_Start()
 {
+	Speed_.y += 1.75f * JUMPSPEED;
+	GetTransform()->SetLocalMove({ 0.0f, 1.0f });
+
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetBodyColor();
+
 	Avatar_->SetChangeAnimation("upperCharge");
 	SkillEffect1_->On();
 	SkillEffect1_->SetChangeAnimation("UpperCharge_effect0", true);
@@ -656,8 +733,26 @@ void Player::upperCharge()
 	{
 		FSM_.ChangeState("fall");
 	}
+
+	if (FootPixelColor_ != GetFootColor())
+	{
+		FootPixelColor_ = GetFootColor();
+	}
+
+	Speed_.y -= GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
+
+	if (PlayerDir::LEFT == Dir_)
+	{
+		GetTransform()->SetLocalDeltaTimeMove({ -Speed_.x, Speed_.y });
+	}
+	else
+	{
+		GetTransform()->SetLocalDeltaTimeMove(Speed_);
+	}
 }
 
 void Player::upperCharge_End()
 {
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetFootColor();
 }

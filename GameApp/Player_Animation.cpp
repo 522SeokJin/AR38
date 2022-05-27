@@ -82,7 +82,7 @@ void Player::CreateAvatarAnimation()
 	// Skill Animation
 	Avatar_->CreateAnimationFolder("slashBlast",
 		{ 0.06f, 0.06f, 0.18f, 0.12f, 0.12f, 0.21f }, false);
-	Avatar_->CreateAnimationFolder("upperCharge", 0.06f);
+	Avatar_->CreateAnimationFolder("upperCharge", 0.06f, false);
 
 	Avatar_->SetChangeAnimation("stand1");
 }
