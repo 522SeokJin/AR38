@@ -9,6 +9,7 @@ enum class ColGroup	// Collision Group Number
 	PORTAL,
 	NPC,
 	MONSTER,
+	SKILL,
 };
 
 enum class DepthOrder

@@ -19,6 +19,7 @@ Player::Player()
 	, SkillEffect1_(nullptr)
 	, SkillEffect2_(nullptr)
 	, Collision_(nullptr)
+	, SkillCollision_(nullptr)
 {
 }
 
@@ -136,6 +137,13 @@ void Player::Start()
 			ColGroup::PLAYER));
 		Collision_->SetLocalScaling({ 39.0f, 64.0f });
 	}
+	
+	{
+		SkillCollision_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
+			ColGroup::SKILL));
+		SkillCollision_->SetLocalScaling({ 150.0f, 150.0f });
+		SkillCollision_->Off();
+	}
 
 	FSM_.CreateState("stand1", std::bind(&Player::stand1, this),
 		std::bind(&Player::stand1_Start, this),
@@ -172,6 +180,8 @@ void Player::Start()
 	FSM_.CreateState("swingO1", std::bind(&Player::swingO1, this),
 		std::bind(&Player::swingO1_Start, this),
 		std::bind(&Player::swingO1_End, this));
+	Avatar_->SetFrameCallBack("swingO1", 2, [&](){SkillCollision_->On();});
+	//Avatar_->SetEndCallBack("swingO1", [&](){SkillCollision_->Off();});
 
 	FSM_.CreateState("slashBlast", std::bind(&Player::slashBlast, this),
 		std::bind(&Player::slashBlast_Start, this),
@@ -208,9 +218,8 @@ void Player::Update(float _DeltaTime)
 
 	FSM_.Update();
 
-	// UpdatePartsOffset();
-
 	GetLevel()->PushDebugRender(Collision_->GetTransform(), CollisionType::Rect);
+	GetLevel()->PushDebugRender(SkillCollision_->GetTransform(), CollisionType::Rect);
 
 	Window->Values_[0] = "Player State : " + FSM_.GetCurrentName();
 	Window->Values_[1] = "BodyPixelCheck : " + body.ToString();

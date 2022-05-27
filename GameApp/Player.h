@@ -63,6 +63,7 @@ private:
 	float4 FootPixelColor_;
 
 	GameEngineCollision* Collision_;
+	GameEngineCollision* SkillCollision_;
 
 	GameEngineImageRenderer* LevelUpEffect_;
 	GameEngineImageRenderer* JobsChangedEffect_;
