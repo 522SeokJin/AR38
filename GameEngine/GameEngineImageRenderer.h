@@ -100,6 +100,8 @@ public:
 	void SetFrameCallBack(const std::string& _Name, int _Index,
 		std::function<void()> _CallBack);
 
+	bool IsLeft_;
+
 protected:
 	GameEngineImageRenderer(const GameEngineImageRenderer& _other) = delete; 
 	GameEngineImageRenderer(GameEngineImageRenderer&& _other) noexcept = delete;

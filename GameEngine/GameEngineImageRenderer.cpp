@@ -13,6 +13,7 @@ GameEngineImageRenderer::GameEngineImageRenderer()
 	, CurAnimation_(nullptr)
 	, CutData_(0, 0, 1, 1)
 	, IsPlay_(true)
+	, IsLeft_(true)
 {
 
 }

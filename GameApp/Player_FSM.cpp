@@ -256,8 +256,6 @@ void Player::jump()
 
 void Player::jump_End()
 {
-	Speed_.y = 0.0f;
-
 	BodyPixelColor_ = GetBodyColor();
 	FootPixelColor_ = GetFootColor();
 }
@@ -579,6 +577,9 @@ void Player::swingO1_Start()
 {
 	Avatar_->SetChangeAnimation("swingO1");
 
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetBodyColor();
+
 	switch (Dir_)
 	{
 	case PlayerDir::LEFT:
@@ -594,15 +595,44 @@ void Player::swingO1_Start()
 
 void Player::swingO1()
 {
-	if (Avatar_->GetCurAnimation()->IsEnd_)
+	if (FootPixelColor_.g < GetFootColor().g &&
+		false == IsUpRopeColor() &&
+		false == IsUpLadderColor())
 	{
-		FSM_.ChangeState("stand1");
+		Speed_.x *= 0.9f;
+		Speed_.y = 0.0f;
+
+		if (Avatar_->GetCurAnimation()->IsEnd_)
+		{
+			FSM_.ChangeState("stand1");
+		}
+	}
+	else
+	{
+		Speed_.y -= GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
+
+		if (Avatar_->GetCurAnimation()->IsEnd_)
+		{
+			FSM_.ChangeState("fall");
+		}
+	}
+
+	if (PlayerDir::LEFT == Dir_)
+	{
+		GetTransform()->SetLocalDeltaTimeMove({ -Speed_.x, Speed_.y });
+	}
+	else
+	{
+		GetTransform()->SetLocalDeltaTimeMove(Speed_);
 	}
 }
 
 void Player::swingO1_End()
 {
 	Avatar_->SetLocalPosition(float4::ZERO);
+
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetFootColor();
 }
 
 void Player::slashBlast_Start()
@@ -611,13 +641,28 @@ void Player::slashBlast_Start()
 	SkillEffect1_->On();
 	SkillEffect1_->SetChangeAnimation("Slashblast_effect", true);
 
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetBodyColor();
+
 	switch (Dir_)
 	{
 	case PlayerDir::LEFT:
-		Avatar_->SetLocalPosition({ -40.0f, 0.0f, 0.0f });
+		Avatar_->SetLocalPosition({ -40.0f, -10.0f, 0.0f });
+		if (false == SkillEffect1_->IsLeft_)
+		{
+			SkillEffect1_->ImageLocalFlipYAxis();
+			SkillEffect1_->IsLeft_ = true;
+		}
+		SkillEffect1_->SetLocalPosition({ -100.0f, 0.0f, 0.0f });
 		break;
 	case PlayerDir::RIGHT:
-		Avatar_->SetLocalPosition({ 40.0f, 0.0f, 0.0f });
+		Avatar_->SetLocalPosition({ 40.0f, -10.0f, 0.0f });
+		if (true == SkillEffect1_->IsLeft_)
+		{
+			SkillEffect1_->ImageLocalFlipYAxis();
+			SkillEffect1_->IsLeft_ = false;
+		}
+		SkillEffect1_->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
 		break;
 	default:
 		break;
@@ -626,15 +671,44 @@ void Player::slashBlast_Start()
 
 void Player::slashBlast()
 {
-	if (Avatar_->GetCurAnimation()->IsEnd_)
+	if (FootPixelColor_.g < GetFootColor().g &&
+		false == IsUpRopeColor() &&
+		false == IsUpLadderColor())
 	{
-		FSM_.ChangeState("stand1");
+		Speed_.x *= 0.9f;
+		Speed_.y = 0.0f;
+
+		if (Avatar_->GetCurAnimation()->IsEnd_)
+		{
+			FSM_.ChangeState("stand1");
+		}
+	}
+	else
+	{
+		Speed_.y -= GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
+
+		if (Avatar_->GetCurAnimation()->IsEnd_)
+		{
+			FSM_.ChangeState("fall");
+		}
+	}
+
+	if (PlayerDir::LEFT == Dir_)
+	{
+		GetTransform()->SetLocalDeltaTimeMove({ -Speed_.x, Speed_.y });
+	}
+	else
+	{
+		GetTransform()->SetLocalDeltaTimeMove(Speed_);
 	}
 }
 
 void Player::slashBlast_End()
 {
 	Avatar_->SetLocalPosition(float4::ZERO);
+
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetFootColor();
 }
 
 void Player::doubleJump_Start()
@@ -643,10 +717,32 @@ void Player::doubleJump_Start()
 	SkillEffect1_->SetChangeAnimation("WarriorLeap_effect0", true);
 
 	Speed_.x += JUMPSPEED;
-	Speed_.y += JUMPSPEED;
+	Speed_.y += 0.5f * JUMPSPEED;
 
 	BodyPixelColor_ = GetBodyColor();
 	FootPixelColor_ = GetBodyColor();
+
+	switch (Dir_)
+	{
+	case PlayerDir::LEFT:
+		if (false == SkillEffect1_->IsLeft_)
+		{
+			SkillEffect1_->ImageLocalFlipYAxis();
+			SkillEffect1_->IsLeft_ = true;
+		}
+		SkillEffect1_->SetLocalPosition({ 140.0f, 10.0f, 0.0f });
+		break;
+	case PlayerDir::RIGHT:
+		if (true == SkillEffect1_->IsLeft_)
+		{
+			SkillEffect1_->ImageLocalFlipYAxis();
+			SkillEffect1_->IsLeft_ = false;
+		}
+		SkillEffect1_->SetLocalPosition({ -140.0f, 10.0f, 0.0f });
+		break;
+	default:
+		break;
+	}
 }
 
 void Player::doubleJump()
@@ -708,8 +804,6 @@ void Player::doubleJump()
 
 void Player::doubleJump_End()
 {
-	Speed_.y = 0.0f;
-
 	BodyPixelColor_ = GetBodyColor();
 	FootPixelColor_ = GetFootColor();
 }
@@ -725,6 +819,28 @@ void Player::upperCharge_Start()
 	Avatar_->SetChangeAnimation("upperCharge");
 	SkillEffect1_->On();
 	SkillEffect1_->SetChangeAnimation("UpperCharge_effect0", true);
+
+	switch (Dir_)
+	{
+	case PlayerDir::LEFT:
+		if (false == SkillEffect1_->IsLeft_)
+		{
+			SkillEffect1_->ImageLocalFlipYAxis();
+			SkillEffect1_->IsLeft_ = true;
+		}
+		SkillEffect1_->SetLocalPosition({ 10.0f, 90.0f, 0.0f });
+		break;
+	case PlayerDir::RIGHT:
+		if (true == SkillEffect1_->IsLeft_)
+		{
+			SkillEffect1_->ImageLocalFlipYAxis();
+			SkillEffect1_->IsLeft_ = false;
+		}
+		SkillEffect1_->SetLocalPosition({ -10.0f, 90.0f, 0.0f });
+		break;
+	default:
+		break;
+	}
 }
 
 void Player::upperCharge()
