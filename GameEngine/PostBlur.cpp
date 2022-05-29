@@ -23,7 +23,7 @@ void PostBlur::Effect(float _DeltaTime)
 	Res_.Setting();
 	Effect_->Rendering();
 	Effect_->Reset();
-	Res_.ReSet();
+	Res_.Reset();
 
 	Target_->Clear(false);
 	Target_->Copy(Result_);

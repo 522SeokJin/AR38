@@ -21,7 +21,7 @@ public:
 	}
 
 	void SetViewPort(float _Width, float _Height, float _TopLeftX,
-		float _TopLeftY, float _MinDepth, float _MaxDepth)
+		float _TopLeftY, float _MinDepth = 0.0f, float _MaxDepth = 1.0f)
 	{
 		ViewPort_.Width = _Width;
 		ViewPort_.Height = _Height;
