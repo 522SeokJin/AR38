@@ -17,9 +17,6 @@
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>Actor\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="TitleUI.cpp">
       <Filter>Actor\UI\Login</Filter>
     </ClCompile>
@@ -260,9 +257,6 @@
     </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>Actor\Monster</Filter>
     </ClInclude>
     <ClInclude Include="TitleUI.h">
       <Filter>Actor\UI\Login</Filter>

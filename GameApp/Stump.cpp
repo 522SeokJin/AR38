@@ -9,6 +9,9 @@ Stump::Stump()
 	, Collision_(nullptr)
 	, Dir_(0)
 	, MoveTime_(0.0f)
+	, Hit_(false)
+	, Die_(false)
+	, Invincible_(false)
 {
 
 }
@@ -75,14 +78,21 @@ void Stump::Update(float _DeltaTime)
 
 void Stump::SkillEvent(GameEngineCollision* _OtherCollision)
 {
-	FSM_.ChangeState("hit");
+	if (false == _OtherCollision->IsUpdate())
+	{
+		return;
+	}
 
-	// _OtherCollision->Off();
+	_OtherCollision->Off();
+
+	if (false == Hit_)
+	{
+		Hit_ = true;
+		Invincible_ = true;
+	}
 }
 
-
 ////////////////////////// FSM
-
 
 void Stump::stand_Start()
 {
@@ -94,6 +104,11 @@ void Stump::stand()
 	if (1.5f < FSM_.GetCurrentState()->Time_)
 	{
 		FSM_.ChangeState("move");
+	}
+
+	if (true == Hit_)
+	{
+		FSM_.ChangeState("hit");
 	}
 }
 
@@ -111,7 +126,7 @@ void Stump::move_Start()
 
 void Stump::move()
 {
-	if (5 < Dir_)
+	if (DIRRIGHT)
 	{
 		GetTransform()->SetLocalDeltaTimeMove({ 70.0f, 0.0f });
 		if (true == Renderer_->IsLeft_)
@@ -120,7 +135,8 @@ void Stump::move()
 			Renderer_->IsLeft_ = false;
 		}
 	}
-	else
+	
+	if (DIRLEFT)
 	{
 		GetTransform()->SetLocalDeltaTimeMove({ -70.0f, 0.0f });
 		if (false == Renderer_->IsLeft_)
@@ -133,6 +149,11 @@ void Stump::move()
 	if (MoveTime_ < FSM_.GetCurrentState()->Time_)
 	{
 		FSM_.ChangeState("stand");
+	}
+
+	if (true == Hit_)
+	{
+		FSM_.ChangeState("hit");
 	}
 }
 
@@ -147,10 +168,25 @@ void Stump::hit_Start()
 
 void Stump::hit()
 {
+	if (0.3f < FSM_.GetCurrentState()->Time_)
+	{
+		FSM_.ChangeState("move");
+	}
+
+	if (DIRRIGHT)
+	{
+		GetTransform()->SetLocalDeltaTimeMove({ -5.0f, 0.0f });
+	}
+	if (DIRLEFT)
+	{
+		GetTransform()->SetLocalDeltaTimeMove({ 5.0f, 0.0f });
+	}
 }
 
 void Stump::hit_End()
 {
+	Hit_ = false;
+	Invincible_ = false;
 }
 
 void Stump::die_Start()

@@ -1,12 +1,15 @@
 #pragma once
-#include "Monster.h"
+#include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineFSM.h>
 #include <GameEngineBase/GameEngineRandom.h>
+
+#define DIRRIGHT (5 < Dir_)
+#define DIRLEFT (5 >= Dir_)
 
 // Ό³Έν : 
 class GameEngineImageRenderer;
 class GameEngineCollision;
-class Stump : public Monster
+class Stump : public GameEngineActor
 {
 public:
 	Stump();
@@ -26,8 +29,12 @@ private:
 
 	GameEngineFSM FSM_;
 	GameEngineRandom Random_;
-	int	Dir_;
+	int	Dir_;						// 5 < Dir_ : Right
 	float MoveTime_;
+
+	bool Hit_;
+	bool Die_;
+	bool Invincible_;
 
 	GameEngineImageRenderer* Renderer_;
 	GameEngineImageRenderer* SkillEffectRenderer_;

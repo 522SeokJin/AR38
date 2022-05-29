@@ -1,10 +1,10 @@
 #pragma once
-#include "Monster.h"
+#include <GameEngine/GameEngineActor.h>
 
 // Ό³Έν : 
 class GameEngineImageRenderer;
 class GameEngineCollision;
-class Demian : public Monster
+class Demian : public GameEngineActor
 {
 public:
 	Demian();

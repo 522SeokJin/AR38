@@ -268,10 +268,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="MenuUI.cpp" />
-    <ClCompile Include="Monster.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>
@@ -400,10 +396,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="MenuUI.h" />
-    <ClInclude Include="Monster.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="QuickSlotUI.h" />
     <ClInclude Include="StatusUI.h" />
     <ClInclude Include="PhysicsDefine.h" />

@@ -181,7 +181,6 @@ void Player::Start()
 		std::bind(&Player::swingO1_Start, this),
 		std::bind(&Player::swingO1_End, this));
 	Avatar_->SetFrameCallBack("swingO1", 2, [&](){SkillCollision_->On();});
-	//Avatar_->SetEndCallBack("swingO1", [&](){SkillCollision_->Off();});
 
 	FSM_.CreateState("slashBlast", std::bind(&Player::slashBlast, this),
 		std::bind(&Player::slashBlast_Start, this),
