@@ -216,7 +216,7 @@ void Player::Update(float _DeltaTime)
 	float4 body = Map::GetColor(GetTransform()->GetWorldPosition().InvertY());
 	float4 foot = Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f));
 
-	FSM_.Update();
+	FSM_.Update(_DeltaTime);
 
 	GetLevel()->PushDebugRender(Collision_->GetTransform(), CollisionType::Rect);
 	GetLevel()->PushDebugRender(SkillCollision_->GetTransform(), CollisionType::Rect);

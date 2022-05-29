@@ -7,6 +7,8 @@ Stump::Stump()
 	: Renderer_(nullptr)
 	, SkillEffectRenderer_(nullptr)
 	, Collision_(nullptr)
+	, Dir_(0)
+	, MoveTime_(0.0f)
 {
 
 }
@@ -60,7 +62,7 @@ void Stump::Start()
 
 void Stump::Update(float _DeltaTime)
 {
-	FSM_.Update();
+	FSM_.Update(_DeltaTime);
 
 	GetLevel()->PushDebugRender(Collision_->GetTransform(), CollisionType::Rect);
 
@@ -89,6 +91,10 @@ void Stump::stand_Start()
 
 void Stump::stand()
 {
+	if (1.5f < FSM_.GetCurrentState()->Time_)
+	{
+		FSM_.ChangeState("move");
+	}
 }
 
 void Stump::stand_End()
@@ -98,10 +104,36 @@ void Stump::stand_End()
 void Stump::move_Start()
 {
 	Renderer_->SetChangeAnimation("Stump_move");
+
+	Dir_ = Random_.RandomInt(0, 9);
+	MoveTime_ = Random_.RandomFloat(1.0f, 3.0f);
 }
 
 void Stump::move()
 {
+	if (5 < Dir_)
+	{
+		GetTransform()->SetLocalDeltaTimeMove({ 70.0f, 0.0f });
+		if (true == Renderer_->IsLeft_)
+		{
+			Renderer_->ImageLocalFlipYAxis();
+			Renderer_->IsLeft_ = false;
+		}
+	}
+	else
+	{
+		GetTransform()->SetLocalDeltaTimeMove({ -70.0f, 0.0f });
+		if (false == Renderer_->IsLeft_)
+		{
+			Renderer_->ImageLocalFlipYAxis();
+			Renderer_->IsLeft_ = true;
+		}
+	}
+
+	if (MoveTime_ < FSM_.GetCurrentState()->Time_)
+	{
+		FSM_.ChangeState("stand");
+	}
 }
 
 void Stump::move_End()

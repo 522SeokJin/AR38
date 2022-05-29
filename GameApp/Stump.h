@@ -1,6 +1,7 @@
 #pragma once
 #include "Monster.h"
 #include <GameEngine/GameEngineFSM.h>
+#include <GameEngineBase/GameEngineRandom.h>
 
 // Ό³Έν : 
 class GameEngineImageRenderer;
@@ -24,6 +25,9 @@ private:
 	void SkillEvent(GameEngineCollision* _OtherCollision);
 
 	GameEngineFSM FSM_;
+	GameEngineRandom Random_;
+	int	Dir_;
+	float MoveTime_;
 
 	GameEngineImageRenderer* Renderer_;
 	GameEngineImageRenderer* SkillEffectRenderer_;

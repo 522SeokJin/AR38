@@ -118,7 +118,7 @@ public:
 	virtual ~GameEngineObjectBase();
 
 protected: // delete fuction
-	GameEngineObjectBase(const GameEngineObjectBase& _other);
+	GameEngineObjectBase(const GameEngineObjectBase& _other) = delete;
 	GameEngineObjectBase(GameEngineObjectBase&& _other) noexcept = delete; 
 	GameEngineObjectBase& operator=(const GameEngineObjectBase& _other) = delete; 
 	GameEngineObjectBase& operator=(const GameEngineObjectBase&& _other) = delete;
