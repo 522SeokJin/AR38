@@ -20,6 +20,11 @@ public:
 	GameEngineRenderingPipeLine();
 	~GameEngineRenderingPipeLine();
 
+	inline GameEngineRasterizer* GetRasterizer() const
+	{
+		return Rasterizer_;
+	}
+
 	inline GameEngineVertexShader* GetVertexShader() const
 	{
 		return VertexShader_;
@@ -53,6 +58,10 @@ public:
 	void Reset();
 
 	void InstanceRendering();
+
+	GameEngineRenderingPipeLine* Clone();
+
+	void RasterizerClone();
 
 protected:
 	GameEngineRenderingPipeLine(const GameEngineRenderingPipeLine& _other) = delete;

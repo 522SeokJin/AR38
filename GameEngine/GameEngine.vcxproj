@@ -246,6 +246,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="SmallPostBlur.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CameraActor.cpp">
@@ -475,6 +476,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SmallPostBlur.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\ThirdParty\x64\Debug\DirectXTex\DirectXTex.lib">

@@ -6,7 +6,8 @@ GameEngineObjectBase::GameEngineObjectBase()
 	isUpdate_(true),
 	isDebug_(false),
 	Order_(0),
-	parent_(nullptr)
+	parent_(nullptr),
+	isOrigin_(true)
 {
 
 }

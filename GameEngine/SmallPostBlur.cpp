@@ -1,21 +1,22 @@
 #include "PreCompile.h"
-#include "PostBlur.h"
+#include "SmallPostBlur.h"
 #include "GameEngineTexture.h"
 #include "GameEngineTextureManager.h"
+#include <GameEngine\GameEngineWindow.h>
+#include <GameEngine\GameEngineRasterizer.h>
 
 
-PostBlur::PostBlur()
+SmallPostBlur::SmallPostBlur()
 	: Filter(nullptr)
 {
 }
 
-PostBlur::~PostBlur()
+SmallPostBlur::~SmallPostBlur()
 {
 }
 
 
-
-void PostBlur::Effect(float _DeltaTime)
+void SmallPostBlur::Effect(float _DeltaTime)
 {
 	Result_->Clear();
 	Result_->Setting();
@@ -29,14 +30,21 @@ void PostBlur::Effect(float _DeltaTime)
 	Target_->Copy(Result_);
 }
 
-void PostBlur::Initialize()
+void SmallPostBlur::Initialize()
 {
-	CreateResultTarget();
+	float4 RenderTargetSize =GameEngineWindow::GetInst().GetSize().halffloat4();
+
+	CreateResultTarget(RenderTargetSize);
 	SetEffect("Blur");
 	Res_.SettingConstantBufferLink("BlurData", Data);
+
+	Effect_ = Effect_->Clone();
+	Effect_->RasterizerClone();
+	Effect_->GetRasterizer()->SetViewPort(RenderTargetSize.x, RenderTargetSize.y, 0.0f, 0.0f);
+
 }
 
-void PostBlur::SetFilter(std::string _TextureName)
+void SmallPostBlur::SetFilter(std::string _TextureName)
 {
 	Filter = GameEngineTextureManager::GetInst().Find(_TextureName);
 
@@ -65,7 +73,6 @@ void PostBlur::SetFilter(std::string _TextureName)
 	}
 
 	Data.FilterCount = Filter->GetTextureSize().ix() * Filter->GetTextureSize().iy();
-	
 
 	Res_.SettingTexture("Filter", Filter);
 }

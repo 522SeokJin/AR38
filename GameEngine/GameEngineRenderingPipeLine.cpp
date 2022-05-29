@@ -23,7 +23,11 @@ GameEngineRenderingPipeLine::GameEngineRenderingPipeLine()
 
 GameEngineRenderingPipeLine::~GameEngineRenderingPipeLine()
 {
-
+	if (true == Rasterizer_->IsClone())
+	{
+		delete Rasterizer_;
+		Rasterizer_ = nullptr;
+	}
 }
 
 void GameEngineRenderingPipeLine::SetInputAssembler1VertexBufferSetting(const std::string& _Name)
@@ -191,3 +195,27 @@ void GameEngineRenderingPipeLine::InstanceRendering()
 	// GameEngineDevice::GetContext()->DrawIndexedInstanced(IndexBuffer_->GetIndexCount(), 0, 0);
 }
 
+
+GameEngineRenderingPipeLine* GameEngineRenderingPipeLine::Clone()
+{
+	GameEngineRenderingPipeLine* NewClone = new GameEngineRenderingPipeLine();
+
+	NewClone->VertexBuffer_ = VertexBuffer_;
+	NewClone->InputLayoutVertexShader_ = InputLayoutVertexShader_;
+	NewClone->VertexShader_ = VertexShader_;
+	NewClone->IndexBuffer_ = IndexBuffer_;
+	NewClone->Topology_ = Topology_;
+	NewClone->Rasterizer_ = Rasterizer_;
+	NewClone->PixelShader_ = PixelShader_;
+	NewClone->Blend_ = Blend_;
+	NewClone->RenderTarget_ = RenderTarget_;
+	NewClone->DepthStencil_ = DepthStencil_;
+	NewClone->CloneOn();
+
+	return NewClone;
+}
+
+void GameEngineRenderingPipeLine::RasterizerClone()
+{
+	Rasterizer_ = Rasterizer_->Clone();
+}

@@ -43,6 +43,8 @@ public:
 
 	void SettingScissorEnable();
 
+	GameEngineRasterizer* Clone();
+
 protected:
 	GameEngineRasterizer(const GameEngineRasterizer& _other) = delete; 
 	GameEngineRasterizer(GameEngineRasterizer&& _other) noexcept = delete;
