@@ -2,6 +2,12 @@
 #include "GameEngineRenderer.h"
 #include <GameEngineBase\GameEngineObjectNameBase.h>
 
+struct CorrectResultColor
+{
+	float4 vMulColor;
+	float4 vPlusColor;
+};
+
 // Ό³Έν : 
 class GameEngineTexture;
 class GameEngineFolderTexture;
@@ -77,7 +83,12 @@ public:
 
 	inline void SetAlpha(float _Value)
 	{
-		ResultColor_.a = _Value;
+		CorrectResultColor_.vMulColor.a = _Value;
+	}
+
+	inline void SetPlusColor(float4 _Color)
+	{
+		CorrectResultColor_.vPlusColor = _Color;
 	}
 
 	inline void AnimationStop()
@@ -121,7 +132,7 @@ private:
 	Animation2D* CurAnimation_;
 	GameEngineTexture* CurTexture_;
 
-	float4 ResultColor_;
+	CorrectResultColor CorrectResultColor_;
 	float4 CutData_; // float2 TextureCutDataPos, float2 TextureCutDataSize
 
 	bool IsPlay_;

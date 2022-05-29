@@ -342,8 +342,10 @@ void GameEngineImageRenderer::SetRenderingPipeLineSettingNext()
 {
 	ShaderHelper.SettingConstantBufferLink("TextureCutData", CutData_);
 
-	ResultColor_ = float4::ONE;
-	ShaderHelper.SettingConstantBufferLink("ResultColor", ResultColor_);
+	CorrectResultColor_.vMulColor = float4::ONE;
+	CorrectResultColor_.vPlusColor = float4::ZERO;
+
+	ShaderHelper.SettingConstantBufferLink("CorrectResultColor", CorrectResultColor_);
 }
 
 void GameEngineImageRenderer::Start()

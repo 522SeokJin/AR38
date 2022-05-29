@@ -36,9 +36,10 @@ VertexOut ProgressBar_VS(VertexIn _in)
     return Out;
 }
 
-cbuffer ResultColor : register(b0)
+cbuffer CorrectResultColor : register(b0)
 {
-    float4 vColor;
+    float4 vMulColor;
+    float4 vPlusColor;
 };
 
 cbuffer ProgressBarCBuffer : register(b1)
@@ -73,7 +74,9 @@ float4 ProgressBar_PS(VertexOut _in) : SV_Target0
         clip(-1); // Right
     }
     
-    float4 Color = Tex.Sample(Smp, _in.Texcoord.xy) * vColor;
-
+    float4 Color = (Tex.Sample(Smp, _in.Texcoord.xy) * vMulColor);
+    
+    Color += vPlusColor;
+    
     return Color;
 }

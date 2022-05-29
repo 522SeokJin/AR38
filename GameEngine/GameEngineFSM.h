@@ -12,6 +12,8 @@ private:
 		std::function<void()> Update_;
 		std::function<void()> End_;
 
+		float			Time_;
+
 		State(std::function<void()> _Start
 			, std::function<void()> _Update
 			, std::function<void()> _End
@@ -19,6 +21,7 @@ private:
 			: Start_(_Start)
 			, Update_(_Update)
 			, End_(_End)
+			, Time_(0.0f)
 		{
 
 		}
@@ -28,7 +31,12 @@ public:
 	GameEngineFSM();
 	~GameEngineFSM();
 
-	void Update();
+	void Update(float _deltaTime);
+
+	State* GetCurrentState()
+	{
+		return Current_;
+	}
 
 	void CreateState(const std::string& _Name, std::function<void()> _Update, 
 		std::function<void()> _Start = nullptr, std::function<void()> _EndStart = nullptr, 
