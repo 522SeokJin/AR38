@@ -37,9 +37,9 @@ private:
 	InventoryUI* Inventory_;
 	StatusUI* Status_;
 	SkillUI* Skill_;
+	LithHarbor* Map_;
 
 	TaxiDlg* TaxiDlg_;
 	LithHarborTaxi* Taxi_;
-	LithHarbor* Map_;
 };
 

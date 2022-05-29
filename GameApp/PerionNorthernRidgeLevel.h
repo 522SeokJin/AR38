@@ -6,6 +6,8 @@ class Mouse;
 class Player;
 class GameEngineRenderWindow;
 class InventoryUI;
+class SkillUI;
+class PerionNorthernRidge;
 class PerionNorthernRidgeLevel : public GameEngineLevel
 {
 public:
@@ -28,5 +30,7 @@ private:
 	Player* Player_;
 	GameEngineRenderWindow* RenderWindow_;
 	InventoryUI* Inventory_;
+	SkillUI* Skill_;
+	PerionNorthernRidge* Map_;
 };
 

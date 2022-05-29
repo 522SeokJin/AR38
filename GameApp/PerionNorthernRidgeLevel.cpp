@@ -14,6 +14,7 @@
 #include "QuickSlotUI.h"
 #include "QuickSlotKeyUI.h"
 #include "InventoryUI.h"
+#include "SkillUI.h"
 
 #include "Stump.h"
 
@@ -22,6 +23,9 @@ PerionNorthernRidgeLevel::PerionNorthernRidgeLevel()
 	, Player_(nullptr)
 	, RenderWindow_(nullptr)
 	, Inventory_(nullptr)
+	, Skill_(nullptr)
+	, Map_(nullptr)
+
 {
 
 }
@@ -68,13 +72,19 @@ void PerionNorthernRidgeLevel::LevelStart()
 	}
 
 	{
+		Skill_ = CreateActor<SkillUI>();
+		Skill_->GetTransform()->SetWorldPosition({ 200.0f, 200.0f });
+		Skill_->Off();
+	}
+
+	{
 		Inventory_ = CreateActor<InventoryUI>();
 		Inventory_->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
 		Inventory_->Off();
 	}
 
 	{
-		PerionNorthernRidge* Actor = CreateActor<PerionNorthernRidge>();
+		Map_ = CreateActor<PerionNorthernRidge>();
 	}
 
 	{
@@ -135,6 +145,16 @@ void PerionNorthernRidgeLevel::LevelUpdate(float _DeltaTime)
 	if (true == GameEngineInput::GetInst().Down("Inventory"))
 	{
 		Inventory_->OnOffChange();
+	}
+
+	if (true == GameEngineInput::GetInst().Down("Skill"))
+	{
+		Skill_->OnOffChange();
+	}
+
+	if (true == GameEngineInput::GetInst().Down("PixelCollide"))
+	{
+		Map_->GetPixelCollideImage()->OnOffChange();
 	}
 }
 

@@ -73,7 +73,9 @@ void Stump::Update(float _DeltaTime)
 
 void Stump::SkillEvent(GameEngineCollision* _OtherCollision)
 {
-	_OtherCollision->Off();
+	FSM_.ChangeState("hit");
+
+	// _OtherCollision->Off();
 }
 
 
