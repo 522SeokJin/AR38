@@ -200,6 +200,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="ForestDefender.cpp" />
     <ClCompile Include="GlobalLevelControl.cpp">
       <SubType>
       </SubType>
@@ -325,6 +326,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ForestDefender.h" />
     <ClInclude Include="GlobalLevelControl.h">
       <SubType>
       </SubType>

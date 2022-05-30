@@ -14,6 +14,9 @@
 #include "QuickSlotUI.h"
 #include "QuickSlotKeyUI.h"
 #include "InventoryUI.h"
+#include "SkillUI.h"
+
+#include "Stump.h"
 
 DeepeningForestLevel::DeepeningForestLevel()
 	: Cursor_(nullptr)

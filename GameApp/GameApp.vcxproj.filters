@@ -146,6 +146,9 @@
     <ClCompile Include="Stump.cpp">
       <Filter>Actor\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="ForestDefender.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -379,6 +382,9 @@
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="Stump.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="ForestDefender.h">
       <Filter>Actor\Monster</Filter>
     </ClInclude>
   </ItemGroup>
