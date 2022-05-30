@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineFSM.h>
+#include <GameEngineBase/GameEngineRandom.h>
 
 // 설명 : 
 
@@ -83,6 +84,10 @@ private:
 
 	int SkillHitCount_;
 	bool Invincible_;
+
+	// 피격 데미지 표시
+	std::map<int, std::vector<GameEngineImageRenderer*>> DmgNumber_;
+	GameEngineRandom Random_;
 
 	////////////////////////////////////////////	FSM
 

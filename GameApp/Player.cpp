@@ -136,6 +136,25 @@ void Player::MonsterEvent(GameEngineCollision* _OtherCollision)
 {
 	Invincible_ = true;
 
+	for (int j = 0; j < 3; j++)
+	{
+		for (int k = 0; k < 10; k++)
+		{
+			DmgNumber_[j][k]->Off();
+			DmgNumber_[j][k]->SetAlpha(1.0f);
+		}
+	}
+
+	int Damage = Random_.RandomInt(10, 99);
+
+	for (int j = 0; j < 2; j++)
+	{
+		int Value = GameEngineMath::PlaceValue(static_cast<int>(Damage), j + 1);
+
+		DmgNumber_[j][Value]->On();
+		DmgNumber_[j][Value]->SetLocalPosition({ -28.5f * (j + 1) + 40.0f, Avatar_->GetImageSize().y - 10.0f, -100.0f });
+	}
+
 	Avatar_->SetMulColor({0.5f, 0.5f, 0.5f, 1.0f});
 
 	GetLevel()->AddTimeEvent(0.1f, [&]()
@@ -203,6 +222,20 @@ void Player::Start()
 		SkillCollision_->Off();
 	}
 
+	for (int j = 0; j < 3; j++)
+	{
+		for (int k = 0; k < 10; k++)
+		{
+			GameEngineImageRenderer* Renderer =
+				CreateTransformComponent<GameEngineImageRenderer>();
+
+			Renderer->SetImage("NoViolet0." + std::to_string(k) + ".png", true, "PointSmp");
+			Renderer->Off();
+
+			DmgNumber_[j].push_back(Renderer);
+		}
+	}
+
 	FSM_.CreateState("stand1", std::bind(&Player::stand1, this),
 		std::bind(&Player::stand1_Start, this),
 		std::bind(&Player::stand1_End, this));
@@ -267,6 +300,17 @@ void Player::Update(float _DeltaTime)
 	{
 		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
 			static_cast<int>(ColGroup::MONSTER), Func);
+	}
+
+	for (int j = 0; j < 3; j++)
+	{
+		for (int k = 0; k < 10; k++)
+		{
+			if (DmgNumber_[j][k]->IsUpdate())
+			{
+				DmgNumber_[j][k]->SubAlpha(2.0f * _DeltaTime);
+			}
+		}
 	}
 
 	if (true == GameEngineInput::GetInst().Down("FreeCamera"))
