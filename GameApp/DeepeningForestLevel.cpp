@@ -16,13 +16,16 @@
 #include "InventoryUI.h"
 #include "SkillUI.h"
 
-#include "Stump.h"
+#include "ForestDefender.h"
 
 DeepeningForestLevel::DeepeningForestLevel()
 	: Cursor_(nullptr)
 	, Player_(nullptr)
 	, RenderWindow_(nullptr)
 	, Inventory_(nullptr)
+	, Map_(nullptr)
+	, Skill_(nullptr)
+	, Status_(nullptr)
 {
 
 }
@@ -41,54 +44,22 @@ void DeepeningForestLevel::LevelStart()
 	GetMainCameraActor()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
 
 	{
-		Cursor_ = CreateActor<Mouse>();
+		Map_ = CreateActor<DeepeningForest>();
 	}
 
-	{
-		StatusUI* Status = CreateActor<StatusUI>();
-		Status->GetTransform()->SetWorldPosition({ 5.0f, 45.0f - GameEngineWindow::GetInst().GetSize().hy() });
-
-		ExpBarUI* ExpBar = CreateActor<ExpBarUI>();
-		ExpBar->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
-		ExpBar->LinkStatus(Status);
-	}
-
-	{
-		MenuUI* Actor = CreateActor<MenuUI>();
-		Actor->GetTransform()->SetWorldPosition({ 133.0f, -355.5f });
-	}
-
-	{
-		QuickSlotUI* Actor = CreateActor<QuickSlotUI>();
-		Actor->GetTransform()->SetWorldPosition({ 617.0f, -337.5f });
-	}
-
-	{
-		QuickSlotKeyUI* Actor = CreateActor<QuickSlotKeyUI>();
-		Actor->GetTransform()->SetWorldPosition({ 338.5f, -310.0f });
-	}
-
-	{
-		Inventory_ = CreateActor<InventoryUI>();
-		Inventory_->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
-		Inventory_->Off();
-	}
-
-	{
-		DeepeningForest* Actor = CreateActor<DeepeningForest>();
-	}
-
-	{
-		Player_ = CreateActor<Player>();
-		GetMainCameraActor()->GetTransform()->SetWorldPosition(
-			Player_->GetTransform()->GetLocalPosition());
-		Player_->GetTransform()->SetWorldPosition({179.0f, -758.0f});
-		Player_->Off();
-	}
+	
 }
 
 void DeepeningForestLevel::LevelUpdate(float _DeltaTime)
 {
+	static bool CreateActorCheck = false;
+
+	if (0 >= UserGame::LoadingFolder
+		&& false == CreateActorCheck)
+	{
+		CreateActorLevel();
+		CreateActorCheck = true;
+	}
 	if (false == GetMainCameraActor()->IsFreeCameraMode())
 	{
 		GlobalLevelControl::PlayerCameraControl();
@@ -132,6 +103,16 @@ void DeepeningForestLevel::LevelUpdate(float _DeltaTime)
 	{
 		Inventory_->OnOffChange();
 	}
+
+	if (true == GameEngineInput::GetInst().Down("Skill"))
+	{
+		Skill_->OnOffChange();
+	}
+
+	if (true == GameEngineInput::GetInst().Down("PixelCollide"))
+	{
+		Map_->GetPixelCollideImage()->OnOffChange();
+	}
 }
 
 void DeepeningForestLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
@@ -141,8 +122,67 @@ void DeepeningForestLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 
 void DeepeningForestLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
+
+}
+
+void DeepeningForestLevel::CreateActorLevel()
+{
+	{
+		Cursor_ = CreateActor<Mouse>();
+	}
+
+	{
+		Status_ = CreateActor<StatusUI>();
+		Status_->GetTransform()->SetWorldPosition({ 5.0f, 45.0f - GameEngineWindow::GetInst().GetSize().hy() });
+
+		ExpBarUI* ExpBar = CreateActor<ExpBarUI>();
+		ExpBar->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
+		ExpBar->LinkStatus(Status_);
+	}
+
+	{
+		MenuUI* Actor = CreateActor<MenuUI>();
+		Actor->GetTransform()->SetWorldPosition({ 133.0f, -355.5f });
+	}
+
+	{
+		QuickSlotUI* Actor = CreateActor<QuickSlotUI>();
+		Actor->GetTransform()->SetWorldPosition({ 617.0f, -337.5f });
+	}
+
+	{
+		QuickSlotKeyUI* Actor = CreateActor<QuickSlotKeyUI>();
+		Actor->GetTransform()->SetWorldPosition({ 338.5f, -310.0f });
+	}
+
+	{
+		Inventory_ = CreateActor<InventoryUI>();
+		Inventory_->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
+		Inventory_->Off();
+	}
+
+	{
+		Skill_ = CreateActor<SkillUI>();
+		Skill_->GetTransform()->SetWorldPosition({ 200.0f, 200.0f });
+		Skill_->Off();
+	}
+
+	{
+		Player_ = CreateActor<Player>();
+		GetMainCameraActor()->GetTransform()->SetWorldPosition(
+			Player_->GetTransform()->GetLocalPosition());
+		Player_->GetTransform()->SetWorldPosition({ 179.0f, -758.0f });
+		Player_->Off();
+	}
+
+	{
+		ForestDefender* Actor = CreateActor<ForestDefender>();
+		Actor->GetTransform()->SetWorldPosition({ 379.0f, -753.0f });
+	}
+
 	GlobalValue::CurrentPlayer = Player_;
 	GlobalValue::CurrentMouse = Cursor_;
+	GlobalValue::CurrentStatusUI = Status_;
 
 	Player_->On();
 }

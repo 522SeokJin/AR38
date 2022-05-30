@@ -23,8 +23,8 @@ PerionNorthernRidgeLevel::PerionNorthernRidgeLevel()
 	, Player_(nullptr)
 	, RenderWindow_(nullptr)
 	, Inventory_(nullptr)
-	, Skill_(nullptr)
 	, Map_(nullptr)
+	, Skill_(nullptr)
 	, Status_(nullptr)
 {
 
