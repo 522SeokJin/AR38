@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Stump.h"
 #include <GameEngine/GameEngineImageRenderer.h>
+#include <GameEngine/GameEngineUIRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 
 Stump::Stump()
@@ -43,6 +44,23 @@ void Stump::Start()
 		static_cast<int>(ColGroup::MONSTER));
 	Collision_->SetLocalScaling({ 67.0f, 54.0f });
 
+	for (int i = 0; i < 20; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				GameEngineUIRenderer* Renderer =
+					CreateTransformComponent<GameEngineUIRenderer>();
+
+				// NoRed0_0.png
+				Renderer->SetImage("NoRed0_" + std::to_string(k) + ".png", true, "PointSmp");
+				Renderer->Off();
+
+				DmgNumber_[i][j].push_back(Renderer);
+			}
+		}
+	}
 
 	FSM_.CreateState("stand", std::bind(&Stump::stand, this),
 		std::bind(&Stump::stand_Start, this),

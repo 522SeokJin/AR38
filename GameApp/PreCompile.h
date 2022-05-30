@@ -13,5 +13,7 @@
 #include <GameEngine/GameEngineInput.h>
 #include <GameEngine/GameEngineLevel.h>
 
+#include "UserGame.h"
+
 #include "GlobalValue.h"
 #include "GlobalLevelControl.h"

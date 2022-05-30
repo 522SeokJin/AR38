@@ -26,6 +26,8 @@ protected:
 	PerionNorthernRidgeLevel& operator=(const PerionNorthernRidgeLevel&& _other) = delete;
 
 private:
+	void CreateActorLevel();
+
 	Mouse* Cursor_;
 	Player* Player_;
 	GameEngineRenderWindow* RenderWindow_;

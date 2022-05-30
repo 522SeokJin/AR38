@@ -8,6 +8,7 @@
 
 // 설명 : 
 class GameEngineImageRenderer;
+class GameEngineUIRenderer;
 class GameEngineCollision;
 class Stump : public GameEngineActor
 {
@@ -40,6 +41,9 @@ private:
 	GameEngineImageRenderer* SkillEffectRenderer_;
 	GameEngineCollision*	 Collision_;
 
+	// Number Image
+	std::map<int, std::vector<GameEngineUIRenderer*>> DmgNumber_[20];	// [최대타수]
+ 
 	////////////////////////////////////////////	FSM
 
 private:

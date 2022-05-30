@@ -59,7 +59,6 @@ void UserGame::ResourceLoad()
 
 	}
 
-
 	Dir.MoveParent();
 	Dir.MoveChild("FolderAnimation");
 
