@@ -12,6 +12,7 @@ Stump::Stump()
 	, Dir_(0)
 	, MoveTime_(0.0f)
 	, Hit_(false)
+	, Die_(false)
 	, Func(std::bind(&Stump::SkillEvent, this, std::placeholders::_1))
 	, MaxHitCount_(0)
 	, CurHitCount_(0)
@@ -35,6 +36,7 @@ void Stump::Start()
 	Renderer_->CreateAnimationFolder("Stump_move", 0.180f);
 	Renderer_->CreateAnimationFolder("Stump_hit", 0.180f, false);
 	Renderer_->CreateAnimationFolder("Stump_die", { 0.18f, 0.18f, 0.3f }, false);
+	Renderer_->SetEndCallBack("Stump_die", [&]() { Die_ = true; });
 
 	Renderer_->SetChangeAnimation("Stump_move");
 
@@ -293,7 +295,15 @@ void Stump::die_Start()
 
 void Stump::die()
 {
-	
+	if (true == Die_)
+	{
+		Renderer_->SubAlpha(2.0f * GameEngineTime::GetInst().GetDeltaTime());
+	}
+
+	if (Renderer_->GetMulColor().a <= 0.0f)
+	{
+		Off();
+	}
 }
 
 void Stump::die_End()

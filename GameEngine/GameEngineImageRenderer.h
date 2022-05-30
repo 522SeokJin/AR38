@@ -115,6 +115,16 @@ public:
 		CorrectResultColor_.vMulColor = _Color;
 	}
 
+	inline float4 GetPlusColor()
+	{
+		return CorrectResultColor_.vPlusColor;
+	}
+
+	inline float4 GetMulColor()
+	{
+		return CorrectResultColor_.vMulColor;
+	}
+
 	inline void AnimationStop()
 	{
 		IsPlay_ = false;

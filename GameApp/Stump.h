@@ -33,6 +33,7 @@ private:
 	float MoveTime_;
 
 	bool Hit_;
+	bool Die_;
 
 	GameEngineImageRenderer* Renderer_;
 	GameEngineImageRenderer* SkillEffectRenderer_;
