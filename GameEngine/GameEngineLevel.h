@@ -134,6 +134,9 @@ public:
 	void PushDebugRender(GameEngineTransform* _Transform, CollisionType _Type);
 	void PushUIDebugRender(GameEngineTransform* _Transform, CollisionType _Type);
 
+	void PushDebugRender(GameEngineCollision* _Collision, CollisionType _Type);
+	void PushUIDebugRender(GameEngineCollision* _Collision, CollisionType _Type);
+
 	inline std::list<GameEngineCollision*>& GetCollisionGroup(int _Group)
 	{
 		return CollisionList_[_Group];

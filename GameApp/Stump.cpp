@@ -13,6 +13,7 @@ Stump::Stump()
 	, Hit_(false)
 	, Die_(false)
 	, Invincible_(false)
+	, Func(std::bind(&Stump::SkillEvent, this, std::placeholders::_1))
 {
 
 }
@@ -85,13 +86,7 @@ void Stump::Update(float _DeltaTime)
 {
 	FSM_.Update(_DeltaTime);
 
-	GetLevel()->PushDebugRender(Collision_->GetTransform(), CollisionType::Rect);
-
-	std::function<void(GameEngineCollision*)> Func =
-		std::bind(&Stump::SkillEvent, this, std::placeholders::_1);
-
-	Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
-		static_cast<int>(ColGroup::SKILL), Func);
+	GetLevel()->PushDebugRender(Collision_, CollisionType::Rect);
 }
 
 void Stump::SkillEvent(GameEngineCollision* _OtherCollision)
@@ -100,7 +95,7 @@ void Stump::SkillEvent(GameEngineCollision* _OtherCollision)
 	{
 		return;
 	}
-
+	
 	_OtherCollision->Off();
 
 	if (false == Hit_)
@@ -122,11 +117,18 @@ void Stump::stand()
 	if (1.5f < FSM_.GetCurrentState()->Time_)
 	{
 		FSM_.ChangeState("move");
+		return;
 	}
 
 	if (true == Hit_)
 	{
 		FSM_.ChangeState("hit");
+		return;
+	}
+	else
+	{
+		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
+			static_cast<int>(ColGroup::SKILL), Func);
 	}
 }
 
@@ -167,11 +169,18 @@ void Stump::move()
 	if (MoveTime_ < FSM_.GetCurrentState()->Time_)
 	{
 		FSM_.ChangeState("stand");
+		return;
 	}
 
 	if (true == Hit_)
 	{
 		FSM_.ChangeState("hit");
+		return;
+	}
+	else
+	{
+		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
+			static_cast<int>(ColGroup::SKILL), Func);
 	}
 }
 
@@ -189,6 +198,7 @@ void Stump::hit()
 	if (0.3f < FSM_.GetCurrentState()->Time_)
 	{
 		FSM_.ChangeState("move");
+		return;
 	}
 
 	if (DIRRIGHT)

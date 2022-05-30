@@ -180,7 +180,7 @@ void Player::Start()
 	FSM_.CreateState("swingO1", std::bind(&Player::swingO1, this),
 		std::bind(&Player::swingO1_Start, this),
 		std::bind(&Player::swingO1_End, this));
-	Avatar_->SetFrameCallBack("swingO1", 2, [&](){SkillCollision_->On();});
+	Avatar_->SetFrameCallBack("swingO1", 2, [&](){ SkillCollision_->On(); });
 
 	FSM_.CreateState("slashBlast", std::bind(&Player::slashBlast, this),
 		std::bind(&Player::slashBlast_Start, this),
@@ -217,8 +217,8 @@ void Player::Update(float _DeltaTime)
 
 	FSM_.Update(_DeltaTime);
 
-	GetLevel()->PushDebugRender(Collision_->GetTransform(), CollisionType::Rect);
-	GetLevel()->PushDebugRender(SkillCollision_->GetTransform(), CollisionType::Rect);
+	GetLevel()->PushDebugRender(Collision_, CollisionType::Rect);
+	GetLevel()->PushDebugRender(SkillCollision_, CollisionType::Rect);
 
 	Window->Values_[0] = "Player State : " + FSM_.GetCurrentName();
 	Window->Values_[1] = "BodyPixelCheck : " + body.ToString();

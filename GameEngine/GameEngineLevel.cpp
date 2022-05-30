@@ -332,6 +332,25 @@ void GameEngineLevel::PushUIDebugRender(GameEngineTransform* _Transform, Collisi
 	GetUICamera()->PushDebugRender(_Transform, _Type);
 }
 
+void GameEngineLevel::PushDebugRender(GameEngineCollision* _Collision, CollisionType _Type)
+{
+	if (false == _Collision->IsUpdate())
+	{
+		return;
+	}
+
+	GetMainCamera()->PushDebugRender(_Collision->GetTransform(), _Type);
+}
+
+void GameEngineLevel::PushUIDebugRender(GameEngineCollision* _Collision, CollisionType _Type)
+{
+	if (false == _Collision->IsUpdate())
+	{
+		return;
+	}
+
+	GetUICamera()->PushDebugRender(_Collision->GetTransform(), _Type);
+}
 
 void GameEngineLevel::SetLevelActorMove(GameEngineLevel* _NextLevel, GameEngineActor* _Actor)
 {

@@ -8,6 +8,7 @@ GameEngineActor::GameEngineActor()
 	, DeathTime_(-1.0f)
 	, IsDestroyed_(false)
 	, IsFindObject_(false)
+	, NextLevelMove_(false)
 {
 }
 

@@ -46,6 +46,8 @@ private:
  
 	////////////////////////////////////////////	FSM
 
+	std::function<void(GameEngineCollision*)> Func;
+
 private:
 	void stand_Start();
 	void stand();

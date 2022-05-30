@@ -203,6 +203,7 @@ void Player::jump()
 	if (0 > Speed_.y)
 	{
 		FSM_.ChangeState("fall");
+		return;
 	}
 
 	if (PlayerDir::LEFT == Dir_)
@@ -380,6 +381,7 @@ void Player::rope()
 		false == GameEngineInput::GetInst().Press("Down"))
 	{
 		FSM_.ChangeState("ropeStop");
+		return;
 	}
 
 	if (true == GameEngineInput::GetInst().Press("Up"))
@@ -398,6 +400,7 @@ void Player::rope()
 			+ float4(0.0f, -31.0f)).r)
 	{
 		FSM_.ChangeState("stand1");
+		return;
 	}
 
 	if (true == GameEngineInput::GetInst().Press("Left") &&
@@ -406,6 +409,7 @@ void Player::rope()
 		Dir_ = PlayerDir::LEFT;
 
 		FSM_.ChangeState("jump");
+		return;
 	}
 
 	if (true == GameEngineInput::GetInst().Press("Right") &&
@@ -414,6 +418,7 @@ void Player::rope()
 		Dir_ = PlayerDir::RIGHT;
 
 		FSM_.ChangeState("jump");
+		return;
 	}
 
 	if (CurrentDir != Dir_)
@@ -442,6 +447,7 @@ void Player::ladder()
 		false == GameEngineInput::GetInst().Press("Down"))
 	{
 		FSM_.ChangeState("ladderStop");
+		return;
 	}
 
 	if (true == GameEngineInput::GetInst().Press("Up"))
@@ -460,6 +466,7 @@ void Player::ladder()
 			+ float4(0.0f, -31.0f)).b)
 	{
 		FSM_.ChangeState("stand1");
+		return;
 	}
 
 	if (true == GameEngineInput::GetInst().Press("Left") &&
@@ -468,6 +475,7 @@ void Player::ladder()
 		Dir_ = PlayerDir::LEFT;
 
 		FSM_.ChangeState("jump");
+		return;
 	}
 
 	if (true == GameEngineInput::GetInst().Press("Right") &&
@@ -476,6 +484,7 @@ void Player::ladder()
 		Dir_ = PlayerDir::RIGHT;
 
 		FSM_.ChangeState("jump");
+		return;
 	}
 
 	if (CurrentDir != Dir_)
@@ -502,6 +511,7 @@ void Player::ropeStop()
 		true == GameEngineInput::GetInst().Press("Down"))
 	{
 		FSM_.ChangeState("rope");
+		return;
 	}
 
 	if (true == GameEngineInput::GetInst().Press("Left") &&
@@ -510,6 +520,7 @@ void Player::ropeStop()
 		Dir_ = PlayerDir::LEFT;
 
 		FSM_.ChangeState("jump");
+		return;
 	}
 
 	if (true == GameEngineInput::GetInst().Press("Right") &&
@@ -518,6 +529,7 @@ void Player::ropeStop()
 		Dir_ = PlayerDir::RIGHT;
 
 		FSM_.ChangeState("jump");
+		return;
 	}
 
 	if (CurrentDir != Dir_)
@@ -544,6 +556,7 @@ void Player::ladderStop()
 		true == GameEngineInput::GetInst().Press("Down"))
 	{
 		FSM_.ChangeState("ladderStop");
+		return;
 	}
 
 	if (true == GameEngineInput::GetInst().Press("Left") &&
@@ -552,6 +565,7 @@ void Player::ladderStop()
 		Dir_ = PlayerDir::LEFT;
 
 		FSM_.ChangeState("jump");
+		return;
 	}
 
 	if (true == GameEngineInput::GetInst().Press("Right") &&
@@ -560,6 +574,7 @@ void Player::ladderStop()
 		Dir_ = PlayerDir::RIGHT;
 
 		FSM_.ChangeState("jump");
+		return;
 	}
 
 	if (CurrentDir != Dir_)
@@ -605,6 +620,7 @@ void Player::swingO1()
 		if (Avatar_->GetCurAnimation()->IsEnd_)
 		{
 			FSM_.ChangeState("stand1");
+			return;
 		}
 	}
 	else
@@ -614,6 +630,7 @@ void Player::swingO1()
 		if (Avatar_->GetCurAnimation()->IsEnd_)
 		{
 			FSM_.ChangeState("fall");
+			return;
 		}
 	}
 
@@ -633,6 +650,8 @@ void Player::swingO1_End()
 
 	BodyPixelColor_ = GetBodyColor();
 	FootPixelColor_ = GetFootColor();
+
+	SkillCollision_->Off();
 }
 
 void Player::slashBlast_Start()
@@ -681,6 +700,7 @@ void Player::slashBlast()
 		if (Avatar_->GetCurAnimation()->IsEnd_)
 		{
 			FSM_.ChangeState("stand1");
+			return;
 		}
 	}
 	else
@@ -690,6 +710,7 @@ void Player::slashBlast()
 		if (Avatar_->GetCurAnimation()->IsEnd_)
 		{
 			FSM_.ChangeState("fall");
+			return;
 		}
 	}
 
@@ -757,6 +778,7 @@ void Player::doubleJump()
 	if (0 > Speed_.y)
 	{
 		FSM_.ChangeState("fall");
+		return;
 	}
 
 	if (PlayerDir::LEFT == Dir_)
@@ -848,6 +870,7 @@ void Player::upperCharge()
 	if (Avatar_->GetCurAnimation()->IsEnd_)
 	{
 		FSM_.ChangeState("fall");
+		return;
 	}
 
 	if (FootPixelColor_ != GetFootColor())

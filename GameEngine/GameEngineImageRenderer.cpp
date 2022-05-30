@@ -415,7 +415,7 @@ void GameEngineImageRenderer::Animation2D::Update(float _DeltaTime)
 		ReverseFrameUpdate();
 	}
 
-	CallFrame();
+	// CallFrame();
 
 	if (nullptr == FolderTextures_)
 	{
@@ -438,6 +438,7 @@ void GameEngineImageRenderer::Animation2D::FrameUpdate()
 	if (CurTime_ <= 0.0f)
 	{
 		++CurFrame_;
+		CallFrame();
 
 		if (true == Loop_ &&
 			CurFrame_ > EndFrame_)
@@ -476,6 +477,8 @@ void GameEngineImageRenderer::Animation2D::ReverseFrameUpdate()
 	if (CurTime_ <= 0.0f)
 	{
 		--CurFrame_;
+		CallFrame();
+
 		CurTime_ = InterTime_;
 		if (true == Loop_
 			&& CurFrame_ < EndFrame_)
