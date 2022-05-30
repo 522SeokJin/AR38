@@ -13,7 +13,7 @@ Stump::Stump()
 	, MoveTime_(0.0f)
 	, Hit_(false)
 	, Die_(false)
-	, Func(std::bind(&Stump::SkillEvent, this, std::placeholders::_1))
+	, Func_(std::bind(&Stump::SkillEvent, this, std::placeholders::_1))
 	, MaxHitCount_(0)
 	, CurHitCount_(0)
 	, HitTime_(0.0f)
@@ -114,8 +114,6 @@ void Stump::SkillEvent(GameEngineCollision* _OtherCollision)
 	{
 		return;
 	}
-	
-	_OtherCollision->Off();
 
 	if (false == Hit_)
 	{
@@ -146,7 +144,7 @@ void Stump::stand()
 	else
 	{
 		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
-			static_cast<int>(ColGroup::SKILL), Func);
+			static_cast<int>(ColGroup::SKILL), Func_);
 	}
 }
 
@@ -198,7 +196,7 @@ void Stump::move()
 	else
 	{
 		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
-			static_cast<int>(ColGroup::SKILL), Func);
+			static_cast<int>(ColGroup::SKILL), Func_);
 	}
 }
 

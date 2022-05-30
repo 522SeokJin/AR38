@@ -26,6 +26,7 @@ protected:
 
 private:
 	void SkillEvent(GameEngineCollision* _OtherCollision);
+	void AttackEvent(GameEngineCollision* _OtherCollision);
 
 	GameEngineFSM FSM_;
 	GameEngineRandom Random_;
@@ -33,11 +34,13 @@ private:
 	float MoveTime_;
 
 	bool Hit_;
+	bool Attack_;
 	bool Die_;
 
 	GameEngineImageRenderer* Renderer_;
 	GameEngineImageRenderer* SkillEffectRenderer_;
 	GameEngineCollision*	 Collision_;
+	GameEngineCollision*	 AttackCollision_;
 
 	// Number Image
 	std::map<int, std::vector<GameEngineImageRenderer*>> DmgNumber_[20];	// [최대타수]
@@ -49,7 +52,8 @@ private:
 
 	////////////////////////////////////////////	FSM
 
-	std::function<void(GameEngineCollision*)> Func;
+	std::function<void(GameEngineCollision*)> Func_;
+	std::function<void(GameEngineCollision*)> AttackFunc_;
 
 private:
 	void stand_Start();

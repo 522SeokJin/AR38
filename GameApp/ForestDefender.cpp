@@ -9,11 +9,14 @@ ForestDefender::ForestDefender()
 	: Renderer_(nullptr)
 	, SkillEffectRenderer_(nullptr)
 	, Collision_(nullptr)
+	, AttackCollision_(nullptr)
 	, Dir_(0)
 	, MoveTime_(0.0f)
 	, Hit_(false)
+	, Attack_(false)
 	, Die_(false)
-	, Func(std::bind(&ForestDefender::SkillEvent, this, std::placeholders::_1))
+	, Func_(std::bind(&ForestDefender::SkillEvent, this, std::placeholders::_1))
+	, AttackFunc_(std::bind(&ForestDefender::AttackEvent, this, std::placeholders::_1))
 	, MaxHitCount_(0)
 	, CurHitCount_(0)
 	, HitTime_(0.0f)
@@ -37,6 +40,11 @@ void ForestDefender::Start()
 	Renderer_->CreateAnimationFolder("ForestDefender_hit", 0.120f, false);
 	Renderer_->CreateAnimationFolder("ForestDefender_die", 0.120f, false);
 	Renderer_->CreateAnimationFolder("ForestDefender_attack1", 0.120f, false);
+	Renderer_->SetEndCallBack("ForestDefender_attack1", [&]()
+		{
+			FSM_.ChangeState("stand");
+		});
+
 	Renderer_->CreateAnimationFolder("ForestDefender_attack1_hit", 0.120f, false);
 	Renderer_->SetEndCallBack("ForestDefender_die", [&]() { Die_ = true; });
 
@@ -50,7 +58,11 @@ void ForestDefender::Start()
 
 	Collision_ = CreateTransformComponent<GameEngineCollision>(
 		static_cast<int>(ColGroup::MONSTER));
-	Collision_->SetLocalScaling({ 67.0f, 54.0f });
+	Collision_->SetLocalScaling({ 103.0f, 80.0f });
+
+	AttackCollision_ = CreateTransformComponent<GameEngineCollision>(
+		static_cast<int>(ColGroup::MONSTERAI));
+	AttackCollision_->SetLocalScaling({ 103.0f * 2.5f, 80.0f * 1.5f });
 
 	for (int i = 0; i < 20; i++)
 	{
@@ -98,6 +110,7 @@ void ForestDefender::Update(float _DeltaTime)
 	FSM_.Update(_DeltaTime);
 
 	GetLevel()->PushDebugRender(Collision_, CollisionType::Rect);
+	GetLevel()->PushDebugRender(AttackCollision_, CollisionType::Rect);
 
 	for (int i = 0; i < 20; i++)
 	{
@@ -121,11 +134,22 @@ void ForestDefender::SkillEvent(GameEngineCollision* _OtherCollision)
 		return;
 	}
 	
-	_OtherCollision->Off();
-
 	if (false == Hit_)
 	{
 		Hit_ = true;
+	}
+}
+
+void ForestDefender::AttackEvent(GameEngineCollision* _OtherCollision)
+{
+	if (false == _OtherCollision->IsUpdate())
+	{
+		return;
+	}
+
+	if (false == Attack_)
+	{
+		Attack_ = true;
 	}
 }
 
@@ -152,7 +176,18 @@ void ForestDefender::stand()
 	else
 	{
 		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
-			static_cast<int>(ColGroup::SKILL), Func);
+			static_cast<int>(ColGroup::SKILL), Func_);
+	}
+
+	if (true == Attack_)
+	{
+		FSM_.ChangeState("attack");
+		return;
+	}
+	else
+	{
+		AttackCollision_->Collision(CollisionType::Rect, CollisionType::Rect,
+			static_cast<int>(ColGroup::PLAYER), AttackFunc_);
 	}
 }
 
@@ -204,7 +239,7 @@ void ForestDefender::move()
 	else
 	{
 		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
-			static_cast<int>(ColGroup::SKILL), Func);
+			static_cast<int>(ColGroup::SKILL), Func_);
 	}
 }
 
@@ -295,14 +330,47 @@ void ForestDefender::hit_End()
 
 void ForestDefender::attack_Start()
 {
+	Renderer_->SetChangeAnimation("ForestDefender_attack1");
+
+	float PlayerXPos = GlobalValue::CurrentPlayer->GetTransform()->GetWorldPosition().x;
+	float DiffXAxis = GetTransform()->GetWorldPosition().x - PlayerXPos;
+
+	if (DiffXAxis < 0)
+	{
+		if (true == Renderer_->IsLeft_)
+		{
+			Renderer_->ImageLocalFlipYAxis();
+			Renderer_->IsLeft_ = false;
+		}
+	}
+	else
+	{
+		if (false == Renderer_->IsLeft_)
+		{
+			Renderer_->ImageLocalFlipYAxis();
+			Renderer_->IsLeft_ = true;
+		}
+	}
+
+	if (true == Renderer_->IsLeft_)
+	{
+		Renderer_->SetLocalMove({ -30.0f, -5.0f, 0.0f });
+	}
+	else
+	{
+		Renderer_->SetLocalMove({ 30.0f, -5.0f, 0.0f });
+	}
 }
 
 void ForestDefender::attack()
 {
+	
 }
 
 void ForestDefender::attack_End()
 {
+	Attack_ = false;
+	Renderer_->SetLocalPosition({ 0.0f, 0.0f, static_cast<float>(DepthOrder::MONSTER) });
 }
 
 void ForestDefender::die_Start()
