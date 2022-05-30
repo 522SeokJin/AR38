@@ -16,7 +16,7 @@ Stump::Stump()
 	, Func(std::bind(&Stump::SkillEvent, this, std::placeholders::_1))
 	, MaxHitCount_(0)
 	, CurHitCount_(0)
-
+	, HitTime_(0.0f)
 {
 
 }
@@ -225,6 +225,8 @@ void Stump::hit_Start()
 
 void Stump::hit()
 {
+	HitTime_ += GameEngineTime::GetInst().GetDeltaTime();
+
 	if (DIRRIGHT)
 	{
 		GetTransform()->SetLocalDeltaTimeMove({ -5.0f, 0.0f });
@@ -234,10 +236,9 @@ void Stump::hit()
 		GetTransform()->SetLocalDeltaTimeMove({ 5.0f, 0.0f });
 	}
 
-
-	if (0.05f < FSM_.GetCurrentState()->Time_)
-	{
-		
+	if (0.05f < HitTime_ &&
+		CurHitCount_ < MaxHitCount_)
+	{	
 		int Damage = Random_.RandomInt(10000, 99999);
 		int TempValue = Random_.RandomInt(-2, 2);
 
@@ -250,15 +251,27 @@ void Stump::hit()
 				+ static_cast<float>(TempValue), Renderer_->GetImageSize().y + 30.0f * CurHitCount_, -100.0f});
 		}
 
-		FSM_.GetCurrentState()->Time_ = 0.0f;
+		HitTime_ = 0.0f;
 		++CurHitCount_;
+	}
 
+	if (MaxHitCount_ > 10)
+	{
 		if (CurHitCount_ >= MaxHitCount_)
 		{
 			FSM_.ChangeState("move");
 			return;
 		}
 	}
+	else
+	{
+		if (0.5f < FSM_.GetCurrentState()->Time_)
+		{
+			FSM_.ChangeState("move");
+			return;
+		}
+	}
+
 }
 
 void Stump::hit_End()

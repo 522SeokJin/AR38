@@ -43,6 +43,7 @@ private:
 	std::map<int, std::vector<GameEngineImageRenderer*>> DmgNumber_[20];	// [최대타수]
 	int MaxHitCount_;
 	int CurHitCount_;
+	float HitTime_;
  
 	////////////////////////////////////////////	FSM
 
