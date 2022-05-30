@@ -33,7 +33,6 @@ private:
 	float MoveTime_;
 
 	bool Hit_;
-	bool Die_;
 
 	GameEngineImageRenderer* Renderer_;
 	GameEngineImageRenderer* SkillEffectRenderer_;
@@ -44,7 +43,9 @@ private:
 	int MaxHitCount_;
 	int CurHitCount_;
 	float HitTime_;
- 
+	
+	int DeadHitCount_;
+
 	////////////////////////////////////////////	FSM
 
 	std::function<void(GameEngineCollision*)> Func;

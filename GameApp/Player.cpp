@@ -7,6 +7,7 @@
 #include "Map.h"
 #include <GameEngine/GameEngineGUI.h>
 #include "ValueCheckWindow.h"
+#include "StatusUI.h"
 
 Player::Player()
 	: Dir_(PlayerDir::LEFT)
@@ -146,6 +147,8 @@ void Player::MonsterEvent(GameEngineCollision* _OtherCollision)
 	}
 
 	int Damage = Random_.RandomInt(10, 99);
+
+	GlobalValue::CurrentStatusUI->SubHP(Damage);
 
 	for (int j = 0; j < 2; j++)
 	{

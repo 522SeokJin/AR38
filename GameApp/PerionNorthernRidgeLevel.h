@@ -33,6 +33,7 @@ private:
 	GameEngineRenderWindow* RenderWindow_;
 	InventoryUI* Inventory_;
 	SkillUI* Skill_;
+	StatusUI* Status_;
 	PerionNorthernRidge* Map_;
 };
 

@@ -9,10 +9,10 @@ StatusUI::StatusUI()
 	, HPBar_(nullptr)
 	, MPBar_(nullptr)
 	, StatusLayer_(nullptr)
-	, CurHP_(5000.0f)
-	, CurMP_(2000.0f)
-	, MaxHP_(5000.0f)
-	, MaxMP_(2000.0f)
+	, CurHP_(500.0f)
+	, CurMP_(100.0f)
+	, MaxHP_(500.0f)
+	, MaxMP_(100.0f)
 	, HPChanged_(true)
 	, MPChanged_(true)
 	, Level_(10)
@@ -144,9 +144,6 @@ void StatusUI::Start()
 			LvNumber_[i].push_back(Renderer);
 		}
 	}
-
-	SetHPPer(0.3f);
-	SetMP(1000.0f);
 }
 
 void StatusUI::Update(float _DeltaTime)

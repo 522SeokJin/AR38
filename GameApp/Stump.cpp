@@ -12,11 +12,11 @@ Stump::Stump()
 	, Dir_(0)
 	, MoveTime_(0.0f)
 	, Hit_(false)
-	, Die_(false)
 	, Func(std::bind(&Stump::SkillEvent, this, std::placeholders::_1))
 	, MaxHitCount_(0)
 	, CurHitCount_(0)
 	, HitTime_(0.0f)
+	, DeadHitCount_(2)
 {
 
 }
@@ -253,6 +253,7 @@ void Stump::hit()
 
 		HitTime_ = 0.0f;
 		++CurHitCount_;
+		--DeadHitCount_;
 	}
 
 	if (MaxHitCount_ > 10)
@@ -272,6 +273,10 @@ void Stump::hit()
 		}
 	}
 
+	if (0 >= DeadHitCount_)
+	{
+		FSM_.ChangeState("die");
+	}
 }
 
 void Stump::hit_End()
@@ -283,10 +288,12 @@ void Stump::hit_End()
 void Stump::die_Start()
 {
 	Renderer_->SetChangeAnimation("Stump_die");
+	Collision_->Off();
 }
 
 void Stump::die()
 {
+	
 }
 
 void Stump::die_End()
