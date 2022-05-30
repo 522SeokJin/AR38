@@ -23,6 +23,11 @@ public:
 		return Dir_;
 	}
 
+	int GetCurrentSkillHitCount()
+	{
+		return SkillHitCount_;
+	}
+
 	void LevelUp();
 	void JobsChanged();
 
@@ -71,6 +76,8 @@ private:
 	GameEngineImageRenderer* Avatar_;
 	GameEngineImageRenderer* SkillEffect1_;
 	GameEngineImageRenderer* SkillEffect2_;
+
+	int SkillHitCount_;
 
 	////////////////////////////////////////////	FSM
 

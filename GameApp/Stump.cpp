@@ -3,6 +3,7 @@
 #include <GameEngine/GameEngineImageRenderer.h>
 #include <GameEngine/GameEngineUIRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
+#include "Player.h"
 
 Stump::Stump()
 	: Renderer_(nullptr)
@@ -12,8 +13,10 @@ Stump::Stump()
 	, MoveTime_(0.0f)
 	, Hit_(false)
 	, Die_(false)
-	, Invincible_(false)
 	, Func(std::bind(&Stump::SkillEvent, this, std::placeholders::_1))
+	, MaxHitCount_(0)
+	, CurHitCount_(0)
+
 {
 
 }
@@ -51,8 +54,8 @@ void Stump::Start()
 		{
 			for (int k = 0; k < 10; k++)
 			{
-				GameEngineUIRenderer* Renderer =
-					CreateTransformComponent<GameEngineUIRenderer>();
+				GameEngineImageRenderer* Renderer =
+					CreateTransformComponent<GameEngineImageRenderer>();
 
 				// NoRed0_0.png
 				Renderer->SetImage("NoRed0_" + std::to_string(k) + ".png", true, "PointSmp");
@@ -87,6 +90,20 @@ void Stump::Update(float _DeltaTime)
 	FSM_.Update(_DeltaTime);
 
 	GetLevel()->PushDebugRender(Collision_, CollisionType::Rect);
+
+	for (int i = 0; i < 20; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				if (DmgNumber_[i][j][k]->IsUpdate())
+				{
+					DmgNumber_[i][j][k]->SubAlpha(2.0f * _DeltaTime);
+				}
+			}
+		}
+	}
 }
 
 void Stump::SkillEvent(GameEngineCollision* _OtherCollision)
@@ -101,7 +118,6 @@ void Stump::SkillEvent(GameEngineCollision* _OtherCollision)
 	if (false == Hit_)
 	{
 		Hit_ = true;
-		Invincible_ = true;
 	}
 }
 
@@ -191,16 +207,24 @@ void Stump::move_End()
 void Stump::hit_Start()
 {
 	Renderer_->SetChangeAnimation("Stump_hit");
+
+	MaxHitCount_ = GlobalValue::CurrentPlayer->GetCurrentSkillHitCount();
+
+	for (int i = 0; i < 20; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				DmgNumber_[i][j][k]->Off();
+				DmgNumber_[i][j][k]->SetAlpha(1.0f);
+			}
+		}
+	}
 }
 
 void Stump::hit()
 {
-	if (0.3f < FSM_.GetCurrentState()->Time_)
-	{
-		FSM_.ChangeState("move");
-		return;
-	}
-
 	if (DIRRIGHT)
 	{
 		GetTransform()->SetLocalDeltaTimeMove({ -5.0f, 0.0f });
@@ -209,12 +233,38 @@ void Stump::hit()
 	{
 		GetTransform()->SetLocalDeltaTimeMove({ 5.0f, 0.0f });
 	}
+
+
+	if (0.05f < FSM_.GetCurrentState()->Time_)
+	{
+		
+		int Damage = Random_.RandomInt(10000, 99999);
+		int TempValue = Random_.RandomInt(-2, 2);
+
+		for (int j = 0; j < 5; j++)
+		{
+			int Value = GameEngineMath::PlaceValue(static_cast<int>(Damage), j + 1);
+
+			DmgNumber_[CurHitCount_][j][Value]->On();
+			DmgNumber_[CurHitCount_][j][Value]->SetLocalPosition({ -25.0f * (j + 1) + 75.0f
+				+ static_cast<float>(TempValue), Renderer_->GetImageSize().y + 30.0f * CurHitCount_, -100.0f});
+		}
+
+		FSM_.GetCurrentState()->Time_ = 0.0f;
+		++CurHitCount_;
+
+		if (CurHitCount_ >= MaxHitCount_)
+		{
+			FSM_.ChangeState("move");
+			return;
+		}
+	}
 }
 
 void Stump::hit_End()
 {
 	Hit_ = false;
-	Invincible_ = false;
+	CurHitCount_ = 0;
 }
 
 void Stump::die_Start()

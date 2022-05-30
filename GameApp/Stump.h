@@ -8,7 +8,6 @@
 
 // 설명 : 
 class GameEngineImageRenderer;
-class GameEngineUIRenderer;
 class GameEngineCollision;
 class Stump : public GameEngineActor
 {
@@ -35,14 +34,15 @@ private:
 
 	bool Hit_;
 	bool Die_;
-	bool Invincible_;
 
 	GameEngineImageRenderer* Renderer_;
 	GameEngineImageRenderer* SkillEffectRenderer_;
 	GameEngineCollision*	 Collision_;
 
 	// Number Image
-	std::map<int, std::vector<GameEngineUIRenderer*>> DmgNumber_[20];	// [최대타수]
+	std::map<int, std::vector<GameEngineImageRenderer*>> DmgNumber_[20];	// [최대타수]
+	int MaxHitCount_;
+	int CurHitCount_;
  
 	////////////////////////////////////////////	FSM
 

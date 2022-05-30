@@ -20,6 +20,7 @@ Player::Player()
 	, SkillEffect2_(nullptr)
 	, Collision_(nullptr)
 	, SkillCollision_(nullptr)
+	, SkillHitCount_(1)
 {
 }
 
@@ -185,6 +186,7 @@ void Player::Start()
 	FSM_.CreateState("slashBlast", std::bind(&Player::slashBlast, this),
 		std::bind(&Player::slashBlast_Start, this),
 		std::bind(&Player::slashBlast_End, this));
+	SkillEffect1_->SetFrameCallBack("Slashblast_effect", 5, [&]() { SkillCollision_->On(); });
 
 	FSM_.CreateState("doubleJump", std::bind(&Player::doubleJump, this),
 		std::bind(&Player::doubleJump_Start, this),

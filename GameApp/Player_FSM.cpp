@@ -590,6 +590,8 @@ void Player::ladderStop_End()
 
 void Player::swingO1_Start()
 {
+	SkillHitCount_ = 1;
+
 	Avatar_->SetChangeAnimation("swingO1");
 
 	BodyPixelColor_ = GetBodyColor();
@@ -656,6 +658,8 @@ void Player::swingO1_End()
 
 void Player::slashBlast_Start()
 {
+	SkillHitCount_ = 2;
+
 	Avatar_->SetChangeAnimation("slashBlast");
 	SkillEffect1_->On();
 	SkillEffect1_->SetChangeAnimation("Slashblast_effect", true);

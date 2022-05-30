@@ -85,6 +85,25 @@ public:
 	{
 		CorrectResultColor_.vMulColor.a = _Value;
 	}
+	inline void AddAlpha(float _Value)
+	{
+		CorrectResultColor_.vMulColor.a += _Value;
+
+		if (CorrectResultColor_.vMulColor.a > 1.0f)
+		{
+			CorrectResultColor_.vMulColor.a = 1.0f;
+		}
+	}
+
+	inline void SubAlpha(float _Value)
+	{
+		CorrectResultColor_.vMulColor.a -= _Value;
+
+		if (CorrectResultColor_.vMulColor.a < 0.0f)
+		{
+			CorrectResultColor_.vMulColor.a = 0.0f;
+		}
+	}
 
 	inline void SetPlusColor(float4 _Color)
 	{
