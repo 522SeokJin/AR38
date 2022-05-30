@@ -734,12 +734,14 @@ void Player::slashBlast_End()
 
 	BodyPixelColor_ = GetBodyColor();
 	FootPixelColor_ = GetFootColor();
+
+	SkillCollision_->Off();
 }
 
 void Player::doubleJump_Start()
 {
-	SkillEffect1_->On();
-	SkillEffect1_->SetChangeAnimation("WarriorLeap_effect0", true);
+	SkillEffect4_->On();
+	SkillEffect4_->SetChangeAnimation("WarriorLeap_effect0", true);
 
 	Speed_.x += JUMPSPEED;
 	Speed_.y += 0.5f * JUMPSPEED;
@@ -750,20 +752,20 @@ void Player::doubleJump_Start()
 	switch (Dir_)
 	{
 	case PlayerDir::LEFT:
-		if (false == SkillEffect1_->IsLeft_)
+		if (false == SkillEffect4_->IsLeft_)
 		{
-			SkillEffect1_->ImageLocalFlipYAxis();
-			SkillEffect1_->IsLeft_ = true;
+			SkillEffect4_->ImageLocalFlipYAxis();
+			SkillEffect4_->IsLeft_ = true;
 		}
-		SkillEffect1_->SetLocalPosition({ 140.0f, 10.0f, 0.0f });
+		SkillEffect4_->SetLocalPosition({ 140.0f, 10.0f, 0.0f });
 		break;
 	case PlayerDir::RIGHT:
-		if (true == SkillEffect1_->IsLeft_)
+		if (true == SkillEffect4_->IsLeft_)
 		{
-			SkillEffect1_->ImageLocalFlipYAxis();
-			SkillEffect1_->IsLeft_ = false;
+			SkillEffect4_->ImageLocalFlipYAxis();
+			SkillEffect4_->IsLeft_ = false;
 		}
-		SkillEffect1_->SetLocalPosition({ -140.0f, 10.0f, 0.0f });
+		SkillEffect4_->SetLocalPosition({ -140.0f, 10.0f, 0.0f });
 		break;
 	default:
 		break;

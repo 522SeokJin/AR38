@@ -38,6 +38,8 @@ protected:
 	Player& operator=(const Player&& _other) = delete;
 
 private:
+	void MonsterEvent(GameEngineCollision* _OtherCollision);
+
 	void CreateAnimation();
 
 	void CreateAvatarAnimation();
@@ -76,8 +78,11 @@ private:
 	GameEngineImageRenderer* Avatar_;
 	GameEngineImageRenderer* SkillEffect1_;
 	GameEngineImageRenderer* SkillEffect2_;
+	GameEngineImageRenderer* SkillEffect3_;
+	GameEngineImageRenderer* SkillEffect4_;
 
 	int SkillHitCount_;
+	bool Invincible_;
 
 	////////////////////////////////////////////	FSM
 

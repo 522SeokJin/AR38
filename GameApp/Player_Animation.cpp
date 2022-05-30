@@ -9,9 +9,13 @@ void Player::CreateAnimation()
 
 	SkillEffect1_ = CreateTransformComponent<GameEngineImageRenderer>();
 	SkillEffect2_ = CreateTransformComponent<GameEngineImageRenderer>();
+	SkillEffect3_ = CreateTransformComponent<GameEngineImageRenderer>();
+	SkillEffect4_ = CreateTransformComponent<GameEngineImageRenderer>();
 
 	SkillEffect1_->Off();
 	SkillEffect2_->Off();
+	SkillEffect3_->Off();
+	SkillEffect4_->Off();
 
 	LevelUpEffect_ = CreateTransformComponent<GameEngineImageRenderer>();
 	LevelUpEffect_->SetLocalPosition({0.0f, 160.0f, static_cast<float>(DepthOrder::SKILL)});
@@ -96,12 +100,13 @@ void Player::CreateSkillAnimation()
 		}
 	);
 
-	SkillEffect1_->CreateAnimationFolder("WarriorLeap_effect0", 0.06f, false);
-	SkillEffect1_->SetEndCallBack("WarriorLeap_effect0", [&]()
+	SkillEffect4_->CreateAnimationFolder("WarriorLeap_effect0", 0.06f, false);
+	SkillEffect4_->SetEndCallBack("WarriorLeap_effect0", [&]()
 		{
-			SkillEffect1_->Off();
+			SkillEffect4_->Off();
 		}
 	);
+
 	SkillEffect1_->CreateAnimationFolder("UpperCharge_effect0", 0.06f, false);
 	SkillEffect1_->SetEndCallBack("UpperCharge_effect0", [&]()
 		{

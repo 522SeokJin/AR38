@@ -18,9 +18,12 @@ Player::Player()
 	, Avatar_(nullptr)
 	, SkillEffect1_(nullptr)
 	, SkillEffect2_(nullptr)
+	, SkillEffect3_(nullptr)
+	, SkillEffect4_(nullptr)
 	, Collision_(nullptr)
 	, SkillCollision_(nullptr)
 	, SkillHitCount_(1)
+	, Invincible_(false)
 {
 }
 
@@ -129,6 +132,60 @@ void Player::JobsChanged()
 	JobsChangedEffect_->SetChangeAnimation("JobChanged", true);
 }
 
+void Player::MonsterEvent(GameEngineCollision* _OtherCollision)
+{
+	Invincible_ = true;
+
+	Avatar_->SetMulColor({0.5f, 0.5f, 0.5f, 1.0f});
+
+	GetLevel()->AddTimeEvent(0.1f, [&]()
+		{
+			Avatar_->SetMulColor(float4::ONE);
+		});
+
+	GetLevel()->AddTimeEvent(0.2f, [&]()
+		{
+			Avatar_->SetMulColor({ 0.5f, 0.5f, 0.5f, 1.0f });
+		});
+
+	GetLevel()->AddTimeEvent(0.3f, [&]()
+		{
+			Avatar_->SetMulColor(float4::ONE);
+		});
+	GetLevel()->AddTimeEvent(0.4f, [&]()
+		{
+			Avatar_->SetMulColor({ 0.5f, 0.5f, 0.5f, 1.0f });
+		});
+
+	GetLevel()->AddTimeEvent(0.5f, [&]()
+		{
+			Avatar_->SetMulColor(float4::ONE);
+		});
+	GetLevel()->AddTimeEvent(0.6f, [&]()
+		{
+			Avatar_->SetMulColor({ 0.5f, 0.5f, 0.5f, 1.0f });
+		});
+
+	GetLevel()->AddTimeEvent(0.7f, [&]()
+		{
+			Avatar_->SetMulColor(float4::ONE);
+		});
+	GetLevel()->AddTimeEvent(0.8f, [&]()
+		{
+			Avatar_->SetMulColor({ 0.5f, 0.5f, 0.5f, 1.0f });
+		});
+
+	GetLevel()->AddTimeEvent(0.9f, [&]()
+		{
+			Avatar_->SetMulColor(float4::ONE);
+		});
+
+	GetLevel()->AddTimeEvent(1.0f, [&]()
+		{
+			Invincible_ = false;
+		});
+}
+
 void Player::Start()
 {
 	CreateAnimation();
@@ -201,6 +258,17 @@ void Player::Start()
 
 void Player::Update(float _DeltaTime)
 {
+	FSM_.Update(_DeltaTime);
+
+	std::function<void(GameEngineCollision*)> Func = 
+		std::bind(&Player::MonsterEvent, this, std::placeholders::_1);
+
+	if (false == Invincible_)
+	{
+		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
+			static_cast<int>(ColGroup::MONSTER), Func);
+	}
+
 	if (true == GameEngineInput::GetInst().Down("FreeCamera"))
 	{
 		GetLevel()->GetMainCameraActor()->FreeCameraModeSwitch();
@@ -217,7 +285,6 @@ void Player::Update(float _DeltaTime)
 	float4 body = Map::GetColor(GetTransform()->GetWorldPosition().InvertY());
 	float4 foot = Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, 32.0f));
 
-	FSM_.Update(_DeltaTime);
 
 	GetLevel()->PushDebugRender(Collision_, CollisionType::Rect);
 	GetLevel()->PushDebugRender(SkillCollision_, CollisionType::Rect);

@@ -110,6 +110,11 @@ public:
 		CorrectResultColor_.vPlusColor = _Color;
 	}
 
+	inline void SetMulColor(float4 _Color)
+	{
+		CorrectResultColor_.vMulColor = _Color;
+	}
+
 	inline void AnimationStop()
 	{
 		IsPlay_ = false;
