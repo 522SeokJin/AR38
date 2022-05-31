@@ -4,6 +4,7 @@
 #include <GameEngine/GameEngineUIRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 #include "Player.h"
+#include "Map.h"
 
 Stump::Stump()
 	: Renderer_(nullptr)
@@ -192,9 +193,20 @@ void Stump::move()
 		Renderer_->AddAlpha(2.0f * GameEngineTime::GetInst().GetDeltaTime());
 	}
 
+	float4 LeftPixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
+		+ float4(-10.0f, 27.0f + 5.0f));
+	float4 RightPixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
+		+ float4(10.0f, 27.0f + 5.0f));
+
 	if (DIRRIGHT)
 	{
 		GetTransform()->SetLocalDeltaTimeMove({ 70.0f, 0.0f });
+
+		if (0.0f >= RightPixelColor.g)
+		{
+			Dir_ = 1;
+		}
+
 		if (true == Renderer_->IsLeft_)
 		{
 			Renderer_->ImageLocalFlipYAxis();
@@ -205,6 +217,12 @@ void Stump::move()
 	if (DIRLEFT)
 	{
 		GetTransform()->SetLocalDeltaTimeMove({ -70.0f, 0.0f });
+
+		if (0.0f >= LeftPixelColor.g)
+		{
+			Dir_ = 9;
+		}
+
 		if (false == Renderer_->IsLeft_)
 		{
 			Renderer_->ImageLocalFlipYAxis();
