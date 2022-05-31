@@ -26,6 +26,7 @@ PerionNorthernRidgeLevel::PerionNorthernRidgeLevel()
 	, Map_(nullptr)
 	, Skill_(nullptr)
 	, Status_(nullptr)
+	, ExpBar_(nullptr)
 	, ReZenTime_(8.0f)
 {
 }
@@ -188,6 +189,7 @@ void PerionNorthernRidgeLevel::CreateActorLevel()
 	GlobalValue::CurrentMouse = Cursor_;
 	GlobalValue::CurrentStatusUI = Status_;
 	GlobalValue::CurrentExpBarUI = ExpBar_;
+	GlobalValue::CurrentInventoryUI = Inventory_;
 
 	Player_->On();
 }

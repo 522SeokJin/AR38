@@ -28,6 +28,7 @@ class Player;
 class Mouse;
 class StatusUI;
 class ExpBarUI;
+class InventoryUI;
 class GlobalValue
 {
 public:
@@ -35,6 +36,7 @@ public:
 	static Mouse* CurrentMouse;
 	static StatusUI* CurrentStatusUI;
 	static ExpBarUI* CurrentExpBarUI;
+	static InventoryUI* CurrentInventoryUI;
 
 protected:
 	GlobalValue(const GlobalValue& _other) = delete; 

@@ -12,6 +12,7 @@ InventoryUI::InventoryUI()
 	, EtcTab_(nullptr)
 	, EnabledTab_(InventoryTab::Equipment)
 	, ItemBlocks_{0, }
+	, Meso_(0)
 {
 
 }
@@ -69,7 +70,6 @@ void InventoryUI::Update(float _DeltaTime)
 
 	ChangeTabEvent();
 }
-
 
 void InventoryUI::TitleBarEvent(GameEngineCollision* _OtherCollision)
 {

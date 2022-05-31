@@ -120,6 +120,9 @@ void InventoryUI::CreateRenderer()
 		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		Renderer->SetImage("Item.AutoBuild.button_Sort.normal.0.png");
 		Renderer->SetLocalPosition({ 64.0f, -125.0f });
+		Renderer->TextSetting("µ¸¿ò", std::to_string(Meso_), 13, float4::BLACK, 
+			{ -15.0f, 1.0f, 0.0f });
+		Renderer->SetTextFlag(FW1_RIGHT | FW1_VCENTER);
 	}
 }
 

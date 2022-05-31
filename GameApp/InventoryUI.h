@@ -9,7 +9,6 @@ enum class InventoryTab
 };
 
 // Ό³Έν : 
-class Item;
 class GameEngineCollision;
 class GameEngineUIRenderer;
 class InventoryUI : public GameEngineActor
@@ -20,6 +19,11 @@ public:
 
 	void Start() override;
 	void Update(float _DeltaTime) override;
+
+	void AddMeso(int _Value)
+	{
+		Meso_ += _Value;
+	}
 
 protected:
 	InventoryUI(const InventoryUI& _other) = delete;
@@ -48,5 +52,7 @@ private:
 	InventoryTab EnabledTab_;
 
 	GameEngineCollision* ItemBlocks_[32];
+
+	int Meso_;
 };
 

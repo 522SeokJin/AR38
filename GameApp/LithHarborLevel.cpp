@@ -195,6 +195,7 @@ void LithHarborLevel::CreateActorLevel()
 	GlobalValue::CurrentPlayer = Player_;
 	GlobalValue::CurrentMouse = Cursor_;
 	GlobalValue::CurrentStatusUI = Status_;
+	GlobalValue::CurrentInventoryUI = Inventory_;
 
 	Player_->On();
 }
