@@ -26,16 +26,17 @@ PerionNorthernRidgeLevel::PerionNorthernRidgeLevel()
 	, Map_(nullptr)
 	, Skill_(nullptr)
 	, Status_(nullptr)
+	, ReZenTime_(8.0f)
 {
-	for (size_t i = 0; i < 29; i++)
-	{
-		Stumps[i] = nullptr;
-	}
 }
 
 PerionNorthernRidgeLevel::~PerionNorthernRidgeLevel()
 {
-
+	for (auto& Stump : Stumps_)
+	{
+		Stump->Death();
+		Stump = nullptr;
+	}
 }
 
 void PerionNorthernRidgeLevel::LevelStart()
@@ -50,6 +51,9 @@ void PerionNorthernRidgeLevel::LevelStart()
 		Map_ = CreateActor<PerionNorthernRidge>();
 		Map_->GetPixelCollideImage()->Off();
 	}
+
+	// Monster Respawn
+	AddTimeEvent(ReZenTime_, std::bind(&PerionNorthernRidgeLevel::ReZenMoster, this));
 }
 
 void PerionNorthernRidgeLevel::LevelUpdate(float _DeltaTime)
@@ -62,6 +66,7 @@ void PerionNorthernRidgeLevel::LevelUpdate(float _DeltaTime)
 		CreateActorLevel();
 		CreateActorCheck = true;
 	}
+
 	if (false == GetMainCameraActor()->IsFreeCameraMode())
 	{
 		GlobalLevelControl::PlayerCameraControl();
@@ -169,8 +174,6 @@ void PerionNorthernRidgeLevel::CreateActorLevel()
 		Inventory_->Off();
 	}
 
-
-
 	{
 		Player_ = CreateActor<Player>();
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(
@@ -191,72 +194,90 @@ void PerionNorthernRidgeLevel::CreateActorLevel()
 
 void PerionNorthernRidgeLevel::CreateMonster()
 {
-	int Count = 0;
-
 	{
-		Stumps[Count] = CreateActor<Stump>();
-		Stumps[Count++]->SetWorldPosition({ 630.0f, -1390.0f });
-	}
-		
-	{
-		Stumps[Count] = CreateActor<Stump>();
-		Stumps[Count++]->SetWorldPosition({ 930.0f, -1390.0f });
-	}
-
-	{
-		Stumps[Count] = CreateActor<Stump>();
-		Stumps[Count++]->SetWorldPosition({ 1280.0f, -1390.0f });
+		Stump* Actor = CreateActor<Stump>();
+		Actor->SetWorldPosition({ 630.0f, -1390.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Stumps_.push_back(Actor);
 	}
 	
 	{
-		Stumps[Count] = CreateActor<Stump>();
-		Stumps[Count++]->SetWorldPosition({ 1830.0f, -1269.0f });
+		Stump* Actor = CreateActor<Stump>();
+		Actor->SetWorldPosition({ 930.0f, -1390.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Stumps_.push_back(Actor);
 	}
-
+	
+	{
+		Stump* Actor = CreateActor<Stump>();
+		Actor->SetWorldPosition({ 1280.0f, -1390.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Stumps_.push_back(Actor);
+	}
+	
+	{
+		Stump* Actor = CreateActor<Stump>();
+		Actor->SetWorldPosition({ 1830.0f, -1269.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Stumps_.push_back(Actor);
+	}
+	
 	// 2F
 
 	{
-		Stumps[Count] = CreateActor<Stump>();
-		Stumps[Count++]->SetWorldPosition({ 610.0f, -1210.0f });
+		Stump* Actor = CreateActor<Stump>();
+		Actor->SetWorldPosition({ 610.0f, -1210.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Stumps_.push_back(Actor);
 	}
 	
 	{
-		Stumps[Count] = CreateActor<Stump>();
-		Stumps[Count++]->SetWorldPosition({ 810.0f, -1210.0f });
+		Stump* Actor = CreateActor<Stump>();
+		Actor->SetWorldPosition({ 810.0f, -1210.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Stumps_.push_back(Actor);
 	}
 
 	{
-		Stumps[Count] = CreateActor<Stump>();
-		Stumps[Count++]->SetWorldPosition({ 1000.0f, -1210.0f });
+		Stump* Actor = CreateActor<Stump>();
+		Actor->SetWorldPosition({ 1000.0f, -1210.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Stumps_.push_back(Actor);
 	}
-	
+
 	{
-		Stumps[Count] = CreateActor<Stump>();
-		Stumps[Count++]->SetWorldPosition({ 1170.0f, -1210.0f });
+		Stump* Actor = CreateActor<Stump>();
+		Actor->SetWorldPosition({ 1170.0f, -1210.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Stumps_.push_back(Actor);
 	}
-	
+
 	// 3F
 
 	{
-		Stumps[Count] = CreateActor<Stump>();
-		Stumps[Count++]->SetWorldPosition({ 1073.0f, -1031.0f });
+		Stump* Actor = CreateActor<Stump>();
+		Actor->SetWorldPosition({ 1073.0f, -1031.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Stumps_.push_back(Actor);
 	}
 	
 	{
-		Stumps[Count] = CreateActor<Stump>();
-		Stumps[Count++]->SetWorldPosition({ 1300.0f, -1031.0f });
+		Stump* Actor = CreateActor<Stump>();
+		Actor->SetWorldPosition({ 1300.0f, -1031.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Stumps_.push_back(Actor);
 	}
 	
 	{
-		Stumps[Count] = CreateActor<Stump>();
-		Stumps[Count++]->SetWorldPosition({ 1580.0f, -1031.0f });
+		Stump* Actor = CreateActor<Stump>();
+		Actor->SetWorldPosition({ 1580.0f, -1031.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Stumps_.push_back(Actor);
+	}
+	
+}
+
+void PerionNorthernRidgeLevel::ReZenMoster()
+{
+	for (auto& Stump : Stumps_)
+	{
+		if (true == Stump->IsUpdate())
+		{
+			continue;
+		}
+
+		Stump->Reset();
+		
 	}
 
-	// 4F
-	
-	{
-		Stumps[Count] = CreateActor<Stump>();
-		Stumps[Count++]->SetWorldPosition({ 1580.0f, -1031.0f });
-	}
-
+	AddTimeEvent(ReZenTime_, std::bind(&PerionNorthernRidgeLevel::ReZenMoster, this));
 }

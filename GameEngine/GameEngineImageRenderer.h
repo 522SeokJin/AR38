@@ -81,6 +81,11 @@ public:
 		return CurAnimation_->GetName() == _Name;
 	}
 
+	inline float GetAlpha()
+	{
+		return CorrectResultColor_.vMulColor.a;
+	}
+
 	inline void SetAlpha(float _Value)
 	{
 		CorrectResultColor_.vMulColor.a = _Value;

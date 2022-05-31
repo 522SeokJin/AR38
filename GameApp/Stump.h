@@ -19,6 +19,7 @@ public:
 	void Update(float _DeltaTime) override;
 
 	void SetWorldPosition(const float4& _Value);
+	void Reset();
 
 protected:
 	Stump(const Stump& _other) = delete; 

@@ -115,6 +115,19 @@ void Stump::SetWorldPosition(const float4& _Value)
 	OriginPos_ = _Value;
 }
 
+void Stump::Reset()
+{
+	FSM_.ChangeState("stand");
+	GetTransform()->SetWorldPosition(OriginPos_);
+	Renderer_->On();
+	Collision_->On();
+	Die_ = false;
+	Hit_ = false;
+	DeadHitCount_ = 2;
+
+	On();
+}
+
 void Stump::SkillEvent(GameEngineCollision* _OtherCollision)
 {
 	if (false == _OtherCollision->IsUpdate())
@@ -137,6 +150,11 @@ void Stump::stand_Start()
 
 void Stump::stand()
 {
+	if (1.0f > Renderer_->GetAlpha())
+	{
+		Renderer_->AddAlpha(2.0f * GameEngineTime::GetInst().GetDeltaTime());
+	}
+
 	if (1.5f < FSM_.GetCurrentState()->Time_)
 	{
 		FSM_.ChangeState("move");
@@ -169,6 +187,11 @@ void Stump::move_Start()
 
 void Stump::move()
 {
+	if (1.0f > Renderer_->GetAlpha())
+	{
+		Renderer_->AddAlpha(2.0f * GameEngineTime::GetInst().GetDeltaTime());
+	}
+
 	if (DIRRIGHT)
 	{
 		GetTransform()->SetLocalDeltaTimeMove({ 70.0f, 0.0f });

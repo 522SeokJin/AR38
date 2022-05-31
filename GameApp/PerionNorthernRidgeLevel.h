@@ -29,6 +29,7 @@ protected:
 private:
 	void CreateActorLevel();
 	void CreateMonster();
+	void ReZenMoster();
 
 	Mouse* Cursor_;
 	Player* Player_;
@@ -38,6 +39,7 @@ private:
 	StatusUI* Status_;
 	PerionNorthernRidge* Map_;
 
-	Stump* Stumps[29];
+	std::list<Stump*> Stumps_;
+	float ReZenTime_;
 };
 
