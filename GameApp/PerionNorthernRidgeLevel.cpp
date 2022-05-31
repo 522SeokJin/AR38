@@ -48,6 +48,7 @@ void PerionNorthernRidgeLevel::LevelStart()
 
 	{
 		Map_ = CreateActor<PerionNorthernRidge>();
+		Map_->GetPixelCollideImage()->Off();
 	}
 }
 
@@ -190,8 +191,72 @@ void PerionNorthernRidgeLevel::CreateActorLevel()
 
 void PerionNorthernRidgeLevel::CreateMonster()
 {
+	int Count = 0;
+
 	{
-		Stumps[0] = CreateActor<Stump>();
-		Stumps[0]->SetWorldPosition({ 600.0f, -1390.0f });
+		Stumps[Count] = CreateActor<Stump>();
+		Stumps[Count++]->SetWorldPosition({ 630.0f, -1390.0f });
 	}
+		
+	{
+		Stumps[Count] = CreateActor<Stump>();
+		Stumps[Count++]->SetWorldPosition({ 930.0f, -1390.0f });
+	}
+
+	{
+		Stumps[Count] = CreateActor<Stump>();
+		Stumps[Count++]->SetWorldPosition({ 1280.0f, -1390.0f });
+	}
+	
+	{
+		Stumps[Count] = CreateActor<Stump>();
+		Stumps[Count++]->SetWorldPosition({ 1830.0f, -1269.0f });
+	}
+
+	// 2F
+
+	{
+		Stumps[Count] = CreateActor<Stump>();
+		Stumps[Count++]->SetWorldPosition({ 610.0f, -1210.0f });
+	}
+	
+	{
+		Stumps[Count] = CreateActor<Stump>();
+		Stumps[Count++]->SetWorldPosition({ 810.0f, -1210.0f });
+	}
+
+	{
+		Stumps[Count] = CreateActor<Stump>();
+		Stumps[Count++]->SetWorldPosition({ 1000.0f, -1210.0f });
+	}
+	
+	{
+		Stumps[Count] = CreateActor<Stump>();
+		Stumps[Count++]->SetWorldPosition({ 1170.0f, -1210.0f });
+	}
+	
+	// 3F
+
+	{
+		Stumps[Count] = CreateActor<Stump>();
+		Stumps[Count++]->SetWorldPosition({ 1073.0f, -1031.0f });
+	}
+	
+	{
+		Stumps[Count] = CreateActor<Stump>();
+		Stumps[Count++]->SetWorldPosition({ 1300.0f, -1031.0f });
+	}
+	
+	{
+		Stumps[Count] = CreateActor<Stump>();
+		Stumps[Count++]->SetWorldPosition({ 1580.0f, -1031.0f });
+	}
+
+	// 4F
+	
+	{
+		Stumps[Count] = CreateActor<Stump>();
+		Stumps[Count++]->SetWorldPosition({ 1580.0f, -1031.0f });
+	}
+
 }

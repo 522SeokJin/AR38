@@ -42,7 +42,7 @@ private:
 	GameEngineCollision*	 Collision_;
 
 	// Number Image
-	std::map<int, std::vector<GameEngineImageRenderer*>> DmgNumber_[20];	// [최대타수]
+	std::map<int, std::vector<GameEngineImageRenderer*>> DmgNumber_[5];	// [최대타수]
 	int MaxHitCount_;
 	int CurHitCount_;
 	float HitTime_;

@@ -362,4 +362,5 @@ void Player::Update(float _DeltaTime)
 	Window->Values_[0] = "Player State : " + FSM_.GetCurrentName();
 	Window->Values_[1] = "BodyPixelCheck : " + body.ToString();
 	Window->Values_[2] = "FootPixelCheck : " + foot.ToString();
+	Window->Values_[3] = "PlayerPosition : " + GetTransform()->GetWorldPosition().ToString();
 }

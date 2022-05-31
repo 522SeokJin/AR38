@@ -51,7 +51,7 @@ void Stump::Start()
 		static_cast<int>(ColGroup::MONSTER));
 	Collision_->SetLocalScaling({ 67.0f, 54.0f });
 
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		for (int j = 0; j < 5; j++)
 		{
@@ -94,7 +94,7 @@ void Stump::Update(float _DeltaTime)
 
 	GetLevel()->PushDebugRender(Collision_, CollisionType::Rect);
 
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		for (int j = 0; j < 5; j++)
 		{
@@ -217,7 +217,7 @@ void Stump::hit_Start()
 
 	MaxHitCount_ = GlobalValue::CurrentPlayer->GetCurrentSkillHitCount();
 
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		for (int j = 0; j < 5; j++)
 		{
