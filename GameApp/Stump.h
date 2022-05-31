@@ -18,6 +18,8 @@ public:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
+	void SetWorldPosition(const float4& _Value);
+
 protected:
 	Stump(const Stump& _other) = delete; 
 	Stump(Stump&& _other) noexcept = delete;
@@ -46,6 +48,8 @@ private:
 	float HitTime_;
 	
 	int DeadHitCount_;
+
+	float4 OriginPos_;
 
 	////////////////////////////////////////////	FSM
 

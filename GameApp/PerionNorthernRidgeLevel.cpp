@@ -27,7 +27,10 @@ PerionNorthernRidgeLevel::PerionNorthernRidgeLevel()
 	, Skill_(nullptr)
 	, Status_(nullptr)
 {
-
+	for (size_t i = 0; i < 29; i++)
+	{
+		Stumps[i] = nullptr;
+	}
 }
 
 PerionNorthernRidgeLevel::~PerionNorthernRidgeLevel()
@@ -175,14 +178,20 @@ void PerionNorthernRidgeLevel::CreateActorLevel()
 		Player_->Off();
 	}
 
-	{
-		Stump* Actor = CreateActor<Stump>();
-		Actor->GetTransform()->SetWorldPosition({ 226.0f, -1390.0f });
-	}
+	CreateMonster();
 
 	GlobalValue::CurrentPlayer = Player_;
 	GlobalValue::CurrentMouse = Cursor_;
 	GlobalValue::CurrentStatusUI = Status_;
 
 	Player_->On();
+}
+
+
+void PerionNorthernRidgeLevel::CreateMonster()
+{
+	{
+		Stumps[0] = CreateActor<Stump>();
+		Stumps[0]->SetWorldPosition({ 600.0f, -1390.0f });
+	}
 }

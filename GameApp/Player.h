@@ -40,6 +40,7 @@ protected:
 
 private:
 	void MonsterEvent(GameEngineCollision* _OtherCollision);
+	void MonsterAttackEvent(GameEngineCollision* _OtherCollision);
 
 	void CreateAnimation();
 
@@ -81,6 +82,7 @@ private:
 	GameEngineImageRenderer* SkillEffect2_;
 	GameEngineImageRenderer* SkillEffect3_;
 	GameEngineImageRenderer* SkillEffect4_;
+	GameEngineImageRenderer* HitEffect_;
 
 	int SkillHitCount_;
 	bool Invincible_;

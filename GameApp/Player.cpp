@@ -21,6 +21,7 @@ Player::Player()
 	, SkillEffect2_(nullptr)
 	, SkillEffect3_(nullptr)
 	, SkillEffect4_(nullptr)
+	, HitEffect_(nullptr)
 	, Collision_(nullptr)
 	, SkillCollision_(nullptr)
 	, SkillHitCount_(1)
@@ -148,7 +149,7 @@ void Player::MonsterEvent(GameEngineCollision* _OtherCollision)
 
 	int Damage = Random_.RandomInt(10, 99);
 
-	GlobalValue::CurrentStatusUI->SubHP(Damage);
+	GlobalValue::CurrentStatusUI->SubHP(static_cast<float>(Damage));
 
 	for (int j = 0; j < 2; j++)
 	{
@@ -206,6 +207,20 @@ void Player::MonsterEvent(GameEngineCollision* _OtherCollision)
 		{
 			Invincible_ = false;
 		});
+}
+
+void Player::MonsterAttackEvent(GameEngineCollision* _OtherCollision)
+{
+	std::string Name = _OtherCollision->GetActor()->GetName();
+
+	HitEffect_->On();
+
+	if ("ForestDefender" == Name)
+	{
+		HitEffect_->SetChangeAnimation("ForestDefender_attack1_hit", true);
+	}
+
+	MonsterEvent(_OtherCollision);
 }
 
 void Player::Start()
@@ -303,6 +318,14 @@ void Player::Update(float _DeltaTime)
 	{
 		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
 			static_cast<int>(ColGroup::MONSTER), Func);
+	}
+
+	Func = std::bind(&Player::MonsterAttackEvent, this, std::placeholders::_1);
+
+	if (false == Invincible_)
+	{
+		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
+			static_cast<int>(ColGroup::MONSTERATTACK), Func);
 	}
 
 	for (int j = 0; j < 3; j++)

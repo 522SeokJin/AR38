@@ -11,11 +11,13 @@ void Player::CreateAnimation()
 	SkillEffect2_ = CreateTransformComponent<GameEngineImageRenderer>();
 	SkillEffect3_ = CreateTransformComponent<GameEngineImageRenderer>();
 	SkillEffect4_ = CreateTransformComponent<GameEngineImageRenderer>();
+	HitEffect_ = CreateTransformComponent<GameEngineImageRenderer>();
 
 	SkillEffect1_->Off();
 	SkillEffect2_->Off();
 	SkillEffect3_->Off();
 	SkillEffect4_->Off();
+	HitEffect_->Off();
 
 	LevelUpEffect_ = CreateTransformComponent<GameEngineImageRenderer>();
 	LevelUpEffect_->SetLocalPosition({0.0f, 160.0f, static_cast<float>(DepthOrder::SKILL)});
@@ -114,4 +116,10 @@ void Player::CreateSkillAnimation()
 		}
 	);
 
+	HitEffect_->CreateAnimationFolder("ForestDefender_attack1_hit", 0.06f, false);
+	HitEffect_->SetEndCallBack("ForestDefender_attack1_hit", [&]()
+		{
+			HitEffect_->Off();
+		}
+	);
 }

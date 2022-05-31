@@ -9,6 +9,7 @@ ForestDefender::ForestDefender()
 	: Renderer_(nullptr)
 	, SkillEffectRenderer_(nullptr)
 	, Collision_(nullptr)
+	, AICollision_(nullptr)
 	, AttackCollision_(nullptr)
 	, Dir_(0)
 	, MoveTime_(0.0f)
@@ -32,6 +33,8 @@ ForestDefender::~ForestDefender()
 
 void ForestDefender::Start()
 {
+	SetName("ForestDefender");
+
 	Renderer_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Renderer_->SetLocalMove({ 0.0f, 0.0f, static_cast<float>(DepthOrder::MONSTER) });
 
@@ -40,6 +43,14 @@ void ForestDefender::Start()
 	Renderer_->CreateAnimationFolder("ForestDefender_hit", 0.120f, false);
 	Renderer_->CreateAnimationFolder("ForestDefender_die", 0.120f, false);
 	Renderer_->CreateAnimationFolder("ForestDefender_attack1", 0.120f, false);
+	Renderer_->SetFrameCallBack("ForestDefender_attack1", 4, [&]()
+		{
+			AttackCollision_->On();
+		});
+	Renderer_->SetFrameCallBack("ForestDefender_attack1", 5, [&]()
+		{
+			AttackCollision_->Off();
+		});
 	Renderer_->SetEndCallBack("ForestDefender_attack1", [&]()
 		{
 			FSM_.ChangeState("stand");
@@ -60,9 +71,14 @@ void ForestDefender::Start()
 		static_cast<int>(ColGroup::MONSTER));
 	Collision_->SetLocalScaling({ 103.0f, 80.0f });
 
-	AttackCollision_ = CreateTransformComponent<GameEngineCollision>(
+	AICollision_ = CreateTransformComponent<GameEngineCollision>(
 		static_cast<int>(ColGroup::MONSTERAI));
-	AttackCollision_->SetLocalScaling({ 103.0f * 2.5f, 80.0f * 1.5f });
+	AICollision_->SetLocalScaling({ 103.0f * 2.5f, 80.0f * 1.5f });
+
+	AttackCollision_ = CreateTransformComponent<GameEngineCollision>(
+		static_cast<int>(ColGroup::MONSTERATTACK));
+	AttackCollision_->SetLocalScaling({ 103.0f * 2.4f, 80.0f * 1.4f });
+	AttackCollision_->Off();
 
 	for (int i = 0; i < 20; i++)
 	{
@@ -110,6 +126,7 @@ void ForestDefender::Update(float _DeltaTime)
 	FSM_.Update(_DeltaTime);
 
 	GetLevel()->PushDebugRender(Collision_, CollisionType::Rect);
+	GetLevel()->PushDebugRender(AICollision_, CollisionType::Rect);
 	GetLevel()->PushDebugRender(AttackCollision_, CollisionType::Rect);
 
 	for (int i = 0; i < 20; i++)
@@ -186,7 +203,7 @@ void ForestDefender::stand()
 	}
 	else
 	{
-		AttackCollision_->Collision(CollisionType::Rect, CollisionType::Rect,
+		AICollision_->Collision(CollisionType::Rect, CollisionType::Rect,
 			static_cast<int>(ColGroup::PLAYER), AttackFunc_);
 	}
 }

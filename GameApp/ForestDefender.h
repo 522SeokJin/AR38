@@ -40,6 +40,7 @@ private:
 	GameEngineImageRenderer* Renderer_;
 	GameEngineImageRenderer* SkillEffectRenderer_;
 	GameEngineCollision*	 Collision_;
+	GameEngineCollision*	 AICollision_;
 	GameEngineCollision*	 AttackCollision_;
 
 	// Number Image

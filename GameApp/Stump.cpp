@@ -18,6 +18,7 @@ Stump::Stump()
 	, CurHitCount_(0)
 	, HitTime_(0.0f)
 	, DeadHitCount_(2)
+	, OriginPos_(float4::ZERO)
 {
 
 }
@@ -106,6 +107,12 @@ void Stump::Update(float _DeltaTime)
 			}
 		}
 	}
+}
+
+void Stump::SetWorldPosition(const float4& _Value)
+{
+	GetTransform()->SetWorldPosition(_Value);
+	OriginPos_ = _Value;
 }
 
 void Stump::SkillEvent(GameEngineCollision* _OtherCollision)

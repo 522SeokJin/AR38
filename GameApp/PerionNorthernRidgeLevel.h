@@ -8,6 +8,7 @@ class GameEngineRenderWindow;
 class InventoryUI;
 class SkillUI;
 class PerionNorthernRidge;
+class Stump;
 class PerionNorthernRidgeLevel : public GameEngineLevel
 {
 public:
@@ -27,6 +28,7 @@ protected:
 
 private:
 	void CreateActorLevel();
+	void CreateMonster();
 
 	Mouse* Cursor_;
 	Player* Player_;
@@ -35,5 +37,7 @@ private:
 	SkillUI* Skill_;
 	StatusUI* Status_;
 	PerionNorthernRidge* Map_;
+
+	Stump* Stumps[29];
 };
 
