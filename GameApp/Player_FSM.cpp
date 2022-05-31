@@ -5,6 +5,7 @@
 #include "Map.h"
 #include "PhysicsDefine.h"
 #include "Player_Define.h"
+#include "StatusUI.h"
 
 void Player::stand1_Start()
 {
@@ -763,6 +764,8 @@ void Player::slashBlast_Start()
 	default:
 		break;
 	}
+
+	GlobalValue::CurrentStatusUI->SubMP(20.0f);
 }
 
 void Player::slashBlast()
@@ -843,6 +846,8 @@ void Player::doubleJump_Start()
 	default:
 		break;
 	}
+
+	GlobalValue::CurrentStatusUI->SubMP(5.0f);
 }
 
 void Player::doubleJump()

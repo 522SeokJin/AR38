@@ -142,9 +142,9 @@ void PerionNorthernRidgeLevel::CreateActorLevel()
 		Status_ = CreateActor<StatusUI>();
 		Status_->GetTransform()->SetWorldPosition({ 5.0f, 45.0f - GameEngineWindow::GetInst().GetSize().hy() });
 
-		ExpBarUI* ExpBar = CreateActor<ExpBarUI>();
-		ExpBar->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
-		ExpBar->LinkStatus(Status_);
+		ExpBar_ = CreateActor<ExpBarUI>();
+		ExpBar_->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
+		ExpBar_->LinkStatus(Status_);
 	}
 
 	{
@@ -187,6 +187,7 @@ void PerionNorthernRidgeLevel::CreateActorLevel()
 	GlobalValue::CurrentPlayer = Player_;
 	GlobalValue::CurrentMouse = Cursor_;
 	GlobalValue::CurrentStatusUI = Status_;
+	GlobalValue::CurrentExpBarUI = ExpBar_;
 
 	Player_->On();
 }

@@ -34,12 +34,6 @@ private:
 
 	void ChangeTabEvent();
 
-	void PushItem(InventoryTab _Category, Item* _Item);
-
-	void EraseItem(InventoryTab _Category, int _Index);
-
-	std::map<int, std::vector<Item*>> ItemList_;
-
 	GameEngineCollision* TitleBar_;
 	bool Grabbed_;
 

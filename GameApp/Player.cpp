@@ -126,6 +126,7 @@ void Player::LevelUp()
 {
 	LevelUpEffect_->On();
 	LevelUpEffect_->SetChangeAnimation("LevelUp", true);
+	
 }
 
 void Player::JobsChanged()

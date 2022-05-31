@@ -7,6 +7,7 @@ class Player;
 class GameEngineRenderWindow;
 class InventoryUI;
 class SkillUI;
+class ExpBarUI;
 class PerionNorthernRidge;
 class Stump;
 class PerionNorthernRidgeLevel : public GameEngineLevel
@@ -37,6 +38,7 @@ private:
 	InventoryUI* Inventory_;
 	SkillUI* Skill_;
 	StatusUI* Status_;
+	ExpBarUI* ExpBar_;
 	PerionNorthernRidge* Map_;
 
 	std::list<Stump*> Stumps_;

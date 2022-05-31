@@ -27,12 +27,14 @@ enum class DepthOrder
 class Player;
 class Mouse;
 class StatusUI;
+class ExpBarUI;
 class GlobalValue
 {
 public:
 	static Player* CurrentPlayer;
 	static Mouse* CurrentMouse;
 	static StatusUI* CurrentStatusUI;
+	static ExpBarUI* CurrentExpBarUI;
 
 protected:
 	GlobalValue(const GlobalValue& _other) = delete; 

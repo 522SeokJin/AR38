@@ -80,9 +80,6 @@
     <ClCompile Include="Player_Animation.cpp">
       <Filter>Actor\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Actor\Item</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>Actor\Map</Filter>
     </ClCompile>
@@ -148,6 +145,9 @@
     </ClCompile>
     <ClCompile Include="ForestDefender.cpp">
       <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallMeso.cpp">
+      <Filter>Actor\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -318,9 +318,6 @@
     <ClInclude Include="Player_Define.h">
       <Filter>Actor\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Actor\Item</Filter>
-    </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>Actor\Map</Filter>
     </ClInclude>
@@ -386,6 +383,9 @@
     </ClInclude>
     <ClInclude Include="ForestDefender.h">
       <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallMeso.h">
+      <Filter>Actor\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

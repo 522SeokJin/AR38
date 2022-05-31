@@ -1,10 +1,10 @@
 #include "PreCompile.h"
 #include "Stump.h"
 #include <GameEngine/GameEngineImageRenderer.h>
-#include <GameEngine/GameEngineUIRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 #include "Player.h"
 #include "Map.h"
+#include "ExpBarUI.h"
 
 Stump::Stump()
 	: Renderer_(nullptr)
@@ -337,6 +337,8 @@ void Stump::die_Start()
 {
 	Renderer_->SetChangeAnimation("Stump_die");
 	Collision_->Off();
+
+	GlobalValue::CurrentExpBarUI->AddExp(100.0f);
 }
 
 void Stump::die()

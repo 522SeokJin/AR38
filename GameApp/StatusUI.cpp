@@ -9,10 +9,10 @@ StatusUI::StatusUI()
 	, HPBar_(nullptr)
 	, MPBar_(nullptr)
 	, StatusLayer_(nullptr)
-	, CurHP_(500.0f)
-	, CurMP_(100.0f)
-	, MaxHP_(500.0f)
-	, MaxMP_(100.0f)
+	, CurHP_(1000.0f)
+	, CurMP_(200.0f)
+	, MaxHP_(1000.0f)
+	, MaxMP_(200.0f)
 	, HPChanged_(true)
 	, MPChanged_(true)
 	, Level_(10)
@@ -546,6 +546,10 @@ void StatusUI::LevelUp()
 {
 	Level_ += 1;
 	LevelChanged_ = true;
+
+	SetHPPer(100.0f);
+	SetMPPer(100.0f);
+
 	GlobalValue::CurrentPlayer->LevelUp();
 }
 
