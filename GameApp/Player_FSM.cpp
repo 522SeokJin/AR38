@@ -408,6 +408,11 @@ void Player::rope()
 	{
 		Dir_ = PlayerDir::LEFT;
 
+		if (CurrentDir != Dir_)
+		{
+			Avatar_->ImageLocalFlipYAxis();
+		}
+
 		FSM_.ChangeState("jump");
 		return;
 	}
@@ -417,12 +422,25 @@ void Player::rope()
 	{
 		Dir_ = PlayerDir::RIGHT;
 
+		if (CurrentDir != Dir_)
+		{
+			Avatar_->ImageLocalFlipYAxis();
+		}
+
 		FSM_.ChangeState("jump");
 		return;
 	}
 
 	if (CurrentDir != Dir_)
 	{
+		if (PlayerDir::LEFT == Dir_)
+		{
+			Dir_ = PlayerDir::RIGHT;
+		}
+		if (PlayerDir::RIGHT== Dir_)
+		{
+			Dir_ = PlayerDir::LEFT;
+		}
 		Avatar_->ImageLocalFlipYAxis();
 	}
 }
@@ -474,6 +492,11 @@ void Player::ladder()
 	{
 		Dir_ = PlayerDir::LEFT;
 
+		if(CurrentDir != Dir_)
+		{
+			Avatar_->ImageLocalFlipYAxis();
+		}
+
 		FSM_.ChangeState("jump");
 		return;
 	}
@@ -481,7 +504,13 @@ void Player::ladder()
 	if (true == GameEngineInput::GetInst().Press("Right") &&
 		true == GameEngineInput::GetInst().Press("Alt"))
 	{
+
 		Dir_ = PlayerDir::RIGHT;
+
+		if (CurrentDir != Dir_)
+		{
+			Avatar_->ImageLocalFlipYAxis();
+		}
 
 		FSM_.ChangeState("jump");
 		return;
@@ -489,6 +518,14 @@ void Player::ladder()
 
 	if (CurrentDir != Dir_)
 	{
+		if (PlayerDir::LEFT == Dir_)
+		{
+			Dir_ = PlayerDir::RIGHT;
+		}
+		if (PlayerDir::RIGHT == Dir_)
+		{
+			Dir_ = PlayerDir::LEFT;
+		}
 		Avatar_->ImageLocalFlipYAxis();
 	}
 }
@@ -519,6 +556,11 @@ void Player::ropeStop()
 	{
 		Dir_ = PlayerDir::LEFT;
 
+		if (CurrentDir != Dir_)
+		{
+			Avatar_->ImageLocalFlipYAxis();
+		}
+
 		FSM_.ChangeState("jump");
 		return;
 	}
@@ -528,12 +570,25 @@ void Player::ropeStop()
 	{
 		Dir_ = PlayerDir::RIGHT;
 
+		if (CurrentDir != Dir_)
+		{
+			Avatar_->ImageLocalFlipYAxis();
+		}
+
 		FSM_.ChangeState("jump");
 		return;
 	}
 
 	if (CurrentDir != Dir_)
 	{
+		if (PlayerDir::LEFT == Dir_)
+		{
+			Dir_ = PlayerDir::RIGHT;
+		}
+		if (PlayerDir::RIGHT == Dir_)
+		{
+			Dir_ = PlayerDir::LEFT;
+		}
 		Avatar_->ImageLocalFlipYAxis();
 	}
 }
@@ -564,6 +619,11 @@ void Player::ladderStop()
 	{
 		Dir_ = PlayerDir::LEFT;
 
+		if (CurrentDir != Dir_)
+		{
+			Avatar_->ImageLocalFlipYAxis();
+		}
+
 		FSM_.ChangeState("jump");
 		return;
 	}
@@ -573,12 +633,25 @@ void Player::ladderStop()
 	{
 		Dir_ = PlayerDir::RIGHT;
 
+		if (CurrentDir != Dir_)
+		{
+			Avatar_->ImageLocalFlipYAxis();
+		}
+
 		FSM_.ChangeState("jump");
 		return;
 	}
 
 	if (CurrentDir != Dir_)
 	{
+		if (PlayerDir::LEFT == Dir_)
+		{
+			Dir_ = PlayerDir::RIGHT;
+		}
+		if (PlayerDir::RIGHT == Dir_)
+		{
+			Dir_ = PlayerDir::LEFT;
+		}
 		Avatar_->ImageLocalFlipYAxis();
 	}
 }
