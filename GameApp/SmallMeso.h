@@ -13,6 +13,8 @@ public:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
+	void DropStart();
+
 protected:
 	SmallMeso(const SmallMeso& _other) = delete; 
 	SmallMeso(SmallMeso&& _other) noexcept = delete;
@@ -36,6 +38,10 @@ private:
 	////////////////////////////////////////////	FSM
 
 private:
+	void stop_Start();
+	void stop();
+	void stop_End();
+
 	void drop_Start();
 	void drop();
 	void drop_End();

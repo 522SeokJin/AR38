@@ -42,6 +42,7 @@ private:
 	PerionNorthernRidge* Map_;
 
 	std::list<Stump*> Stumps_;
+
 	float ReZenTime_;
 };
 

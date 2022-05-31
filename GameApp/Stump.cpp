@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Map.h"
 #include "ExpBarUI.h"
+#include "SmallMeso.h"
 
 Stump::Stump()
 	: Renderer_(nullptr)
@@ -20,6 +21,7 @@ Stump::Stump()
 	, HitTime_(0.0f)
 	, DeadHitCount_(2)
 	, OriginPos_(float4::ZERO)
+	, Meso_(nullptr)
 {
 
 }
@@ -31,6 +33,9 @@ Stump::~Stump()
 
 void Stump::Start()
 {
+	Meso_ = GetLevel()->CreateActor<SmallMeso>();
+	Meso_->Off();
+
 	Renderer_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Renderer_->SetLocalMove({ 0.0f, 0.0f, static_cast<float>(DepthOrder::MONSTER) });
 
@@ -108,6 +113,8 @@ void Stump::Update(float _DeltaTime)
 			}
 		}
 	}
+
+	Meso_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
 }
 
 void Stump::SetWorldPosition(const float4& _Value)
@@ -125,6 +132,8 @@ void Stump::Reset()
 	Die_ = false;
 	Hit_ = false;
 	DeadHitCount_ = 2;
+
+	Meso_->Off();
 
 	On();
 }
@@ -351,6 +360,8 @@ void Stump::die()
 	if (Renderer_->GetMulColor().a <= 0.0f)
 	{
 		Off();
+		Meso_->DropStart();
+		Meso_->On();
 	}
 }
 

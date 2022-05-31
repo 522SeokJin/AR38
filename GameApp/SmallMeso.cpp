@@ -32,6 +32,14 @@ void SmallMeso::Start()
 
 	Renderer_->SetChangeAnimation("SmallMeso");
 
+	Collision_ = CreateTransformComponent<GameEngineCollision>(
+		static_cast<int>(ColGroup::MONSTER));
+	Collision_->SetLocalScaling({ 67.0f, 54.0f });
+
+	FSM_.CreateState("stop", std::bind(&SmallMeso::stop, this),
+		std::bind(&SmallMeso::stop_Start, this),
+		std::bind(&SmallMeso::stop_End, this));
+
 	FSM_.CreateState("drop", std::bind(&SmallMeso::drop, this),
 		std::bind(&SmallMeso::drop_Start, this),
 		std::bind(&SmallMeso::drop_End, this));
@@ -40,7 +48,7 @@ void SmallMeso::Start()
 		std::bind(&SmallMeso::move_Start, this),
 		std::bind(&SmallMeso::move_End, this));
 
-	FSM_.ChangeState("drop");
+	FSM_.ChangeState("stop");
 }
 
 void SmallMeso::Update(float _DeltaTime)
@@ -56,6 +64,11 @@ void SmallMeso::Update(float _DeltaTime)
 		static_cast<int>(ColGroup::PLAYER), Func);
 }
 
+void SmallMeso::DropStart()
+{
+	FSM_.ChangeState("drop");
+}
+
 void SmallMeso::MesoEvent(GameEngineCollision* _OtherCollision)
 {
 	Dispear_ = true;
@@ -65,20 +78,28 @@ void SmallMeso::MesoEvent(GameEngineCollision* _OtherCollision)
 /// ///////////// FSM
 /// </summary>
 
+void SmallMeso::stop_Start()
+{
+}
+
+void SmallMeso::stop()
+{
+}
+
+void SmallMeso::stop_End()
+{
+}
+
 void SmallMeso::drop_Start()
 {
-	Speed_.y = 100.0f;
+	Speed_.y = 300.0f;
+
 	GetTransform()->SetLocalMove({ 0.0f, 1.0f });
 }
 
 void SmallMeso::drop()
 {
-	Speed_.y -= GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
-	
-	if ( -100.0f > Speed_.y)
-	{
-		Speed_.y = -100.0f;
-	}
+	Speed_.y -= 0.5f * GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
 
 	float4 PixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
 		+ float4(0.0f, 12.0f + 3.0f));
@@ -86,6 +107,15 @@ void SmallMeso::drop()
 	if (0.0f < PixelColor.g)
 	{
 		Dropped_ = true;
+	}
+	else
+	{
+		GetTransform()->SetLocalDeltaTimeMove(Speed_);
+
+		if (-300.0f > Speed_.y)
+		{
+			Speed_.y = -300.0f;
+		}
 	}
 
 	if (4.0f < FSM_.GetCurrentState()->Time_ &&

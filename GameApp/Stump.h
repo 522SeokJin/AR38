@@ -7,6 +7,7 @@
 #define DIRLEFT (5 >= Dir_)
 
 // Ό³Έν : 
+class SmallMeso;
 class GameEngineImageRenderer;
 class GameEngineCollision;
 class Stump : public GameEngineActor
@@ -51,6 +52,8 @@ private:
 	int DeadHitCount_;
 
 	float4 OriginPos_;
+
+	SmallMeso* Meso_;
 
 	////////////////////////////////////////////	FSM
 
