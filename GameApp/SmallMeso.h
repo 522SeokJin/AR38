@@ -23,6 +23,7 @@ protected:
 
 private:
 	void MesoEvent(GameEngineCollision* _OtherCollision);
+	void PlayerEvent(GameEngineCollision* _OtherCollision);
 
 	GameEngineFSM FSM_;
 

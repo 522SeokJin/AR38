@@ -5,6 +5,7 @@
 #include <GameEngine/GameEngineCollision.h>
 #include "PhysicsDefine.h"
 #include "Map.h"
+#include "Player.h"
 
 SmallMeso::SmallMeso()
 	: Renderer_(nullptr)
@@ -26,15 +27,15 @@ SmallMeso::~SmallMeso()
 void SmallMeso::Start()
 {
 	Renderer_ = CreateTransformComponent<GameEngineImageRenderer>();
-	Renderer_->SetLocalMove({ 0.0f, 0.0f, static_cast<float>(DepthOrder::MONSTER) });
+	Renderer_->SetLocalMove({ 0.0f, 0.0f, static_cast<float>(DepthOrder::ITEM) });
 
 	Renderer_->CreateAnimationFolder("SmallMeso", 0.1f);
 
 	Renderer_->SetChangeAnimation("SmallMeso");
 
 	Collision_ = CreateTransformComponent<GameEngineCollision>(
-		static_cast<int>(ColGroup::MONSTER));
-	Collision_->SetLocalScaling({ 67.0f, 54.0f });
+		static_cast<int>(ColGroup::ITEM));
+	Collision_->SetLocalScaling({ 25.0f, 25.0f });
 
 	FSM_.CreateState("stop", std::bind(&SmallMeso::stop, this),
 		std::bind(&SmallMeso::stop_Start, this),
@@ -57,16 +58,16 @@ void SmallMeso::Update(float _DeltaTime)
 
 	GetLevel()->PushDebugRender(Collision_, CollisionType::Rect);
 
-	std::function<void(GameEngineCollision*)> Func =
-		std::bind(&SmallMeso::MesoEvent, this, std::placeholders::_1);
-
-	Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
-		static_cast<int>(ColGroup::PLAYER), Func);
+	if (true == Dispear_)
+	{
+		Renderer_->SubAlpha(5.0f * _DeltaTime);
+	}
 }
 
 void SmallMeso::DropStart()
 {
 	FSM_.ChangeState("drop");
+	Renderer_->SetAlpha(1.0f);
 }
 
 void SmallMeso::MesoEvent(GameEngineCollision* _OtherCollision)
@@ -102,13 +103,16 @@ void SmallMeso::drop()
 	Speed_.y -= 0.5f * GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
 
 	float4 PixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
-		+ float4(0.0f, 12.0f + 3.0f));
+		+ float4(0.0f, 13.0f));
 
 	if (0.0f < PixelColor.g)
 	{
 		Dropped_ = true;
+
+		FSM_.ChangeState("move");
 	}
-	else
+	
+	if (false == Dropped_)
 	{
 		GetTransform()->SetLocalDeltaTimeMove(Speed_);
 
@@ -117,16 +121,11 @@ void SmallMeso::drop()
 			Speed_.y = -300.0f;
 		}
 	}
-
-	if (4.0f < FSM_.GetCurrentState()->Time_ &&
-		true == Dropped_)
-	{
-
-	}
 }
 
 void SmallMeso::drop_End()
 {
+	Speed_ = float4::ZERO;
 }
 
 void SmallMeso::move_Start()
@@ -135,6 +134,25 @@ void SmallMeso::move_Start()
 
 void SmallMeso::move()
 {
+	if (2.0f < FSM_.GetCurrentState()->Time_)
+	{
+		float4 PlayerPos = GlobalValue::CurrentPlayer->GetTransform()->GetWorldPosition();
+
+		float4 DiffDir = PlayerPos - GetTransform()->GetWorldPosition();
+
+		DiffDir.Normalize3D();
+
+		if (false == Dispear_)
+		{
+			GetTransform()->SetWorldDeltaTimeMove(DiffDir * 500.0f);
+		}
+
+		std::function<void(GameEngineCollision*)> Func =
+			std::bind(&SmallMeso::MesoEvent, this, std::placeholders::_1);
+
+		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
+			static_cast<int>(ColGroup::PLAYER), Func);
+	}
 }
 
 void SmallMeso::move_End()

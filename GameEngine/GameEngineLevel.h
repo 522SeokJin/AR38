@@ -122,6 +122,8 @@ private:
 	std::list<TimeEvent*> AllEvent_;
 	std::list<TimeEvent*> AddEvent_;
 
+	bool DebugRendering_;
+
 	//////////////////////////////////////////		Collision
 public:
 	template<typename UserEnumType>

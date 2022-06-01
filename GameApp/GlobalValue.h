@@ -12,12 +12,14 @@ enum class ColGroup	// Collision Group Number
 	MONSTERAI,
 	MONSTERATTACK,
 	SKILL,
+	ITEM,
 };
 
 enum class DepthOrder
 {
-	SKILL = -2,
-	PORTAL = -1,
+	SKILL = -3,
+	PORTAL = -2,
+	ITEM = -1,
 	PLAYER = 0,	// Default
 	MONSTER,
 	MAP,
