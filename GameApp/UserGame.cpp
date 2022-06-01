@@ -84,6 +84,8 @@ void UserGame::CreateKey()
 
 	GameEngineInput::GetInst().CreateKey("FreeCamera", 'o');
 	GameEngineInput::GetInst().CreateKey("PixelCollide", 'p');
+	GameEngineInput::GetInst().CreateKey("DebugColOn", '4');
+	GameEngineInput::GetInst().CreateKey("DebugColOff", '5');
 
 	// Skill
 	GameEngineInput::GetInst().CreateKey("a", 'a');

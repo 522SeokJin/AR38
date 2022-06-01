@@ -134,7 +134,7 @@ void SmallMeso::move_Start()
 
 void SmallMeso::move()
 {
-	if (2.0f < FSM_.GetCurrentState()->Time_)
+	if (1.0f < FSM_.GetCurrentState()->Time_)
 	{
 		float4 PlayerPos = GlobalValue::CurrentPlayer->GetTransform()->GetWorldPosition();
 

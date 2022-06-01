@@ -14,7 +14,6 @@
 GameEngineLevel::GameEngineLevel()
 	: MainCameraActor_(nullptr)
 	, UICameraActor_(nullptr)
-	, DebugRendering_(false)
 {
 	PostRender_["CameraMergePrev"];
 	PostRender_["CameraMergeNext"];
@@ -76,16 +75,10 @@ void GameEngineLevel::Render(float _DeltaTime)
 	GetUICamera()->ClearCameraTarget();
 
 	GetMainCamera()->Render();
-	if (true == DebugRendering_)
-	{
-		GetMainCamera()->DebugRender();
-	}
+	GetMainCamera()->DebugRender();
 
 	GetUICamera()->Render();
-	if (true == DebugRendering_)
-	{
-		GetUICamera()->DebugRender();
-	}
+	GetUICamera()->DebugRender();
 
 	std::vector<GameEnginePostProcessRender*>& PostCameraMergePrev = 
 		PostRender_["CameraMergePrev"];
@@ -331,19 +324,11 @@ void GameEngineLevel::AllClear()
 
 void GameEngineLevel::PushDebugRender(GameEngineTransform* _Transform, CollisionType _Type)
 {
-	if (false == DebugRendering_)
-	{
-		return;
-	}
 	GetMainCamera()->PushDebugRender(_Transform, _Type);
 }
 
 void GameEngineLevel::PushUIDebugRender(GameEngineTransform* _Transform, CollisionType _Type)
 {
-	if (false == DebugRendering_)
-	{
-		return;
-	}
 	GetUICamera()->PushDebugRender(_Transform, _Type);
 }
 
@@ -354,22 +339,12 @@ void GameEngineLevel::PushDebugRender(GameEngineCollision* _Collision, Collision
 		return;
 	}
 
-	if (false == DebugRendering_)
-	{
-		return;
-	}
-
 	GetMainCamera()->PushDebugRender(_Collision->GetTransform(), _Type);
 }
 
 void GameEngineLevel::PushUIDebugRender(GameEngineCollision* _Collision, CollisionType _Type)
 {
 	if (false == _Collision->IsUpdate())
-	{
-		return;
-	}
-
-	if (false == DebugRendering_)
 	{
 		return;
 	}

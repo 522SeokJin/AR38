@@ -123,11 +123,6 @@ void CameraComponent::Render()
 
 void CameraComponent::DebugRender()
 {
-	if (true == IsDebugCheck())
-	{
-		return;
-	}
-
 	CameraBufferTarget_->Setting();
 
 	float4x4 View = GetTransform()->GetTransformData().View_;
@@ -237,6 +232,11 @@ void CameraComponent::PushRenderer(int _Order, GameEngineRenderer* _Renderer)
 
 void CameraComponent::PushDebugRender(GameEngineTransform* _Trans, CollisionType _Type)
 {
+	if (false == IsDebugCheck())
+	{
+		return;
+	}
+
 	switch (_Type)
 	{
 	case CollisionType::Point2D:

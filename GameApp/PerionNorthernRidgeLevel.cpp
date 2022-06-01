@@ -116,6 +116,18 @@ void PerionNorthernRidgeLevel::LevelUpdate(float _DeltaTime)
 	{
 		Skill_->OnOffChange();
 	}
+	
+	if (true == GameEngineInput::GetInst().Down("DebugColOn"))
+	{
+		GetMainCamera()->DebugOn();
+		GetUICamera()->DebugOn();
+	}
+	
+	if (true == GameEngineInput::GetInst().Down("DebugColOff"))
+	{
+		GetMainCamera()->DebugOff();
+		GetUICamera()->DebugOff();
+	}
 
 	if (true == GameEngineInput::GetInst().Down("PixelCollide"))
 	{

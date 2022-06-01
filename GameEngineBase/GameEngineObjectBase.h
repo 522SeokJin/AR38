@@ -98,6 +98,11 @@ public:
 		isDebug_ = false;
 	}
 
+	void DebugOnOffChange()
+	{
+		isDebug_ = !isDebug_;
+	}
+
 	bool IsDebugCheck()
 	{
 		if (true == isDebug_)
