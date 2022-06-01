@@ -143,5 +143,49 @@ void InventoryUI::CreateRenderer()
 		ElixirPotion_->Off();
 	}
 
+	for (int j = 0; j < 2; j++)
+	{
+		for (int k = 0; k < 10; k++)
+		{
+			GameEngineUIRenderer* Renderer =
+				CreateTransformComponent<GameEngineUIRenderer>();
+
+			Renderer->SetImage("ItemNo." + std::to_string(k) + ".png", true, "PointSmp");
+			Renderer->Off();
+
+			// ItemNo.0.png
+			RedPotionNumber_[j].push_back(Renderer);
+		}
+	}
+
+	for (int j = 0; j < 2; j++)
+	{
+		for (int k = 0; k < 10; k++)
+		{
+			GameEngineUIRenderer* Renderer =
+				CreateTransformComponent<GameEngineUIRenderer>();
+
+			Renderer->SetImage("ItemNo." + std::to_string(k) + ".png", true, "PointSmp");
+			Renderer->Off();
+
+			// ItemNo.0.png
+			BluePotionNumber_[j].push_back(Renderer);
+		}
+	}
+
+	for (int j = 0; j < 2; j++)
+	{
+		for (int k = 0; k < 10; k++)
+		{
+			GameEngineUIRenderer* Renderer =
+				CreateTransformComponent<GameEngineUIRenderer>();
+
+			Renderer->SetImage("ItemNo." + std::to_string(k) + ".png", true, "PointSmp");
+			Renderer->Off();
+
+			// ItemNo.0.png
+			ElixirPotionNumber_[j].push_back(Renderer);
+		}
+	}
 }
 

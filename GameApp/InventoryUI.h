@@ -27,13 +27,8 @@ public:
 	}
 
 	void AddRedPotion();
-
-	inline void AddRedPotionCount() { ++RedPotionCount_; }
-	inline void AddBluePotionCount() { ++BluePotionCount_; }
-	inline void AddElixirPotionCount() { ++ElixirPotionCount_; }
-	inline void SubRedPotionCount() { --RedPotionCount_; }
-	inline void SubBluePotionCount() { --BluePotionCount_; }
-	inline void SubElixirPotionCount() { --ElixirPotionCount_; }
+	void AddBluePotion();
+	void AddElixirPotion();
 
 protected:
 	InventoryUI(const InventoryUI& _other) = delete;
@@ -59,19 +54,29 @@ private:
 	GameEngineUIRenderer* RedPotion_;
 	GameEngineUIRenderer* BluePotion_;
 	GameEngineUIRenderer* ElixirPotion_;
+	GameEngineCollision* RedPotionCollision_;
+	GameEngineCollision* BluePotionCollision_;
+	GameEngineCollision* ElixirPotionCollision_;
 
 	int RedPotionCount_;
 	int BluePotionCount_;
 	int ElixirPotionCount_;
 
+	// 아이템갯수 최대치 99
+	std::map<int, std::vector<GameEngineUIRenderer*>> RedPotionNumber_;
+	std::map<int, std::vector<GameEngineUIRenderer*>> BluePotionNumber_;
+	std::map<int, std::vector<GameEngineUIRenderer*>> ElixirPotionNumber_;
+
 	GameEngineCollision* EquipmentTab_;
 	GameEngineCollision* UseableTab_;
 	GameEngineCollision* EtcTab_;
 
+	std::list<GameEngineUIRenderer*> EquipmentTabItemList_;
 	std::list<GameEngineUIRenderer*> UseableTabItemList_;
-	
+	std::list<GameEngineUIRenderer*> EtcTabItemList_;
+
+
 	InventoryTab EnabledTab_;
-	int UseableTabNextEmptySpace_;
 
 	int Meso_;
 	

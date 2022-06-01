@@ -4,11 +4,11 @@
 
 // Ό³Έν : 
 class GameEngineImageRenderer;
-class RedPotion	: public GameEngineActor
+class BluePotion	: public GameEngineActor
 {
 public:
-	RedPotion();
-	~RedPotion();
+	BluePotion();
+	~BluePotion();
 
 	void Start() override;
 	void Update(float _DeltaTime) override;
@@ -16,10 +16,10 @@ public:
 	void DropStart();
 
 protected:
-	RedPotion(const RedPotion& _other) = delete; 
-	RedPotion(RedPotion&& _other) noexcept = delete;
-	RedPotion& operator=(const RedPotion& _other) = delete;
-	RedPotion& operator=(const RedPotion&& _other) = delete;
+	BluePotion(const BluePotion& _other) = delete; 
+	BluePotion(BluePotion&& _other) noexcept = delete;
+	BluePotion& operator=(const BluePotion& _other) = delete;
+	BluePotion& operator=(const BluePotion&& _other) = delete;
 
 private:
 	void GainEvent(GameEngineCollision* _OtherCollision);

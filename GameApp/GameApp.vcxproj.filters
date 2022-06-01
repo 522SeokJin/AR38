@@ -152,6 +152,9 @@
     <ClCompile Include="RedPotion.cpp">
       <Filter>Actor\Item</Filter>
     </ClCompile>
+    <ClCompile Include="BluePotion.cpp">
+      <Filter>Actor\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -391,6 +394,9 @@
       <Filter>Actor\Item</Filter>
     </ClInclude>
     <ClInclude Include="RedPotion.h">
+      <Filter>Actor\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="BluePotion.h">
       <Filter>Actor\Item</Filter>
     </ClInclude>
   </ItemGroup>

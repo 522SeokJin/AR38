@@ -1,5 +1,5 @@
 #include "PreCompile.h"
-#include "RedPotion.h"
+#include "BluePotion.h"
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngine/GameEngineImageRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
@@ -8,7 +8,7 @@
 #include "Player.h"
 #include "InventoryUI.h"
 
-RedPotion::RedPotion()
+BluePotion::BluePotion()
 	: Renderer_(nullptr)
 	, Collision_(nullptr)
 	, Dropped_(false)
@@ -17,12 +17,12 @@ RedPotion::RedPotion()
 {
 }
 
-RedPotion::~RedPotion()
+BluePotion::~BluePotion()
 {
 
 }
 
-void RedPotion::Start()
+void BluePotion::Start()
 {
 	Renderer_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Renderer_->SetLocalMove({ 0.0f, 0.0f, static_cast<float>(DepthOrder::ITEM) });
@@ -33,22 +33,22 @@ void RedPotion::Start()
 		static_cast<int>(ColGroup::ITEM));
 	Collision_->SetLocalScaling({ 25.0f, 25.0f });
 
-	FSM_.CreateState("stop", std::bind(&RedPotion::stop, this),
-		std::bind(&RedPotion::stop_Start, this),
-		std::bind(&RedPotion::stop_End, this));
+	FSM_.CreateState("stop", std::bind(&BluePotion::stop, this),
+		std::bind(&BluePotion::stop_Start, this),
+		std::bind(&BluePotion::stop_End, this));
 
-	FSM_.CreateState("drop", std::bind(&RedPotion::drop, this),
-		std::bind(&RedPotion::drop_Start, this),
-		std::bind(&RedPotion::drop_End, this));
+	FSM_.CreateState("drop", std::bind(&BluePotion::drop, this),
+		std::bind(&BluePotion::drop_Start, this),
+		std::bind(&BluePotion::drop_End, this));
 
-	FSM_.CreateState("move", std::bind(&RedPotion::move, this),
-		std::bind(&RedPotion::move_Start, this),
-		std::bind(&RedPotion::move_End, this));
+	FSM_.CreateState("move", std::bind(&BluePotion::move, this),
+		std::bind(&BluePotion::move_Start, this),
+		std::bind(&BluePotion::move_End, this));
 
 	FSM_.ChangeState("stop");
 }
 
-void RedPotion::Update(float _DeltaTime)
+void BluePotion::Update(float _DeltaTime)
 {
 	FSM_.Update(_DeltaTime);
 
@@ -60,45 +60,45 @@ void RedPotion::Update(float _DeltaTime)
 	}
 }
 
-void RedPotion::DropStart()
+void BluePotion::DropStart()
 {
 	FSM_.ChangeState("drop");
 	Renderer_->SetAlpha(1.0f);
 }
 
-void RedPotion::GainEvent(GameEngineCollision* _OtherCollision)
+void BluePotion::GainEvent(GameEngineCollision* _OtherCollision)
 {
 	Dispear_ = true;
 
 	Collision_->Off();
 
-	GlobalValue::CurrentInventoryUI->AddRedPotion();
+	GlobalValue::CurrentInventoryUI->AddBluePotion();
 }
 
 /// <summary>
 /// ///////////// FSM
 /// </summary>
 
-void RedPotion::stop_Start()
+void BluePotion::stop_Start()
 {
 }
 
-void RedPotion::stop()
+void BluePotion::stop()
 {
 }
 
-void RedPotion::stop_End()
+void BluePotion::stop_End()
 {
 }
 
-void RedPotion::drop_Start()
+void BluePotion::drop_Start()
 {
 	Speed_.y = 300.0f;
 
 	GetTransform()->SetLocalMove({ 0.0f, 1.0f });
 }
 
-void RedPotion::drop()
+void BluePotion::drop()
 {
 	Speed_.y -= 0.5f * GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
 
@@ -123,16 +123,16 @@ void RedPotion::drop()
 	}
 }
 
-void RedPotion::drop_End()
+void BluePotion::drop_End()
 {
 	Speed_ = float4::ZERO;
 }
 
-void RedPotion::move_Start()
+void BluePotion::move_Start()
 {
 }
 
-void RedPotion::move()
+void BluePotion::move()
 {
 	if (1.0f < FSM_.GetCurrentState()->Time_)
 	{
@@ -148,14 +148,14 @@ void RedPotion::move()
 		}
 
 		std::function<void(GameEngineCollision*)> Func =
-			std::bind(&RedPotion::GainEvent, this, std::placeholders::_1);
+			std::bind(&BluePotion::GainEvent, this, std::placeholders::_1);
 
 		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
 			static_cast<int>(ColGroup::PLAYER), Func);
 	}
 }
 
-void RedPotion::move_End()
+void BluePotion::move_End()
 {
 }
 
