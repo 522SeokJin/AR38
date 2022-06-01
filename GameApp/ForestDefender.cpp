@@ -52,6 +52,29 @@ void ForestDefender::Start()
 	Renderer_->CreateAnimationFolder("ForestDefender_move", 0.120f);
 	Renderer_->CreateAnimationFolder("ForestDefender_hit", 0.120f, false);
 	Renderer_->CreateAnimationFolder("ForestDefender_die", 0.120f, false);
+	Renderer_->SetEndCallBack("ForestDefender_die", [&]()
+	{
+		Off();
+
+		if (5 > RandomItemSelect_)
+		{
+			Meso_->DropStart();
+			Meso_->On();
+		}
+		else if (5 <= RandomItemSelect_ &&
+			8 > RandomItemSelect_)
+		{
+			RedPotion_->DropStart();
+			RedPotion_->On();
+		}
+		else if (8 <= RandomItemSelect_ &&
+			10 > RandomItemSelect_)
+		{
+			BluePotion_->DropStart();
+			BluePotion_->On();
+		}
+	});
+
 	Renderer_->CreateAnimationFolder("ForestDefender_attack1", 0.120f, false);
 	Renderer_->SetFrameCallBack("ForestDefender_attack1", 4, [&]()
 		{
@@ -152,6 +175,11 @@ void ForestDefender::Update(float _DeltaTime)
 			}
 		}
 	}
+
+	if (1.0f > Renderer_->GetAlpha())
+	{
+		Renderer_->AddAlpha(2.0f * GameEngineTime::GetInst().GetDeltaTime());
+	}
 }
 
 void ForestDefender::SetWorldPosition(const float4& _Value)
@@ -165,6 +193,7 @@ void ForestDefender::Reset()
 	FSM_.ChangeState("stand");
 	GetTransform()->SetWorldPosition(OriginPos_);
 	Renderer_->On();
+	Renderer_->SetAlpha(0.0f);
 	Collision_->On();
 	Die_ = false;
 	Hit_ = false;
@@ -472,33 +501,6 @@ void ForestDefender::die_Start()
 
 void ForestDefender::die()
 {
-	if (true == Die_)
-	{
-		Renderer_->SubAlpha(2.0f * GameEngineTime::GetInst().GetDeltaTime());
-	}
-
-	if (Renderer_->GetMulColor().a <= 0.0f)
-	{
-		Off();
-
-		if (5 > RandomItemSelect_)
-		{
-			Meso_->DropStart();
-			Meso_->On();
-		}
-		else if (5 <= RandomItemSelect_ &&
-			8 > RandomItemSelect_)
-		{
-			RedPotion_->DropStart();
-			RedPotion_->On();
-		}
-		else if (8 <= RandomItemSelect_ &&
-			10 > RandomItemSelect_)
-		{
-			BluePotion_->DropStart();
-			BluePotion_->On();
-		}
-	}
 }
 
 void ForestDefender::die_End()
