@@ -6,6 +6,7 @@
 #include "PhysicsDefine.h"
 #include "Map.h"
 #include "Player.h"
+#include "InventoryUI.h"
 
 SmallMeso::SmallMeso()
 	: Renderer_(nullptr)
@@ -73,6 +74,10 @@ void SmallMeso::DropStart()
 void SmallMeso::MesoEvent(GameEngineCollision* _OtherCollision)
 {
 	Dispear_ = true;
+
+	Collision_->Off();
+
+	GlobalValue::CurrentInventoryUI->AddMeso(Price_);
 }
 
 /// <summary>

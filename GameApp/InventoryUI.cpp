@@ -69,6 +69,9 @@ void InventoryUI::Update(float _DeltaTime)
 		static_cast<int>(ColGroup::MOUSE), Func);
 
 	ChangeTabEvent();
+
+	MesoText_->TextSetting("µ¸¿ò", std::to_string(Meso_), 13, float4::BLACK,
+		{ -15.0f, 1.0f, 0.0f });
 }
 
 void InventoryUI::TitleBarEvent(GameEngineCollision* _OtherCollision)

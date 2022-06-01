@@ -44,6 +44,7 @@ private:
 	GameEngineUIRenderer* EquipmentRenderer_;
 	GameEngineUIRenderer* UseableRenderer_;
 	GameEngineUIRenderer* EtcRenderer_;
+	GameEngineUIRenderer* MesoText_;
 
 	GameEngineCollision* EquipmentTab_;
 	GameEngineCollision* UseableTab_;
