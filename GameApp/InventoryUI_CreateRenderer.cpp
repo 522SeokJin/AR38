@@ -124,5 +124,24 @@ void InventoryUI::CreateRenderer()
 			{ -15.0f, 1.0f, 0.0f });
 		MesoText_->SetTextFlag(FW1_RIGHT | FW1_VCENTER);
 	}
+
+	{
+		RedPotion_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+		RedPotion_->SetImage("02000000.info.icon.png");
+		RedPotion_->SetLocalPosition({ 82.0f, -125.0f });
+	}
+	
+	{
+		BluePotion_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+		BluePotion_->SetImage("02000003.info.icon.png");
+		BluePotion_->SetLocalPosition({ 82.0f, -125.0f });
+	}
+	
+	{
+		ElixirPotion_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+		ElixirPotion_->SetImage("02000004.info.icon.png");
+		ElixirPotion_->SetLocalPosition({ 82.0f, -125.0f });
+	}
+
 }
 

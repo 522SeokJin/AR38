@@ -25,6 +25,13 @@ public:
 		Meso_ += _Value;
 	}
 
+	inline void AddRedPotionCount() { ++RedPotionCount_; }
+	inline void AddBluePotionCount() { ++BluePotionCount_; }
+	inline void AddElixirPotionCount() { ++ElixirPotionCount_; }
+	inline void SubRedPotionCount() { --RedPotionCount_; }
+	inline void SubBluePotionCount() { --BluePotionCount_; }
+	inline void SubElixirPotionCount() { --ElixirPotionCount_; }
+
 protected:
 	InventoryUI(const InventoryUI& _other) = delete;
 	InventoryUI(InventoryUI&& _other) noexcept = delete;
@@ -46,6 +53,13 @@ private:
 	GameEngineUIRenderer* EtcRenderer_;
 	GameEngineUIRenderer* MesoText_;
 
+	GameEngineUIRenderer* RedPotion_;
+	GameEngineUIRenderer* BluePotion_;
+	GameEngineUIRenderer* ElixirPotion_;
+	int RedPotionCount_;
+	int BluePotionCount_;
+	int ElixirPotionCount_;
+
 	GameEngineCollision* EquipmentTab_;
 	GameEngineCollision* UseableTab_;
 	GameEngineCollision* EtcTab_;
@@ -53,7 +67,7 @@ private:
 	InventoryTab EnabledTab_;
 
 	GameEngineCollision* ItemBlocks_[32];
-
+	
 	int Meso_;
 };
 

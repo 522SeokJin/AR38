@@ -149,6 +149,9 @@
     <ClCompile Include="SmallMeso.cpp">
       <Filter>Actor\Item</Filter>
     </ClCompile>
+    <ClCompile Include="RedPotion.cpp">
+      <Filter>Actor\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -385,6 +388,9 @@
       <Filter>Actor\Monster</Filter>
     </ClInclude>
     <ClInclude Include="SmallMeso.h">
+      <Filter>Actor\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="RedPotion.h">
       <Filter>Actor\Item</Filter>
     </ClInclude>
   </ItemGroup>

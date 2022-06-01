@@ -244,6 +244,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="QuickSlotKeyUI.cpp" />
+    <ClCompile Include="RedPotion.cpp" />
     <ClCompile Include="SahelLevel.cpp">
       <SubType>
       </SubType>
@@ -373,6 +374,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="QuickSlotKeyUI.h" />
+    <ClInclude Include="RedPotion.h" />
     <ClInclude Include="SahelLevel.h">
       <SubType>
       </SubType>

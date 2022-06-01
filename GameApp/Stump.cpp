@@ -33,9 +33,6 @@ Stump::~Stump()
 
 void Stump::Start()
 {
-	Meso_ = GetLevel()->CreateActor<SmallMeso>();
-	Meso_->Off();
-
 	Renderer_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Renderer_->SetLocalMove({ 0.0f, 0.0f, static_cast<float>(DepthOrder::MONSTER) });
 
@@ -113,8 +110,6 @@ void Stump::Update(float _DeltaTime)
 			}
 		}
 	}
-
-	Meso_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
 }
 
 void Stump::SetWorldPosition(const float4& _Value)
@@ -132,8 +127,6 @@ void Stump::Reset()
 	Die_ = false;
 	Hit_ = false;
 	DeadHitCount_ = 2;
-
-	Meso_->Off();
 
 	On();
 }
@@ -344,6 +337,10 @@ void Stump::hit_End()
 
 void Stump::die_Start()
 {
+	Meso_ = GetLevel()->CreateActor<SmallMeso>();
+	Meso_->Off();
+	Meso_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
+
 	Renderer_->SetChangeAnimation("Stump_die");
 	Collision_->Off();
 

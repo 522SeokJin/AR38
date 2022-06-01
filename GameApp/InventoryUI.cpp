@@ -13,6 +13,12 @@ InventoryUI::InventoryUI()
 	, EnabledTab_(InventoryTab::Equipment)
 	, ItemBlocks_{0, }
 	, Meso_(0)
+	, RedPotion_(nullptr)
+	, BluePotion_(nullptr)
+	, ElixirPotion_(nullptr)
+	, RedPotionCount_(0)
+	, BluePotionCount_(0)
+	, ElixirPotionCount_(0)
 {
 
 }
