@@ -57,7 +57,7 @@ private:
 
 	SmallMeso* Meso_;	// 0~4
 	RedPotion*  RedPotion_;	// 5~7 
-	// BluePotion* BluePotion_;	// 8~9
+	BluePotion* BluePotion_;	// 8~9
 
 	int RandomItemSelect_;
 

@@ -7,8 +7,9 @@ class Player;
 class GameEngineRenderWindow;
 class InventoryUI;
 class SkillUI;
-class StatusUI;
+class ExpBarUI;
 class DeepeningForest;
+class ForestDefender;
 class DeepeningForestLevel : public GameEngineLevel
 {
 public:
@@ -21,13 +22,15 @@ public:
 	void LevelChangeStartEvent(GameEngineLevel* _PrevLevel) override;
 
 protected:
-	DeepeningForestLevel(const DeepeningForestLevel& _other) = delete; 
+	DeepeningForestLevel(const DeepeningForestLevel& _other) = delete;
 	DeepeningForestLevel(DeepeningForestLevel&& _other) noexcept = delete;
 	DeepeningForestLevel& operator=(const DeepeningForestLevel& _other) = delete;
 	DeepeningForestLevel& operator=(const DeepeningForestLevel&& _other) = delete;
 
 private:
 	void CreateActorLevel();
+	void CreateMonster();
+	void ReZenMoster();
 
 	Mouse* Cursor_;
 	Player* Player_;
@@ -35,6 +38,10 @@ private:
 	InventoryUI* Inventory_;
 	SkillUI* Skill_;
 	StatusUI* Status_;
+	ExpBarUI* ExpBar_;
 	DeepeningForest* Map_;
-};
 
+	std::list<ForestDefender*> Monsters_;
+
+	float ReZenTime_;
+};

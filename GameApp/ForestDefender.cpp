@@ -4,6 +4,11 @@
 #include <GameEngine/GameEngineUIRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 #include "Player.h"
+#include "Map.h"
+#include "ExpBarUI.h"
+#include "SmallMeso.h"
+#include "RedPotion.h"
+#include "BluePotion.h"
 
 ForestDefender::ForestDefender()
 	: Renderer_(nullptr)
@@ -22,6 +27,11 @@ ForestDefender::ForestDefender()
 	, CurHitCount_(0)
 	, HitTime_(0.0f)
 	, DeadHitCount_(4)
+	, OriginPos_(float4::ZERO)
+	, Meso_(nullptr)
+	, RedPotion_(nullptr)
+	, BluePotion_(nullptr)
+	, RandomItemSelect_(0)
 {
 
 }
@@ -80,7 +90,7 @@ void ForestDefender::Start()
 	AttackCollision_->SetLocalScaling({ 103.0f * 2.4f, 80.0f * 1.4f });
 	AttackCollision_->Off();
 
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		for (int j = 0; j < 5; j++)
 		{
@@ -129,7 +139,7 @@ void ForestDefender::Update(float _DeltaTime)
 	GetLevel()->PushDebugRender(AICollision_, CollisionType::Rect);
 	GetLevel()->PushDebugRender(AttackCollision_, CollisionType::Rect);
 
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		for (int j = 0; j < 5; j++)
 		{
@@ -142,6 +152,25 @@ void ForestDefender::Update(float _DeltaTime)
 			}
 		}
 	}
+}
+
+void ForestDefender::SetWorldPosition(const float4& _Value)
+{
+	GetTransform()->SetWorldPosition(_Value);
+	OriginPos_ = _Value;
+}
+
+void ForestDefender::Reset()
+{
+	FSM_.ChangeState("stand");
+	GetTransform()->SetWorldPosition(OriginPos_);
+	Renderer_->On();
+	Collision_->On();
+	Die_ = false;
+	Hit_ = false;
+	DeadHitCount_ = 2;
+
+	On();
 }
 
 void ForestDefender::SkillEvent(GameEngineCollision* _OtherCollision)
@@ -258,6 +287,17 @@ void ForestDefender::move()
 		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
 			static_cast<int>(ColGroup::SKILL), Func_);
 	}
+
+	if (true == Attack_)
+	{
+		FSM_.ChangeState("attack");
+		return;
+	}
+	else
+	{
+		AICollision_->Collision(CollisionType::Rect, CollisionType::Rect,
+			static_cast<int>(ColGroup::PLAYER), AttackFunc_);
+	}
 }
 
 void ForestDefender::move_End()
@@ -270,7 +310,7 @@ void ForestDefender::hit_Start()
 
 	MaxHitCount_ = GlobalValue::CurrentPlayer->GetCurrentSkillHitCount();
 
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 5 ;i++)
 	{
 		for (int j = 0; j < 5; j++)
 		{
@@ -381,7 +421,16 @@ void ForestDefender::attack_Start()
 
 void ForestDefender::attack()
 {
-	
+	if (true == Hit_)
+	{
+		FSM_.ChangeState("hit");
+		return;
+	}
+	else
+	{
+		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
+			static_cast<int>(ColGroup::SKILL), Func_);
+	}
 }
 
 void ForestDefender::attack_End()
@@ -394,6 +443,31 @@ void ForestDefender::die_Start()
 {
 	Renderer_->SetChangeAnimation("ForestDefender_die");
 	Collision_->Off();
+
+	RandomItemSelect_ = Random_.RandomInt(0, 9);
+
+	if (5 > RandomItemSelect_)
+	{
+		Meso_ = GetLevel()->CreateActor<SmallMeso>();
+		Meso_->Off();
+		Meso_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
+	}
+	else if (5 <= RandomItemSelect_ &&
+		8 > RandomItemSelect_)
+	{
+		RedPotion_ = GetLevel()->CreateActor<RedPotion>();
+		RedPotion_->Off();
+		RedPotion_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
+	}
+	else if (8 <= RandomItemSelect_ &&
+		10 > RandomItemSelect_)
+	{
+		BluePotion_ = GetLevel()->CreateActor<BluePotion>();
+		BluePotion_->Off();
+		BluePotion_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
+	}
+
+	GlobalValue::CurrentExpBarUI->AddExp(150.0f);
 }
 
 void ForestDefender::die()
@@ -406,6 +480,24 @@ void ForestDefender::die()
 	if (Renderer_->GetMulColor().a <= 0.0f)
 	{
 		Off();
+
+		if (5 > RandomItemSelect_)
+		{
+			Meso_->DropStart();
+			Meso_->On();
+		}
+		else if (5 <= RandomItemSelect_ &&
+			8 > RandomItemSelect_)
+		{
+			RedPotion_->DropStart();
+			RedPotion_->On();
+		}
+		else if (8 <= RandomItemSelect_ &&
+			10 > RandomItemSelect_)
+		{
+			BluePotion_->DropStart();
+			BluePotion_->On();
+		}
 	}
 }
 

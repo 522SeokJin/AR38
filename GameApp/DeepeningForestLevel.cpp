@@ -26,13 +26,18 @@ DeepeningForestLevel::DeepeningForestLevel()
 	, Map_(nullptr)
 	, Skill_(nullptr)
 	, Status_(nullptr)
+	, ExpBar_(nullptr)
+	, ReZenTime_(8.0f)
 {
-
 }
 
 DeepeningForestLevel::~DeepeningForestLevel()
 {
-
+	for (auto& Monster : Monsters_)
+	{
+		Monster->Death();
+		Monster = nullptr;
+	}
 }
 
 void DeepeningForestLevel::LevelStart()
@@ -45,9 +50,11 @@ void DeepeningForestLevel::LevelStart()
 
 	{
 		Map_ = CreateActor<DeepeningForest>();
+		Map_->GetPixelCollideImage()->Off();
 	}
 
-	
+	// Monster Respawn
+	AddTimeEvent(ReZenTime_, std::bind(&DeepeningForestLevel::ReZenMoster, this));
 }
 
 void DeepeningForestLevel::LevelUpdate(float _DeltaTime)
@@ -60,6 +67,7 @@ void DeepeningForestLevel::LevelUpdate(float _DeltaTime)
 		CreateActorLevel();
 		CreateActorCheck = true;
 	}
+
 	if (false == GetMainCameraActor()->IsFreeCameraMode())
 	{
 		GlobalLevelControl::PlayerCameraControl();
@@ -109,6 +117,18 @@ void DeepeningForestLevel::LevelUpdate(float _DeltaTime)
 		Skill_->OnOffChange();
 	}
 
+	if (true == GameEngineInput::GetInst().Down("DebugColOn"))
+	{
+		GetMainCamera()->DebugOn();
+		GetUICamera()->DebugOn();
+	}
+
+	if (true == GameEngineInput::GetInst().Down("DebugColOff"))
+	{
+		GetMainCamera()->DebugOff();
+		GetUICamera()->DebugOff();
+	}
+
 	if (true == GameEngineInput::GetInst().Down("PixelCollide"))
 	{
 		Map_->GetPixelCollideImage()->OnOffChange();
@@ -135,9 +155,9 @@ void DeepeningForestLevel::CreateActorLevel()
 		Status_ = CreateActor<StatusUI>();
 		Status_->GetTransform()->SetWorldPosition({ 5.0f, 45.0f - GameEngineWindow::GetInst().GetSize().hy() });
 
-		ExpBarUI* ExpBar = CreateActor<ExpBarUI>();
-		ExpBar->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
-		ExpBar->LinkStatus(Status_);
+		ExpBar_ = CreateActor<ExpBarUI>();
+		ExpBar_->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
+		ExpBar_->LinkStatus(Status_);
 	}
 
 	{
@@ -156,15 +176,15 @@ void DeepeningForestLevel::CreateActorLevel()
 	}
 
 	{
-		Inventory_ = CreateActor<InventoryUI>();
-		Inventory_->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
-		Inventory_->Off();
-	}
-
-	{
 		Skill_ = CreateActor<SkillUI>();
 		Skill_->GetTransform()->SetWorldPosition({ 200.0f, 200.0f });
 		Skill_->Off();
+	}
+
+	{
+		Inventory_ = CreateActor<InventoryUI>();
+		Inventory_->GetTransform()->SetWorldPosition({ -200.0f, 0.0f });
+		Inventory_->Off();
 	}
 
 	{
@@ -175,15 +195,110 @@ void DeepeningForestLevel::CreateActorLevel()
 		Player_->Off();
 	}
 
-	{
-		ForestDefender* Actor = CreateActor<ForestDefender>();
-		Actor->GetTransform()->SetWorldPosition({ 379.0f, -753.0f });
-	}
+	CreateMonster();
 
 	GlobalValue::CurrentPlayer = Player_;
 	GlobalValue::CurrentMouse = Cursor_;
 	GlobalValue::CurrentStatusUI = Status_;
+	GlobalValue::CurrentExpBarUI = ExpBar_;
 	GlobalValue::CurrentInventoryUI = Inventory_;
 
 	Player_->On();
+}
+
+void DeepeningForestLevel::CreateMonster()
+{
+
+	{
+		ForestDefender* Actor = CreateActor<ForestDefender>();
+		Actor->SetWorldPosition({ 379.0f, -756.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+	
+	{
+		ForestDefender* Actor = CreateActor<ForestDefender>();
+		Actor->SetWorldPosition({ 670.0f, -756.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+	
+	{
+		ForestDefender* Actor = CreateActor<ForestDefender>();
+		Actor->SetWorldPosition({ 985.0f, -756.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+	
+	{
+		ForestDefender* Actor = CreateActor<ForestDefender>();
+		Actor->SetWorldPosition({ 1355.0f, -756.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+	
+	{
+		ForestDefender* Actor = CreateActor<ForestDefender>();
+		Actor->SetWorldPosition({ 1700.0f, -756.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+
+	// 2F
+
+	{
+		ForestDefender* Actor = CreateActor<ForestDefender>();
+		Actor->SetWorldPosition({ 600.0f, -574.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+
+	{
+		ForestDefender* Actor = CreateActor<ForestDefender>();
+		Actor->SetWorldPosition({ 845.0f, -574.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+	
+	{
+		ForestDefender* Actor = CreateActor<ForestDefender>();
+		Actor->SetWorldPosition({ 1631.0f, -551.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+	
+	// 3F
+
+	{
+		ForestDefender* Actor = CreateActor<ForestDefender>();
+		Actor->SetWorldPosition({ 644.0f, -398.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+	
+	{
+		ForestDefender* Actor = CreateActor<ForestDefender>();
+		Actor->SetWorldPosition({ 1471.0f, -313.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}	
+
+	{
+		ForestDefender* Actor = CreateActor<ForestDefender>();
+		Actor->SetWorldPosition({ 1722.0f, -313.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+	
+	// 4F
+
+	{
+		ForestDefender* Actor = CreateActor<ForestDefender>();
+		Actor->SetWorldPosition({ 483.0f, -240.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+}
+
+void DeepeningForestLevel::ReZenMoster()
+{
+	for (auto& Monster : Monsters_)
+	{
+		if (true == Monster->IsUpdate())
+		{
+			continue;
+		}
+
+		Monster->Reset();
+	}
+
+	AddTimeEvent(ReZenTime_, std::bind(&DeepeningForestLevel::ReZenMoster, this));
 }

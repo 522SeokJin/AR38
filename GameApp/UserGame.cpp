@@ -52,7 +52,7 @@ void UserGame::Initialize()
 	LevelCreate<SilentSwampLevel>("SilentSwamp");
 	LevelCreate<SahelLevel>("Sahel");
 
-	LevelChange("PerionNorthernRidge");
+	LevelChange("DeepeningForest");
 }
 
 void UserGame::Release()

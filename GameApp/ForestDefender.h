@@ -9,6 +9,9 @@
 // 설명 : 
 class GameEngineImageRenderer;
 class GameEngineCollision;
+class SmallMeso;
+class RedPotion;
+class BluePotion;
 class ForestDefender : public GameEngineActor
 {
 public:
@@ -17,6 +20,9 @@ public:
 
 	void Start() override;
 	void Update(float _DeltaTime) override;
+
+	void SetWorldPosition(const float4& _Value);
+	void Reset();
 
 protected:
 	ForestDefender(const ForestDefender& _other) = delete; 
@@ -44,12 +50,20 @@ private:
 	GameEngineCollision*	 AttackCollision_;
 
 	// Number Image
-	std::map<int, std::vector<GameEngineImageRenderer*>> DmgNumber_[20];	// [최대타수]
+	std::map<int, std::vector<GameEngineImageRenderer*>> DmgNumber_[5];	// [최대타수]
 	int MaxHitCount_;
 	int CurHitCount_;
 	float HitTime_;
 	
 	int DeadHitCount_;
+
+	float4 OriginPos_;
+
+	SmallMeso* Meso_;	// 0~4
+	RedPotion* RedPotion_;	// 5~7 
+	BluePotion* BluePotion_;	// 8~9
+
+	int RandomItemSelect_;
 
 	////////////////////////////////////////////	FSM
 

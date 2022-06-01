@@ -7,6 +7,7 @@
 #include "ExpBarUI.h"
 #include "SmallMeso.h"
 #include "RedPotion.h"
+#include "BluePotion.h"
 
 Stump::Stump()
 	: Renderer_(nullptr)
@@ -24,6 +25,7 @@ Stump::Stump()
 	, OriginPos_(float4::ZERO)
 	, Meso_(nullptr)
 	, RedPotion_(nullptr)
+	, BluePotion_(nullptr)
 	, RandomItemSelect_(0)
 {
 
@@ -349,11 +351,18 @@ void Stump::die_Start()
 		Meso_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
 	}
 	else if (5 <= RandomItemSelect_ &&
-		10 > RandomItemSelect_)
+		8 > RandomItemSelect_)
 	{
 		RedPotion_ = GetLevel()->CreateActor<RedPotion>();
 		RedPotion_->Off();
 		RedPotion_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
+	}
+	else if (8 <= RandomItemSelect_ &&
+		10 > RandomItemSelect_)
+	{
+		BluePotion_ = GetLevel()->CreateActor<BluePotion>();
+		BluePotion_->Off();
+		BluePotion_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
 	}
 
 	Renderer_->SetChangeAnimation("Stump_die");
@@ -379,10 +388,16 @@ void Stump::die()
 			Meso_->On();
 		}
 		else if (5 <= RandomItemSelect_ &&
-			10 > RandomItemSelect_)
+			8 > RandomItemSelect_)
 		{
 			RedPotion_->DropStart();
 			RedPotion_->On();
+		}
+		else if (8 <= RandomItemSelect_ &&
+			10 > RandomItemSelect_)
+		{
+			BluePotion_->DropStart();
+			BluePotion_->On();
 		}
 	}
 }
