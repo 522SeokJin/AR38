@@ -11,6 +11,7 @@ enum class InventoryTab
 // Ό³Έν : 
 class GameEngineCollision;
 class GameEngineUIRenderer;
+class GameEngineImageRenderer;
 class InventoryUI : public GameEngineActor
 {
 public:
@@ -24,6 +25,8 @@ public:
 	{
 		Meso_ += _Value;
 	}
+
+	void AddRedPotion();
 
 	inline void AddRedPotionCount() { ++RedPotionCount_; }
 	inline void AddBluePotionCount() { ++BluePotionCount_; }
@@ -56,6 +59,7 @@ private:
 	GameEngineUIRenderer* RedPotion_;
 	GameEngineUIRenderer* BluePotion_;
 	GameEngineUIRenderer* ElixirPotion_;
+
 	int RedPotionCount_;
 	int BluePotionCount_;
 	int ElixirPotionCount_;
@@ -64,10 +68,12 @@ private:
 	GameEngineCollision* UseableTab_;
 	GameEngineCollision* EtcTab_;
 
-	InventoryTab EnabledTab_;
-
-	GameEngineCollision* ItemBlocks_[32];
+	std::list<GameEngineUIRenderer*> UseableTabItemList_;
 	
+	InventoryTab EnabledTab_;
+	int UseableTabNextEmptySpace_;
+
 	int Meso_;
+	
 };
 

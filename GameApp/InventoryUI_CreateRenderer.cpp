@@ -128,19 +128,19 @@ void InventoryUI::CreateRenderer()
 	{
 		RedPotion_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		RedPotion_->SetImage("02000000.info.icon.png");
-		RedPotion_->SetLocalPosition({ 82.0f, -125.0f });
+		RedPotion_->Off();
 	}
 	
 	{
 		BluePotion_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		BluePotion_->SetImage("02000003.info.icon.png");
-		BluePotion_->SetLocalPosition({ 82.0f, -125.0f });
+		BluePotion_->Off();
 	}
 	
 	{
 		ElixirPotion_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		ElixirPotion_->SetImage("02000004.info.icon.png");
-		ElixirPotion_->SetLocalPosition({ 82.0f, -125.0f });
+		ElixirPotion_->Off();
 	}
 
 }

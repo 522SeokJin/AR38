@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "InventoryUI.h"
 #include <GameEngine/GameEngineUIRenderer.h>
+#include <GameEngine/GameEngineImageRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 #include "Mouse.h"
 
@@ -11,7 +12,6 @@ InventoryUI::InventoryUI()
 	, UseableTab_(nullptr)
 	, EtcTab_(nullptr)
 	, EnabledTab_(InventoryTab::Equipment)
-	, ItemBlocks_{0, }
 	, Meso_(0)
 	, RedPotion_(nullptr)
 	, BluePotion_(nullptr)
@@ -19,6 +19,11 @@ InventoryUI::InventoryUI()
 	, RedPotionCount_(0)
 	, BluePotionCount_(0)
 	, ElixirPotionCount_(0)
+	, EquipmentRenderer_(nullptr)
+	, UseableRenderer_(nullptr)
+	, EtcRenderer_(nullptr)
+	, MesoText_(nullptr)
+	, UseableTabNextEmptySpace_(1)
 {
 
 }
@@ -58,6 +63,7 @@ void InventoryUI::Start()
 		EtcTab_->SetLocalScaling({ 29.0f, 19.0f });
 		EtcTab_->SetLocalPosition({ -75.0f + 2.0f * 30.0f, 154.0f });
 	}
+	AddRedPotion();
 }
 
 void InventoryUI::Update(float _DeltaTime)
@@ -78,6 +84,16 @@ void InventoryUI::Update(float _DeltaTime)
 
 	MesoText_->TextSetting("µ¸¿ò", std::to_string(Meso_), 13, float4::BLACK,
 		{ -15.0f, 1.0f, 0.0f });
+}
+
+void InventoryUI::AddRedPotion()
+{
+	if (0 == RedPotionCount_)
+	{
+		UseableTabItemList_.push_back(RedPotion_);
+	}
+
+	++RedPotionCount_;
 }
 
 void InventoryUI::TitleBarEvent(GameEngineCollision* _OtherCollision)
@@ -112,6 +128,11 @@ void InventoryUI::ChangeTabEvent()
 				EtcRenderer_->SetImage("Item.Tab.disabled.2.png");
 
 				EnabledTab_ = InventoryTab::Equipment;
+
+				for (auto& Item : UseableTabItemList_)
+				{
+					Item->Off();
+				}
 			}
 		});
 
@@ -125,6 +146,12 @@ void InventoryUI::ChangeTabEvent()
 				EtcRenderer_->SetImage("Item.Tab.disabled.2.png");
 
 				EnabledTab_ = InventoryTab::Useable;
+
+				for (auto& Item : UseableTabItemList_)
+				{
+					Item->On();
+					Item->SetLocalPosition(float4::ZERO);
+				}
 			}
 
 		});
