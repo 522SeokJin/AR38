@@ -27,9 +27,7 @@ void RedPotion::Start()
 	Renderer_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Renderer_->SetLocalMove({ 0.0f, 0.0f, static_cast<float>(DepthOrder::ITEM) });
 
-	Renderer_->CreateAnimationFolder("RedPotion", 0.1f);
-
-	Renderer_->SetChangeAnimation("RedPotion");
+	Renderer_->SetImage("02000000.info.iconRaw.png");
 
 	Collision_ = CreateTransformComponent<GameEngineCollision>(
 		static_cast<int>(ColGroup::ITEM));

@@ -6,6 +6,7 @@
 #include "Map.h"
 #include "ExpBarUI.h"
 #include "SmallMeso.h"
+#include "RedPotion.h"
 
 Stump::Stump()
 	: Renderer_(nullptr)
@@ -22,6 +23,8 @@ Stump::Stump()
 	, DeadHitCount_(2)
 	, OriginPos_(float4::ZERO)
 	, Meso_(nullptr)
+	, RedPotion_(nullptr)
+	, RandomItemSelect_(0)
 {
 
 }
@@ -337,9 +340,21 @@ void Stump::hit_End()
 
 void Stump::die_Start()
 {
-	Meso_ = GetLevel()->CreateActor<SmallMeso>();
-	Meso_->Off();
-	Meso_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
+	RandomItemSelect_ = Random_.RandomInt(0, 9);
+
+	if (5 > RandomItemSelect_)
+	{
+		Meso_ = GetLevel()->CreateActor<SmallMeso>();
+		Meso_->Off();
+		Meso_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
+	}
+	else if (5 <= RandomItemSelect_ &&
+		10 > RandomItemSelect_)
+	{
+		RedPotion_ = GetLevel()->CreateActor<RedPotion>();
+		RedPotion_->Off();
+		RedPotion_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
+	}
 
 	Renderer_->SetChangeAnimation("Stump_die");
 	Collision_->Off();
@@ -357,8 +372,18 @@ void Stump::die()
 	if (Renderer_->GetMulColor().a <= 0.0f)
 	{
 		Off();
-		Meso_->DropStart();
-		Meso_->On();
+
+		if (5 > RandomItemSelect_)
+		{
+			Meso_->DropStart();
+			Meso_->On();
+		}
+		else if (5 <= RandomItemSelect_ &&
+			10 > RandomItemSelect_)
+		{
+			RedPotion_->DropStart();
+			RedPotion_->On();
+		}
 	}
 }
 
