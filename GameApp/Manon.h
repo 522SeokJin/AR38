@@ -44,6 +44,8 @@ private:
 	GameEngineImageRenderer* Renderer_;
 	GameEngineImageRenderer* SkillEffectRenderer_;
 	GameEngineCollision*	 Collision_;
+	GameEngineCollision*	 AICollision_;
+	GameEngineCollision*	 AttackCollision_;
 
 	// Number Image
 	std::map<int, std::vector<GameEngineImageRenderer*>> DmgNumber_[5];	// [최대타수]
@@ -74,6 +76,18 @@ private:
 	void move();
 	void move_End();
 
+	void attack1_Start();
+	void attack1();
+	void attack1_End();
+	
+	void attack2_Start();
+	void attack2();
+	void attack2_End();
+	
+	void attack3_Start();
+	void attack3();
+	void attack3_End();
+
 	void hit_Start();
 	void hit();
 	void hit_End();
@@ -81,5 +95,6 @@ private:
 	void die_Start();
 	void die();
 	void die_End();
+
 };
 

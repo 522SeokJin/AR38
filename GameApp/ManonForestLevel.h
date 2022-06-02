@@ -9,7 +9,7 @@ class InventoryUI;
 class SkillUI;
 class ExpBarUI;
 class ManonForest;
-class CopperDrake;
+class Manon;
 class ManonForestLevel : public GameEngineLevel
 {
 public:
@@ -39,7 +39,7 @@ private:
 	ExpBarUI* ExpBar_;
 	ManonForest* Map_;
 
-	CopperDrake* Boss_;
+	Manon* Boss_;
 
 	float ReZenTime_;
 };

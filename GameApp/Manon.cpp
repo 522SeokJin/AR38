@@ -13,6 +13,8 @@ Manon::Manon()
 	: Renderer_(nullptr)
 	, SkillEffectRenderer_(nullptr)
 	, Collision_(nullptr)
+	, AICollision_(nullptr)
+	, AttackCollision_(nullptr)
 	, Dir_(0)
 	, MoveTime_(0.0f)
 	, Hit_(false)
@@ -41,10 +43,13 @@ void Manon::Start()
 	Renderer_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Renderer_->SetLocalMove({ 0.0f, 0.0f, static_cast<float>(DepthOrder::MONSTER) });
 
-	Renderer_->CreateAnimationFolder("Manon_stand", 0.210f);
-	Renderer_->CreateAnimationFolder("Manon_move", 0.210f);
+	Renderer_->CreateAnimationFolder("Manon_stand", 0.130f);
+	Renderer_->CreateAnimationFolder("Manon_move", 0.130f);
+	Renderer_->CreateAnimationFolder("Manon_attack1", 0.130f, false);
+	Renderer_->CreateAnimationFolder("Manon_attack2", 0.130f, false);
+	Renderer_->CreateAnimationFolder("Manon_attack3", 0.130f, false);
 	Renderer_->CreateAnimationFolder("Manon_hit", 0.180f, false);
-	Renderer_->CreateAnimationFolder("Manon_die", 0.180f, false);
+	Renderer_->CreateAnimationFolder("Manon_die", 0.110f, false);
 	Renderer_->SetEndCallBack("Manon_die", [&]() { Die_ = true; });
 
 	Renderer_->SetChangeAnimation("Manon_stand");
@@ -57,7 +62,16 @@ void Manon::Start()
 
 	Collision_ = CreateTransformComponent<GameEngineCollision>(
 		static_cast<int>(ColGroup::MONSTER));
-	Collision_->SetLocalScaling({ 129.0f, 83.0f });
+	Collision_->SetLocalScaling({ 221.0f, 252.0f });
+
+	AICollision_ = CreateTransformComponent<GameEngineCollision>(
+		static_cast<int>(ColGroup::MONSTERAI));
+	AICollision_->SetLocalScaling({ 221.0f * 3.0f, 252.0f * 2.0f });
+
+	AttackCollision_ = CreateTransformComponent<GameEngineCollision>(
+		static_cast<int>(ColGroup::MONSTERATTACK));
+	AttackCollision_->SetLocalScaling({ 221.0f * 2.9f, 252.0f * 1.9f });
+	AttackCollision_->Off();
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -101,6 +115,8 @@ void Manon::Update(float _DeltaTime)
 	FSM_.Update(_DeltaTime);
 
 	GetLevel()->PushDebugRender(Collision_, CollisionType::Rect);
+	GetLevel()->PushDebugRender(AICollision_, CollisionType::Rect);
+	GetLevel()->PushDebugRender(AttackCollision_, CollisionType::Rect);
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -201,9 +217,9 @@ void Manon::move()
 	}
 
 	float4 LeftSidePixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
-		+ float4(-42.5f, 0.0f));
+		+ float4(-110.5f, 0.0f));
 	float4 RightSidePixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
-		+ float4(42.5f, 0.0f));
+		+ float4(110.5f, 0.0f));
 
 	if (DIRRIGHT)
 	{
@@ -234,13 +250,13 @@ void Manon::move()
 	}
 
 	float4 LeftPixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
-		+ float4(-10.0f, 60.5f));
+		+ float4(-10.0f, 135.0f));
 	float4 RightPixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
-		+ float4(10.0f, 60.5f));	
+		+ float4(10.0f, 135.0f));
 
 	if (DIRRIGHT)
 	{
-		GetTransform()->SetLocalDeltaTimeMove({ 100.0f, 0.0f });
+		GetTransform()->SetLocalDeltaTimeMove({ 20.0f, 0.0f });
 
 		if (0.0f >= RightPixelColor.g)
 		{
@@ -261,7 +277,7 @@ void Manon::move()
 	
 	if (DIRLEFT)
 	{
-		GetTransform()->SetLocalDeltaTimeMove({ -100.0f, 0.0f });
+		GetTransform()->SetLocalDeltaTimeMove({ -20.0f, 0.0f });
 
 		if (0.0f >= LeftPixelColor.g)
 		{
@@ -301,9 +317,46 @@ void Manon::move_End()
 {
 }
 
+void Manon::attack1_Start()
+{
+}
+
+void Manon::attack1()
+{
+}
+
+void Manon::attack1_End()
+{
+}
+
+void Manon::attack2_Start()
+{
+}
+
+void Manon::attack2()
+{
+}
+
+void Manon::attack2_End()
+{
+}
+
+void Manon::attack3_Start()
+{
+}
+
+void Manon::attack3()
+{
+}
+
+void Manon::attack3_End()
+{
+}
+
 void Manon::hit_Start()
 {
 	Renderer_->SetChangeAnimation("Manon_hit");
+	Renderer_->SetLocalMove({ 0.0f, 25.0f, 0.0f });
 
 	MaxHitCount_ = GlobalValue::CurrentPlayer->GetCurrentSkillHitCount();
 
@@ -380,6 +433,7 @@ void Manon::hit_End()
 {
 	Hit_ = false;
 	CurHitCount_ = 0;
+	Renderer_->SetLocalMove({ 0.0f, -25.0f, 0.0f });
 }
 
 void Manon::die_Start()

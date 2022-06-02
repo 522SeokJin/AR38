@@ -16,7 +16,7 @@
 #include "InventoryUI.h"
 #include "SkillUI.h"
 
-#include "CopperDrake.h"
+#include "Manon.h"
 
 ManonForestLevel::ManonForestLevel()
 	: Cursor_(nullptr)
@@ -28,6 +28,7 @@ ManonForestLevel::ManonForestLevel()
 	, Status_(nullptr)
 	, ExpBar_(nullptr)
 	, ReZenTime_(8.0f)
+	, Boss_(nullptr)
 {
 }
 
@@ -184,13 +185,13 @@ void ManonForestLevel::CreateActorLevel()
 		Player_ = CreateActor<Player>();
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(
 			Player_->GetTransform()->GetLocalPosition());
-		Player_->GetTransform()->SetWorldPosition({ 131.0f, -1432.0f });
+		Player_->GetTransform()->SetWorldPosition({ 151.0f, -1020.0f });
 		Player_->Off();
 	}
 
 	{
-		CopperDrake* Actor = CreateActor<CopperDrake>();
-		Actor->SetWorldPosition({ 896.0f, -648.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Manon* Actor = CreateActor<Manon>();
+		Actor->SetWorldPosition({ 882.0f, -920.0f, static_cast<float>(DepthOrder::MONSTER) });
 	}
 
 	GlobalValue::CurrentPlayer = Player_;
