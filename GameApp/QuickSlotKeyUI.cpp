@@ -42,12 +42,12 @@ void QuickSlotKeyUI::Start()
 		Renderer->SetLocalMove({ 3.0f * 35.0f, -0.0f * 35.0f });
 	}
 
-	{
-		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-		Renderer->SetImage("key.19.png");
-		Renderer->SetLocalPosition({ Renderer->GetImageSize().hx(), 0.0f });
-		Renderer->SetLocalMove({ 4.0f * 35.0f, -0.0f * 35.0f });
-	}
+	//{
+	//	GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+	//	Renderer->SetImage("key.19.png");
+	//	Renderer->SetLocalPosition({ Renderer->GetImageSize().hx(), 0.0f });
+	//	Renderer->SetLocalMove({ 4.0f * 35.0f, -0.0f * 35.0f });
+	//}
 
 	{
 		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());

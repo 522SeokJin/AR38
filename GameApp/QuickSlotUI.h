@@ -25,6 +25,7 @@ private:
 	
 	GameEngineUIRenderer* SlashBlast_;
 	GameEngineUIRenderer* UpperCharge_;
+	GameEngineUIRenderer* WarriorLeap_;
 	GameEngineUIRenderer* RagingBlow_;
 	GameEngineUIRenderer* RageUprising_;
 	GameEngineUIRenderer* Incising_;

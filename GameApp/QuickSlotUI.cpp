@@ -3,6 +3,7 @@
 #include "GameEngine/GameEngineUIRenderer.h"
 #include "InventoryUI.h"
 #include "StatusUI.h"
+#include "SkillUI.h"
 
 QuickSlotUI::QuickSlotUI()
 	: RedPotion_(nullptr)
@@ -10,6 +11,7 @@ QuickSlotUI::QuickSlotUI()
 	, ElixirPotion_(nullptr)
 	, SlashBlast_(nullptr)
 	, UpperCharge_(nullptr)
+	, WarriorLeap_(nullptr)
 	, RagingBlow_(nullptr)
 	, RageUprising_(nullptr)
 	, Incising_(nullptr)
@@ -74,6 +76,12 @@ void QuickSlotUI::Start()
 		UpperCharge_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
 		UpperCharge_->SetImage("1001011.iconDisabled.png");
 		UpperCharge_->SetLocalPosition({ -263.0f + 35.0f * 1.0f, -17.5f + 35.0f * 0.0f});
+	}
+	
+	{
+		WarriorLeap_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+		WarriorLeap_->SetImage("1001008.iconDisabled.png");
+		WarriorLeap_->SetLocalPosition({ -263.0f + 35.0f * 4.0f, -17.5f + 35.0f * 1.0f});
 	}
 	
 	{
@@ -244,6 +252,36 @@ void QuickSlotUI::Update(float _DeltaTime)
 			GlobalValue::CurrentStatusUI->AddHPPer(50.0f);
 			GlobalValue::CurrentStatusUI->AddMPPer(50.0f);
 		}
+	}
+
+	if (0 < GlobalValue::CurrentSkillUI->GetSlashblastSP())
+	{
+		SlashBlast_->SetImage("1001005.icon.png");
+	}
+	
+	if (0 < GlobalValue::CurrentSkillUI->GetUpperChargeSP())
+	{
+		UpperCharge_->SetImage("1001011.icon.png");
+	}
+
+	if (0 < GlobalValue::CurrentSkillUI->GetWarriorLeapSP())
+	{
+		WarriorLeap_->SetImage("1001008.icon.png");
+	}
+
+	if (0 < GlobalValue::CurrentSkillUI->GetRagingBlowSP())
+	{
+		RagingBlow_->SetImage("1120017.icon.png");
+	}
+
+	if (0 < GlobalValue::CurrentSkillUI->GetIncisingSP())
+	{
+		Incising_->SetImage("1121015.icon.png");
+	}
+
+	if (0 < GlobalValue::CurrentSkillUI->GetRageUprisingSP())
+	{
+		RageUprising_->SetImage("1121052.icon.png");
 	}
 }
 
