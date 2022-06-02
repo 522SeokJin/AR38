@@ -11,6 +11,7 @@
 #include "QuickSlotUI.h"
 #include "QuickSlotKeyUI.h"
 #include "InventoryUI.h"
+#include "SkillUI.h"
 
 #include "Player.h"
 #include "Mouse.h"
@@ -24,6 +25,8 @@ PerionLevel::PerionLevel()
 	, Inventory_(nullptr)
 	, Status_(nullptr)
 	, Map_(nullptr)
+	, Skill_(nullptr)
+	, ExpBar_(nullptr)
 {
 
 }
@@ -51,9 +54,15 @@ void PerionLevel::LevelStart()
 	}
 
 	{
-		ExpBarUI* ExpBar = CreateActor<ExpBarUI>();
-		ExpBar->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
-		ExpBar->LinkStatus(Status_);
+		ExpBar_ = CreateActor<ExpBarUI>();
+		ExpBar_->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
+		ExpBar_->LinkStatus(Status_);
+	}
+
+	{
+		Skill_ = CreateActor<SkillUI>();
+		Skill_->GetTransform()->SetWorldPosition({ 200.0f, 200.0f });
+		Skill_->Off();
 	}
 
 	{
@@ -142,6 +151,23 @@ void PerionLevel::LevelUpdate(float _DeltaTime)
 		Inventory_->OnOffChange();
 	}
 
+	if (true == GameEngineInput::GetInst().Down("Skill"))
+	{
+		Skill_->OnOffChange();
+	}
+
+	if (true == GameEngineInput::GetInst().Down("DebugColOn"))
+	{
+		GetMainCamera()->DebugOn();
+		GetUICamera()->DebugOn();
+	}
+
+	if (true == GameEngineInput::GetInst().Down("DebugColOff"))
+	{
+		GetMainCamera()->DebugOff();
+		GetUICamera()->DebugOff();
+	}
+
 	if (true == GameEngineInput::GetInst().Down("PixelCollide"))
 	{
 		Map_->GetPixelCollideImage()->OnOffChange();
@@ -158,6 +184,8 @@ void PerionLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 	GlobalValue::CurrentPlayer = Player_;
 	GlobalValue::CurrentMouse = Cursor_;
 	GlobalValue::CurrentStatusUI = Status_;
+	GlobalValue::CurrentSkillUI = Skill_;
+	GlobalValue::CurrentExpBarUI = ExpBar_;
 
 	Player_->On();
 }

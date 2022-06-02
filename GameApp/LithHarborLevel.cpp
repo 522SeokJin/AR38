@@ -30,6 +30,7 @@ LithHarborLevel::LithHarborLevel()
 	, TaxiDlg_(nullptr)
 	, Taxi_(nullptr)
 	, Map_(nullptr)
+	, ExpBar_(nullptr)
 {
 
 }
@@ -49,6 +50,7 @@ void LithHarborLevel::LevelStart()
 
 	{
 		Map_ = CreateActor<LithHarbor>();
+		Map_->GetPixelCollideImage()->Off();
 	}
 }
 
@@ -147,9 +149,9 @@ void LithHarborLevel::CreateActorLevel()
 	}
 
 	{
-		ExpBarUI* ExpBar = CreateActor<ExpBarUI>();
-		ExpBar->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
-		ExpBar->LinkStatus(Status_);
+		ExpBar_ = CreateActor<ExpBarUI>();
+		ExpBar_->GetTransform()->SetWorldPosition(float4(0.0f, 12.0f - GameEngineWindow::GetInst().GetSize().hy()));
+		ExpBar_->LinkStatus(Status_);
 	}
 
 	{
@@ -196,6 +198,7 @@ void LithHarborLevel::CreateActorLevel()
 	GlobalValue::CurrentMouse = Cursor_;
 	GlobalValue::CurrentStatusUI = Status_;
 	GlobalValue::CurrentInventoryUI = Inventory_;
+	GlobalValue::CurrentExpBarUI = ExpBar_;
 
 	Player_->On();
 }

@@ -22,6 +22,13 @@ void PerionRoom::Start()
 	}
 
 	{
+		GameEngineImageRenderer* Renderer = CreateTransformComponent<GameEngineImageRenderer>();
+		Renderer->SetImage("blackimage.png");
+		Renderer->GetTransform()->SetLocalPosition(MapImage_->GetImageSize().halffloat4().InvertY());
+		Renderer->SetLocalMove({ 0.0f, 0.0f, static_cast<float>(DepthOrder::MAP) + 1.0f });
+	}
+
+	{
 		PixelCollideImage_ = CreateTransformComponent<GameEngineImageRenderer>();
 		PixelCollideImage_->SetImage("20220406190451543_102000003.png");
 		PixelCollideImage_->GetTransform()->SetLocalPosition(PixelCollideImage_->GetImageSize().halffloat4().InvertY());

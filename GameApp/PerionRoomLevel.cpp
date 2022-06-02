@@ -92,6 +92,7 @@ void PerionRoomLevel::LevelStart()
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(
 			{ Map_->GetPixelCollideImage()->GetImageSize().halffloat4().x,
 			-Map_->GetPixelCollideImage()->GetImageSize().halffloat4().y, -100.0f});
+		Map_->GetPixelCollideImage()->Off();
 	}
 
 	{

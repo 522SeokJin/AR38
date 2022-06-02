@@ -37,6 +37,7 @@ private:
 	InventoryUI* Inventory_;
 	StatusUI* Status_;
 	SkillUI* Skill_;
+	ExpBarUI* ExpBar_;
 	LithHarbor* Map_;
 
 	TaxiDlg* TaxiDlg_;

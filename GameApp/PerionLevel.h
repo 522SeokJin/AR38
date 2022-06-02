@@ -32,5 +32,7 @@ private:
 	InventoryUI* Inventory_;
 	StatusUI* Status_;
 	Perion* Map_;
+	SkillUI*  Skill_;
+	ExpBarUI* ExpBar_;
 };
 
