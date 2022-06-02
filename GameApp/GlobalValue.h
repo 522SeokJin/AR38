@@ -31,6 +31,7 @@ class Mouse;
 class StatusUI;
 class ExpBarUI;
 class InventoryUI;
+class SkillUI;
 class GlobalValue
 {
 public:
@@ -39,6 +40,7 @@ public:
 	static StatusUI* CurrentStatusUI;
 	static ExpBarUI* CurrentExpBarUI;
 	static InventoryUI* CurrentInventoryUI;
+	static SkillUI* CurrentSkillUI;
 
 protected:
 	GlobalValue(const GlobalValue& _other) = delete; 

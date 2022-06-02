@@ -35,8 +35,8 @@ private:
 	GameEngineRenderWindow* RenderWindow_;
 	InventoryUI* Inventory_;
 	SkillUI* Skill_;
-	StatusUI* Status_;
 	ExpBarUI* ExpBar_;
+	StatusUI* Status_;
 	ManonForest* Map_;
 
 	Manon* Boss_;

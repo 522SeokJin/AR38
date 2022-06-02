@@ -7,6 +7,7 @@
 SkillUI::SkillUI()
 	: TitleBar_(nullptr)
 	, Grabbed_(false)
+	, BgRenderer_(nullptr)
 	, JobNameRenderer_(nullptr)
 	, SkillTab1_(nullptr)
 	, SkillTab2_(nullptr)
@@ -15,19 +16,22 @@ SkillUI::SkillUI()
 	, SpUpBtn1_(nullptr)
 	, SpUpBtn2_(nullptr)
 	, SpUpBtn3_(nullptr)
-	, SpUpBtn4_(nullptr)
 	, Skill1_(nullptr)
 	, Skill2_(nullptr)
 	, Skill3_(nullptr)
-	, Skill4_(nullptr)
-	, Skill5_(nullptr)
 	, SpUpCol1_(nullptr)
 	, SpUpCol2_(nullptr)
 	, SpUpCol3_(nullptr)
-	, SpUpCol4_(nullptr)
 	, EnabledTab_(0)
-	, SP1_(0)
+	, SP1_(3)
 	, SP2_(0)
+	, SlashblastSP_(0)
+	, WarriorLeapSP_(0)
+	, UpperChargeSP_(0)
+	, IncisingSP_(0)
+	, RagingBlowSP_(0)
+	, RageUprisingSP_(0)
+
 {
 
 }
@@ -40,10 +44,10 @@ SkillUI::~SkillUI()
 void SkillUI::Start()
 {
 	{
-		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>();
-		Renderer->SetImage("Skill.main.backgrndui.png", true, "PointSmp");
-		Renderer->TextSetting("µ¸¿ò", std::to_string(SP1_), 13.5f, float4::BLACK, { 143.0f, 143.0f });
-		Renderer->SetTextFlag(FW1_RIGHT | FW1_VCENTER);
+		BgRenderer_ = CreateTransformComponent<GameEngineUIRenderer>();
+		BgRenderer_->SetImage("Skill.main.backgrndui.png", true, "PointSmp");
+		BgRenderer_->TextSetting("µ¸¿ò", std::to_string(SP1_), 13.5f, float4::BLACK, { 143.0f, 143.0f });
+		BgRenderer_->SetTextFlag(FW1_RIGHT | FW1_VCENTER);
 	}
 
 	{
@@ -82,7 +86,7 @@ void SkillUI::Start()
 	{
 		SpUpBtn1_ = CreateTransformComponent<GameEngineUIRenderer>();
 		SpUpBtn1_->SetImage("Skill.main.BtSpUp.normal.0.png", true, "PointSmp");
-		SpUpBtn1_->TextSetting("µ¸¿ò", std::to_string(SP1_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
+		SpUpBtn1_->TextSetting("µ¸¿ò", std::to_string(SlashblastSP_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
 		SpUpBtn1_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
 		SpUpBtn1_->SetLocalPosition({ -18.0f + 142.0f * 0.0f, 61.5f - 40.0f * 0.0f, -1.0f });
 	}
@@ -90,7 +94,7 @@ void SkillUI::Start()
 	{
 		SpUpBtn2_ = CreateTransformComponent<GameEngineUIRenderer>();
 		SpUpBtn2_->SetImage("Skill.main.BtSpUp.normal.0.png", true, "PointSmp");
-		SpUpBtn2_->TextSetting("µ¸¿ò", std::to_string(SP2_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
+		SpUpBtn2_->TextSetting("µ¸¿ò", std::to_string(WarriorLeapSP_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
 		SpUpBtn2_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
 		SpUpBtn2_->SetLocalPosition({ -18.0f + 142.0f * 1.0f, 61.5f - 40.0f * 0.0f, -1.0f });
 	}
@@ -98,7 +102,7 @@ void SkillUI::Start()
 	{
 		SpUpBtn3_ = CreateTransformComponent<GameEngineUIRenderer>();
 		SpUpBtn3_->SetImage("Skill.main.BtSpUp.normal.0.png", true, "PointSmp");
-		SpUpBtn3_->TextSetting("µ¸¿ò", std::to_string(SP1_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
+		SpUpBtn3_->TextSetting("µ¸¿ò", std::to_string(UpperChargeSP_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
 		SpUpBtn3_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
 		SpUpBtn3_->SetLocalPosition({ -18.0f + 142.0f * 0.0f, 61.5f - 40.0f * 1.0f, -1.0f });
 	}
@@ -217,6 +221,44 @@ void SkillUI::Update(float _DeltaTime)
 		static_cast<int>(ColGroup::MOUSE), Func);
 
 	ChangeTabEvent();
+
+	switch (EnabledTab_)
+	{
+	case 0:		// SP1
+	
+		Skill1_->SetImage("1001005.icon.png");
+		Skill1_->TextSetting("µ¸¿ò", "½½·¡½Ã ºí·¯½ºÆ®", 13.0f, float4::BLACK, { 25.0f, 10.0f });
+		SpUpBtn1_->TextSetting("µ¸¿ò", std::to_string(SlashblastSP_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
+
+		Skill2_->SetImage("1001008.icon.png");
+		Skill2_->TextSetting("µ¸¿ò", "¿ö¸®¾î ¸®ÇÁ", 13.0f, float4::BLACK, { 25.0f, 10.0f });
+		SpUpBtn2_->TextSetting("µ¸¿ò", std::to_string(WarriorLeapSP_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
+	
+		Skill3_->SetImage("1001011.icon.png");
+		Skill3_->TextSetting("µ¸¿ò", "¾îÆÛ Â÷Áö", 13.0f, float4::BLACK, { 25.0f, 10.0f });
+		SpUpBtn3_->TextSetting("µ¸¿ò", std::to_string(UpperChargeSP_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
+
+		break;
+	case 1:		// SP2
+
+		Skill1_->SetImage("1120017.icon.png");
+		Skill1_->TextSetting("µ¸¿ò", "·¹ÀÌÂ¡ ºí·Î¿ì", 13.0f, float4::BLACK, { 25.0f, 10.0f });
+		SpUpBtn1_->TextSetting("µ¸¿ò", std::to_string(RagingBlowSP_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
+
+		Skill2_->SetImage("1121015.icon.png");
+		Skill2_->TextSetting("µ¸¿ò", "ÀÎ»çÀÌÂ¡", 13.0f, float4::BLACK, { 25.0f, 10.0f });
+		SpUpBtn2_->TextSetting("µ¸¿ò", std::to_string(IncisingSP_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
+
+		Skill3_->SetImage("1121052.icon.png");
+		Skill3_->TextSetting("µ¸¿ò", "·¹ÀÌÁö ¾÷¶óÀÌÂ¡", 13.0f, float4::BLACK, { 25.0f, 10.0f });
+		SpUpBtn3_->TextSetting("µ¸¿ò", std::to_string(RageUprisingSP_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
+
+		break;
+	default:
+		break;
+	}
+
+
 }
 
 void SkillUI::TitleBarEvent(GameEngineCollision* _OtherCollision)
@@ -250,6 +292,27 @@ void SkillUI::SpUpBtnEvent1(GameEngineCollision* _OtherCollision)
 	if (true == GameEngineInput::GetInst().Up("MLBtn"))
 	{
 		// Event
+		switch (EnabledTab_)
+		{
+		case 0:		// SP1
+			if (0 < SP1_)
+			{
+				++SlashblastSP_;
+				--SP1_;
+				BgRenderer_->TextSetting("µ¸¿ò", std::to_string(SP1_), 13.5f, float4::BLACK, { 143.0f, 143.0f });
+			}
+			break;
+		case 1:		// SP2
+			if (0 < SP2_)
+			{
+				++RagingBlowSP_;
+				--SP2_;
+				BgRenderer_->TextSetting("µ¸¿ò", std::to_string(SP2_), 13.5f, float4::BLACK, { 143.0f, 143.0f });
+			}
+			break;
+		default:
+			break;
+		}
 		return;
 	}
 
@@ -267,6 +330,27 @@ void SkillUI::SpUpBtnEvent2(GameEngineCollision* _OtherCollision)
 	if (true == GameEngineInput::GetInst().Up("MLBtn"))
 	{
 		// Event
+		switch (EnabledTab_)
+		{
+		case 0:		// SP1
+			if (0 < SP1_)
+			{
+				++WarriorLeapSP_;
+				--SP1_;
+				BgRenderer_->TextSetting("µ¸¿ò", std::to_string(SP1_), 13.5f, float4::BLACK, { 143.0f, 143.0f });
+			}
+			break;
+		case 1:		// SP2
+			if (0 < SP2_)
+			{
+				++IncisingSP_;
+				--SP2_;
+				BgRenderer_->TextSetting("µ¸¿ò", std::to_string(SP2_), 13.5f, float4::BLACK, { 143.0f, 143.0f });
+			}
+			break;
+		default:
+			break;
+		}
 		return;
 	}
 
@@ -284,27 +368,31 @@ void SkillUI::SpUpBtnEvent3(GameEngineCollision* _OtherCollision)
 	if (true == GameEngineInput::GetInst().Up("MLBtn"))
 	{
 		// Event
+		switch (EnabledTab_)
+		{
+		case 0:		// SP1
+			if (0 < SP1_)
+			{
+				++UpperChargeSP_;
+				--SP1_;
+				BgRenderer_->TextSetting("µ¸¿ò", std::to_string(SP1_), 13.5f, float4::BLACK, { 143.0f, 143.0f });
+			}
+			break;
+		case 1:		// SP2
+			if (0 < SP2_)
+			{
+				++RageUprisingSP_;
+				--SP2_;
+				BgRenderer_->TextSetting("µ¸¿ò", std::to_string(SP2_), 13.5f, float4::BLACK, { 143.0f, 143.0f });
+			}
+			break;
+		default:
+			break;
+		}
 		return;
 	}
 
 	SpUpBtn3_->SetImage("Skill.main.BtSpUp.mouseOver.0.png");
-}
-
-void SkillUI::SpUpBtnEvent4(GameEngineCollision* _OtherCollision)
-{
-	if (true == GameEngineInput::GetInst().Press("MLBtn"))
-	{
-		SpUpBtn4_->SetImage("Skill.main.BtSpUp.pressed.0.png");
-		return;
-	}
-
-	if (true == GameEngineInput::GetInst().Up("MLBtn"))
-	{
-		// Event
-		return;
-	}
-
-	SpUpBtn4_->SetImage("Skill.main.BtSpUp.mouseOver.0.png");
 }
 
 void SkillUI::ChangeTabEvent()
@@ -317,6 +405,7 @@ void SkillUI::ChangeTabEvent()
 				SkillTab1_->SetImage("Skill.main.Tab.enabled.1.png");
 				SkillTab2_->SetImage("Skill.main.Tab.disabled.2.png");
 
+				BgRenderer_->TextSetting("µ¸¿ò", std::to_string(SP1_), 13.5f, float4::BLACK, { 143.0f, 143.0f });
 				JobNameRenderer_->TextSetting("µ¸¿ò", "Àü»çÀÇ ±æ", 11, float4::WHITE, { 0.0f, 0.0f });
 
 				EnabledTab_ = 0;
@@ -331,6 +420,7 @@ void SkillUI::ChangeTabEvent()
 				SkillTab1_->SetImage("Skill.main.Tab.disabled.1.png");
 				SkillTab2_->SetImage("Skill.main.Tab.enabled.2.png");
 
+				BgRenderer_->TextSetting("µ¸¿ò", std::to_string(SP2_), 13.5f, float4::BLACK, { 143.0f, 143.0f });
 				JobNameRenderer_->TextSetting("µ¸¿ò", "È÷¾î·ÎÀÇ ±æ", 11, float4::WHITE, { 0.0f, 0.0f });
 
 				EnabledTab_ = 1;

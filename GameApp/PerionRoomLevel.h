@@ -9,6 +9,8 @@ class InventoryUI;
 class JobsNPC_Dlg;
 class JobsNPC;
 class StatusUI;
+class SkillUI;
+class PerionRoom;
 class PerionRoomLevel : public GameEngineLevel
 {
 public:
@@ -32,6 +34,9 @@ private:
 	GameEngineRenderWindow* RenderWindow_;
 	InventoryUI* Inventory_;
 	StatusUI* Status_;
+	SkillUI*  Skill_;
+	ExpBarUI* ExpBar_;
+	PerionRoom* Map_;
 
 	JobsNPC_Dlg* JobsNPCDlg_;
 	JobsNPC* JobsNPC_;
