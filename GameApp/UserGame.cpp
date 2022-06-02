@@ -16,8 +16,7 @@
 #include "DeepeningForestLevel.h"
 #include "SilentSwampLevel.h"
 #include "SahelLevel.h"
-#include "EntranceDemianLevel.h"
-#include "DemianLevel.h"
+#include "ManonForestLevel.h"
 
 std::atomic<int> UserGame::LoadingFolder = 0;
 
@@ -53,10 +52,10 @@ void UserGame::Initialize()
 	LevelCreate<SahelLevel>("Sahel");
 
 	// Boss Ground
-	// LevelCreate<ManonForest>("ManonForest");
+	LevelCreate<ManonForestLevel>("ManonForest");
 
 
-	LevelChange("SilentSwamp");
+	LevelChange("ManonForest");
 }
 
 void UserGame::Release()

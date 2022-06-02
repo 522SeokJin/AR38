@@ -41,29 +41,11 @@
     <ClCompile Include="SahelLevel.cpp">
       <Filter>Level\HuntingGround</Filter>
     </ClCompile>
-    <ClCompile Include="EntranceDemianLevel.cpp">
-      <Filter>Level\HuntingGround\Demian</Filter>
-    </ClCompile>
     <ClCompile Include="QuickSlotKeyUI.cpp">
       <Filter>Actor\UI\MainBar\QuickSlot</Filter>
     </ClCompile>
     <ClCompile Include="QuickSlotUI.cpp">
       <Filter>Actor\UI\MainBar\QuickSlot</Filter>
-    </ClCompile>
-    <ClCompile Include="DemianLevel.cpp">
-      <Filter>Level\HuntingGround\Demian</Filter>
-    </ClCompile>
-    <ClCompile Include="Demian.cpp">
-      <Filter>Actor\Monster\BOSS</Filter>
-    </ClCompile>
-    <ClCompile Include="Demian_Animation.cpp">
-      <Filter>Actor\Monster\BOSS</Filter>
-    </ClCompile>
-    <ClCompile Include="DemianMap.cpp">
-      <Filter>Actor\Map\HuntingGround\Demian</Filter>
-    </ClCompile>
-    <ClCompile Include="EntranceDemianMap.cpp">
-      <Filter>Actor\Map\HuntingGround\Demian</Filter>
     </ClCompile>
     <ClCompile Include="InventoryUI.cpp">
       <Filter>Actor\UI\Inventory</Filter>
@@ -170,6 +152,15 @@
     <ClCompile Include="SilentSwamp.cpp">
       <Filter>Actor\Map\HuntingGround</Filter>
     </ClCompile>
+    <ClCompile Include="ManonForest.cpp">
+      <Filter>Actor\Map\HuntingGround</Filter>
+    </ClCompile>
+    <ClCompile Include="ManonForestLevel.cpp">
+      <Filter>Level\HuntingGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Manon.cpp">
+      <Filter>Actor\Monster\BOSS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -211,9 +202,6 @@
     <Filter Include="Actor\NPC">
       <UniqueIdentifier>{d5ce0523-29a4-495c-a840-b26a26f94b98}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\HuntingGround\Demian">
-      <UniqueIdentifier>{5247f2c1-c26d-4932-b321-14d614563cfb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\Player">
       <UniqueIdentifier>{aa6748f1-cc28-4389-866e-b706de81f30e}</UniqueIdentifier>
     </Filter>
@@ -246,9 +234,6 @@
     </Filter>
     <Filter Include="Actor\Map\HuntingGround">
       <UniqueIdentifier>{d371576b-2ea8-41d5-88ac-faeb6f201ba6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Map\HuntingGround\Demian">
-      <UniqueIdentifier>{80fdbf4c-2465-4d92-99e1-544a771eab93}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Portal">
       <UniqueIdentifier>{3b8c0cb4-af83-4767-b413-14afc69d7ef0}</UniqueIdentifier>
@@ -306,26 +291,11 @@
     <ClInclude Include="SahelLevel.h">
       <Filter>Level\HuntingGround</Filter>
     </ClInclude>
-    <ClInclude Include="EntranceDemianLevel.h">
-      <Filter>Level\HuntingGround\Demian</Filter>
-    </ClInclude>
     <ClInclude Include="QuickSlotKeyUI.h">
       <Filter>Actor\UI\MainBar\QuickSlot</Filter>
     </ClInclude>
     <ClInclude Include="QuickSlotUI.h">
       <Filter>Actor\UI\MainBar\QuickSlot</Filter>
-    </ClInclude>
-    <ClInclude Include="DemianLevel.h">
-      <Filter>Level\HuntingGround\Demian</Filter>
-    </ClInclude>
-    <ClInclude Include="Demian.h">
-      <Filter>Actor\Monster\BOSS</Filter>
-    </ClInclude>
-    <ClInclude Include="DemianMap.h">
-      <Filter>Actor\Map\HuntingGround\Demian</Filter>
-    </ClInclude>
-    <ClInclude Include="EntranceDemianMap.h">
-      <Filter>Actor\Map\HuntingGround\Demian</Filter>
     </ClInclude>
     <ClInclude Include="InventoryUI.h">
       <Filter>Actor\UI\Inventory</Filter>
@@ -428,6 +398,15 @@
     </ClInclude>
     <ClInclude Include="SilentSwamp.h">
       <Filter>Actor\Map\HuntingGround</Filter>
+    </ClInclude>
+    <ClInclude Include="ManonForest.h">
+      <Filter>Actor\Map\HuntingGround</Filter>
+    </ClInclude>
+    <ClInclude Include="ManonForestLevel.h">
+      <Filter>Level\HuntingGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Manon.h">
+      <Filter>Actor\Monster\BOSS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

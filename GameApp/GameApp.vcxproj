@@ -177,27 +177,6 @@
     <ClCompile Include="CurvedEffect.cpp" />
     <ClCompile Include="DeepeningForest.cpp" />
     <ClCompile Include="DeepeningForestLevel.cpp" />
-    <ClCompile Include="Demian.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="DemianLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="DemianMap.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Demian_Animation.cpp" />
-    <ClCompile Include="EntranceDemianLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="EntranceDemianMap.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="ExpBarUI.cpp">
       <SubType>
       </SubType>
@@ -223,6 +202,9 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="LithHarborTaxi.cpp" />
+    <ClCompile Include="Manon.cpp" />
+    <ClCompile Include="ManonForest.cpp" />
+    <ClCompile Include="ManonForestLevel.cpp" />
     <ClCompile Include="Map.cpp">
       <SubType>
       </SubType>
@@ -315,26 +297,6 @@
     <ClInclude Include="CurvedEffect.h" />
     <ClInclude Include="DeepeningForest.h" />
     <ClInclude Include="DeepeningForestLevel.h" />
-    <ClInclude Include="Demian.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="DemianLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="DemianMap.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="EntranceDemianLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="EntranceDemianMap.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="ForestDefender.h" />
     <ClInclude Include="GlobalLevelControl.h">
       <SubType>
@@ -359,6 +321,9 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="LithHarborTaxi.h" />
+    <ClInclude Include="Manon.h" />
+    <ClInclude Include="ManonForest.h" />
+    <ClInclude Include="ManonForestLevel.h" />
     <ClInclude Include="Map.h">
       <SubType>
       </SubType>
