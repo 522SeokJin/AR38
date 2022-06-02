@@ -885,6 +885,8 @@ void Player::slashBlast_Start()
 			SkillEffect1_->IsLeft_ = true;
 		}
 		SkillEffect1_->SetLocalPosition({ -100.0f, 0.0f, 0.0f });
+		SkillCollision_->SetLocalPosition({ -100.0f, 0.0f, 0.0f });
+		SkillCollision_->SetLocalScaling({ 300.0f, 150.0f, 0.0f });
 		break;
 	case PlayerDir::RIGHT:
 		Avatar_->SetLocalPosition({ 40.0f, -10.0f, 0.0f });
@@ -894,6 +896,8 @@ void Player::slashBlast_Start()
 			SkillEffect1_->IsLeft_ = false;
 		}
 		SkillEffect1_->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
+		SkillCollision_->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
+		SkillCollision_->SetLocalScaling({ 300.0f, 150.0f, 0.0f });
 		break;
 	default:
 		break;
@@ -1095,6 +1099,8 @@ void Player::upperCharge_Start()
 			SkillEffect1_->IsLeft_ = true;
 		}
 		SkillEffect1_->SetLocalPosition({ 10.0f, 90.0f, 0.0f });
+		SkillCollision_->SetLocalPosition({ -50.0f, 150.0f, 0.0f });
+		SkillCollision_->SetLocalScaling({ 100.0f, 300.0f, 0.0f });
 		break;
 	case PlayerDir::RIGHT:
 		if (true == SkillEffect1_->IsLeft_)
@@ -1103,6 +1109,8 @@ void Player::upperCharge_Start()
 			SkillEffect1_->IsLeft_ = false;
 		}
 		SkillEffect1_->SetLocalPosition({ -10.0f, 90.0f, 0.0f });
+		SkillCollision_->SetLocalPosition({ 50.0f, 150.0f, 0.0f });
+		SkillCollision_->SetLocalScaling({ 100.0f, 300.0f, 0.0f });
 		break;
 	default:
 		break;
@@ -1169,6 +1177,9 @@ void Player::RageUprising_Start()
 
 	SkillEffect2_->SetLocalPosition({ 35.0f, 235.0f, 0.0f });
 	SkillEffect3_->SetLocalPosition({ -1.0f, 128.0f, 0.0f });
+
+	SkillCollision_->SetLocalPosition({ 0.0f, 300.0f, 0.0f });
+	SkillCollision_->SetLocalScaling({ 700.0f, 700.0f, 0.0f });
 
 	GlobalValue::CurrentStatusUI->SubMP(50.0f);
 }
@@ -1240,6 +1251,8 @@ void Player::Incising_Start()
 			SkillEffect1_->IsLeft_ = true;
 		}
 		SkillEffect1_->SetLocalPosition({ -100.0f, 150.0f, 0.0f });
+		SkillCollision_->SetLocalPosition({ -200.0f, 0.0f, 0.0f });
+		SkillCollision_->SetLocalScaling({ 300.0f, 300.0f, 0.0f });
 		break;
 	case PlayerDir::RIGHT:
 		Avatar_->SetLocalPosition({ 12.0f, -10.0f, 0.0f });
@@ -1249,6 +1262,8 @@ void Player::Incising_Start()
 			SkillEffect1_->IsLeft_ = false;
 		}
 		SkillEffect1_->SetLocalPosition({ 100.0f, 150.0f, 0.0f });
+		SkillCollision_->SetLocalPosition({ 200.0f, 0.0f, 0.0f });
+		SkillCollision_->SetLocalScaling({ 300.0f, 300.0f, 0.0f });
 		break;
 	default:
 		break;
@@ -1325,6 +1340,8 @@ void Player::RagingBlow_Start()
 			SkillEffect1_->IsLeft_ = true;
 		}
 		SkillEffect1_->SetLocalPosition({ 70.0f, 10.0f, 0.0f });
+		SkillCollision_->SetLocalPosition({ -100.0f, 0.0f, 0.0f });
+		SkillCollision_->SetLocalScaling({ 400.0f, 300.0f, 0.0f });
 		break;
 	case PlayerDir::RIGHT:
 		Avatar_->SetLocalPosition({ 12.0f, -25.0f, 0.0f });
@@ -1334,6 +1351,8 @@ void Player::RagingBlow_Start()
 			SkillEffect1_->IsLeft_ = false;
 		}
 		SkillEffect1_->SetLocalPosition({ -70.0f, 10.0f, 0.0f });
+		SkillCollision_->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
+		SkillCollision_->SetLocalScaling({ 400.0f, 300.0f, 0.0f });
 		break;
 	default:
 		break;
