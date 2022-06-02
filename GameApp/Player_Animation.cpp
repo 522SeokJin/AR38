@@ -15,7 +15,9 @@ void Player::CreateAnimation()
 
 	Tombstone_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Tombstone_->SetImage("TombStone.png", true, "PointSmp");
-	Tombstone_->SetLocalPosition({ 0.0f, -16.0f, 2.0f });
+	TombstoneOriginPos_ = { 0.0f, -16.0f, 2.0f };
+	Tombstone_->SetLocalPosition(TombstoneOriginPos_);
+	Tombstone_->Off();
 
 	SkillEffect1_->Off();
 	SkillEffect2_->Off();

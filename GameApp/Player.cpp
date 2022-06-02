@@ -8,6 +8,7 @@
 #include <GameEngine/GameEngineGUI.h>
 #include "ValueCheckWindow.h"
 #include "StatusUI.h"
+#include "DeathNotice.h"
 
 Player::Player()
 	: Dir_(PlayerDir::LEFT)
@@ -23,10 +24,12 @@ Player::Player()
 	, SkillEffect4_(nullptr)
 	, HitEffect_(nullptr)
 	, Tombstone_(nullptr)
+	, TombstoneOriginPos_(float4::ZERO)
 	, Collision_(nullptr)
 	, SkillCollision_(nullptr)
 	, SkillHitCount_(1)
 	, Invincible_(false)
+	, DeathUI_(nullptr)
 {
 }
 
@@ -136,6 +139,20 @@ void Player::JobsChanged()
 	JobsChangedEffect_->SetChangeAnimation("JobChanged", true);
 }
 
+void Player::Revive()
+{
+	GlobalValue::CurrentStatusUI->SetHPPer(100.0f);
+	GlobalValue::CurrentStatusUI->SetMPPer(100.0f);
+
+	if (0.0f >= GetFootColor().g)
+	{
+		FSM_.ChangeState("fall");
+		return;
+	}
+
+	FSM_.ChangeState("stand1");
+}
+
 void Player::MonsterEvent(GameEngineCollision* _OtherCollision)
 {
 	Invincible_ = true;
@@ -228,6 +245,11 @@ void Player::MonsterAttackEvent(GameEngineCollision* _OtherCollision)
 void Player::Start()
 {
 	CreateAnimation();
+
+	{
+		DeathUI_ = GetLevel()->CreateActor<DeathNotice>();
+		DeathUI_->Off();
+	}
 
 	{
 		Collision_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
@@ -327,12 +349,19 @@ void Player::Start()
 		std::bind(&Player::RagingBlow_End, this));
 	SkillEffect1_->SetFrameCallBack("RagingBlow_effect", 3, [&]() { SkillCollision_->On(); });
 
-	FSM_.ChangeState("dead");
+	FSM_.ChangeState("stand1");
 }
 
 void Player::Update(float _DeltaTime)
 {
 	FSM_.Update(_DeltaTime);
+
+	if ("dead" != FSM_.GetCurrentName() &&
+		0 >= GlobalValue::CurrentStatusUI->GetHP())
+	{
+		FSM_.ChangeState("dead");
+		return;
+	}
 
 	std::function<void(GameEngineCollision*)> Func = 
 		std::bind(&Player::MonsterEvent, this, std::placeholders::_1);

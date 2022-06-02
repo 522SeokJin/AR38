@@ -38,6 +38,16 @@ public:
 	void SubHP(float _Value);
 	void SubMP(float _Value);
 
+	inline float GetHP()
+	{
+		return CurHP_;
+	}
+	
+	inline float GetMP()
+	{
+		return CurMP_;
+	}
+
 	void SetLevel(int _Level)
 	{
 		Level_ = _Level;

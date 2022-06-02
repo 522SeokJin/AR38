@@ -3,6 +3,7 @@
 #include <GameEngine/GameEngineUIRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 #include "Mouse.h"
+#include "Player.h"
 
 DeathNotice::DeathNotice()
 	: BgRenderer_(nullptr)
@@ -99,6 +100,7 @@ void DeathNotice::OkBtnEvent(GameEngineCollision* _OtherCollision)
 	if (true == GameEngineInput::GetInst().Up("MLBtn"))
 	{
 		// Event
+		GlobalValue::CurrentPlayer->Revive();
 		return;
 	}
 

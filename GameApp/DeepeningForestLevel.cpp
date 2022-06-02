@@ -15,7 +15,6 @@
 #include "QuickSlotKeyUI.h"
 #include "InventoryUI.h"
 #include "SkillUI.h"
-#include "DeathNotice.h"
 
 #include "ForestDefender.h"
 
@@ -187,11 +186,6 @@ void DeepeningForestLevel::CreateActorLevel()
 		Inventory_->Off();
 	}
 	
-	{
-		DeathNotice* Notice = CreateActor<DeathNotice>();
-		Notice->GetTransform()->SetWorldPosition({ -0.0f, 0.0f });
-	}
-
 	{
 		Player_ = CreateActor<Player>();
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(

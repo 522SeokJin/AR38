@@ -6,6 +6,7 @@
 #include "PhysicsDefine.h"
 #include "Player_Define.h"
 #include "StatusUI.h"
+#include "DeathNotice.h"
 
 void Player::stand1_Start()
 {
@@ -115,16 +116,35 @@ void Player::dead_Start()
 {
 	Avatar_->SetChangeAnimation("dead");
 	Tombstone_->On();
+	Tombstone_->SetLocalPosition(TombstoneOriginPos_ + float4(0.0f, 1000.0f, 0.0f));
+
+	DeathUI_->On();
+	Collision_->Off();
 }
 
 void Player::dead()
 {
-	Avatar_->SetLocalPosition({-10.0f + 20.0f * std::sinf(2.0f * FSM_.GetCurrentState()->Time_)
-		, 30.0f + 20.0f * std::cosf(2.0f * FSM_.GetCurrentState()->Time_)});
+	Avatar_->SetLocalPosition({ -10.0f + 20.0f * std::sinf(2.0f * FSM_.GetCurrentState()->Time_)
+		, 30.0f + 20.0f * std::cosf(2.0f * FSM_.GetCurrentState()->Time_) });
+
+	if (Tombstone_->GetLocalPosition() != TombstoneOriginPos_)
+	{
+		Tombstone_->SetLocalDeltaTimeMove({ 0.0f, -1000.0f, 0.0f });
+	}
+
+	if (Tombstone_->GetLocalPosition().y < TombstoneOriginPos_.y)
+	{
+		Tombstone_->SetLocalPosition(TombstoneOriginPos_);
+	}
 }
 
 void Player::dead_End()
 {
+	Tombstone_->Off();
+	DeathUI_->Off();
+	Collision_->On();
+
+	Avatar_->SetLocalPosition(float4::ZERO);
 }
 
 void Player::walk1_Start()

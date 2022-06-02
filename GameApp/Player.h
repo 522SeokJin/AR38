@@ -9,6 +9,7 @@ enum class PlayerDir;
 
 class GameEngineImageRenderer;
 class GameEngineCollision;
+class DeathNotice;
 class Player : public GameEngineActor
 {
 public:
@@ -31,6 +32,8 @@ public:
 
 	void LevelUp();
 	void JobsChanged();
+	
+	void Revive();
 
 protected:
 	Player(const Player& _other) = delete; 
@@ -85,6 +88,7 @@ private:
 	GameEngineImageRenderer* HitEffect_;
 
 	GameEngineImageRenderer* Tombstone_;
+	float4 TombstoneOriginPos_;
 
 	int SkillHitCount_;
 	bool Invincible_;
@@ -92,6 +96,8 @@ private:
 	// 피격 데미지 표시
 	std::map<int, std::vector<GameEngineImageRenderer*>> DmgNumber_;
 	GameEngineRandom Random_;
+
+	DeathNotice* DeathUI_;
 
 	////////////////////////////////////////////	FSM
 

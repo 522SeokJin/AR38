@@ -69,8 +69,8 @@ void UserGame::CreateKey()
 	GameEngineInput::GetInst().CreateKey("Right", VK_RIGHT);
 	GameEngineInput::GetInst().CreateKey("Up", VK_UP);
 	GameEngineInput::GetInst().CreateKey("Down", VK_DOWN);
-	GameEngineInput::GetInst().CreateKey("Ctrl", VK_CONTROL);
-	GameEngineInput::GetInst().CreateKey("Alt", VK_MENU);
+	GameEngineInput::GetInst().CreateKey("Ctrl", 'z');
+	GameEngineInput::GetInst().CreateKey("Alt", 'x');
 	GameEngineInput::GetInst().CreateKey("Enter", VK_RETURN);
 
 	// Mouse
