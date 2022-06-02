@@ -35,7 +35,6 @@ DeepeningForestLevel::~DeepeningForestLevel()
 {
 	for (auto& Monster : Monsters_)
 	{
-		Monster->Death();
 		Monster = nullptr;
 	}
 }

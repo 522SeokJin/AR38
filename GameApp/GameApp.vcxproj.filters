@@ -155,6 +155,15 @@
     <ClCompile Include="BluePotion.cpp">
       <Filter>Actor\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Scorpion.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Sahel.cpp">
+      <Filter>Actor\Map\HuntingGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Sandmole.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -398,6 +407,15 @@
     </ClInclude>
     <ClInclude Include="BluePotion.h">
       <Filter>Actor\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Scorpion.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Sahel.h">
+      <Filter>Actor\Map\HuntingGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Sandmole.h">
+      <Filter>Actor\Monster</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

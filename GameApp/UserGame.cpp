@@ -52,7 +52,11 @@ void UserGame::Initialize()
 	LevelCreate<SilentSwampLevel>("SilentSwamp");
 	LevelCreate<SahelLevel>("Sahel");
 
-	LevelChange("DeepeningForest");
+	// Boss Ground
+	// LevelCreate<ManonForest>("ManonForest");
+
+
+	LevelChange("Sahel");
 }
 
 void UserGame::Release()

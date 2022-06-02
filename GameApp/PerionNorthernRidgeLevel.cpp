@@ -35,7 +35,6 @@ PerionNorthernRidgeLevel::~PerionNorthernRidgeLevel()
 {
 	for (auto& Stump : Stumps_)
 	{
-		Stump->Death();
 		Stump = nullptr;
 	}
 }

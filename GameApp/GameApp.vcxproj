@@ -246,10 +246,13 @@
     </ClCompile>
     <ClCompile Include="QuickSlotKeyUI.cpp" />
     <ClCompile Include="RedPotion.cpp" />
+    <ClCompile Include="Sahel.cpp" />
     <ClCompile Include="SahelLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Sandmole.cpp" />
+    <ClCompile Include="Scorpion.cpp" />
     <ClCompile Include="SilentSwampLevel.cpp">
       <SubType>
       </SubType>
@@ -377,10 +380,13 @@
     </ClInclude>
     <ClInclude Include="QuickSlotKeyUI.h" />
     <ClInclude Include="RedPotion.h" />
+    <ClInclude Include="Sahel.h" />
     <ClInclude Include="SahelLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Sandmole.h" />
+    <ClInclude Include="Scorpion.h" />
     <ClInclude Include="SilentSwampLevel.h">
       <SubType>
       </SubType>
