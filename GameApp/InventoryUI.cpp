@@ -110,34 +110,95 @@ void InventoryUI::Update(float _DeltaTime)
 	MesoText_->TextSetting("µ¸¿ò", std::to_string(Meso_), 13, float4::BLACK,
 		{ -15.0f, 1.0f, 0.0f });
 
+	int UseableItemCount = 0;
+
 	switch (EnabledTab_)
 	{
 	case InventoryTab::Equipment:
 		for (auto& Item : EquipmentTabItemList_)
 		{
-			if (true == Item->IsUpdate())
+			if (false == Item->IsUpdate())
 			{
 				continue;
 			}
 
 			Item->On();
+		}
+
+		for (auto& Item : UseableTabItemList_)
+		{
+			if (false == Item->IsUpdate())
+			{
+				continue;
+			}
+
+			Item->Off();
+		}
+		for (auto& Item : EtcTabItemList_)
+		{
+			if (false == Item->IsUpdate())
+			{
+				continue;
+			}
+
+			Item->Off();
 		}
 		break;
 	case InventoryTab::Useable:
+		for (auto& Item : EquipmentTabItemList_)
+		{
+			if (false == Item->IsUpdate())
+			{
+				continue;
+			}
+
+			Item->Off();
+		}
 		for (auto& Item : UseableTabItemList_)
 		{
-			if (true == Item->IsUpdate())
+			if (false == Item->IsUpdate())
 			{
 				continue;
 			}
 
 			Item->On();
+			Item->SetLocalPosition({ -68.0f + UseableItemCount * 42.0f, 119.0f });
+			Item->SetLocalPosition({ -68.0f + UseableItemCount * 42.0f, 119.0f });
+
+			++UseableItemCount;
+		}
+		for (auto& Item : EtcTabItemList_)
+		{
+			if (false == Item->IsUpdate())
+			{
+				continue;
+			}
+
+			Item->Off();
 		}
 		break;
 	case InventoryTab::Etc:
+		for (auto& Item : EquipmentTabItemList_)
+		{
+			if (false == Item->IsUpdate())
+			{
+				continue;
+			}
+
+			Item->Off();
+		}
+		for (auto& Item : UseableTabItemList_)
+		{
+			if (false == Item->IsUpdate())
+			{
+				continue;
+			}
+
+			Item->Off();
+		}
 		for (auto& Item : EtcTabItemList_)
 		{
-			if (true == Item->IsUpdate())
+			if (false == Item->IsUpdate())
 			{
 				continue;
 			}

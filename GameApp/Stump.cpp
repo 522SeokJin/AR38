@@ -379,20 +379,20 @@ void Stump::die_Start()
 {
 	RandomItemSelect_ = Random_.RandomInt(0, 9);
 
-	if (5 > RandomItemSelect_)
+	if (4 > RandomItemSelect_)
 	{
 		Meso_ = GetLevel()->CreateActor<SmallMeso>();
 		Meso_->Off();
 		Meso_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
 	}
-	else if (5 <= RandomItemSelect_ &&
-		8 > RandomItemSelect_)
+	else if (4 <= RandomItemSelect_ &&
+		7 > RandomItemSelect_)
 	{
 		RedPotion_ = GetLevel()->CreateActor<RedPotion>();
 		RedPotion_->Off();
 		RedPotion_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
 	}
-	else if (8 <= RandomItemSelect_ &&
+	else if (7 <= RandomItemSelect_ &&
 		10 > RandomItemSelect_)
 	{
 		BluePotion_ = GetLevel()->CreateActor<BluePotion>();
@@ -415,25 +415,26 @@ void Stump::die()
 
 	if (Renderer_->GetMulColor().a <= 0.0f)
 	{
-		Off();
-
-		if (5 > RandomItemSelect_)
+		if (4 > RandomItemSelect_)
 		{
 			Meso_->DropStart();
 			Meso_->On();
 		}
-		else if (5 <= RandomItemSelect_ &&
-			8 > RandomItemSelect_)
+		else if (4 <= RandomItemSelect_ &&
+			7 > RandomItemSelect_)
 		{
 			RedPotion_->DropStart();
 			RedPotion_->On();
 		}
-		else if (8 <= RandomItemSelect_ &&
+		else if (7 <= RandomItemSelect_ &&
 			10 > RandomItemSelect_)
 		{
 			BluePotion_->DropStart();
 			BluePotion_->On();
 		}
+
+		Off();
+
 	}
 }
 

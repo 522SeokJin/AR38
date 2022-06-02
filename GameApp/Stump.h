@@ -55,9 +55,9 @@ private:
 
 	float4 OriginPos_;
 
-	SmallMeso* Meso_;	// 0~4
-	RedPotion*  RedPotion_;	// 5~7 
-	BluePotion* BluePotion_;	// 8~9
+	SmallMeso* Meso_;	// 0~3
+	RedPotion*  RedPotion_;	// 4~6 
+	BluePotion* BluePotion_;	// 7~9
 
 	int RandomItemSelect_;
 
