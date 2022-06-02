@@ -8,7 +8,11 @@ QuickSlotUI::QuickSlotUI()
 	: RedPotion_(nullptr)
 	, BluePotion_(nullptr)
 	, ElixirPotion_(nullptr)
-
+	, SlashBlast_(nullptr)
+	, UpperCharge_(nullptr)
+	, RagingBlow_(nullptr)
+	, RageUprising_(nullptr)
+	, Incising_(nullptr)
 {
 
 }
@@ -59,7 +63,37 @@ void QuickSlotUI::Start()
 		ElixirPotion_->SetImage("02000004.info.icon.png");
 		ElixirPotion_->SetLocalPosition({ -263.0f + 35.0f * 3.0f, -17.5f + 35.0f });
 	}
+	
+	{
+		SlashBlast_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+		SlashBlast_->SetImage("1001005.iconDisabled.png");
+		SlashBlast_->SetLocalPosition({ -263.0f + 35.0f * 0.0f, -17.5f + 35.0f * 1.0f });
+	}
+	
+	{
+		UpperCharge_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+		UpperCharge_->SetImage("1001011.iconDisabled.png");
+		UpperCharge_->SetLocalPosition({ -263.0f + 35.0f * 1.0f, -17.5f + 35.0f * 0.0f});
+	}
+	
+	{
+		RagingBlow_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+		RagingBlow_->SetImage("1120017.iconDisabled.png");
+		RagingBlow_->SetLocalPosition({ -263.0f + 35.0f * 2.0f, -17.5f + 35.0f * 0.0f});
+	}
 
+	{
+		Incising_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+		Incising_->SetImage("1121015.iconDisabled.png");
+		Incising_->SetLocalPosition({ -263.0f + 35.0f * 3.0f, -17.5f + 35.0f * 0.0f });
+	}
+
+	{
+		RageUprising_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
+		RageUprising_->SetImage("1121052.iconDisabled.png");
+		RageUprising_->SetLocalPosition({ -263.0f + 35.0f * 4.0f, -17.5f + 35.0f * 0.0f});
+	}
+	
 	for (int j = 0; j < 2; j++)
 	{
 		for (int k = 0; k < 10; k++)

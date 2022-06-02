@@ -22,6 +22,12 @@ private:
 	GameEngineUIRenderer* RedPotion_;
 	GameEngineUIRenderer* BluePotion_;
 	GameEngineUIRenderer* ElixirPotion_;
+	
+	GameEngineUIRenderer* SlashBlast_;
+	GameEngineUIRenderer* UpperCharge_;
+	GameEngineUIRenderer* RagingBlow_;
+	GameEngineUIRenderer* RageUprising_;
+	GameEngineUIRenderer* Incising_;
 
 	// 아이템갯수 최대치 99
 	std::map<int, std::vector<GameEngineUIRenderer*>> RedPotionNumber_;
