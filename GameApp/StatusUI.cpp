@@ -17,6 +17,7 @@ StatusUI::StatusUI()
 	, MPChanged_(true)
 	, Level_(10)
 	, LevelChanged_(true)
+	, CurrentPlayerName_()
 {
 }
 
@@ -31,6 +32,7 @@ void StatusUI::Start()
 		StatusLayer_ = CreateTransformComponent<GameEngineUIRenderer>(GetTransform(), 1);
 		StatusLayer_->SetImage("mainBar.status.layer_cover.png");
 		StatusLayer_->TextSetting("µ¸¿ò", "ÃÊº¸ÀÚ", 11, float4::WHITE, {10.0f, 23.0f});
+		CurrentPlayerName_ = "ÃÊº¸ÀÚ";
 	}
 
 	{
@@ -556,4 +558,6 @@ void StatusUI::LevelUp()
 void StatusUI::SetNickName(const std::string& _NickName)
 {
 	StatusLayer_->TextSetting("µ¸¿ò", _NickName, 11, float4::WHITE, { 10.0f, 23.0f });
+
+	CurrentPlayerName_ = _NickName;
 }

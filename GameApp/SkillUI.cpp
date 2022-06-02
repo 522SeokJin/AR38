@@ -441,3 +441,15 @@ void SkillUI::AddSP2(int _Value)
 	SP2_ += _Value;
 	BgRenderer_->TextSetting("µ¸¿ò", std::to_string(SP2_), 13.5f, float4::BLACK, { 143.0f, 143.0f });
 }
+
+void SkillUI::SetSP1(int _Value)
+{
+	SP1_ = _Value;
+	BgRenderer_->TextSetting("µ¸¿ò", std::to_string(SP1_), 13.5f, float4::BLACK, { 143.0f, 143.0f });
+}
+
+void SkillUI::SetSP2(int _Value)
+{
+	SP2_ = _Value;
+	BgRenderer_->TextSetting("µ¸¿ò", std::to_string(SP2_), 13.5f, float4::BLACK, { 143.0f, 143.0f });
+}

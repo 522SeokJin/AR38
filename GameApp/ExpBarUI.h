@@ -23,6 +23,10 @@ public:
 	void Update(float _DeltaTime) override;
 
 	void SetExp(float _Value);
+	inline float GetExp()
+	{
+		return CurrentExp_;
+	}
 	void AddExp(float _Value);
 
 	void LinkStatus(StatusUI* _Status)

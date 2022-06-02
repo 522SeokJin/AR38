@@ -20,9 +20,21 @@ public:
 	inline int GetIncisingSP() { return IncisingSP_ ; }
 	inline int GetRageUprisingSP() { return RageUprisingSP_; }
 
-	void AddSP1(int _Value);
+	inline void SetSlashblastSP(int _Value) { SlashblastSP_ = _Value; }
+	inline void SetWarriorLeapSP(int _Value) { WarriorLeapSP_ = _Value; }
+	inline void SetUpperChargeSP(int _Value) { UpperChargeSP_ = _Value; }
+	inline void SetRagingBlowSP(int _Value) { RagingBlowSP_ = _Value; }
+	inline void SetIncisingSP(int _Value) { IncisingSP_ = _Value; }
+	inline void SetRageUprisingSP(int _Value) { RageUprisingSP_ = _Value; }
 
+	void AddSP1(int _Value);
 	void AddSP2(int _Value);
+
+	void SetSP1(int _Value);
+	void SetSP2(int _Value);
+
+	inline int GetSP1() {return SP1_;};
+	inline int GetSP2() {return SP2_;};
 
 protected:
 	SkillUI(const SkillUI& _other) = delete; 

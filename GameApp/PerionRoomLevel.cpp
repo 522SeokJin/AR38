@@ -18,6 +18,7 @@
 
 #include "JobsNPC.h"
 #include "JobsNPC_Dlg.h"
+#include "Portal.h"
 
 PerionRoomLevel::PerionRoomLevel()
 	: Cursor_(nullptr)
@@ -29,6 +30,7 @@ PerionRoomLevel::PerionRoomLevel()
 	, JobsNPC_(nullptr)
 	, Skill_(nullptr)
 	, ExpBar_(nullptr)
+	, Map_(nullptr)
 {
 
 }
@@ -115,6 +117,12 @@ void PerionRoomLevel::LevelStart()
 		JobsNPC_->GetTransform()->SetWorldPosition({ 91.0f, -272.0f });
 		JobsNPC_->SetDlg(JobsNPCDlg_);
 	}
+
+	{
+		Portal* Actor = CreateActor<Portal>();
+		Actor->SetDestination("PerionNorthernRidge");
+		Actor->GetTransform()->SetWorldPosition({ 649.0f, -430.0f, -10.0f });
+	}
 }
 
 void PerionRoomLevel::LevelUpdate(float _DeltaTime)
@@ -190,10 +198,46 @@ void PerionRoomLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 	GlobalValue::CurrentPlayer = Player_;
 	GlobalValue::CurrentMouse = Cursor_;
+
+	if (nullptr != GlobalValue::CurrentStatusUI)
+	{
+		Status_->SetHP(GlobalValue::CurrentStatusUI->GetHP());
+		Status_->SetMP(GlobalValue::CurrentStatusUI->GetMP());
+		Status_->SetPlayerLevel(GlobalValue::CurrentStatusUI->GetPlayerLevel());
+		Status_->SetNickName(GlobalValue::CurrentStatusUI->GetNickName());
+	}
+
 	GlobalValue::CurrentStatusUI = Status_;
-	GlobalValue::CurrentSkillUI = Skill_;
-	GlobalValue::CurrentExpBarUI= ExpBar_;
+
+	if (nullptr != GlobalValue::CurrentExpBarUI)
+	{
+		ExpBar_->SetExp(GlobalValue::CurrentExpBarUI->GetExp());
+	}
+		GlobalValue::CurrentExpBarUI = ExpBar_;
+
+	if (nullptr != GlobalValue::CurrentInventoryUI)
+	{
+		Inventory_->SetMeso(GlobalValue::CurrentInventoryUI->GetMeso());
+		Inventory_->SetRedPotion(GlobalValue::CurrentInventoryUI->GetRedPotionCount());
+		Inventory_->SetBluePotion(GlobalValue::CurrentInventoryUI->GetBluePotionCount());
+		Inventory_->SetElixirPotion(GlobalValue::CurrentInventoryUI->GetElixirPotionCount());
+	}
 	GlobalValue::CurrentInventoryUI = Inventory_;
+
+	if (nullptr != GlobalValue::CurrentSkillUI)
+	{
+		Skill_->SetSlashblastSP(GlobalValue::CurrentSkillUI->GetSlashblastSP());
+		Skill_->SetWarriorLeapSP(GlobalValue::CurrentSkillUI->GetWarriorLeapSP());
+		Skill_->SetUpperChargeSP(GlobalValue::CurrentSkillUI->GetUpperChargeSP());
+		Skill_->SetRagingBlowSP(GlobalValue::CurrentSkillUI->GetRagingBlowSP());
+		Skill_->SetIncisingSP(GlobalValue::CurrentSkillUI->GetIncisingSP());
+		Skill_->SetRageUprisingSP(GlobalValue::CurrentSkillUI->GetRageUprisingSP());
+
+		Skill_->SetSP1(GlobalValue::CurrentSkillUI->GetSP1());
+		Skill_->SetSP2(GlobalValue::CurrentSkillUI->GetSP2());
+	}
+
+	GlobalValue::CurrentSkillUI = Skill_;
 
 	Player_->On();
 }

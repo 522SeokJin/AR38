@@ -62,6 +62,10 @@ public:
 	void LevelUp();
 
 	void SetNickName(const std::string& _NickName);
+	inline std::string GetNickName()
+	{
+		return CurrentPlayerName_;
+	}
 
 protected:
 	StatusUI(const StatusUI& _other) = delete; 
@@ -91,7 +95,9 @@ private:
 
 	int	Level_;
 	bool LevelChanged_;
-
+	
+	std::string CurrentPlayerName_;
+	
 	// Number Image
 	std::map<int, std::vector<GameEngineUIRenderer*>> HPNumber_;
 	std::map<int, std::vector<GameEngineUIRenderer*>> MPNumber_;

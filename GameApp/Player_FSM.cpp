@@ -745,7 +745,7 @@ void Player::ladderStop()
 	if (true == GameEngineInput::GetInst().Press("Up") ||
 		true == GameEngineInput::GetInst().Press("Down"))
 	{
-		FSM_.ChangeState("ladderStop");
+		FSM_.ChangeState("ladder");
 		return;
 	}
 

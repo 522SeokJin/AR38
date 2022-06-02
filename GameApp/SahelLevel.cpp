@@ -18,6 +18,7 @@
 
 #include "Scorpion.h"
 #include "Sandmole.h"
+#include "Portal.h"
 
 SahelLevel::SahelLevel()
 	: Cursor_(nullptr)
@@ -199,13 +200,56 @@ void SahelLevel::CreateActorLevel()
 		Player_->Off();
 	}
 
+
+	{
+		Portal* Actor = CreateActor<Portal>();
+		Actor->SetDestination("SilentSwamp");
+		Actor->GetTransform()->SetWorldPosition({ 98.0f, -853.0f, -10.0f });
+	}
+
 	CreateMonster();
 
 	GlobalValue::CurrentPlayer = Player_;
 	GlobalValue::CurrentMouse = Cursor_;
+
+	if (nullptr != GlobalValue::CurrentStatusUI)
+	{
+		Status_->SetHP(GlobalValue::CurrentStatusUI->GetHP());
+		Status_->SetMP(GlobalValue::CurrentStatusUI->GetMP());
+		Status_->SetPlayerLevel(GlobalValue::CurrentStatusUI->GetPlayerLevel());
+		Status_->SetNickName(GlobalValue::CurrentStatusUI->GetNickName());
+	}
+
 	GlobalValue::CurrentStatusUI = Status_;
-	GlobalValue::CurrentExpBarUI = ExpBar_;
+
+	if (nullptr != GlobalValue::CurrentExpBarUI)
+	{
+		ExpBar_->SetExp(GlobalValue::CurrentExpBarUI->GetExp());
+	}
+		GlobalValue::CurrentExpBarUI = ExpBar_;
+
+	if (nullptr != GlobalValue::CurrentInventoryUI)
+	{
+		Inventory_->SetMeso(GlobalValue::CurrentInventoryUI->GetMeso());
+		Inventory_->SetRedPotion(GlobalValue::CurrentInventoryUI->GetRedPotionCount());
+		Inventory_->SetBluePotion(GlobalValue::CurrentInventoryUI->GetBluePotionCount());
+		Inventory_->SetElixirPotion(GlobalValue::CurrentInventoryUI->GetElixirPotionCount());
+	}
 	GlobalValue::CurrentInventoryUI = Inventory_;
+
+	if (nullptr != GlobalValue::CurrentSkillUI)
+	{
+		Skill_->SetSlashblastSP(GlobalValue::CurrentSkillUI->GetSlashblastSP());
+		Skill_->SetWarriorLeapSP(GlobalValue::CurrentSkillUI->GetWarriorLeapSP());
+		Skill_->SetUpperChargeSP(GlobalValue::CurrentSkillUI->GetUpperChargeSP());
+		Skill_->SetRagingBlowSP(GlobalValue::CurrentSkillUI->GetRagingBlowSP());
+		Skill_->SetIncisingSP(GlobalValue::CurrentSkillUI->GetIncisingSP());
+		Skill_->SetRageUprisingSP(GlobalValue::CurrentSkillUI->GetRageUprisingSP());
+
+		Skill_->SetSP1(GlobalValue::CurrentSkillUI->GetSP1());
+		Skill_->SetSP2(GlobalValue::CurrentSkillUI->GetSP2());
+	}
+
 	GlobalValue::CurrentSkillUI = Skill_;
 
 	Player_->On();

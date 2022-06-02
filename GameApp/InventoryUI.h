@@ -21,14 +21,27 @@ public:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
-	void AddMeso(int _Value)
+	inline void AddMeso(int _Value)
 	{
 		Meso_ += _Value;
+	}
+	inline void SetMeso(int _Value)
+	{
+		Meso_ = _Value;
+	}
+
+	inline int GetMeso()
+	{
+		return Meso_;
 	}
 
 	void AddRedPotion();
 	void AddBluePotion();
 	void AddElixirPotion();
+	
+	inline void SetRedPotion(int _Value) {RedPotionCount_ = _Value; };
+	inline void SetBluePotion(int _Value) { BluePotionCount_ = _Value; };
+	inline void SetElixirPotion(int _Value) { ElixirPotionCount_ = _Value; };
 
 	inline int GetRedPotionCount()
 	{

@@ -406,6 +406,7 @@ void Sandmole::die_Start()
 	}
 
 	Renderer_->SetChangeAnimation("Sandmole_die");
+	Renderer_->SetLocalMove({ 0.0f, 20.0f, 0.0f });
 	Collision_->Off();
 
 	GlobalValue::CurrentExpBarUI->AddExp(100.0f);
@@ -444,4 +445,5 @@ void Sandmole::die()
 
 void Sandmole::die_End()
 {
+	Renderer_->SetLocalMove({ 0.0f, -20.0f, 0.0f });
 }
