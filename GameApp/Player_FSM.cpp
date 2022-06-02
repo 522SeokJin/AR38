@@ -7,6 +7,7 @@
 #include "Player_Define.h"
 #include "StatusUI.h"
 #include "DeathNotice.h"
+#include "SkillUI.h"
 
 void Player::stand1_Start()
 {
@@ -76,31 +77,36 @@ void Player::stand1()
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("Shift"))
+	if (true == GameEngineInput::GetInst().Press("Shift") &&
+		0 < GlobalValue::CurrentSkillUI->GetSlashblastSP())
 	{
 		FSM_.ChangeState("slashBlast");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("a"))
+	if (true == GameEngineInput::GetInst().Press("a") &&
+		0 < GlobalValue::CurrentSkillUI->GetUpperChargeSP())
 	{
 		FSM_.ChangeState("upperCharge");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("s"))
+	if (true == GameEngineInput::GetInst().Press("s") &&
+		0 < GlobalValue::CurrentSkillUI->GetRagingBlowSP())
 	{
 		FSM_.ChangeState("ragingBlow");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("d"))
+	if (true == GameEngineInput::GetInst().Press("d") &&
+		0 < GlobalValue::CurrentSkillUI->GetIncisingSP())
 	{
 		FSM_.ChangeState("incising");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("f"))
+	if (true == GameEngineInput::GetInst().Press("f") &&
+		0 < GlobalValue::CurrentSkillUI->GetRageUprisingSP())
 	{
 		FSM_.ChangeState("rageUprising");
 		return;
@@ -220,35 +226,41 @@ void Player::walk1()
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("Shift"))
+	if (true == GameEngineInput::GetInst().Press("Shift") &&
+		0 < GlobalValue::CurrentSkillUI->GetSlashblastSP())
 	{
 		FSM_.ChangeState("slashBlast");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("a"))
+	if (true == GameEngineInput::GetInst().Press("a") &&
+		0 < GlobalValue::CurrentSkillUI->GetUpperChargeSP())
 	{
 		FSM_.ChangeState("upperCharge");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("s"))
+	if (true == GameEngineInput::GetInst().Press("s") &&
+		0 < GlobalValue::CurrentSkillUI->GetRagingBlowSP())
 	{
 		FSM_.ChangeState("ragingBlow");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("d"))
+	if (true == GameEngineInput::GetInst().Press("d") &&
+		0 < GlobalValue::CurrentSkillUI->GetIncisingSP())
 	{
 		FSM_.ChangeState("incising");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("f"))
+	if (true == GameEngineInput::GetInst().Press("f") &&
+		0 < GlobalValue::CurrentSkillUI->GetRageUprisingSP())
 	{
 		FSM_.ChangeState("rageUprising");
 		return;
 	}
+
 }
 
 void Player::walk1_End()
@@ -304,7 +316,8 @@ void Player::jump()
 		}
 	}
 
-	if (true == GameEngineInput::GetInst().Down("Alt"))
+	if (true == GameEngineInput::GetInst().Down("Alt") &&
+		0 < GlobalValue::CurrentSkillUI->GetWarriorLeapSP())
 	{
 		FSM_.ChangeState("doubleJump");
 		return;
@@ -316,35 +329,41 @@ void Player::jump()
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("Shift"))
+	if (true == GameEngineInput::GetInst().Press("Shift") &&
+		0 < GlobalValue::CurrentSkillUI->GetSlashblastSP())
 	{
 		FSM_.ChangeState("slashBlast");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("a"))
+	if (true == GameEngineInput::GetInst().Press("a") &&
+		0 < GlobalValue::CurrentSkillUI->GetUpperChargeSP())
 	{
 		FSM_.ChangeState("upperCharge");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("s"))
+	if (true == GameEngineInput::GetInst().Press("s") &&
+		0 < GlobalValue::CurrentSkillUI->GetRagingBlowSP())
 	{
 		FSM_.ChangeState("ragingBlow");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("d"))
+	if (true == GameEngineInput::GetInst().Press("d") &&
+		0 < GlobalValue::CurrentSkillUI->GetIncisingSP())
 	{
 		FSM_.ChangeState("incising");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("f"))
+	if (true == GameEngineInput::GetInst().Press("f") &&
+		0 < GlobalValue::CurrentSkillUI->GetRageUprisingSP())
 	{
 		FSM_.ChangeState("rageUprising");
 		return;
 	}
+
 }
 
 void Player::jump_End()
@@ -437,35 +456,41 @@ void Player::fall()
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("Shift"))
+	if (true == GameEngineInput::GetInst().Press("Shift") &&
+		0 < GlobalValue::CurrentSkillUI->GetSlashblastSP())
 	{
 		FSM_.ChangeState("slashBlast");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("a"))
+	if (true == GameEngineInput::GetInst().Press("a") &&
+		0 < GlobalValue::CurrentSkillUI->GetUpperChargeSP())
 	{
 		FSM_.ChangeState("upperCharge");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("s"))
+	if (true == GameEngineInput::GetInst().Press("s") &&
+		0 < GlobalValue::CurrentSkillUI->GetRagingBlowSP())
 	{
 		FSM_.ChangeState("ragingBlow");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("d"))
+	if (true == GameEngineInput::GetInst().Press("d") &&
+		0 < GlobalValue::CurrentSkillUI->GetIncisingSP())
 	{
 		FSM_.ChangeState("incising");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst().Press("f"))
+	if (true == GameEngineInput::GetInst().Press("f") &&
+		0 < GlobalValue::CurrentSkillUI->GetRageUprisingSP())
 	{
 		FSM_.ChangeState("rageUprising");
 		return;
 	}
+
 }
 
 void Player::fall_End()

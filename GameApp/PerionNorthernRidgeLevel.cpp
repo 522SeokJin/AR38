@@ -201,6 +201,7 @@ void PerionNorthernRidgeLevel::CreateActorLevel()
 	GlobalValue::CurrentStatusUI = Status_;
 	GlobalValue::CurrentExpBarUI = ExpBar_;
 	GlobalValue::CurrentInventoryUI = Inventory_;
+	GlobalValue::CurrentSkillUI = Skill_;
 
 	Player_->On();
 }

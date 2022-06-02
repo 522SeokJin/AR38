@@ -186,6 +186,7 @@ void PerionLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 	GlobalValue::CurrentStatusUI = Status_;
 	GlobalValue::CurrentSkillUI = Skill_;
 	GlobalValue::CurrentExpBarUI = ExpBar_;
+	GlobalValue::CurrentInventoryUI = Inventory_;
 
 	Player_->On();
 }
