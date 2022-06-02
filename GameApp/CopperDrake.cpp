@@ -234,9 +234,9 @@ void CopperDrake::move()
 	}
 
 	float4 LeftPixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
-		+ float4(-10.0f, 64.5f + 5.0f));
+		+ float4(-10.0f, 60.5f));
 	float4 RightPixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
-		+ float4(10.0f, 64.5f + 5.0f));	
+		+ float4(10.0f, 60.5f));	
 
 	if (DIRRIGHT)
 	{

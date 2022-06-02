@@ -225,6 +225,54 @@ void SilentSwampLevel::CreateMonster()
 		Actor->SetWorldPosition({ 1079.0f, -1485.0f, static_cast<float>(DepthOrder::MONSTER) });
 		Monsters_.push_back(Actor);
 	}
+	
+	{
+		CopperDrake* Actor = CreateActor<CopperDrake>();
+		Actor->SetWorldPosition({ 441.0f, -1188.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+	
+	{
+		CopperDrake* Actor = CreateActor<CopperDrake>();
+		Actor->SetWorldPosition({ 695.0f, -1188.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+	
+	{
+		CopperDrake* Actor = CreateActor<CopperDrake>();
+		Actor->SetWorldPosition({ 927.0f, -1188.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+	
+	{
+		CopperDrake* Actor = CreateActor<CopperDrake>();
+		Actor->SetWorldPosition({ 543.0f, -950.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+	
+	{
+		CopperDrake* Actor = CreateActor<CopperDrake>();
+		Actor->SetWorldPosition({ 943.0f, -950.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+	
+	{
+		CopperDrake* Actor = CreateActor<CopperDrake>();
+		Actor->SetWorldPosition({ 457.0f, -648.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+	
+	{
+		CopperDrake* Actor = CreateActor<CopperDrake>();
+		Actor->SetWorldPosition({ 582.0f, -648.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
+	
+	{
+		CopperDrake* Actor = CreateActor<CopperDrake>();
+		Actor->SetWorldPosition({ 896.0f, -648.0f, static_cast<float>(DepthOrder::MONSTER) });
+		Monsters_.push_back(Actor);
+	}
 
 }
 
