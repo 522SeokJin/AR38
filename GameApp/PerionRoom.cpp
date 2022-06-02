@@ -16,8 +16,9 @@ void PerionRoom::Start()
 {
 	{
 		MapImage_ = CreateTransformComponent<GameEngineImageRenderer>();
-		MapImage_->SetImage("20220406190434176_102000003.png");
-		MapImage_->GetTransform()->SetLocalPosition(MapImage_->GetImageSize().halffloat4().InvertY());
+		MapImage_->CreateAnimationFolder("PerionRoom", 0.4f);
+		MapImage_->SetChangeAnimation("PerionRoom");
+		MapImage_->GetTransform()->SetLocalPosition({400.0f, -300.0f});
 		MapImage_->SetLocalMove({0.0f, 0.0f, static_cast<float>(DepthOrder::MAP) });
 	}
 
