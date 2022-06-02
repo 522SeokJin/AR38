@@ -979,3 +979,73 @@ void Player::upperCharge_End()
 	BodyPixelColor_ = GetBodyColor();
 	FootPixelColor_ = GetFootColor();
 }
+
+void Player::RageUprising_Start()
+{
+	SkillHitCount_ = 2;
+
+	Avatar_->SetChangeAnimation("slashBlast");
+	SkillEffect1_->On();
+	SkillEffect1_->SetChangeAnimation("Slashblast_effect", true);
+
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetBodyColor();
+
+	switch (Dir_)
+	{
+	case PlayerDir::LEFT:
+		Avatar_->SetLocalPosition({ -40.0f, -10.0f, 0.0f });
+		if (false == SkillEffect1_->IsLeft_)
+		{
+			SkillEffect1_->ImageLocalFlipYAxis();
+			SkillEffect1_->IsLeft_ = true;
+		}
+		SkillEffect1_->SetLocalPosition({ -100.0f, 0.0f, 0.0f });
+		break;
+	case PlayerDir::RIGHT:
+		Avatar_->SetLocalPosition({ 40.0f, -10.0f, 0.0f });
+		if (true == SkillEffect1_->IsLeft_)
+		{
+			SkillEffect1_->ImageLocalFlipYAxis();
+			SkillEffect1_->IsLeft_ = false;
+		}
+		SkillEffect1_->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
+		break;
+	default:
+		break;
+	}
+
+	GlobalValue::CurrentStatusUI->SubMP(20.0f);
+}
+
+void Player::RageUprising()
+{
+}
+
+void Player::RageUprising_End()
+{
+}
+
+void Player::Incising_Start()
+{
+}
+
+void Player::Incising()
+{
+}
+
+void Player::Incising_End()
+{
+}
+
+void Player::RagingBlow_Start()
+{
+}
+
+void Player::RagingBlow()
+{
+}
+
+void Player::RagingBlow_End()
+{
+}

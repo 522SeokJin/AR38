@@ -141,5 +141,18 @@ private:
 	void upperCharge_Start();
 	void upperCharge();
 	void upperCharge_End();
+	
+	void RageUprising_Start();
+	void RageUprising();
+	void RageUprising_End();
+	
+	void Incising_Start();
+	void Incising();
+	void Incising_End();
+	
+	void RagingBlow_Start();
+	void RagingBlow();
+	void RagingBlow_End();
+
 };
 

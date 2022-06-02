@@ -304,6 +304,18 @@ void Player::Start()
 	FSM_.CreateState("upperCharge", std::bind(&Player::upperCharge, this),
 		std::bind(&Player::upperCharge_Start, this),
 		std::bind(&Player::upperCharge_End, this));
+	
+	FSM_.CreateState("incising", std::bind(&Player::Incising, this),
+		std::bind(&Player::Incising_Start, this),
+		std::bind(&Player::Incising_End, this));
+	
+	FSM_.CreateState("rageUprising", std::bind(&Player::RageUprising, this),
+		std::bind(&Player::RageUprising_Start, this),
+		std::bind(&Player::RageUprising_End, this));
+	
+	FSM_.CreateState("ragingBlow", std::bind(&Player::RagingBlow, this),
+		std::bind(&Player::RagingBlow_Start, this),
+		std::bind(&Player::RagingBlow_End, this));
 
 	FSM_.ChangeState("stand1");
 }
