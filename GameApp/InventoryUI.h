@@ -43,6 +43,8 @@ private:
 
 	void ChangeTabEvent();
 
+	void UpdateEnableTabItem();
+
 	GameEngineCollision* TitleBar_;
 	bool Grabbed_;
 
@@ -70,11 +72,6 @@ private:
 	GameEngineCollision* EquipmentTab_;
 	GameEngineCollision* UseableTab_;
 	GameEngineCollision* EtcTab_;
-
-	std::list<GameEngineUIRenderer*> EquipmentTabItemList_;
-	std::list<GameEngineUIRenderer*> UseableTabItemList_;
-	std::list<GameEngineUIRenderer*> EtcTabItemList_;
-
 
 	InventoryTab EnabledTab_;
 

@@ -86,6 +86,30 @@ void InventoryUI::Start()
 		EtcTab_->SetLocalScaling({ 29.0f, 19.0f });
 		EtcTab_->SetLocalPosition({ -75.0f + 2.0f * 30.0f, 154.0f });
 	}
+
+	for (int j = 0; j < 2; j++)
+	{
+		for (int k = 0; k < 10; k++)
+		{
+			RedPotionNumber_[j][k]->Off();
+		}
+	}
+
+	for (int j = 0; j < 2; j++)
+	{
+		for (int k = 0; k < 10; k++)
+		{
+			BluePotionNumber_[j][k]->Off();
+		}
+	}
+
+	for (int j = 0; j < 2; j++)
+	{
+		for (int k = 0; k < 10; k++)
+		{
+			ElixirPotionNumber_[j][k]->Off();
+		}
+	}
 }
 
 void InventoryUI::Update(float _DeltaTime)
@@ -110,114 +134,11 @@ void InventoryUI::Update(float _DeltaTime)
 	MesoText_->TextSetting("µ¸¿ò", std::to_string(Meso_), 13, float4::BLACK,
 		{ -15.0f, 1.0f, 0.0f });
 
-	int UseableItemCount = 0;
-
-	switch (EnabledTab_)
-	{
-	case InventoryTab::Equipment:
-		for (auto& Item : EquipmentTabItemList_)
-		{
-			if (false == Item->IsUpdate())
-			{
-				continue;
-			}
-
-			Item->On();
-		}
-
-		for (auto& Item : UseableTabItemList_)
-		{
-			if (false == Item->IsUpdate())
-			{
-				continue;
-			}
-
-			Item->Off();
-		}
-		for (auto& Item : EtcTabItemList_)
-		{
-			if (false == Item->IsUpdate())
-			{
-				continue;
-			}
-
-			Item->Off();
-		}
-		break;
-	case InventoryTab::Useable:
-		for (auto& Item : EquipmentTabItemList_)
-		{
-			if (false == Item->IsUpdate())
-			{
-				continue;
-			}
-
-			Item->Off();
-		}
-		for (auto& Item : UseableTabItemList_)
-		{
-			if (false == Item->IsUpdate())
-			{
-				continue;
-			}
-
-			Item->On();
-			Item->SetLocalPosition({ -68.0f + UseableItemCount * 42.0f, 119.0f });
-			Item->SetLocalPosition({ -68.0f + UseableItemCount * 42.0f, 119.0f });
-
-			++UseableItemCount;
-		}
-		for (auto& Item : EtcTabItemList_)
-		{
-			if (false == Item->IsUpdate())
-			{
-				continue;
-			}
-
-			Item->Off();
-		}
-		break;
-	case InventoryTab::Etc:
-		for (auto& Item : EquipmentTabItemList_)
-		{
-			if (false == Item->IsUpdate())
-			{
-				continue;
-			}
-
-			Item->Off();
-		}
-		for (auto& Item : UseableTabItemList_)
-		{
-			if (false == Item->IsUpdate())
-			{
-				continue;
-			}
-
-			Item->Off();
-		}
-		for (auto& Item : EtcTabItemList_)
-		{
-			if (false == Item->IsUpdate())
-			{
-				continue;
-			}
-
-			Item->On();
-		}
-		break;
-	default:
-		break;
-	}
+	UpdateEnableTabItem();
 }
 
 void InventoryUI::AddRedPotion()
 {
-	if (0 == RedPotionCount_)
-	{
-		UseableTabItemList_.push_back(RedPotion_);
-	}
-
 	++RedPotionCount_;
 
 	for (int j = 0; j < 2; j++)
@@ -242,17 +163,12 @@ void InventoryUI::AddRedPotion()
 			}
 		}
 
-		RedPotionNumber_[j][Value]->SetLocalPosition({ -8.0f * (j + 1) + 16.0f, -7.0f, -100.0f });
+		RedPotionNumber_[j][Value]->SetLocalPosition(RedPotion_->GetLocalPosition() + float4{ -8.0f * (j + 1) + 16.0f, -7.0f, -100.0f });
 	}	
 }
 
 void InventoryUI::AddBluePotion()
 {
-	if (0 == BluePotionCount_)
-	{
-		UseableTabItemList_.push_back(BluePotion_);
-	}
-
 	++BluePotionCount_;
 
 	for (int j = 0; j < 2; j++)
@@ -277,18 +193,13 @@ void InventoryUI::AddBluePotion()
 			}
 		}
 
-		BluePotionNumber_[j][Value]->SetLocalPosition({ -8.0f * (j + 1) + 16.0f, -7.0f, -100.0f });
+		BluePotionNumber_[j][Value]->SetLocalPosition(BluePotion_->GetLocalPosition() + float4{ -8.0f * (j + 1) + 16.0f, -7.0f, -100.0f });
 
 	}
 }
 	
 void InventoryUI::AddElixirPotion()
 {
-	if (0 == ElixirPotionCount_)
-	{
-		UseableTabItemList_.push_back(ElixirPotion_);
-	}
-
 	++ElixirPotionCount_;
 
 	for (int j = 0; j < 2; j++)
@@ -313,8 +224,7 @@ void InventoryUI::AddElixirPotion()
 			}
 		}
 
-		ElixirPotionNumber_[j][Value]->SetLocalPosition({ -8.0f * (j + 1) + 16.0f, -7.0f, -100.0f });
-
+		ElixirPotionNumber_[j][Value]->SetLocalPosition(ElixirPotion_->GetLocalPosition() + float4{ -8.0f * (j + 1) + 16.0f, -7.0f, -100.0f });
 	}
 }
 
@@ -351,10 +261,7 @@ void InventoryUI::ChangeTabEvent()
 
 				EnabledTab_ = InventoryTab::Equipment;
 
-				for (auto& Item : UseableTabItemList_)
-				{
-					Item->Off();
-				}
+			
 			}
 		});
 
@@ -369,11 +276,7 @@ void InventoryUI::ChangeTabEvent()
 
 				EnabledTab_ = InventoryTab::Useable;
 
-				for (auto& Item : UseableTabItemList_)
-				{
-					Item->On();
-					Item->SetLocalPosition(float4::ZERO);
-				}
+				
 			}
 
 		});
@@ -390,4 +293,166 @@ void InventoryUI::ChangeTabEvent()
 				EnabledTab_ = InventoryTab::Etc;
 			}
 		});
+}
+
+void InventoryUI::UpdateEnableTabItem()
+{
+	int UseableItemCount = 0;
+
+	switch (EnabledTab_)
+	{
+	case InventoryTab::Equipment:
+		RedPotion_->Off();
+		BluePotion_->Off();
+		ElixirPotion_->Off();
+
+		for (int j = 0; j < 2; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				RedPotionNumber_[j][k]->Off();
+			}
+		}
+
+		for (int j = 0; j < 2; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				BluePotionNumber_[j][k]->Off();
+			}
+		}
+
+		for (int j = 0; j < 2; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				ElixirPotionNumber_[j][k]->Off();
+			}
+		}
+		break;
+	case InventoryTab::Useable:
+		if (0 < RedPotionCount_)
+		{
+			RedPotion_->On();
+			RedPotion_->SetLocalPosition({ -68.0f + 42.0f * 0.0f, 119.0f });
+			RedPotionCollision_->On();
+			RedPotionCollision_->SetLocalPosition(RedPotion_->GetLocalPosition());
+		}
+		if (0 < BluePotionCount_)
+		{
+			BluePotion_->On();
+			BluePotion_->SetLocalPosition({ -68.0f + 1.0f * 42.0f, 119.0f });
+			BluePotionCollision_->On();
+			BluePotionCollision_->SetLocalPosition(BluePotion_->GetLocalPosition());
+
+		}
+		if (0 < ElixirPotionCount_)
+		{
+			ElixirPotion_->On();
+			ElixirPotion_->SetLocalPosition({ -68.0f + 2.0f * 42.0f, 119.0f });
+			ElixirPotionCollision_->On();
+			ElixirPotionCollision_->SetLocalPosition(ElixirPotion_->GetLocalPosition());
+		}
+
+		for (int j = 0; j < 2; j++)
+		{
+			if (0 >= RedPotionCount_)
+			{
+				continue;
+			}
+
+			int Value = GameEngineMath::PlaceValue(RedPotionCount_, j + 1);
+
+			RedPotionNumber_[j][Value]->On();
+
+			if (j == RedPotionNumber_.size() - 1)
+			{
+				if (0 == Value)
+				{
+					RedPotionNumber_[j][Value]->Off();
+				}
+			}
+
+			RedPotionNumber_[j][Value]->SetLocalPosition(RedPotion_->GetLocalPosition() + float4{ -8.0f * (j + 1) + 16.0f, -7.0f, -100.0f });
+		}
+
+		for (int j = 0; j < 2; j++)
+		{
+			if (0 >= BluePotionCount_)
+			{
+				continue;
+			}
+
+			int Value = GameEngineMath::PlaceValue(BluePotionCount_, j + 1);
+
+			BluePotionNumber_[j][Value]->On();
+
+			if (j == BluePotionNumber_.size() - 1)
+			{
+				if (0 == Value)
+				{
+					BluePotionNumber_[j][Value]->Off();
+				}
+			}
+
+			BluePotionNumber_[j][Value]->SetLocalPosition(BluePotion_->GetLocalPosition() + float4{ -8.0f * (j + 1) + 16.0f, -7.0f, -100.0f });
+
+		}
+
+		for (int j = 0; j < 2; j++)
+		{
+			if (0 >= ElixirPotionCount_)
+			{
+				continue;
+			}
+
+			int Value = GameEngineMath::PlaceValue(ElixirPotionCount_, j + 1);
+
+			ElixirPotionNumber_[j][Value]->On();
+
+			if (j == ElixirPotionNumber_.size() - 1)
+			{
+				if (0 == Value)
+				{
+					ElixirPotionNumber_[j][Value]->Off();
+				}
+			}
+
+			ElixirPotionNumber_[j][Value]->SetLocalPosition(ElixirPotion_->GetLocalPosition() + float4{ -8.0f * (j + 1) + 16.0f, -7.0f, -100.0f });
+
+		}
+
+		break;
+	case InventoryTab::Etc:
+		RedPotion_->Off();
+		BluePotion_->Off();
+		ElixirPotion_->Off();
+
+		for (int j = 0; j < 2; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				RedPotionNumber_[j][k]->Off();
+			}
+		}
+
+		for (int j = 0; j < 2; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				BluePotionNumber_[j][k]->Off();
+			}
+		}
+
+		for (int j = 0; j < 2; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				ElixirPotionNumber_[j][k]->Off();
+			}
+		}
+		break;
+	default:
+		break;
+	}
 }
