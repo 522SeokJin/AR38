@@ -30,6 +30,8 @@ public:
 		return SkillHitCount_;
 	}
 
+	std::string GetCurrentStateName();
+
 	void LevelUp();
 	void JobsChanged();
 	

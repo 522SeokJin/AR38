@@ -127,6 +127,11 @@ bool Player::IsDownLadderColor()
 		|| 1.0f == Map::GetColor(GetTransform()->GetWorldPosition().InvertY() + float4(0.0f, -16.0f)).b;
 }
 
+std::string Player::GetCurrentStateName()
+{
+	return FSM_.GetCurrentName();
+}
+
 void Player::LevelUp()
 {
 	LevelUpEffect_->On();
