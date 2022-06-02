@@ -86,6 +86,25 @@ void Player::stand1()
 		FSM_.ChangeState("upperCharge");
 		return;
 	}
+
+	if (true == GameEngineInput::GetInst().Press("s"))
+	{
+		FSM_.ChangeState("ragingBlow");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("d"))
+	{
+		FSM_.ChangeState("incising");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("f"))
+	{
+		FSM_.ChangeState("rageUprising");
+		return;
+	}
+
 }
 
 void Player::stand1_End()
@@ -176,6 +195,24 @@ void Player::walk1()
 		FSM_.ChangeState("upperCharge");
 		return;
 	}
+
+	if (true == GameEngineInput::GetInst().Press("s"))
+	{
+		FSM_.ChangeState("ragingBlow");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("d"))
+	{
+		FSM_.ChangeState("incising");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("f"))
+	{
+		FSM_.ChangeState("rageUprising");
+		return;
+	}
 }
 
 void Player::walk1_End()
@@ -252,6 +289,24 @@ void Player::jump()
 	if (true == GameEngineInput::GetInst().Press("a"))
 	{
 		FSM_.ChangeState("upperCharge");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("s"))
+	{
+		FSM_.ChangeState("ragingBlow");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("d"))
+	{
+		FSM_.ChangeState("incising");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("f"))
+	{
+		FSM_.ChangeState("rageUprising");
 		return;
 	}
 }
@@ -355,6 +410,24 @@ void Player::fall()
 	if (true == GameEngineInput::GetInst().Press("a"))
 	{
 		FSM_.ChangeState("upperCharge");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("s"))
+	{
+		FSM_.ChangeState("ragingBlow");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("d"))
+	{
+		FSM_.ChangeState("incising");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("f"))
+	{
+		FSM_.ChangeState("rageUprising");
 		return;
 	}
 }
@@ -906,6 +979,24 @@ void Player::doubleJump()
 		FSM_.ChangeState("upperCharge");
 		return;
 	}
+
+	if (true == GameEngineInput::GetInst().Press("s"))
+	{
+		FSM_.ChangeState("ragingBlow");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("d"))
+	{
+		FSM_.ChangeState("incising");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst().Press("f"))
+	{
+		FSM_.ChangeState("rageUprising");
+		return;
+	}
 }
 
 void Player::doubleJump_End()
@@ -982,11 +1073,13 @@ void Player::upperCharge_End()
 
 void Player::RageUprising_Start()
 {
-	SkillHitCount_ = 2;
+	SkillHitCount_ = 5;
 
-	Avatar_->SetChangeAnimation("slashBlast");
-	SkillEffect1_->On();
-	SkillEffect1_->SetChangeAnimation("Slashblast_effect", true);
+	Avatar_->SetChangeAnimation("rageUprising");
+	SkillEffect2_->On();
+	SkillEffect2_->SetChangeAnimation("RageUprising_effect0", true);
+	SkillEffect3_->On();
+	SkillEffect3_->SetChangeAnimation("RageUprising_effect1", true);
 
 	BodyPixelColor_ = GetBodyColor();
 	FootPixelColor_ = GetBodyColor();
@@ -994,58 +1087,204 @@ void Player::RageUprising_Start()
 	switch (Dir_)
 	{
 	case PlayerDir::LEFT:
-		Avatar_->SetLocalPosition({ -40.0f, -10.0f, 0.0f });
-		if (false == SkillEffect1_->IsLeft_)
-		{
-			SkillEffect1_->ImageLocalFlipYAxis();
-			SkillEffect1_->IsLeft_ = true;
-		}
-		SkillEffect1_->SetLocalPosition({ -100.0f, 0.0f, 0.0f });
+		Avatar_->SetLocalPosition({ -0.0f, -0.0f, 0.0f });
 		break;
 	case PlayerDir::RIGHT:
-		Avatar_->SetLocalPosition({ 40.0f, -10.0f, 0.0f });
-		if (true == SkillEffect1_->IsLeft_)
-		{
-			SkillEffect1_->ImageLocalFlipYAxis();
-			SkillEffect1_->IsLeft_ = false;
-		}
-		SkillEffect1_->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
+		Avatar_->SetLocalPosition({ 0.0f, -0.0f, 0.0f });
 		break;
 	default:
 		break;
 	}
 
-	GlobalValue::CurrentStatusUI->SubMP(20.0f);
+	GlobalValue::CurrentStatusUI->SubMP(50.0f);
 }
 
 void Player::RageUprising()
 {
+	if (FootPixelColor_.g < GetFootColor().g &&
+		false == IsUpRopeColor() &&
+		false == IsUpLadderColor())
+	{
+		Speed_.x *= 0.9f;
+		Speed_.y = 0.0f;
+
+		if (Avatar_->GetCurAnimation()->IsEnd_)
+		{
+			FSM_.ChangeState("stand1");
+			return;
+		}
+	}
+	else
+	{
+		Speed_.y -= GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
+
+		if (Avatar_->GetCurAnimation()->IsEnd_)
+		{
+			FSM_.ChangeState("fall");
+			return;
+		}
+	}
+
+	if (PlayerDir::LEFT == Dir_)
+	{
+		GetTransform()->SetLocalDeltaTimeMove({ -Speed_.x, Speed_.y });
+	}
+	else
+	{
+		GetTransform()->SetLocalDeltaTimeMove(Speed_);
+	}
 }
 
 void Player::RageUprising_End()
 {
+	Avatar_->SetLocalPosition(float4::ZERO);
+
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetFootColor();
+
+	SkillCollision_->Off();
 }
 
 void Player::Incising_Start()
 {
+	SkillHitCount_ = 5;
+
+	Avatar_->SetChangeAnimation("incising");
+	SkillEffect1_->On();
+	SkillEffect1_->SetChangeAnimation("Incising_effect", true);
+
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetBodyColor();
+
+	switch (Dir_)
+	{
+	case PlayerDir::LEFT:
+		Avatar_->SetLocalPosition({ -0.0f, -0.0f, 0.0f });
+		break;
+	case PlayerDir::RIGHT:
+		Avatar_->SetLocalPosition({ 0.0f, -0.0f, 0.0f });
+		break;
+	default:
+		break;
+	}
+
+	GlobalValue::CurrentStatusUI->SubMP(50.0f);
 }
 
 void Player::Incising()
 {
+	if (FootPixelColor_.g < GetFootColor().g &&
+		false == IsUpRopeColor() &&
+		false == IsUpLadderColor())
+	{
+		Speed_.x *= 0.9f;
+		Speed_.y = 0.0f;
+
+		if (Avatar_->GetCurAnimation()->IsEnd_)
+		{
+			FSM_.ChangeState("stand1");
+			return;
+		}
+	}
+	else
+	{
+		Speed_.y -= GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
+
+		if (Avatar_->GetCurAnimation()->IsEnd_)
+		{
+			FSM_.ChangeState("fall");
+			return;
+		}
+	}
+
+	if (PlayerDir::LEFT == Dir_)
+	{
+		GetTransform()->SetLocalDeltaTimeMove({ -Speed_.x, Speed_.y });
+	}
+	else
+	{
+		GetTransform()->SetLocalDeltaTimeMove(Speed_);
+	}
 }
 
 void Player::Incising_End()
 {
+	Avatar_->SetLocalPosition(float4::ZERO);
+
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetFootColor();
+
+	SkillCollision_->Off();
 }
 
 void Player::RagingBlow_Start()
 {
+	SkillHitCount_ = 3;
+
+	Avatar_->SetChangeAnimation("ragingBlow");
+	SkillEffect1_->On();
+	SkillEffect1_->SetChangeAnimation("RagingBlow_effect", true);
+
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetBodyColor();
+
+	switch (Dir_)
+	{
+	case PlayerDir::LEFT:
+		Avatar_->SetLocalPosition({ -0.0f, -0.0f, 0.0f });
+		break;
+	case PlayerDir::RIGHT:
+		Avatar_->SetLocalPosition({ 0.0f, -0.0f, 0.0f });
+		break;
+	default:
+		break;
+	}
+
+	GlobalValue::CurrentStatusUI->SubMP(50.0f);
 }
 
 void Player::RagingBlow()
 {
+	if (FootPixelColor_.g < GetFootColor().g &&
+		false == IsUpRopeColor() &&
+		false == IsUpLadderColor())
+	{
+		Speed_.x *= 0.9f;
+		Speed_.y = 0.0f;
+
+		if (Avatar_->GetCurAnimation()->IsEnd_)
+		{
+			FSM_.ChangeState("stand1");
+			return;
+		}
+	}
+	else
+	{
+		Speed_.y -= GRAVITYACC * GameEngineTime::GetInst().GetDeltaTime();
+
+		if (Avatar_->GetCurAnimation()->IsEnd_)
+		{
+			FSM_.ChangeState("fall");
+			return;
+		}
+	}
+
+	if (PlayerDir::LEFT == Dir_)
+	{
+		GetTransform()->SetLocalDeltaTimeMove({ -Speed_.x, Speed_.y });
+	}
+	else
+	{
+		GetTransform()->SetLocalDeltaTimeMove(Speed_);
+	}
 }
 
 void Player::RagingBlow_End()
 {
+	Avatar_->SetLocalPosition(float4::ZERO);
+
+	BodyPixelColor_ = GetBodyColor();
+	FootPixelColor_ = GetFootColor();
+
+	SkillCollision_->Off();
 }

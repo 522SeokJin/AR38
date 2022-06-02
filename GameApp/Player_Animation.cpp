@@ -88,7 +88,18 @@ void Player::CreateAvatarAnimation()
 	// Skill Animation
 	Avatar_->CreateAnimationFolder("slashBlast",
 		{ 0.06f, 0.06f, 0.18f, 0.12f, 0.12f, 0.21f }, false);
+
 	Avatar_->CreateAnimationFolder("upperCharge", 0.06f, false);
+
+	Avatar_->CreateAnimationFolder("ragingBlow",
+		{ 0.120f, 0.06f, 0.06f, 0.120f, 0.06f, 0.06f, 0.06f, 0.06f, 0.06f
+		, 0.06f, 0.06f }, false);
+
+	Avatar_->CreateAnimationFolder("incising",
+		{ 0.09f, 0.630f, 0.150f }, false);
+	
+	Avatar_->CreateAnimationFolder("rageUprising",
+		{ 0.09f, 0.09f, 0.630f, 0.09f }, false);
 
 	Avatar_->SetChangeAnimation("stand1");
 }
@@ -113,10 +124,10 @@ void Player::CreateSkillAnimation()
 
 	for (size_t i = 0; i < 12; i++)
 	{
-		RagingBlowWait.push_back(60.0f);
+		RagingBlowWait.push_back(0.06f);
 	}
-	RagingBlowWait.push_back(30.0f);
-	RagingBlowWait.push_back(30.0f);
+	RagingBlowWait.push_back(0.03f);
+	RagingBlowWait.push_back(0.03f);
 
 	SkillEffect1_->CreateAnimationFolder("RagingBlow_effect", RagingBlowWait, false);
 	SkillEffect1_->SetEndCallBack("RagingBlow_effect", [&]()
