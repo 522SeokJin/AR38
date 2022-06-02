@@ -131,7 +131,7 @@ void Scorpion::Reset()
 	Collision_->On();
 	Die_ = false;
 	Hit_ = false;
-	DeadHitCount_ = 2;
+	DeadHitCount_ = 8;
 
 	On();
 }
@@ -199,6 +199,41 @@ void Scorpion::move()
 	{
 		Renderer_->AddAlpha(2.0f * GameEngineTime::GetInst().GetDeltaTime());
 	}
+
+
+	float4 LeftSidePixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
+		+ float4(-42.5f, 0.0f));
+	float4 RightSidePixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
+		+ float4(42.5f, 0.0f));
+
+	if (DIRRIGHT)
+	{
+		if (0.0f < RightSidePixelColor.g)
+		{
+			Dir_ = 1;
+		}
+
+		if (true == Renderer_->IsLeft_)
+		{
+			Renderer_->ImageLocalFlipYAxis();
+			Renderer_->IsLeft_ = false;
+		}
+	}
+
+	if (DIRLEFT)
+	{
+		if (0.0f < LeftSidePixelColor.g)
+		{
+			Dir_ = 9;
+		}
+
+		if (false == Renderer_->IsLeft_)
+		{
+			Renderer_->ImageLocalFlipYAxis();
+			Renderer_->IsLeft_ = true;
+		}
+	}
+
 
 	float4 LeftPixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
 		+ float4(-10.0f, 27.0f + 5.0f));
