@@ -18,17 +18,20 @@ Manon::Manon()
 	, Dir_(0)
 	, MoveTime_(0.0f)
 	, Hit_(false)
+	, Attack_(false)
 	, Die_(false)
 	, Func_(std::bind(&Manon::SkillEvent, this, std::placeholders::_1))
+	, AttackFunc_(std::bind(&Manon::AttackEvent, this, std::placeholders::_1))
 	, MaxHitCount_(0)
 	, CurHitCount_(0)
 	, HitTime_(0.0f)
-	, DeadHitCount_(8)
+	, DeadHitCount_(50)
 	, OriginPos_(float4::ZERO)
 	, Meso_(nullptr)
 	, RedPotion_(nullptr)
 	, BluePotion_(nullptr)
 	, RandomItemSelect_(0)
+	, RandomAttackSelect_(0)
 {
 
 }
@@ -45,9 +48,51 @@ void Manon::Start()
 
 	Renderer_->CreateAnimationFolder("Manon_stand", 0.130f);
 	Renderer_->CreateAnimationFolder("Manon_move", 0.130f);
+
+
 	Renderer_->CreateAnimationFolder("Manon_attack1", 0.130f, false);
+	Renderer_->SetFrameCallBack("Manon_attack1", 13, [&]()
+		{
+			AttackCollision_->On();
+		});
+	Renderer_->SetFrameCallBack("Manon_attack1", 14, [&]()
+		{
+			AttackCollision_->Off();
+		});
+	Renderer_->SetEndCallBack("Manon_attack1", [&]()
+		{
+			FSM_.ChangeState("stand");
+		});
+
+
 	Renderer_->CreateAnimationFolder("Manon_attack2", 0.130f, false);
+	Renderer_->SetFrameCallBack("Manon_attack2", 11, [&]()
+		{
+			AttackCollision_->On();
+		});
+	Renderer_->SetFrameCallBack("Manon_attack2", 12, [&]()
+		{
+			AttackCollision_->Off();
+		});
+	Renderer_->SetEndCallBack("Manon_attack2", [&]()
+		{
+			FSM_.ChangeState("stand");
+		});
+
 	Renderer_->CreateAnimationFolder("Manon_attack3", 0.130f, false);
+	Renderer_->SetFrameCallBack("Manon_attack3", 5, [&]()
+		{
+			AttackCollision_->On();
+		});
+	Renderer_->SetFrameCallBack("Manon_attack3", 6, [&]()
+		{
+			AttackCollision_->Off();
+		});
+	Renderer_->SetEndCallBack("Manon_attack3", [&]()
+		{
+			FSM_.ChangeState("stand");
+		});
+
 	Renderer_->CreateAnimationFolder("Manon_hit", 0.180f, false);
 	Renderer_->CreateAnimationFolder("Manon_die", 0.110f, false);
 	Renderer_->SetEndCallBack("Manon_die", [&]() { Die_ = true; });
@@ -99,6 +144,18 @@ void Manon::Start()
 		std::bind(&Manon::move_Start, this),
 		std::bind(&Manon::move_End, this));
 
+	FSM_.CreateState("attack1", std::bind(&Manon::attack1, this),
+		std::bind(&Manon::attack1_Start, this),
+		std::bind(&Manon::attack1_End, this));
+	
+	FSM_.CreateState("attack2", std::bind(&Manon::attack2, this),
+		std::bind(&Manon::attack2_Start, this),
+		std::bind(&Manon::attack2_End, this));
+	
+	FSM_.CreateState("attack3", std::bind(&Manon::attack3, this),
+		std::bind(&Manon::attack3_Start, this),
+		std::bind(&Manon::attack3_End, this));
+
 	FSM_.CreateState("hit", std::bind(&Manon::hit, this),
 		std::bind(&Manon::hit_Start, this),
 		std::bind(&Manon::hit_End, this));
@@ -147,7 +204,7 @@ void Manon::Reset()
 	Collision_->On();
 	Die_ = false;
 	Hit_ = false;
-	DeadHitCount_ = 8;
+	DeadHitCount_ = 50;
 
 	On();
 }
@@ -165,6 +222,19 @@ void Manon::SkillEvent(GameEngineCollision* _OtherCollision)
 	}
 }
 
+void Manon::AttackEvent(GameEngineCollision* _OtherCollision)
+{
+	if (false == _OtherCollision->IsUpdate())
+	{
+		return;
+	}
+
+	if (false == Attack_)
+	{
+		Attack_ = true;
+	}
+}
+
 ////////////////////////// FSM
 
 void Manon::stand_Start()
@@ -179,7 +249,7 @@ void Manon::stand()
 		Renderer_->AddAlpha(2.0f * GameEngineTime::GetInst().GetDeltaTime());
 	}
 
-	if (1.5f < FSM_.GetCurrentState()->Time_)
+	if (2.0f < FSM_.GetCurrentState()->Time_)
 	{
 		FSM_.ChangeState("move");
 		return;
@@ -194,6 +264,39 @@ void Manon::stand()
 	{
 		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
 			static_cast<int>(ColGroup::SKILL), Func_);
+	}
+
+	if (1.5f < FSM_.GetCurrentState()->Time_)
+	{
+		if (true == Attack_)
+		{
+			RandomAttackSelect_ = Random_.RandomInt(0, 8);
+			
+			if (3 > RandomAttackSelect_)
+			{
+				FSM_.ChangeState("attack1");
+				return;
+			}
+
+			if (3 <= RandomAttackSelect_ &&
+				6 > RandomAttackSelect_)
+			{
+				FSM_.ChangeState("attack2");
+				return;
+			}
+
+			if (6 <= RandomAttackSelect_ &&
+				9 > RandomAttackSelect_)
+			{
+				FSM_.ChangeState("attack3");
+				return;
+			}
+		}
+		else
+		{
+			AICollision_->Collision(CollisionType::Rect, CollisionType::Rect,
+				static_cast<int>(ColGroup::PLAYER), AttackFunc_);
+		}
 	}
 }
 
@@ -319,6 +422,36 @@ void Manon::move_End()
 
 void Manon::attack1_Start()
 {
+	Renderer_->SetChangeAnimation("Manon_attack1");
+
+	float PlayerXPos = GlobalValue::CurrentPlayer->GetTransform()->GetWorldPosition().x;
+	float DiffXAxis = GetTransform()->GetWorldPosition().x - PlayerXPos;
+
+	if (DiffXAxis < 0)
+	{
+		if (true == Renderer_->IsLeft_)
+		{
+			Renderer_->ImageLocalFlipYAxis();
+			Renderer_->IsLeft_ = false;
+		}
+	}
+	else
+	{
+		if (false == Renderer_->IsLeft_)
+		{
+			Renderer_->ImageLocalFlipYAxis();
+			Renderer_->IsLeft_ = true;
+		}
+	}
+
+	if (true == Renderer_->IsLeft_)
+	{
+		Renderer_->SetLocalMove({ -20.0f, 48.0f, 0.0f });
+	}
+	else
+	{
+		Renderer_->SetLocalMove({ 20.0f, 48.0f, 0.0f });
+	}
 }
 
 void Manon::attack1()
@@ -327,10 +460,49 @@ void Manon::attack1()
 
 void Manon::attack1_End()
 {
+	Attack_ = false;
+	if (true == Renderer_->IsLeft_)
+	{
+		Renderer_->SetLocalMove({ 20.0f, -48.0f, 0.0f });
+	}
+	else
+	{
+		Renderer_->SetLocalMove({ -20.0f, -48.0f, 0.0f });
+	}
 }
 
 void Manon::attack2_Start()
 {
+	Renderer_->SetChangeAnimation("Manon_attack2");
+
+	float PlayerXPos = GlobalValue::CurrentPlayer->GetTransform()->GetWorldPosition().x;
+	float DiffXAxis = GetTransform()->GetWorldPosition().x - PlayerXPos;
+
+	if (DiffXAxis < 0)
+	{
+		if (true == Renderer_->IsLeft_)
+		{
+			Renderer_->ImageLocalFlipYAxis();
+			Renderer_->IsLeft_ = false;
+		}
+	}
+	else
+	{
+		if (false == Renderer_->IsLeft_)
+		{
+			Renderer_->ImageLocalFlipYAxis();
+			Renderer_->IsLeft_ = true;
+		}
+	}
+
+	if (true == Renderer_->IsLeft_)
+	{
+		Renderer_->SetLocalMove({ -15.0f, 0.0f, 0.0f });
+	}
+	else
+	{
+		Renderer_->SetLocalMove({ 15.0f, 0.0f, 0.0f });
+	}
 }
 
 void Manon::attack2()
@@ -339,10 +511,49 @@ void Manon::attack2()
 
 void Manon::attack2_End()
 {
+	Attack_ = false;
+	if (true == Renderer_->IsLeft_)
+	{
+		Renderer_->SetLocalMove({ 15.0f, -0.0f, 0.0f });
+	}
+	else
+	{
+		Renderer_->SetLocalMove({ -15.0f, -0.0f, 0.0f });
+	}
 }
 
 void Manon::attack3_Start()
 {
+	Renderer_->SetChangeAnimation("Manon_attack3");
+
+	float PlayerXPos = GlobalValue::CurrentPlayer->GetTransform()->GetWorldPosition().x;
+	float DiffXAxis = GetTransform()->GetWorldPosition().x - PlayerXPos;
+
+	if (DiffXAxis < 0)
+	{
+		if (true == Renderer_->IsLeft_)
+		{
+			Renderer_->ImageLocalFlipYAxis();
+			Renderer_->IsLeft_ = false;
+		}
+	}
+	else
+	{
+		if (false == Renderer_->IsLeft_)
+		{
+			Renderer_->ImageLocalFlipYAxis();
+			Renderer_->IsLeft_ = true;
+		}
+	}
+
+	if (true == Renderer_->IsLeft_)
+	{
+		Renderer_->SetLocalMove({ -18.0f, 22.0f, 0.0f });
+	}
+	else
+	{
+		Renderer_->SetLocalMove({ 18.0f, 22.0f, 0.0f });
+	}
 }
 
 void Manon::attack3()
@@ -351,6 +562,15 @@ void Manon::attack3()
 
 void Manon::attack3_End()
 {
+	Attack_ = false;
+	if (true == Renderer_->IsLeft_)
+	{
+		Renderer_->SetLocalMove({ 18.0f, -22.0f, 0.0f });
+	}
+	else
+	{
+		Renderer_->SetLocalMove({ -18.0f, -22.0f, 0.0f });
+	}
 }
 
 void Manon::hit_Start()
@@ -410,7 +630,7 @@ void Manon::hit()
 	{
 		if (CurHitCount_ >= MaxHitCount_)
 		{
-			FSM_.ChangeState("move");
+			FSM_.ChangeState("stand");
 			return;
 		}
 	}
@@ -418,7 +638,7 @@ void Manon::hit()
 	{
 		if (0.5f < FSM_.GetCurrentState()->Time_)
 		{
-			FSM_.ChangeState("move");
+			FSM_.ChangeState("stand");
 			return;
 		}
 	}

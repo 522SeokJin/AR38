@@ -32,6 +32,7 @@ protected:
 
 private:
 	void SkillEvent(GameEngineCollision* _OtherCollision);
+	void AttackEvent(GameEngineCollision* _OtherCollision);
 
 	GameEngineFSM FSM_;
 	GameEngineRandom Random_;
@@ -39,6 +40,7 @@ private:
 	float MoveTime_;
 
 	bool Hit_;
+	bool Attack_;
 	bool Die_;
 
 	GameEngineImageRenderer* Renderer_;
@@ -62,10 +64,12 @@ private:
 	BluePotion* BluePotion_;	// 8~9
 
 	int RandomItemSelect_;
+	int RandomAttackSelect_;
 
 	////////////////////////////////////////////	FSM
 
 	std::function<void(GameEngineCollision*)> Func_;
+	std::function<void(GameEngineCollision*)> AttackFunc_;
 
 private:
 	void stand_Start();
@@ -76,15 +80,15 @@ private:
 	void move();
 	void move_End();
 
-	void attack1_Start();
+	void attack1_Start();	// 0~2
 	void attack1();
 	void attack1_End();
 	
-	void attack2_Start();
+	void attack2_Start();	// 3~5
 	void attack2();
 	void attack2_End();
 	
-	void attack3_Start();
+	void attack3_Start();	// 6~8
 	void attack3();
 	void attack3_End();
 
