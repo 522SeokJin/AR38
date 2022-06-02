@@ -161,6 +161,9 @@
     <ClCompile Include="Manon.cpp">
       <Filter>Actor\Monster\BOSS</Filter>
     </ClCompile>
+    <ClCompile Include="DeathNotice.cpp">
+      <Filter>Actor\UI\DeathNotice</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -249,6 +252,9 @@
     </Filter>
     <Filter Include="Global\PostProcess">
       <UniqueIdentifier>{6f719326-8d18-44ea-b928-dee40f707827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI\DeathNotice">
+      <UniqueIdentifier>{35572d5e-81a7-4d54-8fd1-c19d5a233b54}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -407,6 +413,9 @@
     </ClInclude>
     <ClInclude Include="Manon.h">
       <Filter>Actor\Monster\BOSS</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathNotice.h">
+      <Filter>Actor\UI\DeathNotice</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

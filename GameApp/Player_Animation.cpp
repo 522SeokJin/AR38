@@ -13,6 +13,10 @@ void Player::CreateAnimation()
 	SkillEffect4_ = CreateTransformComponent<GameEngineImageRenderer>();
 	HitEffect_ = CreateTransformComponent<GameEngineImageRenderer>();
 
+	Tombstone_ = CreateTransformComponent<GameEngineImageRenderer>();
+	Tombstone_->SetImage("TombStone.png", true, "PointSmp");
+	Tombstone_->SetLocalPosition({ 0.0f, -16.0f, 2.0f });
+
 	SkillEffect1_->Off();
 	SkillEffect2_->Off();
 	SkillEffect3_->Off();

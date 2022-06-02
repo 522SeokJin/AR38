@@ -22,6 +22,7 @@ Player::Player()
 	, SkillEffect3_(nullptr)
 	, SkillEffect4_(nullptr)
 	, HitEffect_(nullptr)
+	, Tombstone_(nullptr)
 	, Collision_(nullptr)
 	, SkillCollision_(nullptr)
 	, SkillHitCount_(1)
@@ -258,6 +259,10 @@ void Player::Start()
 	FSM_.CreateState("stand1", std::bind(&Player::stand1, this),
 		std::bind(&Player::stand1_Start, this),
 		std::bind(&Player::stand1_End, this));
+	
+	FSM_.CreateState("dead", std::bind(&Player::dead, this),
+		std::bind(&Player::dead_Start, this),
+		std::bind(&Player::dead_End, this));
 
 	FSM_.CreateState("walk1", std::bind(&Player::walk1, this),
 		std::bind(&Player::walk1_Start, this),
@@ -322,7 +327,7 @@ void Player::Start()
 		std::bind(&Player::RagingBlow_End, this));
 	SkillEffect1_->SetFrameCallBack("RagingBlow_effect", 3, [&]() { SkillCollision_->On(); });
 
-	FSM_.ChangeState("stand1");
+	FSM_.ChangeState("dead");
 }
 
 void Player::Update(float _DeltaTime)

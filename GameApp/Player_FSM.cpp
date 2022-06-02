@@ -111,6 +111,22 @@ void Player::stand1_End()
 {
 }
 
+void Player::dead_Start()
+{
+	Avatar_->SetChangeAnimation("dead");
+	Tombstone_->On();
+}
+
+void Player::dead()
+{
+	Avatar_->SetLocalPosition({-10.0f + 20.0f * std::sinf(2.0f * FSM_.GetCurrentState()->Time_)
+		, 30.0f + 20.0f * std::cosf(2.0f * FSM_.GetCurrentState()->Time_)});
+}
+
+void Player::dead_End()
+{
+}
+
 void Player::walk1_Start()
 {
 	Avatar_->SetChangeAnimation("walk1");

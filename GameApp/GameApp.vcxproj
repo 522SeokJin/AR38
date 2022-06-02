@@ -175,6 +175,7 @@
     <ClCompile Include="BluePotion.cpp" />
     <ClCompile Include="CopperDrake.cpp" />
     <ClCompile Include="CurvedEffect.cpp" />
+    <ClCompile Include="DeathNotice.cpp" />
     <ClCompile Include="DeepeningForest.cpp" />
     <ClCompile Include="DeepeningForestLevel.cpp" />
     <ClCompile Include="ExpBarUI.cpp">
@@ -295,6 +296,7 @@
     <ClInclude Include="BluePotion.h" />
     <ClInclude Include="CopperDrake.h" />
     <ClInclude Include="CurvedEffect.h" />
+    <ClInclude Include="DeathNotice.h" />
     <ClInclude Include="DeepeningForest.h" />
     <ClInclude Include="DeepeningForestLevel.h" />
     <ClInclude Include="ForestDefender.h" />

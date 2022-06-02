@@ -84,6 +84,8 @@ private:
 	GameEngineImageRenderer* SkillEffect4_;
 	GameEngineImageRenderer* HitEffect_;
 
+	GameEngineImageRenderer* Tombstone_;
+
 	int SkillHitCount_;
 	bool Invincible_;
 
@@ -97,6 +99,10 @@ private:
 	void stand1_Start();
 	void stand1();
 	void stand1_End();
+
+	void dead_Start();
+	void dead();
+	void dead_End();
 
 	void walk1_Start();
 	void walk1();
