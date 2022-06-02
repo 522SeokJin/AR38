@@ -411,6 +411,18 @@ void Player::Update(float _DeltaTime)
 		}
 	}
 
+	if (true == GameEngineInput::GetInst().Down("Level100"))
+	{
+		LevelUp();
+		GlobalValue::CurrentStatusUI->SetPlayerLevel(100);
+	}
+
+	if (true == GameEngineInput::GetInst().Down("JobChange"))
+	{
+		JobsChanged();
+		GlobalValue::CurrentStatusUI->SetNickName("È÷¾î·Î");
+	}
+
 	if (true == GameEngineInput::GetInst().Down("FreeCamera"))
 	{
 		GetLevel()->GetMainCameraActor()->FreeCameraModeSwitch();

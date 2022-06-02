@@ -332,9 +332,9 @@ void StatusUI::SetHP(float _Value)
 		return;
 	}
 
-	if (0 >= _Value)
+	if (0 > _Value)
 	{
-		GameEngineDebug::MsgBoxError("HP Value를 0 이하로 설정했습니다.");
+		GameEngineDebug::MsgBoxError("HP Value를 음수로 설정했습니다.");
 		return;
 	}
 
@@ -357,9 +357,9 @@ void StatusUI::SetMP(float _Value)
 		return;
 	}
 
-	if (0 >= _Value)
+	if (0 > _Value)
 	{
-		GameEngineDebug::MsgBoxError("MP Value를 0 이하로 설정했습니다.");
+		GameEngineDebug::MsgBoxError("MP Value를 음수로 설정했습니다.");
 		return;
 	}
 

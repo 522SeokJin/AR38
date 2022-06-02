@@ -89,6 +89,8 @@ void UserGame::CreateKey()
 	GameEngineInput::GetInst().CreateKey("PixelCollide", 'p');
 	GameEngineInput::GetInst().CreateKey("DebugColOn", '4');
 	GameEngineInput::GetInst().CreateKey("DebugColOff", '5');
+	GameEngineInput::GetInst().CreateKey("Level100", '9');
+	GameEngineInput::GetInst().CreateKey("JobChange", '0');
 
 	// Skill
 	GameEngineInput::GetInst().CreateKey("a", 'a');
