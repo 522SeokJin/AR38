@@ -102,6 +102,43 @@ void Player::CreateSkillAnimation()
 		}
 	);
 
+	SkillEffect1_->CreateAnimationFolder("Incising_effect", 0.09f, false);
+	SkillEffect1_->SetEndCallBack("Incising_effect", [&]()
+		{
+			SkillEffect1_->Off();
+		}
+	);
+	
+	std::vector<float> RagingBlowWait = {};
+
+	for (size_t i = 0; i < 12; i++)
+	{
+		RagingBlowWait.push_back(60.0f);
+	}
+	RagingBlowWait.push_back(30.0f);
+	RagingBlowWait.push_back(30.0f);
+
+	SkillEffect1_->CreateAnimationFolder("RagingBlow_effect", RagingBlowWait, false);
+	SkillEffect1_->SetEndCallBack("RagingBlow_effect", [&]()
+		{
+			SkillEffect1_->Off();
+		}
+	);
+	
+	SkillEffect2_->CreateAnimationFolder("RageUprising_effect0", 0.09f, false);
+	SkillEffect2_->SetEndCallBack("RageUprising_effect0", [&]()
+		{
+			SkillEffect2_->Off();
+		}
+	);
+
+	SkillEffect3_->CreateAnimationFolder("RageUprising_effect1", 0.09f, false);
+	SkillEffect3_->SetEndCallBack("RageUprising_effect1", [&]()
+		{
+			SkillEffect3_->Off();
+		}
+	);
+
 	SkillEffect4_->CreateAnimationFolder("WarriorLeap_effect0", 0.06f, false);
 	SkillEffect4_->SetEndCallBack("WarriorLeap_effect0", [&]()
 		{
