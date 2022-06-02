@@ -304,18 +304,23 @@ void Player::Start()
 	FSM_.CreateState("upperCharge", std::bind(&Player::upperCharge, this),
 		std::bind(&Player::upperCharge_Start, this),
 		std::bind(&Player::upperCharge_End, this));
+	SkillEffect1_->SetFrameCallBack("UpperCharge_effect0", 1, [&]() { SkillCollision_->On(); });
+	SkillEffect1_->SetFrameCallBack("UpperCharge_effect0", 2, [&]() { SkillCollision_->Off(); });
 	
 	FSM_.CreateState("incising", std::bind(&Player::Incising, this),
 		std::bind(&Player::Incising_Start, this),
 		std::bind(&Player::Incising_End, this));
-	
+	SkillEffect1_->SetFrameCallBack("Incising_effect", 9, [&]() { SkillCollision_->On(); });
+
 	FSM_.CreateState("rageUprising", std::bind(&Player::RageUprising, this),
 		std::bind(&Player::RageUprising_Start, this),
 		std::bind(&Player::RageUprising_End, this));
-	
+	SkillEffect2_->SetFrameCallBack("RageUprising_effect0", 8, [&]() { SkillCollision_->On(); });
+
 	FSM_.CreateState("ragingBlow", std::bind(&Player::RagingBlow, this),
 		std::bind(&Player::RagingBlow_Start, this),
 		std::bind(&Player::RagingBlow_End, this));
+	SkillEffect1_->SetFrameCallBack("RagingBlow_effect", 3, [&]() { SkillCollision_->On(); });
 
 	FSM_.ChangeState("stand1");
 }

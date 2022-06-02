@@ -1007,6 +1007,8 @@ void Player::doubleJump_End()
 
 void Player::upperCharge_Start()
 {
+	SkillHitCount_ = 1;
+
 	Speed_.y += 1.75f * JUMPSPEED;
 	GetTransform()->SetLocalMove({ 0.0f, 1.0f });
 
@@ -1038,6 +1040,8 @@ void Player::upperCharge_Start()
 	default:
 		break;
 	}
+
+	GlobalValue::CurrentStatusUI->SubMP(5.0f);
 }
 
 void Player::upperCharge()
@@ -1095,6 +1099,9 @@ void Player::RageUprising_Start()
 	default:
 		break;
 	}
+
+	SkillEffect2_->SetLocalPosition({ 35.0f, 235.0f, 0.0f });
+	SkillEffect3_->SetLocalPosition({ -1.0f, 128.0f, 0.0f });
 
 	GlobalValue::CurrentStatusUI->SubMP(50.0f);
 }
@@ -1159,14 +1166,27 @@ void Player::Incising_Start()
 	switch (Dir_)
 	{
 	case PlayerDir::LEFT:
-		Avatar_->SetLocalPosition({ -0.0f, -0.0f, 0.0f });
+		Avatar_->SetLocalPosition({ -12.0f, -10.0f, 0.0f });
+		if (false == SkillEffect1_->IsLeft_)
+		{
+			SkillEffect1_->ImageLocalFlipYAxis();
+			SkillEffect1_->IsLeft_ = true;
+		}
+		SkillEffect1_->SetLocalPosition({ -100.0f, 150.0f, 0.0f });
 		break;
 	case PlayerDir::RIGHT:
-		Avatar_->SetLocalPosition({ 0.0f, -0.0f, 0.0f });
+		Avatar_->SetLocalPosition({ 12.0f, -10.0f, 0.0f });
+		if (true == SkillEffect1_->IsLeft_)
+		{
+			SkillEffect1_->ImageLocalFlipYAxis();
+			SkillEffect1_->IsLeft_ = false;
+		}
+		SkillEffect1_->SetLocalPosition({ 100.0f, 150.0f, 0.0f });
 		break;
 	default:
 		break;
 	}
+
 
 	GlobalValue::CurrentStatusUI->SubMP(50.0f);
 }
@@ -1231,10 +1251,22 @@ void Player::RagingBlow_Start()
 	switch (Dir_)
 	{
 	case PlayerDir::LEFT:
-		Avatar_->SetLocalPosition({ -0.0f, -0.0f, 0.0f });
+		Avatar_->SetLocalPosition({ -12.0f, -25.0f, 0.0f });
+		if (false == SkillEffect1_->IsLeft_)
+		{
+			SkillEffect1_->ImageLocalFlipYAxis();
+			SkillEffect1_->IsLeft_ = true;
+		}
+		SkillEffect1_->SetLocalPosition({ 70.0f, 10.0f, 0.0f });
 		break;
 	case PlayerDir::RIGHT:
-		Avatar_->SetLocalPosition({ 0.0f, -0.0f, 0.0f });
+		Avatar_->SetLocalPosition({ 12.0f, -25.0f, 0.0f });
+		if (true == SkillEffect1_->IsLeft_)
+		{
+			SkillEffect1_->ImageLocalFlipYAxis();
+			SkillEffect1_->IsLeft_ = false;
+		}
+		SkillEffect1_->SetLocalPosition({ -70.0f, 10.0f, 0.0f });
 		break;
 	default:
 		break;
