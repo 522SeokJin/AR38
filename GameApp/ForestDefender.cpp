@@ -282,9 +282,9 @@ void ForestDefender::move()
 {
 
 	float4 LeftSidePixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
-		+ float4(-42.5f, 0.0f));
+		+ float4(-51.5f, 0.0f));
 	float4 RightSidePixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
-		+ float4(42.5f, 0.0f));
+		+ float4(51.5f, 0.0f));
 
 	if (DIRRIGHT)
 	{
@@ -315,9 +315,9 @@ void ForestDefender::move()
 	}
 
 	float4 LeftPixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
-		+ float4(-10.0f, 64.5f + 5.0f));
+		+ float4(-10.0f, 40.0f));
 	float4 RightPixelColor = Map::GetColor(GetTransform()->GetWorldPosition().InvertY()
-		+ float4(10.0f, 64.5f + 5.0f));
+		+ float4(10.0f, 40.0f));
 
 	if (DIRRIGHT)
 	{

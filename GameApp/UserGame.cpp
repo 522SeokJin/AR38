@@ -55,7 +55,7 @@ void UserGame::Initialize()
 	LevelCreate<ManonForestLevel>("ManonForest");
 
 
-	LevelChange("ManonForest");
+	LevelChange("DeepeningForest");
 }
 
 void UserGame::Release()
