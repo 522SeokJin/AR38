@@ -25,7 +25,6 @@ private:
 	void SpUpBtnEvent2(GameEngineCollision* _OtherCollision);
 	void SpUpBtnEvent3(GameEngineCollision* _OtherCollision);
 	void SpUpBtnEvent4(GameEngineCollision* _OtherCollision);
-	void SpUpBtnEvent5(GameEngineCollision* _OtherCollision);
 
 	void ChangeTabEvent();
 
@@ -36,18 +35,13 @@ private:
 
 	GameEngineUIRenderer* SkillTab1_;
 	GameEngineUIRenderer* SkillTab2_;
-	GameEngineUIRenderer* SkillTab3_;
-	GameEngineUIRenderer* SkillTab4_;
 	GameEngineCollision*  SkillTabCol1_;
 	GameEngineCollision*  SkillTabCol2_;
-	GameEngineCollision*  SkillTabCol3_;
-	GameEngineCollision*  SkillTabCol4_;
 
 	GameEngineUIRenderer* SpUpBtn1_;
 	GameEngineUIRenderer* SpUpBtn2_;
 	GameEngineUIRenderer* SpUpBtn3_;
 	GameEngineUIRenderer* SpUpBtn4_;
-	GameEngineUIRenderer* SpUpBtn5_;
 	GameEngineUIRenderer* Skill1_;
 	GameEngineUIRenderer* Skill2_;
 	GameEngineUIRenderer* Skill3_;
@@ -57,14 +51,11 @@ private:
 	GameEngineCollision*  SpUpCol2_;
 	GameEngineCollision*  SpUpCol3_;
 	GameEngineCollision*  SpUpCol4_;
-	GameEngineCollision*  SpUpCol5_;
 
 	int EnabledTab_;
 
 	int SP1_;
 	int SP2_;
-	int SP3_;
-	int SP4_;
 
 };
 

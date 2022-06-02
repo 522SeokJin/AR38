@@ -10,17 +10,12 @@ SkillUI::SkillUI()
 	, JobNameRenderer_(nullptr)
 	, SkillTab1_(nullptr)
 	, SkillTab2_(nullptr)
-	, SkillTab3_(nullptr)
-	, SkillTab4_(nullptr)
 	, SkillTabCol1_(nullptr)
 	, SkillTabCol2_(nullptr)
-	, SkillTabCol3_(nullptr)
-	, SkillTabCol4_(nullptr)
 	, SpUpBtn1_(nullptr)
 	, SpUpBtn2_(nullptr)
 	, SpUpBtn3_(nullptr)
 	, SpUpBtn4_(nullptr)
-	, SpUpBtn5_(nullptr)
 	, Skill1_(nullptr)
 	, Skill2_(nullptr)
 	, Skill3_(nullptr)
@@ -30,12 +25,9 @@ SkillUI::SkillUI()
 	, SpUpCol2_(nullptr)
 	, SpUpCol3_(nullptr)
 	, SpUpCol4_(nullptr)
-	, SpUpCol5_(nullptr)
 	, EnabledTab_(0)
 	, SP1_(0)
 	, SP2_(0)
-	, SP3_(0)
-	, SP4_(0)
 {
 
 }
@@ -74,18 +66,6 @@ void SkillUI::Start()
 	}
 
 	{
-		SkillTab3_ = CreateTransformComponent<GameEngineUIRenderer>();
-		SkillTab3_->SetImage("Skill.main.Tab.disabled.3.png", true, "PointSmp");
-		SkillTab3_->SetLocalPosition({ -137.0f + 27.0f * 2.0f, 143.0f });
-	}
-
-	{
-		SkillTab4_ = CreateTransformComponent<GameEngineUIRenderer>();
-		SkillTab4_->SetImage("Skill.main.Tab.disabled.4.png", true, "PointSmp");
-		SkillTab4_->SetLocalPosition({ -137.0f + 27.0f * 3.0f, 143.0f });
-	}
-
-	{
 		SkillTabCol1_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
 			ColGroup::TAB));
 		SkillTabCol1_->SetLocalScaling(SkillTab1_->GetImageSize());
@@ -97,20 +77,6 @@ void SkillUI::Start()
 			ColGroup::TAB));
 		SkillTabCol2_->SetLocalScaling(SkillTab2_->GetImageSize());
 		SkillTabCol2_->SetLocalPosition({ -137.0f + 27.0f * 1.0f, 143.0f });
-	}
-
-	{
-		SkillTabCol3_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
-			ColGroup::TAB));
-		SkillTabCol3_->SetLocalScaling(SkillTab3_->GetImageSize());
-		SkillTabCol3_->SetLocalPosition({ -137.0f + 27.0f * 2.0f, 143.0f });
-	}
-
-	{
-		SkillTabCol4_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
-			ColGroup::TAB));
-		SkillTabCol4_->SetLocalScaling(SkillTab4_->GetImageSize());
-		SkillTabCol4_->SetLocalPosition({ -137.0f + 27.0f * 3.0f, 143.0f });
 	}
 
 	{
@@ -138,14 +104,6 @@ void SkillUI::Start()
 	}
 
 	{
-		SpUpBtn4_ = CreateTransformComponent<GameEngineUIRenderer>();
-		SpUpBtn4_->SetImage("Skill.main.BtSpUp.normal.0.png", true, "PointSmp");
-		SpUpBtn4_->TextSetting("돋움", std::to_string(SP1_), 13.5f, float4::BLACK, { -90.0f, 0.0f });
-		SpUpBtn4_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
-		SpUpBtn4_->SetLocalPosition({ -18.0f + 142.0f * 1.0f,61.5f - 40.0f * 1.0f, -1.0f });
-	}
-
-	{
 		SpUpCol1_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
 			ColGroup::TAB));
 		SpUpCol1_->SetLocalScaling(SpUpBtn1_->GetImageSize());
@@ -164,13 +122,6 @@ void SkillUI::Start()
 			ColGroup::TAB));
 		SpUpCol3_->SetLocalScaling(SpUpBtn3_->GetImageSize());
 		SpUpCol3_->SetLocalPosition({ -18.0f + 142.0f * 0.0f, 61.5f - 40.0f * 1.0f });
-	}
-
-	{
-		SpUpCol4_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
-			ColGroup::TAB));
-		SpUpCol4_->SetLocalScaling(SpUpBtn4_->GetImageSize());
-		SpUpCol4_->SetLocalPosition({ -18.0f + 142.0f * 1.0f, 61.5f - 40.0f * 1.0f });
 	}
 
 	{	
@@ -195,12 +146,6 @@ void SkillUI::Start()
 		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>();
 		Renderer->SetImage("Skill.main.skill1.png");
 		Renderer->SetLocalPosition({ -80.0f, 30.0f });
-	}
-		
-	{
-		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>();
-		Renderer->SetImage("Skill.main.skill1.png");
-		Renderer->SetLocalPosition({ 63.0f, 30.0f });
 	}
 
 	{
@@ -228,14 +173,6 @@ void SkillUI::Start()
 	}
 
 	{
-		Skill4_ = CreateTransformComponent<GameEngineUIRenderer>();
-		Skill4_->SetImage("1001010.icon.png");
-		Skill4_->TextSetting("돋움", "리프 어택", 13.0f, float4::BLACK, { 25.0f, 10.0f });
-		Skill4_->SetTextFlag(FW1_LEFT | FW1_VCENTER);
-		Skill4_->SetLocalPosition({ 10.0f, 30.0f });
-	}
-
-	{
 		TitleBar_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
 			ColGroup::TAB));
 		TitleBar_->SetLocalScaling({ 318.0f, 20.0f });
@@ -250,17 +187,13 @@ void SkillUI::Update(float _DeltaTime)
 
 	GetLevel()->PushUIDebugRender(SkillTabCol1_->GetTransform(), CollisionType::Rect);
 	GetLevel()->PushUIDebugRender(SkillTabCol2_->GetTransform(), CollisionType::Rect);
-	GetLevel()->PushUIDebugRender(SkillTabCol3_->GetTransform(), CollisionType::Rect);
-	GetLevel()->PushUIDebugRender(SkillTabCol4_->GetTransform(), CollisionType::Rect);
 	GetLevel()->PushUIDebugRender(SpUpCol1_->GetTransform(), CollisionType::Rect);
 	GetLevel()->PushUIDebugRender(SpUpCol2_->GetTransform(), CollisionType::Rect);
 	GetLevel()->PushUIDebugRender(SpUpCol3_->GetTransform(), CollisionType::Rect);
-	GetLevel()->PushUIDebugRender(SpUpCol4_->GetTransform(), CollisionType::Rect);
 
 	SpUpBtn1_->SetImage("Skill.main.BtSpUp.normal.0.png", true, "PointSmp");
 	SpUpBtn2_->SetImage("Skill.main.BtSpUp.normal.0.png", true, "PointSmp");
 	SpUpBtn3_->SetImage("Skill.main.BtSpUp.normal.0.png", true, "PointSmp");
-	SpUpBtn4_->SetImage("Skill.main.BtSpUp.normal.0.png", true, "PointSmp");
 
 	std::function<void(GameEngineCollision*)> Func =
 		std::bind(&SkillUI::TitleBarEvent, this, std::placeholders::_1);
@@ -281,11 +214,6 @@ void SkillUI::Update(float _DeltaTime)
 	Func = std::bind(&SkillUI::SpUpBtnEvent3, this, std::placeholders::_1);
 
 	SpUpCol3_->Collision(CollisionType::Rect, CollisionType::Rect,
-		static_cast<int>(ColGroup::MOUSE), Func);
-
-	Func = std::bind(&SkillUI::SpUpBtnEvent4, this, std::placeholders::_1);
-
-	SpUpCol4_->Collision(CollisionType::Rect, CollisionType::Rect,
 		static_cast<int>(ColGroup::MOUSE), Func);
 
 	ChangeTabEvent();
@@ -379,23 +307,6 @@ void SkillUI::SpUpBtnEvent4(GameEngineCollision* _OtherCollision)
 	SpUpBtn4_->SetImage("Skill.main.BtSpUp.mouseOver.0.png");
 }
 
-void SkillUI::SpUpBtnEvent5(GameEngineCollision* _OtherCollision)
-{
-	if (true == GameEngineInput::GetInst().Press("MLBtn"))
-	{
-		SpUpBtn5_->SetImage("Skill.main.BtSpUp.pressed.0.png");
-		return;
-	}
-
-	if (true == GameEngineInput::GetInst().Up("MLBtn"))
-	{
-		// Event
-		return;
-	}
-
-	SpUpBtn5_->SetImage("Skill.main.BtSpUp.mouseOver.0.png");
-}
-
 void SkillUI::ChangeTabEvent()
 {
 	SkillTabCol1_->Collision(CollisionType::Rect, CollisionType::Rect,
@@ -405,8 +316,6 @@ void SkillUI::ChangeTabEvent()
 			{
 				SkillTab1_->SetImage("Skill.main.Tab.enabled.1.png");
 				SkillTab2_->SetImage("Skill.main.Tab.disabled.2.png");
-				SkillTab3_->SetImage("Skill.main.Tab.disabled.3.png");
-				SkillTab4_->SetImage("Skill.main.Tab.disabled.4.png");
 
 				JobNameRenderer_->TextSetting("돋움", "전사의 길", 11, float4::WHITE, { 0.0f, 0.0f });
 
@@ -421,45 +330,12 @@ void SkillUI::ChangeTabEvent()
 			{
 				SkillTab1_->SetImage("Skill.main.Tab.disabled.1.png");
 				SkillTab2_->SetImage("Skill.main.Tab.enabled.2.png");
-				SkillTab3_->SetImage("Skill.main.Tab.disabled.3.png");
-				SkillTab4_->SetImage("Skill.main.Tab.disabled.4.png");
 
-				JobNameRenderer_->TextSetting("돋움", "파이터의 길", 11, float4::WHITE, { 0.0f, 0.0f });
+				JobNameRenderer_->TextSetting("돋움", "히어로의 길", 11, float4::WHITE, { 0.0f, 0.0f });
 
 				EnabledTab_ = 1;
 			}
 		});
 
-	SkillTabCol3_->Collision(CollisionType::Rect, CollisionType::Rect,
-		static_cast<int>(ColGroup::MOUSE), [&](GameEngineCollision* _OtherCollision)
-		{
-			if (true == GameEngineInput::GetInst().Down("MLBtn"))
-			{
-				SkillTab1_->SetImage("Skill.main.Tab.disabled.1.png");
-				SkillTab2_->SetImage("Skill.main.Tab.disabled.2.png");
-				SkillTab3_->SetImage("Skill.main.Tab.enabled.3.png");
-				SkillTab4_->SetImage("Skill.main.Tab.disabled.4.png");
-
-				JobNameRenderer_->TextSetting("돋움", "크루세이더의 길", 11, float4::WHITE, { 0.0f, 0.0f });
-
-				EnabledTab_ = 2;
-			}
-		});
-
-	SkillTabCol4_->Collision(CollisionType::Rect, CollisionType::Rect,
-		static_cast<int>(ColGroup::MOUSE), [&](GameEngineCollision* _OtherCollision)
-		{
-			if (true == GameEngineInput::GetInst().Down("MLBtn"))
-			{
-				SkillTab1_->SetImage("Skill.main.Tab.disabled.1.png");
-				SkillTab2_->SetImage("Skill.main.Tab.disabled.2.png");
-				SkillTab3_->SetImage("Skill.main.Tab.disabled.3.png");
-				SkillTab4_->SetImage("Skill.main.Tab.enabled.4.png");
-
-				JobNameRenderer_->TextSetting("돋움", "히어로의 길", 11, float4::WHITE, { 0.0f, 0.0f });
-
-				EnabledTab_ = 3;
-			}
-		});
 }
 
