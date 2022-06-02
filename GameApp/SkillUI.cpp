@@ -23,7 +23,7 @@ SkillUI::SkillUI()
 	, SpUpCol2_(nullptr)
 	, SpUpCol3_(nullptr)
 	, EnabledTab_(0)
-	, SP1_(3)
+	, SP1_(0)
 	, SP2_(0)
 	, SlashblastSP_(0)
 	, WarriorLeapSP_(0)
@@ -429,3 +429,15 @@ void SkillUI::ChangeTabEvent()
 
 }
 
+
+void SkillUI::AddSP1(int _Value)
+{
+	SP1_ += _Value;
+	BgRenderer_->TextSetting("µ¸¿ò", std::to_string(SP1_), 13.5f, float4::BLACK, { 143.0f, 143.0f });
+}
+
+void SkillUI::AddSP2(int _Value)
+{
+	SP2_ += _Value;
+	BgRenderer_->TextSetting("µ¸¿ò", std::to_string(SP2_), 13.5f, float4::BLACK, { 143.0f, 143.0f });
+}

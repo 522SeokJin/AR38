@@ -9,6 +9,7 @@
 #include "ValueCheckWindow.h"
 #include "StatusUI.h"
 #include "DeathNotice.h"
+#include "SkillUI.h"
 
 Player::Player()
 	: Dir_(PlayerDir::LEFT)
@@ -131,12 +132,31 @@ void Player::LevelUp()
 	LevelUpEffect_->On();
 	LevelUpEffect_->SetChangeAnimation("LevelUp", true);
 	
+	if (30 > GlobalValue::CurrentStatusUI->GetPlayerLevel())
+	{
+		GlobalValue::CurrentSkillUI->AddSP1(1);
+	}
+
+	if (100 < GlobalValue::CurrentStatusUI->GetPlayerLevel())
+	{
+		GlobalValue::CurrentSkillUI->AddSP2(1);
+	}
 }
 
 void Player::JobsChanged()
 {
 	JobsChangedEffect_->On();
 	JobsChangedEffect_->SetChangeAnimation("JobChanged", true);
+
+	if (30 > GlobalValue::CurrentStatusUI->GetPlayerLevel())
+	{
+		GlobalValue::CurrentSkillUI->AddSP1(3);
+	}
+
+	if (100 <= GlobalValue::CurrentStatusUI->GetPlayerLevel())
+	{
+		GlobalValue::CurrentSkillUI->AddSP2(3);
+	}
 }
 
 void Player::Revive()

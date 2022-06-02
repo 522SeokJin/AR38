@@ -48,11 +48,17 @@ public:
 		return CurMP_;
 	}
 
-	void SetLevel(int _Level)
+	void SetPlayerLevel(int _Level)
 	{
 		Level_ = _Level;
 		LevelChanged_ = true;
 	}
+
+	inline int GetPlayerLevel()
+	{
+		return Level_;
+	}
+
 	void LevelUp();
 
 	void SetNickName(const std::string& _NickName);

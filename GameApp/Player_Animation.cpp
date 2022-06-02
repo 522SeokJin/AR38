@@ -28,7 +28,7 @@ void Player::CreateAnimation()
 	LevelUpEffect_ = CreateTransformComponent<GameEngineImageRenderer>();
 	LevelUpEffect_->SetLocalPosition({0.0f, 160.0f, static_cast<float>(DepthOrder::SKILL)});
 	JobsChangedEffect_ = CreateTransformComponent<GameEngineImageRenderer>();
-	JobsChangedEffect_->SetLocalPosition({ 0.0f, 182.5f, static_cast<float>(DepthOrder::SKILL)});
+	JobsChangedEffect_->SetLocalPosition({ 0.0f, 128.0f, static_cast<float>(DepthOrder::SKILL)});
 
 	LevelUpEffect_->CreateAnimationFolder("LevelUp", 0.09f, false);
 	JobsChangedEffect_->CreateAnimationFolder("JobChanged", 0.1f, false);

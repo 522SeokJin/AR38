@@ -20,6 +20,10 @@ public:
 	inline int GetIncisingSP() { return IncisingSP_ ; }
 	inline int GetRageUprisingSP() { return RageUprisingSP_; }
 
+	void AddSP1(int _Value);
+
+	void AddSP2(int _Value);
+
 protected:
 	SkillUI(const SkillUI& _other) = delete; 
 	SkillUI(SkillUI&& _other) noexcept = delete;
