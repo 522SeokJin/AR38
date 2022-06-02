@@ -30,6 +30,32 @@ public:
 	void AddBluePotion();
 	void AddElixirPotion();
 
+	inline int GetRedPotionCount()
+	{
+		return RedPotionCount_;
+	}
+	inline int GetBluePotionCount()
+	{
+		return BluePotionCount_;
+	}
+	inline int GetElixirPotionCount()
+	{
+		return ElixirPotionCount_;
+	}
+
+	inline void SubRedPotionCount()
+	{
+		--RedPotionCount_;
+	}
+	inline void SubBluePotionCount()
+	{
+		--BluePotionCount_;
+	}
+	inline void SubElixirPotionCount()
+	{
+		--ElixirPotionCount_;
+	}
+
 protected:
 	InventoryUI(const InventoryUI& _other) = delete;
 	InventoryUI(InventoryUI&& _other) noexcept = delete;
@@ -57,6 +83,7 @@ private:
 	GameEngineUIRenderer* RedPotion_;
 	GameEngineUIRenderer* BluePotion_;
 	GameEngineUIRenderer* ElixirPotion_;
+
 	GameEngineCollision* RedPotionCollision_;
 	GameEngineCollision* BluePotionCollision_;
 	GameEngineCollision* ElixirPotionCollision_;

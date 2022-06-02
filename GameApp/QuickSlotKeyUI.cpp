@@ -51,7 +51,7 @@ void QuickSlotKeyUI::Start()
 
 	{
 		GameEngineUIRenderer* Renderer = CreateTransformComponent<GameEngineUIRenderer>(GetTransform());
-		Renderer->SetImage("key.29.png");
+		Renderer->SetImage("key.44.png");
 		Renderer->SetLocalPosition({ Renderer->GetImageSize().hx(), 0.0f });
 		Renderer->SetLocalMove({ 0.0f * 35.0f, -1.0f * 35.0f });
 	}

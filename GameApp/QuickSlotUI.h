@@ -2,6 +2,7 @@
 #include "GameEngine/GameEngineActor.h"
 
 // 설명 : 
+class GameEngineUIRenderer;
 class QuickSlotUI : public GameEngineActor
 {
 public:
@@ -18,6 +19,14 @@ protected:
 	QuickSlotUI& operator=(const QuickSlotUI&& _other) = delete;
 
 private:
+	GameEngineUIRenderer* RedPotion_;
+	GameEngineUIRenderer* BluePotion_;
+	GameEngineUIRenderer* ElixirPotion_;
+
+	// 아이템갯수 최대치 99
+	std::map<int, std::vector<GameEngineUIRenderer*>> RedPotionNumber_;
+	std::map<int, std::vector<GameEngineUIRenderer*>> BluePotionNumber_;
+	std::map<int, std::vector<GameEngineUIRenderer*>> ElixirPotionNumber_;
 
 };
 
