@@ -4,6 +4,7 @@
 #include <GameEngine/GameEngineImageRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 #include "Mouse.h"
+#include "StatusUI.h"
 
 InventoryUI::InventoryUI()
 	: TitleBar_(nullptr)
@@ -40,21 +41,21 @@ void InventoryUI::Start()
 
 	{
 		RedPotionCollision_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
-			ColGroup::TAB));
+			ColGroup::ITEM));
 		RedPotionCollision_->SetLocalScaling({ 25.0f, 25.0f });
 		RedPotionCollision_->SetLocalPosition(RedPotion_->GetLocalPosition());
 	}
 
 	{
 		BluePotionCollision_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
-			ColGroup::TAB));
+			ColGroup::ITEM));
 		BluePotionCollision_->SetLocalScaling({ 25.0f, 25.0f });
 		BluePotionCollision_->SetLocalPosition(BluePotion_->GetLocalPosition());
 	}
 
 	{
 		ElixirPotionCollision_ = CreateTransformComponent<GameEngineCollision>(static_cast<int>(
-			ColGroup::TAB));
+			ColGroup::ITEM));
 		ElixirPotionCollision_->SetLocalScaling({ 25.0f, 25.0f });
 		ElixirPotionCollision_->SetLocalPosition(ElixirPotion_->GetLocalPosition());
 	}
@@ -135,6 +136,7 @@ void InventoryUI::Update(float _DeltaTime)
 		{ -15.0f, 1.0f, 0.0f });
 
 	UpdateEnableTabItem();
+	UsePotionEvent();
 }
 
 void InventoryUI::AddRedPotion()
@@ -295,6 +297,49 @@ void InventoryUI::ChangeTabEvent()
 		});
 }
 
+void InventoryUI::UsePotionEvent()
+{
+	RedPotionCollision_->Collision(CollisionType::Rect, CollisionType::Rect,
+		static_cast<int>(ColGroup::MOUSE), [&](GameEngineCollision* _OtherCollision)
+		{
+			if (true == GameEngineInput::GetInst().Down("MLBtn"))
+			{
+				if (0 < RedPotionCount_)
+				{
+					--RedPotionCount_;
+					GlobalValue::CurrentStatusUI->AddHP(100.0f);
+				}
+			}
+		});
+
+	BluePotionCollision_->Collision(CollisionType::Rect, CollisionType::Rect,
+		static_cast<int>(ColGroup::MOUSE), [&](GameEngineCollision* _OtherCollision)
+		{
+			if (true == GameEngineInput::GetInst().Down("MLBtn"))
+			{
+				if (0 < BluePotionCount_)
+				{
+					--BluePotionCount_;
+					GlobalValue::CurrentStatusUI->AddMP(100.0f);
+				}
+			}
+		});
+
+	ElixirPotionCollision_->Collision(CollisionType::Rect, CollisionType::Rect,
+		static_cast<int>(ColGroup::MOUSE), [&](GameEngineCollision* _OtherCollision)
+		{
+			if (true == GameEngineInput::GetInst().Down("MLBtn"))
+			{
+				if (0 < ElixirPotionCount_)
+				{
+					--ElixirPotionCount_;
+					GlobalValue::CurrentStatusUI->AddHPPer(50.0f);
+					GlobalValue::CurrentStatusUI->AddMPPer(50.0f);
+				}
+			}
+		});
+}
+
 void InventoryUI::UpdateEnableTabItem()
 {
 	int UseableItemCount = 0;
@@ -331,6 +376,33 @@ void InventoryUI::UpdateEnableTabItem()
 		}
 		break;
 	case InventoryTab::Useable:
+		RedPotion_->Off();
+		BluePotion_->Off();
+		ElixirPotion_->Off();
+
+		for (int j = 0; j < 2; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				RedPotionNumber_[j][k]->Off();
+			}
+		}
+
+		for (int j = 0; j < 2; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				BluePotionNumber_[j][k]->Off();
+			}
+		}
+
+		for (int j = 0; j < 2; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				ElixirPotionNumber_[j][k]->Off();
+			}
+		}
 		if (0 < RedPotionCount_)
 		{
 			RedPotion_->On();

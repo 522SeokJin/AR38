@@ -42,6 +42,7 @@ private:
 	void TitleBarEvent(GameEngineCollision* _OtherCollision);
 
 	void ChangeTabEvent();
+	void UsePotionEvent();
 
 	void UpdateEnableTabItem();
 
