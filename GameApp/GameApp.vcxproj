@@ -173,6 +173,7 @@
   <ItemGroup>
     <ClCompile Include="AppMain.cpp" />
     <ClCompile Include="BluePotion.cpp" />
+    <ClCompile Include="CopperDrake.cpp" />
     <ClCompile Include="CurvedEffect.cpp" />
     <ClCompile Include="DeepeningForest.cpp" />
     <ClCompile Include="DeepeningForestLevel.cpp" />
@@ -253,6 +254,7 @@
     </ClCompile>
     <ClCompile Include="Sandmole.cpp" />
     <ClCompile Include="Scorpion.cpp" />
+    <ClCompile Include="SilentSwamp.cpp" />
     <ClCompile Include="SilentSwampLevel.cpp">
       <SubType>
       </SubType>
@@ -309,6 +311,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BluePotion.h" />
+    <ClInclude Include="CopperDrake.h" />
     <ClInclude Include="CurvedEffect.h" />
     <ClInclude Include="DeepeningForest.h" />
     <ClInclude Include="DeepeningForestLevel.h" />
@@ -387,6 +390,7 @@
     </ClInclude>
     <ClInclude Include="Sandmole.h" />
     <ClInclude Include="Scorpion.h" />
+    <ClInclude Include="SilentSwamp.h" />
     <ClInclude Include="SilentSwampLevel.h">
       <SubType>
       </SubType>

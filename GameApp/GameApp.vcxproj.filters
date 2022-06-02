@@ -164,6 +164,12 @@
     <ClCompile Include="Sandmole.cpp">
       <Filter>Actor\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="CopperDrake.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="SilentSwamp.cpp">
+      <Filter>Actor\Map\HuntingGround</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precom">
@@ -416,6 +422,12 @@
     </ClInclude>
     <ClInclude Include="Sandmole.h">
       <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CopperDrake.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="SilentSwamp.h">
+      <Filter>Actor\Map\HuntingGround</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
