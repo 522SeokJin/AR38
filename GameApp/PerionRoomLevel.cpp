@@ -49,7 +49,7 @@ void PerionRoomLevel::LevelStart()
 
 	RenderWindow_ = GameEngineGUI::GetInst()->FindGUIWindowConvert
 		<GameEngineRenderWindow>("RenderWindow");
-
+	RenderWindow_->Off();
 	GetMainCamera()->SetProjectionMode(ProjectionMode::ORTHOGRAPHIC);
 
 	{

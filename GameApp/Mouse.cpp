@@ -33,6 +33,7 @@ void Mouse::Start()
 		ColGroup::MOUSE));
 
 	Collision_->SetWorldScaling(GetCollision()->GetWorldScaling());
+	WindowCursorOff();
 }
 
 void Mouse::Update(float _DeltaTime)
