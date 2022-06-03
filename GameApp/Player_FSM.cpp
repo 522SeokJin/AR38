@@ -814,9 +814,13 @@ void Player::swingO1_Start()
 	{
 	case PlayerDir::LEFT:
 		Avatar_->SetLocalPosition({ -40.0f, 0.0f, 0.0f });
+		SkillCollision_->SetLocalPosition({ -100.0f, 0.0f, 0.0f });
+		SkillCollision_->SetLocalScaling({ 100.0f, 100.0f, 0.0f });
 		break;
 	case PlayerDir::RIGHT:
 		Avatar_->SetLocalPosition({ 40.0f, 0.0f, 0.0f });
+		SkillCollision_->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
+		SkillCollision_->SetLocalScaling({ 100.0f, 100.0f, 0.0f });
 		break;
 	default:
 		break;
@@ -848,7 +852,7 @@ void Player::swingO1()
 			return;
 		}
 	}
-
+		
 	if (PlayerDir::LEFT == Dir_)
 	{
 		GetTransform()->SetLocalDeltaTimeMove({ -Speed_.x, Speed_.y });
