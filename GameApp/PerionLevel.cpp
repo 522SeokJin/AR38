@@ -17,6 +17,7 @@
 #include "Mouse.h"
 #include "Portal.h"
 #include "Perion.h"
+#include <GameEngine/PostFade.h>
 
 PerionLevel::PerionLevel()
 	: Cursor_(nullptr)
@@ -38,6 +39,10 @@ PerionLevel::~PerionLevel()
 
 void PerionLevel::LevelStart()
 {
+	PostFade* Effect = AddPostProcessCameraMergeNext<PostFade>();
+	Effect->SetTarget(GameEngineDevice::GetBackBufferTarget());
+	Effect->SetData(1.5f, FadeOption::LIGHT);
+
 	RenderWindow_ = GameEngineGUI::GetInst()->FindGUIWindowConvert
 		<GameEngineRenderWindow>("RenderWindow");
 

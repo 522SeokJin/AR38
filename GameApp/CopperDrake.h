@@ -8,8 +8,7 @@
 
 // Ό³Έν : 
 class SmallMeso;
-class RedPotion;
-class BluePotion;
+class ElixirPotion;
 class GameEngineImageRenderer;
 class GameEngineCollision;
 class CopperDrake : public GameEngineActor
@@ -56,8 +55,7 @@ private:
 	float4 OriginPos_;
 
 	SmallMeso* Meso_;	// 0~4
-	RedPotion*  RedPotion_;	// 5~7 
-	BluePotion* BluePotion_;	// 8~9
+	ElixirPotion* ElixirPotion_;	// 5~8
 
 	int RandomItemSelect_;
 

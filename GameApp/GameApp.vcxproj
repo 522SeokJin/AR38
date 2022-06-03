@@ -179,6 +179,8 @@
     <ClCompile Include="DeepeningForest.cpp" />
     <ClCompile Include="DeepeningForestLevel.cpp" />
     <ClCompile Include="ElixirPotion.cpp" />
+    <ClCompile Include="EndingActor.cpp" />
+    <ClCompile Include="EndingLevel.cpp" />
     <ClCompile Include="ExpBarUI.cpp">
       <SubType>
       </SubType>
@@ -301,6 +303,8 @@
     <ClInclude Include="DeepeningForest.h" />
     <ClInclude Include="DeepeningForestLevel.h" />
     <ClInclude Include="ElixirPotion.h" />
+    <ClInclude Include="EndingActor.h" />
+    <ClInclude Include="EndingLevel.h" />
     <ClInclude Include="ForestDefender.h" />
     <ClInclude Include="GlobalLevelControl.h">
       <SubType>

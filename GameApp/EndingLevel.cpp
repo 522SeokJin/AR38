@@ -1,6 +1,6 @@
 #include "PreCompile.h"
-#include "TitleLevel.h"
-#include "TitleUI.h"
+#include "EndingLevel.h"
+#include "EndingActor.h"
 #include "GameEngineBase/GameEngineSoundManager.h"
 #include "Mouse.h"
 #include <GameEngine/GameEngineWindow.h>
@@ -8,7 +8,7 @@
 #include <GameEngine/GameEngineRenderWindow.h>
 #include <GameEngine/PostFade.h>
 
-TitleLevel::TitleLevel()
+EndingLevel::EndingLevel()
 	: Cursor_(nullptr)
 	, RenderWindow_(nullptr)
 	, FadeEffect_(nullptr)
@@ -16,15 +16,16 @@ TitleLevel::TitleLevel()
 
 }
 
-TitleLevel::~TitleLevel()
+EndingLevel::~EndingLevel()
 {
 
 }
 
-void TitleLevel::LevelStart()
+void EndingLevel::LevelStart()
 {
 	RenderWindow_ = GameEngineGUI::GetInst()->FindGUIWindowConvert
 		<GameEngineRenderWindow>("RenderWindow");
+	RenderWindow_->Off();
 
 	GetMainCamera()->SetProjectionMode(ProjectionMode::ORTHOGRAPHIC);
 	GetMainCameraActor()->GetTransform()->SetLocalPosition(float4(0.0f, 0.0f, -100.0f));
@@ -34,7 +35,7 @@ void TitleLevel::LevelStart()
 	}
 
 	{
-		TitleUI* Actor = CreateActor<TitleUI>();
+		EndingActor* Actor = CreateActor<EndingActor>();
 		GetMainCameraActor()->GetTransform()->SetWorldPosition(
 			Actor->GetTransform()->GetLocalPosition());
 	}
@@ -45,7 +46,7 @@ void TitleLevel::LevelStart()
 	FadeEffect_->SetData(1.5f, FadeOption::LIGHT);
 }
 
-void TitleLevel::LevelUpdate(float _DeltaTime)
+void EndingLevel::LevelUpdate(float _DeltaTime)
 {
 	static bool Check = false;
 
@@ -82,11 +83,11 @@ void TitleLevel::LevelUpdate(float _DeltaTime)
 	}
 }
 
-void TitleLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
+void EndingLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
 }
 
-void TitleLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
+void EndingLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 	GlobalValue::CurrentMouse = Cursor_;
 

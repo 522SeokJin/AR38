@@ -17,6 +17,7 @@
 #include "SilentSwampLevel.h"
 #include "SahelLevel.h"
 #include "ManonForestLevel.h"
+#include "EndingLevel.h"
 
 std::atomic<int> UserGame::LoadingFolder = 0;
 
@@ -53,6 +54,8 @@ void UserGame::Initialize()
 
 	// Boss Ground
 	LevelCreate<ManonForestLevel>("ManonForest");
+
+	LevelCreate<EndingLevel>("Ending");
 
 
 	LevelChange("Title");

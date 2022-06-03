@@ -6,8 +6,7 @@
 #include "Map.h"
 #include "ExpBarUI.h"
 #include "SmallMeso.h"
-#include "RedPotion.h"
-#include "BluePotion.h"
+#include "ElixirPotion.h"
 
 Scorpion::Scorpion()
 	: Renderer_(nullptr)
@@ -24,8 +23,7 @@ Scorpion::Scorpion()
 	, DeadHitCount_(8)
 	, OriginPos_(float4::ZERO)
 	, Meso_(nullptr)
-	, RedPotion_(nullptr)
-	, BluePotion_(nullptr)
+	, ElixirPotion_(nullptr)
 	, RandomItemSelect_(0)
 {
 
@@ -457,18 +455,11 @@ void Scorpion::die_Start()
 		Meso_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
 	}
 	else if (5 <= RandomItemSelect_ &&
-		8 > RandomItemSelect_)
+		9 > RandomItemSelect_)
 	{
-		RedPotion_ = GetLevel()->CreateActor<RedPotion>();
-		RedPotion_->Off();
-		RedPotion_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
-	}
-	else if (8 <= RandomItemSelect_ &&
-		10 > RandomItemSelect_)
-	{
-		BluePotion_ = GetLevel()->CreateActor<BluePotion>();
-		BluePotion_->Off();
-		BluePotion_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
+		ElixirPotion_ = GetLevel()->CreateActor<ElixirPotion>();
+		ElixirPotion_->Off();
+		ElixirPotion_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
 	}
 
 	Renderer_->SetChangeAnimation("Scorpion_die");
@@ -494,16 +485,10 @@ void Scorpion::die()
 			Meso_->On();
 		}
 		else if (5 <= RandomItemSelect_ &&
-			8 > RandomItemSelect_)
+			9 > RandomItemSelect_)
 		{
-			RedPotion_->DropStart();
-			RedPotion_->On();
-		}
-		else if (8 <= RandomItemSelect_ &&
-			10 > RandomItemSelect_)
-		{
-			BluePotion_->DropStart();
-			BluePotion_->On();
+			ElixirPotion_->DropStart();
+			ElixirPotion_->On();
 		}
 	}
 }

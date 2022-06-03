@@ -18,6 +18,7 @@
 
 #include "CopperDrake.h"
 #include "Portal.h"
+#include <GameEngine/PostFade.h>
 
 SilentSwampLevel::SilentSwampLevel()
 	: Cursor_(nullptr)
@@ -42,6 +43,10 @@ SilentSwampLevel::~SilentSwampLevel()
 
 void SilentSwampLevel::LevelStart()
 {
+	PostFade* Effect = AddPostProcessCameraMergeNext<PostFade>();
+	Effect->SetTarget(GameEngineDevice::GetBackBufferTarget());
+	Effect->SetData(1.5f, FadeOption::LIGHT);
+
 	RenderWindow_ = GameEngineGUI::GetInst()->FindGUIWindowConvert
 		<GameEngineRenderWindow>("RenderWindow");
 

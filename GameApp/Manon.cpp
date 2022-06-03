@@ -5,9 +5,6 @@
 #include "Player.h"
 #include "Map.h"
 #include "ExpBarUI.h"
-#include "SmallMeso.h"
-#include "RedPotion.h"
-#include "BluePotion.h"
 #include "StatusUI.h"
 
 Manon::Manon()
@@ -29,10 +26,6 @@ Manon::Manon()
 	, HitTime_(0.0f)
 	, DeadHitCount_(50)
 	, OriginPos_(float4::ZERO)
-	, Meso_(nullptr)
-	, RedPotion_(nullptr)
-	, BluePotion_(nullptr)
-	, RandomItemSelect_(0)
 	, RandomAttackSelect_(0)
 {
 
@@ -1038,29 +1031,7 @@ void Manon::hit_End()
 
 void Manon::die_Start()
 {
-	RandomItemSelect_ = Random_.RandomInt(0, 9);
-
-	if (5 > RandomItemSelect_)
-	{
-		Meso_ = GetLevel()->CreateActor<SmallMeso>();
-		Meso_->Off();
-		Meso_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
-	}
-	else if (5 <= RandomItemSelect_ &&
-		8 > RandomItemSelect_)
-	{
-		RedPotion_ = GetLevel()->CreateActor<RedPotion>();
-		RedPotion_->Off();
-		RedPotion_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
-	}
-	else if (8 <= RandomItemSelect_ &&
-		10 > RandomItemSelect_)
-	{
-		BluePotion_ = GetLevel()->CreateActor<BluePotion>();
-		BluePotion_->Off();
-		BluePotion_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
-	}
-
+	
 	Renderer_->SetChangeAnimation("Manon_die");
 	Collision_->Off();
 
@@ -1077,24 +1048,6 @@ void Manon::die()
 	if (Renderer_->GetMulColor().a <= 0.0f)
 	{
 		Off();
-
-		if (5 > RandomItemSelect_)
-		{
-			Meso_->DropStart();
-			Meso_->On();
-		}
-		else if (5 <= RandomItemSelect_ &&
-			8 > RandomItemSelect_)
-		{
-			RedPotion_->DropStart();
-			RedPotion_->On();
-		}
-		else if (8 <= RandomItemSelect_ &&
-			10 > RandomItemSelect_)
-		{
-			BluePotion_->DropStart();
-			BluePotion_->On();
-		}
 	}
 }
 

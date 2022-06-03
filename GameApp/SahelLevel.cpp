@@ -19,6 +19,7 @@
 #include "Scorpion.h"
 #include "Sandmole.h"
 #include "Portal.h"
+#include <GameEngine/PostFade.h>
 
 SahelLevel::SahelLevel()
 	: Cursor_(nullptr)
@@ -47,6 +48,10 @@ SahelLevel::~SahelLevel()
 
 void SahelLevel::LevelStart()
 {
+	PostFade* Effect = AddPostProcessCameraMergeNext<PostFade>();
+	Effect->SetTarget(GameEngineDevice::GetBackBufferTarget());
+	Effect->SetData(1.5f, FadeOption::LIGHT);
+
 	RenderWindow_ = GameEngineGUI::GetInst()->FindGUIWindowConvert
 		<GameEngineRenderWindow>("RenderWindow");
 

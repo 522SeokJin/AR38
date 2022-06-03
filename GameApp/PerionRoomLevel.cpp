@@ -19,6 +19,7 @@
 #include "JobsNPC.h"
 #include "JobsNPC_Dlg.h"
 #include "Portal.h"
+#include <GameEngine/PostFade.h>
 
 PerionRoomLevel::PerionRoomLevel()
 	: Cursor_(nullptr)
@@ -42,6 +43,10 @@ PerionRoomLevel::~PerionRoomLevel()
 
 void PerionRoomLevel::LevelStart()
 {
+	PostFade* Effect = AddPostProcessCameraMergeNext<PostFade>();
+	Effect->SetTarget(GameEngineDevice::GetBackBufferTarget());
+	Effect->SetData(1.5f, FadeOption::LIGHT);
+
 	RenderWindow_ = GameEngineGUI::GetInst()->FindGUIWindowConvert
 		<GameEngineRenderWindow>("RenderWindow");
 

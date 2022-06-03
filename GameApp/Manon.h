@@ -7,9 +7,6 @@
 #define DIRLEFT (5 >= Dir_)
 
 // Ό³Έν : 
-class SmallMeso;
-class RedPotion;
-class BluePotion;
 class GameEngineImageRenderer;
 class GameEngineCollision;
 class Manon : public GameEngineActor
@@ -59,12 +56,7 @@ private:
 	int DeadHitCount_;
 
 	float4 OriginPos_;
-
-	SmallMeso* Meso_;	// 0~4
-	RedPotion*  RedPotion_;	// 5~7 
-	BluePotion* BluePotion_;	// 8~9
-
-	int RandomItemSelect_;
+	
 	int RandomAttackSelect_;
 
 	////////////////////////////////////////////	FSM

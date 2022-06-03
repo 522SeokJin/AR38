@@ -17,6 +17,7 @@
 #include "SkillUI.h"
 
 #include "Manon.h"
+#include <GameEngine/PostFade.h>
 
 ManonForestLevel::ManonForestLevel()
 	: Cursor_(nullptr)
@@ -38,6 +39,10 @@ ManonForestLevel::~ManonForestLevel()
 
 void ManonForestLevel::LevelStart()
 {
+	PostFade* Effect = AddPostProcessCameraMergeNext<PostFade>();
+	Effect->SetTarget(GameEngineDevice::GetBackBufferTarget());
+	Effect->SetData(1.5f, FadeOption::LIGHT);
+
 	RenderWindow_ = GameEngineGUI::GetInst()->FindGUIWindowConvert
 		<GameEngineRenderWindow>("RenderWindow");
 

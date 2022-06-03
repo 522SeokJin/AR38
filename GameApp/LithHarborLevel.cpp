@@ -19,6 +19,7 @@
 
 #include "LithHarborTaxi.h"
 #include "TaxiDlg.h"
+#include <GameEngine/PostFade.h>
 
 LithHarborLevel::LithHarborLevel()
 	: Cursor_(nullptr)
@@ -42,6 +43,10 @@ LithHarborLevel::~LithHarborLevel()
 
 void LithHarborLevel::LevelStart()
 {
+	PostFade* Effect = AddPostProcessCameraMergeNext<PostFade>();
+	Effect->SetTarget(GameEngineDevice::GetBackBufferTarget());
+	Effect->SetData(1.5f, FadeOption::LIGHT);
+
 	RenderWindow_ = GameEngineGUI::GetInst()->FindGUIWindowConvert
 		<GameEngineRenderWindow>("RenderWindow");
 
