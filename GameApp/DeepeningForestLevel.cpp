@@ -30,6 +30,7 @@ DeepeningForestLevel::DeepeningForestLevel()
 	, Status_(nullptr)
 	, ExpBar_(nullptr)
 	, ReZenTime_(8.0f)
+	, LevelControl(nullptr)
 {
 }
 
@@ -43,6 +44,8 @@ DeepeningForestLevel::~DeepeningForestLevel()
 
 void DeepeningForestLevel::LevelStart()
 {
+	LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
+	LevelControl->Off();
 	PostFade* Effect = AddPostProcessCameraMergeNext<PostFade>();
 	Effect->SetTarget(GameEngineDevice::GetBackBufferTarget());
 	Effect->SetData(1.5f, FadeOption::LIGHT);
@@ -96,7 +99,7 @@ void DeepeningForestLevel::LevelUpdate(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst().Down("LevelControl"))
 	{
-		GameEngineGUIWindow* LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
+		LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
 		LevelControl->OnOffChange();
 	}
 

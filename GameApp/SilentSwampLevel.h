@@ -10,6 +10,7 @@ class SkillUI;
 class ExpBarUI;
 class SilentSwamp;
 class CopperDrake;
+class GameEngineGUIWindow;
 class SilentSwampLevel : public GameEngineLevel
 {
 public:
@@ -44,4 +45,5 @@ private:
 	std::list<CopperDrake*> Monsters_;
 
 	float ReZenTime_;
+	GameEngineGUIWindow* LevelControl;
 };

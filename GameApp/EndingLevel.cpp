@@ -11,7 +11,7 @@
 EndingLevel::EndingLevel()
 	: Cursor_(nullptr)
 	, RenderWindow_(nullptr)
-	, FadeEffect_(nullptr)
+	, FadeEffect_(nullptr), LevelControl(nullptr)
 {
 
 }
@@ -23,6 +23,8 @@ EndingLevel::~EndingLevel()
 
 void EndingLevel::LevelStart()
 {
+	LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
+	LevelControl->Off();
 	RenderWindow_ = GameEngineGUI::GetInst()->FindGUIWindowConvert
 		<GameEngineRenderWindow>("RenderWindow");
 	RenderWindow_->Off();
@@ -68,7 +70,7 @@ void EndingLevel::LevelUpdate(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst().Down("LevelControl"))
 	{
-		GameEngineGUIWindow* LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
+		LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
 		LevelControl->OnOffChange();
 	}
 

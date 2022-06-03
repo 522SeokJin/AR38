@@ -11,6 +11,7 @@ class ExpBarUI;
 class Sahel;
 class Scorpion;
 class Sandmole;
+class GameEngineGUIWindow;
 class SahelLevel : public GameEngineLevel
 {
 public:
@@ -46,4 +47,5 @@ private:
 	std::list<Sandmole*> Monsters2_;
 
 	float ReZenTime_;
+	GameEngineGUIWindow* LevelControl;
 };

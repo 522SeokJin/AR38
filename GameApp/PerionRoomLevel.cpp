@@ -31,7 +31,7 @@ PerionRoomLevel::PerionRoomLevel()
 	, JobsNPC_(nullptr)
 	, Skill_(nullptr)
 	, ExpBar_(nullptr)
-	, Map_(nullptr)
+	, Map_(nullptr), LevelControl(nullptr)
 {
 
 }
@@ -43,6 +43,8 @@ PerionRoomLevel::~PerionRoomLevel()
 
 void PerionRoomLevel::LevelStart()
 {
+	LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
+	LevelControl->Off();
 	PostFade* Effect = AddPostProcessCameraMergeNext<PostFade>();
 	Effect->SetTarget(GameEngineDevice::GetBackBufferTarget());
 	Effect->SetData(1.5f, FadeOption::LIGHT);
@@ -150,7 +152,7 @@ void PerionRoomLevel::LevelUpdate(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst().Down("LevelControl"))
 	{
-		GameEngineGUIWindow* LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
+		LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
 		LevelControl->OnOffChange();
 	}
 

@@ -10,6 +10,7 @@ class SkillUI;
 class ExpBarUI;
 class DeepeningForest;
 class ForestDefender;
+class GameEngineGUIWindow;
 class DeepeningForestLevel : public GameEngineLevel
 {
 public:
@@ -44,4 +45,5 @@ private:
 	std::list<ForestDefender*> Monsters_;
 
 	float ReZenTime_;
+	GameEngineGUIWindow* LevelControl;
 };

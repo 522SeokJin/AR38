@@ -8,6 +8,7 @@ class GameEngineRenderWindow;
 class InventoryUI;
 class StatusUI;
 class Perion;
+class GameEngineGUIWindow;
 class PerionLevel : public GameEngineLevel
 {
 public:
@@ -34,5 +35,6 @@ private:
 	Perion* Map_;
 	SkillUI*  Skill_;
 	ExpBarUI* ExpBar_;
+	GameEngineGUIWindow* LevelControl;
 };
 

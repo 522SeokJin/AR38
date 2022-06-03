@@ -30,7 +30,7 @@ ManonForestLevel::ManonForestLevel()
 	, Status_(nullptr)
 	, ExpBar_(nullptr)
 	, ReZenTime_(8.0f)
-	, Boss_(nullptr)
+	, Boss_(nullptr), LevelControl(nullptr)
 {
 }
 
@@ -40,6 +40,8 @@ ManonForestLevel::~ManonForestLevel()
 
 void ManonForestLevel::LevelStart()
 {
+	LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
+	LevelControl->Off();
 	PostFade* Effect = AddPostProcessCameraMergeNext<PostFade>();
 	Effect->SetTarget(GameEngineDevice::GetBackBufferTarget());
 	Effect->SetData(1.5f, FadeOption::LIGHT);
@@ -91,7 +93,7 @@ void ManonForestLevel::LevelUpdate(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst().Down("LevelControl"))
 	{
-		GameEngineGUIWindow* LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
+		LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
 		LevelControl->OnOffChange();
 	}
 

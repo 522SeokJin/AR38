@@ -30,7 +30,7 @@ SahelLevel::SahelLevel()
 	, Skill_(nullptr)
 	, Status_(nullptr)
 	, ExpBar_(nullptr)
-	, ReZenTime_(8.0f)
+	, ReZenTime_(8.0f), LevelControl(nullptr)
 {
 }
 
@@ -48,6 +48,8 @@ SahelLevel::~SahelLevel()
 
 void SahelLevel::LevelStart()
 {
+	LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
+	LevelControl->Off();
 	PostFade* Effect = AddPostProcessCameraMergeNext<PostFade>();
 	Effect->SetTarget(GameEngineDevice::GetBackBufferTarget());
 	Effect->SetData(1.5f, FadeOption::LIGHT);
@@ -101,7 +103,7 @@ void SahelLevel::LevelUpdate(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst().Down("LevelControl"))
 	{
-		GameEngineGUIWindow* LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
+		LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
 		LevelControl->OnOffChange();
 	}
 

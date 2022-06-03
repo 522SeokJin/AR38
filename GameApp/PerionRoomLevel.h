@@ -11,6 +11,7 @@ class JobsNPC;
 class StatusUI;
 class SkillUI;
 class PerionRoom;
+class GameEngineGUIWindow;
 class PerionRoomLevel : public GameEngineLevel
 {
 public:
@@ -40,5 +41,6 @@ private:
 
 	JobsNPC_Dlg* JobsNPCDlg_;
 	JobsNPC* JobsNPC_;
+	GameEngineGUIWindow* LevelControl;
 };
 

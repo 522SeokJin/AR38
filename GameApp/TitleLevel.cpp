@@ -13,7 +13,7 @@
 TitleLevel::TitleLevel()
 	: Cursor_(nullptr)
 	, RenderWindow_(nullptr)
-	, FadeEffect_(nullptr)
+	, FadeEffect_(nullptr), LevelControl(nullptr)
 {
 
 }
@@ -25,6 +25,8 @@ TitleLevel::~TitleLevel()
 
 void TitleLevel::LevelStart()
 {
+	LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
+	LevelControl->Off();
 	RenderWindow_ = GameEngineGUI::GetInst()->FindGUIWindowConvert
 		<GameEngineRenderWindow>("RenderWindow");
 	RenderWindow_->Off();
@@ -70,7 +72,6 @@ void TitleLevel::LevelUpdate(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst().Down("LevelControl"))
 	{
-		GameEngineGUIWindow* LevelControl = GameEngineGUI::GetInst()->FindGUIWindow("LevelControlWindow");
 		LevelControl->OnOffChange();
 	}
 

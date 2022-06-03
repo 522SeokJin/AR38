@@ -4,6 +4,7 @@
 // Ό³Έν : 
 class Mouse;
 class GameEngineRenderWindow;
+class GameEngineGUIWindow;
 class EndingLevel : public GameEngineLevel
 {
 public:
@@ -26,6 +27,7 @@ protected:
 private:
 	Mouse* Cursor_;
 	GameEngineRenderWindow* RenderWindow_;
+	GameEngineGUIWindow* LevelControl;
 
 };
 

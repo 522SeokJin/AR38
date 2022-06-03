@@ -10,6 +10,7 @@ class SkillUI;
 class ExpBarUI;
 class PerionNorthernRidge;
 class Stump;
+class GameEngineGUIWindow;
 class PerionNorthernRidgeLevel : public GameEngineLevel
 {
 public:
@@ -44,5 +45,6 @@ private:
 	std::list<Stump*> Stumps_;
 
 	float ReZenTime_;
+	GameEngineGUIWindow* LevelControl;
 };
 

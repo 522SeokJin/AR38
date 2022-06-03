@@ -10,6 +10,7 @@ class SkillUI;
 class ExpBarUI;
 class ManonForest;
 class Manon;
+class GameEngineGUIWindow;
 class ManonForestLevel : public GameEngineLevel
 {
 public:
@@ -42,4 +43,5 @@ private:
 	Manon* Boss_;
 
 	float ReZenTime_;
+	GameEngineGUIWindow* LevelControl;
 };

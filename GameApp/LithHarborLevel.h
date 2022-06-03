@@ -11,6 +11,7 @@ class LithHarborTaxi;
 class LithHarbor;
 class StatusUI;
 class SkillUI;
+class GameEngineGUIWindow;
 class LithHarborLevel : public GameEngineLevel
 {
 public:
@@ -42,5 +43,6 @@ private:
 
 	TaxiDlg* TaxiDlg_;
 	LithHarborTaxi* Taxi_;
+	GameEngineGUIWindow* LevelControl;
 };
 
