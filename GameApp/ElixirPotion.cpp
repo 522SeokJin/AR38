@@ -27,7 +27,7 @@ void ElixirPotion::Start()
 	Renderer_ = CreateTransformComponent<GameEngineImageRenderer>();
 	Renderer_->SetLocalMove({ 0.0f, 0.0f, static_cast<float>(DepthOrder::ITEM) });
 
-	Renderer_->SetImage("02000003.info.iconRaw.png");
+	Renderer_->SetImage("02000004.info.iconRaw.png");
 
 	Collision_ = CreateTransformComponent<GameEngineCollision>(
 		static_cast<int>(ColGroup::ITEM));

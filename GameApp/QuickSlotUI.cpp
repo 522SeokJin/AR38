@@ -249,8 +249,8 @@ void QuickSlotUI::Update(float _DeltaTime)
 		if (0 < GlobalValue::CurrentInventoryUI->GetElixirPotionCount())
 		{
 			GlobalValue::CurrentInventoryUI->SubElixirPotionCount();
-			GlobalValue::CurrentStatusUI->AddHPPer(50.0f);
-			GlobalValue::CurrentStatusUI->AddMPPer(50.0f);
+			GlobalValue::CurrentStatusUI->AddHPPer(0.5f);
+			GlobalValue::CurrentStatusUI->AddMPPer(0.5f);
 		}
 	}
 

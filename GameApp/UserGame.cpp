@@ -58,7 +58,7 @@ void UserGame::Initialize()
 	LevelCreate<EndingLevel>("Ending");
 
 
-	LevelChange("Title");
+	LevelChange("ManonForest");
 }
 
 void UserGame::Release()
@@ -92,6 +92,7 @@ void UserGame::CreateKey()
 	GameEngineInput::GetInst().CreateKey("PixelCollide", 'p');
 	GameEngineInput::GetInst().CreateKey("DebugColOn", '4');
 	GameEngineInput::GetInst().CreateKey("DebugColOff", '5');
+	GameEngineInput::GetInst().CreateKey("LevelUp", '8');
 	GameEngineInput::GetInst().CreateKey("Level100", '9');
 	GameEngineInput::GetInst().CreateKey("JobChange", '0');
 

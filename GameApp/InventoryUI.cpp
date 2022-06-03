@@ -333,8 +333,8 @@ void InventoryUI::UsePotionEvent()
 				if (0 < ElixirPotionCount_)
 				{
 					--ElixirPotionCount_;
-					GlobalValue::CurrentStatusUI->AddHPPer(50.0f);
-					GlobalValue::CurrentStatusUI->AddMPPer(50.0f);
+					GlobalValue::CurrentStatusUI->AddHPPer(0.5f);
+					GlobalValue::CurrentStatusUI->AddMPPer(0.5f);
 				}
 			}
 		});

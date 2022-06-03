@@ -433,6 +433,12 @@ void Player::Update(float _DeltaTime)
 		}
 	}
 
+	if (true == GameEngineInput::GetInst().Down("LevelUp"))
+	{
+		LevelUp();
+		GlobalValue::CurrentStatusUI->LevelUp();
+	}
+
 	if (true == GameEngineInput::GetInst().Down("Level100"))
 	{
 		LevelUp();
