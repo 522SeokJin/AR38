@@ -350,7 +350,9 @@ void Player::Start()
 	FSM_.CreateState("swingO1", std::bind(&Player::swingO1, this),
 		std::bind(&Player::swingO1_Start, this),
 		std::bind(&Player::swingO1_End, this));
-	Avatar_->SetFrameCallBack("swingO1", 2, [&](){ SkillCollision_->On(); });
+	Avatar_->SetFrameCallBack("swingO1", 2, [&](){ SkillCollision_->On();
+	UserGame::EffectSoundPlayer->PlayOverLap("Attack.mp3");
+		});
 
 	FSM_.CreateState("slashBlast", std::bind(&Player::slashBlast, this),
 		std::bind(&Player::slashBlast_Start, this),

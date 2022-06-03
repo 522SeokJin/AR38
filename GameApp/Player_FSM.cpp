@@ -805,6 +805,8 @@ void Player::swingO1_Start()
 
 	Avatar_->SetChangeAnimation("swingO1");
 
+
+
 	BodyPixelColor_ = GetBodyColor();
 	FootPixelColor_ = GetBodyColor();
 
@@ -870,7 +872,7 @@ void Player::swingO1_End()
 void Player::slashBlast_Start()
 {
 	SkillHitCount_ = 2;
-
+	UserGame::EffectSoundPlayer->PlayOverLap("slashblastuse.mp3");
 	Avatar_->SetChangeAnimation("slashBlast");
 	SkillEffect1_->On();
 	SkillEffect1_->SetChangeAnimation("Slashblast_effect", true);
@@ -959,7 +961,7 @@ void Player::doubleJump_Start()
 {
 	SkillEffect4_->On();
 	SkillEffect4_->SetChangeAnimation("WarriorLeap_effect0", true);
-
+	UserGame::EffectSoundPlayer->PlayOverLap("doublejump.mp3");
 	Speed_.x += JUMPSPEED;
 	Speed_.y += 0.5f * JUMPSPEED;
 
@@ -1082,7 +1084,8 @@ void Player::doubleJump_End()
 void Player::upperCharge_Start()
 {
 	SkillHitCount_ = 1;
-
+	
+	UserGame::EffectSoundPlayer->PlayOverLap("upperchargeuse.mp3");
 	Speed_.y += 1.75f * JUMPSPEED;
 	GetTransform()->SetLocalMove({ 0.0f, 1.0f });
 
@@ -1156,6 +1159,7 @@ void Player::upperCharge_End()
 void Player::RageUprising_Start()
 {
 	SkillHitCount_ = 5;
+	UserGame::EffectSoundPlayer->PlayOverLap("RageUprising.mp3");
 
 	Avatar_->SetChangeAnimation("rageUprising");
 	SkillEffect2_->On();
@@ -1237,6 +1241,7 @@ void Player::Incising_Start()
 {
 	SkillHitCount_ = 5;
 
+	UserGame::EffectSoundPlayer->PlayOverLap("IncisingUse.mp3");
 	Avatar_->SetChangeAnimation("incising");
 	SkillEffect1_->On();
 	SkillEffect1_->SetChangeAnimation("Incising_effect", true);
@@ -1326,6 +1331,7 @@ void Player::RagingBlow_Start()
 {
 	SkillHitCount_ = 3;
 
+	UserGame::EffectSoundPlayer->PlayOverLap("RagingBlowUse.mp3");
 	Avatar_->SetChangeAnimation("ragingBlow");
 	SkillEffect1_->On();
 	SkillEffect1_->SetChangeAnimation("RagingBlow_effect", true);
