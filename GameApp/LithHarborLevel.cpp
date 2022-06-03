@@ -127,11 +127,13 @@ void LithHarborLevel::LevelUpdate(float _DeltaTime)
 
 void LithHarborLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
-
+	UserGame::BGSoundPlayer->Stop();
 }
 
 void LithHarborLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
+	UserGame::BGSoundPlayer->PlayAlone("AboveTheTreetops.mp3");
+	UserGame::EffectSoundPlayer->PlayOverLap("Whistle.mp3");
 }
 
 void LithHarborLevel::CreateActorLevel()

@@ -7,6 +7,8 @@
 #include <GameEngine/GameEngineGUI.h>
 #include <GameEngine/GameEngineRenderWindow.h>
 #include <GameEngine/PostFade.h>
+#include <GameEngineBase/GameEngineSoundPlayer.h>
+
 
 TitleLevel::TitleLevel()
 	: Cursor_(nullptr)
@@ -85,11 +87,12 @@ void TitleLevel::LevelUpdate(float _DeltaTime)
 
 void TitleLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
+	UserGame::BGSoundPlayer->Stop();
 }
 
 void TitleLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
 	GlobalValue::CurrentMouse = Cursor_;
 
-	// GameEngineSoundManager::GetInst().PlaySoundOneShot("Title.mp3");
+	UserGame::BGSoundPlayer->PlayAlone("Title.mp3");
 }

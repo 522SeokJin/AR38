@@ -627,6 +627,7 @@ void ForestDefender::die_Start()
 		BluePotion_->GetTransform()->SetWorldPosition(GetTransform()->GetWorldPosition());
 	}
 
+	UserGame::EffectSoundPlayer->PlayOverLap("DropItem.mp3");
 	GlobalValue::CurrentExpBarUI->AddExp(150.0f);
 }
 

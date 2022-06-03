@@ -136,6 +136,7 @@ void Player::LevelUp()
 {
 	LevelUpEffect_->On();
 	LevelUpEffect_->SetChangeAnimation("LevelUp", true);
+	UserGame::EffectSoundPlayer->PlayOverLap("LevelUp.mp3");
 	
 	if (30 > GlobalValue::CurrentStatusUI->GetPlayerLevel())
 	{
@@ -152,6 +153,8 @@ void Player::JobsChanged()
 {
 	JobsChangedEffect_->On();
 	JobsChangedEffect_->SetChangeAnimation("JobChanged", true);
+
+	UserGame::EffectSoundPlayer->PlayOverLap("JobChanged.mp3");
 
 	if (30 > GlobalValue::CurrentStatusUI->GetPlayerLevel())
 	{

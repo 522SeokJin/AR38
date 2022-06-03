@@ -123,6 +123,7 @@ void Player::dead_Start()
 	Avatar_->SetChangeAnimation("dead");
 	Tombstone_->On();
 	Tombstone_->SetLocalPosition(TombstoneOriginPos_ + float4(0.0f, 1000.0f, 0.0f));
+	UserGame::EffectSoundPlayer->PlayOverLap("Tombstone.mp3");
 
 	DeathUI_->On();
 	Collision_->Off();
@@ -270,6 +271,8 @@ void Player::walk1_End()
 void Player::jump_Start()
 {
 	Avatar_->SetChangeAnimation("jump");
+	UserGame::EffectSoundPlayer->PlayOverLap("Jump.mp3");
+
 	Speed_.y = JUMPSPEED;
 	GetTransform()->SetLocalMove({ 0.0f, 1.0f });
 

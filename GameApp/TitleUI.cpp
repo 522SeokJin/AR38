@@ -63,6 +63,7 @@ void TitleUI::MouseEvent(GameEngineCollision* _OtherCollision)
 
 	if (true == GameEngineInput::GetInst().Up("MLBtn"))
 	{
+		UserGame::EffectSoundPlayer->PlayOverLap("GameIn.mp3");
 		GameEngineCore::LevelChange("LithHarbor");
 		return;
 	}

@@ -39,6 +39,7 @@ void Portal::Update(float _DeltaTime)
 			if (true == GameEngineInput::GetInst().Down("Up"))
 			{
 				GameEngineCore::LevelChange(Destination_);
+				UserGame::EffectSoundPlayer->PlayOverLap("Portal.mp3");
 			}
 		}
 	);

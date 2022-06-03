@@ -308,6 +308,7 @@ void InventoryUI::UsePotionEvent()
 				{
 					--RedPotionCount_;
 					GlobalValue::CurrentStatusUI->AddHP(100.0f);
+					UserGame::EffectSoundPlayer->PlayOverLap("Use.mp3");
 				}
 			}
 		});
@@ -321,6 +322,7 @@ void InventoryUI::UsePotionEvent()
 				{
 					--BluePotionCount_;
 					GlobalValue::CurrentStatusUI->AddMP(100.0f);
+					UserGame::EffectSoundPlayer->PlayOverLap("Use.mp3");
 				}
 			}
 		});
@@ -335,6 +337,7 @@ void InventoryUI::UsePotionEvent()
 					--ElixirPotionCount_;
 					GlobalValue::CurrentStatusUI->AddHPPer(0.5f);
 					GlobalValue::CurrentStatusUI->AddMPPer(0.5f);
+					UserGame::EffectSoundPlayer->PlayOverLap("Use.mp3");
 				}
 			}
 		});

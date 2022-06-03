@@ -17,3 +17,6 @@
 
 #include "GlobalValue.h"
 #include "GlobalLevelControl.h"
+
+#include <GameEngineBase/GameEngineSoundPlayer.h>
+

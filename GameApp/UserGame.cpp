@@ -20,9 +20,14 @@
 #include "EndingLevel.h"
 
 std::atomic<int> UserGame::LoadingFolder = 0;
+GameEngineSoundPlayer* UserGame::BGSoundPlayer = nullptr;
+GameEngineSoundPlayer* UserGame::EffectSoundPlayer = nullptr;
+
 
 UserGame::UserGame() // default constructer 디폴트 생성자
 {
+	BGSoundPlayer = GameEngineSoundManager::GetInst().CreateSoundPlayer();
+	EffectSoundPlayer = GameEngineSoundManager::GetInst().CreateSoundPlayer();
 
 }
 
@@ -111,6 +116,10 @@ void UserGame::CreateKey()
 	GameEngineInput::GetInst().CreateKey("e", 'e');
 	GameEngineInput::GetInst().CreateKey("r", 'r');
 	GameEngineInput::GetInst().CreateKey("Shift", VK_SHIFT);
+
+	// Sound Volume
+	GameEngineInput::GetInst().CreateKey("VolumeUp", 'u');
+	GameEngineInput::GetInst().CreateKey("VolumeDown", 'n');
 }
 
 

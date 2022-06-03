@@ -11,6 +11,10 @@ public:
 	// 64πŸ¿Ã∆Æ
 	static std::atomic<int> LoadingFolder;
 
+
+	static GameEngineSoundPlayer* BGSoundPlayer;
+	static GameEngineSoundPlayer* EffectSoundPlayer;
+
 public:
 	UserGame();
 	~UserGame();
@@ -28,7 +32,6 @@ public:
 	{
 		return { 1024.0f, 768.0f };
 	}
-
 protected:
 	UserGame(const UserGame& _other) = delete;
 	UserGame(UserGame&& _other) = delete;

@@ -12,6 +12,7 @@ GameEngineSoundPlayer::GameEngineSoundPlayer()
 	: playSoundFile_(nullptr)
 	, playChannel_(nullptr)
 	, PlayCount(-1)
+	, Volume_(1.0f)
 {
 }
 
@@ -109,4 +110,28 @@ void GameEngineSoundPlayer::Stop()
 
 	playChannel_->stop();
 	playChannel_ = nullptr;
+}
+
+void GameEngineSoundPlayer::VolumeUp()
+{
+	if (nullptr == playChannel_)
+	{
+		return;
+	}
+
+	Volume_ += 0.1f;
+
+	playChannel_->setVolume(Volume_);
+}
+
+void GameEngineSoundPlayer::VolumeDown()
+{
+	if (nullptr == playChannel_)
+	{
+		return;
+	}
+
+	Volume_ -= 0.1f;
+
+	playChannel_->setVolume(Volume_);
 }

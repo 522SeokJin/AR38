@@ -87,7 +87,7 @@ void Mouse::ButtonEvent(GameEngineCollision* _OtherCollision)
 	if (false == GameEngineInput::GetInst().Press("MLBtn") &&
 		"ClickHovered" != GetUIRenderer()->GetCurrentAnimationName())
 	{
-		GetUIRenderer()->SetChangeAnimation("ClickHovered");
+		//GetUIRenderer()->SetChangeAnimation("ClickHovered");
 		return;
 	}
 }
@@ -97,7 +97,7 @@ void Mouse::NPCEvent(GameEngineCollision* _OtherCollision)
 	if (false == GameEngineInput::GetInst().Press("MLBtn") &&
 		"ClickHovered" != GetUIRenderer()->GetCurrentAnimationName())
 	{
-		GetUIRenderer()->SetChangeAnimation("ClickHovered");
+		//GetUIRenderer()->SetChangeAnimation("ClickHovered");
 		return;
 	}
 }

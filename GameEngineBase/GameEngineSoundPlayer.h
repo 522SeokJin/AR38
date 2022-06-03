@@ -15,6 +15,7 @@ private:	// member Var
 	GameEngineSoundManager* playSoundFile_;
 	FMOD::Channel* playChannel_;
 	int PlayCount;
+	float Volume_;
 
 private:		
 	GameEngineSoundPlayer(); // default constructer 디폴트 생성자
@@ -40,5 +41,8 @@ public:		//member Func
 	void PlayAlone(const std::string& _name, int _LoopCount = 1);
 
 	void Stop();
+
+	void VolumeUp();
+	void VolumeDown();
 };
 
