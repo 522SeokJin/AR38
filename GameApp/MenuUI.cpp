@@ -2,6 +2,9 @@
 #include "MenuUI.h"
 #include <GameEngine/GameEngineUIRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
+#include "GlobalValue.h"
+#include "InventoryUI.h"
+#include "SkillUI.h"
 
 MenuUI::MenuUI()
 	: CharRenderer_(nullptr)
@@ -107,17 +110,26 @@ void MenuUI::Update(float _DeltaTime)
 
 void MenuUI::CharButtonEvent(GameEngineCollision* _OtherCollision)
 {
+	if (true == GameEngineInput::GetInst().Down("MLBtn"))
+	{
+		GlobalValue::CurrentInventoryUI->OnOffChange();
+	}
+
 	if (true == GameEngineInput::GetInst().Press("MLBtn"))
 	{
 		CharRenderer_->SetImage("menu.button_Character.pressed.0.png");
 		return;
 	}
-
 	CharRenderer_->SetImage("menu.button_Character.mouseOver.0.png");
 }
 
 void MenuUI::SettingButtonEvent(GameEngineCollision* _OtherCollision)
 {
+	if (true == GameEngineInput::GetInst().Down("MLBtn"))
+	{
+		GlobalValue::CurrentSkillUI->OnOffChange();
+	}
+
 	if (true == GameEngineInput::GetInst().Press("MLBtn"))
 	{
 		SettingRenderer_->SetImage("menu.button_Setting.pressed.0.png");
