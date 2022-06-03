@@ -78,6 +78,7 @@ void SmallMeso::MesoEvent(GameEngineCollision* _OtherCollision)
 	Collision_->Off();
 
 	GlobalValue::CurrentInventoryUI->AddMeso(Price_);
+	UserGame::EffectSoundPlayer->PlayOverLap("PickUpItem.mp3");
 }
 
 /// <summary>
@@ -98,6 +99,7 @@ void SmallMeso::stop_End()
 
 void SmallMeso::drop_Start()
 {
+	UserGame::EffectSoundPlayer->PlayOverLap("DropItem.mp3");
 	Speed_.y = 300.0f;
 
 	GetTransform()->SetLocalMove({ 0.0f, 1.0f });

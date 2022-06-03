@@ -262,8 +262,8 @@ void InventoryUI::ChangeTabEvent()
 				EtcRenderer_->SetImage("Item.Tab.disabled.2.png");
 
 				EnabledTab_ = InventoryTab::Equipment;
+				UserGame::EffectSoundPlayer->PlayOverLap("Tab.mp3");
 
-			
 			}
 		});
 
@@ -278,6 +278,7 @@ void InventoryUI::ChangeTabEvent()
 
 				EnabledTab_ = InventoryTab::Useable;
 
+				UserGame::EffectSoundPlayer->PlayOverLap("Tab.mp3");
 				
 			}
 

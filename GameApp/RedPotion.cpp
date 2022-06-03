@@ -73,6 +73,7 @@ void RedPotion::GainEvent(GameEngineCollision* _OtherCollision)
 	Collision_->Off();
 
 	GlobalValue::CurrentInventoryUI->AddRedPotion();
+	UserGame::EffectSoundPlayer->PlayOverLap("PickUpItem.mp3");
 }
 
 /// <summary>
@@ -93,6 +94,7 @@ void RedPotion::stop_End()
 
 void RedPotion::drop_Start()
 {
+	UserGame::EffectSoundPlayer->PlayOverLap("DropItem.mp3");
 	Speed_.y = 300.0f;
 
 	GetTransform()->SetLocalMove({ 0.0f, 1.0f });

@@ -73,6 +73,7 @@ void BluePotion::GainEvent(GameEngineCollision* _OtherCollision)
 	Collision_->Off();
 
 	GlobalValue::CurrentInventoryUI->AddBluePotion();
+	UserGame::EffectSoundPlayer->PlayOverLap("PickUpItem.mp3");
 }
 
 /// <summary>
@@ -95,6 +96,7 @@ void BluePotion::drop_Start()
 {
 	Speed_.y = 300.0f;
 
+	UserGame::EffectSoundPlayer->PlayOverLap("DropItem.mp3");
 	GetTransform()->SetLocalMove({ 0.0f, 1.0f });
 }
 

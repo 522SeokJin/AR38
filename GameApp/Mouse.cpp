@@ -54,6 +54,7 @@ void Mouse::Update(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst().Down("MLBtn"))
 	{
+		UserGame::EffectSoundPlayer->PlayOverLap("BtMouseClick.mp3");
 		GetUIRenderer()->SetChangeAnimation("Click");
 	}
 

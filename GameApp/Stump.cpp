@@ -503,7 +503,6 @@ void Stump::die()
 			BluePotion_->DropStart();
 			BluePotion_->On();
 		}
-		UserGame::EffectSoundPlayer->PlayOverLap("DropItem.mp3");
 		Off();
 
 	}

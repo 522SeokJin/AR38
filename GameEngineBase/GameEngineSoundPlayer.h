@@ -35,10 +35,10 @@ public:		//member Func
 	void PlayCountReset(int _Count = -1);
 
 	// 겹쳐서 재생 기존의 사운드가 재생되고 있어도 그냥 재생한다. OneShot.
-	void PlayOverLap(const std::string& _name, int _LoopCount = 1);
+	void PlayOverLap(const std::string& _name, int _LoopCount = 0);
 
 	// 기존의 사운드가 재생이 끝나야만 다음 사운드를 재생한다.
-	void PlayAlone(const std::string& _name, int _LoopCount = 1);
+	void PlayAlone(const std::string& _name, int _LoopCount = 0);
 
 	void Stop();
 

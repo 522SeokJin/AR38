@@ -73,6 +73,7 @@ void ElixirPotion::GainEvent(GameEngineCollision* _OtherCollision)
 	Collision_->Off();
 
 	GlobalValue::CurrentInventoryUI->AddElixirPotion();
+	UserGame::EffectSoundPlayer->PlayOverLap("PickUpItem.mp3");
 }
 
 /// <summary>
@@ -93,6 +94,7 @@ void ElixirPotion::stop_End()
 
 void ElixirPotion::drop_Start()
 {
+	UserGame::EffectSoundPlayer->PlayOverLap("DropItem.mp3");
 	Speed_.y = 300.0f;
 
 	GetTransform()->SetLocalMove({ 0.0f, 1.0f });

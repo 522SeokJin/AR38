@@ -490,7 +490,6 @@ void Scorpion::die()
 			ElixirPotion_->DropStart();
 			ElixirPotion_->On();
 		}
-		UserGame::EffectSoundPlayer->PlayOverLap("DropItem.mp3");
 	}
 }
 
