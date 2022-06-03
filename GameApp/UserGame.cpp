@@ -58,7 +58,7 @@ void UserGame::Initialize()
 	LevelCreate<EndingLevel>("Ending");
 
 
-	LevelChange("ManonForest");
+	LevelChange("Title");
 }
 
 void UserGame::Release()
@@ -90,8 +90,13 @@ void UserGame::CreateKey()
 
 	GameEngineInput::GetInst().CreateKey("FreeCamera", 'o');
 	GameEngineInput::GetInst().CreateKey("PixelCollide", 'p');
+
 	GameEngineInput::GetInst().CreateKey("DebugColOn", '4');
 	GameEngineInput::GetInst().CreateKey("DebugColOff", '5');
+
+	GameEngineInput::GetInst().CreateKey("InvincibleOn", '6');
+	GameEngineInput::GetInst().CreateKey("InvincibleOff", '7');
+
 	GameEngineInput::GetInst().CreateKey("LevelUp", '8');
 	GameEngineInput::GetInst().CreateKey("Level100", '9');
 	GameEngineInput::GetInst().CreateKey("JobChange", '0');

@@ -16,7 +16,7 @@ void SilentSwamp::Start()
 {
 	{
 		MapImage_ = CreateTransformComponent<GameEngineImageRenderer>();
-		MapImage_->SetImage("20220602164454808_105010000.png");
+		MapImage_->SetImage("20220602164541050_105010000.png");
 		MapImage_->GetTransform()->SetLocalPosition(MapImage_->GetImageSize().halffloat4().InvertY());
 		MapImage_->SetLocalMove({0.0f, 0.0f, static_cast<float>(DepthOrder::MAP) });
 	}

@@ -18,6 +18,7 @@
 
 #include "Manon.h"
 #include <GameEngine/PostFade.h>
+#include "Portal.h"
 
 ManonForestLevel::ManonForestLevel()
 	: Cursor_(nullptr)
@@ -192,6 +193,12 @@ void ManonForestLevel::CreateActorLevel()
 			Player_->GetTransform()->GetLocalPosition());
 		Player_->GetTransform()->SetWorldPosition({ 151.0f, -1020.0f });
 		Player_->Off();
+	}
+
+	{
+		Portal* Actor = CreateActor<Portal>();
+		Actor->SetDestination("Ending");
+		Actor->GetTransform()->SetWorldPosition({ 966.0f, -1058.0f, -10.0f });
 	}
 
 	{

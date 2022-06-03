@@ -433,6 +433,16 @@ void Player::Update(float _DeltaTime)
 		}
 	}
 
+	if (true == GameEngineInput::GetInst().Down("InvincibleOn"))
+	{
+		Invincible_ = true;
+	}
+	
+	if (true == GameEngineInput::GetInst().Down("InvincibleOff"))
+	{
+		Invincible_ = false;
+	}
+	
 	if (true == GameEngineInput::GetInst().Down("LevelUp"))
 	{
 		LevelUp();
