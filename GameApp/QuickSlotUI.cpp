@@ -232,6 +232,7 @@ void QuickSlotUI::Update(float _DeltaTime)
 		{
 			GlobalValue::CurrentInventoryUI->SubRedPotionCount();
 			GlobalValue::CurrentStatusUI->AddHP(100.0f);
+			UserGame::EffectSoundPlayer->PlayOverLap("Use.mp3");
 		}
 	}
 
@@ -241,6 +242,7 @@ void QuickSlotUI::Update(float _DeltaTime)
 		{
 			GlobalValue::CurrentInventoryUI->SubBluePotionCount();
 			GlobalValue::CurrentStatusUI->AddMP(100.0f);
+			UserGame::EffectSoundPlayer->PlayOverLap("Use.mp3");
 		}
 	}
 
@@ -251,6 +253,7 @@ void QuickSlotUI::Update(float _DeltaTime)
 			GlobalValue::CurrentInventoryUI->SubElixirPotionCount();
 			GlobalValue::CurrentStatusUI->AddHPPer(0.5f);
 			GlobalValue::CurrentStatusUI->AddMPPer(0.5f);
+			UserGame::EffectSoundPlayer->PlayOverLap("Use.mp3");
 		}
 	}
 
