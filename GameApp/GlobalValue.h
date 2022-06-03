@@ -11,6 +11,7 @@ enum class ColGroup	// Collision Group Number
 	MONSTER,
 	MONSTERAI,
 	MONSTERATTACK,
+	MONSTERSTUN,
 	SKILL,
 	ITEM,
 };

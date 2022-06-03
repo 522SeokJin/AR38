@@ -46,6 +46,7 @@ protected:
 private:
 	void MonsterEvent(GameEngineCollision* _OtherCollision);
 	void MonsterAttackEvent(GameEngineCollision* _OtherCollision);
+	void MonsterStunEvent(GameEngineCollision* _OtherCollision);
 
 	void CreateAnimation();
 
@@ -167,6 +168,10 @@ private:
 	void RagingBlow_Start();
 	void RagingBlow();
 	void RagingBlow_End();
+
+	void stun_Start();
+	void stun();
+	void stun_End();
 
 };
 

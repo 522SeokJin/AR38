@@ -1406,3 +1406,22 @@ void Player::RagingBlow_End()
 
 	SkillCollision_->Off();
 }
+
+void Player::stun_Start()
+{
+	Avatar_->SetChangeAnimation("stand1");
+	Avatar_->SetMulColor({ 1.0f, 1.0f, 0.0f, 1.0f });
+}
+
+void Player::stun()
+{
+	if (1.5f < FSM_.GetCurrentState()->Time_)
+	{
+		FSM_.ChangeState("stand1");
+	}
+}
+
+void Player::stun_End()
+{
+	Avatar_->SetMulColor(float4::ONE);
+}

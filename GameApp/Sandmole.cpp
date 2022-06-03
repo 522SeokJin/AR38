@@ -51,9 +51,31 @@ void Sandmole::Start()
 
 	SkillEffectRenderer_ = CreateTransformComponent<GameEngineImageRenderer>();
 	SkillEffectRenderer_->SetLocalMove({ 0.0f, 0.0f, static_cast<float>(DepthOrder::SKILL) });
-
-	SkillEffectRenderer_->CreateAnimationFolder("Slashblast_hit", 0.06f);
 	SkillEffectRenderer_->Off();
+
+	SkillEffectRenderer_->CreateAnimationFolder("Slashblast_hit", 0.06f, false);
+	SkillEffectRenderer_->SetEndCallBack("Slashblast_hit", [&]() { SkillEffectRenderer_->Off(); });
+
+	SkillEffectRenderer_->CreateAnimationFolder("Incising_hit", 0.09f, false);
+	SkillEffectRenderer_->SetEndCallBack("Incising_hit", [&]() { SkillEffectRenderer_->Off(); });
+
+	SkillEffectRenderer_->CreateAnimationFolder("RageUprising_hit", 0.09f, false);
+	SkillEffectRenderer_->SetEndCallBack("RageUprising_hit", [&]() { SkillEffectRenderer_->Off(); });
+
+	SkillEffectRenderer_->CreateAnimationFolder("RagingBlow_hit0", 0.09f, false);
+	SkillEffectRenderer_->SetEndCallBack("RagingBlow_hit0", [&]() { SkillEffectRenderer_->Off(); });
+
+	SkillEffectRenderer_->CreateAnimationFolder("RagingBlow_hit1", 0.09f, false);
+	SkillEffectRenderer_->SetEndCallBack("RagingBlow_hit1", [&]() { SkillEffectRenderer_->Off(); });
+
+	SkillEffectRenderer_->CreateAnimationFolder("RagingBlow_hit2", 0.09f, false);
+	SkillEffectRenderer_->SetEndCallBack("RagingBlow_hit2", [&]() { SkillEffectRenderer_->Off(); });
+
+	SkillEffectRenderer_->CreateAnimationFolder("RagingBlow_hit3", 0.09f, false);
+	SkillEffectRenderer_->SetEndCallBack("RagingBlow_hit3", [&]() { SkillEffectRenderer_->Off(); });
+
+	SkillEffectRenderer_->CreateAnimationFolder("RagingBlow_hit4", 0.09f, false);
+	SkillEffectRenderer_->SetEndCallBack("RagingBlow_hit4", [&]() { SkillEffectRenderer_->Off(); });
 
 	Collision_ = CreateTransformComponent<GameEngineCollision>(
 		static_cast<int>(ColGroup::MONSTER));
@@ -299,6 +321,55 @@ void Sandmole::move_End()
 void Sandmole::hit_Start()
 {
 	Renderer_->SetChangeAnimation("Sandmole_hit");
+
+	if ("slashBlast" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		SkillEffectRenderer_->SetChangeAnimation("Slashblast_hit", true);
+		SkillEffectRenderer_->On();
+	}
+
+	if ("incising" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		SkillEffectRenderer_->SetChangeAnimation("Incising_hit", true);
+		SkillEffectRenderer_->On();
+	}
+
+	if ("rageUprising" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		SkillEffectRenderer_->SetChangeAnimation("RageUprising_hit", true);
+		SkillEffectRenderer_->On();
+	}
+
+	if ("ragingBlow" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		int SkillSelect = Random_.RandomInt(0, 4);
+
+		switch (SkillSelect)
+		{
+		case 0:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit0", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 1:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit1", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 2:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit2", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 3:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit3", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 4:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit4", true);
+			SkillEffectRenderer_->On();
+			break;
+		default:
+			break;
+		}
+	}
 
 	MaxHitCount_ = GlobalValue::CurrentPlayer->GetCurrentSkillHitCount();
 

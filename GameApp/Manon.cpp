@@ -8,6 +8,7 @@
 #include "SmallMeso.h"
 #include "RedPotion.h"
 #include "BluePotion.h"
+#include "StatusUI.h"
 
 Manon::Manon()
 	: Renderer_(nullptr)
@@ -15,6 +16,7 @@ Manon::Manon()
 	, Collision_(nullptr)
 	, AICollision_(nullptr)
 	, AttackCollision_(nullptr)
+	, StunCollision_(nullptr)
 	, Dir_(0)
 	, MoveTime_(0.0f)
 	, Hit_(false)
@@ -68,11 +70,11 @@ void Manon::Start()
 	Renderer_->CreateAnimationFolder("Manon_attack2", 0.130f, false);
 	Renderer_->SetFrameCallBack("Manon_attack2", 11, [&]()
 		{
-			AttackCollision_->On();
+			StunCollision_->On();
 		});
 	Renderer_->SetFrameCallBack("Manon_attack2", 12, [&]()
 		{
-			AttackCollision_->Off();
+			StunCollision_->Off();
 		});
 	Renderer_->SetEndCallBack("Manon_attack2", [&]()
 		{
@@ -80,14 +82,14 @@ void Manon::Start()
 		});
 
 	Renderer_->CreateAnimationFolder("Manon_attack3", 0.130f, false);
-	Renderer_->SetFrameCallBack("Manon_attack3", 5, [&]()
-		{
-			AttackCollision_->On();
-		});
 	Renderer_->SetFrameCallBack("Manon_attack3", 6, [&]()
 		{
-			AttackCollision_->Off();
+
+			GlobalValue::CurrentStatusUI->SetHP(1.0f);
+			GlobalValue::CurrentStatusUI->SetMP(1.0f);
+
 		});
+
 	Renderer_->SetEndCallBack("Manon_attack3", [&]()
 		{
 			FSM_.ChangeState("stand");
@@ -101,9 +103,31 @@ void Manon::Start()
 
 	SkillEffectRenderer_ = CreateTransformComponent<GameEngineImageRenderer>();
 	SkillEffectRenderer_->SetLocalMove({ 0.0f, 0.0f, static_cast<float>(DepthOrder::SKILL) });
-
-	SkillEffectRenderer_->CreateAnimationFolder("Slashblast_hit", 0.06f);
 	SkillEffectRenderer_->Off();
+
+	SkillEffectRenderer_->CreateAnimationFolder("Slashblast_hit", 0.06f, false);
+	SkillEffectRenderer_->SetEndCallBack("Slashblast_hit", [&]() { SkillEffectRenderer_->Off(); });
+
+	SkillEffectRenderer_->CreateAnimationFolder("Incising_hit", 0.09f, false);
+	SkillEffectRenderer_->SetEndCallBack("Incising_hit", [&]() { SkillEffectRenderer_->Off(); });
+
+	SkillEffectRenderer_->CreateAnimationFolder("RageUprising_hit", 0.09f, false);
+	SkillEffectRenderer_->SetEndCallBack("RageUprising_hit", [&]() { SkillEffectRenderer_->Off(); });
+
+	SkillEffectRenderer_->CreateAnimationFolder("RagingBlow_hit0", 0.09f, false);
+	SkillEffectRenderer_->SetEndCallBack("RagingBlow_hit0", [&]() { SkillEffectRenderer_->Off(); });
+
+	SkillEffectRenderer_->CreateAnimationFolder("RagingBlow_hit1", 0.09f, false);
+	SkillEffectRenderer_->SetEndCallBack("RagingBlow_hit1", [&]() { SkillEffectRenderer_->Off(); });
+
+	SkillEffectRenderer_->CreateAnimationFolder("RagingBlow_hit2", 0.09f, false);
+	SkillEffectRenderer_->SetEndCallBack("RagingBlow_hit2", [&]() { SkillEffectRenderer_->Off(); });
+
+	SkillEffectRenderer_->CreateAnimationFolder("RagingBlow_hit3", 0.09f, false);
+	SkillEffectRenderer_->SetEndCallBack("RagingBlow_hit3", [&]() { SkillEffectRenderer_->Off(); });
+
+	SkillEffectRenderer_->CreateAnimationFolder("RagingBlow_hit4", 0.09f, false);
+	SkillEffectRenderer_->SetEndCallBack("RagingBlow_hit4", [&]() { SkillEffectRenderer_->Off(); });
 
 	Collision_ = CreateTransformComponent<GameEngineCollision>(
 		static_cast<int>(ColGroup::MONSTER));
@@ -117,6 +141,11 @@ void Manon::Start()
 		static_cast<int>(ColGroup::MONSTERATTACK));
 	AttackCollision_->SetLocalScaling({ 221.0f * 2.9f, 252.0f * 1.9f });
 	AttackCollision_->Off();
+	
+	StunCollision_ = CreateTransformComponent<GameEngineCollision>(
+		static_cast<int>(ColGroup::MONSTERSTUN));
+	StunCollision_->SetLocalScaling({ 221.0f * 2.9f, 252.0f * 1.9f });
+	StunCollision_->Off();
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -452,10 +481,100 @@ void Manon::attack1_Start()
 	{
 		Renderer_->SetLocalMove({ 20.0f, 48.0f, 0.0f });
 	}
+
+
+	if ("slashBlast" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		SkillEffectRenderer_->SetChangeAnimation("Slashblast_hit", true);
+		SkillEffectRenderer_->On();
+	}
+
+	if ("incising" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		SkillEffectRenderer_->SetChangeAnimation("Incising_hit", true);
+		SkillEffectRenderer_->On();
+	}
+
+	if ("rageUprising" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		SkillEffectRenderer_->SetChangeAnimation("RageUprising_hit", true);
+		SkillEffectRenderer_->On();
+	}
+
+	if ("ragingBlow" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		int SkillSelect = Random_.RandomInt(0, 4);
+
+		switch (SkillSelect)
+		{
+		case 0:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit0", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 1:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit1", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 2:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit2", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 3:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit3", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 4:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit4", true);
+			SkillEffectRenderer_->On();
+			break;
+		default:
+			break;
+		}
+	}
+
+	MaxHitCount_ = GlobalValue::CurrentPlayer->GetCurrentSkillHitCount();
+
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				DmgNumber_[i][j][k]->Off();
+				DmgNumber_[i][j][k]->SetAlpha(1.0f);
+			}
+		}
+	}
 }
 
 void Manon::attack1()
 {
+	HitTime_ += GameEngineTime::GetInst().GetDeltaTime();
+
+	if (0.05f < HitTime_ &&
+		CurHitCount_ < MaxHitCount_)
+	{
+		int Damage = Random_.RandomInt(10000, 99999);
+		int TempValue = Random_.RandomInt(-2, 2);
+
+		for (int j = 0; j < 5; j++)
+		{
+			int Value = GameEngineMath::PlaceValue(static_cast<int>(Damage), j + 1);
+
+			DmgNumber_[CurHitCount_][j][Value]->On();
+			DmgNumber_[CurHitCount_][j][Value]->SetLocalPosition({ -25.0f * (j + 1) + 75.0f
+				+ static_cast<float>(TempValue), Renderer_->GetImageSize().y + 30.0f * CurHitCount_, -100.0f });
+		}
+
+		HitTime_ = 0.0f;
+		++CurHitCount_;
+		--DeadHitCount_;
+	}
+	
+	if (0 >= DeadHitCount_)
+	{
+		FSM_.ChangeState("die");
+	}
 }
 
 void Manon::attack1_End()
@@ -503,10 +622,99 @@ void Manon::attack2_Start()
 	{
 		Renderer_->SetLocalMove({ 15.0f, 0.0f, 0.0f });
 	}
+
+	if ("slashBlast" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		SkillEffectRenderer_->SetChangeAnimation("Slashblast_hit", true);
+		SkillEffectRenderer_->On();
+	}
+
+	if ("incising" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		SkillEffectRenderer_->SetChangeAnimation("Incising_hit", true);
+		SkillEffectRenderer_->On();
+	}
+
+	if ("rageUprising" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		SkillEffectRenderer_->SetChangeAnimation("RageUprising_hit", true);
+		SkillEffectRenderer_->On();
+	}
+
+	if ("ragingBlow" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		int SkillSelect = Random_.RandomInt(0, 4);
+
+		switch (SkillSelect)
+		{
+		case 0:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit0", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 1:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit1", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 2:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit2", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 3:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit3", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 4:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit4", true);
+			SkillEffectRenderer_->On();
+			break;
+		default:
+			break;
+		}
+	}
+
+	MaxHitCount_ = GlobalValue::CurrentPlayer->GetCurrentSkillHitCount();
+
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				DmgNumber_[i][j][k]->Off();
+				DmgNumber_[i][j][k]->SetAlpha(1.0f);
+			}
+		}
+	}
 }
 
 void Manon::attack2()
 {
+	HitTime_ += GameEngineTime::GetInst().GetDeltaTime();
+
+	if (0.05f < HitTime_ &&
+		CurHitCount_ < MaxHitCount_)
+	{
+		int Damage = Random_.RandomInt(10000, 99999);
+		int TempValue = Random_.RandomInt(-2, 2);
+
+		for (int j = 0; j < 5; j++)
+		{
+			int Value = GameEngineMath::PlaceValue(static_cast<int>(Damage), j + 1);
+
+			DmgNumber_[CurHitCount_][j][Value]->On();
+			DmgNumber_[CurHitCount_][j][Value]->SetLocalPosition({ -25.0f * (j + 1) + 75.0f
+				+ static_cast<float>(TempValue), Renderer_->GetImageSize().y + 30.0f * CurHitCount_, -100.0f });
+		}
+
+		HitTime_ = 0.0f;
+		++CurHitCount_;
+		--DeadHitCount_;
+	}
+
+	if (0 >= DeadHitCount_)
+	{
+		FSM_.ChangeState("die");
+	}
 }
 
 void Manon::attack2_End()
@@ -554,10 +762,99 @@ void Manon::attack3_Start()
 	{
 		Renderer_->SetLocalMove({ 18.0f, 22.0f, 0.0f });
 	}
+
+	if ("slashBlast" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		SkillEffectRenderer_->SetChangeAnimation("Slashblast_hit", true);
+		SkillEffectRenderer_->On();
+	}
+
+	if ("incising" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		SkillEffectRenderer_->SetChangeAnimation("Incising_hit", true);
+		SkillEffectRenderer_->On();
+	}
+
+	if ("rageUprising" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		SkillEffectRenderer_->SetChangeAnimation("RageUprising_hit", true);
+		SkillEffectRenderer_->On();
+	}
+
+	if ("ragingBlow" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		int SkillSelect = Random_.RandomInt(0, 4);
+
+		switch (SkillSelect)
+		{
+		case 0:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit0", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 1:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit1", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 2:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit2", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 3:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit3", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 4:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit4", true);
+			SkillEffectRenderer_->On();
+			break;
+		default:
+			break;
+		}
+	}
+
+	MaxHitCount_ = GlobalValue::CurrentPlayer->GetCurrentSkillHitCount();
+
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				DmgNumber_[i][j][k]->Off();
+				DmgNumber_[i][j][k]->SetAlpha(1.0f);
+			}
+		}
+	}
 }
 
 void Manon::attack3()
 {
+	HitTime_ += GameEngineTime::GetInst().GetDeltaTime();
+
+	if (0.05f < HitTime_ &&
+		CurHitCount_ < MaxHitCount_)
+	{
+		int Damage = Random_.RandomInt(10000, 99999);
+		int TempValue = Random_.RandomInt(-2, 2);
+
+		for (int j = 0; j < 5; j++)
+		{
+			int Value = GameEngineMath::PlaceValue(static_cast<int>(Damage), j + 1);
+
+			DmgNumber_[CurHitCount_][j][Value]->On();
+			DmgNumber_[CurHitCount_][j][Value]->SetLocalPosition({ -25.0f * (j + 1) + 75.0f
+				+ static_cast<float>(TempValue), Renderer_->GetImageSize().y + 30.0f * CurHitCount_, -100.0f });
+		}
+
+		HitTime_ = 0.0f;
+		++CurHitCount_;
+		--DeadHitCount_;
+	}
+
+	if (0 >= DeadHitCount_)
+	{
+		FSM_.ChangeState("die");
+	}
 }
 
 void Manon::attack3_End()
@@ -578,6 +875,55 @@ void Manon::hit_Start()
 	Renderer_->SetChangeAnimation("Manon_hit");
 	Renderer_->SetLocalMove({ 0.0f, 25.0f, 0.0f });
 
+	if ("slashBlast" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		SkillEffectRenderer_->SetChangeAnimation("Slashblast_hit", true);
+		SkillEffectRenderer_->On();
+	}
+
+	if ("incising" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		SkillEffectRenderer_->SetChangeAnimation("Incising_hit", true);
+		SkillEffectRenderer_->On();
+	}
+
+	if ("rageUprising" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		SkillEffectRenderer_->SetChangeAnimation("RageUprising_hit", true);
+		SkillEffectRenderer_->On();
+	}
+
+	if ("ragingBlow" == GlobalValue::CurrentPlayer->GetCurrentStateName())
+	{
+		int SkillSelect = Random_.RandomInt(0, 4);
+
+		switch (SkillSelect)
+		{
+		case 0:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit0", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 1:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit1", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 2:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit2", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 3:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit3", true);
+			SkillEffectRenderer_->On();
+			break;
+		case 4:
+			SkillEffectRenderer_->SetChangeAnimation("RagingBlow_hit4", true);
+			SkillEffectRenderer_->On();
+			break;
+		default:
+			break;
+		}
+	}
+
 	MaxHitCount_ = GlobalValue::CurrentPlayer->GetCurrentSkillHitCount();
 
 	for (int i = 0; i < 5; i++)
@@ -595,6 +941,8 @@ void Manon::hit_Start()
 
 void Manon::hit()
 {
+	int NextStateSelect = Random_.RandomInt(0, 3);
+
 	HitTime_ += GameEngineTime::GetInst().GetDeltaTime();
 
 	if (DIRRIGHT)
@@ -630,7 +978,23 @@ void Manon::hit()
 	{
 		if (CurHitCount_ >= MaxHitCount_)
 		{
-			FSM_.ChangeState("stand");
+			switch (NextStateSelect)
+			{
+			case 0:
+				FSM_.ChangeState("stand");
+				break;
+			case 1:
+				FSM_.ChangeState("attack1");
+				break;
+			case 2:
+				FSM_.ChangeState("attack2");
+				break;
+			case 3:
+				FSM_.ChangeState("attack3");
+				break;
+			default:
+				break;
+			}
 			return;
 		}
 	}
@@ -638,7 +1002,23 @@ void Manon::hit()
 	{
 		if (0.5f < FSM_.GetCurrentState()->Time_)
 		{
-			FSM_.ChangeState("stand");
+			switch (NextStateSelect)
+			{
+			case 0:
+				FSM_.ChangeState("stand");
+				break;
+			case 1:
+				FSM_.ChangeState("attack1");
+				break;
+			case 2:
+				FSM_.ChangeState("attack2");
+				break;
+			case 3:
+				FSM_.ChangeState("attack3");
+				break;
+			default:
+				break;
+			}
 			return;
 		}
 	}

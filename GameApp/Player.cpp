@@ -267,6 +267,11 @@ void Player::MonsterAttackEvent(GameEngineCollision* _OtherCollision)
 	MonsterEvent(_OtherCollision);
 }
 
+void Player::MonsterStunEvent(GameEngineCollision* _OtherCollision)
+{
+	FSM_.ChangeState("stun");
+}
+
 void Player::Start()
 {
 	CreateAnimation();
@@ -374,6 +379,10 @@ void Player::Start()
 		std::bind(&Player::RagingBlow_End, this));
 	SkillEffect1_->SetFrameCallBack("RagingBlow_effect", 3, [&]() { SkillCollision_->On(); });
 
+	FSM_.CreateState("stun", std::bind(&Player::stun, this),
+		std::bind(&Player::stun_Start, this),
+		std::bind(&Player::stun_End, this));
+
 	FSM_.ChangeState("stand1");
 }
 
@@ -403,6 +412,14 @@ void Player::Update(float _DeltaTime)
 	{
 		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
 			static_cast<int>(ColGroup::MONSTERATTACK), Func);
+	}
+
+	Func = std::bind(&Player::MonsterStunEvent, this, std::placeholders::_1);
+
+	if (false == Invincible_)
+	{
+		Collision_->Collision(CollisionType::Rect, CollisionType::Rect,
+			static_cast<int>(ColGroup::MONSTERSTUN), Func);
 	}
 
 	for (int j = 0; j < 3; j++)

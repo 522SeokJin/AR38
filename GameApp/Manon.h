@@ -48,6 +48,7 @@ private:
 	GameEngineCollision*	 Collision_;
 	GameEngineCollision*	 AICollision_;
 	GameEngineCollision*	 AttackCollision_;
+	GameEngineCollision*	 StunCollision_;
 
 	// Number Image
 	std::map<int, std::vector<GameEngineImageRenderer*>> DmgNumber_[5];	// [최대타수]
