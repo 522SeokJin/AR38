@@ -143,10 +143,14 @@ void PerionNorthernRidgeLevel::LevelUpdate(float _DeltaTime)
 void PerionNorthernRidgeLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
 
+	UserGame::BGSoundPlayer->Stop();
+
 }
 
 void PerionNorthernRidgeLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
+
+	UserGame::BGSoundPlayer->PlayAlone("Perion_Nightmare.mp3");
 
 }
 

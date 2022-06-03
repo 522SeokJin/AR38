@@ -147,12 +147,12 @@ void SahelLevel::LevelUpdate(float _DeltaTime)
 
 void SahelLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
-
+	UserGame::BGSoundPlayer->Stop();
 }
 
 void SahelLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
-
+	UserGame::BGSoundPlayer->PlayAlone("SunsetDesert.mp3");
 }
 
 void SahelLevel::CreateActorLevel()

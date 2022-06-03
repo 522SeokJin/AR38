@@ -137,12 +137,12 @@ void ManonForestLevel::LevelUpdate(float _DeltaTime)
 
 void ManonForestLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
-
+	UserGame::BGSoundPlayer->Stop();
 }
 
 void ManonForestLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
-
+	UserGame::BGSoundPlayer->PlayAlone("AcientForest.mp3");
 }
 
 void ManonForestLevel::CreateActorLevel()

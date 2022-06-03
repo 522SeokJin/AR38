@@ -142,12 +142,12 @@ void DeepeningForestLevel::LevelUpdate(float _DeltaTime)
 
 void DeepeningForestLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
-
+	UserGame::BGSoundPlayer->Stop();
 }
 
 void DeepeningForestLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
-
+	UserGame::BGSoundPlayer->PlayAlone("SecretElodin.mp3");
 }
 
 void DeepeningForestLevel::CreateActorLevel()

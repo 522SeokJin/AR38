@@ -142,12 +142,12 @@ void SilentSwampLevel::LevelUpdate(float _DeltaTime)
 
 void SilentSwampLevel::LevelChangeEndEvent(GameEngineLevel* _NextLevel)
 {
-
+	UserGame::BGSoundPlayer->Stop();
 }
 
 void SilentSwampLevel::LevelChangeStartEvent(GameEngineLevel* _PrevLevel)
 {
-
+	UserGame::BGSoundPlayer->PlayAlone("SleepyWood.mp3");
 }
 
 void SilentSwampLevel::CreateActorLevel()
